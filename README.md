@@ -1,4 +1,4 @@
-# Showcase Website - Sophrologist
+# Professional Website - Sophrologist
 
 This project is a **multi-pages professional website** for a sophrologist. It is built with **Eleventy, Nunjucks, Tailwind CSS, and Netlify CMS**.
 
