@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+/* 
+//////////////////////////////////////////////////////////////////////
+
+THOMAS SOPHRO BY CHARLOTTE CARPENTIER
+ITERATION: 00.1
+USING: NUNJUCKS, TAILWIND, 11TY & NETLIFY
+LAST UPDATE: 11/02/2025
+
+////////////////////////////////////////////////////////////////////// 
+*/
+
+@import "tailwindcss";
+@import "tailwindcss/preflight";
+@import "tailwind/utilities";

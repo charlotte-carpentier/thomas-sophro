@@ -4,7 +4,7 @@ module.exports = function(eleventyConfig) {
   // Copy static assets directory to output
   eleventyConfig.addPassthroughCopy('./src/assets');
   // Copy main stylesheet to output
-  eleventyConfig.addPassthroughCopy('./src/style.css');
+  eleventyConfig.addPassthroughCopy('./src/css/tailwind.css');
   // Copy admin interface files to output
   eleventyConfig.addPassthroughCopy('./src/admin');
   // Add shortcode to display current year dynamically
