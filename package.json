@@ -1,0 +1,34 @@
+{
+  "name": "thomas-sophro",
+  "version": "1.0.0",
+  "description": "This project is a **multi-pages professional website** for a sophrologist. It is built with **Eleventy, Nunjucks, Tailwind CSS, and Netlify CMS**.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlotte-carpentier/thomas-sophro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/charlotte-carpentier/thomas-sophro/issues"
+  },
+  "homepage": "https://github.com/charlotte-carpentier/thomas-sophro#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "nunjucks": "^3.2.4",
+    "tailwindcss": "^4.0.6",
+    "vite": "^6.1.0"
+  }
+}
