@@ -1,0 +1,42 @@
+<!-- ========================= -->
+<!--         CHECKBOX       -->
+<!-- ========================= -->
+
+{% macro renderCheckbox(option) %}
+  {# Get checkbox options with default values if not provided #}
+  {% set text = option.text | default('Checkbox') %}
+  {% set variant = option.variant | default(checkbox.defaultProps.variant) %}
+  
+  {# Find the variant in the checkbox.json file #}
+  {% set selectedVariant = null %}
+  {% for v in checkbox.variants %}
+    {% if v.name == variant %}
+      {% set selectedVariant = v %}
+    {% endif %}
+  {% endfor %}
+  
+  {# Use default variant if specified variant was not found #}
+  {% if not selectedVariant %}
+    {% for v in checkbox.variants %}
+      {% if v.name == checkbox.defaultProps.variant %}
+        {% set selectedVariant = v %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+  {# Render the component with appropriate classes #}
+  <div class="checkbox {{ selectedVariant.class }}">
+    {{ text }}
+  </div>
+{% endmacro %}
+
+<!-- ========================= -->
+<!-- HOW TO USE THIS COMPONENT -->
+<!-- ========================= -->
+
+<!--
+  Complete documentation in Storybook
+  Basic usage: {% from "03-atoms/checkbox.njk" import renderCheckbox %}
+              {{ renderCheckbox(checkboxs.checkbox_data.default_checkbox) }}
+  With style: {{ renderCheckbox({ text: "Custom Checkbox", variant: "primary" }) }}
+-->

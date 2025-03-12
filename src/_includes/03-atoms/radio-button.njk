@@ -1,0 +1,42 @@
+<!-- ========================= -->
+<!--         RADIOBUTTON    -->
+<!-- ========================= -->
+
+{% macro renderRadioButton(option) %}
+  {# Get radio-button options with default values if not provided #}
+  {% set text = option.text | default('RadioButton') %}
+  {% set variant = option.variant | default(radio-button.defaultProps.variant) %}
+  
+  {# Find the variant in the radio-button.json file #}
+  {% set selectedVariant = null %}
+  {% for v in radio-button.variants %}
+    {% if v.name == variant %}
+      {% set selectedVariant = v %}
+    {% endif %}
+  {% endfor %}
+  
+  {# Use default variant if specified variant was not found #}
+  {% if not selectedVariant %}
+    {% for v in radio-button.variants %}
+      {% if v.name == radio-button.defaultProps.variant %}
+        {% set selectedVariant = v %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+  {# Render the component with appropriate classes #}
+  <div class="radio-button {{ selectedVariant.class }}">
+    {{ text }}
+  </div>
+{% endmacro %}
+
+<!-- ========================= -->
+<!-- HOW TO USE THIS COMPONENT -->
+<!-- ========================= -->
+
+<!--
+  Complete documentation in Storybook
+  Basic usage: {% from "03-atoms/radio-button.njk" import renderRadioButton %}
+              {{ renderRadioButton(radio-buttons.radio-button_data.default_radio-button) }}
+  With style: {{ renderRadioButton({ text: "Custom RadioButton", variant: "primary" }) }}
+-->

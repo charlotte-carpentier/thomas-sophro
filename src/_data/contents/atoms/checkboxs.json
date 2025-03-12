@@ -1,0 +1,35 @@
+{
+  "component": "checkbox",
+  "summary": "A reusable checkbox component for the website",
+  "params": [
+    {
+      "name": "text",
+      "type": "string",
+      "required": true,
+      "notes": "Main text for the checkbox"
+    },
+    {
+      "name": "variant",
+      "type": "string",
+      "required": false,
+      "notes": "Visual style variant"
+    }
+  ],
+  "checkbox_data": {
+    "default_checkbox": {
+      "name": "default",
+      "text": "Default Checkbox",
+      "variant": "default"
+    },
+    "primary_checkbox": {
+      "name": "primary",
+      "text": "Primary Checkbox",
+      "variant": "primary"
+    },
+    "secondary_checkbox": {
+      "name": "secondary",
+      "text": "Secondary Checkbox",
+      "variant": "secondary"
+    }
+  }
+}

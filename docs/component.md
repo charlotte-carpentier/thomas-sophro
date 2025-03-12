@@ -40,6 +40,8 @@ project/
 │   │       │   └── molecule-names.json (plural)
 │   │       └── organisms/
 │   │           └── organism-names.json (plural)
+│   └── js/
+│       └── generate-component.js  <!-- Component generator script -->
 └── stories/
     ├── atoms/
     │       └── AtomName.stories.js
@@ -211,11 +213,28 @@ export const Usage = () => {
 
 ## Naming Conventions
 
-- **Directories**: Use numeric prefix (`00-`, `01-`, `02-`, `03-`) to indicate OMA level
-- **Nunjucks Files**: Kebab-case (`button-link.njk`)
-- **Style JSON Files**: Kebab-case (`button.json`)
-- **Content JSON Files**: Kebab-case plural (`buttons.json`)
-- **Stories Files**: PascalCase (`Button.stories.js`)
+HAT Dynamic Template uses specific naming conventions for different file types and code elements:
+
+| Type | Format | Example | Use Case |
+|------|--------|---------|----------|
+| Component Names | PascalCase | `ButtonLink` | For component identifiers and macro names |
+| File Names | kebab-case | `button-link.njk` | For component files, except Stories |
+| Content Files | kebab-case (plural) | `button-links.json` | For content data files |
+| Style Files | kebab-case | `button-link.json` | For style data files |
+| Story Files | PascalCase | `ButtonLink.stories.js` | For Storybook files |
+| JSON Properties | snake_case | `button_link_data` | For JSON property names |
+| HTML Classes | kebab-case | `button-link--primary` | For CSS class names |
+
+### Multi-word Component Names
+
+For components with multiple words (e.g., "Button Link"), the generator converts:
+
+- **PascalCase** → `ButtonLink` (for component names, macros, Story files)
+- **kebab-case** → `button-link` (for file names, HTML classes)
+- **snake_case** → `button_link` (for JSON properties)
+- **camelCase** → `buttonLink` (for JavaScript variables)
+
+This ensures compatibility with both JavaScript and templating systems while maintaining consistent naming across the codebase.
 
 ## Creating a New Component
 
@@ -232,48 +251,72 @@ To create a new component manually, you need to create these four files in their
 
 The HAT Component Generator is a utility script that automates the creation of all necessary component files.
 
-#### Installation
+#### Location
 
-1. Save the `generate-component.js` file in the root directory of your HAT Dynamic Template project
-2. Make sure you have Node.js installed
+The component generator script is located at:
+```
+src/js/generate-component.js
+```
 
 #### Usage
 
 **Basic usage - Create an Atom component**
 
 ```bash
-node generate-component.js Button
+node src/js/generate-component.js Button
+```
+
+**Create a multi-word component**
+
+You can use either PascalCase or quoted strings for multi-word components:
+
+```bash
+# Option 1: PascalCase (recommended)
+node src/js/generate-component.js ButtonLink
+
+# Option 2: Quoted string
+node src/js/generate-component.js "Button Link"
 ```
 
 **Create other component types**
 
 ```bash
 # Create a Molecule component
-node generate-component.js Card molecules
+node src/js/generate-component.js Card molecules
 
 # Create an Organism component
-node generate-component.js Hero organisms
+node src/js/generate-component.js Hero organisms
 ```
 
 #### Generated Files
 
-For a component named "Button", the script will generate:
+For a component named "ButtonLink", the script will generate:
 
-| File | Location | Purpose |
-|------|----------|---------|
-| `button.njk` | `src/_includes/03-atoms/` | Component template with Nunjucks macro |
-| `buttons.json` | `src/_data/contents/atoms/` | Content data with variants |
-| `button.json` | `src/_data/styles/atoms/` | Style data with CSS classes |
-| `Button.stories.js` | `src/stories/atoms/` | Storybook documentation and examples |
+| File | Location | Format | Example |
+|------|----------|--------|---------|
+| Component template | `src/_includes/03-atoms/` | kebab-case | `button-link.njk` |
+| Content data | `src/_data/contents/atoms/` | kebab-case (plural) | `button-links.json` |
+| Style data | `src/_data/styles/atoms/` | kebab-case | `button-link.json` |
+| Storybook docs | `src/stories/atoms/` | PascalCase | `ButtonLink.stories.js` |
 
-#### Generator Output Example
+#### JSON Property Naming
 
-The Component Generator script will create well-structured files for each component:
+The component generator uses snake_case for JSON property names to ensure compatibility with JavaScript access patterns:
 
-- **Component Template**: Includes a Nunjucks macro with proper parameters and documentation
-- **Content Data**: Includes default, primary, and secondary variants
-- **Style Data**: Defines multiple style variants with appropriate classes
-- **Storybook File**: Complete with examples and usage documentation
+```json
+{
+  "component": "button-link",
+  "button_link_data": {
+    "default_button_link": {
+      "name": "default",
+      "text": "Default Button Link",
+      "variant": "default"
+    }
+  }
+}
+```
+
+This approach avoids problems that can occur when accessing properties with hyphens in JavaScript.
 
 #### Next Steps After Generation
 
@@ -301,3 +344,117 @@ To modify an existing component, update the corresponding files:
 2. Add/modify styles in the styles JSON file
 3. Add/modify data in the content JSON file
 4. Update documentation in the `.stories.js` file
+
+### Modifying the Component Template
+
+When modifying a component's template (`.njk` file), consider the following best practices:
+
+- Keep the macro parameters consistent with existing usage
+- Include default values for all parameters to ensure backward compatibility
+- Add comments to explain any complex logic
+- Update the usage examples at the bottom of the file
+
+### Adding New Variants
+
+To add a new variant to an existing component:
+
+1. Add the variant to the style JSON file:
+
+```json
+{
+  "variants": [
+    // Existing variants...
+    {
+      "name": "new-variant",
+      "class": "component-name--new-variant bg-purple-100 text-purple-800"
+    }
+  ]
+}
+```
+
+2. Add content examples to the content JSON file:
+
+```json
+{
+  "component_name_data": {
+    // Existing data...
+    "new_variant_component_name": {
+      "name": "new-variant",
+      "text": "New Variant Component",
+      "variant": "new-variant"
+    }
+  }
+}
+```
+
+3. Add an example to the Storybook file:
+
+```javascript
+export const NewVariant = {
+  args: {
+    text: componentNameExamples.new_variant_component_name.text,
+    variant: componentNameExamples.new_variant_component_name.variant
+  }
+};
+```
+
+## Common Issues and Troubleshooting
+
+### Path Resolution
+
+If you encounter issues with file paths when running the component generator, ensure:
+
+- You're running the command from the project root directory
+- The script is properly detecting the project root path
+- Directory paths in the configuration match your project structure
+
+### JSON Property Access
+
+When working with multi-word component names, remember:
+
+- Use snake_case in JSON property names (`button_link_data`) rather than kebab-case (`button-link-data`)
+- This ensures properties can be accessed in JavaScript using dot notation:
+
+  ```javascript
+  // Good - Works with snake_case
+  data.button_link_data.default_button_link
+  
+  // Bad - Doesn't work with kebab-case
+  data.button-link-data.default-button-link  // JavaScript syntax error!
+  ```
+
+### Component Naming Requirements
+
+When creating new components:
+
+- Component names should be descriptive and follow a noun or noun-adjective format
+- Avoid generic names that might conflict with HTML elements
+- For multi-word names, ensure consistent casing when running the generator
+
+## Best Practices
+
+### Component Creation
+
+- Group related components into logical categories
+- Prefer small, reusable components over large, specific ones
+- Consider accessibility from the start (include ARIA attributes)
+- Include all possible states (hover, focus, active, disabled)
+
+### Naming Conventions
+
+- Be consistent with the established naming patterns
+- Use descriptive, semantic names that reflect the component's purpose
+- Avoid abbreviations unless they are widely understood
+
+### Documentation
+
+- Keep the component usage examples up-to-date
+- Include basic accessibility information
+- Document any non-obvious behaviors or requirements
+
+## Further Resources
+
+- [Nunjucks Documentation](https://mozilla.github.io/nunjucks/templating.html)
+- [TailwindCSS Documentation](https://tailwindcss.com/docs)
+- [Storybook Documentation](https://storybook.js.org/docs)
+- [JSON Standards](https://www.json.org/json-en.html)

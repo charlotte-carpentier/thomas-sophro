@@ -1,0 +1,35 @@
+{
+  "component": "radio-button",
+  "summary": "A reusable radio-button component for the website",
+  "params": [
+    {
+      "name": "text",
+      "type": "string",
+      "required": true,
+      "notes": "Main text for the radio-button"
+    },
+    {
+      "name": "variant",
+      "type": "string",
+      "required": false,
+      "notes": "Visual style variant"
+    }
+  ],
+  "radio-button_data": {
+    "default_radio-button": {
+      "name": "default",
+      "text": "Default RadioButton",
+      "variant": "default"
+    },
+    "primary_radio-button": {
+      "name": "primary",
+      "text": "Primary RadioButton",
+      "variant": "primary"
+    },
+    "secondary_radio-button": {
+      "name": "secondary",
+      "text": "Secondary RadioButton",
+      "variant": "secondary"
+    }
+  }
+}
