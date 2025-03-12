@@ -219,7 +219,70 @@ export const Usage = () => {
 
 ## Creating a New Component
 
-To create a new component, you need to create these four files in their respective directories, following the OMA architecture and naming conventions.
+There are two ways to create a new component in the HAT Dynamic Template:
+
+1. **Manual Creation**: Create all four required files following the OMA architecture
+2. **Using the Component Generator**: Automatically generate all component files
+
+### Manual Component Creation
+
+To create a new component manually, you need to create these four files in their respective directories, following the OMA architecture and naming conventions.
+
+### Using the Component Generator
+
+The HAT Component Generator is a utility script that automates the creation of all necessary component files.
+
+#### Installation
+
+1. Save the `generate-component.js` file in the root directory of your HAT Dynamic Template project
+2. Make sure you have Node.js installed
+
+#### Usage
+
+**Basic usage - Create an Atom component**
+
+```bash
+node generate-component.js Button
+```
+
+**Create other component types**
+
+```bash
+# Create a Molecule component
+node generate-component.js Card molecules
+
+# Create an Organism component
+node generate-component.js Hero organisms
+```
+
+#### Generated Files
+
+For a component named "Button", the script will generate:
+
+| File | Location | Purpose |
+|------|----------|---------|
+| `button.njk` | `src/_includes/03-atoms/` | Component template with Nunjucks macro |
+| `buttons.json` | `src/_data/contents/atoms/` | Content data with variants |
+| `button.json` | `src/_data/styles/atoms/` | Style data with CSS classes |
+| `Button.stories.js` | `src/stories/atoms/` | Storybook documentation and examples |
+
+#### Generator Output Example
+
+The Component Generator script will create well-structured files for each component:
+
+- **Component Template**: Includes a Nunjucks macro with proper parameters and documentation
+- **Content Data**: Includes default, primary, and secondary variants
+- **Style Data**: Defines multiple style variants with appropriate classes
+- **Storybook File**: Complete with examples and usage documentation
+
+#### Next Steps After Generation
+
+After generating a component:
+
+1. Customize the HTML structure in the `.njk` file
+2. Modify styles in the style JSON file
+3. Add or adjust content variants in the content JSON file
+4. Enhance the Storybook documentation with more examples
 
 ## Using a Component
 

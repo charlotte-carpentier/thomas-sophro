@@ -4,7 +4,6 @@
     <div class="container mx-auto px-4">
         <h2 class="section-title text-3xl font-semibold text-center text-gray-800 mb-4">Featured articles</h2>
         <p class="typography-h1 text-center text-lg text-gray-600 mb-8">Here is a sample of articles which I feel give you a good idea of what this site is all about.</p>
-
         <!-- Featured articles grid -->
         <ul role="list" class="articles__list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {%- for post in collections.featured | reverse -%}

@@ -23,7 +23,8 @@
     "build": "eleventy",
     "refresh": "rm -rf .cache ./public/css/output.css",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "generate:stories": "node scripts/generate-stories.js"
   },
   "dependencies": {
     "@anthropic-ai/claude-code": "^0.2.29"
