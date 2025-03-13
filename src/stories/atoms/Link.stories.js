@@ -1,36 +1,23 @@
 // src/stories/atoms/Link.stories.js
 import nunjucks from 'nunjucks';
-import linkData from '../../_data/styles/atoms/link.json';
 import linksData from '../../_data/contents/atoms/links.json';
 
-// Nunjucks template for rendering links
-const linkTemplate = `
-  <a 
-    href="{{ href }}" 
-    class="link link--{{ variant }} {{ variantClass }}"
-  >
-    {{ text }}
-  </a>
-`;
-
-// Helper function to get variant-specific CSS classes
-function getVariantClass(variant) {
-  const foundVariant = linkData.variants.find(v => v.name === variant);
-  return foundVariant ? foundVariant.class.replace(`link--${variant}`, '').trim() : '';
-}
+// Define styles map in JavaScript
+const styleClasses = {
+  default: "text-gray-800 hover:text-gray-600 transition-colors duration-200",
+  primary: "text-blue-600 hover:text-blue-800 underline transition-colors duration-200",
+  secondary: "text-gray-500 hover:text-gray-700 transition-colors duration-200"
+};
 
 export default {
   title: 'Atoms/Link',
   tags: ['autodocs'],
   
-  // Render function using Nunjucks macro
+  // Render function
   render: (args) => {
-    return nunjucks.renderString(linkTemplate, {
-      href: args.href,
-      text: args.text,
-      variant: args.variant,
-      variantClass: getVariantClass(args.variant)
-    });
+    // Use a simple template without complex Nunjucks logic
+    const linkTemplate = `<a href="${args.href}" class="${styleClasses[args.style] || styleClasses.default}">${args.text}</a>`;
+    return linkTemplate;
   },
   
   // Argument types for storybook controls
@@ -45,11 +32,11 @@ export default {
       control: 'text',
       defaultValue: 'Link' 
     },
-    variant: { 
+    style: { 
       description: 'Visual style of the link',
       control: { 
         type: 'select', 
-        options: linkData.variants.map(v => v.name)
+        options: ['default', 'primary', 'secondary']
       },
       defaultValue: 'default'
     }
@@ -57,25 +44,47 @@ export default {
 };
 
 // Using examples from links.json
-const linkExamples = linksData.link_data;
-
-export const Tavern = {
+export const TavernQuest = {
   args: {
-    href: linkExamples.link_tavern_quest.href,
-    text: linkExamples.link_tavern_quest.text,
-    variant: linkExamples.link_tavern_quest.variant
+    href: linksData[0].href,
+    text: linksData[0].text,
+    style: linksData[0].style
   }
 };
 
-export const MonsertManual = {
+export const MonsterManual = {
   args: {
-    href: linkExamples.link_monster_manual.href,
-    text: linkExamples.link_monster_manual.text,
-    variant: linkExamples.link_monster_manual.variant
+    href: linksData[1].href,
+    text: linksData[1].text,
+    style: linksData[1].style
   }
 };
 
-// Using examples from links.json
+export const Default = {
+  args: {
+    href: '#',
+    text: 'Default Link',
+    style: 'default'
+  }
+};
+
+export const Primary = {
+  args: {
+    href: '#',
+    text: 'Primary Link',
+    style: 'primary'
+  }
+};
+
+export const Secondary = {
+  args: {
+    href: '#',
+    text: 'Secondary Link',
+    style: 'secondary'
+  }
+};
+
+// Usage guide based on the new macro
 export const Usage = () => {
   const usageGuide = document.createElement('div');
   usageGuide.className = 'bg-gray-50 p-6 rounded-lg max-w-4xl mx-auto';
@@ -89,49 +98,45 @@ export const Usage = () => {
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Insert the component in your template:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink(links.link_data.link_home) }}</code></pre>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Call a specific link by its index:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink(contents.atoms.links[0]) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Use a custom variant directly in the call:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Call a specific link by its name:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% set link_by_name = contents.atoms.links | selectattr('name', 'equalto', 'tavern_quest') | first %}
+{{ renderLink(link_by_name) }}</code></pre>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Use a custom link directly:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink({
   href: '/custom-page', 
   text: 'Custom Link', 
-  variant: 'primary'
+  style: 'primary'
 }) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Available content & styles:</h3>
-        <p class="text-gray-600 mb-3">Check the following files:</p>
-        <ul class="list-disc pl-6 space-y-2 text-gray-600">
-          <li>Content: <code>src/_data/contents/atoms/links.json</code></li>
-          <li>Styles: <code>src/_data/styles/atoms/link.json</code></li>
-        </ul>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Add a new link in links.json:</h3>
+        <div class="bg-gray-100 p-3 rounded-md overflow-x-auto">
+          <pre><code class="text-sm text-gray-900">{
+  "id": 2, // Must be unique and sequential (e.g., max ID + 1)
+  "name": "new_link_name",
+  "href": "/your-link",
+  "text": "Your Link Text",
+  "style": "primary"
+}</code></pre>
+        </div>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Create a new content or style:</h3>
-        <div class="bg-gray-100 p-3 rounded-md overflow-x-auto">
-          <h4 class="font-semibold mb-2">Add content to links.json:</h4>
-          <pre><code class="text-sm text-gray-900">"link_data": {
-  "your_new_link": {
-    "name": "unique_name",
-    "href": "/your-path",
-    "text": "Your link text",
-    "variant": "default"
-  }
-}</code></pre>
-          
-          <h4 class="font-semibold mt-4 mb-2">Add style to link.json:</h4>
-          <pre><code class="text-sm text-gray-900">"variants": [
-  {
-    "name": "your_new_variant",
-    "class": "link--custom text-green-600 hover:text-green-800"
-  }
-]</code></pre>
-        </div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Available styles:</h3>
+        <ul class="list-disc pl-6 space-y-2 text-gray-600">
+          <li><code>default</code>: Gray text that darkens on hover</li>
+          <li><code>primary</code>: Blue underlined text that darkens on hover</li>
+          <li><code>secondary</code>: Light gray text that darkens on hover</li>
+        </ul>
       </div>
     </div>
   `;

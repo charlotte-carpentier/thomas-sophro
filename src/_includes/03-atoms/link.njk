@@ -1,43 +1,59 @@
 <!-- ========================= -->
-<!--           LINK            -->
+<!--          LINK             -->
 <!-- ========================= -->
 
-{% macro renderLink(option) %}
-  {# Get link options with default values if not provided #}
-  {% set href = option.href | default('#') %}
-  {% set text = option.text | default('Link') %}
-  {% set variant = option.variant | default(link.defaultProps.variant) %}
-  
-  {# Find the variant in the link.json file #}
-  {% set selectedVariant = null %}
-  {% for v in link.variants %}
-    {% if v.name == variant %}
-      {% set selectedVariant = v %}
-    {% endif %}
-  {% endfor %}
-  
-  {# Use default variant if specified variant was not found #}
-  {% if not selectedVariant %}
-    {% for v in link.variants %}
-      {% if v.name == link.defaultProps.variant %}
-        {% set selectedVariant = v %}
-      {% endif %}
+{# {% macro renderLink(links) %}
+  {% if links is iterable and links[0] is defined %}
+    {% for link in links %}
+      <a href="{{ link.href }}" class="typography-label-l link {{ link.style }}">
+        {{ link.text }}
+      </a><br>
     {% endfor %}
+  {% else %}
+    <a href="{{ links.href }}" class="typography-label-l link {{ links.style }}">
+      {{ links.text }}
+    </a>
   {% endif %}
-  
-  {# Render the anchor tag with appropriate classes from link.json #}
-  <a href="{{ href }}" class="{{ selectedVariant.class }}">
-    {{ text }}
-  </a>
-{% endmacro %}
+{% endmacro %} #}
 
-<!-- ========================= -->
-<!-- HOW TO USE THIS COMPONENT -->
-<!-- ========================= -->
+{%- macro renderLink(link) -%}
+    {%- set styles = {
+        "default": "text-gray-800 hover:text-gray-600 transition-colors duration-200",
+        "primary": "text-blue-600 hover:text-blue-800 underline transition-colors duration-200",
+        "secondary": "text-gray-500 hover:text-gray-700 transition-colors duration-200"
+    } -%}
 
-<!--
-  Complete documentation in Storybook
-  Basic usage: {% from "03-atoms/link.njk" import renderLink %}
-              {{ renderLink(links.link_data.link_home) }}
-  With style: {{ renderLink(links.link_data.link_home, "primary") }}
--->
+    {% if link and link.style in styles %}
+        <a href="{{ link.href }}" class="{{ styles[link.style] }}">{{ link.text }}</a>
+    {% else %}
+        <a href="{{ link.href }}" class="{{ styles.default }}">{{ link.text }}</a>
+    {% endif %}
+{%- endmacro %}
+
+<!-- ============================ -->
+<!-- Summon HAT Components Wisely -->
+<!-- ============================ -->
+
+<!-- 1. Import the macro at the top of your page -->
+{# {% from "03-atoms/link.njk" import renderLink %} #}
+
+<!-- 2. Call a specific link by its ID -->
+{# {{ renderLink(contents.atoms.links[0]) }} #}
+
+<!-- 3. Call a specific link by its name -->
+{# {% set link_by_name = contents.atoms.links | selectattr('name', 'equalto', 'tavern_quest') | first %} #}
+{# {{ renderLink(link_by_name) }} #}
+
+<!-- 4. Adding a new link -->
+<!-- Open contents/atoms/links.json and add a new entry following this format: -->
+{#
+{
+  "id": 2, // Must be unique and sequential (e.g., max ID + 1)
+  "name": "new_link_name",
+  "href": "/your-link",
+  "text": "Your Link Text",
+  "style": "primary"
+}
+#}
+
+<!-- May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨ -->

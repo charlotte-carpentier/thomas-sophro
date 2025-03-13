@@ -3,8 +3,8 @@
  * 
  * This script generates component files following the OMA architecture:
  * 1. Component template (.njk)
- * 2. Content data (.json)
- * 3. Style data (.json)
+ * 2. Content data as array (.json)
+ * 3. Updates centralized style data (.json)
  * 4. Storybook documentation (.stories.js)
  * 
  * Usage: node src/js/generate-component.js <componentName> [componentType=atoms]
@@ -22,7 +22,7 @@ import readline from 'readline';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// CORRECTION: Get the project root by going up two levels from the script location
+// Get the project root by going up two levels from the script location
 const projectRoot = path.resolve(__dirname, "../../");
 
 // Debug information to verify paths
@@ -43,7 +43,7 @@ if (!componentName) {
 
 // Configuration
 const config = {
-    // Base paths - CORRECTION: Use projectRoot instead of a relative path
+    // Base paths
     basePath: projectRoot,
     
     // Specific paths
@@ -68,7 +68,7 @@ const config = {
 const componentPrefix = config.paths[componentType] || config.paths.atoms;
 const includesPath = path.join(config.basePath, config.directories.includes, componentPrefix);
 const contentsPath = path.join(config.basePath, config.directories.data, config.directories.contents, componentType);
-const stylesPath = path.join(config.basePath, config.directories.data, config.directories.styles, componentType);
+const stylesPath = path.join(config.basePath, config.directories.data, config.directories.styles);
 const storiesPath = path.join(config.basePath, config.directories.stories, componentType);
 
 // Log paths for verification
@@ -81,7 +81,7 @@ console.log("Storybook file:", storiesPath);
 // Define file names
 const componentFile = path.join(includesPath, `${componentNameKebab}.njk`);
 const contentFile = path.join(contentsPath, `${pluralize(componentNameKebab)}.json`);
-const styleFile = path.join(stylesPath, `${componentNameKebab}.json`);
+const styleFile = path.join(stylesPath, `${componentType}.json`);
 const storyFile = path.join(storiesPath, `${pascalCase(componentName)}.stories.js`);
 
 // Ensure directories exist
@@ -93,9 +93,9 @@ const storyFile = path.join(storiesPath, `${pascalCase(componentName)}.stories.j
 });
 
 // Generate files
-generateComponentFile(componentFile, componentName, componentNameKebab);
+generateComponentFile(componentFile, componentName, componentNameKebab, componentType);
 generateContentFile(contentFile, componentName, componentNameKebab);
-generateStyleFile(styleFile, componentName, componentNameKebab);
+updateStyleFile(styleFile, componentName, componentNameKebab);
 generateStoryFile(storyFile, componentName, componentNameKebab, componentType);
 
 console.log(`
@@ -104,13 +104,13 @@ console.log(`
 Generated files:
 1. Component: ${componentFile}
 2. Content Data: ${contentFile}
-3. Style Data: ${styleFile}
+3. Updated Style Data: ${styleFile}
 4. Storybook: ${storyFile}
 
 Next steps:
 - Customize the component's HTML structure in the .njk file
-- Add specific styles in the style JSON file
-- Define content variants in the content JSON file
+- Update specific styles in the ${componentType}.json file
+- Add more items in the content JSON array
 - Enhance the Storybook documentation with examples
 
 Happy coding! 🚀
@@ -121,37 +121,31 @@ Happy coding! 🚀
  * @param {string} filePath 
  * @param {string} name 
  * @param {string} nameKebab 
+ * @param {string} componentType
  */
-function generateComponentFile(filePath, name, nameKebab) {
+function generateComponentFile(filePath, name, nameKebab, componentType) {
     const content = `<!-- ========================= -->
 <!--         ${name.toUpperCase().padEnd(14, ' ')} -->
 <!-- ========================= -->
 
-{% macro render${name}(option) %}
+{% macro render${name}(item) %}
   {# Get ${nameKebab} options with default values if not provided #}
-  {% set text = option.text | default('${name}') %}
-  {% set variant = option.variant | default(${nameKebab}.defaultProps.variant) %}
+  {% set label = item.label | default('${name}') %}
+  {% set id = item.id | default('default-${nameKebab}') %}
+  {% set style = item.style | default('default') %}
   
-  {# Find the variant in the ${nameKebab}.json file #}
-  {% set selectedVariant = null %}
-  {% for v in ${nameKebab}.variants %}
-    {% if v.name == variant %}
-      {% set selectedVariant = v %}
-    {% endif %}
-  {% endfor %}
-  
-  {# Use default variant if specified variant was not found #}
-  {% if not selectedVariant %}
-    {% for v in ${nameKebab}.variants %}
-      {% if v.name == ${nameKebab}.defaultProps.variant %}
-        {% set selectedVariant = v %}
-      {% endif %}
-    {% endfor %}
+  {# Check if styles object exists #}
+  {% if styles.${componentType}.${nameKebab} %}
+    {# Get style classes from the centralized styles file #}
+    {% set styleClasses = styles.${componentType}.${nameKebab}[style] %}
+  {% else %}
+    {# Fallback classes if style not found #}
+    {% set styleClasses = "bg-gray-200 text-gray-800 p-2 rounded" %}
   {% endif %}
   
   {# Render the component with appropriate classes #}
-  <div class="${nameKebab} {{ selectedVariant.class }}">
-    {{ text }}
+  <div id="{{ id }}" class="${nameKebab} {{ styleClasses }}">
+    {{ label }}
   </div>
 {% endmacro %}
 
@@ -161,98 +155,96 @@ function generateComponentFile(filePath, name, nameKebab) {
 
 <!--
   Complete documentation in Storybook
-  Basic usage: {% from "${componentPrefix}/${nameKebab}.njk" import render${name} %}
-              {{ render${name}(${pluralize(nameKebab)}.${nameKebab}_data.default_${nameKebab}) }}
-  With style: {{ render${name}({ text: "Custom ${name}", variant: "primary" }) }}
+  
+  Basic usage with data:
+  {% from "${componentPrefix}/${nameKebab}.njk" import render${name} %}
+  
+  {# Single item usage #}
+  {% set item = contents.${componentType}.${pluralize(nameKebab)}[0] %}
+  {{ render${name}(item) }}
+  
+  {# Loop through all items #}
+  {% for item in contents.${componentType}.${pluralize(nameKebab)} %}
+    {{ render${name}(item) }}
+  {% endfor %}
+  
+  {# Custom item #}
+  {{ render${name}({
+    label: "Custom ${name}",
+    id: "custom-${nameKebab}",
+    style: "primary"
+  }) }}
 -->`;
 
     createFile(filePath, content);
 }
 
 /**
- * Generate the content JSON file
+ * Generate the content JSON file as an array
  * @param {string} filePath 
  * @param {string} name 
  * @param {string} nameKebab 
  */
 function generateContentFile(filePath, name, nameKebab) {
-    const contentObject = {
-        component: nameKebab,
-        summary: `A reusable ${nameKebab} component for the website`,
-        params: [
-            { 
-                name: "text", 
-                type: "string", 
-                required: true, 
-                notes: `Main text for the ${nameKebab}` 
-            },
-            { 
-                name: "variant", 
-                type: "string", 
-                required: false, 
-                notes: "Visual style variant" 
-            }
-        ],
-        [`${nameKebab}_data`]: {
-            [`default_${nameKebab}`]: {
-                name: "default",
-                text: `Default ${name}`,
-                variant: "default"
-            },
-            [`primary_${nameKebab}`]: {
-                name: "primary",
-                text: `Primary ${name}`,
-                variant: "primary"
-            },
-            [`secondary_${nameKebab}`]: {
-                name: "secondary",
-                text: `Secondary ${name}`,
-                variant: "secondary"
-            }
+    const contentArray = [
+        {
+            id: `default-${nameKebab}`,
+            label: `Default ${name}`,
+            style: "default",
+            description: `A default ${nameKebab} component`
+        },
+        {
+            id: `primary-${nameKebab}`,
+            label: `Primary ${name}`,
+            style: "primary",
+            description: `A primary ${nameKebab} component with emphasis`
+        },
+        {
+            id: `secondary-${nameKebab}`,
+            label: `Secondary ${name}`,
+            style: "secondary",
+            description: `A secondary ${nameKebab} component for less important actions`
         }
-    };
+    ];
 
-    createFile(filePath, JSON.stringify(contentObject, null, 2));
+    createFile(filePath, JSON.stringify(contentArray, null, 2));
 }
 
 /**
- * Generate the style JSON file
+ * Update the centralized style file for the component type
  * @param {string} filePath 
  * @param {string} name 
  * @param {string} nameKebab 
  */
-function generateStyleFile(filePath, name, nameKebab) {
-    const styleObject = {
-        name: name,
-        description: `${name} component with multiple style variants`,
-        variants: [
-            {
-                name: "default",
-                class: `${nameKebab}--default text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm p-2`
-            },
-            {
-                name: "primary",
-                class: `${nameKebab}--primary text-white bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 p-2`
-            },
-            {
-                name: "secondary",
-                class: `${nameKebab}--secondary text-gray-800 bg-gray-100 border border-gray-200 rounded-md shadow-sm hover:bg-gray-200 p-2`
-            }
-        ],
-        defaultProps: {
-            variant: "default"
-        },
-        accessibility: {
-            roles: [nameKebab],
-            keyboardInteractions: []
-        }
-    };
+function updateStyleFile(filePath, name, nameKebab) {
+    let styleData = {};
 
-    createFile(filePath, JSON.stringify(styleObject, null, 2));
+    // Load existing style file if exists
+    if (fs.existsSync(filePath)) {
+        try {
+            styleData = JSON.parse(fs.readFileSync(filePath, "utf8"));
+        } catch (error) {
+            console.warn(`⚠️ Error parsing existing style file. Creating new: ${error.message}`);
+        }
+    }
+
+    // Add styles for new component if not exists
+    if (!styleData[nameKebab]) {
+        styleData[nameKebab] = {
+            "default": "text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm p-2",
+            "primary": "text-white bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 p-2",
+            "secondary": "text-gray-800 bg-gray-100 border border-gray-200 rounded-md shadow-sm hover:bg-gray-200 p-2"
+        };
+
+        createFile(filePath, JSON.stringify(styleData, null, 2));
+        console.log(`✅ Updated: ${filePath} (added ${nameKebab})`);
+    } else {
+        console.log(`⚠️ Style for ${nameKebab} already exists in ${filePath}`);
+    }
 }
 
 /**
- * Generate the Storybook story file
+ * Generate the Storybook story file for the new component structure
  * @param {string} filePath 
  * @param {string} name 
  * @param {string} nameKebab 
@@ -262,20 +254,21 @@ function generateStoryFile(filePath, name, nameKebab, componentType) {
     const capitalizedType = capitalizeFirstLetter(componentType);
     const content = `// src/stories/${componentType}/${name}.stories.js
 import nunjucks from 'nunjucks';
-import ${nameKebab}Data from '../../_data/styles/${componentType}/${nameKebab}.json';
-import ${pluralize(nameKebab)}Data from '../../_data/contents/${componentType}/${pluralize(nameKebab)}.json';
+import stylesData from '../../_data/styles/${componentType}.json';
+import contentData from '../../_data/contents/${componentType}/${pluralize(nameKebab)}.json';
 
-// Nunjucks template for rendering ${pluralize(nameKebab)}
+// Nunjucks template for rendering the component
 const ${nameKebab}Template = \`
-  <div class="${nameKebab} \$\{variantClass\}">
-    \$\{text\}
+  <div id="\$\{id\}" class="${nameKebab} \$\{styleClasses\}">
+    \$\{label\}
   </div>
 \`;
 
-// Helper function to get variant-specific CSS classes
-function getVariantClass(variant) {
-  const foundVariant = ${nameKebab}Data.variants.find(v => v.name === variant);
-  return foundVariant ? foundVariant.class : '';
+// Helper function to get style classes based on style name
+function getStyleClasses(style = 'default') {
+  return stylesData && stylesData.${nameKebab} && stylesData.${nameKebab}[style] 
+    ? stylesData.${nameKebab}[style] 
+    : "bg-gray-200 text-gray-800 p-2 rounded";
 }
 
 export default {
@@ -285,55 +278,80 @@ export default {
   // Render function using Nunjucks
   render: (args) => {
     return nunjucks.renderString(${nameKebab}Template, {
-      text: args.text,
-      variant: args.variant,
-      variantClass: getVariantClass(args.variant)
+      id: args.id || \`story-${nameKebab}-\${Date.now()}\`,
+      label: args.label,
+      styleClasses: getStyleClasses(args.style)
     });
   },
   
   // Argument types for Storybook controls
   argTypes: {
-    text: { 
-      description: 'Main content text',
+    id: { 
+      description: 'Unique identifier',
+      control: 'text'
+    },
+    label: { 
+      description: 'Component text content',
       control: 'text',
       defaultValue: 'Default ${name}' 
     },
-    variant: { 
+    style: { 
       description: 'Visual style of the ${nameKebab}',
       control: { 
         type: 'select', 
-        options: ${nameKebab}Data.variants.map(v => v.name)
+        options: stylesData && stylesData.${nameKebab} 
+          ? Object.keys(stylesData.${nameKebab}) 
+          : ['default', 'primary', 'secondary']
       },
       defaultValue: 'default'
     }
   }
 };
 
-// Using examples from ${pluralize(nameKebab)}.json
-const ${nameKebab}Examples = ${pluralize(nameKebab)}Data.${nameKebab}_data;
-
+// Create story examples from the content data
 export const Default = {
-  args: {
-    text: ${nameKebab}Examples.default_${nameKebab}.text,
-    variant: ${nameKebab}Examples.default_${nameKebab}.variant
-  }
+  args: contentData && contentData.length > 0 
+    ? {
+        id: contentData[0].id,
+        label: contentData[0].label,
+        style: contentData[0].style
+      }
+    : {
+        id: 'default-${nameKebab}',
+        label: 'Default ${name}',
+        style: 'default'
+      }
 };
 
 export const Primary = {
-  args: {
-    text: ${nameKebab}Examples.primary_${nameKebab}.text,
-    variant: ${nameKebab}Examples.primary_${nameKebab}.variant
-  }
+  args: contentData && contentData.length > 1
+    ? {
+        id: contentData[1].id,
+        label: contentData[1].label,
+        style: contentData[1].style
+      }
+    : {
+        id: 'primary-${nameKebab}',
+        label: 'Primary ${name}',
+        style: 'primary'
+      }
 };
 
 export const Secondary = {
-  args: {
-    text: ${nameKebab}Examples.secondary_${nameKebab}.text,
-    variant: ${nameKebab}Examples.secondary_${nameKebab}.variant
-  }
+  args: contentData && contentData.length > 2
+    ? {
+        id: contentData[2].id,
+        label: contentData[2].label,
+        style: contentData[2].style
+      }
+    : {
+        id: 'secondary-${nameKebab}',
+        label: 'Secondary ${name}',
+        style: 'secondary'
+      }
 };
 
-// Usage guide
+// Usage guide reflecting the new structure
 export const Usage = () => {
   const usageGuide = document.createElement('div');
   usageGuide.className = 'bg-gray-50 p-6 rounded-lg max-w-4xl mx-auto';
@@ -347,46 +365,67 @@ export const Usage = () => {
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Insert the component in your template:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ render${name}(${pluralize(nameKebab)}.${nameKebab}_data.default_${nameKebab}) }}</code></pre>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Use with a single content item:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% set item = contents.${componentType}.${pluralize(nameKebab)}[0] %}
+{{ render${name}(item) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Use a custom variant directly in the call:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Loop through all content items:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% for item in contents.${componentType}.${pluralize(nameKebab)} %}
+  {{ render${name}(item) }}
+{% endfor %}</code></pre>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Use with custom properties:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ render${name}({
-  text: "Custom ${name}", 
-  variant: "primary"
+  label: "Custom ${name}",
+  id: "custom-${nameKebab}",
+  style: "primary"
 }) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Available content & styles:</h3>
-        <p class="text-gray-600 mb-3">Check the following files:</p>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Available files and structure:</h3>
+        <p class="text-gray-600 mb-3">Updated component architecture:</p>
         <ul class="list-disc pl-6 space-y-2 text-gray-600">
-          <li>Content: <code>src/_data/contents/${componentType}/${pluralize(nameKebab)}.json</code></li>
-          <li>Styles: <code>src/_data/styles/${componentType}/${nameKebab}.json</code></li>
+          <li>Component template: <code>src/_includes/${componentPrefix}/${nameKebab}.njk</code></li>
+          <li>Content data (array): <code>src/_data/contents/${componentType}/${pluralize(nameKebab)}.json</code></li>
+          <li>Centralized styles: <code>src/_data/styles/${componentType}.json</code></li>
         </ul>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Create a new content or style:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Content JSON Structure:</h3>
         <div class="bg-gray-100 p-3 rounded-md overflow-x-auto">
-          <h4 class="font-semibold mb-2">Add content to ${pluralize(nameKebab)}.json:</h4>
-          <pre><code class="text-sm text-gray-900">"${nameKebab}_data": {
-  "your_new_${nameKebab}": {
-    "name": "unique_name",
-    "text": "Your ${nameKebab} text",
-    "variant": "default"
-  }
-}</code></pre>
-          
-          <h4 class="font-semibold mt-4 mb-2">Add style to ${nameKebab}.json:</h4>
-          <pre><code class="text-sm text-gray-900">"variants": [
+          <pre><code class="text-sm text-gray-900">[
   {
-    "name": "your_new_variant",
-    "class": "${nameKebab}--custom bg-purple-100 text-purple-800"
+    "id": "unique-id-1",
+    "label": "First ${name}",
+    "style": "primary",
+    "description": "Optional description"
+  },
+  {
+    "id": "unique-id-2",
+    "label": "Second ${name}",
+    "style": "secondary",
+    "description": "Another description"
   }
 ]</code></pre>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">7. Style Structure in ${componentType}.json:</h3>
+        <div class="bg-gray-100 p-3 rounded-md overflow-x-auto">
+          <pre><code class="text-sm text-gray-900">{
+  "${nameKebab}": {
+    "default": "text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm p-2",
+    "primary": "text-white bg-blue-600 border border-blue-700 rounded-md hover:bg-blue-700 p-2",
+    "secondary": "text-gray-800 bg-gray-100 border border-gray-200 hover:bg-gray-200 p-2"
+  }
+}</code></pre>
         </div>
       </div>
     </div>
@@ -408,7 +447,7 @@ Usage.parameters = {
 }
 
 /**
- * Create a file if it doesn't exist
+ * Create a file if it doesn't exist or update it as needed
  * @param {string} filePath 
  * @param {string} content 
  */

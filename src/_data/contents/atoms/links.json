@@ -1,24 +1,16 @@
-{
-  "component": "link",
-  "summary": "A navigation link for the website",
-  "params": [
-    { "name": "option", "type": "object", "required": true, "notes": "Object containing link properties" },
-    { "name": "option.href", "type": "string", "required": true, "notes": "URL path for the navigation link" },
-    { "name": "option.text", "type": "string", "required": true, "notes": "Displayed text for the link" },
-    { "name": "option.variant", "type": "string", "required": false, "notes": "Visual style variant" }
-  ],
-  "link_data": {
-    "link_tavern_quest": {
-            "name": "tavern_quest",
-            "href": "/", 
-            "text": "Tavern Quest Board",
-            "variant": "secondary"
-        },
-        "link_monster_manual": {
-            "name": "monster_manual",
-            "href": "/bestiary", 
-            "text": "Legendary Monster Encyclopedia",
-            "variant": "primary"
-        }
+[
+  {
+    "id": 0,
+    "name": "tavern_quest",
+    "href": "/",
+    "text": "Tavern Quest Board",
+    "style": "primary"
+  },
+  {
+    "id": 1,
+    "name": "monster_manual",
+    "href": "/bestiary",
+    "text": "Legendary Monster Encyclopedia",
+    "style": "primary"
   }
-}
+]

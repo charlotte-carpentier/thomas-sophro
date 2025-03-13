@@ -2,17 +2,21 @@
 
 ## Overview
 
-HAT Dynamic Template is a modular front-end development framework built on Eleventy, Nunjucks, and TailwindCSS. It follows a custom OMA structure (Core, Organisms, Molecules, Atoms) to create consistent and maintainable web components.
+HAT Dynamic Template is a modular front-end development framework built on Eleventy, Nunjucks, and TailwindCSS. It follows a custom OMA structure (Organisms, Molecules, Atoms) to create consistent and maintainable web components.
 
 ## Directory Structure
 
 ```sh
 src/
 ├── _data/            # Data files for templates
-│   ├── contents/     # Content-related data
-│   │   └── atoms/    # Content data for atomic components
-│   ├── styles/       # Style-related data
-│   │   └── atoms/    # Style data for atomic components
+│   ├── contents/     # Content-related data (multiple instances per file)
+│   │   ├── atoms/    # Content data for atomic components
+│   │   ├── molecules/ # Content data for molecular components
+│   │   ├── organisms/ # Content data for organism components
+│   ├── styles/       # Style-related data (one file per category)
+│   │   ├── atoms.json      # Styles for atoms
+│   │   ├── molecules.json  # Styles for molecules
+│   │   ├── organisms.json  # Styles for organisms
 │   └── site.json     # Global site configuration
 ├── _includes/        # Component templates
 │   ├── 00-core/      # Base templates
@@ -21,10 +25,10 @@ src/
 │   │   └── footer.njk
 │   ├── 01-organisms/ # Page sections
 │   │   └── sections/ # Complete sections like hero, featured, about
-│   ├── 02-molecules/ # Composite components (made from organisms and atoms)
+│   ├── 02-molecules/ # Composite components (made from atoms)
 │   │   ├── cards/    # Card components
 │   │   ├── forms/    # Form groups
-│   └── 03-atoms/     # Basic components
+│   └── 03-atoms/     # Basic components (buttons, inputs, icons)
 
 ├── admin/            # Decap CMS configuration
 ├── assets/           # Static assets
@@ -43,59 +47,38 @@ src/
 
 ## Component Architecture (OMA)
 
-The framework uses a four-tiered component architecture with an inverted numbering system:
-
-### 0. Core (00-core)
-
-Core templates provide the foundational structure for all pages:
-
-- `base.njk`: The main HTML template with head and body structure
-- `header.njk`: Global site header
-- `footer.njk`: Global site footer
-
 ### 1. Organisms (01-organisms)
 
-Organisms are relatively complex components that form distinct sections of the interface.
+Organisms are complex, self-contained sections that group molecules and atoms.
 
 **Examples:**
 
 - Hero sections
 - Featured content sections
 - Contact forms
-- Article sections
 - Page-level sections
 
 ### 2. Molecules (02-molecules)
 
-Molecules are groups of components that work together as a unit to perform a more complex function.
+Molecules are groups of atoms that function together.
 
 **Examples:**
 
 - Cards
 - Form groups
 - Alert messages
-- Navigation menu
-- Carousels
+- Navigation menus
 
 ### 3. Atoms (03-atoms)
 
-Atoms are the smallest building blocks of the interface - they cannot be broken down further without losing their functionality.
+Atoms are the smallest components that cannot be further broken down.
 
 **Examples:**
 
 - Buttons
 - Form inputs
-- Tags
-- Links
 - Icons
-- Tooltips
-
-### 4. Pages (Optional)
-
-Pages combine these components to create complete user interfaces. In this framework, pages are typically:
-
-- Root level `.njk` files
-- Templates in special directories like `blog/`
+- Links
 
 ## Data Structure
 
@@ -103,98 +86,68 @@ The framework separates content from presentation:
 
 ### Content Data (`_data/contents/`)
 
-Contains the actual content to be displayed in components, with localized text, labels, and example data.
+Contains actual component data, stored as arrays to allow multiple instances.
 
-**Example (`contents/atoms/links.json`):**
+**Example (`contents/atoms/buttons.json`):**
 
 ```json
-{
-  "component": "link",
-  "link_data": {
-    "link_home": {
-      "name": "home",
-      "href": "/", 
-      "text": "Home",
-      "variant": "default"
-    }
+[
+  {
+    "label": "Contactez-nous",
+    "url": "/contact",
+    "style": "primary"
+  },
+  {
+    "label": "En savoir plus",
+    "url": "/about",
+    "style": "secondary"
   }
-}
+]
 ```
 
 ### Style Data (`_data/styles/`)
 
-Contains style-specific information for components, including variants, classes, and default properties.
+Contains style-specific data grouped by component type.
 
-**Example (`styles/atoms/tag.json`):**
+**Example (`styles/atoms.json`):**
 
 ```json
 {
-  "name": "Tag",
-  "variants": [
-    {
-      "name": "default",
-      "class": "tag--default bg-gray-100 text-gray-800"
-    },
-    {
-      "name": "success",
-      "class": "tag--success bg-green-100 text-green-800"
-    }
-  ],
-  "defaultProps": {
-    "variant": "default"
+  "button": {
+    "primary": "bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600",
+    "secondary": "bg-gray-200 text-black px-4 py-2 rounded-lg"
   }
 }
 ```
 
 ## Component Templates
 
-Templates are built using Nunjucks macros for reusability. Each component follows a standard pattern:
+Templates use Nunjucks macros for reusability.
 
 ```njk
-{% macro renderComponentName(options) %}
-  {# Extract options with default values #}
-  {% set option1 = options.option1 | default('default value') %}
-  
-  {# Render the component #}
-  <div class="component-name">
-    {{ option1 }}
-  </div>
+{% macro renderButton(button) %}
+<a href="{{ button.url }}" class="{{ styles.atoms.button[button.style] }}">
+  {{ button.label }}
+</a>
 {% endmacro %}
 ```
 
 ## Storybook Integration
 
-Components are documented and showcased using Storybook:
-
 - Each component has a `.stories.js` file
 - Stories demonstrate different variants and usage examples
-- Detailed documentation for component usage is included
-
-## Integration with Decap CMS
-
-The framework includes configuration for Decap CMS:
-
-- `admin/config.yml` defines the content model
-- Content collections map to site sections
-- Media management is configured for Netlify uploads
 
 ## Styling with TailwindCSS
 
-- Single `input.css` file for custom styles and Tailwind configuration
-- TailwindCSS classes for styling components
-- Theme customization via CSS variables
+- Uses a single `input.css` file
+- TailwindCSS classes define component styles
+- No additional CSS files needed
 
 ## Documentation
 
-Documentation is available in the `docs/` directory:
-
-- Component creation guide
 - Architecture overview
-- Setup and installation instructions
-- Scripts for project setup and maintenance
+- Component creation guide
+- Integration with Decap CMS
 
-## Additional Resources
-
-- `stories/` directory provides component documentation and examples
-- Each component includes usage comments
-- JSON data files contain component descriptions and parameters
+---
+This structure ensures **scalability, maintainability, and consistency** throughout the project.
