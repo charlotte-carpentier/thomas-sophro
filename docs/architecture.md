@@ -9,15 +9,18 @@ HAT Dynamic Template is a modular front-end development framework built on Eleve
 ```sh
 src/
 ├── _data/            # Data files for templates
-│   ├── contents/     # Content-related data (multiple instances per file)
-│   │   ├── atoms/    # Content data for atomic components
-│   │   ├── molecules/ # Content data for molecular components
-│   │   ├── organisms/ # Content data for organism components
-│   ├── styles/       # Style-related data (one file per category)
-│   │   ├── atoms.json      # Styles for atoms
-│   │   ├── molecules.json  # Styles for molecules
-│   │   ├── organisms.json  # Styles for organisms
-│   └── site.json     # Global site configuration
+│   ├── atoms/        # Data for atomic components (one file per component)
+│   │   ├── button.json   # Button component data
+│   │   ├── link.json     # Link component data
+│   │   └── input.json    # Input component data
+│   ├── molecules/    # Data for molecular components
+│   │   ├── card.json     # Card component data
+│   │   └── form.json     # Form component data
+│   ├── organisms/    # Data for organism components
+│   │   ├── section.json  # Section component data
+│   │   └── header.json   # Header component data
+│   ├── core/         # Core data files
+│   │   └── site.json     # Global site configuration
 ├── _includes/        # Component templates
 │   ├── 00-core/      # Base templates
 │   │   ├── base.njk  # HTML base template
@@ -82,52 +85,45 @@ Atoms are the smallest components that cannot be further broken down.
 
 ## Data Structure
 
-The framework separates content from presentation:
+The framework now uses a more granular approach with one data file per component:
 
-### Content Data (`_data/contents/`)
+### Component Data Files (`_data/atoms/`, `_data/molecules/`, `_data/organisms/`)
 
-Contains actual component data, stored as arrays to allow multiple instances.
+Each component has its own JSON file containing both the component structure and instances.
 
-**Example (`contents/atoms/buttons.json`):**
-
-```json
-[
-  {
-    "label": "Contactez-nous",
-    "url": "/contact",
-    "style": "primary"
-  },
-  {
-    "label": "En savoir plus",
-    "url": "/about",
-    "style": "secondary"
-  }
-]
-```
-
-### Style Data (`_data/styles/`)
-
-Contains style-specific data grouped by component type.
-
-**Example (`styles/atoms.json`):**
+**Example (`_data/atoms/link.json`):**
 
 ```json
 {
-  "button": {
-    "primary": "bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600",
-    "secondary": "bg-gray-200 text-black px-4 py-2 rounded-lg"
-  }
+  "component": "link",
+  "variants": {
+    "primary": "text-blue-600 hover:text-blue-800 underline",
+    "secondary": "text-gray-600 hover:text-gray-800",
+    "button": "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+  },
+  "instances": [
+    {
+      "label": "Contactez-nous",
+      "url": "/contact",
+      "variant": "primary"
+    },
+    {
+      "label": "En savoir plus",
+      "url": "/about",
+      "variant": "secondary"
+    }
+  ]
 }
 ```
 
 ## Component Templates
 
-Templates use Nunjucks macros for reusability.
+Templates use Nunjucks macros for reusability and reference the specific component data file.
 
 ```njk
-{% macro renderButton(button) %}
-<a href="{{ button.url }}" class="{{ styles.atoms.button[button.style] }}">
-  {{ button.label }}
+{% macro renderLink(link) %}
+<a href="{{ link.url }}" class="{{ link.variants[link.variant] }}">
+  {{ link.label }}
 </a>
 {% endmacro %}
 ```
@@ -135,12 +131,32 @@ Templates use Nunjucks macros for reusability.
 ## Storybook Integration
 
 - Each component has a `.stories.js` file
-- Stories demonstrate different variants and usage examples
+- Stories import the specific component data file
+- Stories demonstrate different variants and instances
+
+```javascript
+import linkData from '../../_data/atoms/links.json';
+
+export default {
+  title: 'Atoms/Link',
+  render: (args) => {
+    return `<a href="${args.url}" class="${linkData.variants[args.variant]}">${args.label}</a>`;
+  },
+  argTypes: {
+    label: { control: 'text', defaultValue: 'Link' },
+    url: { control: 'text', defaultValue: '#' },
+    variant: { 
+      control: { type: 'select', options: Object.keys(linkData.variants) }, 
+      defaultValue: 'primary' 
+    }
+  }
+};
+```
 
 ## Styling with TailwindCSS
 
 - Uses a single `input.css` file
-- TailwindCSS classes define component styles
+- TailwindCSS classes defined in component data files
 - No additional CSS files needed
 
 ## Documentation
@@ -150,4 +166,4 @@ Templates use Nunjucks macros for reusability.
 - Integration with Decap CMS
 
 ---
-This structure ensures **scalability, maintainability, and consistency** throughout the project.
+This updated structure ensures **scalability, maintainability, and consistency** throughout the project while providing better organization with a one-file-per-component approach.

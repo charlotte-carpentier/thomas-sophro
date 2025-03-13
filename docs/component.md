@@ -1,15 +1,14 @@
 # HAT Components Structure
 
-This document explains the organization of components in the HAT Dynamic Template project according to the OMA (Organism-Molecule-Atom) architecture.
+This document explains the organization of components in the HAT Dynamic Template project according to the OMA (Organism-Molecule-Atom) architecture with the updated data structure.
 
 ## Overview
 
 Each component consists of several files distributed across different directories:
 
 1. **Nunjucks Component** (`.njk`) - The component template
-2. **Styles** (`_data/styles/`) - Component style definitions
-3. **Content** (`_data/contents/`) - Component data instances
-4. **Storybook Documentation** (`.stories.js`) - Component documentation and examples
+2. **Component Data** (`_data/{type}/{component}.json`) - Component variants and instances
+3. **Storybook Documentation** (`.stories.js`) - Component documentation and examples
 
 ## Directory Structure
 
@@ -26,17 +25,18 @@ project/
 │   │   └── 03-atoms/
 │   │           └── atom-name.njk
 │   ├── _data/
-│   │   ├── styles/
-│   │   │   ├── atoms.json
-│   │   │   ├── molecules.json
-│   │   │   ├── organisms.json
-│   │   ├── contents/
-│   │   │   ├── atoms/
-│   │   │   │   └── buttons.json
-│   │   │   ├── molecules/
-│   │   │   │   └── cards.json
-│   │   │   ├── organisms/
-│   │   │       └── sections.json
+│   │   ├── atoms/          # One file per atom component
+│   │   │   ├── button.json
+│   │   │   ├── link.json
+│   │   │   └── input.json
+│   │   ├── molecules/      # One file per molecule component
+│   │   │   ├── card.json
+│   │   │   └── form.json
+│   │   ├── organisms/      # One file per organism component
+│   │   │   ├── section.json
+│   │   │   └── header.json
+│   │   ├── core/           # Core data files
+│   │   │   └── site.json   # Global site configuration
 │   └── js/
 │       └── generate-component.js  <!-- Component generator script -->
 └── stories/
@@ -54,100 +54,147 @@ project/
 
 This file contains the component macro that defines its HTML structure.
 
-**Example** (`src/_includes/03-atoms/button-link.njk`):
+**Example** (`src/_includes/03-atoms/link.njk`):
 
 ```njk
-{% macro renderButton(button) %}
-<a href="{{ button.url }}" class="{{ styles.atoms.button[button.style] }}">
-  {{ button.label }}
+{% macro renderLink(link) %}
+<a href="{{ link.url }}" class="{{ link.variants[link.variant] }}">
+  {{ link.label }}
 </a>
 {% endmacro %}
 ```
 
-### 2. Styles (`_data/styles/`)
+### 2. Component Data (`_data/{type}/{component}.json`)
 
-This file defines the different style variants of components.
+Each component has its own dedicated JSON file that includes both variants (styles) and instances (content).
 
-**Example** (`src/_data/styles/atoms.json`):
+**Example** (`src/_data/atoms/link.json`):
 
 ```json
 {
-  "button": {
-    "primary": "bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600",
-    "secondary": "bg-gray-200 text-black px-4 py-2 rounded-lg"
-  }
+  "component": "link",
+  "variants": {
+    "primary": "text-blue-600 hover:text-blue-800 underline",
+    "secondary": "text-gray-600 hover:text-gray-800",
+    "button": "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+  },
+  "instances": [
+    {
+      "label": "Contactez-nous",
+      "url": "/contact",
+      "variant": "primary"
+    },
+    {
+      "label": "En savoir plus",
+      "url": "/about",
+      "variant": "secondary"
+    }
+  ]
 }
 ```
 
-### 3. Content (`_data/contents/`)
-
-This file stores multiple instances of component data.
-
-**Example** (`src/_data/contents/atoms/buttons.json`):
-
-```json
-[
-  {
-    "label": "Contactez-nous",
-    "url": "/contact",
-    "style": "primary"
-  },
-  {
-    "label": "En savoir plus",
-    "url": "/about",
-    "style": "secondary"
-  }
-]
-```
-
-### 4. Storybook Documentation (`.stories.js`)
+### 3. Storybook Documentation (`.stories.js`)
 
 This file defines the component tests and documentation in Storybook.
 
-**Example** (`stories/atoms/ButtonLink.stories.js`):
+**Example** (`stories/atoms/Link.stories.js`):
 
 ```javascript
-import buttonData from '../../_data/styles/atoms.json';
-import buttonsContent from '../../_data/contents/atoms/buttons.json';
+import linkData from '../../_data/atoms/link.json';
 
 export default {
-  title: 'Atoms/ButtonLink',
+  title: 'Atoms/Link',
   render: (args) => {
-    return `<button class='${buttonData.button[args.style]}'>${args.label}</button>`;
+    return `<a href="${args.url}" class="${linkData.variants[args.variant]}">${args.label}</a>`;
   },
   argTypes: {
-    label: { control: 'text', defaultValue: 'Button' },
-    style: { control: { type: 'select', options: Object.keys(buttonData.button) }, defaultValue: 'primary' }
+    label: { control: 'text', defaultValue: 'Link' },
+    url: { control: 'text', defaultValue: '#' },
+    variant: { 
+      control: { type: 'select', options: Object.keys(linkData.variants) }, 
+      defaultValue: 'primary' 
+    }
   }
 };
+
+// Create a story for each instance
+linkData.instances.forEach((instance, index) => {
+  exports[`Instance${index + 1}`] = {
+    args: {
+      label: instance.label,
+      url: instance.url,
+      variant: instance.variant
+    }
+  };
+});
 ```
 
 ## Component Naming Conventions
 
 | Type | Format | Example |
 |------|--------|---------|
-| **Component Names** | PascalCase | `ButtonLink` |
-| **File Names** | kebab-case | `button-link.njk` |
-| **Content Files** | kebab-case (plural) | `button-links.json` |
-| **Style Files** | kebab-case | `atoms.json` |
-| **Story Files** | PascalCase | `ButtonLink.stories.js` |
+| **Component Names** | PascalCase | `Link` |
+| **File Names** | kebab-case | `link.njk` |
+| **Data Files** | kebab-case (singular) | `link.json` |
+| **Story Files** | PascalCase | `Link.stories.js` |
 
 ## Creating a New Component
 
 ### Using the Component Generator
 
+The component generator should be updated to reflect the new data structure:
+
 ```bash
-node src/js/generate-component.js ButtonLink
+node src/js/generate-component.js Link atoms
 ```
 
 ### Generated Files
 
 | File | Location | Example |
 |------|----------|---------|
-| Component template | `_includes/03-atoms/` | `button-link.njk` |
-| Content data | `_data/contents/atoms/` | `button-links.json` |
-| Style data | `_data/styles/` | `atoms.json` |
-| Storybook docs | `stories/atoms/` | `ButtonLink.stories.js` |
+| Component template | `_includes/03-atoms/` | `link.njk` |
+| Component data | `_data/atoms/` | `link.json` |
+| Storybook docs | `stories/atoms/` | `Link.stories.js` |
+
+### Component Data Structure
+
+The newly generated component data file should follow this structure:
+
+```json
+{
+  "component": "link",
+  "description": "A reusable link component",
+  "variants": {
+    "primary": "text-blue-600 hover:text-blue-800 underline",
+    "secondary": "text-gray-600 hover:text-gray-800"
+  },
+  "instances": [
+    {
+      "label": "Example Link",
+      "url": "#",
+      "variant": "primary"
+    }
+  ]
+}
+```
+
+## Using a Component
+
+To use a component in a template, import the Nunjucks macro and pass the instance data:
+
+```njk
+{% from "03-atoms/link.njk" import renderLink %}
+
+<!-- Use a specific instance -->
+{{ renderLink(link.instances[0]) }}
+
+<!-- Or create a custom instance -->
+{{ renderLink({
+  label: "Custom Link",
+  url: "/custom",
+  variant: "secondary"
+}) }}
+```
 
 ---
-This structure ensures consistency and maintainability in component development.
+This updated structure provides better organization and maintainability with a dedicated data file per component.

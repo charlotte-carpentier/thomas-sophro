@@ -1,0 +1,60 @@
+<!-- ========================= -->
+<!--          CHIPNOTIFICATION -->
+<!-- ========================= -->
+
+{% macro renderChipNotification(options) %}
+  {% set chip-notificationData = options.datas.chip-notifications | selectattr('name', 'equalto', options.name) | first %}
+  {% set globalStyle = options.datas.globalStyle %}
+  {% set variantStyle = options.datas.variants[chip-notificationData.style] %}
+  
+  {% if chip-notificationData %}
+    <div 
+      class="{{ globalStyle }} {{ variantStyle }}"
+    >
+      {{ chip-notificationData.text }}
+    </div>
+  {% else %}
+    <span class="text-red-500">ChipNotification not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+<!-- ============================ -->
+<!-- Summon HAT Components Wisely -->
+<!-- ============================ -->
+
+<!-- 1. Import the macro at the top of your page -->
+{# {% from "03-atoms/chip-notification.njk" import renderChipNotification %} #}
+
+<!-- 2. Call a specific chip-notification by its name -->
+{# {{ renderChipNotification({ 
+    name: "example_chip-notification", 
+    datas: atoms.chip-notifications 
+}) }} #}
+
+<!-- 3. Call multiple chip-notifications from the data -->
+{# {% for chip-notification in atoms.chip-notifications.chip-notifications %}
+    {{ renderChipNotification({ 
+        name: chip-notification.name, 
+        datas: atoms.chip-notifications 
+    }) }}
+{% endfor %} #}
+
+<!-- 4. Direct chip-notification creation -->
+{# {{ renderChipNotification({
+    text: "Custom ChipNotification", 
+    style: "primary"
+}) }} #}
+
+<!-- 5. Adding a new chip-notification to chip-notifications.json -->
+{# {
+  "chip-notifications": [
+    {
+      "name": "new_chip-notification_name",
+      "text": "Your ChipNotification Text",
+      "style": "primary"
+    }
+  ]
+} #}
+
+<!-- May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨ -->
