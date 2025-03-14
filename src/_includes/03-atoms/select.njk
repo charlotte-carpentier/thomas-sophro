@@ -1,54 +1,83 @@
-<!-- ========================= -->
-<!--           SELECT          -->
-<!-- ========================= -->
+{#
+=========================
+         SELECT          
+=========================
+#}
 
-{% macro renderSelect(option) %}
-  {# Get select options with default values if not provided #}
-  {% set name = option.name | default('select-default') %}
-  {% set options = option.options | default([]) %}
-  {% set variant = option.variant | default(select.defaultProps.variant) %}
+{% macro renderSelect(options) %}
+  {% set selectData = null %}
   
-  {# Find the variant in the select.json file #}
-  {% set selectedVariant = null %}
-  {% for v in select.variants %}
-    {% if v.name == variant %}
-      {% set selectedVariant = v %}
+  {% for select in options.datas.selects %}
+    {% if select.name == options.name %}
+      {% set selectData = select %}
     {% endif %}
   {% endfor %}
-  
-  {# Use default variant if specified variant was not found #}
-  {% if not selectedVariant %}
-    {% for v in select.variants %}
-      {% if v.name == select.defaultProps.variant %}
-        {% set selectedVariant = v %}
-      {% endif %}
-    {% endfor %}
+
+  {% set globalStyle = options.datas.globalStyle %}
+
+  {% if selectData %}
+    {% set variantStyle = options.datas.variants[selectData.variant] | default('') %}
+    
+    <div class="mt-6 mb-6 mx-auto relative">
+      <select 
+        name="{{ selectData.name }}" 
+        class="{{ globalStyle }} {{ variantStyle }} appearance-none pr-10"
+        {% if selectData.variant == 'disabled' %}disabled{% endif %}
+      >
+        {% for opt in selectData.options %}
+          <option 
+            value="{{ opt.value }}"
+            {% if opt.selected %} selected{% endif %}
+          >
+            {{ opt.label }}
+          </option>
+        {% endfor %}
+      </select>
+      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+        </svg>
+      </div>
+    </div>
+  {% else %}
+    <span class="text-red-500">Select not found: {{ options.name }}</span>
   {% endif %}
-  
-  {# Render the select with appropriate classes from select.json #}
-  <div class="mt-6 mb-6 mx-auto">
-    <select name="{{ name }}" class="{{ selectedVariant.class }}">
-      {% for opt in options %}
-        <option value="{{ opt.value }}"{% if opt.selected %} selected{% endif %}>{{ opt.label }}</option>
-      {% endfor %}
-    </select>
-  </div>
 {% endmacro %}
 
-<!-- ========================= -->
-<!-- HOW TO USE THIS COMPONENT -->
-<!-- ========================= -->
 
-<!--
-  Complete documentation in Storybook
-  Basic usage: {% from "03-atoms/select.njk" import renderSelect %}
-              {{ renderSelect(selects.select_data.categories) }}
-  Custom usage: {{ renderSelect({
-                  name: "custom-select",
-                  options: [
-                    { value: "option1", label: "Option 1" },
-                    { value: "option2", label: "Option 2", selected: true }
-                  ],
-                  variant: "primary"
-                }) }}
--->
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/select.njk" import renderSelect %}
+
+2. Call a specific select by its name
+{{ renderSelect({ name: "categories", datas: atoms.selects }) }}
+
+3. Call multiple selects from the data
+{% for select in atoms.selects.selects %}
+    {{ renderSelect({ 
+        name: select.name, 
+        datas: atoms.selects 
+    }) }}
+{% endfor %}
+
+4. Adding a new select to selects.json
+{
+  "selects": [
+    {
+      "name": "new_select_name",
+      "variant": "default",
+      "options": [
+        { "value": "option1", "label": "Option 1" },
+        { "value": "option2", "label": "Option 2", selected: true }
+      ]
+    }
+  ]
+}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

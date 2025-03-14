@@ -1,15 +1,16 @@
 {
-  "component": "select",
-  "summary": "A dropdown select component for the website",
-  "params": [
-    { "name": "option", "type": "object", "required": true, "notes": "Object containing select properties" },
-    { "name": "option.name", "type": "string", "required": true, "notes": "HTML name attribute for the select element" },
-    { "name": "option.options", "type": "array", "required": true, "notes": "Array of option objects with value and label properties" },
-    { "name": "option.variant", "type": "string", "required": false, "notes": "Visual style variant, defaults to 'default'" }
-  ],
-  "select_data": {
-    "categories": {
+  "globalStyle": "appearance-none w-full rounded-md transition-all duration-200 font-sans text-gray-700",
+  "variants": {
+    "default": "bg-white border border-gray-300 px-4 py-2 shadow-sm",
+    "hover": "bg-white border border-gray-400 px-4 py-2 shadow-sm",
+    "focus": "bg-white border-2 border-blue-500 px-4 py-2 shadow-sm outline-none ring-2 ring-blue-200",
+    "active": "bg-white border-2 border-blue-600 px-4 py-2 shadow-sm outline-none ring-2 ring-blue-300",
+    "disabled": "bg-gray-100 border border-gray-300 px-4 py-2 text-gray-400 cursor-not-allowed"
+  },
+  "selects": [
+    {
       "name": "categories",
+      "variant": "default",
       "options": [
         { "value": "warrior", "label": "Warrior" },
         { "value": "rogue", "label": "Rogue" },
@@ -18,11 +19,11 @@
         { "value": "necromancer", "label": "Necromancer" },
         { "value": "bard", "label": "Bard (Loot Included)" },
         { "value": "beastmaster", "label": "Beastmaster" }
-      ],
-      "variant": "default"
+      ]
     },
-    "locations": {
+    {
       "name": "locations",
+      "variant": "hover",
       "options": [
         { "value": "stormhold", "label": "Stormhold Citadel" },
         { "value": "shadowmere", "label": "Shadowmere Swamps" },
@@ -31,28 +32,37 @@
         { "value": "mysthaven", "label": "Mysthaven Village" },
         { "value": "darkhollow", "label": "Darkhollow Dungeon" },
         { "value": "arcane-sanctum", "label": "Arcane Sanctum" }
-      ],
-      "variant": "primary"
+      ]
     },
-    "difficulties": {
+    {
+      "name": "abilities",
+      "variant": "focus",
+      "options": [
+        { "value": "fireball", "label": "Fireball" },
+        { "value": "healing", "label": "Healing" },
+        { "value": "stealth", "label": "Stealth" },
+        { "value": "shield", "label": "Shield Block" }
+      ]
+    },
+    {
       "name": "difficulty",
+      "variant": "active",
       "options": [
         { "value": "easy", "label": "Easy", "selected": true },
         { "value": "medium", "label": "Medium" },
         { "value": "hard", "label": "Hard" },
         { "value": "nightmare", "label": "Nightmare" }
-      ],
-      "variant": "secondary"
+      ]
     },
-    "itemsPerPage": {
-      "name": "perPage",
+    {
+      "name": "item-count",
+      "variant": "disabled",
       "options": [
         { "value": "10", "label": "10 per page", "selected": true },
         { "value": "20", "label": "20 per page" },
         { "value": "50", "label": "50 per page" },
         { "value": "100", "label": "100 per page" }
-      ],
-      "variant": "small"
+      ]
     }
-  }
+  ]
 }
