@@ -1,0 +1,122 @@
+{#
+=========================
+         INPUT            
+=========================
+#}
+
+{% macro renderInput(options) %}
+  {% set inputData = null %}
+  
+  {% for input in options.datas.inputs %}
+    {% if input.name == options.name %}
+      {% set inputData = input %}
+    {% endif %}
+  {% endfor %}
+
+  {% set globalStyle = options.datas.globalStyle %}
+
+  {% if inputData %}
+    {% set variantStyle = options.datas.variants[inputData.style] | default('') %}
+    
+    <div class="{{ globalStyle }} {{ variantStyle }}">
+      {% if inputData.label %}
+        <label for="{{ inputData.id }}">
+          {{ inputData.label }}{% if inputData.required %} *{% endif %}
+        </label>
+      {% endif %}
+
+      {% if inputData.type == "text" %}
+        <input 
+          type="text" 
+          id="{{ inputData.id }}" 
+          name="{{ inputData.name }}" 
+          placeholder="{{ inputData.placeholder }}" 
+          class="input-class"
+        />
+      {% elif inputData.type == "phone" %}
+        <input 
+          type="tel" 
+          id="{{ inputData.id }}" 
+          name="{{ inputData.name }}" 
+          placeholder="{{ inputData.placeholder }}" 
+          class="input-class"
+        />
+      {% elif inputData.type == "textarea" %}
+        <textarea 
+          id="{{ inputData.id }}" 
+          name="{{ inputData.name }}" 
+          placeholder="{{ inputData.placeholder }}" 
+          class="input-class"
+        ></textarea>
+      {% elif inputData.type == "select" %}
+        <select id="{{ inputData.id }}" name="{{ inputData.name }}" class="input-class">
+          {% for option in inputData.options %}
+            <option value="{{ option.value }}">{{ option.label }}</option>
+          {% endfor %}
+        </select>
+      {% elif inputData.type == "multi-select" %}
+        <select id="{{ inputData.id }}" name="{{ inputData.name }}" multiple class="input-class">
+          {% for option in inputData.options %}
+            <option value="{{ option.value }}">{{ option.label }}</option>
+          {% endfor %}
+        </select>
+      {% elif inputData.type == "datepicker" %}
+        <input 
+          type="date" 
+          id="{{ inputData.id }}" 
+          name="{{ inputData.name }}" 
+          class="input-class"
+        />
+      {% endif %}
+    </div>
+  {% else %}
+    <span class="text-red-500">Input not found: {{ options.name }}</span>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/input.njk" import renderInput %}
+
+2. Call a specific input by its name
+{{ renderInput({ name: "example_input1", datas: atoms.inputs }) }}
+
+3. Call multiple inputs from the data
+{% for input in atoms.inputs.inputs %}
+    {{ renderInput({ 
+        name: input.name, 
+        datas: atoms.inputs 
+    }) }}
+{% endfor %}
+
+4. Direct input creation
+{{ renderInput({
+    id: "custom-input", 
+    name: "custom_input", 
+    label: "Custom Input", 
+    placeholder: "Enter something...", 
+    type: "text", 
+    style: "primary"
+}) }}
+
+5. Adding a new input to inputs.json
+{
+  "inputs": [
+    {
+      "name": "example_input1",
+      "id": "input1",
+      "label": "Example Input 1",
+      "placeholder": "Enter text...",
+      "type": "text",
+      "style": "primary"
+    }
+  ]
+}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

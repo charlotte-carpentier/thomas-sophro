@@ -10,6 +10,7 @@ layout: '00-organisms-global/base.njk'
 {% from "03-atoms/tag.njk" import renderTag %}
 {% from "03-atoms/tooltip.njk" import renderTooltip %}
 {% from "03-atoms/select.njk" import renderSelect %}
+{% from "03-atoms/input.njk" import renderInput %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -56,6 +57,18 @@ layout: '00-organisms-global/base.njk'
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing select component #}
              {{ renderSelect({ name: "categories", datas: atoms.selects }) }}
+        </div>
+    </div>
+
+    {# Input Atom #}
+    <h3 class="text-xl font-semibold mb-4">Input</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing input component #}
+            {% for input in atoms.inputs.inputs %}
+    {{ renderInput({ name: input.name, datas: atoms.inputs }) }}
+{% endfor %}
+
         </div>
     </div>
 

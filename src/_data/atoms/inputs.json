@@ -1,0 +1,72 @@
+{
+  "globalStyle": "typography-label-l input",
+  "variants": {
+    "default": "border-gray-300 text-gray-800 bg-white",
+    "hover": "border-gray-400 text-gray-800 bg-white",
+    "focus": "border-blue-500 ring-2 ring-blue-300 bg-white",
+    "active": "border-blue-600 text-gray-900 bg-white",
+    "filled": "border-gray-300 text-gray-900 bg-white",
+    "critical": "border-red-500 text-gray-900 bg-white",
+    "disabled": "border-gray-300 text-gray-400 bg-gray-100 cursor-not-allowed"
+  },
+  "inputs": [
+    {
+      "name": "text_input",
+      "type": "text",
+      "label": "Text Input",
+      "id": "textInput",
+      "placeholder": "Enter text...",
+      "required": true,
+      "style": "default"
+    },
+    {
+      "name": "phone_input",
+      "type": "phone",
+      "label": "Phone Number",
+      "id": "phoneInput",
+      "placeholder": "+33 6 12 34 56 78",
+      "required": true,
+      "style": "primary"
+    },
+    {
+      "name": "textarea_input",
+      "type": "textarea",
+      "label": "Message",
+      "id": "textareaInput",
+      "placeholder": "Enter your message...",
+      "required": false,
+      "style": "secondary"
+    },
+    {
+      "name": "select_input",
+      "type": "select",
+      "label": "Choose an option",
+      "id": "selectInput",
+      "options": [
+        { "value": "option1", "label": "Option 1" },
+        { "value": "option2", "label": "Option 2" },
+        { "value": "option3", "label": "Option 3" }
+      ],
+      "style": "default"
+    },
+    {
+      "name": "multi_select_input",
+      "type": "multi-select",
+      "label": "Select multiple options",
+      "id": "multiSelectInput",
+      "options": [
+        { "value": "option1", "label": "Option 1" },
+        { "value": "option2", "label": "Option 2" },
+        { "value": "option3", "label": "Option 3" }
+      ],
+      "style": "default"
+    },
+    {
+      "name": "datepicker_input",
+      "type": "datepicker",
+      "label": "Pick a date",
+      "id": "datepickerInput",
+      "style": "default"
+    }
+  ]
+}
