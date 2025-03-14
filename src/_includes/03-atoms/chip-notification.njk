@@ -1,106 +1,80 @@
-<!-- ========================= -->
-<!-- CHIP NOTIFICATION -->
-<!-- ========================= -->
-
-{# {% macro renderChipNotification(options) %}
-  {# Extract notification data #}
-  {# {% set text = '' %}
-  {% set style = 'red' %}
-  
-  {% if options.name and options.datas %}
-    {% set chipData = options.datas.chip-notifications | selectattr('name', 'equalto', options.name) | first %}
-    {% set text = chipData.text %}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set variantStyle = options.datas.variants[chipData.style] %}
-    {% set styleClasses = globalStyle ~ ' ' ~ variantStyle %}
-  {% elif options.text %}
-    {% set text = options.text %}
-    {% set styleClasses = 'bg-' ~ (options.style | default('red')) ~ '-500' %}
-  {% else %}
-    {% set text = content | default('0') %}
-    {% set styleClasses = 'bg-' ~ (variant | default('red')) ~ '-500' %}
-  {% endif %} #}
-  
-  {# Determine size class based on text length #}
-  {# {% set contentLength = text | string | length %}
-  {% set classes = {
-    '1': 'h-6 w-6 text-xs',
-    '2': 'h-8 w-8 text-sm',
-    '3+': 'h-10 w-10 px-1 text-sm'
-  } %}
-  {% if contentLength <= 1 %}
-    {% set sizeClass = classes['1'] %}
-  {% elif contentLength <= 2 %}
-    {% set sizeClass = classes['2'] %}
-  {% else %}
-    {% set sizeClass = classes['3+'] %}
-  {% endif %}
-  
-  <span class="inline-flex items-center justify-center rounded-full text-white {{ styleClasses }} {{ sizeClass }}" role="status">
-    {{ text }}
-  </span>
-{% endmacro %} #}
+{#
+=========================
+    CHIP NOTIFICATION
+=========================
+#}
 
 {% macro renderChipNotification(options) %}
-  {% set text = options.text or '0' %}
-  {% set style = options.style or 'red' %}
-  
-  {% set contentLength = text | string | length %}
-  {% set classes = {
-  '1': 'h-6 w-6 text-xs',
-  '2': 'h-8 w-8 text-sm',
-  '3+': 'h-10 w-10 px-1 text-sm'
-} %}
+  {% if options and options.datas and options.datas["chip-notifications"] %}
 
-{% if contentLength <= 1 %}
-  {% set sizeClass = classes['1'] %}
-{% elif contentLength <= 2 %}
-  {% set sizeClass = classes['2'] %}
-{% else %}
-  {% set sizeClass = classes['3+'] %}
-{% endif %}
-  
-  <span class="inline-flex items-center justify-center rounded-full text-white bg-{{ style }}-500 {{ sizeClass }}" role="status">
-    {{ text }}
-  </span>
+    {% set chipData = null %}
+    {% for notification in options.datas["chip-notifications"] %}
+      {% if notification.name == options.name %}
+        {% set chipData = notification %}
+      {% endif %}
+    {% endfor %}
+    
+    {% if chipData %}
+      {% set globalStyle = options.datas.globalStyle %}
+      {% set variantStyle = options.datas.variants[chipData.style] %}
+      
+      {% set contentLength = chipData.text | string | length %}
+      {% set sizeClass = "h-6 w-6 text-xs" %}
+      
+      {% if contentLength > 2 %}
+        {% set sizeClass = "h-10 w-10 px-1 text-sm" %}
+      {% elif contentLength > 1 %}
+        {% set sizeClass = "h-8 w-8 text-sm" %}
+      {% endif %}
+      
+      <span class="inline-flex items-center justify-center rounded-full text-white {{ globalStyle }} {{ variantStyle }} {{ sizeClass }}" role="status">
+        {{ chipData.text }}
+      </span>
+    {% else %}
+      <span class="text-red-500">Notification '{{ options.name }}' not found</span>
+    {% endif %}
+  {% else %}
+    <span class="text-red-500">Invalid data structure</span>
+  {% endif %}
 {% endmacro %}
 
-<!-- ============================ -->
-<!-- Summon HAT Components Wisely -->
-<!-- ============================ -->
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-<!-- 1. Import the macro at the top of your page -->
-{# {% from "03-atoms/chip-notification.njk" import renderChipNotification %} #}
+1. Import the macro at the top of your page
+{% from "03-atoms/chip-notification.njk" import renderChipNotification %}
 
-<!-- 2. Call a specific chip-notification by its name -->
-{# {{ renderChipNotification({ 
-    name: "notification_count", 
-    datas: atoms.chip-notifications 
-}) }} #}
+2. Call a specific chip notification by its name
+{{ renderChipNotification({ name: "notification_count", datas: atoms.chipNotifications }) }}
 
-<!-- 3. Call multiple chip-notifications from the data -->
-{# {% for chip-notification in atoms.chip-notifications.chip-notifications %}
+3. Call multiple chip notifications from the data
+{% for chipNotification in atoms.chipNotifications.list %}
     {{ renderChipNotification({ 
-        name: chip-notification.name, 
-        datas: atoms.chip-notifications 
+        name: chipNotification.name, 
+        datas: atoms.chipNotifications 
     }) }}
-{% endfor %} #}
+{% endfor %}
 
-<!-- 4. Direct chip-notification creation -->
-{# {{ renderChipNotification({
+4. Direct chip notification creation
+{{ renderChipNotification({
     text: "42", 
     style: "success"
-}) }} #}
+}) }}
 
-<!-- 5. Adding a new chip-notification to chip-notifications.json -->
-{# {
-  "chip-notifications": [
-    {
-      "name": "new_notification_count",
-      "text": "99+",
-      "style": "warning"
-    }
-  ]
-} #}
+5. Adding a new chip notification to chip-notifications.json
+{
+  "chipNotifications": {
+    "list": [
+      {
+        "name": "new_notification_count",
+        "text": "99+",
+        "style": "warning"
+      }
+    ]
+  }
+}
 
-<!-- May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨ -->
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

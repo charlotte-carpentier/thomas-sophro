@@ -1,13 +1,23 @@
-<!-- ========================= -->
-<!--          LINK             -->
-<!-- ========================= -->
+{#
+=========================
+         LINK           
+=========================
+#}
 
 {% macro renderLink(options) %}
-  {% set linkData = options.datas.links | selectattr('name', 'equalto', options.name) | first %}
-  {% set globalStyle = options.datas.globalStyle %}
-  {% set variantStyle = options.datas.variants[linkData.style] %}
+  {% set linkData = null %}
   
+  {% for link in options.datas.links %}
+    {% if link.name == options.name %}
+      {% set linkData = link %}
+    {% endif %}
+  {% endfor %}
+
+  {% set globalStyle = options.datas.globalStyle %}
+
   {% if linkData %}
+    {% set variantStyle = options.datas.variants[linkData.style] | default('') %}
+    
     <a 
       href="{{ linkData.href }}" 
       class="{{ globalStyle }} {{ variantStyle }}"
@@ -15,41 +25,40 @@
       {{ linkData.text }}
     </a>
   {% else %}
-    <span class="text-red-500">Link not found</span>
+    <span class="text-red-500">Link not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
 
 
-<!-- ============================ -->
-<!-- Summon HAT Components Wisely -->
-<!-- ============================ -->
 
-<!-- 1. Import the macro at the top of your page -->
-{# {% from "03-atoms/link.njk" import renderLink %} #}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-<!-- 2. Call a specific link by its name -->
-{# {{ renderLink({ 
-    name: "tavern_quest", 
-    datas: atoms.links 
-}) }} #}
+1. Import the macro at the top of your page
+{% from "03-atoms/link.njk" import renderLink %}
 
-<!-- 3. Call multiple links from the data -->
-{# {% for link in atoms.links.links %}
+2. Call a specific link by its name
+{{ renderLink({ name: "tavern_quest", datas: atoms.links }) }}
+
+3. Call multiple links from the data
+{% for link in atoms.links.links %}
     {{ renderLink({ 
         name: link.name, 
         datas: atoms.links 
     }) }}
-{% endfor %} #}
+{% endfor %}
 
-<!-- 4. Direct link creation -->
-{# {{ renderLink({
+4. Direct link creation
+{{ renderLink({
     href: "/new-page", 
     text: "Custom Link", 
     style: "primary"
-}) }} #}
+}) }}
 
-<!-- 5. Adding a new link to links.json -->
-{# {
+5. Adding a new link to links.json
+{
   "links": [
     {
       "name": "new_link_name",
@@ -58,6 +67,7 @@
       "style": "primary"
     }
   ]
-} #}
+}
 
-<!-- May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨ -->
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

@@ -1,42 +1,67 @@
-<!-- ========================= -->
-<!--           TAG            -->
-<!-- ========================= -->
+{#
+=========================
+          TAG           
+=========================
+#}
 
-{% macro renderTag(option) %}
-  {# Extract options with default values #}
-  {% set text = option.text | default('Tag') %}
-  {% set variant = option.variant | default(tag.defaultProps.variant) %}
+{% macro renderTag(options) %}
+  {% set tagData = null %}
   
-  {# Find the variant in the tag.json file #}
-  {% set selectedVariant = null %}
-  {% for v in tag.variants %}
-    {% if v.name == variant %}
-      {% set selectedVariant = v %}
+  {% for tag in options.datas.tags %}
+    {% if tag.name == options.name %}
+      {% set tagData = tag %}
     {% endif %}
   {% endfor %}
-  
-  {# Use default variant if specified variant was not found #}
-  {% if not selectedVariant %}
-    {% for v in tag.variants %}
-      {% if v.name == tag.defaultProps.variant %}
-        {% set selectedVariant = v %}
-      {% endif %}
-    {% endfor %}
+
+  {% set globalStyle = options.datas.globalStyle %}
+
+  {% if tagData %}
+    {% set variantStyle = options.datas.variants[tagData.variant] | default('') %}
+    
+    <span class="{{ globalStyle }} {{ variantStyle }}">
+      {{ tagData.text }}
+    </span>
+  {% else %}
+    <span class="text-red-500">Tag not found: {{ options.name }}</span>
   {% endif %}
-  
-  {# Render the tag with the appropriate class #}
-  <span class="tag inline-flex items-center px-2 py-1 text-xs font-medium rounded-md {{ selectedVariant.class }}">
-    {{ text }}
-  </span>
 {% endmacro %}
 
-<!-- ========================= -->
-<!-- HOW TO USE THIS COMPONENT -->
-<!-- ========================= -->
 
-<!--
-  Complete documentation in Storybook
-  Basic usage: {% from "03-atoms-notifications/tag.njk" import renderTag %}
-              {{ renderTag(tags.tag_data.tag_adventure) }}
-  With style: {{ renderTag({ text: "Custom Tag", variant: "success" }) }}
--->
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/tag.njk" import renderTag %}
+
+2. Call a specific tag by its name
+{{ renderTag({ name: "adventure", datas: atoms.tags }) }}
+
+3. Call multiple tags from the data
+{% for tag in atoms.tags.tags %}
+    {{ renderTag({ 
+        name: tag.name, 
+        datas: atoms.tags 
+    }) }}
+{% endfor %}
+
+4. Direct tag creation
+{{ renderTag({
+    text: "New Tag",
+    variant: "success"
+}) }}
+
+5. Adding a new tag to tags.json
+{
+  "tags": [
+    {
+      "name": "new_tag",
+      "text": "New Tag Text",
+      "variant": "default"
+    }
+  ]
+}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}
