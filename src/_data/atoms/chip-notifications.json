@@ -1,20 +1,31 @@
 {
   "globalStyle": "typography-label-l chip-notification",
   "variants": {
-    "default": "text-gray-800 hover:text-gray-600",
-    "primary": "text-blue-600 hover:text-blue-800 font-bold",
-    "secondary": "text-gray-500 hover:text-gray-700"
+    "default": "bg-red-500",
+    "success": "bg-green-500",
+    "warning": "bg-yellow-500",
+    "info": "bg-blue-500"
   },
   "chip-notifications": [
     {
-      "name": "example_chip-notification1",
-      "text": "Example ChipNotification 1",
-      "style": "primary"
+      "name": "notification_count",
+      "text": "3",
+      "style": "default"
     },
     {
-      "name": "example_chip-notification2",
-      "text": "Example ChipNotification 2",
-      "style": "secondary"
+      "name": "unread_messages",
+      "text": "12",
+      "style": "info"
+    },
+    {
+      "name": "completed_tasks",
+      "text": "8",
+      "style": "success"
+    },
+    {
+      "name": "overflowed",
+      "text": "99+",
+      "style": "warning"
     }
   ]
 }

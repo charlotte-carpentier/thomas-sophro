@@ -6,6 +6,7 @@ layout: '00-organisms-global/base.njk'
 
 {# Import required macros #}
 {% from "03-atoms/link.njk" import renderLink %}
+{% from "03-atoms/chip-notification.njk" import renderChipNotification %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -26,7 +27,8 @@ layout: '00-organisms-global/base.njk'
     {# Chip Notification Component #}
     <h3 class="text-xl font-semibold mt-8 mb-4">Chip Notification</h3>
     <div class="p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
-        {# {% include "02-atoms/chip-notification.njk" %} #}
+        {{ renderChipNotification({ name: "notification_count", datas: atoms.chip-notifications }) }}
+        {{ renderChipNotification({ text: '11', style: 'red' }) }}
     </div>
 
     {# Portal to the Sacred Codex #}

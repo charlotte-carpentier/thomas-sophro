@@ -1,23 +1,69 @@
 <!-- ========================= -->
-<!--          CHIPNOTIFICATION -->
+<!-- CHIP NOTIFICATION -->
 <!-- ========================= -->
 
-{% macro renderChipNotification(options) %}
-  {% set chip-notificationData = options.datas.chip-notifications | selectattr('name', 'equalto', options.name) | first %}
-  {% set globalStyle = options.datas.globalStyle %}
-  {% set variantStyle = options.datas.variants[chip-notificationData.style] %}
+{# {% macro renderChipNotification(options) %}
+  {# Extract notification data #}
+  {# {% set text = '' %}
+  {% set style = 'red' %}
   
-  {% if chip-notificationData %}
-    <div 
-      class="{{ globalStyle }} {{ variantStyle }}"
-    >
-      {{ chip-notificationData.text }}
-    </div>
+  {% if options.name and options.datas %}
+    {% set chipData = options.datas.chip-notifications | selectattr('name', 'equalto', options.name) | first %}
+    {% set text = chipData.text %}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set variantStyle = options.datas.variants[chipData.style] %}
+    {% set styleClasses = globalStyle ~ ' ' ~ variantStyle %}
+  {% elif options.text %}
+    {% set text = options.text %}
+    {% set styleClasses = 'bg-' ~ (options.style | default('red')) ~ '-500' %}
   {% else %}
-    <span class="text-red-500">ChipNotification not found</span>
+    {% set text = content | default('0') %}
+    {% set styleClasses = 'bg-' ~ (variant | default('red')) ~ '-500' %}
+  {% endif %} #}
+  
+  {# Determine size class based on text length #}
+  {# {% set contentLength = text | string | length %}
+  {% set classes = {
+    '1': 'h-6 w-6 text-xs',
+    '2': 'h-8 w-8 text-sm',
+    '3+': 'h-10 w-10 px-1 text-sm'
+  } %}
+  {% if contentLength <= 1 %}
+    {% set sizeClass = classes['1'] %}
+  {% elif contentLength <= 2 %}
+    {% set sizeClass = classes['2'] %}
+  {% else %}
+    {% set sizeClass = classes['3+'] %}
   {% endif %}
-{% endmacro %}
+  
+  <span class="inline-flex items-center justify-center rounded-full text-white {{ styleClasses }} {{ sizeClass }}" role="status">
+    {{ text }}
+  </span>
+{% endmacro %} #}
 
+{% macro renderChipNotification(options) %}
+  {% set text = options.text or '0' %}
+  {% set style = options.style or 'red' %}
+  
+  {% set contentLength = text | string | length %}
+  {% set classes = {
+  '1': 'h-6 w-6 text-xs',
+  '2': 'h-8 w-8 text-sm',
+  '3+': 'h-10 w-10 px-1 text-sm'
+} %}
+
+{% if contentLength <= 1 %}
+  {% set sizeClass = classes['1'] %}
+{% elif contentLength <= 2 %}
+  {% set sizeClass = classes['2'] %}
+{% else %}
+  {% set sizeClass = classes['3+'] %}
+{% endif %}
+  
+  <span class="inline-flex items-center justify-center rounded-full text-white bg-{{ style }}-500 {{ sizeClass }}" role="status">
+    {{ text }}
+  </span>
+{% endmacro %}
 
 <!-- ============================ -->
 <!-- Summon HAT Components Wisely -->
@@ -28,7 +74,7 @@
 
 <!-- 2. Call a specific chip-notification by its name -->
 {# {{ renderChipNotification({ 
-    name: "example_chip-notification", 
+    name: "notification_count", 
     datas: atoms.chip-notifications 
 }) }} #}
 
@@ -42,17 +88,17 @@
 
 <!-- 4. Direct chip-notification creation -->
 {# {{ renderChipNotification({
-    text: "Custom ChipNotification", 
-    style: "primary"
+    text: "42", 
+    style: "success"
 }) }} #}
 
 <!-- 5. Adding a new chip-notification to chip-notifications.json -->
 {# {
   "chip-notifications": [
     {
-      "name": "new_chip-notification_name",
-      "text": "Your ChipNotification Text",
-      "style": "primary"
+      "name": "new_notification_count",
+      "text": "99+",
+      "style": "warning"
     }
   ]
 } #}
