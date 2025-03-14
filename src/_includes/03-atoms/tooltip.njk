@@ -1,55 +1,71 @@
-<!-- ========================= -->
-<!--         TOOLTIP          -->
-<!-- ========================= -->
+{#
+=========================
+        TOOLTIP          
+=========================
+#}
 
-{% macro renderTooltip(option) %}
-  {# Get tooltip options with default values if not provided #}
-  {% set text = option.text | default('Tooltip content') %}
-  {% set buttonText = option.buttonText | default('Hover me') %}
-  {% set variant = option.variant | default(tooltip.defaultProps.variant) %}
-  {% set name = option.name | default('default') %}
-  
-  {# Find the variant in the tooltip.json file #}
-  {% set selectedVariant = null %}
-  {% for v in tooltip.variants %}
-    {% if v.name == variant %}
-      {% set selectedVariant = v %}
+{% macro renderTooltip(options) %}
+  {% set tooltipData = null %}
+
+  {% for tooltip in options.datas.tooltips %}
+    {% if tooltip.name == options.name %}
+      {% set tooltipData = tooltip %}
     {% endif %}
   {% endfor %}
-  
-  {# Use default variant if specified variant was not found #}
-  {% if not selectedVariant %}
-    {% for v in tooltip.variants %}
-      {% if v.name == tooltip.defaultProps.variant %}
-        {% set selectedVariant = v %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-  
-  {# Render the tooltip container with appropriate classes #}
-  <div class="tooltip-container">
-    <button 
-      class="tooltip typography-label-l" 
-      aria-describedby="tooltip-{{ name }}"
-    >
-      {{ buttonText }}
-    </button>
-    <div 
-      id="tooltip-{{ name }}" 
-      class="tag inline-flex items-center px-2 py-1 text-xs font-medium rounded-md {{ selectedVariant.class }}"
-    >
-      {{ text }}
+
+  {% set globalStyle = options.datas.globalStyle %}
+
+  {% if tooltipData %}
+    {% set variantStyle = options.datas.variants[tooltipData.variant] | default('') %}
+    
+    <div class="tooltip-container">
+      <div 
+        id="tooltip-{{ options.name }}" 
+        class="tag inline-flex items-center px-2 py-1 text-xs font-medium rounded-md {{ variantStyle }}"
+      >
+        {{ tooltipData.text | default("Tooltip content") }}
+      </div>
     </div>
-  </div>
+  {% else %}
+    <span class="text-red-500">Tooltip not found: {{ options.name }}</span>
+  {% endif %}
 {% endmacro %}
 
-<!-- ========================= -->
-<!-- HOW TO USE THIS COMPONENT -->
-<!-- ========================= -->
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-<!--
-  Complete documentation in Storybook
-  Basic usage: {% from "03-atoms/tooltip.njk" import renderTooltip %}
-              {{ renderTooltip(tooltips.tooltip_data.mystic_amulet) }}
-  With style: {{ renderTooltip({ text: "Custom Tooltip", variant: "success" }) }}
--->
+1. Import the macro at the top of your page
+{% from "03-atoms/tooltip.njk" import renderTooltip %}
+
+2. Call a specific tooltip by its name
+{{ renderTooltip({ name: "info_tip", datas: atoms.tooltips }) }}
+
+3. Call multiple tooltips from the data
+{% for tooltip in atoms.tooltips.tooltips %}
+    {{ renderTooltip({ 
+        name: tooltip.name, 
+        datas: atoms.tooltips 
+    }) }}
+{% endfor %}
+
+4. Direct tooltip creation
+{{ renderTooltip({
+    text: "Beware, adventurer!", 
+    style: "warning"
+}) }}
+
+5. Adding a new tooltip to tooltips.json
+{
+  "tooltips": [
+    {
+      "name": "new_tooltip_name",
+      "text": "Your Tooltip Text",
+      "variant": "info"
+    }
+  ]
+}
+
+May your tooltips always appear when needed, and never block your path. 🧙‍♂️✨
+#}

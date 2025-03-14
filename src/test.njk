@@ -8,6 +8,7 @@ layout: '00-organisms-global/base.njk'
 {% from "03-atoms/link.njk" import renderLink %}
 {% from "03-atoms/chip-notification.njk" import renderChipNotification %}
 {% from "03-atoms/tag.njk" import renderTag %}
+{% from "03-atoms/tooltip.njk" import renderTooltip %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -21,7 +22,6 @@ layout: '00-organisms-global/base.njk'
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing link component #}
             {{ renderLink({ name: "tavern_quest", datas: atoms.links }) }}
-
         </div>
     </div>
 
@@ -29,7 +29,6 @@ layout: '00-organisms-global/base.njk'
     <h3 class="text-xl font-semibold mt-8 mb-4">Chip Notification</h3>
     <div class="p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
         {{ renderChipNotification({ name: "notification_count", datas: atoms["chip-notifications"] }) }}
-
     </div>
 
     {# Tag Component #}
@@ -38,8 +37,15 @@ layout: '00-organisms-global/base.njk'
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing tag component #}
             {{ renderTag({ name: "adventure", datas: atoms.tags }) }}
-           
+        </div>
+    </div>
 
+    {# Tooltip Component #}
+    <h3 class="text-xl font-semibold mb-4">Tooltip</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing tooltip component #}
+            {{ renderTooltip({ name: "mystic_amulet", datas: atoms.tooltips }) }}
         </div>
     </div>
 
