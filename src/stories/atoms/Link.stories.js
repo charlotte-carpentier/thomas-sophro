@@ -2,84 +2,135 @@
 import nunjucks from 'nunjucks';
 import linksData from '../../_data/atoms/links.json';
 
-// Define styles map in JavaScript
-const styleClasses = {
-  default: "text-gray-800 hover:text-gray-600 transition-colors duration-200",
-  primary: "text-blue-600 hover:text-blue-800 underline transition-colors duration-200",
-  secondary: "text-gray-500 hover:text-gray-700 transition-colors duration-200"
-};
+// Template for rendering links based on our macro
+const linkTemplate = `
+  {% macro renderLink(options) %}
+    {% if options.name %}
+      {% set linkData = null %}
+      {% for link in datas.links %}
+        {% if link.name == options.name %}
+          {% set linkData = link %}
+        {% endif %}
+      {% endfor %}
+
+      {% set globalStyle = datas.globalStyle %}
+
+      {% if linkData %}
+        {% set variantStyle = datas.variants[linkData.style] | default('') %}
+        
+        <a 
+          href="{{ linkData.href }}" 
+          class="{{ globalStyle }} {{ variantStyle }}"
+        >
+          {{ linkData.text }}
+        </a>
+      {% else %}
+        <span class="text-red-500">Link not found: {{ options.name }}</span>
+      {% endif %}
+    {% else %}
+      {% set globalStyle = datas.globalStyle %}
+      {% set variantStyle = datas.variants[options.style] | default('') %}
+      
+      <a 
+        href="{{ options.href }}" 
+        class="{{ globalStyle }} {{ variantStyle }}"
+      >
+        {{ options.text }}
+      </a>
+    {% endif %}
+  {% endmacro %}
+  
+  {{ renderLink(options) }}
+`;
 
 export default {
   title: 'Atoms/Link',
   tags: ['autodocs'],
   
-  // Render function
+  // Render function using the macro with Nunjucks
   render: (args) => {
-    // Use a simple template without complex Nunjucks logic
-    const linkTemplate = `<a href="${args.href}" class="${styleClasses[args.style] || styleClasses.default}">${args.text}</a>`;
-    return linkTemplate;
+    // Create context for Nunjucks template
+    const context = {
+      datas: linksData,
+      options: args
+    };
+    
+    // Render using Nunjucks with our template and context
+    return nunjucks.renderString(linkTemplate, context);
   },
   
   // Argument types for storybook controls
   argTypes: {
+    name: { 
+      description: 'Name of the predefined link',
+      control: 'select',
+      options: linksData.links.map(link => link.name),
+      defaultValue: null
+    },
     href: { 
-      description: 'Destination URL for the link',
+      description: 'Destination URL for the link (for custom links)',
       control: 'text',
-      defaultValue: '#' 
+      defaultValue: '/custom-page' 
     },
     text: { 
-      description: 'Text displayed for the link',
+      description: 'Text displayed for the link (for custom links)',
       control: 'text',
-      defaultValue: 'Link' 
+      defaultValue: 'Custom Link' 
     },
     style: { 
-      description: 'Visual style of the link',
+      description: 'Visual style of the link (for custom links)',
       control: { 
         type: 'select', 
-        options: ['default', 'primary', 'secondary']
+        options: Object.keys(linksData.variants)
       },
-      defaultValue: 'default'
+      defaultValue: 'primary'
     }
   }
 };
 
 // Using examples from links.json
-export const TavernQuest = {
+export const TavernQuestBoard = {
   args: {
-    href: linksData[0].href,
-    text: linksData[0].text,
-    style: linksData[0].style
+    name: "tavern_quest"
   }
 };
 
 export const MonsterManual = {
   args: {
-    href: linksData[1].href,
-    text: linksData[1].text,
-    style: linksData[1].style
+    name: "monster_manual"
   }
 };
 
-export const Default = {
+// Custom link example
+export const CustomLink = {
   args: {
-    href: '#',
-    text: 'Default Link',
+    href: '/custom-page',
+    text: 'Custom Link',
+    style: 'secondary'
+  }
+};
+
+// Link variants
+export const DefaultStyle = {
+  args: {
+    href: '/styles/default',
+    text: 'Default Style Link',
     style: 'default'
   }
 };
 
-export const Primary = {
+export const PrimaryStyle = {
   args: {
-    href: '#',
-    text: 'Primary Link',
+    href: '/styles/primary',
+    text: 'Primary Style Link',
     style: 'primary'
   }
 };
 
-export const Secondary = {
+export const SecondaryStyle = {
   args: {
-    href: '#',
-    text: 'Secondary Link',
+    href: '/styles/secondary',
+    text: 'Secondary Style Link',
     style: 'secondary'
   }
 };
@@ -89,7 +140,7 @@ export const Usage = () => {
   const usageGuide = document.createElement('div');
   usageGuide.className = 'bg-gray-50 p-6 rounded-lg max-w-4xl mx-auto';
   usageGuide.innerHTML = `
-    <h2 class="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">How to Use This Component</h2>
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">Summon HAT Components Wisely</h2>
     
     <div class="space-y-6">
       <div>
@@ -98,47 +149,47 @@ export const Usage = () => {
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Call a specific link by its index:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink(atoms.links[0]) }}</code></pre>
-      </div>
-      
-      <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Call a specific link by its name:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% set link_by_name = atoms.links | selectattr('name', 'equalto', 'tavern_quest') | first %}
-{{ renderLink(link_by_name) }}</code></pre>
-      </div>
-      
-      <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Use a custom link directly:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink({
-  href: '/custom-page', 
-  text: 'Custom Link', 
-  style: 'primary'
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Call a specific link by its name:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink({ 
+  name: "tavern_quest", 
+  datas: atoms.links 
 }) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Add a new link in links.json:</h3>
-        <div class="bg-gray-100 p-3 rounded-md overflow-x-auto">
-          <pre><code class="text-sm text-gray-900">{
-  "id": 2, // Must be unique and sequential (e.g., max ID + 1)
-  "name": "new_link_name",
-  "href": "/your-link",
-  "text": "Your Link Text",
-  "style": "primary"
-}</code></pre>
-        </div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Call multiple links from the data:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% for link in atoms.links.links %}
+    {{ renderLink({ 
+        name: link.name, 
+        datas: atoms.links 
+    }) }}
+{% endfor %}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Available styles:</h3>
-        <ul class="list-disc pl-6 space-y-2 text-gray-600">
-          <li><code>default</code>: Gray text that darkens on hover</li>
-          <li><code>primary</code>: Blue underlined text that darkens on hover</li>
-          <li><code>secondary</code>: Light gray text that darkens on hover</li>
-        </ul>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Direct link creation:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderLink({
+  href: "/new-page", 
+  text: "Custom Link", 
+  style: "primary"
+}) }}</code></pre>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Adding a new link to links.json:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
+  "links": [
+    {
+      "name": "new_link_name",
+      "href": "/your-link",
+      "text": "Your Link Text",
+      "style": "primary"
+    }
+  ]
+}</code></pre>
       </div>
     </div>
+    <p class="mt-6 text-gray-600 italic">May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨</p>
   `;
   
   return usageGuide;

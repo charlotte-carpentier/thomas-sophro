@@ -149,12 +149,12 @@ export const LargeChip = {
   }
 };
 
-// Usage guide 
+// Usage guide
 export const Usage = () => {
   const usageGuide = document.createElement('div');
   usageGuide.className = 'bg-gray-50 p-6 rounded-lg max-w-4xl mx-auto';
   usageGuide.innerHTML = `
-    <h2 class="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">How to Use This Component</h2>
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">Summon HAT Components Wisely</h2>
     
     <div class="space-y-6">
       <div>
@@ -163,64 +163,57 @@ export const Usage = () => {
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Call a specific chip notification by name:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Call a specific chip notification by its name:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderChipNotification({ 
   name: "notification_count", 
-  datas: atoms["chip-notifications"] 
+  datas: atoms.chipNotifications 
 }) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Loop through all chip notifications:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% for notification in atoms["chip-notifications"]["chip-notifications"] %}
-  {{ renderChipNotification({ 
-    name: notification.name, 
-    datas: atoms["chip-notifications"] 
-  }) }}
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Call multiple chip notifications from the data:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% for chipNotification in atoms.chipNotifications.list %}
+    {{ renderChipNotification({ 
+        name: chipNotification.name, 
+        datas: atoms.chipNotifications 
+    }) }}
 {% endfor %}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Create a custom chip notification:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Direct chip notification creation:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderChipNotification({
-  text: '42', 
-  style: 'success',
-  datas: atoms["chip-notifications"]
+  text: "42", 
+  style: "success"
 }) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Available styles:</h3>
-        <ul class="list-disc pl-6 space-y-2 text-gray-600">
-          ${Object.entries(chipNotificationsData.variants).map(([style, className]) => `
-            <li><code>${style}</code>: ${className}</li>
-          `).join('')}
-        </ul>
-      </div>
-      
-      <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Add a new chip notification in the JSON file:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Adding a new chip notification to chip-notifications.json:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
-  "chip-notifications": [
-    // Existing notifications...
-    {
-      "name": "new_notification_count",
-      "text": "99+",
-      "style": "warning"
-    }
-  ]
+  "chipNotifications": {
+    "list": [
+      {
+        "name": "new_notification_count",
+        "text": "99+",
+        "style": "warning"
+      }
+    ]
+  }
 }</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">7. Auto-sizing based on content length:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Available content & styles:</h3>
+        <p class="text-gray-600 mb-3">Check the following files:</p>
         <ul class="list-disc pl-6 space-y-2 text-gray-600">
-          <li>1 character: Small size (h-6 w-6)</li>
-          <li>2 characters: Medium size (h-8 w-8)</li>
-          <li>3+ characters: Large size (h-10 w-10 with padding)</li>
+          <li>Content: <code>src/_data/contents/atoms/chip-notifications.json</code></li>
+          <li>Styles: <code>src/_data/styles/atoms/chip-notification.json</code></li>
+          <li>Component: <code>src/_includes/03-atoms/chip-notification.njk</code></li>
         </ul>
       </div>
     </div>
+    <p class="mt-6 text-gray-600 italic">May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨</p>
   `;
   
   return usageGuide;
