@@ -1,42 +1,143 @@
-<!-- ========================= -->
-<!--         CHECKBOX       -->
-<!-- ========================= -->
+{#
+=========================
+        CHECKBOX         
+=========================
+#}
 
-{% macro renderCheckbox(option) %}
-  {# Get checkbox options with default values if not provided #}
-  {% set text = option.text | default('Checkbox') %}
-  {% set variant = option.variant | default(checkbox.defaultProps.variant) %}
+{% macro renderCheckbox(options) %}
+  {% set globalStyle = options.datas.globalStyle | default('') %}
+  {% set fieldsetClasses = options.datas.fieldsetClasses | default('checkbox-group') %}
+  {% set legendClasses = options.datas.legendClasses | default('font-medium text-gray-700 mb-3') %}
+  {% set groupContainerClasses = options.datas.groupContainerClasses | default('space-y-2') %}
   
-  {# Find the variant in the checkbox.json file #}
-  {% set selectedVariant = null %}
-  {% for v in checkbox.variants %}
-    {% if v.name == variant %}
-      {% set selectedVariant = v %}
-    {% endif %}
-  {% endfor %}
-  
-  {# Use default variant if specified variant was not found #}
-  {% if not selectedVariant %}
-    {% for v in checkbox.variants %}
-      {% if v.name == checkbox.defaultProps.variant %}
-        {% set selectedVariant = v %}
+  {% if options.group %}
+    <fieldset class="{{ fieldsetClasses }}">
+      {% if options.groupLabel %}
+        <legend class="{{ legendClasses }} {% if options.groupSrOnly %}sr-only{% endif %}">
+          {{ options.groupLabel }}
+        </legend>
+      {% endif %}
+      
+      <div class="{{ groupContainerClasses }}">
+        {% for checkbox in options.datas.checkboxes %}
+          {{ renderSingleCheckbox(checkbox, options.datas) }}
+        {% endfor %}
+      </div>
+    </fieldset>
+  {% else %}
+    {% set checkboxData = null %}
+    
+    {% for checkbox in options.datas.checkboxes %}
+      {% if checkbox.id == options.id %}
+        {% set checkboxData = checkbox %}
       {% endif %}
     {% endfor %}
+    
+    {% if checkboxData %}
+      {{ renderSingleCheckbox(checkboxData, options.datas) }}
+    {% else %}
+      <span class="{{ options.datas.errorClasses | default('text-red-500') }}">Checkbox not found: {{ options.id }}</span>
+    {% endif %}
   {% endif %}
-  
-  {# Render the component with appropriate classes #}
-  <div class="checkbox {{ selectedVariant.class }}">
-    {{ text }}
-  </div>
 {% endmacro %}
 
-<!-- ========================= -->
-<!-- HOW TO USE THIS COMPONENT -->
-<!-- ========================= -->
+{% macro renderSingleCheckbox(checkbox, datas) %}
+  {% set labelClasses = datas.labelClasses | default('flex cursor-pointer items-start gap-4') %}
+  {% set checkboxContainerClasses = datas.checkboxContainerClasses | default('flex items-center') %}
+  {% set baseClasses = datas.baseClasses | default('size-4 rounded-sm') %}
+  {% set labelTextClasses = datas.labelTextClasses | default('font-medium text-gray-900') %}
+  {% set descriptionClasses = datas.descriptionClasses | default('text-sm text-gray-500') %}
+  
+  {% set stateClasses = {
+    'default': datas.variants.default | default('border-gray-300'),
+    'hover': datas.variants.hover | default('border-gray-600'),
+    'checked': datas.variants.checked | default('bg-gray-500 border-gray-500 text-white'),
+    'focus': datas.variants.focus | default('border-blue-500 outline-none ring-2 ring-blue-300'),
+    'disabled': datas.variants.disabled | default('bg-gray-100 border-gray-300 cursor-not-allowed'),
+    'disabledChecked': datas.variants.disabledChecked | default('bg-gray-300 border-gray-300 cursor-not-allowed')
+  } %}
+  
+  {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
+  
+  <label for="{{ checkbox.id }}" class="{{ labelClasses }}">
+    <div class="{{ checkboxContainerClasses }}">
+      <input 
+        type="checkbox" 
+        id="{{ checkbox.id }}" 
+        name="{{ checkbox.id }}"
+        value="{{ checkbox.value }}"
+        class="{{ inputClasses }}"
+        onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
+        onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'"
+        onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
+        onclick="this.checked ? this.className='{{ baseClasses }} {{ stateClasses.checked }}' : this.className='{{ baseClasses }} {{ stateClasses.default }}'"
+        {% if checkbox.disabled %}
+          disabled 
+          class="{{ baseClasses }} {% if checkbox.checked %}{{ stateClasses.disabledChecked }}{% else %}{{ stateClasses.disabled }}{% endif %}"
+        {% endif %}
+        {% if checkbox.checked %}checked{% endif %}
+        {% if checkbox.ariaLabel %}aria-label="{{ checkbox.ariaLabel }}"{% endif %}
+      />
+    </div>
+    <div>
+      <strong class="{{ labelTextClasses }}">
+        {{ checkbox.label }}
+      </strong>
+      {% if checkbox.description %}
+        <p class="{{ descriptionClasses }}">{{ checkbox.description }}</p>
+      {% endif %}
+    </div>
+  </label>
+{% endmacro %}
 
-<!--
-  Complete documentation in Storybook
-  Basic usage: {% from "03-atoms/checkbox.njk" import renderCheckbox %}
-              {{ renderCheckbox(checkboxs.checkbox_data.default_checkbox) }}
-  With style: {{ renderCheckbox({ text: "Custom Checkbox", variant: "primary" }) }}
--->
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/checkbox.njk" import renderCheckbox %}
+
+2. Render a single checkbox by ID
+{{ renderCheckbox({ id: "option1", datas: atoms.checkboxs }) }}
+
+3. Render an entire checkbox group
+{{ renderCheckbox({ 
+    group: true, 
+    groupLabel: "RPG Player Habits",
+    groupSrOnly: false,
+    datas: atoms.checkboxs 
+}) }}
+
+4. Render a subset of checkboxes
+{% set rpgOptions = [
+    { "id": "option1", "label": "I put all my skill points in charisma.", "value": "charisma" },
+    { "id": "option2", "label": "I loot everything... even useless junk.", "value": "loot-hoarder" }
+] %}
+{{ renderCheckbox({ 
+    group: true, 
+    groupLabel: "Custom Group", 
+    checkboxes: rpgOptions, 
+    datas: { 
+      globalStyle: atoms.checkboxs.globalStyle, 
+      variants: atoms.checkboxs.variants,
+      baseClasses: atoms.checkboxs.baseClasses,
+      labelClasses: atoms.checkboxs.labelClasses
+    } 
+}) }}
+
+5. Available options for each checkbox:
+{
+  "id": "unique_id",            // Unique identifier
+  "label": "Checkbox Label",    // Visible text
+  "value": "submission_value",  // Value for form submission
+  "checked": true,              // Pre-checked state (optional)
+  "disabled": false,            // Disabled state (optional)
+  "description": "Additional details about the option" // (optional)
+  "ariaLabel": "Accessible label for screen readers" // (optional)
+}
+
+May your validation never fail and your UX be legendary. 🐉🔥
+#}
