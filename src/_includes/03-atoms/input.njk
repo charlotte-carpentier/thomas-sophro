@@ -90,11 +90,16 @@
           {% if inputData.disabled %}class="{{ stateClasses.disabled }}" disabled{% endif %}
         />
       {% endif %}
+
+      {% if inputData.state == 'critical' and inputData.errorMessage %}
+        <p class="text-red-500 text-sm mt-1">{{ inputData.errorMessage }}</p>
+      {% endif %}
     </div>
   {% else %}
     <span class="text-red-500">Input not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
+
 
 
 {#

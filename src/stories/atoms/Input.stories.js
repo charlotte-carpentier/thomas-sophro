@@ -108,6 +108,10 @@ const inputTemplate = `
               {% if inputData.disabled %}disabled class="{{ stateClasses.disabled }}"{% endif %}
             />
           {% endif %}
+          
+          {% if inputData.state == 'critical' or options.state == 'critical' %}
+            <p class="text-red-500 text-sm mt-1">{{ inputData.errorMessage }}</p>
+          {% endif %}
         </div>
       {% else %}
         <span class="text-red-500">Input not found: {{ options.name }}</span>
@@ -191,6 +195,10 @@ const inputTemplate = `
             {% if options.disabled %}disabled{% endif %}
           />
         {% endif %}
+        
+        {% if options.state == 'critical' and options.errorMessage %}
+          <p class="text-red-500 text-sm mt-1">{{ options.errorMessage }}</p>
+        {% endif %}
       </div>
     {% endif %}
   {% endmacro %}
@@ -255,52 +263,65 @@ export default {
         options: Object.keys(inputsData.variants)
       },
       defaultValue: 'default'
+    },
+    state: {
+      description: 'State of the input (for custom inputs)',
+      control: { 
+        type: 'select', 
+        options: ['default', 'critical']
+      },
+      defaultValue: 'default'
+    },
+    errorMessage: {
+      description: 'Error message (for critical state)',
+      control: 'text',
+      defaultValue: 'This field is required.'
     }
   }
 };
 
 // Predefined inputs from data
-export const TextInput = {
+export const HeroName = {
   args: {
-    name: "text_input"
+    name: "hero_name"
   }
 };
 
-export const PhoneInput = {
+export const GuildPhone = {
   args: {
-    name: "phone_input"
+    name: "guild_phone"
   }
 };
 
-export const TextareaInput = {
+export const QuestDescription = {
   args: {
-    name: "textarea_input"
+    name: "quest_description"
   }
 };
 
-export const SelectInput = {
+export const WeaponChoice = {
   args: {
-    name: "select_input"
+    name: "weapon_choice"
   }
 };
 
-export const MultiSelectInput = {
+export const PartyMembers = {
   args: {
-    name: "multi_select_input"
+    name: "party_members"
   }
 };
 
-export const DatepickerInput = {
+export const AdventureDate = {
   args: {
-    name: "datepicker_input"
+    name: "adventure_date"
   }
 };
 
 // Custom inputs with different states
 export const CustomTextInput = {
   args: {
-    label: 'Custom Text Input',
-    placeholder: 'Type something here...',
+    label: 'Spell Name',
+    placeholder: 'Type your spell name here...',
     type: 'text',
     style: 'default'
   }
@@ -308,8 +329,8 @@ export const CustomTextInput = {
 
 export const DefaultInput = {
   args: {
-    label: 'Default State Input',
-    placeholder: 'Default state...',
+    label: 'Default State Potion',
+    placeholder: 'Enter potion name...',
     type: 'text',
     style: 'default'
   }
@@ -317,8 +338,8 @@ export const DefaultInput = {
 
 export const HoverState = {
   args: {
-    label: 'Hover State Input',
-    placeholder: 'Hover over me...',
+    label: 'Enchanted Hover Scroll',
+    placeholder: 'Hover over me to reveal magic...',
     type: 'text',
     style: 'hover'
   }
@@ -326,8 +347,8 @@ export const HoverState = {
 
 export const FocusState = {
   args: {
-    label: 'Focus State Input',
-    placeholder: 'Click me...',
+    label: 'Focus Crystals',
+    placeholder: 'Click to channel energy...',
     type: 'text',
     style: 'focus'
   }
@@ -335,8 +356,8 @@ export const FocusState = {
 
 export const ActiveState = {
   args: {
-    label: 'Active State Input',
-    placeholder: 'Click and hold...',
+    label: 'Activation Rune',
+    placeholder: 'Click and hold to activate...',
     type: 'text',
     style: 'active'
   }
@@ -344,26 +365,28 @@ export const ActiveState = {
 
 export const FilledState = {
   args: {
-    label: 'Filled State Input',
-    placeholder: 'With value...',
+    label: 'Enchanted Item',
+    placeholder: 'This item is already enchanted...',
     type: 'text',
     style: 'filled'
   }
 };
 
 export const CriticalState = {
-  args: {
-    label: 'Critical State Input',
-    placeholder: 'Error state...',
-    type: 'text',
-    style: 'critical'
+  args: { 
+    label: 'Critical State Input', 
+    placeholder: 'Error state...', 
+    type: 'text', 
+    style: 'critical', 
+    state: 'critical', 
+    errorMessage: 'A hero without a name? Impossible!' 
   }
 };
 
 export const DisabledState = {
   args: {
-    label: 'Disabled Input',
-    placeholder: 'Cannot be modified',
+    label: 'Sealed Scroll',
+    placeholder: 'This ancient text cannot be modified',
     type: 'text',
     disabled: true
   }
@@ -371,8 +394,8 @@ export const DisabledState = {
 
 export const RequiredInput = {
   args: {
-    label: 'Required Input',
-    placeholder: 'This field is required',
+    label: 'Oath of the Hero',
+    placeholder: 'Your oath is required to proceed',
     type: 'text',
     required: true,
     style: 'default'
@@ -395,7 +418,7 @@ export const Usage = () => {
       <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Call a specific input by its name:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderInput({ 
-  name: "text_input", 
+  name: "hero_name", 
   datas: atoms.inputs 
 }) }}</code></pre>
       </div>
@@ -414,8 +437,8 @@ export const Usage = () => {
         <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Create a custom input:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderInput({
   id: "custom-input", 
-  label: "Custom Input", 
-  placeholder: "Enter something...", 
+  label: "Custom Spell Name", 
+  placeholder: "Enter your spell name...", 
   type: "text", 
   style: "primary",
   required: true
@@ -423,7 +446,20 @@ export const Usage = () => {
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Available styles:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Input with critical state and error message:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderInput({
+  id: "critical-input", 
+  label: "Forbidden Spell", 
+  placeholder: "This spell is forbidden...", 
+  type: "text", 
+  style: "critical",
+  state: "critical",
+  errorMessage: "This spell is too dangerous to cast!"
+}) }}</code></pre>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Available styles:</h3>
         <ul class="list-disc pl-6 space-y-2 text-gray-600">
           ${Object.entries(inputsData.variants).map(([style, className]) => `
             <li><code>${style}</code>: ${className}</li>
@@ -432,23 +468,24 @@ export const Usage = () => {
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Add a new input to inputs.json:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">7. Add a new input to inputs.json:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
   "inputs": [
     {
-      "name": "new_input",
+      "name": "magic_spell",
       "type": "text",
-      "label": "New Input",
-      "id": "newInput",
-      "placeholder": "Enter text...",
+      "label": "Magic Spell",
+      "id": "magicSpell",
+      "placeholder": "Enter your incantation...",
       "required": true,
-      "style": "default"
+      "style": "default",
+      "errorMessage": "A wizard needs a proper spell name!"
     }
   ]
 }</code></pre>
       </div>
     </div>
-    <p class="mt-6 text-gray-600 italic">May your bugs be forever exiled to the shadow realm. ✨</p>
+    <p class="mt-6 text-gray-600 italic">May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨</p>
   `;
   
   return usageGuide;

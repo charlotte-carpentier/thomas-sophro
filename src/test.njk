@@ -11,6 +11,7 @@ layout: '00-organisms-global/base.njk'
 {% from "03-atoms/tooltip.njk" import renderTooltip %}
 {% from "03-atoms/select.njk" import renderSelect %}
 {% from "03-atoms/input.njk" import renderInput %}
+{% from "03-atoms/chip-multiselect.njk" import renderChipMultiselect %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -65,9 +66,15 @@ layout: '00-organisms-global/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing input component #}
-            {{ renderInput({ name: "phone_input", datas: atoms.inputs }) }}
+            {{ renderInput({ name: "hero_name", datas: atoms.inputs }) }}
 
         </div>
+    </div>
+
+    {# Chip Multiselect Atom #}
+    <h3 class="text-xl font-semibold mt-8 mb-4">Chip Multiselect</h3>
+    <div class="p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+        {{ renderChipMultiselect({ name: "fire", datas: atoms["chip-multiselects"] }) }} 
     </div>
 
     {# Portal to the Sacred Codex #}

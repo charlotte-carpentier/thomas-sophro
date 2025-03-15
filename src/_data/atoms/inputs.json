@@ -11,62 +11,62 @@
   },
   "inputs": [
     {
-      "name": "text_input",
+      "name": "hero_name",
       "type": "text",
-      "label": "Text Input",
-      "id": "textInput",
-      "placeholder": "Enter text...",
+      "label": "Hero Name",
+      "id": "heroName",
+      "placeholder": "Enter your legendary name...",
       "required": true,
-      "style": "default"
+      "errorMessage": "A hero without a name? Impossible!"
     },
     {
-      "name": "phone_input",
+      "name": "guild_phone",
       "type": "phone",
-      "label": "Phone Number",
-      "id": "phoneInput",
-      "placeholder": "+33 6 12 34 56 78",
+      "label": "Guild Contact Number",
+      "id": "guildPhone",
+      "placeholder": "+1 555 123 4567",
       "required": true,
-      "style": "primary"
+      "errorMessage": "How will the King summon you without a number?"
     },
     {
-      "name": "textarea_input",
+      "name": "quest_description",
       "type": "textarea",
-      "label": "Message",
-      "id": "textareaInput",
-      "placeholder": "Enter your message...",
+      "label": "Quest Description",
+      "id": "questDescription",
+      "placeholder": "Describe your epic quest...",
       "required": false,
-      "style": "secondary"
+      "errorMessage": "Even the most mysterious quests need a description!"
     },
     {
-      "name": "select_input",
+      "name": "weapon_choice",
       "type": "select",
-      "label": "Choose an option",
-      "id": "selectInput",
+      "label": "Choose Your Weapon",
+      "id": "weaponChoice",
       "options": [
-        { "value": "option1", "label": "Option 1" },
-        { "value": "option2", "label": "Option 2" },
-        { "value": "option3", "label": "Option 3" }
+        { "value": "sword", "label": "Legendary Sword" },
+        { "value": "bow", "label": "Elven Bow" },
+        { "value": "staff", "label": "Wizard's Staff" }
       ],
-      "style": "default"
+      "errorMessage": "You cannot embark on a journey without a weapon!"
     },
     {
-      "name": "multi_select_input",
+      "name": "party_members",
       "type": "multi-select",
-      "label": "Select multiple options",
-      "id": "multiSelectInput",
+      "label": "Select Your Companions",
+      "id": "partyMembers",
       "options": [
-        { "value": "option1", "label": "Option 1" },
-        { "value": "option2", "label": "Option 2" },
-        { "value": "option3", "label": "Option 3" }
+        { "value": "warrior", "label": "Bearded Warrior" },
+        { "value": "mage", "label": "Eccentric Mage" },
+        { "value": "rogue", "label": "Mysterious Rogue" }
       ],
-      "style": "default"
+      "errorMessage": "Going on an adventure alone? Risky..."
     },
     {
-      "name": "datepicker_input",
+      "name": "adventure_date",
       "type": "datepicker",
-      "label": "Pick a date",
-      "id": "datepickerInput",
-      "style": "default"
+      "label": "Adventure Start Date",
+      "id": "adventureDate",
+      "errorMessage": "Every epic journey needs a starting date!"
     }
   ]
 }
