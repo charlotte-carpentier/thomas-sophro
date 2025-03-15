@@ -6,10 +6,10 @@
  * 2. Component data file (.json) - one file per component
  * 3. Storybook documentation (.stories.js)
  * 
- * Usage: node src/js/generate-component.js <componentName> [componentType=atoms]
+ * Usage: node src/js/tools/generate-component.js <componentName> [componentType=atoms]
  * 
- * Example: node src/js/generate-component.js Button
- * Example: node src/js/generate-component.js Card molecules
+ * Example: node src/js/tools/generate-component.js Button
+ * Example: node src/js/tools/generate-component.js Card molecules
  */
 
 import fs from "fs";
@@ -21,8 +21,8 @@ import readline from 'readline';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Get the project root by going up two levels from the script location
-const projectRoot = path.resolve(__dirname, "../../");
+// Le script est dans src/js/tools/, donc le projet root est 3 niveaux plus haut
+const projectRoot = path.resolve(__dirname, "../../../");
 
 // Debug information to verify paths
 console.log("Script location:", __dirname);
@@ -36,7 +36,7 @@ const componentType = process.argv[3] || "atoms"; // Default to atoms if not spe
 // Exit if component name is not provided
 if (!componentName) {
     console.error("❌ Please provide a component name.");
-    console.log("Usage: node src/js/generate-component.js <componentName> [componentType=atoms]");
+    console.log("Usage: node src/js/tools/generate-component.js <componentName> [componentType=atoms]");
     process.exit(1);
 }
 
@@ -51,21 +51,14 @@ const config = {
         molecules: "02-molecules",
         organisms: "01-organisms",
         core: "00-core"
-    },
-    
-    // Directory structure
-    directories: {
-        includes: "src/_includes",
-        data: "src/_data",
-        stories: "src/stories"
     }
 };
 
 // Define paths for the generated files
 const componentPrefix = config.paths[componentType] || config.paths.atoms;
-const includesPath = path.join(config.basePath, config.directories.includes, componentPrefix);
-const dataPath = path.join(config.basePath, config.directories.data, componentType);
-const storiesPath = path.join(config.basePath, config.directories.stories, componentType);
+const includesPath = path.join(config.basePath, "src", "_includes", componentPrefix);
+const dataPath = path.join(config.basePath, "src", "_data", componentType);
+const storiesPath = path.join(config.basePath, "src", "stories", componentType);
 
 // Log paths for verification
 console.log("\nPaths for component generation:");
