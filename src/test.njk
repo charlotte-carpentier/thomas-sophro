@@ -65,9 +65,7 @@ layout: '00-organisms-global/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing input component #}
-            {% for input in atoms.inputs.inputs %}
-    {{ renderInput({ name: input.name, datas: atoms.inputs }) }}
-{% endfor %}
+            {{ renderInput({ name: "phone_input", datas: atoms.inputs }) }}
 
         </div>
     </div>

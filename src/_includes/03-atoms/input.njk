@@ -14,48 +14,65 @@
   {% endfor %}
 
   {% set globalStyle = options.datas.globalStyle %}
+  {% set inputWidth = options.datas.inputWidth | default('w-64') %} 
 
   {% if inputData %}
     {% set variantStyle = options.datas.variants[inputData.style] | default('') %}
     
-    <div class="{{ globalStyle }} {{ variantStyle }}">
+    <div class="flex flex-col gap-1 {{ globalStyle }} {{ variantStyle }}">
       {% if inputData.label %}
-        <label for="{{ inputData.id }}">
+        <label for="{{ inputData.id }}" class="font-medium text-gray-700">
           {{ inputData.label }}{% if inputData.required %} *{% endif %}
         </label>
       {% endif %}
 
-      {% if inputData.type == "text" %}
+      {% set baseClasses = "border rounded-md px-3 py-2 focus:outline-none " ~ inputWidth %}
+      {% set stateClasses = {
+        'default': options.datas.variants.default | default('border-gray-300'),
+        'hover': options.datas.variants.hover | default('border-blue-400'),
+        'focus': options.datas.variants.focus | default('border-blue-600 ring-1 ring-blue-600'),
+        'active': options.datas.variants.active | default('border-blue-700'),
+        'disabled': options.datas.variants.disabled | default('border-gray-200 bg-gray-100 cursor-not-allowed'),
+        'filled': options.datas.variants.filled | default('border-green-500'),
+        'critical': options.datas.variants.critical | default('border-red-500')
+      } %}
+      
+      {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
+      
+      {% if inputData.type in ["text", "phone"] %}
         <input 
-          type="text" 
+          type="{{ inputData.type }}" 
           id="{{ inputData.id }}" 
           name="{{ inputData.name }}" 
           placeholder="{{ inputData.placeholder }}" 
-          class="input-class"
-        />
-      {% elif inputData.type == "phone" %}
-        <input 
-          type="tel" 
-          id="{{ inputData.id }}" 
-          name="{{ inputData.name }}" 
-          placeholder="{{ inputData.placeholder }}" 
-          class="input-class"
+          class="{{ inputClasses }}"
+          onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
+          onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'" 
+          onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
+          onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }}'" 
+          {% if inputData.disabled %}disabled class="{{ stateClasses.disabled }}"{% endif %}
         />
       {% elif inputData.type == "textarea" %}
         <textarea 
           id="{{ inputData.id }}" 
           name="{{ inputData.name }}" 
           placeholder="{{ inputData.placeholder }}" 
-          class="input-class"
+          class="{{ inputClasses }}"
+          onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
+          onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'" 
+          onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
+          onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }}'" 
+          {% if inputData.disabled %}disabled class="{{ stateClasses.disabled }}"{% endif %}
         ></textarea>
-      {% elif inputData.type == "select" %}
-        <select id="{{ inputData.id }}" name="{{ inputData.name }}" class="input-class">
-          {% for option in inputData.options %}
-            <option value="{{ option.value }}">{{ option.label }}</option>
-          {% endfor %}
-        </select>
-      {% elif inputData.type == "multi-select" %}
-        <select id="{{ inputData.id }}" name="{{ inputData.name }}" multiple class="input-class">
+      {% elif inputData.type in ["select", "multi-select"] %}
+        <select id="{{ inputData.id }}" name="{{ inputData.name }}" 
+          {% if inputData.type == "multi-select" %}multiple{% endif %} 
+          class="{{ inputClasses }}"
+          onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
+          onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'" 
+          onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
+          onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }}'" 
+          {% if inputData.disabled %}disabled class="{{ stateClasses.disabled }}"{% endif %}>
           {% for option in inputData.options %}
             <option value="{{ option.value }}">{{ option.label }}</option>
           {% endfor %}
@@ -65,7 +82,12 @@
           type="date" 
           id="{{ inputData.id }}" 
           name="{{ inputData.name }}" 
-          class="input-class"
+          class="{{ inputClasses }}"
+          onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
+          onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'" 
+          onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
+          onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }}'" 
+          {% if inputData.disabled %}class="{{ stateClasses.disabled }}" disabled{% endif %}
         />
       {% endif %}
     </div>
@@ -118,5 +140,5 @@ Summon HAT Components Wisely
   ]
 }
 
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+May your bugs be forever exiled to the shadow realm. ✨
 #}
