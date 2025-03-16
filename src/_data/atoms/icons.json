@@ -1,0 +1,36 @@
+{
+  "sizes": {
+    "xs": "14x14",
+    "sm": "16x16",
+    "md": "24x24",
+    "lg": "32x32",
+    "xl": "48x48",
+    "xxl": "64x64"
+  },
+  "globalClass": "icon",
+  "variants": {
+    "default": "",
+    "primary": "text-blue-600",
+    "secondary": "text-gray-500"
+  },
+  "icons": [
+    {
+      "name": "brand",
+      "path": "/assets/icons/brand.svg",
+      "alt": "Brand Flag Icon",
+      "defaultSize": "lg"
+    },
+    {
+      "name": "icon-light",
+      "path": "/assets/icons/icon-light.svg",
+      "alt": "Light Icon",
+      "defaultSize": "md"
+    },
+    {
+      "name": "icon-dark",
+      "path": "/assets/icons/icon-dark.svg",
+      "alt": "Dark Icon",
+      "defaultSize": "md"
+    }
+  ]
+}

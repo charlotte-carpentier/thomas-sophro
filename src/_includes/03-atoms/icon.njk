@@ -1,0 +1,106 @@
+{#
+=========================
+         ICON           
+=========================
+#}
+
+{% macro renderIcon(options) %}
+  {% set iconData = null %}
+  
+  {% if options.name %}
+    {# Look for the icon in the data #}
+    {% for icon in options.datas.icons %}
+      {% if icon.name == options.name %}
+        {% set iconData = icon %}
+      {% endif %}
+    {% endfor %}
+    
+    {% if iconData %}
+      {# Get size dimensions #}
+      {% set size = options.size | default(iconData.defaultSize) %}
+      {% set dimensions = options.datas.sizes[size] | default(options.datas.sizes.md) %}
+      {% set width = dimensions.split('x')[0] %}
+      {% set height = dimensions.split('x')[1] %}
+      
+      {# Get variant style #}
+      {% set variantStyle = options.datas.variants[options.variant] | default('') %}
+      
+      {# Render SVG icon with appropriate classes and dimensions #}
+      <img 
+        src="{{ iconData.path }}" 
+        alt="{{ iconData.alt }}" 
+        width="{{ width }}" 
+        height="{{ height }}" 
+        class="{{ options.datas.globalClass }} {{ variantStyle }} {{ options.class | default('') }}"
+      >
+    {% else %}
+      <span class="text-red-500">Icon not found: {{ options.name }}</span>
+    {% endif %}
+  {% else %}
+    {# Direct path usage #}
+    {% set size = options.size | default('md') %}
+    {% set dimensions = options.datas.sizes[size] | default(options.datas.sizes.md) %}
+    {% set width = dimensions.split('x')[0] %}
+    {% set height = dimensions.split('x')[1] %}
+    
+    {# Get variant style #}
+    {% set variantStyle = options.datas.variants[options.variant] | default('') %}
+    
+    <img 
+      src="{{ options.path }}" 
+      alt="{{ options.alt | default('Icon') }}" 
+      width="{{ width }}" 
+      height="{{ height }}" 
+      class="{{ options.datas.globalClass }} {{ variantStyle }} {{ options.class | default('') }}"
+    >
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon Icon Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/icon.njk" import renderIcon %}
+
+2. Call a specific icon by its name
+{{ renderIcon({ 
+    name: "brand", 
+    size: "lg",
+    variant: "default",
+    datas: atoms.icons 
+}) }}
+
+3. Call multiple icons from the data with different sizes
+{% for size in ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] %}
+    {{ renderIcon({ 
+        name: "brand", 
+        size: size,
+        datas: atoms.icons 
+    }) }}
+{% endfor %}
+
+4. Direct icon usage with custom path
+{{ renderIcon({
+    path: "/assets/icons/custom-icon.svg", 
+    alt: "Custom Icon",
+    size: "md",
+    variant: "primary",
+    datas: atoms.icons
+}) }}
+
+5. Adding a new icon to icons.json
+{
+  "icons": [
+    {
+      "name": "new_icon_name",
+      "path": "/assets/icons/your-icon.svg",
+      "alt": "Your Icon Description",
+      "defaultSize": "md"
+    }
+  ]
+}
+
+May your designs defy the sands of time. ⏳⚡
+#}

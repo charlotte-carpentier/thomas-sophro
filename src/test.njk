@@ -20,6 +20,7 @@ layout: '00-organisms-global/base.njk'
 {% from "03-atoms/switch.njk" import renderSwitch %}
 {% from "03-atoms/image.njk" import renderImage %}
 {% from "03-atoms/vector.njk" import renderVector %}
+{% from "03-atoms/icon.njk" import renderIcon %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -146,7 +147,6 @@ layout: '00-organisms-global/base.njk'
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing switch component #}
             {{ renderSwitch({ id: "torch", datas: atoms.switchs }) }}
-
         </div>
     </div>
 
@@ -156,7 +156,6 @@ layout: '00-organisms-global/base.njk'
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing image component #}
             {{ renderImage({ name: "avatar_character", datas: atoms.images }) }}
-
         </div>
     </div>
 
@@ -166,7 +165,21 @@ layout: '00-organisms-global/base.njk'
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing vector component #}
             {{ renderVector({ name: "logo_full", datas: atoms.vectors }) }}
+        </div>
+    </div>
 
+        {# Icon Atom #}
+    <h3 class="text-xl font-semibold mb-4">Icon</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing icon component #}
+            {% for size in ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] %}
+                {{ renderIcon({ 
+                    name: "icon-light", 
+                    size: size,
+                    datas: atoms.icons 
+                }) }}
+            {% endfor %}
         </div>
     </div>
 
