@@ -1,6 +1,6 @@
 {
   "globalStyle": "appearance-none transition-all duration-200 font-sans text-gray-700",
-  "groupLabel": "RPG Player Habits",
+  "groupLabel": "Your RPG Combat Style",
   "fieldsetClasses": "checkbox-group",
   "legendClasses": "font-medium text-gray-700 mb-3",
   "groupContainerClasses": "space-y-2",
