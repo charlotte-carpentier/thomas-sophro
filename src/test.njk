@@ -15,6 +15,7 @@ layout: '00-organisms-global/base.njk'
 {% from "03-atoms/checkbox.njk" import renderCheckbox %}
 {% from "03-atoms/box.njk" import renderBox %}
 {% from "03-atoms/radio-button.njk" import renderRadioButton %}
+{% from "03-atoms/radio.njk" import renderRadio %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -109,18 +110,27 @@ layout: '00-organisms-global/base.njk'
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing cradio-button component #}
              {{ renderRadioButton({ 
-    group: true, 
-    groupLabel: "Your RPG Combat Style",
-    groupSrOnly: false,
-    datas: atoms["radio-buttons"] 
-}) }}
+                group: true, 
+                groupLabel: "Your RPG Combat Style",
+                groupSrOnly: false,
+                datas: atoms["radio-buttons"] 
+            }) }}
+        </div>
+    </div>
+
+    {# Radio Atom #}
+    <h3 class="text-xl font-semibold mb-4">Radio</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing radio component #}
+             {{ renderRadio({ id: "radio1", datas: atoms.radios }) }}
         </div>
     </div>
 
     {# Portal to the Sacred Codex #}
     <div class="mt-8 pt-6 border-t text-center">
         <a href="http://localhost:6006" target="_blank" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors inline-block">
-            ⚔️ Enter the Storybook Realm
+            ⚔️ Enter the Storybook Area
         </a>
         <p class="mt-2 text-gray-600 text-sm italic">
             (Only for the bravest ones)

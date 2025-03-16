@@ -1,0 +1,44 @@
+{
+  "globalStyle": "appearance-none transition-all duration-200 font-sans text-gray-700",
+  "fieldsetClasses": "radio-group",
+  "groupContainerClasses": "flex space-x-4",
+  "radioContainerClasses": "flex items-center",
+  "baseClasses": "size-4 rounded-full",
+  "errorClasses": "text-red-500",
+  "variants": {
+    "default": "bg-white border border-gray-400 text-gray-900",
+    "hover": "bg-white border border-gray-600 text-gray-900",
+    "checked": "bg-gray-500 border border-gray-500 text-white",
+    "focus": "bg-white border-2 border-blue-500 text-gray-900 outline-none ring-2 ring-blue-300",
+    "disabled": "bg-gray-100 border border-gray-300 text-gray-400 cursor-not-allowed",
+    "disabledChecked": "bg-gray-300 border border-gray-400 text-gray-500 cursor-not-allowed"
+  },
+  "radios": [
+    {
+      "id": "radio1",
+      "value": "radio1"
+    },
+    {
+      "id": "radio2",
+      "value": "radio2"
+    },
+    {
+      "id": "radio3",
+      "value": "radio3"
+    },
+    {
+      "id": "radio4",
+      "value": "radio4"
+    },
+    {
+      "id": "radio5",
+      "value": "radio5",
+      "checked": true
+    },
+    {
+      "id": "radio6",
+      "value": "radio6",
+      "disabled": true
+    }
+  ]
+}
