@@ -1,7 +1,7 @@
 {#
-============================
-Summon HAT Components Wisely
-============================
+=========================
+         IMAGE           
+=========================
 #}
 
 {% macro renderImage(options) %}
@@ -22,13 +22,39 @@ Summon HAT Components Wisely
       <img 
         src="{{ imageData.src }}" 
         alt="{{ imageData.alt }}" 
-        class="{{ globalStyle }} {{ variantStyle }}"
+        class="{{ globalStyle }} {{ variantStyle }} {% if options.className %}{{ options.className }}{% endif %}"
         {% if options.loading %}loading="{{ options.loading }}"{% endif %}
         {% if options.width %}width="{{ options.width }}"{% endif %}
         {% if options.height %}height="{{ options.height }}"{% endif %}
       />
     {% else %}
       <span class="text-red-500">Image not found: {{ options.name }}</span>
+    {% endif %}
+  {% elseif options.group %}
+    {% set groupImages = [] %}
+    
+    {% for image in options.datas.images %}
+      {% if image.group == options.group %}
+        {% set groupImages = (groupImages.push(image), groupImages) %}
+      {% endif %}
+    {% endfor %}
+    
+    {% if groupImages.length > 0 %}
+      <div class="image-group {% if options.groupClass %}{{ options.groupClass }}{% endif %}">
+        {% for image in groupImages %}
+          {% set variantStyle = options.datas.variants[image.size] | default('') %}
+          <div class="image-container">
+            <img 
+              src="{{ image.src }}" 
+              alt="{{ image.alt }}" 
+              class="{{ options.datas.globalStyle }} {{ variantStyle }} {% if options.imageClass %}{{ options.imageClass }}{% endif %}"
+              {% if options.loading %}loading="{{ options.loading }}"{% endif %}
+            />
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <span class="text-red-500">No images found in group: {{ options.group }}</span>
     {% endif %}
   {% else %}
     {% set globalStyle = options.datas.globalStyle %}
@@ -37,13 +63,15 @@ Summon HAT Components Wisely
     <img 
       src="{{ options.src }}" 
       alt="{{ options.alt }}" 
-      class="{{ globalStyle }} {{ variantStyle }}"
+      class="{{ globalStyle }} {{ variantStyle }} {% if options.className %}{{ options.className }}{% endif %}"
       {% if options.loading %}loading="{{ options.loading }}"{% endif %}
       {% if options.width %}width="{{ options.width }}"{% endif %}
       {% if options.height %}height="{{ options.height }}"{% endif %}
     />
   {% endif %}
 {% endmacro %}
+
+
 
 {#
 ============================
@@ -64,7 +92,15 @@ Image Component Usage Guide
     }) }}
 {% endfor %}
 
-4. Direct image creation with custom attributes
+4. Render a group of images
+{{ renderImage({ 
+    group: "block-media-small", 
+    datas: atoms.images,
+    groupClass: "flex gap-2 flex-wrap",
+    imageClass: "m-1" 
+}) }}
+
+5. Direct image creation with custom attributes
 {{ renderImage({
     src: "/assets/images/custom.jpg", 
     alt: "Custom image", 
@@ -73,14 +109,15 @@ Image Component Usage Guide
     datas: atoms.images
 }) }}
 
-5. Adding a new image to images.json
+6. Adding a new image to images.json
 {
   "images": [
     {
       "name": "new_image_name",
       "src": "/path/to/image.jpg",
       "alt": "Descriptive alt text",
-      "size": "small|medium|large"
+      "size": "small|medium|large|avatar",
+      "group": "block-media|block-media-small"
     }
   ]
 }

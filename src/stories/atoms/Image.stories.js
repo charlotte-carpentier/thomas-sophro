@@ -21,13 +21,37 @@ const imageTemplate = `
         <img 
           src="{{ imageData.src }}" 
           alt="{{ imageData.alt }}" 
-          class="{{ globalStyle }} {{ variantStyle }}"
+          class="{{ globalStyle }} {{ variantStyle }} {% if options.className %}{{ options.className }}{% endif %}"
           {% if options.loading %}loading="{{ options.loading }}"{% endif %}
           {% if options.width %}width="{{ options.width }}"{% endif %}
           {% if options.height %}height="{{ options.height }}"{% endif %}
         />
       {% else %}
         <span class="text-red-500">Image not found: {{ options.name }}</span>
+      {% endif %}
+    {% elseif options.group %}
+      {% set groupImages = [] %}
+      
+      {% for image in datas.images %}
+        {% if image.group == options.group %}
+          {% set groupImages = (groupImages.push(image), groupImages) %}
+        {% endif %}
+      {% endfor %}
+      
+      {% if groupImages.length > 0 %}
+        <div class="image-group {% if options.groupClass %}{{ options.groupClass }}{% endif %}">
+          {% for image in groupImages %}
+            {% set variantStyle = datas.variants[image.size] | default('') %}
+            <img 
+              src="{{ image.src }}" 
+              alt="{{ image.alt }}" 
+              class="{{ datas.globalStyle }} {{ variantStyle }} {% if options.imageClass %}{{ options.imageClass }}{% endif %}"
+              {% if options.loading %}loading="{{ options.loading }}"{% endif %}
+            />
+          {% endfor %}
+        </div>
+      {% else %}
+        <span class="text-red-500">No images found in group: {{ options.group }}</span>
       {% endif %}
     {% else %}
       {% set globalStyle = datas.globalStyle %}
@@ -36,7 +60,7 @@ const imageTemplate = `
       <img 
         src="{{ options.src }}" 
         alt="{{ options.alt }}" 
-        class="{{ globalStyle }} {{ variantStyle }}"
+        class="{{ globalStyle }} {{ variantStyle }} {% if options.className %}{{ options.className }}{% endif %}"
         {% if options.loading %}loading="{{ options.loading }}"{% endif %}
         {% if options.width %}width="{{ options.width }}"{% endif %}
         {% if options.height %}height="{{ options.height }}"{% endif %}
@@ -54,7 +78,7 @@ export default {
   // Render function using the macro with Nunjucks
   render: (args) => {
     // For demo in Storybook, use project placeholder images if no src provided
-    if (!args.name && !args.src) {
+    if (!args.name && !args.src && !args.group) {
       const size = args.size || 'medium';
       args.src = `/assets/images/placeholder-${size}.png`;
     }
@@ -76,6 +100,22 @@ export default {
       control: 'select',
       options: [null, ...imagesData.images.map(image => image.name)],
       defaultValue: null
+    },
+    group: {
+      description: 'Group of images to render',
+      control: 'select',
+      options: [null, ...Object.keys(imagesData.groups || {})],
+      defaultValue: null
+    },
+    groupClass: {
+      description: 'CSS classes to apply to the group container',
+      control: 'text',
+      defaultValue: 'flex gap-2 flex-wrap'
+    },
+    imageClass: {
+      description: 'CSS classes to apply to each image in a group',
+      control: 'text',
+      defaultValue: ''
     },
     src: { 
       description: 'Source URL for the image (for custom images)',
@@ -112,6 +152,11 @@ export default {
       description: 'Explicit height attribute (optional)',
       control: 'text',
       defaultValue: null
+    },
+    className: {
+      description: 'Additional CSS classes',
+      control: 'text',
+      defaultValue: ''
     }
   }
 };
@@ -135,33 +180,31 @@ export const LargePlaceholder = {
   }
 };
 
-// Custom image examples with direct asset paths
-export const CustomSmallImage = {
+// Avatar examples
+export const AvatarImage = {
   args: {
-    src: '/assets/images/placeholder-small.png',
-    alt: 'Small custom placeholder image',
-    size: 'small',
-    loading: 'lazy'
+    name: "avatar_dark"
   }
 };
 
-export const CustomMediumImage = {
+// Group examples
+export const BlockMediaGroup = {
   args: {
-    src: '/assets/images/placeholder-medium.png',
-    alt: 'Medium custom placeholder image',
-    size: 'medium',
-    loading: 'lazy'
+    group: "block-media",
+    groupClass: "grid grid-cols-2 gap-4 md:grid-cols-3",
+    imageClass: ""
   }
 };
 
-export const CustomLargeImage = {
+export const BlockMediaSmallGroup = {
   args: {
-    src: '/assets/images/placeholder-large.png',
-    alt: 'Large custom placeholder image',
-    size: 'large',
-    loading: 'lazy'
+    group: "block-media-small",
+    groupClass: "grid grid-cols-3 gap-2 md:grid-cols-6",
+    imageClass: ""
   }
 };
+
+// Suppression des exemples personnalisés comme demandé
 
 // Usage guide
 export const Usage = () => {
@@ -193,9 +236,19 @@ export const Usage = () => {
     }) }}
 {% endfor %}</code></pre>
       </div>
+
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Render a group of images:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderImage({ 
+    group: "block-media-small", 
+    datas: atoms.images,
+    groupClass: "flex gap-2 flex-wrap",
+    imageClass: "m-1" 
+}) }}</code></pre>
+      </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Direct image creation with custom attributes:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Direct image creation with custom attributes:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderImage({
   src: "/assets/images/custom.jpg", 
   alt: "Custom image", 
@@ -206,27 +259,29 @@ export const Usage = () => {
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Adding a new image to images.json:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Adding a new image to images.json:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
   "images": [
     {
       "name": "new_image_name",
       "src": "/path/to/image.jpg",
       "alt": "Descriptive alt text",
-      "size": "small|medium|large"
+      "size": "small|medium|large|avatar",
+      "group": "block-media|block-media-small"
     }
   ]
 }</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Best practices for images:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">7. Best practices for images:</h3>
         <ul class="list-disc pl-6 space-y-2 text-gray-600">
           <li>Always provide meaningful <code>alt</code> text for accessibility</li>
           <li>Use <code>loading="lazy"</code> for images below the fold</li>
           <li>Consider adding <code>width</code> and <code>height</code> attributes to prevent layout shifts</li>
           <li>Choose the appropriate size variant for your layout context</li>
           <li>Use responsive sizes that adapt to different viewports</li>
+          <li>Group related images together with the <code>group</code> parameter</li>
         </ul>
       </div>
     </div>

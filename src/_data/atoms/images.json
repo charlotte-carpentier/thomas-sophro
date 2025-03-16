@@ -3,26 +3,87 @@
   "variants": {
     "small": "w-64 md:w-72 lg:w-80",
     "medium": "w-80 md:w-96 lg:w-[28rem]",
-    "large": "w-96 md:w-[28rem] lg:w-[32rem]"
+    "large": "w-96 md:w-[28rem] lg:w-[32rem]",
+    "avatar": "w-14 h-14 rounded-md object-cover"
+  },
+  "groups": {
+    "block-media": [
+      "placeholder_small",
+      "placeholder_medium",
+      "placeholder_large"
+    ],
+    "block-media-small": [
+      "avatar_dark",
+      "avatar_blue",
+      "avatar_green",
+      "avatar_orange",
+      "avatar_red",
+      "avatar_character"
+    ]
   },
   "images": [
     {
       "name": "placeholder_small",
       "src": "/assets/images/placeholder-small.png",
       "alt": "Small placeholder image",
-      "size": "small"
+      "size": "small",
+      "group": "block-media"
     },
     {
       "name": "placeholder_medium",
       "src": "/assets/images/placeholder-medium.png",
       "alt": "Medium placeholder image",
-      "size": "medium"
+      "size": "medium",
+      "group": "block-media"
     },
     {
       "name": "placeholder_large",
       "src": "/assets/images/placeholder-large.png",
       "alt": "Large placeholder image",
-      "size": "large"
+      "size": "large",
+      "group": "block-media"
+    },
+    {
+      "name": "avatar_dark",
+      "src": "/assets/images/avatar-dark.png",
+      "alt": "Dark avatar",
+      "size": "avatar",
+      "group": "block-media-small"
+    },
+    {
+      "name": "avatar_blue",
+      "src": "/assets/images/avatar-blue.png",
+      "alt": "Blue avatar",
+      "size": "avatar",
+      "group": "block-media-small"
+    },
+    {
+      "name": "avatar_green",
+      "src": "/assets/images/avatar-green.png",
+      "alt": "Green avatar",
+      "size": "avatar",
+      "group": "block-media-small"
+    },
+    {
+      "name": "avatar_orange",
+      "src": "/assets/images/avatar-orange.png",
+      "alt": "Orange avatar",
+      "size": "avatar",
+      "group": "block-media-small"
+    },
+    {
+      "name": "avatar_red",
+      "src": "/assets/images/avatar-red.png",
+      "alt": "Red avatar",
+      "size": "avatar",
+      "group": "block-media-small"
+    },
+    {
+      "name": "avatar_character",
+      "src": "/assets/images/avatar-character.png",
+      "alt": "Character avatar",
+      "size": "avatar",
+      "group": "block-media-small"
     }
   ]
 }
