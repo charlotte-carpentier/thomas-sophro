@@ -1,0 +1,60 @@
+<!-- ========================= -->
+<!--          SWITCH         -->
+<!-- ========================= -->
+
+{% macro renderSwitch(options) %}
+  {% set switchData = options.datas.switchs | selectattr('name', 'equalto', options.name) | first %}
+  {% set globalStyle = options.datas.globalStyle %}
+  {% set variantStyle = options.datas.variants[switchData.style] %}
+  
+  {% if switchData %}
+    <div 
+      class="{{ globalStyle }} {{ variantStyle }}"
+    >
+      {{ switchData.text }}
+    </div>
+  {% else %}
+    <span class="text-red-500">Switch not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+<!-- ============================ -->
+<!-- Summon HAT Components Wisely -->
+<!-- ============================ -->
+
+<!-- 1. Import the macro at the top of your page -->
+{# {% from "03-atoms/switch.njk" import renderSwitch %} #}
+
+<!-- 2. Call a specific switch by its name -->
+{# {{ renderSwitch({ 
+    name: "example_switch", 
+    datas: atoms.switchs 
+}) }} #}
+
+<!-- 3. Call multiple switchs from the data -->
+{# {% for switch in atoms.switchs.switchs %}
+    {{ renderSwitch({ 
+        name: switch.name, 
+        datas: atoms.switchs 
+    }) }}
+{% endfor %} #}
+
+<!-- 4. Direct switch creation -->
+{# {{ renderSwitch({
+    text: "Custom Switch", 
+    style: "primary"
+}) }} #}
+
+<!-- 5. Adding a new switch to switchs.json -->
+{# {
+  "switchs": [
+    {
+      "name": "new_switch_name",
+      "text": "Your Switch Text",
+      "style": "primary"
+    }
+  ]
+} #}
+
+<!-- May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨ -->

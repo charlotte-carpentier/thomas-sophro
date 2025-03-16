@@ -1,0 +1,154 @@
+{#
+=========================
+         TOGGLE          
+=========================
+#}
+
+{% macro renderToggle(options) %}
+  {% set globalStyle = options.datas.globalStyle | default('') %}
+  {% set fieldsetClasses = options.datas.fieldsetClasses | default('toggle-group') %}
+  {% set legendClasses = options.datas.legendClasses | default('font-medium text-gray-700 mb-3') %}
+  {% set groupContainerClasses = options.datas.groupContainerClasses | default('space-y-2') %}
+  
+  {% if options.group %}
+    <fieldset class="{{ fieldsetClasses }}">
+      {% if options.groupLabel %}
+        <legend class="{{ legendClasses }} {% if options.groupSrOnly %}sr-only{% endif %}">
+          {{ options.groupLabel }}
+        </legend>
+      {% endif %}
+      
+      <div class="{{ groupContainerClasses }}">
+        {% for toggle in options.datas.toggles %}
+          {{ renderSingleToggle(toggle, options.datas) }}
+        {% endfor %}
+      </div>
+    </fieldset>
+  {% else %}
+    {% set toggleData = null %}
+    
+    {% for toggle in options.datas.toggles %}
+      {% if toggle.id == options.id %}
+        {% set toggleData = toggle %}
+      {% endif %}
+    {% endfor %}
+    
+    {% if toggleData %}
+      {{ renderSingleToggle(toggleData, options.datas) }}
+    {% else %}
+      <span class="{{ options.datas.errorClasses | default('text-red-500') }}">Toggle not found: {{ options.id }}</span>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{% macro renderSingleToggle(toggle, datas) %}
+  {% set labelTextClasses = datas.labelTextClasses | default('ms-3 text-sm font-medium text-gray-900 dark:text-gray-300') %}
+  {% set descriptionClasses = datas.descriptionClasses | default('text-xs text-gray-500 dark:text-gray-400') %}
+  
+  {# Determine variant, default to 'default' if not specified #}
+  {% set variant = toggle.variant | default('default') %}
+  
+  {# Determine additional state classes based on toggle state #}
+  {% if toggle.disabled and toggle.checked %}
+    {% set variant = 'disabledChecked' %}
+  {% elseif toggle.disabled %}
+    {% set variant = 'disabled' %}
+  {% elseif toggle.checked %}
+    {% set variant = 'checked' %}
+  {% endif %}
+  
+  {# Retrieve specific classes for the selected variant #}
+  {% set toggleBaseClasses = datas.variants.container[variant].base %}
+  {% set toggleCheckedClasses = datas.variants.container[variant].checked %}
+  {% set toggleFocusClasses = datas.variants.container[variant].focus %}
+  
+  {# Retrieve thumb classes for the current variant #}
+  {% set thumbBaseClasses = datas.variants.thumb[variant].base | default('bg-white') %}
+  {% set thumbCheckedClasses = datas.variants.thumb[variant].checked | default('bg-white') %}
+  
+  <label class="inline-flex items-center cursor-pointer {% if toggle.disabled %}opacity-50 cursor-not-allowed{% endif %}">
+    <input 
+      type="checkbox" 
+      id="{{ toggle.id }}" 
+      name="{{ toggle.id }}"
+      value="{{ toggle.value }}"
+      class="sr-only peer"
+      {% if toggle.checked %}checked{% endif %}
+      {% if toggle.disabled %}disabled{% endif %}
+      {% if toggle.ariaLabel %}aria-label="{{ toggle.ariaLabel }}"{% endif %}
+    />
+    <div 
+      class="relative w-11 h-6 rounded-full transition-all duration-200 
+      {{ toggleBaseClasses }}
+      {% if toggle.checked %}{{ toggleCheckedClasses }}{% endif %}
+      peer-focus:outline-none peer-focus:ring-4 {{ toggleFocusClasses }}"
+    >
+      <div 
+        class="absolute top-1/2 -translate-y-1/2 rounded-full h-5 w-5 transition-all duration-200
+        {{ thumbBaseClasses }}
+        {% if toggle.checked %}
+          right-[2px] left-auto
+          {{ thumbCheckedClasses }}
+        {% else %}
+          left-[2px] right-auto
+        {% endif %}"
+      ></div>
+    </div>
+    
+    <div class="ml-3">
+      <span class="{{ labelTextClasses }}">
+        {{ toggle.label }}
+      </span>
+      
+      {% if toggle.description %}
+        <p class="{{ descriptionClasses }}">{{ toggle.description }}</p>
+      {% endif %}
+    </div>
+  </label>
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/toggle.njk" import renderToggle %}
+
+2. Render a single toggle by ID
+{{ renderToggle({ id: "option1", datas: atoms.toggles }) }}
+
+3. Render an entire toggle group
+{{ renderToggle({ 
+    group: true, 
+    groupLabel: "Game Settings",
+    groupSrOnly: false,
+    datas: atoms.toggles 
+}) }}
+
+4. Render a subset of toggles
+{% set gameSettings = [
+    { "id": "music", "label": "Background Music", "value": "music_on" },
+    { "id": "sound", "label": "Sound Effects", "value": "sound_on" }
+] %}
+{{ renderToggle({ 
+    group: true, 
+    groupLabel: "Audio Settings", 
+    checkboxes: gameSettings, 
+    datas: atoms.toggles
+}) }}
+
+5. Available options for each toggle:
+{
+  "id": "unique_id",            // Unique identifier
+  "label": "Toggle Label",      // Visible text
+  "value": "submission_value",  // Value for form submission
+  "checked": true,              // Pre-checked state (optional)
+  "disabled": false,            // Disabled state (optional)
+  "description": "Additional details" // (optional)
+  "ariaLabel": "Accessible label" // (optional)
+  "variant": "default"          // Visual variant (optional)
+}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

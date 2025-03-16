@@ -16,6 +16,7 @@ layout: '00-organisms-global/base.njk'
 {% from "03-atoms/box.njk" import renderBox %}
 {% from "03-atoms/radio-button.njk" import renderRadioButton %}
 {% from "03-atoms/radio.njk" import renderRadio %}
+{% from "03-atoms/toggle.njk" import renderToggle %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -124,6 +125,15 @@ layout: '00-organisms-global/base.njk'
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing radio component #}
              {{ renderRadio({ id: "radio1", datas: atoms.radios }) }}
+        </div>
+    </div>
+
+    {# Toggle Atom #}
+    <h3 class="text-xl font-semibold mb-4">Toggle</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing toggle component #}
+             {{ renderToggle({ id: "combat_difficulty", datas: atoms.toggles }) }}
         </div>
     </div>
 
