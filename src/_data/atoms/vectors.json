@@ -1,0 +1,22 @@
+{
+  "globalStyle": "inline-block",
+  "sizes": {
+    "large": "w-72 h-auto",
+    "medium": "w-48 h-auto",
+    "small": "w-24 h-auto"
+  },
+  "vectors": [
+    {
+      "name": "logo_full",
+      "src": "/assets/logos/logo-full.svg",
+      "alt": "Starter kit full logo",
+      "size": "medium"
+    },
+    {
+      "name": "logo_symbol",
+      "src": "/assets/logos/logo-symbol.svg",
+      "alt": "Starter kit symbol logo",
+      "size": "small"
+    }
+  ]
+}

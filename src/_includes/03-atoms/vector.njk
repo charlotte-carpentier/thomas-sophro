@@ -1,0 +1,83 @@
+{#
+=========================
+         VECTOR           
+=========================
+#}
+
+{% macro renderVector(options) %}
+  {% set vectorData = null %}
+  
+  {% if options.name %}
+    {% for vector in options.datas.vectors %}
+      {% if vector.name == options.name %}
+        {% set vectorData = vector %}
+      {% endif %}
+    {% endfor %}
+
+    {% set globalStyle = options.datas.globalStyle %}
+
+    {% if vectorData %}
+      {% set sizeStyle = options.datas.sizes[vectorData.size] | default('') %}
+      
+      <img 
+        src="{{ vectorData.src }}" 
+        alt="{{ vectorData.alt }}"
+        class="{{ globalStyle }} {{ sizeStyle }}"
+      />
+    {% else %}
+      <span class="text-red-500">Vector not found: {{ options.name }}</span>
+    {% endif %}
+  {% else %}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set sizeStyle = options.datas.sizes[options.size] | default('') %}
+    
+    <img 
+      src="{{ options.src }}" 
+      alt="{{ options.alt | default('Logo') }}"
+      class="{{ globalStyle }} {{ sizeStyle }}"
+    />
+  {% endif %}
+{% endmacro %}
+
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/vector.njk" import renderVector %}
+
+2. Call a specific vector by its name
+{{ renderVector({ name: "logo_full", datas: atoms.vectors }) }}
+
+3. Call multiple vectors from the data
+{% for vector in atoms.vectors.vectors %}
+    {{ renderVector({ 
+        name: vector.name, 
+        datas: atoms.vectors 
+    }) }}
+{% endfor %}
+
+4. Direct vector creation
+{{ renderVector({
+    src: "/assets/logos/custom-logo.svg", 
+    alt: "Custom Logo", 
+    size: "large"
+}) }}
+
+5. Adding a new vector to vectors.json
+{
+  "vectors": [
+    {
+      "name": "new_vector_name",
+      "src": "/assets/logos/your-logo.svg",
+      "alt": "Your Logo Description",
+      "size": "large"
+    }
+  ]
+}
+
+May your designs defy the sands of time. ⏳⚡
+#}
