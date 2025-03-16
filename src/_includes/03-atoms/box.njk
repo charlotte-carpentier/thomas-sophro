@@ -1,0 +1,97 @@
+{#
+=========================
+          BOX            
+=========================
+#}
+
+{% macro renderBox(options) %}
+  {% set globalStyle = options.datas.globalStyle | default('') %}
+  {% set fieldsetClasses = options.datas.fieldsetClasses | default('box-group') %}
+  {% set groupContainerClasses = options.datas.groupContainerClasses | default('space-y-2') %}
+  
+  {% if options.group %}
+    <fieldset class="{{ fieldsetClasses }}">
+      <div class="{{ groupContainerClasses }}">
+        {% for box in options.datas.boxes %}
+          {{ renderSingleBox(box, options.datas) }}
+        {% endfor %}
+      </div>
+    </fieldset>
+  {% else %}
+    {% set boxData = null %}
+    
+    {% for box in options.datas.boxes %}
+      {% if box.id == options.id %}
+        {% set boxData = box %}
+      {% endif %}
+    {% endfor %}
+    
+    {% if boxData %}
+      {{ renderSingleBox(boxData, options.datas) }}
+    {% else %}
+      <span class="{{ options.datas.errorClasses | default('text-red-500') }}">Box not found: {{ options.id }}</span>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{% macro renderSingleBox(box, datas) %}
+  {% set boxContainerClasses = datas.boxContainerClasses | default('flex items-center') %}
+  {% set baseClasses = datas.baseClasses | default('size-4 rounded-sm') %}
+  
+  {% set stateClasses = {
+    'default': datas.variants.default | default('border-gray-300'),
+    'hover': datas.variants.hover | default('border-gray-600'),
+    'checked': datas.variants.checked | default('bg-gray-500 border-gray-500 text-white'),
+    'focus': datas.variants.focus | default('border-blue-500 outline-none ring-2 ring-blue-300'),
+    'disabled': datas.variants.disabled | default('bg-gray-100 border-gray-300 cursor-not-allowed'),
+    'disabledChecked': datas.variants.disabledChecked | default('bg-gray-300 border-gray-300 cursor-not-allowed')
+  } %}
+  
+  {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
+  
+  <div class="{{ boxContainerClasses }}">
+    <input 
+      type="checkbox" 
+      id="{{ box.id }}" 
+      name="{{ box.id }}"
+      value="{{ box.value }}"
+      class="{{ inputClasses }}"
+      onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
+      onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'"
+      onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
+      onclick="this.checked ? this.className='{{ baseClasses }} {{ stateClasses.checked }}' : this.className='{{ baseClasses }} {{ stateClasses.default }}'"
+      {% if box.disabled %}
+        disabled 
+        class="{{ baseClasses }} {% if box.checked %}{{ stateClasses.disabledChecked }}{% else %}{{ stateClasses.disabled }}{% endif %}"
+      {% endif %}
+      {% if box.checked %}checked{% endif %}
+      {% if box.ariaLabel %}aria-label="{{ box.ariaLabel }}"{% endif %}
+    />
+  </div>
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/box.njk" import renderBox %}
+
+2. Render a single box by ID
+{{ renderBox({ id: "box1", datas: atoms.boxs }) }}
+
+3. Render an entire box group
+{{ renderBox({ group: true, datas: atoms.boxs }) }}
+
+4. Available options for each box:
+{
+  "id": "unique_id",            // Unique identifier 
+  "value": "submission_value",  // Value for form submission
+  "checked": true,              // Pre-checked state (optional)
+  "disabled": false,            // Disabled state (optional)
+  "ariaLabel": "Accessible label for screen readers" // (optional)
+}
+
+May your validation never fail. 🐉🔥
+#}

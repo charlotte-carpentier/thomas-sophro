@@ -341,7 +341,7 @@ export const Usage = () => {
         </ul>
       </div>
     </div>
-    <p class="mt-6 text-gray-600 italic">May your validation never fail and your UX be legendary. 🐉🔥</p>
+    <p class="mt-6 text-gray-600 italic">May your validation never fail. 🐉🔥</p>
   `;
   
   return usageGuide;
