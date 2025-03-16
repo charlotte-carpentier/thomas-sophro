@@ -1,0 +1,89 @@
+{#
+============================
+Summon HAT Components Wisely
+============================
+#}
+
+{% macro renderImage(options) %}
+  {% if options.name %}
+    {% set imageData = null %}
+    
+    {% for image in options.datas.images %}
+      {% if image.name == options.name %}
+        {% set imageData = image %}
+      {% endif %}
+    {% endfor %}
+
+    {% set globalStyle = options.datas.globalStyle %}
+
+    {% if imageData %}
+      {% set variantStyle = options.datas.variants[imageData.size] | default('') %}
+      
+      <img 
+        src="{{ imageData.src }}" 
+        alt="{{ imageData.alt }}" 
+        class="{{ globalStyle }} {{ variantStyle }}"
+        {% if options.loading %}loading="{{ options.loading }}"{% endif %}
+        {% if options.width %}width="{{ options.width }}"{% endif %}
+        {% if options.height %}height="{{ options.height }}"{% endif %}
+      />
+    {% else %}
+      <span class="text-red-500">Image not found: {{ options.name }}</span>
+    {% endif %}
+  {% else %}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set variantStyle = options.datas.variants[options.size] | default('') %}
+    
+    <img 
+      src="{{ options.src }}" 
+      alt="{{ options.alt }}" 
+      class="{{ globalStyle }} {{ variantStyle }}"
+      {% if options.loading %}loading="{{ options.loading }}"{% endif %}
+      {% if options.width %}width="{{ options.width }}"{% endif %}
+      {% if options.height %}height="{{ options.height }}"{% endif %}
+    />
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Image Component Usage Guide
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/image.njk" import renderImage %}
+
+2. Call a specific image by its name
+{{ renderImage({ name: "placeholder_medium", datas: atoms.images }) }}
+
+3. Render multiple images from the data
+{% for image in atoms.images.images %}
+    {{ renderImage({ 
+        name: image.name, 
+        datas: atoms.images 
+    }) }}
+{% endfor %}
+
+4. Direct image creation with custom attributes
+{{ renderImage({
+    src: "/assets/images/custom.jpg", 
+    alt: "Custom image", 
+    size: "medium",
+    loading: "lazy",
+    datas: atoms.images
+}) }}
+
+5. Adding a new image to images.json
+{
+  "images": [
+    {
+      "name": "new_image_name",
+      "src": "/path/to/image.jpg",
+      "alt": "Descriptive alt text",
+      "size": "small|medium|large"
+    }
+  ]
+}
+
+A hero engraves alt text runes so the sages may perceive the unseen. 🔮📖
+#}

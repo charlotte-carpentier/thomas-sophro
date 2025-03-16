@@ -1,0 +1,28 @@
+{
+  "globalStyle": "max-w-full h-auto",
+  "variants": {
+    "small": "w-64 md:w-72 lg:w-80",
+    "medium": "w-80 md:w-96 lg:w-[28rem]",
+    "large": "w-96 md:w-[28rem] lg:w-[32rem]"
+  },
+  "images": [
+    {
+      "name": "placeholder_small",
+      "src": "/assets/images/placeholder-small.png",
+      "alt": "Small placeholder image",
+      "size": "small"
+    },
+    {
+      "name": "placeholder_medium",
+      "src": "/assets/images/placeholder-medium.png",
+      "alt": "Medium placeholder image",
+      "size": "medium"
+    },
+    {
+      "name": "placeholder_large",
+      "src": "/assets/images/placeholder-large.png",
+      "alt": "Large placeholder image",
+      "size": "large"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 /** @type { import('@storybook/html-webpack5').StorybookConfig } */
-import path from 'path';
-import nunjucks from 'nunjucks';
+const path = require('path');
+const nunjucks = require('nunjucks');
 
 // Configure Nunjucks environment
 const njkEnv = new nunjucks.Environment(
@@ -29,6 +29,9 @@ const config = {
       }
     }
   },
+  
+  // Add public folder for static assets
+  staticDirs: ['../public'],
 
   webpackFinal: async (config) => {
     // Existing rule for .njk files
@@ -75,4 +78,4 @@ const config = {
   }
 };
 
-export default config;
+module.exports = config;
