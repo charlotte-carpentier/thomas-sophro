@@ -22,6 +22,9 @@ layout: '00-organisms-global/base.njk'
 {% from "03-atoms/vector.njk" import renderVector %}
 {% from "03-atoms/icon.njk" import renderIcon %}
 {% from "03-atoms/button.njk" import renderButton %}
+{% from "03-atoms/heading.njk" import renderHeading %}
+
+{# Import required molecules macros #}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -184,6 +187,15 @@ layout: '00-organisms-global/base.njk'
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing button component #}
             {{ renderButton({ name: "submit_quest", datas: atoms.buttons }) }}
+        </div>
+    </div>
+
+    {# Heading Atom #}
+    <h3 class="text-xl font-semibold mb-4">Heading</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing heading component #}
+            {{ renderHeading({ name: "section_title", datas: atoms.headings }) }}
         </div>
     </div>
 

@@ -2,74 +2,185 @@
 import nunjucks from 'nunjucks';
 import headingsData from '../../_data/atoms/headings.json';
 
+// Template based on our heading.njk macro
+const headingTemplate = `
+  {% macro renderHeading(options) %}
+    {% set headingData = null %}
+    
+    {% if options.name %}
+      {% for heading in options.datas.headings %}
+        {% if heading.name == options.name %}
+          {% set headingData = heading %}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% set headingData = {
+        "level": options.level | default(2),
+        "text": options.text | default("Heading"),
+        "style": options.style | default("default")
+      } %}
+    {% endif %}
+
+    {% set globalStyle = options.datas.globalStyle | default("") %}
+    
+    {% if headingData %}
+      {% set level = headingData.level | default(2) %}
+      {% set variantStyle = options.datas.variants[headingData.style] | default('') %}
+      {% set sizeStyle = options.datas.sizeStyles["h" + level] | default('') %}
+      {% set iconStyle = options.datas.iconStyles.default | default('') %}
+      
+      {% if level == 1 %}
+        <h1 class="{{ globalStyle }} {{ sizeStyle }} {{ variantStyle }}">{% if options.icon %}<span class="{{ iconStyle }}">{{ options.icon }}</span>{% endif %}{{ headingData.text }}</h1>
+      {% elif level == 2 %}
+        <h2 class="{{ globalStyle }} {{ sizeStyle }} {{ variantStyle }}">{% if options.icon %}<span class="{{ iconStyle }}">{{ options.icon }}</span>{% endif %}{{ headingData.text }}</h2>
+      {% elif level == 3 %}
+        <h3 class="{{ globalStyle }} {{ sizeStyle }} {{ variantStyle }}">{% if options.icon %}<span class="{{ iconStyle }}">{{ options.icon }}</span>{% endif %}{{ headingData.text }}</h3>
+      {% elif level == 4 %}
+        <h4 class="{{ globalStyle }} {{ sizeStyle }} {{ variantStyle }}">{% if options.icon %}<span class="{{ iconStyle }}">{{ options.icon }}</span>{% endif %}{{ headingData.text }}</h4>
+      {% elif level == 5 %}
+        <h5 class="{{ globalStyle }} {{ sizeStyle }} {{ variantStyle }}">{% if options.icon %}<span class="{{ iconStyle }}">{{ options.icon }}</span>{% endif %}{{ headingData.text }}</h5>
+      {% elif level == 6 %}
+        <h6 class="{{ globalStyle }} {{ sizeStyle }} {{ variantStyle }}">{% if options.icon %}<span class="{{ iconStyle }}">{{ options.icon }}</span>{% endif %}{{ headingData.text }}</h6>
+      {% endif %}
+    {% else %}
+      <span class="text-red-500">Heading not found: {{ options.name }}</span>
+    {% endif %}
+  {% endmacro %}
+  
+  {{ renderHeading(options) }}
+`;
+
 export default {
   title: 'Atoms/Heading',
   tags: ['autodocs'],
   
-  // Render function
+  // Render function using the macro with Nunjucks
   render: (args) => {
-    const globalStyle = headingsData.globalStyle;
-    const variantStyle = headingsData.variants[args.style];
+    // Create context for Nunjucks template
+    const context = {
+      options: {
+        ...args,
+        datas: headingsData
+      }
+    };
     
-    const headingTemplate = `<div class="${globalStyle} ${variantStyle}">${args.text}</div>`;
-    return headingTemplate;
+    // Render using Nunjucks with our template and context
+    return nunjucks.renderString(headingTemplate, context);
   },
   
-  // Argument types for storybook controls
+  // Argument types for Storybook controls
   argTypes: {
+    name: { 
+      description: 'Name of the predefined heading',
+      control: 'select',
+      options: ['', ...headingsData.headings.map(h => h.name)],
+      defaultValue: ''
+    },
+    level: { 
+      description: 'Heading level (h1-h6)',
+      control: 'select',
+      options: [1, 2, 3, 4, 5, 6],
+      defaultValue: 2
+    },
     text: { 
-      description: 'Text displayed for the heading',
+      description: 'Heading text',
       control: 'text',
-      defaultValue: 'Heading' 
+      defaultValue: 'Custom Heading'
     },
     style: { 
       description: 'Visual style of the heading',
-      control: { 
-        type: 'select', 
-        options: Object.keys(headingsData.variants)
-      },
+      control: 'select',
+      options: Object.keys(headingsData.variants),
       defaultValue: 'default'
+    },
+    icon: { 
+      description: 'Optional icon to display before heading text',
+      control: 'text',
+      defaultValue: ''
     }
   }
 };
 
-// Using examples from headings.json
-export const Example1 = {
+// Predefined headings from data
+export const PageTitle = {
   args: {
-    text: headingsData.headings[0].text,
-    style: headingsData.headings[0].style
+    name: "page_title"
   }
 };
 
-export const Example2 = {
+export const SectionTitle = {
   args: {
-    text: headingsData.headings[1].text,
-    style: headingsData.headings[1].style
+    name: "section_title"
   }
 };
 
-export const Default = {
+export const SubsectionTitle = {
   args: {
-    text: 'Default Heading',
-    style: 'default'
+    name: "subsection_title"
   }
 };
 
-export const Primary = {
+export const ComponentTitle = {
   args: {
-    text: 'Primary Heading',
+    name: "component_title"
+  }
+};
+
+export const MiniTitle = {
+  args: {
+    name: "mini_title"
+  }
+};
+
+export const MicroTitle = {
+  args: {
+    name: "micro_title"
+  }
+};
+
+// Custom headings with different styles
+export const CustomH1 = {
+  args: {
+    level: 1,
+    text: 'Custom H1 Heading',
+    style: 'hero'
+  }
+};
+
+export const PrimaryH2 = {
+  args: {
+    level: 2,
+    text: 'Primary H2 Heading',
     style: 'primary'
   }
 };
 
-export const Secondary = {
+export const SecondaryH3 = {
   args: {
-    text: 'Secondary Heading',
+    level: 3,
+    text: 'Secondary H3 Heading',
     style: 'secondary'
   }
 };
 
-// Usage guide based on the new macro
+export const AccentH4 = {
+  args: {
+    level: 4,
+    text: 'Accent H4 Heading',
+    style: 'accent'
+  }
+};
+
+export const HeadingWithIcon = {
+  args: {
+    level: 2,
+    text: 'Heading with Icon',
+    style: 'primary',
+    icon: '★'
+  }
+};
+
+// Usage guide
 export const Usage = () => {
   const usageGuide = document.createElement('div');
   usageGuide.className = 'bg-gray-50 p-6 rounded-lg max-w-4xl mx-auto';
@@ -83,15 +194,36 @@ export const Usage = () => {
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Call a specific heading by name:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Use a predefined heading by name:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderHeading({ 
-  name: "example_heading1", 
+  name: "page_title",
   datas: atoms.headings 
 }) }}</code></pre>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Loop through all headings:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Create a custom heading:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderHeading({
+  level: 2,
+  text: "Custom Heading Text",
+  style: "primary",
+  datas: atoms.headings 
+}) }}</code></pre>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Add an icon to a heading:</h3>
+        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderHeading({
+  level: 3,
+  text: "Heading with Icon",
+  style: "secondary",
+  icon: "★",
+  datas: atoms.headings 
+}) }}</code></pre>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Loop through multiple headings from data:</h3>
         <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{% for heading in atoms.headings.headings %}
   {{ renderHeading({ 
     name: heading.name, 
@@ -101,35 +233,24 @@ export const Usage = () => {
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">4. Use a custom heading directly:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{{ renderHeading({
-  text: 'Custom Heading', 
-  style: 'primary'
-}) }}</code></pre>
-      </div>
-      
-      <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">5. Available styles:</h3>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Available styles:</h3>
         <ul class="list-disc pl-6 space-y-2 text-gray-600">
-          ${Object.entries(headingsData.variants).map(([style, className]) => `
-            <li><code>${style}</code>: ${className}</li>
+          ${Object.keys(headingsData.variants).map(style => `
+            <li><code>${style}</code>: ${headingsData.variants[style]}</li>
           `).join('')}
         </ul>
       </div>
       
       <div>
-        <h3 class="text-xl font-semibold text-gray-700 mb-3">6. Add a new heading:</h3>
-        <pre class="bg-gray-100 p-3 rounded-md overflow-x-auto"><code class="text-sm text-gray-900">{
-  "headings": [
-    {
-      "name": "new_heading_name",
-      "text": "New Heading Text",
-      "style": "primary"
-    }
-  ]
-}</code></pre>
+        <h3 class="text-xl font-semibold text-gray-700 mb-3">7. Heading sizes based on level:</h3>
+        <ul class="list-disc pl-6 space-y-2 text-gray-600">
+          ${Object.keys(headingsData.sizeStyles).map(size => `
+            <li><code>${size}</code>: ${headingsData.sizeStyles[size]}</li>
+          `).join('')}
+        </ul>
       </div>
     </div>
+    <p class="mt-6 text-gray-600 italic">Don't forget to pass the configuration data via the atoms.headings object!</p>
   `;
   
   return usageGuide;
@@ -142,4 +263,4 @@ Usage.parameters = {
       code: null
     }
   }
-};
+}

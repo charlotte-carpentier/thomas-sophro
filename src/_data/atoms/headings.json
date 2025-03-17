@@ -1,20 +1,59 @@
 {
-  "globalStyle": "typography-label-l heading",
+  "globalStyle": "font-serif font-bold mb-4 leading-tight",
+  "sizeStyles": {
+    "h1": "text-4xl md:text-5xl",
+    "h2": "text-3xl md:text-4xl",
+    "h3": "text-2xl md:text-3xl",
+    "h4": "text-xl md:text-2xl",
+    "h5": "text-lg md:text-xl",
+    "h6": "text-base md:text-lg"
+  },
   "variants": {
-    "default": "text-gray-800 hover:text-gray-600",
-    "primary": "text-blue-600 hover:text-blue-800 font-bold",
-    "secondary": "text-gray-500 hover:text-gray-700"
+    "default": "text-gray-800",
+    "primary": "text-blue-700",
+    "secondary": "text-gray-600",
+    "accent": "text-purple-600",
+    "hero": "text-gray-900 tracking-tight"
+  },
+  "iconStyles": {
+    "default": "text-purple-500 inline-flex items-center mr-2"
   },
   "headings": [
     {
-      "name": "example_heading1",
-      "text": "Example Heading 1",
-      "style": "primary"
+      "name": "page_title",
+      "level": 1,
+      "text": "Heading",
+      "style": "hero"
     },
     {
-      "name": "example_heading2",
-      "text": "Example Heading 2",
-      "style": "secondary"
+      "name": "section_title",
+      "level": 2,
+      "text": "Heading",
+      "style": "default"
+    },
+    {
+      "name": "subsection_title",
+      "level": 3,
+      "text": "Heading",
+      "style": "default"
+    },
+    {
+      "name": "component_title",
+      "level": 4,
+      "text": "Heading",
+      "style": "default"
+    },
+    {
+      "name": "mini_title",
+      "level": 5,
+      "text": "Heading",
+      "style": "default"
+    },
+    {
+      "name": "micro_title",
+      "level": 6,
+      "text": "Heading",
+      "style": "default"
     }
   ]
 }
