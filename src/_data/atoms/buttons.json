@@ -1,0 +1,101 @@
+{
+  "globalStyle": "btn-base rounded-md",
+  "sizes": {
+    "button": "px-4 py-2 text-base",
+    "button-small": "px-3 py-1 text-sm"
+  },
+  "variants": {
+    "primary": {
+      "default": "bg-gray-500 text-white",
+      "hover": "bg-gray-600 text-white",
+      "focus": "bg-gray-400 text-white ring-2 ring-blue-500",
+      "active": "bg-gray-700 text-white",
+      "disabled": "bg-gray-300 text-white"
+    },
+    "secondary": {
+      "default": "bg-white text-gray-500 border border-gray-500",
+      "hover": "bg-white text-gray-600 border border-gray-600",
+      "focus": "bg-white text-gray-500 ring-2 ring-blue-500",
+      "active": "bg-gray-500 text-white",
+      "disabled": "bg-white text-gray-500 border border-gray-500"
+    },
+    "secondary-small": {
+      "default": "bg-white text-gray-500 border border-gray-500",
+      "hover": "bg-white text-gray-600",
+      "focus": "bg-white text-gray-500 ring-2 ring-blue-500",
+      "active": "bg-gray-500 text-white",
+      "disabled": "bg-white text-gray-500 border border-gray-500"
+    },
+    "fixed": {
+      "default": "bg-white text-gray-500 border border-gray-500",
+      "hover": "bg-white text-gray-500 border border-gray-500",
+      "focus": "bg-white text-gray-500 ring-1 ring-blue-500",
+      "active": "bg-gray-500 text-white",
+      "disabled": "bg-white text-gray-500 border border-gray-500"
+    },
+    "icon": {
+      "default": "bg-white text-gray-500 border border-gray-500",
+      "hover": "bg-white text-gray-500 border border-gray-500",
+      "focus": "bg-white text-gray-500 ring-1 ring-blue-500",
+      "active": "bg-gray-500 text-white",
+      "disabled": "bg-white text-gray-500 border border-gray-500"
+    },
+    "ghost": {
+      "default": "bg-white text-gray-500 border border-gray-500",
+      "hover": "bg-white text-gray-500 border-gray-500",
+      "focus": "bg-white text-gray-500 ring-1 ring-blue-500",
+      "active": "bg-gray-500 text-white",
+      "disabled": "bg-white text-gray-500 border border-gray-500"
+    }
+  },
+  "states": {
+    "current": "text-black"
+  },
+"buttons": [
+  {
+    "name": "submit_quest",
+    "text": "Accept the Quest",
+    "size": "button",
+    "style": "primary",
+    "iconBefore": "/assets/icons/icon-light.svg",
+    "iconAfter": "/assets/icons/icon-light.svg"
+  },
+  {
+    "name": "flee_battle",
+    "text": "Flee like a Coward",
+    "size": "button",
+    "style": "secondary",
+    "iconBefore": "/assets/icons/icon-light.svg",
+    "iconAfter": "/assets/icons/icon-light.svg"
+  },
+  {
+    "name": "inventory",
+    "text": "Inventory",
+    "size": "button-small",
+    "style": "icon",
+    "iconBefore": "/assets/icons/icon-light.svg"
+  },
+  {
+    "name": "quest_details",
+    "text": "Quest Details",
+    "size": "button",
+    "style": "secondary-small",
+    "iconBefore": "/assets/icons/icon-light.svg",
+    "iconAfter": "/assets/icons/icon-light.svg"
+  },
+  {
+    "name": "quantity_button",
+    "number": "42",
+    "size": "button-small",
+    "style": "fixed"
+  },
+  {
+    "name": "ghost_button",
+    "text": "Clear Filters",
+    "size": "button",
+    "style": "ghost",
+    "iconBefore": "/assets/icons/icon-light.svg",
+    "iconAfter": "/assets/icons/icon-light.svg"
+  }
+]
+}

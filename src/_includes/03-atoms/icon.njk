@@ -5,54 +5,31 @@
 #}
 
 {% macro renderIcon(options) %}
+  {# Find the icon in the data #}
   {% set iconData = null %}
-  
-  {% if options.name %}
-    {# Look for the icon in the data #}
-    {% for icon in options.datas.icons %}
-      {% if icon.name == options.name %}
-        {% set iconData = icon %}
-      {% endif %}
-    {% endfor %}
-    
-    {% if iconData %}
-      {# Get size dimensions #}
-      {% set size = options.size | default(iconData.defaultSize) %}
-      {% set dimensions = options.datas.sizes[size] | default(options.datas.sizes.md) %}
-      {% set width = dimensions.split('x')[0] %}
-      {% set height = dimensions.split('x')[1] %}
-      
-      {# Get variant style #}
-      {% set variantStyle = options.datas.variants[options.variant] | default('') %}
-      
-      {# Render SVG icon with appropriate classes and dimensions #}
-      <img 
-        src="{{ iconData.path }}" 
-        alt="{{ iconData.alt }}" 
-        width="{{ width }}" 
-        height="{{ height }}" 
-        class="{{ options.datas.globalClass }} {{ variantStyle }} {{ options.class | default('') }}"
-      >
-    {% else %}
-      <span class="text-red-500">Icon not found: {{ options.name }}</span>
+  {% for icon in options.datas.icons %}
+    {% if icon.name == options.name %}
+      {% set iconData = icon %}
     {% endif %}
-  {% else %}
-    {# Direct path usage #}
-    {% set size = options.size | default('md') %}
+  {% endfor %}
+
+  {% if iconData %}
+    {# Get size dimensions #}
+    {% set size = options.size | default(iconData.defaultSize) %}
     {% set dimensions = options.datas.sizes[size] | default(options.datas.sizes.md) %}
     {% set width = dimensions.split('x')[0] %}
     {% set height = dimensions.split('x')[1] %}
-    
-    {# Get variant style #}
-    {% set variantStyle = options.datas.variants[options.variant] | default('') %}
-    
-    <img 
-      src="{{ options.path }}" 
-      alt="{{ options.alt | default('Icon') }}" 
-      width="{{ width }}" 
-      height="{{ height }}" 
-      class="{{ options.datas.globalClass }} {{ variantStyle }} {{ options.class | default('') }}"
+
+    {# Render icon with appropriate classes #}
+    <img
+      src="{{ iconData.path }}"
+      alt="{{ iconData.alt }}"
+      width="{{ width }}"
+      height="{{ height }}"
+      class="{{ options.datas.globalClass }} {{ options.class | default('') }}"
     >
+  {% else %}
+    <span class="text-red-500">Icon not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
 
@@ -68,7 +45,6 @@ Summon Icon Components Wisely
 {{ renderIcon({ 
     name: "brand", 
     size: "lg",
-    variant: "default",
     datas: atoms.icons 
 }) }}
 
@@ -86,7 +62,6 @@ Summon Icon Components Wisely
     path: "/assets/icons/custom-icon.svg", 
     alt: "Custom Icon",
     size: "md",
-    variant: "primary",
     datas: atoms.icons
 }) }}
 

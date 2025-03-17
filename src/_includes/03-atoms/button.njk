@@ -1,0 +1,192 @@
+{# 
+========================
+         BUTTON           
+========================
+Flexible button component with variant and state support
+#}
+
+{% macro renderButton(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No button configuration provided</span>
+  {% else %}
+    {# Retrieve button configuration #}
+    {% set buttonsConfig = option.datas %}
+    {% set buttonName = option.name %}
+    
+    {# Find the specific button by name #}
+    {% set buttonData = null %}
+    {% for button in buttonsConfig.buttons %}
+      {% if button.name == buttonName %}
+        {% set buttonData = button %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if button not found #}
+    {% if not buttonData %}
+      <span class="text-red-500">Button not found: {{ buttonName }}</span>
+    {% else %}
+      {# Determine variant configuration #}
+      {% set variant = option.style | default(buttonData.style) %}
+      {% set variantConfig = buttonsConfig.variants[variant] %}
+      
+      {# Determine all classes #}
+      {% set globalClasses = buttonsConfig.globalStyle %}
+      {% set sizeClasses = buttonsConfig.sizes[buttonData.size | default('button')] %}
+      
+      {# Set base classes and state classes #}
+      {% set baseClasses = globalClasses ~ ' ' ~ sizeClasses %}
+      {% set stateClasses = {
+        'default': variantConfig.default,
+        'hover': variantConfig.hover,
+        'focus': variantConfig.focus,
+        'active': variantConfig.active,
+        'disabled': variantConfig.disabled
+      } %}
+      
+      {# Combine all default classes for initial state #}
+      {% set combinedClasses = baseClasses ~ ' ' ~ stateClasses.default %}
+      
+      {# Render the button #}
+      <button 
+        type="{{ option.type | default('button') }}"
+        class="{{ combinedClasses }} flex items-center justify-center"
+        onfocus="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center'; this.setAttribute('data-focused', 'true'); }" 
+        onblur="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.default }} flex items-center justify-center'; this.removeAttribute('data-focused'); }"
+        onmouseover="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.hover }} flex items-center justify-center'; }" 
+        onmouseout="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.default }} flex items-center justify-center'; }" 
+        onmousedown="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.active }} flex items-center justify-center'; }" 
+        onmouseup="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.hover }} flex items-center justify-center'; }"
+        {% if option.disabled or buttonData.disabled %}
+          disabled 
+          class="{{ baseClasses }} {{ stateClasses.disabled }} flex items-center justify-center"
+        {% endif %}
+      >
+        {% if variant == 'icon' %}
+          {# Icon-only button #}
+          {% if buttonData.iconBefore %}
+            {% if buttonData.iconBefore | endsWith('.svg') %}
+              <span class="inline-flex items-center justify-center w-5 h-5">
+                {% svgContents buttonData.iconBefore %}
+              </span>
+            {% else %}
+              <img 
+                src="{{ buttonData.iconBefore }}" 
+                alt="{{ option.text | default(buttonData.text) }}" 
+                class="w-5 h-5"
+              />
+            {% endif %}
+          {% elif buttonData.icon %}
+            {% if buttonData.icon | endsWith('.svg') %}
+              <span class="inline-flex items-center justify-center w-5 h-5">
+                {% svgContents buttonData.icon %}
+              </span>
+            {% else %}
+              <img 
+                src="{{ buttonData.icon }}" 
+                alt="{{ option.text | default(buttonData.text) }}" 
+                class="w-5 h-5"
+              />
+            {% endif %}
+          {% endif %}
+        {% elif variant == 'fixed' %}
+          {# Fixed button - display only number #}
+          <span>{{ option.number | default(buttonData.number) }}</span>
+        {% else %}
+          {# Standard button with optional icons + text #}
+          
+          {# Before icon #}
+          {% if buttonData.iconBefore %}
+            {% if buttonData.iconBefore | endsWith('.svg') %}
+              <span class="inline-flex items-center justify-center mr-2 w-4 h-4">
+                {% svgContents buttonData.iconBefore %}
+              </span>
+            {% else %}
+              <img 
+                src="{{ buttonData.iconBefore }}" 
+                alt="Icon" 
+                class="mr-2 w-4 h-4"
+              />
+            {% endif %}
+          {% elif buttonData.icon %}
+            {% if buttonData.icon | endsWith('.svg') %}
+              <span class="inline-flex items-center justify-center mr-2 w-4 h-4">
+                {% svgContents buttonData.icon %}
+              </span>
+            {% else %}
+              <img 
+                src="{{ buttonData.icon }}" 
+                alt="Icon" 
+                class="mr-2 w-4 h-4"
+              />
+            {% endif %}
+          {% endif %}
+          
+          {# Button text with override capability #}
+          <span>{{ option.text | default(buttonData.text) }}</span>
+          
+          {# After icon #}
+          {% if buttonData.iconAfter %}
+            {% if buttonData.iconAfter | endsWith('.svg') %}
+              <span class="inline-flex items-center justify-center ml-2 w-4 h-4">
+                {% svgContents buttonData.iconAfter %}
+              </span>
+            {% else %}
+              <img 
+                src="{{ buttonData.iconAfter }}" 
+                alt="Icon" 
+                class="ml-2 w-4 h-4"
+              />
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      </button>
+      
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# 
+============================
+Summon HAT Button Wisely
+============================
+
+Usage examples:
+
+1. Use predefined button from buttons.json
+{{ renderButton({ 
+    name: "submit_quest",
+    datas: atoms.buttons 
+}) }}
+
+2. Override button text
+{{ renderButton({ 
+    name: "submit_quest", 
+    text: "Custom Button Text",
+    datas: atoms.buttons 
+}) }}
+
+3. Change button style 
+{{ renderButton({
+    name: "submit_quest", 
+    style: "secondary",
+    datas: atoms.buttons 
+}) }}
+
+4. Disable a button
+{{ renderButton({
+    name: "submit_quest", 
+    disabled: true,
+    datas: atoms.buttons 
+}) }}
+
+5. Using SVG icons that inherit button text color
+   - Store your SVG files in a location like `/assets/icons/`
+   - In your SVG files, remove any hardcoded fill or stroke attributes
+   - Add `fill="currentColor"` to your SVG elements
+   - Reference icons in buttons.json like:
+     "iconBefore": "/assets/icons/arrow-left.svg",
+     "iconAfter": "/assets/icons/arrow-right.svg"
+
+May your buttons never miss their saving throw! 🎲🎯
+#}

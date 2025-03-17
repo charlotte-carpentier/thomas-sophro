@@ -1,0 +1,20 @@
+{
+  "globalStyle": "typography-label-l heading",
+  "variants": {
+    "default": "text-gray-800 hover:text-gray-600",
+    "primary": "text-blue-600 hover:text-blue-800 font-bold",
+    "secondary": "text-gray-500 hover:text-gray-700"
+  },
+  "headings": [
+    {
+      "name": "example_heading1",
+      "text": "Example Heading 1",
+      "style": "primary"
+    },
+    {
+      "name": "example_heading2",
+      "text": "Example Heading 2",
+      "style": "secondary"
+    }
+  ]
+}

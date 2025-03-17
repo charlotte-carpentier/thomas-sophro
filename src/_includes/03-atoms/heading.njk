@@ -1,0 +1,60 @@
+<!-- ========================= -->
+<!--          HEADING        -->
+<!-- ========================= -->
+
+{% macro renderHeading(options) %}
+  {% set headingData = options.datas.headings | selectattr('name', 'equalto', options.name) | first %}
+  {% set globalStyle = options.datas.globalStyle %}
+  {% set variantStyle = options.datas.variants[headingData.style] %}
+  
+  {% if headingData %}
+    <div 
+      class="{{ globalStyle }} {{ variantStyle }}"
+    >
+      {{ headingData.text }}
+    </div>
+  {% else %}
+    <span class="text-red-500">Heading not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+<!-- ============================ -->
+<!-- Summon HAT Components Wisely -->
+<!-- ============================ -->
+
+<!-- 1. Import the macro at the top of your page -->
+{# {% from "03-atoms/heading.njk" import renderHeading %} #}
+
+<!-- 2. Call a specific heading by its name -->
+{# {{ renderHeading({ 
+    name: "example_heading", 
+    datas: atoms.headings 
+}) }} #}
+
+<!-- 3. Call multiple headings from the data -->
+{# {% for heading in atoms.headings.headings %}
+    {{ renderHeading({ 
+        name: heading.name, 
+        datas: atoms.headings 
+    }) }}
+{% endfor %} #}
+
+<!-- 4. Direct heading creation -->
+{# {{ renderHeading({
+    text: "Custom Heading", 
+    style: "primary"
+}) }} #}
+
+<!-- 5. Adding a new heading to headings.json -->
+{# {
+  "headings": [
+    {
+      "name": "new_heading_name",
+      "text": "Your Heading Text",
+      "style": "primary"
+    }
+  ]
+} #}
+
+<!-- May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨ -->
