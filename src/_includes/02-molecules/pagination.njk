@@ -1,0 +1,205 @@
+{#
+=========================
+       PAGINATION         
+=========================
+#}
+
+{% macro renderPagination(options) %}
+  {# Check if required data is provided, show error if not #}
+  {% if not options or not options.datas or (not options.datas.pager and not options.datas.navigationPager) %}
+    <span class="text-red-500">Error: No pagination data provided</span>
+  {% else %}
+    {# Initialize pagination data based on provided structure #}
+    {% if options.datas.navigationPager %}
+      {% set paginationData = options.datas.navigationPager %}
+      {% set children = paginationData.children | default([]) %}
+    {% else %}
+      {% set paginationData = options.datas.pager %}
+    {% endif %}
+
+    {# Select specific paginator by name if provided #}
+    {% if options.name %}
+      {% if options.datas.pager.name == options.name %}
+        {% set paginationData = options.datas.pager %}
+      {% elif options.datas.navigationPager and options.datas.navigationPager.name == options.name %}
+        {% set paginationData = options.datas.navigationPager %}
+        {% set children = paginationData.children | default([]) %}
+      {% endif %}
+    {% endif %}
+
+    {# Get global style from data or use default empty string #}
+    {% set globalStyle = options.datas.globalStyle | default('') %}
+
+    <div class="pagination-container flex items-center">
+      {# Items per page selector - Only rendered if itemsPerPage and selectData are provided #}
+      {% if options.itemsPerPage and options.selectData %}
+        <div class="items-per-page mr-4">
+          <select class="border rounded px-2 py-1" aria-label="Items per page" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-url')">
+            {% for count in [10, 20, 50, 100] %}
+              <option value="{{ count }}" {% if count == options.itemsPerPage %} selected{% endif %}>
+                {{ count }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      {% endif %}
+
+      {# Pagination navigation - Only rendered if children array exists and has items #}
+      {% if children and children | length > 0 %}
+        <nav class="pagination {{ globalStyle }}" role="navigation" aria-label="Pagination">
+          <ul class="flex flex-row items-center space-x-1">
+            {% for page in children %}
+              {% set buttonStyle = "" %}
+              {% set buttonSize = "" %}
+              {% set buttonClasses = "page-link" %}
+              {% set buttonStateClasses = {} %}
+              
+              {# Resolve button reference if it exists and buttonData is provided #}
+              {% if page.ref and options.buttonData %}
+                {% set buttonParts = page.ref.split('.') %}
+                {% if buttonParts | length == 2 %}
+                  {% set buttonName = buttonParts[1] %}
+                  {% set matchingButton = null %}
+                  
+                  {# Find the matching button - we'll use a variable instead of break #}
+                  {% for button in options.buttonData.buttons %}
+                    {% if button.name == buttonName and not matchingButton %}
+                      {% set matchingButton = button %}
+                    {% endif %}
+                  {% endfor %}
+                  
+                  {# Apply styles if we found a matching button #}
+                  {% if matchingButton %}
+                    {# Get button variant style #}
+                    {% set buttonVariant = matchingButton.style | default('default') %}
+                    {% set variantConfig = options.buttonData.variants[buttonVariant] %}
+                    
+                    {# Get button size style #}
+                    {% set buttonSizeKey = matchingButton.size | default('button') %}
+                    {% set buttonSize = options.buttonData.sizes[buttonSizeKey] | default('') %}
+                    
+                    {# Combine all styles #}
+                    {% set baseClasses = options.buttonData.globalStyle ~ " " ~ buttonSize %}
+                    
+                    {# Set button state classes #}
+                    {% set buttonStateClasses = {
+                      'default': variantConfig.default,
+                      'hover': variantConfig.hover,
+                      'focus': variantConfig.focus,
+                      'active': variantConfig.active,
+                      'disabled': variantConfig.disabled
+                    } %}
+                    
+                    {# Default initial class #}
+                    {% set buttonClasses = baseClasses ~ " " ~ buttonStateClasses.default ~ " page-link" %}
+                    
+                    {# Add current state style if page is current #}
+                    {% if page.current and options.buttonData.states and options.buttonData.states.current %}
+                      {% set buttonClasses = buttonClasses ~ " " ~ options.buttonData.states.current %}
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+              
+              <li>
+                <a href="{{ page.url }}" 
+                  class="{{ buttonClasses }} flex items-center justify-center" 
+                  rel="nofollow" 
+                  {% if page.current %} aria-current="page" {% endif %}
+                  {% if page.label | endsWith('.svg') %} aria-label="{{ page.ariaLabel | default('Navigate') }}"{% endif %}
+                  
+                  {% if buttonStateClasses | length > 0 %}
+                    onfocus="this.className='{{ baseClasses }} {{ buttonStateClasses.focus }} flex items-center justify-center page-link {% if page.current %}active{% endif %}'; this.setAttribute('data-focused', 'true');" 
+                    onblur="this.className='{{ baseClasses }} {{ buttonStateClasses.default }} flex items-center justify-center page-link {% if page.current %}active{% endif %}'; this.removeAttribute('data-focused');"
+                    onmouseover="this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ buttonStateClasses.focus }} flex items-center justify-center page-link {% if page.current %}active{% endif %}' : '{{ baseClasses }} {{ buttonStateClasses.hover }} flex items-center justify-center page-link {% if page.current %}active{% endif %}';" 
+                    onmouseout="this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ buttonStateClasses.focus }} flex items-center justify-center page-link {% if page.current %}active{% endif %}' : '{{ baseClasses }} {{ buttonStateClasses.default }} flex items-center justify-center page-link {% if page.current %}active{% endif %}';" 
+                    onmousedown="this.className='{{ baseClasses }} {{ buttonStateClasses.active }} flex items-center justify-center page-link {% if page.current %}active{% endif %}';" 
+                    onmouseup="this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ buttonStateClasses.focus }} flex items-center justify-center page-link {% if page.current %}active{% endif %}' : '{{ baseClasses }} {{ buttonStateClasses.hover }} flex items-center justify-center page-link {% if page.current %}active{% endif %}';"
+                  {% endif %}
+                >
+                  
+                  {% if page.label | endsWith('.svg') %}
+                    {# Handle SVG icons #}
+                    {% if svgContents is defined %}
+                      <span class="inline-flex items-center justify-center w-5 h-5">
+                        {{ svgContents(page.label) }}
+                      </span>
+                    {% else %}
+                      <img src="{{ page.label }}" alt="{{ page.ariaLabel | default('Navigate') }}" class="w-5 h-5">
+                    {% endif %}
+                  {% else %}
+                    {{ page.label }}
+                  {% endif %}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% else %}
+        <span class="text-gray-500">No pages available</span>
+      {% endif %}
+
+      {# Items counter - Shows range of items being displayed (e.g., "1-10 of 98") #}
+      {% if options.totalItems and options.currentPage and options.itemsPerPage %}
+        {# Calculate first item number on current page #}
+        {% set firstItem = (options.currentPage - 1) * options.itemsPerPage + 1 %}
+        {# Calculate last item number (might exceed total) #}
+        {% set lastItemTemp = options.currentPage * options.itemsPerPage %}
+        {% set lastItem = lastItemTemp %}
+        {# Adjust last item if it exceeds total #}
+        {% if lastItemTemp > options.totalItems %}
+          {% set lastItem = options.totalItems %}
+        {% endif %}
+
+        <div class="items-count ml-4">
+          <span>
+            {{ firstItem }} - {{ lastItem }} of {{ options.totalItems }}
+          </span>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+  {#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/pagination.njk" import renderPagination %}
+
+2. Full pagination component with select, navigation and count
+{{ renderPagination({ 
+    name: "pager", 
+    currentPage: 1,
+    totalPages: 10,
+    itemsPerPage: 10,
+    totalItems: 98,
+    label: "Show",
+    buttonData: atoms.buttons,
+    selectData: atoms.selects,
+    datas: molecules.paginations 
+}) }}
+
+3. Navigation pager only (just the page numbers and navigation buttons)
+{{ renderPagination({ 
+    name: "navigation-pager", 
+    currentPage: 1,
+    totalPages: 10,
+    buttonData: atoms.buttons,
+    datas: molecules.paginations 
+}) }}
+
+4. Custom configuration options
+- currentPage: Current active page (number)
+- totalPages: Total number of pages (number)
+- itemsPerPage: Number of items displayed per page (number)
+- totalItems: Total count of items (number)
+- label: Label text for select (string)
+- buttonData: Button component data from atoms.buttons 
+- selectData: Select component data from atoms.selects
+
+May the winds favor your sails and not your enemies'! ⛵🌬️
+#}

@@ -27,25 +27,25 @@
       "disabled": "bg-white text-gray-500 border border-gray-500"
     },
     "fixed": {
-      "default": "bg-white text-gray-500 border border-gray-500",
-      "hover": "bg-white text-gray-500 border border-gray-500",
+      "default": "bg-white text-gray-500",
+      "hover": "bg-gray-200 text-gray-500",
       "focus": "bg-white text-gray-500 ring-1 ring-blue-500",
       "active": "bg-gray-500 text-white",
-      "disabled": "bg-white text-gray-500 border border-gray-500"
+      "disabled": "bg-white text-gray-500"
     },
     "icon": {
-      "default": "bg-white text-gray-500 border border-gray-500",
-      "hover": "bg-white text-gray-500 border border-gray-500",
+      "default": "bg-white text-gray-500",
+      "hover": "bg-gray-200 text-gray-500",
       "focus": "bg-white text-gray-500 ring-1 ring-blue-500",
       "active": "bg-gray-500 text-white",
-      "disabled": "bg-white text-gray-500 border border-gray-500"
+      "disabled": "bg-white text-gray-500"
     },
     "ghost": {
-      "default": "bg-white text-gray-500 border border-gray-500",
-      "hover": "bg-white text-gray-500 border-gray-500",
+      "default": "bg-white text-gray-500",
+      "hover": "bg-gray-200 text-gray-500",
       "focus": "bg-white text-gray-500 ring-1 ring-blue-500",
       "active": "bg-gray-500 text-white",
-      "disabled": "bg-white text-gray-500 border border-gray-500"
+      "disabled": "bg-white text-gray-500"
     }
   },
   "states": {

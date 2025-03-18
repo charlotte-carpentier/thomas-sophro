@@ -26,6 +26,7 @@ layout: '00-organisms-global/base.njk'
 
 {# Import required molecules macros #}
 {% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
+{% from "02-molecules/pagination.njk" import renderPagination %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -96,7 +97,7 @@ layout: '00-organisms-global/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing checkbox component #}
-             {{ renderCheckbox({ 
+            {{ renderCheckbox({ 
                 group: true, 
                 groupLabel: "RPG Player Habits",
                 groupSrOnly: false,
@@ -205,7 +206,26 @@ layout: '00-organisms-global/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing breadcrumb component #}
-                {{ renderBreadcrumb({ name: "adventure", datas: molecules.breadcrumbs, links: atoms.links }) }}
+            {{ renderBreadcrumb({ name: "adventure", datas: molecules.breadcrumbs, links: atoms.links }) }}
+        </div>
+    </div>
+
+    {# Pagination Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Pagination</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render pagination component #}
+            {{ renderPagination({ 
+                name: "pager", 
+                currentPage: 1,
+                totalPages: 10,
+                itemsPerPage: 10,
+                totalItems: 98,
+                label: "Show",
+                buttonData: atoms.buttons,
+                selectData: atoms.selects,
+                datas: molecules.paginations 
+            }) }}
         </div>
     </div>
 
