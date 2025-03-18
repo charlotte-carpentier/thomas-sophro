@@ -56,13 +56,15 @@
     },
     {
       "name": "item-count",
-      "variant": "disabled",
+      "label": "Label item count",
+      "variant": "default",
       "options": [
-        { "value": "10", "label": "10 per page", "selected": true },
-        { "value": "20", "label": "20 per page" },
-        { "value": "50", "label": "50 per page" },
-        { "value": "100", "label": "100 per page" }
+        { "value": "10", "label": "Label 10", "selected": true },
+        { "value": "20", "label": "20" },
+        { "value": "50", "label": "50" },
+        { "value": "100", "label": "100" }
       ]
     }
+    
   ]
 }
