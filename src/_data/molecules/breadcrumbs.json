@@ -1,0 +1,51 @@
+{
+  "globalStyle": "typography-label-l breadcrumb",
+  "variants": {
+    "default": "text-gray-800 underline",
+    "hover": "text-gray-600",
+    "focus": "text-gray-800 underline outline-2 outline-blue-500 outline-offset-2 rounded-md",
+    "disabled": "text-gray-400 cursor-not-allowed"
+  },
+  "breadcrumbs": [
+    {
+      "name": "adventure",
+      "links": [
+        {
+          "name": "home",
+          "link": "tavern_quest",
+          "style": "primary"
+        },
+        {
+          "name": "bestiary",
+          "link": "monster_manual",
+          "style": "secondary"
+        },
+        {
+          "name": "alchemy",
+          "link": "alchemy_lab",
+          "style": "default"
+        }
+      ]
+    },
+    {
+      "name": "exploration",
+      "links": [
+        {
+          "name": "home",
+          "link": "tavern_quest",
+          "style": "primary"
+        },
+        {
+          "name": "map",
+          "link": "dungeon_map",
+          "style": "secondary"
+        },
+        {
+          "name": "shop",
+          "link": "magic_shop",
+          "style": "primary"
+        }
+      ]
+    }
+  ]
+}

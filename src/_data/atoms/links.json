@@ -17,6 +17,30 @@
       "href": "/bestiary",
       "text": "Legendary Monster Encyclopedia",
       "style": "primary"
+    },
+    {
+      "name": "alchemy_lab",
+      "href": "/alchemy",
+      "text": "Alchemy Lab Recipes",
+      "style": "secondary"
+    },
+    {
+      "name": "dungeon_map",
+      "href": "/map",
+      "text": "Ancient Dungeon Map",
+      "style": "default"
+    },
+    {
+      "name": "magic_shop",
+      "href": "/shop",
+      "text": "Enchanted Goods Store",
+      "style": "primary"
+    },
+    {
+      "name": "guild_hall",
+      "href": "/guild",
+      "text": "Heroes' Guild Hall",
+      "style": "secondary"
     }
   ]
 }
