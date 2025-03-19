@@ -28,6 +28,7 @@ layout: '00-organisms-global/base.njk'
 {% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
 {% from "02-molecules/pagination.njk" import renderPagination %}
 {% from "02-molecules/caption.njk" import renderCaption %}
+{% from "02-molecules/toast.njk" import renderToast %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -236,6 +237,19 @@ layout: '00-organisms-global/base.njk'
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing caption component #}
             {{ renderCaption({ name: "error_label", datas: molecules.captions, icons: atoms.icons }) }}
+        </div>
+    </div>
+
+        {# Toast Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Toast</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing toast component #}
+            {{ renderToast({ 
+                name: "warning_notification", 
+                datas: molecules.toasts, 
+                icons: atoms.icons 
+            }) }}
         </div>
     </div>
 

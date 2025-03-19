@@ -1,0 +1,46 @@
+{
+  "globalStyle": "toast flex items-center justify-between p-4 rounded-lg shadow-lg mb-4 w-auto max-w-md",
+  "variants": {
+    "info": "bg-blue-50 border-l-4 border-blue-500 text-blue-900",
+    "success": "bg-green-50 border-l-4 border-green-500 text-green-900", 
+    "warning": "bg-yellow-50 border-l-4 border-yellow-500 text-yellow-900",
+    "error": "bg-red-50 border-l-4 border-red-500 text-red-900"
+  },
+  "iconStyles": {
+    "default": "w-5 h-5 mr-2"
+  },
+  "toasts": [
+    {
+      "name": "info_notification",
+      "message": "An informative message for the user",
+      "style": "info",
+      "icon": "info",
+      "duration": 5000,
+      "dismissible": true
+    },
+    {
+      "name": "success_notification",
+      "message": "Operation completed successfully",
+      "style": "success", 
+      "icon": "success",
+      "duration": 5000,
+      "dismissible": true
+    },
+    {
+      "name": "warning_notification", 
+      "message": "Something requires your attention",
+      "style": "warning",
+      "icon": "warning", 
+      "duration": 5000,
+      "dismissible": true
+    },
+    {
+      "name": "error_notification",
+      "message": "An error occurred. Please try again.",
+      "style": "error",
+      "icon": "error",
+      "duration": 5000, 
+      "dismissible": true
+    }
+  ]
+}

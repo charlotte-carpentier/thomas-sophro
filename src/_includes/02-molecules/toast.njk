@@ -1,0 +1,89 @@
+{#
+=========================
+          TOAST          
+=========================
+#}
+
+{% macro renderToast(options) %}
+  {% if options.datas %}
+    {% set toastData = null %}
+    
+    {% if options.name %}
+      {% for toast in options.datas.toasts %}
+        {% if toast.name == options.name %}
+          {% set toastData = toast %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not toastData %}
+      <span class="text-red-500">Toast not found: {{ options.name }}</span>
+    {% else %}
+      {% set globalStyle = options.datas.globalStyle %}
+      {% set variantStyle = options.datas.variants[toastData.style] %}
+      {% set iconStyle = options.datas.iconStyles.default %}
+      
+      {% set iconData = null %}
+      {% if toastData.icon and options.icons %}
+        {% for icon in options.icons.icons %}
+          {% if icon.name == toastData.icon %}
+            {% set iconData = icon %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      <div 
+        class="toast-container"
+        aria-live="polite" 
+        role="status"
+        data-toast-duration="{{ toastData.duration }}"
+      >
+        <div 
+          class="{{ globalStyle }} {{ variantStyle }}"
+          data-toast="{{ options.name }}"
+        >
+          <div class="flex items-center space-x-2">
+            {% if iconData %}
+              <span 
+                data-svg-src="{{ iconData.path }}" 
+                class="{{ iconStyle }}" 
+                aria-hidden="true"
+              ></span>
+            {% endif %}
+            <span>{{ toastData.message }}</span>
+          </div>
+          
+          {% if toastData.dismissible %}
+            <button 
+              class="ml-4 text-current hover:opacity-75" 
+              onclick="dismissToast('{{ options.name }}')"
+              aria-label="Dismiss notification"
+            >
+              &times;
+            </button>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <span class="text-red-500">No toast data provided</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/toast.njk" import renderToast %}
+
+2. Call a specific toast by name
+{{ renderToast({ 
+    name: "success_notification", 
+    datas: molecules.toasts,
+    icons: atoms.icons 
+}) }}
+
+May your notifications be legendary drops 🔔💎
+#}
