@@ -1,0 +1,120 @@
+{#
+=========================
+      RATING GAUGE       
+=========================
+#}
+
+{% macro renderRatingGauge(options) %}
+  {% if not options or not options.datas %}
+    <p class="text-red-500">Error: Missing required data for rating gauge</p>
+  {% else %}
+    {% set globalStyle = options.datas.globalStyle | default('rating-gauge flex items-center space-x-1') %}
+    {% set ratingData = null %}
+    
+    {# Find the specific rating by name if provided #}
+    {% if options.name %}
+      {% for rating in options.datas.ratingLevels %}
+        {% if rating.name == options.name %}
+          {% set ratingData = rating %}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {# Use first rating as default if no name provided #}
+      {% set ratingData = options.datas.ratingLevels[0] %}
+    {% endif %}
+    
+    {% if not ratingData %}
+      <p class="text-red-500">Error: Rating "{{ options.name }}" not found</p>
+    {% else %}
+      <div class="{{ globalStyle }} {{ options.class | default('') }}">
+        {% for star in ratingData.stars %}
+          {% set iconData = null %}
+          
+          {# Find icon data if icons are provided #}
+          {% if options.icons and options.icons.icons %}
+            {% for icon in options.icons.icons %}
+              {% if icon.name == star %}
+                {% set iconData = icon %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+          
+          {# Apply the appropriate style based on the star type #}
+          {% set starStyle = options.datas.variants[ratingData.style] | default('') %}
+          {% set iconStyle = options.datas.iconStyles.default | default('w-6 h-6') %}
+          
+          <span class="{{ starStyle }}">
+            {% if iconData and iconData.path %}
+              {# Render SVG with data-svg-src for SVG loader script if exists #}
+              {% if iconData.path.endsWith('.svg') %}
+                <span 
+                  data-svg-src="{{ iconData.path }}" 
+                  class="{{ iconStyle }}"
+                  aria-hidden="true"
+                ></span>
+              {% else %}
+                {# Standard image fallback #}
+                <img 
+                  src="{{ iconData.path }}" 
+                  alt="{{ iconData.alt | default('Rating star') }}" 
+                  class="{{ iconStyle }}"
+                >
+              {% endif %}
+            {% else %}
+              {# Fallback for missing icons - simple text representation #}
+              <span class="{{ iconStyle }} inline-flex items-center justify-center">
+                {% if star == 'star-filled' %}★{% else %}☆{% endif %}
+              </span>
+            {% endif %}
+          </span>
+        {% endfor %}
+        
+        {# Optional: Show numeric value if requested #}
+        {% if options.showValue and ratingData.value %}
+          <span class="ml-2 text-sm text-gray-600">
+            {{ ratingData.value }}
+          </span>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/rating-gauge.njk" import renderRatingGauge %}
+
+2. Full rating gauge component with customizable icons and styles
+{{ renderRatingGauge({ 
+    name: "three_star",
+    datas: molecules["rating-gauges"],
+    icons: atoms.icons
+}) }}
+
+3. Render all rating gauges dynamically with vertical spacing
+<div class="space-y-6">
+  {% for gauge in molecules["rating-gauges"].ratingLevels %}
+    <div class="rating-example flex items-center gap-4">
+      {{ renderRatingGauge({ 
+          name: gauge.name, 
+          datas: molecules["rating-gauges"],
+          icons: atoms.icons
+      }) }}
+    </div>
+  {% endfor %}
+</div>
+
+4. Show rating with numeric value
+{{ renderRatingGauge({ 
+    name: "four_star",
+    showValue: true,
+    datas: molecules["rating-gauges"],
+    icons: atoms.icons
+}) }}
+
+May your stars shine ever in your favor! ⭐✨
+#}

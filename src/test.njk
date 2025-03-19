@@ -31,6 +31,7 @@ layout: '00-organisms-global/base.njk'
 {% from "02-molecules/toast.njk" import renderToast %}
 {% from "02-molecules/disclaimer.njk" import renderDisclaimer %}
 {% from "02-molecules/dropzone-upload.njk" import renderDropzoneUpload %}
+{% from "02-molecules/rating-gauge.njk" import renderRatingGauge %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -269,17 +270,30 @@ layout: '00-organisms-global/base.njk'
     </div>
 
     {# Dropzone-upload Molecule #}
-    <h3 class="text-xl font-semibold mb-4">Dropzone-upload</h3>
+    <h3 class="text-xl font-semibold mb-4">Dropzone upload</h3>
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing dropzone-upload component #}
-        {{ renderDropzoneUpload({ 
-            name: "standard_upload", 
-            datas: molecules["dropzone-uploads"],
-            headings: atoms.headings,
-            icons: atoms.icons,
-            buttons: atoms.buttons
-        }) }}
+            {{ renderDropzoneUpload({ 
+                name: "standard_upload", 
+                datas: molecules["dropzone-uploads"],
+                headings: atoms.headings,
+                icons: atoms.icons,
+                buttons: atoms.buttons
+            }) }}
+        </div>
+    </div>
+
+    {# Rating gauge Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Rating gauge</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing rating gauge component #}
+            {{ renderRatingGauge({ 
+                name: "three_star",
+                datas: molecules["rating-gauges"],
+                icons: atoms.icons
+            }) }}
         </div>
     </div>
 

@@ -11,7 +11,7 @@
   "buttonStyles": {
     "default": "bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-md"
   },
-  "dropzoneAreaClass": "flex flex-col items-center justify-center w-full border border-gray-300 rounded-lg p-8",
+  "dropzoneAreaClass": "flex flex-col w-full border border-gray-300 rounded-lg p-8",
   "textClass": "typography-body-m text-gray-700",
   "spinnerClass": "dropzone-spinner mt-4",
   "spinnerSvgClass": "animate-spin h-8 w-8 text-gray-400",
@@ -19,9 +19,8 @@
   "errorTextClass": "text-red-500 text-sm",
   "dismissButtonClass": "ml-2 text-gray-400 hover:text-gray-600",
   "dismissIconClass": "h-4 w-4",
-  "separatorContainerClass": "flex items-center justify-center w-full my-4",
-  "separatorLineClass": "border-t border-gray-300 flex-grow",
-  "separatorTextClass": "typography-body-m text-gray-700 px-4",
+  "separatorContainerClass": "flex items-center justify-start w-full my-4",
+  "separatorTextClass": "typography-body-m text-gray-700",
   "fileInfoClass": "mt-4 w-full",
   "fileInfoTextClass": "typography-body-s text-gray-600",
   "formatsLabel": "Supported formats",
