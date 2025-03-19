@@ -45,11 +45,13 @@
       {% endif %}
 
       <div class="{{ captionClasses }}">
-        {% if iconData %}
-          {# Use data-svg-src for SVG loader, similar to button.njk #}
-          <span data-svg-src="{{ iconData.path }}" class="inline-flex items-center justify-center mr-2 w-4 h-4">
-            <!-- SVG will be loaded here -->
-          </span>
+        {% if iconData and iconData.path %}
+          {# Using data-svg-src attribute for SVG loader script #}
+          <span 
+            data-svg-src="{{ iconData.path }}" 
+            class="inline-flex items-center justify-center mr-2 w-4 h-4 {{ captionStyle }}"
+            aria-hidden="true"
+          ></span>
         {% endif %}
         
         <span class="caption-text">{{ captionData.text }}</span>

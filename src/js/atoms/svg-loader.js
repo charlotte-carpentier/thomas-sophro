@@ -5,7 +5,7 @@
  * with the actual SVG content, allowing for styling with CSS and theme colors.
  */
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all elements with the data-svg-src attribute
+  function loadSVGs() {
     document.querySelectorAll('[data-svg-src]').forEach(element => {
       const svgPath = element.getAttribute('data-svg-src');
       const originalClasses = element.className || '';
@@ -54,4 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
           element.parentNode.replaceChild(fallback, element);
         });
     });
+  }
+  
+  // Initial SVG load
+  loadSVGs();
+
+  // Observe changes in the DOM and reload SVGs when needed
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      mutation.addedNodes.forEach(node => {
+        if (node.nodeType === 1 && node.hasAttribute('data-svg-src')) {
+          loadSVGs();
+        }
+      });
+    });
   });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+});
