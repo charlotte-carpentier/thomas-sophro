@@ -170,7 +170,7 @@
                   class="{{ buttonClasses }} flex items-center justify-center" 
                   rel="nofollow" 
                   {% if page.current %} aria-current="page" {% endif %}
-                  {% if page.label.slice(-4) == '.svg' %} aria-label="{{ page.ariaLabel | default('Navigate') }}"{% endif %}
+                  {% if page.icon %} aria-label="{{ page.ariaLabel | default('Navigate') }}"{% endif %}
                   
                   {% if buttonStateClasses | length > 0 %}
                     onfocus="this.className='{{ baseClasses }} {{ buttonStateClasses.focus }} flex items-center justify-center page-link {% if page.current %}active{% endif %}'; this.setAttribute('data-focused', 'true');" 
@@ -182,22 +182,32 @@
                   {% endif %}
                 >
                   
-                  {% if page.label.slice(-4) == '.svg' %}
-                    {# Handle SVG icons - Use direct SVG content instead of img tag #}
-                    {% if svgContents is defined %}
-                      <span class="inline-flex items-center justify-center w-5 h-5">
-                        {{ svgContents(page.label) }}
+                  {% if page.icon %}
+                    {# Find the corresponding icon in icons.json #}
+                    {% set iconData = null %}
+                    {% if options.icons %}
+                      {% for icon in options.icons.icons %}
+                        {% if icon.name == page.icon %}
+                          {% set iconData = icon %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                    
+                    {% if iconData %}
+                      {# Use data-svg-src for SVG loader, similar to button.njk #}
+                      <span data-svg-src="{{ iconData.path }}" class="inline-flex items-center justify-center w-5 h-5">
+                        <!-- SVG will be loaded here -->
                       </span>
                     {% else %}
                       {# Fallback - Use predefined SVG icon with currentColor to inherit styles #}
                       <span class="inline-flex items-center justify-center w-5 h-5">
-                        {% if page.label.indexOf('first') > -1 %}
+                        {% if page.icon == 'first' %}
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
-                        {% elif page.label.indexOf('last') > -1 %}
+                        {% elif page.icon == 'last' %}
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 17 5-5-5-5"/><path d="m6 17 5-5-5-5"/></svg>
-                        {% elif page.label.indexOf('next') > -1 %}
+                        {% elif page.icon == 'next' %}
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                        {% elif page.label.indexOf('prev') > -1 %}
+                        {% elif page.icon == 'prev' %}
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                         {% else %}
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
@@ -258,6 +268,7 @@ Summon HAT Components Wisely
     labelSuffix: "items",
     buttonData: atoms.buttons,
     selectData: atoms.selects,
+    icons: atoms.icons,
     datas: molecules.paginations 
 }) }}
 
@@ -267,6 +278,7 @@ Summon HAT Components Wisely
     currentPage: 1,
     totalPages: 10,
     buttonData: atoms.buttons,
+    icons: atoms.icons, 
     datas: molecules.paginations 
 }) }}
 
@@ -279,6 +291,7 @@ Summon HAT Components Wisely
 - labelSuffix: Text to display after the number (default: "per page")
 - buttonData: Button component data from atoms.buttons 
 - selectData: Select component data from atoms.selects
+- icons: Icon component data from atoms.icons
 
 May the winds favor your sails and not your enemies'! ⛵🌬️
 #}

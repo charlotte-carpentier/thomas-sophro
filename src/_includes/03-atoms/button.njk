@@ -65,9 +65,9 @@ Flexible button component with variant and state support
         {% if variant == 'icon' %}
           {# Icon-only button #}
           {% if buttonData.iconBefore %}
-            {% if buttonData.iconBefore | endsWith('.svg') %}
-              <span class="inline-flex items-center justify-center w-5 h-5">
-                {% svgContents buttonData.iconBefore %}
+            {% if buttonData.iconBefore.endsWith('.svg') %}
+              <span data-svg-src="{{ buttonData.iconBefore }}" class="inline-flex items-center justify-center w-5 h-5">
+                <!-- SVG will be loaded here -->
               </span>
             {% else %}
               <img 
@@ -77,9 +77,9 @@ Flexible button component with variant and state support
               />
             {% endif %}
           {% elif buttonData.icon %}
-            {% if buttonData.icon | endsWith('.svg') %}
-              <span class="inline-flex items-center justify-center w-5 h-5">
-                {% svgContents buttonData.icon %}
+            {% if buttonData.icon.endsWith('.svg') %}
+              <span data-svg-src="{{ buttonData.icon }}" class="inline-flex items-center justify-center w-5 h-5">
+                <!-- SVG will be loaded here -->
               </span>
             {% else %}
               <img 
@@ -97,9 +97,9 @@ Flexible button component with variant and state support
           
           {# Before icon #}
           {% if buttonData.iconBefore %}
-            {% if buttonData.iconBefore | endsWith('.svg') %}
-              <span class="inline-flex items-center justify-center mr-2 w-4 h-4">
-                {% svgContents buttonData.iconBefore %}
+            {% if buttonData.iconBefore.endsWith('.svg') %}
+              <span data-svg-src="{{ buttonData.iconBefore }}" class="inline-flex items-center justify-center mr-2 w-4 h-4">
+                <!-- SVG will be loaded here -->
               </span>
             {% else %}
               <img 
@@ -109,9 +109,9 @@ Flexible button component with variant and state support
               />
             {% endif %}
           {% elif buttonData.icon %}
-            {% if buttonData.icon | endsWith('.svg') %}
-              <span class="inline-flex items-center justify-center mr-2 w-4 h-4">
-                {% svgContents buttonData.icon %}
+            {% if buttonData.icon.endsWith('.svg') %}
+              <span data-svg-src="{{ buttonData.icon }}" class="inline-flex items-center justify-center mr-2 w-4 h-4">
+                <!-- SVG will be loaded here -->
               </span>
             {% else %}
               <img 
@@ -127,9 +127,9 @@ Flexible button component with variant and state support
           
           {# After icon #}
           {% if buttonData.iconAfter %}
-            {% if buttonData.iconAfter | endsWith('.svg') %}
-              <span class="inline-flex items-center justify-center ml-2 w-4 h-4">
-                {% svgContents buttonData.iconAfter %}
+            {% if buttonData.iconAfter.endsWith('.svg') %}
+              <span data-svg-src="{{ buttonData.iconAfter }}" class="inline-flex items-center justify-center ml-2 w-4 h-4">
+                <!-- SVG will be loaded here -->
               </span>
             {% else %}
               <img 
@@ -141,7 +141,6 @@ Flexible button component with variant and state support
           {% endif %}
         {% endif %}
       </button>
-      
     {% endif %}
   {% endif %}
 {% endmacro %}

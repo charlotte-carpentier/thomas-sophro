@@ -1,12 +1,12 @@
-// src/js/main.js
+/**
+ * Main JavaScript file that imports all required components
+ */
 
-// Import the multi-select initialization function
-import { initializeMultiSelect } from './atoms/multiSelect.js';
+// You can import other modules here
+// import './components/menu.js';
+// import './components/carousel.js';
 
-// Main application logic
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Application initialized');
-
-  // Initialize the multi-select component
-  initializeMultiSelect();
+// Main initialization code
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('HAT Dynamic Template initialized');
 });

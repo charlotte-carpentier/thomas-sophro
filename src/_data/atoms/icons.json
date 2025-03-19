@@ -23,9 +23,57 @@
     },
     {
       "name": "icon-dark",
-      "path": "/assets/icons/icon-light.svg", 
+      "path": "/assets/icons/icon-dark.svg", 
       "alt": "Light Icon",
       "defaultSize": "md"
+    },
+    {
+      "name": "first",
+      "path": "/assets/icons/first.svg",
+      "alt": "First Icon", 
+      "defaultSize": "sm"
+    },
+    {
+      "name": "prev",
+      "path": "/assets/icons/prev.svg", 
+      "alt": "Prev Icon",
+      "defaultSize": "sm"
+    },
+    {
+      "name": "next",
+      "path": "/assets/icons/next.svg", 
+      "alt": "Next Icon",
+      "defaultSize": "sm"
+    },
+    {
+      "name": "last",
+      "path": "/assets/icons/last.svg", 
+      "alt": "Last Icon",
+      "defaultSize": "sm"
+    },
+    {
+      "name": "info",
+      "path": "/assets/icons/info.svg",
+      "alt": "Info Icon", 
+      "defaultSize": "xs"
+    },
+    {
+      "name": "success",
+      "path": "/assets/icons/success.svg", 
+      "alt": "Success Icon",
+      "defaultSize": "xs"
+    },
+    {
+      "name": "warning",
+      "path": "/assets/icons/warning.svg", 
+      "alt": "Warning Icon",
+      "defaultSize": "xs"
+    },
+    {
+      "name": "error",
+      "path": "/assets/icons/error.svg", 
+      "alt": "Error Icon",
+      "defaultSize": "xs"
     }
   ]
 }

@@ -27,6 +27,7 @@ layout: '00-organisms-global/base.njk'
 {# Import required molecules macros #}
 {% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
 {% from "02-molecules/pagination.njk" import renderPagination %}
+{% from "02-molecules/caption.njk" import renderCaption %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -223,8 +224,18 @@ layout: '00-organisms-global/base.njk'
                 totalItems: 98,
                 buttonData: atoms.buttons,
                 selectData: atoms.selects,
-                datas: molecules.paginations 
+                datas: molecules.paginations, 
+                icons: atoms.icons
             }) }}
+        </div>
+    </div>
+
+    {# Caption Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Caption</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing caption component #}
+            {{ renderCaption({ name: "info_label", datas: molecules.captions, icons: atoms.icons }) }}
         </div>
     </div>
 

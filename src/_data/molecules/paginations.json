@@ -15,20 +15,20 @@
       }
     },
     "showTotalCount": true
-    },
+  },
   "navigationPager": {
     "name": "navigation-pager",
     "text": "Navigation Pager",
     "children": [
-      { "label": "/assets/icons/first.svg", "url": "/first", "ref": "buttons.inventory" },
-      { "label": "/assets/icons/prev.svg", "url": "/prev", "ref": "buttons.inventory" },
+      { "icon": "first", "url": "/first", "ref": "buttons.inventory" },
+      { "icon": "prev", "url": "/prev", "ref": "buttons.inventory" },
       { "label": "1", "url": "/page/1", "current": true, "ref": "buttons.quantity_button" },
       { "label": "2", "url": "/page/2", "ref": "buttons.quantity_button" },
       { "label": "3", "url": "/page/3", "ref": "buttons.quantity_button" },
       { "label": "...", "url": "#", "ref": "buttons.quantity_button" },
       { "label": "6", "url": "/page/6", "ref": "buttons.quantity_button" },
-      { "label": "/assets/icons/next.svg", "url": "/next", "ref": "buttons.inventory" },
-      { "label": "/assets/icons/last.svg", "url": "/last", "ref": "buttons.inventory" }
+      { "icon": "next", "url": "/next", "ref": "buttons.inventory" },
+      { "icon": "last", "url": "/last", "ref": "buttons.inventory" }
     ]
   }
 }
