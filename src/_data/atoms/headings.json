@@ -54,6 +54,12 @@
       "level": 6,
       "text": "Heading",
       "style": "default"
+    },
+    {
+      "name": "dropzone_upload",
+      "level": 4,
+      "text": "Upload file",
+      "style": "default"
     }
   ]
 }

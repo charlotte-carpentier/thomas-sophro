@@ -30,6 +30,7 @@ layout: '00-organisms-global/base.njk'
 {% from "02-molecules/caption.njk" import renderCaption %}
 {% from "02-molecules/toast.njk" import renderToast %}
 {% from "02-molecules/disclaimer.njk" import renderDisclaimer %}
+{% from "02-molecules/dropzone-upload.njk" import renderDropzoneUpload %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -264,6 +265,21 @@ layout: '00-organisms-global/base.njk'
                 datas: molecules.disclaimers,
                 icons: atoms.icons 
             }) }}
+        </div>
+    </div>
+
+    {# Dropzone-upload Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Dropzone-upload</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing dropzone-upload component #}
+        {{ renderDropzoneUpload({ 
+            name: "standard_upload", 
+            datas: molecules["dropzone-uploads"],
+            headings: atoms.headings,
+            icons: atoms.icons,
+            buttons: atoms.buttons
+        }) }}
         </div>
     </div>
 

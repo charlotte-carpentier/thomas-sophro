@@ -96,6 +96,12 @@
     "style": "ghost",
     "iconBefore": "/assets/icons/icon-light.svg",
     "iconAfter": "/assets/icons/icon-light.svg"
+  },
+  {
+    "name": "browse_button",
+    "text": "Browse files",
+    "size": "button",
+    "style": "primary"
   }
 ]
 }

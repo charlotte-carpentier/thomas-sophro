@@ -1,0 +1,200 @@
+{#
+=========================
+    DROPZONE UPLOAD        
+=========================
+#}
+
+{% macro renderDropzoneUpload(options) %}
+  {% if options.datas %}
+    {% set dropzoneData = null %}
+
+    {% if options.name %}
+      {% for dropzone in options.datas.dropzones %}
+        {% if dropzone.name == options.name %}
+          {% set dropzoneData = dropzone %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not dropzoneData %}
+      <span class="text-red-500">Dropzone upload not found:
+        {{ options.name }}</span>
+    {% else %}
+      {% set globalStyle = options.datas.globalStyle %}
+      {% set variantStyle = options
+        .datas
+        .variants[dropzoneData.style] %}
+      {% set iconStyle = options.datas.iconStyles.default %}
+
+      {# Find heading data if headings are provided #}
+      {% set headingData = null %}
+      {% if dropzoneData.heading and options.headings %}
+        {% for heading in options.headings.headings %}
+          {% if heading.name == dropzoneData.heading %}
+            {% set headingData = heading %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% set iconData = null %}
+      {% if dropzoneData.icon and options.icons %}
+        {% for icon in options.icons.icons %}
+          {% if icon.name == dropzoneData.icon %}
+            {% set iconData = icon %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% set buttonData = null %}
+      {% if dropzoneData.button and options.buttons %}
+        {% for button in options.buttons.buttons %}
+          {% if button.name == dropzoneData.button %}
+            {% set buttonData = button %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      <div class="dropzone-upload-container {{ globalStyle }}" data-dropzone="{{ options.name }}">
+        {# Render heading based on headingData if available #}
+        {% if headingData %}
+          {% set headingLevel = headingData.level %}
+          {% set headingText = headingData.text %}
+          {% set headingStyle = options
+            .headings
+            .variants[headingData.style] %}
+          {% set headingSizeStyle = options
+            .headings
+            .sizeStyles["h" + headingLevel] %}
+          {% set headingGlobalStyle = options.headings.globalStyle %}
+
+          {% if headingLevel == 1 %}
+            <h1 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h1>
+          {% elif headingLevel == 2 %}
+            <h2 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h2>
+          {% elif headingLevel == 3 %}
+            <h3 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h3>
+          {% elif headingLevel == 4 %}
+            <h4 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h4>
+          {% elif headingLevel == 5 %}
+            <h5 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h5>
+          {% else %}
+            <h6 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h6>
+          {% endif %}
+        {% else %}
+          <h4 class="{{ options.datas.defaultHeadingClass|default('') }}">{{ options.datas.defaultHeadingText|default('Upload file') }}</h4>
+        {% endif %}
+
+        <div class="dropzone-area {{ options.datas.dropzoneAreaClass }}" tabindex="0" role="button" aria-label="Upload file by dropping it here or by clicking">
+          {% if iconData %}
+            <span data-svg-src="{{ iconData.path }}" class="{{ iconStyle }}" aria-hidden="true"></span>
+          {% endif %}
+          <p class="{{ options.datas.textClass }}">{{ dropzoneData.dropzoneText }}</p>
+
+          {% if dropzoneData.style == "loading" %}
+            <div class="{{ options.datas.spinnerClass }}" aria-hidden="true">
+              <svg class="{{ options.datas.spinnerSvgClass }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+          {% endif %}
+        </div>
+
+        {% if dropzoneData.errorMessage %}
+          <div class="{{ options.datas.errorContainerClass }}">
+            <p class="{{ options.datas.errorTextClass }}">{{ dropzoneData.errorMessage }}</p>
+            {% if dropzoneData.dismissible %}
+              <button type="button" class="{{ options.datas.dismissButtonClass }}" aria-label="Dismiss error message">
+                <svg xmlns="http://www.w3.org/2000/svg" class="{{ options.datas.dismissIconClass }}" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <div class="{{ options.datas.separatorContainerClass }}">
+          <div class="{{ options.datas.separatorLineClass }}"></div>
+          <span class="{{ options.datas.separatorTextClass }}">{{ dropzoneData.separator }}</span>
+          <div class="{{ options.datas.separatorLineClass }}"></div>
+        </div>
+
+        {% if buttonData and options.buttons %}
+          {% set buttonVariant = options
+            .buttons
+            .variants[buttonData.style] %}
+          {% set buttonSize = options
+            .buttons
+            .sizes[buttonData.size | default('button')] %}
+          {% set baseClasses = options.buttons.globalStyle ~ " " ~ buttonSize %}
+          {% set stateClasses = {
+            'default': buttonVariant.default,
+            'hover': buttonVariant.hover,
+            'focus': buttonVariant.focus,
+            'active': buttonVariant.active,
+            'disabled': buttonVariant.disabled
+          } %}
+          {% set buttonClasses = baseClasses ~ " " ~ stateClasses.default %}
+
+          <button type="button" class="{{ baseClasses }} {{ stateClasses.disabled }} flex items-center justify-center" onfocus="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center'; this.setAttribute('data-focused', 'true'); }" onblur="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.default }} flex items-center justify-center'; this.removeAttribute('data-focused'); }" onmouseover="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.hover }} flex items-center justify-center'; }" onmouseout="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.default }} flex items-center justify-center'; }" onmousedown="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.active }} flex items-center justify-center'; }" onmouseup="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.hover }} flex items-center justify-center'; }" {% if dropzoneData.style == "loading" %} disabled="disabled" {% endif %}>
+            {{ buttonData.text }}
+          </button>
+        {% else %}
+          {% set baseClasses = options.datas.buttonClass %}
+          {% set stateClasses = {
+            'default': options.datas.buttonDefaultClass | default(options.datas.buttonClass),
+            'hover': options.datas.buttonHoverClass | default(options.datas.buttonClass),
+            'focus': options.datas.buttonFocusClass | default(options.datas.buttonClass),
+            'active': options.datas.buttonActiveClass | default(options.datas.buttonClass),
+            'disabled': options.datas.buttonDisabledClass | default(options.datas.buttonClass)
+          } %}
+
+          <button type="button" class="{{ baseClasses }} {{ stateClasses.disabled }}" onfocus="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.focus }}'; this.setAttribute('data-focused', 'true'); }" onblur="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.default }}'; this.removeAttribute('data-focused'); }" onmouseover="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.hover }}'; }" onmouseout="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.default }}'; }" onmousedown="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.active }}'; }" onmouseup="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.hover }}'; }" {% if dropzoneData.style == "loading" %} disabled="disabled" {% endif %}>
+            {{ dropzoneData.buttonText|default('Browse files') }}
+          </button>
+        {% endif %}
+
+        <div class="{{ options.datas.fileInfoClass }}">
+          <p class="{{ options.datas.fileInfoTextClass }}">
+            <span>{{ options.datas.formatsLabel }}:</span>
+            <span>{{ dropzoneData.supportedFormats }}</span>
+          </p>
+          <p class="{{ options.datas.fileInfoTextClass }}">
+            <span>{{ options.datas.maxSizeLabel }}:</span>
+            <span>{{ dropzoneData.maxFileSize }}</span>
+          </p>
+        </div>
+
+        <!-- Hidden file input -->
+        <input type="file" id="file-{{ dropzoneData.name }}" class="hidden" accept="{{ dropzoneData.supportedFormats|replace(' ', '')|lower }}" aria-hidden="true" tabindex="-1">
+      </div>
+    {% endif %}
+  {% else %}
+    <span class="text-red-500">No dropzone upload data provided</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/dropzone-upload.njk" import renderDropzoneUpload %}
+
+2. Call a specific dropzone upload by name
+{{ renderDropzoneUpload({ 
+            name: "standard_upload", 
+            datas: molecules["dropzone-uploads"],
+            headings: atoms.headings,
+            icons: atoms.icons,
+            buttons: atoms.buttons
+        }) }}
+
+3. Different variants available
+- standard_upload: Default style
+- error_upload: Shows error message
+- loading_upload: Displays loading state with spinner
+
+May your file uploads be swift and error-free 📤📁
+#}

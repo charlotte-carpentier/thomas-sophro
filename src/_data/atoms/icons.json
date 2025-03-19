@@ -74,6 +74,18 @@
       "path": "/assets/icons/error.svg", 
       "alt": "Error Icon",
       "defaultSize": "xs"
+    },
+    {
+      "name": "upload",
+      "path": "/assets/icons/upload.svg", 
+      "alt": "Upload Icon",
+      "defaultSize": "md"
+    },
+    {
+      "name": "spinner",
+      "path": "/assets/icons/spinner.svg", 
+      "alt": "Spinner Icon",
+      "defaultSize": "md"
     }
   ]
 }
