@@ -1,0 +1,144 @@
+{#
+=========================
+      PROGRESS BAR        
+=========================
+#}
+
+{% macro renderProgressBar(options) %}
+  {# Validate required data #}
+  {% if not options or not options.datas %}
+    <span class="text-red-500">Error: Missing progress bar configuration</span>
+  {% else %}
+    {# Set default styles from configuration #}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set barStyle = options.datas.barStyle | default('h-4 transition-all duration-300 ease-in-out') %}
+    {% set labelStyle = options.datas.labelStyle | default('text-sm font-medium text-gray-700 mb-1') %}
+    {% set valuesStyle = options.datas.valuesStyle | default('flex justify-between text-xs text-gray-500 mt-1') %}
+    
+    {# Find the specific progress bar configuration #}
+    {% set progressBarData = null %}
+    {% if options.name %}
+      {% for progressBar in options.datas["progress-bars"] %}
+        {% if progressBar.name == options.name %}
+          {% set progressBarData = progressBar %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {# Fallback to custom configuration or default #}
+    {% if not progressBarData %}
+      {% set progressBarData = {
+        "percentage": options.percentage | default("0"),
+        "style": options.style | default("default"),
+        "size": options.size | default("md"),
+        "showLabel": options.showLabel | default(true),
+        "label": options.label | default("Progress"),
+        "showValues": options.showValues | default(true),
+        "minValue": options.minValue | default("0"),
+        "maxValue": options.maxValue | default("100%")
+      } %}
+    {% endif %}
+    
+    {# Determine label text #}
+    {% set labelText = null %}
+    {% if options.customLabel %}
+      {# Custom label takes highest priority #}
+      {% set labelText = options.customLabel %}
+    {% elseif progressBarData.heading and options.headings %}
+      {# Try to find heading text from headings configuration #}
+      {% for heading in options.headings.headings %}
+        {% if heading.name == progressBarData.heading %}
+          {% set labelText = heading.text %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {# Fallback to predefined or default label #}
+    {% set labelText = labelText | default(progressBarData.label | default("Progress")) %}
+    
+    {# Get variant style for the progress bar #}
+    {% set variantStyle = options.datas.variants[progressBarData.style] | default(options.datas.variants.default) %}
+    
+    {# Get size class for the progress bar container #}
+    {% set sizeClass = options.datas.sizes[progressBarData.size] | default(options.datas.sizes.md) %}
+    
+    {# Get the percentage width class #}
+    {% set percentageClass = options.datas.percentages[progressBarData.percentage] | default('w-0') %}
+    
+    {# Render progress bar #}
+    <div class="progress-bar-container {{ sizeClass }} {{ options.class | default('') }}">
+      {# Label section #}
+      {% if progressBarData.showLabel %}
+        <div class="progress-bar-label {{ labelStyle }}">
+          {{ labelText }}
+        </div>
+      {% endif %}
+      
+      {# Progress bar container #}
+      <div class="{{ globalStyle }}">
+        <div 
+          class="{{ barStyle }} {{ variantStyle }} {{ percentageClass }}"
+          role="progressbar" 
+          aria-valuenow="{{ progressBarData.percentage }}" 
+          aria-valuemin="0" 
+          aria-valuemax="100"
+        ></div>
+      </div>
+
+      {# Values section #}
+      {% if progressBarData.showValues %}
+        <div class="{{ valuesStyle }}">
+          <span>{{ progressBarData.minValue }}</span>
+          <span>{{ progressBarData.maxValue }}</span>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/progress-bar.njk" import renderProgressBar %}
+
+2. Call the progress bar component with a specific name
+{{ renderProgressBar({ 
+    name: "primary-progress",
+    datas: molecules["progress-bars"],
+    headings: atoms.headings
+}) }}
+
+3. Create a custom progress bar
+{{ renderProgressBar({ 
+    percentage: "65",
+    style: "default",
+    size: "md",
+    showLabel: true,
+    label: "Custom Label",
+    showValues: true,
+    minValue: "0",
+    maxValue: "100%",
+    datas: molecules["progress-bars"]
+}) }}
+
+4. Custom label display
+{{ renderProgressBar({ 
+    name: "default-progress",
+    customLabel: "Overridden Label",
+    datas: molecules["progress-bars"],
+    headings: atoms.headings
+}) }}
+
+5. Different size options
+{{ renderProgressBar({ 
+    name: "default-progress",
+    size: "lg", // Available sizes: xs, sm, md, lg, xl, full
+    datas: molecules["progress-bars"]
+}) }}
+
+May your progress always move forward, not backward! 📊🚀
+#}

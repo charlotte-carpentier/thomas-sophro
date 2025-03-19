@@ -32,6 +32,7 @@ layout: '00-organisms-global/base.njk'
 {% from "02-molecules/disclaimer.njk" import renderDisclaimer %}
 {% from "02-molecules/dropzone-upload.njk" import renderDropzoneUpload %}
 {% from "02-molecules/rating-gauge.njk" import renderRatingGauge %}
+{% from "02-molecules/progress-bar.njk" import renderProgressBar %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -293,6 +294,19 @@ layout: '00-organisms-global/base.njk'
                 name: "three_star",
                 datas: molecules["rating-gauges"],
                 icons: atoms.icons
+            }) }}
+        </div>
+    </div>
+
+    {# Progress bar Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Progress bar</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing progress-bar component #}
+            {{ renderProgressBar({ 
+                name: "default-progress",
+                datas: molecules["progress-bars"],
+                headings: atoms.headings
             }) }}
         </div>
     </div>

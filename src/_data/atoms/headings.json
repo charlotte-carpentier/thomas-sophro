@@ -60,6 +60,12 @@
       "level": 4,
       "text": "Upload file",
       "style": "default"
+    },
+    {
+      "name": "progress_bar",
+      "level": 5,
+      "text": "Label",
+      "style": "default"
     }
   ]
 }
