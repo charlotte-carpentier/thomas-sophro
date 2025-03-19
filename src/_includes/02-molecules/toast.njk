@@ -36,32 +36,34 @@
         class="toast-container"
         aria-live="polite" 
         role="status"
+        data-toast="{{ options.name }}"
         data-toast-duration="{{ toastData.duration }}"
       >
         <div 
           class="{{ globalStyle }} {{ variantStyle }}"
-          data-toast="{{ options.name }}"
         >
-          <div class="flex items-center space-x-2">
-            {% if iconData %}
-              <span 
-                data-svg-src="{{ iconData.path }}" 
-                class="{{ iconStyle }}" 
-                aria-hidden="true"
-              ></span>
+          <div class="flex items-center justify-between space-x-2">
+            <div class="flex items-center space-x-2">
+              {% if iconData %}
+                <span 
+                  data-svg-src="{{ iconData.path }}" 
+                  class="{{ iconStyle }}" 
+                  aria-hidden="true"
+                ></span>
+              {% endif %}
+              <span>{{ toastData.message }}</span>
+            </div>
+            
+            {% if toastData.dismissible %}
+              <button 
+                class="ml-4 text-current hover:opacity-75" 
+                data-dismiss
+                aria-label="Dismiss notification"
+              >
+                &times;
+              </button>
             {% endif %}
-            <span>{{ toastData.message }}</span>
           </div>
-          
-          {% if toastData.dismissible %}
-            <button 
-              class="ml-4 text-current hover:opacity-75" 
-              onclick="dismissToast('{{ options.name }}')"
-              aria-label="Dismiss notification"
-            >
-              &times;
-            </button>
-          {% endif %}
         </div>
       </div>
     {% endif %}

@@ -1,0 +1,88 @@
+{#
+=========================
+       DISCLAIMER        
+=========================
+#}
+
+{% macro renderDisclaimer(options) %}
+  {% if options.datas %}
+    {% set disclaimerData = null %}
+    
+    {% if options.name %}
+      {% for disclaimer in options.datas.disclaimers %}
+        {% if disclaimer.name == options.name %}
+          {% set disclaimerData = disclaimer %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not disclaimerData %}
+      <span class="text-red-500">Disclaimer not found: {{ options.name }}</span>
+    {% else %}
+      {% set globalStyle = options.datas.globalStyle %}
+      {% set variantStyle = options.datas.variants[disclaimerData.style] %}
+      {% set iconStyle = options.datas.iconStyles.default %}
+      
+      {% set iconData = null %}
+      {% if disclaimerData.icon and options.icons %}
+        {% for icon in options.icons.icons %}
+          {% if icon.name == disclaimerData.icon %}
+            {% set iconData = icon %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      <div 
+        class="disclaimer-container"
+        aria-live="polite" 
+        role="alert"
+        data-disclaimer="{{ options.name }}"
+      >
+        <div 
+          class="{{ globalStyle }} {{ variantStyle }}"
+        >
+          <div class="flex items-center justify-between space-x-4">
+            <div class="flex items-center space-x-2">
+              {% if iconData %}
+                <span 
+                  data-svg-src="{{ iconData.path }}" 
+                  class="{{ iconStyle }}" 
+                  aria-hidden="true"
+                ></span>
+              {% endif %}
+              <span>{{ disclaimerData.message }}</span>
+            </div>
+            
+            <button 
+              class="ml-4 text-current hover:opacity-75" 
+              data-dismiss
+              aria-label="Dismiss disclaimer"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <span class="text-red-500">No disclaimer data provided</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/disclaimer.njk" import renderDisclaimer %}
+
+2. Call a specific disclaimer by name
+{{ renderDisclaimer({ 
+    name: "gdpr_consent", 
+    datas: molecules.disclaimers,
+    icons: atoms.icons 
+}) }}
+
+May your disclaimers guide users wisely 🛡️📜
+#}

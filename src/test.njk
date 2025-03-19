@@ -1,7 +1,7 @@
----
-title: Component Playground
-description: Interactive exploration of Link Components
-layout: '00-organisms-global/base.njk'
+--- 
+title: Component Playground 
+description: Interactive exploration of Link Components 
+layout: '00-organisms-global/base.njk' 
 ---
 
 {# Import required atom macros #}
@@ -29,10 +29,11 @@ layout: '00-organisms-global/base.njk'
 {% from "02-molecules/pagination.njk" import renderPagination %}
 {% from "02-molecules/caption.njk" import renderCaption %}
 {% from "02-molecules/toast.njk" import renderToast %}
+{% from "02-molecules/disclaimer.njk" import renderDisclaimer %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
-    
+
     {# Section Title #}
     <h2 class="text-2xl font-semibold mb-6">HAT Component Playground</h2>
 
@@ -74,7 +75,7 @@ layout: '00-organisms-global/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing select component #}
-             {{ renderSelect({ name: "categories", datas: atoms.selects }) }}
+            {{ renderSelect({ name: "categories", datas: atoms.selects }) }}
         </div>
     </div>
 
@@ -91,7 +92,7 @@ layout: '00-organisms-global/base.njk'
     <h3 class="text-xl font-semibold mt-8 mb-4">Chip Multiselect</h3>
     <div class="p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
         {# Render existing chip multiselect component #}
-        {{ renderChipMultiselect({ name: "fire", datas: atoms["chip-multiselects"] }) }} 
+        {{ renderChipMultiselect({ name: "fire", datas: atoms["chip-multiselects"] }) }}
     </div>
 
     {# Checkbox Atom #}
@@ -113,7 +114,7 @@ layout: '00-organisms-global/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing box component #}
-             {{ renderBox({ id: "box1", datas: atoms.boxs }) }}
+            {{ renderBox({ id: "box1", datas: atoms.boxs }) }}
         </div>
     </div>
 
@@ -122,7 +123,7 @@ layout: '00-organisms-global/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing radio-button component #}
-             {{ renderRadioButton({ 
+            {{ renderRadioButton({ 
                 group: true, 
                 groupLabel: "Your RPG Combat Style",
                 groupSrOnly: false,
@@ -136,7 +137,7 @@ layout: '00-organisms-global/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing radio component #}
-             {{ renderRadio({ id: "radio1", datas: atoms.radios }) }}
+            {{ renderRadio({ id: "radio1", datas: atoms.radios }) }}
         </div>
     </div>
 
@@ -145,7 +146,7 @@ layout: '00-organisms-global/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing toggle component #}
-             {{ renderToggle({ id: "combat_difficulty", datas: atoms.toggles }) }}
+            {{ renderToggle({ id: "combat_difficulty", datas: atoms.toggles }) }}
         </div>
     </div>
 
@@ -176,7 +177,7 @@ layout: '00-organisms-global/base.njk'
         </div>
     </div>
 
-        {# Icon Atom #}
+    {# Icon Atom #}
     <h3 class="text-xl font-semibold mb-4">Icon</h3>
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
@@ -240,7 +241,7 @@ layout: '00-organisms-global/base.njk'
         </div>
     </div>
 
-        {# Toast Molecule #}
+    {# Toast Molecule #}
     <h3 class="text-xl font-semibold mb-4">Toast</h3>
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
@@ -248,6 +249,19 @@ layout: '00-organisms-global/base.njk'
             {{ renderToast({ 
                 name: "warning_notification", 
                 datas: molecules.toasts, 
+                icons: atoms.icons 
+            }) }}
+        </div>
+    </div>
+
+    {# Disclaimer Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Disclaimer</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing disclaimer component #}
+            {{ renderDisclaimer({ 
+                name: "quest_completed", 
+                datas: molecules.disclaimers,
                 icons: atoms.icons 
             }) }}
         </div>
@@ -266,7 +280,8 @@ layout: '00-organisms-global/base.njk'
     {# Development Status Indicator #}
     <div class="mt-12 text-center">
         <div class="mt-4 text-lg font-semibold text-gray-800">
-            🛡️ <span class="text-red-600">**Legendary Quest Status: Work in Progress**</span>
+            🛡️
+            <span class="text-red-600">**Legendary Quest Status: Work in Progress**</span>
         </div>
         <p class="text-gray-600 mt-2 italic">
             "The realm of HAT is still being forged… More artifacts to come!"

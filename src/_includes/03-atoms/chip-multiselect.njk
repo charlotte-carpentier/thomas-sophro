@@ -6,7 +6,7 @@
 
 {% macro renderChipMultiselect(options) %}
   {% set chipMultiselectData = null %}
-  
+
   {% for chipMultiselect in options.datas["chip-multiselects"] %}
     {% if chipMultiselect.name == options.name %}
       {% set chipMultiselectData = chipMultiselect %}
@@ -14,7 +14,7 @@
   {% endfor %}
 
   {% set globalStyle = options.datas.globalStyle %}
-  
+
   {% if chipMultiselectData %}
     {% set baseClasses = globalStyle %}
     {% set stateClasses = {
@@ -23,18 +23,20 @@
       'focus': options.datas.variants.focus,
       'disabled': options.datas.variants.disabled
     } %}
-    
+
     <span 
       class="{{ baseClasses }} {{ stateClasses.default }}"
       onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
       onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'" 
       onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
       tabindex="0"
+      data-chip-multiselect="{{ options.name }}"
     >
       {{ chipMultiselectData.text }}
       <button 
         type="button" 
         class="{{ options.datas.closeButtonStyle }}"
+        data-dismiss
         aria-label="Remove {{ chipMultiselectData.text }}"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5">
