@@ -102,6 +102,24 @@
     "text": "Browse files",
     "size": "button",
     "style": "primary"
+  },
+  {
+    "name": "segmented_control01",
+    "text": "Roll",
+    "size": "button",
+    "style": "primary"
+  },
+  {
+    "name": "segmented_control02",
+    "text": "Purge",
+    "size": "button",
+    "style": "primary"
+  },
+  {
+    "name": "segmented_control03",
+    "text": "Loot",
+    "size": "button",
+    "style": "primary"
   }
 ]
 }

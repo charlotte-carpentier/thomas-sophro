@@ -1,0 +1,125 @@
+{#
+=========================
+    SEGMENTED CONTROL    
+=========================
+#}
+
+{% macro renderSegmentedControl(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set variants = options.datas.variants %}
+    {% set segmentStyle = options.datas.segmentStyle %}
+
+    {# Define default icon styles if not provided #}
+    {% set iconBeforeStyle = options.datas.iconBeforeStyle | default('w-4 h-4') %}
+    {% set iconAfterStyle = options.datas.iconAfterStyle | default('w-4 h-4') %}
+
+    {% set segmentedControlData = null %}
+    {% if options.name %}
+      {% for controlSet in options.datas.segmentedControls %}
+        {% if controlSet.name == options.name %}
+          {% set segmentedControlData = controlSet %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not segmentedControlData %}
+      {% set segmentedControlData = options
+        .datas
+        .segmentedControls[0] %}
+    {% endif %}
+
+    <div class="{{ globalStyle }} {{ variants.default }} {{ options.class | default('') }}" role="tablist" aria-label="{{ segmentedControlData.name | replace('_', ' ') }}" onfocus="this.className='{{ globalStyle }} {{ variants.focus }} {{ options.class | default('') }}'" onblur="this.className='{{ globalStyle }} {{ variants.default }} {{ options.class | default('') }}'" data-segmented-control="{{ segmentedControlData.name }}">
+
+      {% for segment in segmentedControlData.segments %}
+        {% set positionClass = "" %}
+        {% if loop.first %}
+          {% set positionClass = segmentStyle.first %}
+        {% elif loop.last %}
+          {% set positionClass = segmentStyle.last %}
+        {% else %}
+          {% set positionClass = segmentStyle.middle %}
+        {% endif %}
+
+        {% set buttonData = null %}
+        {% if options.buttons %}
+          {% for button in options.buttons.buttons %}
+            {% if button.name == segment.buttonRef %}
+              {% set buttonData = button %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {% if segment.isActive %}
+          {% set baseStyle = segmentStyle.active %}
+          {% set hoverStyle = segmentStyle.active %}
+          {% set focusStyle = segmentStyle['active-focus'] %}
+        {% else %}
+          {% set baseStyle = segmentStyle.default %}
+          {% set hoverStyle = segmentStyle.hover %}
+          {% set focusStyle = segmentStyle.focus %}
+        {% endif %}
+
+        {% if buttonData %}
+          {% set buttonSize = options
+            .buttons
+            .sizes[buttonData.size] %}
+
+          <button id="{{ segmentedControlData.name }}-{{ segment.name }}" role="tab" aria-selected="{{ segment.isActive | string }}" class="{{ positionClass }} {{ buttonSize }} {{ baseStyle }} inline-flex items-center justify-center" onmouseover="this.className='{{ positionClass }} {{ buttonSize }} {{ hoverStyle }} inline-flex items-center justify-center'" onmouseout="this.className='{{ positionClass }} {{ buttonSize }} {{ baseStyle }} inline-flex items-center justify-center'" onfocus="this.className='{{ positionClass }} {{ buttonSize }} {{ focusStyle }} inline-flex items-center justify-center'" onblur="this.className='{{ positionClass }} {{ buttonSize }} {{ baseStyle }} inline-flex items-center justify-center'">
+
+            {% if buttonData.iconBefore %}
+              <span class="icon-before mr-2 inline-flex items-center">
+                <img src="{{ buttonData.iconBefore }}" alt="" aria-hidden="true" class="w-4 h-4" {# Preserve icon size #}/>
+              </span>
+            {% endif %}
+
+            {% if buttonData.text %}
+              <span class="button-text">{{ buttonData.text }}</span>
+            {% elif buttonData.number %}
+              <span class="button-number">{{ buttonData.number }}</span>
+            {% else %}
+              <span class="button-text">{{ segment.name | replace('_', ' ') }}</span>
+            {% endif %}
+
+            {% if buttonData.iconAfter %}
+              <span class="icon-after ml-2 inline-flex items-center">
+                <img src="{{ buttonData.iconAfter }}" alt="" aria-hidden="true" class="w-4 h-4" {# Preserve icon size #}/>
+              </span>
+            {% endif %}
+          </button>
+        {% else %}
+          <button id="{{ segmentedControlData.name }}-{{ segment.name }}" role="tab" aria-selected="{{ segment.isActive | string }}" class="{{ positionClass }} {{ baseStyle }} px-4 py-2 inline-flex items-center justify-center" onmouseover="this.className='{{ positionClass }} {{ hoverStyle }} px-4 py-2 inline-flex items-center justify-center'" onmouseout="this.className='{{ positionClass }} {{ baseStyle }} px-4 py-2 inline-flex items-center justify-center'" onfocus="this.className='{{ positionClass }} {{ focusStyle }} px-4 py-2 inline-flex items-center justify-center'" onblur="this.className='{{ positionClass }} {{ baseStyle }} px-4 py-2 inline-flex items-center justify-center'">
+            <span class="button-text">{{ segment.name | replace('_', ' ') }}</span>
+          </button>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <span class="text-red-500">Segmented control data not found</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/segmented-control.njk" import renderSegmentedControl %}
+
+2. Call the segmented control component with a specific name
+{{ renderSegmentedControl({ 
+    name: "tab_navigation",
+    datas: molecules.segmentedControls,
+    buttons: atoms.buttons 
+}) }}
+
+3. Using custom styles
+{{ renderSegmentedControl({ 
+    datas: molecules.segmentedControls,
+    buttons: atoms.buttons,
+    class: "my-custom-segmented-class"
+}) }}
+
+Choose wisely or roll for luck!
+#}

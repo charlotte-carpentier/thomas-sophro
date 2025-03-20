@@ -1,0 +1,51 @@
+{
+  "globalStyle": "typography-body-m list-form",
+  "variants": {
+    "default": "bg-white rounded-lg border border-gray-300 p-6",
+    "hover": "bg-gray-50",
+    "focus": "border-blue-500 ring-2 ring-blue-300",
+    "disabled": "bg-gray-100 cursor-not-allowed"
+  },
+  "forms": [
+    {
+      "name": "hero_registration",
+      "title": "Hero Registration",
+      "description": "Register your hero for epic adventures",
+      "submitLabel": "Register Hero",
+      "inputs": [
+        {
+          "name": "hero_name",
+          "required": true
+        },
+        {
+          "name": "guild_phone",
+          "required": true
+        },
+        {
+          "name": "weapon_choice",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "quest_submission",
+      "title": "Quest Submission",
+      "description": "Submit a new quest for approval",
+      "submitLabel": "Submit Quest",
+      "inputs": [
+        {
+          "name": "hero_name",
+          "required": true
+        },
+        {
+          "name": "quest_description",
+          "required": true
+        },
+        {
+          "name": "adventure_date",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

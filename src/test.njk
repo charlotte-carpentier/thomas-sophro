@@ -33,6 +33,8 @@ layout: '00-organisms-global/base.njk'
 {% from "02-molecules/dropzone-upload.njk" import renderDropzoneUpload %}
 {% from "02-molecules/rating-gauge.njk" import renderRatingGauge %}
 {% from "02-molecules/progress-bar.njk" import renderProgressBar %}
+{% from "02-molecules/list-form.njk" import renderListForm %}
+{% from "02-molecules/segmented-control.njk" import renderSegmentedControl %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -308,6 +310,32 @@ layout: '00-organisms-global/base.njk'
                 datas: molecules["progress-bars"],
                 headings: atoms.headings
             }) }}
+        </div>
+    </div>
+
+    {# List form Molecule #}
+    <h3 class="text-xl font-semibold mb-4">List form</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing list-form component #}
+            {{ renderListForm({ 
+                name: "hero_registration",
+                datas: molecules["list-forms"],
+                atoms: atoms
+            }) }}
+        </div>
+    </div>
+
+    {# Segmented-control Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Segmented-control</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing segmented-control component #}
+            {{ renderSegmentedControl({ 
+                    name: "filter_controls",
+                    datas: molecules["segmented-controls"],
+                    buttons: atoms.buttons 
+                }) }}
         </div>
     </div>
 

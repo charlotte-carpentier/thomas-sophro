@@ -1,0 +1,168 @@
+{#
+=========================
+       LIST-FORM        
+=========================
+#}
+
+{% macro renderInput(input, atoms) %}
+  {% set inputData = null %}
+  {% for inputDef in atoms.inputs.inputs %}
+    {% if inputDef.name == input.name %}
+      {% set inputData = inputDef %}
+    {% endif %}
+  {% endfor %}
+
+  {% if inputData %}
+    {% set stateClasses = {
+      'default': atoms.inputs.variants.default | default('border-gray-300 text-gray-800 bg-white'),
+      'hover': atoms.inputs.variants.hover | default('border-gray-400 text-gray-800 bg-white'),
+      'focus': atoms.inputs.variants.focus | default('border-blue-500 ring-2 ring-blue-300 bg-white'),
+      'disabled': atoms.inputs.variants.disabled | default('border-gray-300 text-gray-400 bg-gray-100 cursor-not-allowed')
+    } %}
+    
+    <div class="mb-4">
+      <label for="{{ inputData.id }}" class="block mb-1 typography-label-m">
+        {{ inputData.label }}{% if input.required %}<span class="text-red-500 ml-1">*</span>{% endif %}
+      </label>
+      
+      {% if inputData.type == 'textarea' %}
+        <textarea 
+          id="{{ inputData.id }}" 
+          name="{{ inputData.name }}" 
+          placeholder="{{ inputData.placeholder }}" 
+          class="w-full px-3 py-2 border rounded-md {{ stateClasses.default }}"
+          onmouseover="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.hover }}'" 
+          onmouseout="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
+          onfocus="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.focus }}'"
+          onblur="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
+          {% if input.required %}required{% endif %}
+        ></textarea>
+      {% elseif inputData.type == 'select' or inputData.type == 'multi-select' %}
+        <select 
+          id="{{ inputData.id }}" 
+          name="{{ inputData.name }}" 
+          class="w-full px-3 py-2 border rounded-md {{ stateClasses.default }}"
+          onmouseover="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.hover }}'" 
+          onmouseout="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
+          onfocus="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.focus }}'"
+          onblur="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
+          {% if input.required %}required{% endif %}
+          {% if inputData.type == 'multi-select' %}multiple{% endif %}
+        >
+          <option value="" disabled selected>Please select...</option>
+          {% for option in inputData.options %}
+            <option value="{{ option.value }}">{{ option.label }}</option>
+          {% endfor %}
+        </select>
+      {% else %}
+        <input 
+          type="{{ inputData.type }}" 
+          id="{{ inputData.id }}" 
+          name="{{ inputData.name }}" 
+          placeholder="{{ inputData.placeholder }}" 
+          class="w-full px-3 py-2 border rounded-md {{ stateClasses.default }}"
+          onmouseover="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.hover }}'" 
+          onmouseout="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
+          onfocus="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.focus }}'"
+          onblur="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
+          {% if input.required %}required{% endif %}
+        >
+      {% endif %}
+      
+      <div class="error-message hidden text-red-500 text-sm mt-1">
+        {{ inputData.errorMessage }}
+      </div>
+    </div>
+  {% else %}
+    <div class="error-message text-red-500 text-sm my-2">Input "{{ input.name }}" not found</div>
+  {% endif %}
+{% endmacro %}
+
+{% macro renderListForm(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    
+    {% set formData = null %}
+    {% if options.name %}
+      {% for form in options.datas.forms %}
+        {% if form.name == options.name %}
+          {% set formData = form %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not formData %}
+      {% set formData = options.datas.forms[0] %}
+    {% endif %}
+    
+    {% set stateClasses = {
+      'default': options.datas.variants.default | default('bg-white rounded-lg border border-gray-300 p-6'),
+      'hover': options.datas.variants.hover | default('bg-gray-50'),
+      'focus': options.datas.variants.focus | default('border-blue-500 ring-2 ring-blue-300'),
+      'disabled': options.datas.variants.disabled | default('bg-gray-100 cursor-not-allowed')
+    } %}
+    
+    <div class="{{ globalStyle }} {{ stateClasses.default }} {{ options.class | default('') }}">
+      <div id="inputs-{{ formData.name }}" class="space-y-2">
+        {% for input in formData.inputs %}
+          {{ renderInput(input, options.atoms) }}
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <span class="text-red-500">List form data not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/list-form.njk" import renderListForm %}
+
+2. Call the list-form component with a specific name
+{{ renderListForm({ 
+    name: "hero_registration",
+    datas: molecules["list-forms"],
+    atoms: atoms
+}) }}
+
+3. Using custom styles
+{{ renderListForm({ 
+    name: "quest_submission",
+    datas: molecules["list-forms"],
+    atoms: atoms,
+    class: "my-custom-form-class"
+}) }}
+
+4. Structure of list-forms.json
+{
+  "forms": [
+    {
+      "name": "hero_registration",
+      "title": "Hero Registration",
+      "description": "Register your hero for epic adventures",
+      "submitLabel": "Register Hero",
+      "inputs": [
+        {
+          "name": "hero_name",
+          "required": true
+        },
+        {
+          "name": "guild_phone",
+          "required": true
+        },
+        {
+          "name": "weapon_choice",
+          "required": true
+        }
+      ]
+    }
+  ]
+}
+
+Choose your destiny... but first, paperwork 🏹📄
+#}
