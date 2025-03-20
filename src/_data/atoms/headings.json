@@ -66,6 +66,18 @@
       "level": 5,
       "text": "Label",
       "style": "default"
+    },
+    {
+      "name": "ancient_prophecy",
+      "level": 4,
+      "text": "Ancient prophecy",
+      "style": "default"
+    },
+    {
+      "name": "guild_rank",
+      "level": 4,
+      "text": "Guild rank",
+      "style": "default"
     }
   ]
 }

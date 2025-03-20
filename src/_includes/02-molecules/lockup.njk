@@ -1,0 +1,146 @@
+{#
+=========================
+         LOCKUP          
+=========================
+#}
+
+{% macro renderLockup(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    
+    {% set lockupData = null %}
+    {% if options.name %}
+      {% for lockupItem in options.datas.lockups %}
+        {% if lockupItem.name == options.name %}
+          {% set lockupData = lockupItem %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not lockupData %}
+      {% set lockupData = options.datas.lockups[0] %}
+    {% endif %}
+    
+    {# Get type-specific style #}
+    {% set typeStyle = options.datas.variants[lockupData.type] | default('') %}
+    
+    <div class="{{ globalStyle }} {{ typeStyle }} {{ options.class | default('') }}">
+      {% if lockupData.type == 'label-value' %}
+        {# Label + Value configuration #}
+        {% set labelStyle = options.datas.labelStyles[lockupData.label.style] | default(options.datas.labelStyles.default) %}
+        {% set valueStyle = options.datas.valueStyles[lockupData.value.style] | default(options.datas.valueStyles.default) %}
+        
+        <span class="{{ labelStyle }}">{{ lockupData.label.text }}</span>
+        <span class="{{ valueStyle }}">{{ lockupData.value.text }}</span>
+      
+      {% elif lockupData.type == 'value-legend' %}
+        {# Value + Legend configuration #}
+        {% set valueStyle = options.datas.valueStyles[lockupData.value.style] | default(options.datas.valueStyles.default) %}
+        {% set legendStyle = options.datas.legendStyles[lockupData.legend.style] | default(options.datas.legendStyles.default) %}
+        
+        <span class="{{ valueStyle }}">{{ lockupData.value.text }}</span>
+        <span class="{{ legendStyle }}">{{ lockupData.legend.text }}</span>
+      
+      {% elif lockupData.type == 'block-content' %}
+        {# Block Content configuration - horizontal layout with image left, content right #}
+        {% set contentStyle = options.datas.contentStyles[lockupData.content.style] | default(options.datas.contentStyles.default) %}
+        
+        {# Image column #}
+        {% if lockupData.image and options.images %}
+          {% set imageData = null %}
+          {% for img in options.images.images %}
+            {% if img.name == lockupData.image.name %}
+              {% set imageData = img %}
+            {% endif %}
+          {% endfor %}
+          
+          {% if imageData %}
+            {% set imgSize = options.images.variants[imageData.size] | default('') %}
+            <div class="flex-shrink-0 mr-4">
+              <img 
+                src="{{ imageData.src }}" 
+                alt="{{ imageData.alt }}" 
+                class="{{ options.images.globalStyle }} {{ imgSize }}"
+              >
+            </div>
+          {% endif %}
+        {% endif %}
+        
+        {# Content column #}
+        <div class="flex-grow">
+          {# Render heading if present #}
+          {% if lockupData.heading and options.headings %}
+            {% set headingData = null %}
+            {% for heading in options.headings.headings %}
+              {% if heading.name == lockupData.heading.name %}
+                {% set headingData = heading %}
+              {% endif %}
+            {% endfor %}
+            
+            {% if headingData %}
+              {% set hLevel = headingData.level | default(4) %}
+              {% set headingStyle = options.headings.variants[headingData.style] | default(options.headings.variants.default) %}
+              {% set sizeStyle = options.headings.sizeStyles['h' + hLevel] | default('') %}
+              
+              <h{{ hLevel }} class="{{ options.headings.globalStyle }} {{ sizeStyle }} {{ headingStyle }}">
+                {{ headingData.text }}
+              </h{{ hLevel }}>
+            {% endif %}
+          {% endif %}
+          
+          {# Render content text #}
+          <p class="{{ contentStyle }}">{{ lockupData.content.text }}</p>
+        </div>
+      {% endif %}
+    </div>
+  {% else %}
+    <span class="text-red-500">Lockup data not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/lockup.njk" import renderLockup %}
+
+2. Call the lockup component with a specific name
+{{ renderLockup({ 
+    name: "price_info",
+    datas: molecules.lockups,
+    images: atoms.images,
+    headings: atoms.headings
+}) }}
+
+3. Using custom styles
+{{ renderLockup({ 
+    name: "feature_block",
+    datas: molecules.lockups,
+    images: atoms.images,
+    headings: atoms.headings,
+    class: "my-custom-lockup-class"
+}) }}
+
+4. Structure of lockups.json
+{
+  "lockups": [
+    {
+      "name": "price_info",
+      "type": "label-value",
+      "label": {
+        "text": "Prix :",
+        "style": "default"
+      },
+      "value": {
+        "text": "200€",
+        "style": "highlight"
+      }
+    }
+  ]
+}
+
+Build not just walls, but a legacy 🏯🔥
+#}
