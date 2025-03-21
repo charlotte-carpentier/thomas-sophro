@@ -120,6 +120,12 @@
     "text": "Loot",
     "size": "button",
     "style": "primary"
+  },
+  {
+    "name": "card",
+    "text": "Venture forth",
+    "size": "button",
+    "style": "secondary"
   }
 ]
 }

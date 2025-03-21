@@ -1,12 +1,12 @@
 ---
 title: Blog
 description: This is the blog page
-layout: '00-organisms-global/base.njk'
+layout: '01-organisms/base.njk'
 ---
 
 {# For blog page, use hero_blog.json #}
 {% set pageData = hero_blog %}
-{% include "00-organisms-sections/section-page-hero.njk" %}
+{% include "01-organisms-sections/section-page-hero.njk" %}
 
 <div class="section container mx-auto py-8 px-4">
     <h1 class="text-3xl font-semibold text-center text-gray-900 mb-6">{{ pageData.title }}</h1>

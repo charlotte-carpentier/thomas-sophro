@@ -1,9 +1,3 @@
---- 
-title: Component Playground 
-description: Interactive exploration of Link Components 
-layout: '00-organisms-global/base.njk' 
----
-
 {# Import required atom macros #}
 {% from "03-atoms/link.njk" import renderLink %}
 {% from "03-atoms/chip-notification.njk" import renderChipNotification %}
@@ -38,6 +32,7 @@ layout: '00-organisms-global/base.njk'
 {% from "02-molecules/lockup.njk" import renderLockup %}
 {% from "02-molecules/list-value.njk" import renderListValue %}
 {% from "02-molecules/list-content.njk" import renderListContent %}
+{% from "02-molecules/card.njk" import renderCard %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -50,7 +45,7 @@ layout: '00-organisms-global/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing link component #}
-            {{ renderLink({ name: "tavern_quest", datas: atoms.links }) }}
+            {{ renderLink({ name: "camp", datas: atoms.links }) }}
         </div>
     </div>
 
@@ -381,6 +376,22 @@ layout: '00-organisms-global/base.njk'
                 lockups: molecules.lockups,
                 images: atoms.images,
                 headings: atoms.headings
+            }) }}
+        </div>
+    </div>
+
+    {# Card Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Card content</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing card component #}
+            {{ renderCard({ 
+                name: "goblin_menace",
+                variant: "default",
+                datas: molecules.cards,
+                images: atoms.images,
+                headings: atoms.headings,
+                buttons: atoms.buttons
             }) }}
         </div>
     </div>

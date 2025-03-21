@@ -3,7 +3,8 @@
   "sizes": {
     "large": "w-72 h-auto",
     "medium": "w-48 h-auto",
-    "small": "w-24 h-auto"
+    "small": "w-24 h-auto",
+    "xsmall": "w-12 h-auto"
   },
   "vectors": [
     {
@@ -13,10 +14,10 @@
       "size": "medium"
     },
     {
-      "name": "logo_symbol",
-      "src": "/assets/logos/logo-symbol.svg",
+      "name": "logo_minimal",
+      "src": "/assets/logos/logo-minimal.svg",
       "alt": "Starter kit symbol logo",
-      "size": "small"
+      "size": "xsmall"
     }
   ]
 }

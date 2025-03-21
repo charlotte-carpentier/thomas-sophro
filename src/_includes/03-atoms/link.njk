@@ -21,6 +21,7 @@
     <a 
       href="{{ linkData.href }}" 
       class="{{ globalStyle }} {{ variantStyle }}"
+      {% if options.dataNavLink %}data-nav-link="true"{% endif %}
     >
       {{ linkData.text }}
     </a>
@@ -42,22 +43,26 @@ Summon HAT Components Wisely
 2. Call a specific link by its name
 {{ renderLink({ name: "tavern_quest", datas: atoms.links }) }}
 
-3. Call multiple links from the data
+3. Call a navigation link with active state detection
+{{ renderLink({ name: "pigeon", datas: atoms.links, dataNavLink: true }) }}
+
+4. Call multiple links from the data
 {% for link in atoms.links.links %}
     {{ renderLink({ 
         name: link.name, 
-        datas: atoms.links 
+        datas: atoms.links,
+        dataNavLink: link.style == "navigation"  /* Automatically add active state to navigation links */
     }) }}
 {% endfor %}
 
-4. Direct link creation
+5. Direct link creation
 {{ renderLink({
     href: "/new-page", 
     text: "Custom Link", 
     style: "primary"
 }) }}
 
-5. Adding a new link to links.json
+6. Adding a new link to links.json
 {
   "links": [
     {
@@ -68,6 +73,9 @@ Summon HAT Components Wisely
     }
   ]
 }
+
+Note: For active state detection to work, you need to include the active-links.js script
+and add the dataNavLink: true parameter to your navigation links.
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

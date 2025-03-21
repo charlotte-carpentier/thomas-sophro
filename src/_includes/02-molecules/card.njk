@@ -1,0 +1,184 @@
+{#
+=========================
+          CARD           
+=========================
+#}
+
+{% macro renderCard(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set widthStyle = options.datas.widthStyle | default('') %}
+    
+    {% set cardData = null %}
+    {% if options.name %}
+      {% for cardItem in options.datas.cards %}
+        {% if cardItem.name == options.name %}
+          {% set cardData = cardItem %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not cardData %}
+      {% set cardData = options.datas.cards[0] %}
+    {% endif %}
+    
+    {# Get variant style #}
+    {% set variantStyle = options.datas.variants[options.variant] | default(options.datas.variants.default) %}
+    
+    <div class="{{ globalStyle }} {{ widthStyle }} {{ variantStyle }} {{ options.class | default('') }}">
+      {# Image section #}
+      {% if cardData.image and options.images %}
+        {% set imageData = null %}
+        {% for img in options.images.images %}
+          {% if img.name == cardData.image.name %}
+            {% set imageData = img %}
+          {% endif %}
+        {% endfor %}
+        
+        {% if imageData %}
+          {% set imgSize = options.images.variants[imageData.size] | default('') %}
+          <div class="card-image-container">
+            <img 
+              src="{{ imageData.src }}" 
+              alt="{{ imageData.alt }}" 
+              class="{{ options.images.globalStyle }} {{ imgSize }} w-full h-auto"
+            >
+          </div>
+        {% endif %}
+      {% endif %}
+      
+      {# Content section #}
+      <div class="{{ options.datas.contentStyle }}">
+        {# Render heading if present #}
+        {% if cardData.heading and options.headings %}
+          {% set headingData = null %}
+          {% for heading in options.headings.headings %}
+            {% if heading.name == cardData.heading.name %}
+              {% set headingData = heading %}
+            {% endif %}
+          {% endfor %}
+          
+          {% if headingData %}
+            {% set hLevel = headingData.level | default(3) %}
+            {% set headingStyle = options.headings.variants[headingData.style] | default(options.headings.variants.default) %}
+            {% set sizeStyle = options.headings.sizeStyles['h' + hLevel] | default('') %}
+            
+            <h{{ hLevel }} class="{{ options.headings.globalStyle }} {{ sizeStyle }} {{ headingStyle }}">
+              {{ headingData.text }}
+            </h{{ hLevel }}>
+          {% endif %}
+        {% endif %}
+        
+        {# Render content text #}
+        {% if cardData.content %}
+          {% set contentStyle = options.datas.contentStyles[cardData.content.style] | default(options.datas.contentStyles.default) %}
+          {% set maxLines = cardData.content.maxLines | default(0) %}
+          <p class="{{ contentStyle }} {% if maxLines > 0 %}line-clamp-{{ maxLines }}{% endif %}">{{ cardData.content.text }}</p>
+        {% endif %}
+        
+        {# Render button if present #}
+        {% if cardData.button and options.buttons %}
+          {% set buttonData = null %}
+          {% for button in options.buttons.buttons %}
+            {% if button.name == cardData.button.name %}
+              {% set buttonData = button %}
+            {% endif %}
+          {% endfor %}
+          
+          {% if buttonData %}
+            {% set btnVariant = buttonData.style | default('primary') %}
+            {% set btnSize = buttonData.size | default('button') %}
+            {% set btnDefaultState = options.buttons.variants[btnVariant].default | default('') %}
+            {% set btnSizeStyle = options.buttons.sizes[btnSize] | default('') %}
+            
+            <div class="mt-auto pt-2 flex justify-center">
+              <a 
+                href="{{ buttonData.href | default('#') }}" 
+                class="{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}"
+                {% if buttonData.target %}target="{{ buttonData.target }}"{% endif %}
+                onmouseover="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].hover }} {{ btnSizeStyle }}'"
+                onmouseout="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
+                onfocus="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].focus }} {{ btnSizeStyle }}'"
+                onblur="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
+              >
+                {% if buttonData.iconBefore %}
+                  <img src="{{ buttonData.iconBefore }}" alt="" class="inline-block mr-2 h-4 w-4">
+                {% endif %}
+                
+                {{ buttonData.text }}
+                
+                {% if buttonData.iconAfter %}
+                  <img src="{{ buttonData.iconAfter }}" alt="" class="inline-block ml-2 h-4 w-4">
+                {% endif %}
+              </a>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <span class="text-red-500">Card data not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/card.njk" import renderCard %}
+
+2. Call the card component with a specific name
+{{ renderCard({ 
+    name: "goblin_menace",
+    variant: "default",
+    datas: molecules.cards,
+    images: atoms.images,
+    headings: atoms.headings,
+    buttons: atoms.buttons
+}) }}
+
+3. Using custom styles or specific width
+{{ renderCard({ 
+    name: "lost_wizard_hat",
+    variant: "featured",
+    datas: molecules.cards,
+    images: atoms.images,
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    class: "my-custom-card-class w-64"
+}) }}
+
+4. Creating a grid of cards with responsive layout
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {{ renderCard({ name: "goblin_menace", variant: "default", datas: molecules.cards, images: atoms.images, headings: atoms.headings, buttons: atoms.buttons }) }}
+  {{ renderCard({ name: "lost_wizard_hat", variant: "featured", datas: molecules.cards, images: atoms.images, headings: atoms.headings, buttons: atoms.buttons }) }}
+</div>
+
+5. Structure of cards.json
+{
+  "cards": [
+    {
+      "name": "goblin_menace",
+      "image": {
+        "name": "placeholder_small"
+      },
+      "heading": {
+        "name": "goblin_menace"
+      },
+      "content": {
+        "text": "A band of mischievous goblins is causing chaos...",
+        "style": "default",
+        "maxLines": 2  // Optional: Limits text to 2 lines with ellipsis
+      },
+      "button": {
+        "name": "card"
+      }
+    }
+  ]
+}
+
+Adventure awaits behind every card! 🗝️🎴
+#}

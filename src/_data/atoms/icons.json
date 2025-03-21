@@ -98,6 +98,12 @@
       "path": "/assets/icons/star-filled.svg", 
       "alt": "Star Filled Icon",
       "defaultSize": "md"
+    },
+    {
+      "name": "burger_solid",
+      "path": "/assets/icons/burger-solid.svg", 
+      "alt": "Header burger Icon",
+      "defaultSize": "md"
     }
   ]
 }

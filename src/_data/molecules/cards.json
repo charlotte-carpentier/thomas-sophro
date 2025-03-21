@@ -1,0 +1,51 @@
+{
+  "globalStyle": "flex flex-col rounded-lg overflow-hidden shadow-md transition-all duration-300",
+  "widthStyle": "w-80",
+  "variants": {
+    "default": "bg-white hover:shadow-lg",
+    "primary": "bg-blue-50 hover:shadow-lg",
+    "secondary": "bg-gray-50 hover:shadow-lg",
+    "featured": "bg-white hover:shadow-xl border-2 border-blue-500"
+  },
+  "contentStyle": "p-4 flex flex-col gap-4",
+  "contentStyles": {
+    "default": "text-gray-700",
+    "secondary": "text-gray-600 text-sm"
+  },
+  "cards": [
+    {
+      "name": "goblin_menace",
+      "image": {
+        "name": "placeholder_small"
+      },
+      "heading": {
+        "name": "goblin_menace"
+      },
+      "content": {
+        "text": "A band of mischievous goblins is causing chaos in the village tavern. Reward: 50 gold and unlimited ale for a night.",
+        "style": "default",
+        "maxLines": 2
+      },
+      "button": {
+        "name": "card"
+      }
+    },
+    {
+      "name": "lost_wizard_hat",
+      "image": {
+        "name": "placeholder_small"
+      },
+      "heading": {
+        "name": "lost_wizard_hat"
+      },
+      "content": {
+        "text": "Grand Magus Eldrin misplaced his enchanted hat... again. Find it before it starts summoning random chickens.",
+        "style": "default",
+        "maxLines": 3
+      },
+      "button": {
+        "name": "card"
+      }
+    }
+  ]
+}

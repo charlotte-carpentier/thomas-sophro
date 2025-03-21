@@ -114,6 +114,30 @@
       "level": 4,
       "text": "Cursed Treasure",
       "style": "default"
+    },
+    {
+      "name": "goblin_menace",
+      "level": 3,
+      "text": "Goblin Menace",
+      "style": "default"
+    },
+    {
+      "name": "lost_wizard_hat",
+      "level": 4,
+      "text": "Lost Wizard Hat",
+      "style": "default"
+    },
+    {
+      "name": "dragon_sighting",
+      "level": 4,
+      "text": "Dragon Sighting",
+      "style": "default"
+    },
+    {
+      "name": "bard_for_hire",
+      "level": 4,
+      "text": "Bard for Hire",
+      "style": "default"
     }
   ]
 }
