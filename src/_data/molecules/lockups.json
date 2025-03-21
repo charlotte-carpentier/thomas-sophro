@@ -147,6 +147,90 @@
         "text": "10 gold coins or a really good story",
         "style": "highlight"
       }
-    }
+    },
+    {
+      "name": "forgotten_prophecy",
+      "type": "block-content",
+      "image": {
+        "name": "placeholder_small"
+      },
+      "heading": {
+        "name": "forgotten_prophecy"
+      },
+      "content": {
+        "text": "Deep within the archives of the Elders, a prophecy speaks of a chosen one... who actually reads the terms and conditions.",
+        "style": "default"
+      }
+    },
+    {
+      "name": "forbidden_tome",
+      "type": "block-content",
+      "image": {
+        "name": "placeholder_small"
+      },
+      "heading": {
+        "name": "forbidden_tome"
+      },
+      "content": {
+        "text": "This ancient tome holds great wisdom—if you can get past the eldritch librarian guarding it with a +5 glare of disapproval.",
+        "style": "default"
+      }
+    },
+    {
+      "name": "blade_of_fate",
+      "type": "block-content",
+      "image": {
+        "name": "placeholder_small"
+      },
+      "heading": {
+        "name": "blade_of_fate"
+      },
+      "content": {
+        "text": "Legends tell of a blade so powerful that kings and warlords sought it for centuries—only to realize it was stuck in a rock. Again.",
+        "style": "default"
+      }
+    },
+    {
+      "name": "mysterious_vendor",
+      "type": "block-content",
+      "image": {
+        "name": "placeholder_small"
+      },
+      "heading": {
+        "name": "mysterious_vendor"
+      },
+      "content": {
+        "text": "He offers potions of unknown origin and scrolls with questionable effects... but hey, at least they come with a discount.",
+        "style": "default"
+      }
+    },
+    {
+      "name": "wizard_hat",
+      "type": "block-content",
+      "image": {
+        "name": "placeholder_small"
+      },
+      "heading": {
+        "name": "wizard_hat"
+      },
+      "content": {
+        "text": "A hat so powerful that it grants wisdom, charisma, and—most importantly—a dramatic flair for making grand exits.",
+        "style": "default"
+      }
+    },
+    {
+      "name": "cursed_treasure",
+      "type": "block-content",
+      "image": {
+        "name": "placeholder_small"
+      },
+      "heading": {
+        "name": "cursed_treasure"
+      },
+      "content": {
+        "text": "It glows, it tempts, it whispers your name... and yet, something tells you it might have teeth. Big ones.",
+        "style": "default"
+      }
+    }    
   ]
 }

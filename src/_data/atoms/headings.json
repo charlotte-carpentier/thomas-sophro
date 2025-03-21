@@ -78,6 +78,42 @@
       "level": 4,
       "text": "Guild rank",
       "style": "default"
+    },
+    {
+      "name": "forgotten_prophecy",
+      "level": 4,
+      "text": "Forgotten Prophecy",
+      "style": "default"
+    },
+    {
+      "name": "forbidden_tome",
+      "level": 4,
+      "text": "Forbidden Tome",
+      "style": "default"
+    },
+    {
+      "name": "blade_of_fate",
+      "level": 4,
+      "text": "Blade of Fate",
+      "style": "default"
+    },
+    {
+      "name": "mysterious_vendor",
+      "level": 4,
+      "text": "Mysterious Vendor",
+      "style": "default"
+    },
+    {
+      "name": "wizard_hat",
+      "level": 4,
+      "text": "Wizard's Hat",
+      "style": "default"
+    },
+    {
+      "name": "cursed_treasure",
+      "level": 4,
+      "text": "Cursed Treasure",
+      "style": "default"
     }
   ]
 }

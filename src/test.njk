@@ -37,6 +37,7 @@ layout: '00-organisms-global/base.njk'
 {% from "02-molecules/segmented-control.njk" import renderSegmentedControl %}
 {% from "02-molecules/lockup.njk" import renderLockup %}
 {% from "02-molecules/list-value.njk" import renderListValue %}
+{% from "02-molecules/list-content.njk" import renderListContent %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -355,17 +356,32 @@ layout: '00-organisms-global/base.njk'
         </div>
     </div>
 
-        {# List value Molecule #}
+    {# List value Molecule #}
     <h3 class="text-xl font-semibold mb-4">List value</h3>
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing list-value component #}
-{{ renderListValue({ 
-    name: "two_columns",
-    datas: molecules["list-values"],
-    lockups: molecules.lockups,
-    variant: "default"
-}) }}
+            {{ renderListValue({ 
+                name: "columns",
+                datas: molecules["list-values"],
+                lockups: molecules.lockups,
+                variant: "default"
+            }) }}
+        </div>
+    </div>
+
+    {# List content Molecule #}
+    <h3 class="text-xl font-semibold mb-4">List content</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing list-content component #}
+            {{ renderListContent({ 
+                name: "forgotten_legends",
+                datas: molecules["list-contents"],
+                lockups: molecules.lockups,
+                images: atoms.images,
+                headings: atoms.headings
+            }) }}
         </div>
     </div>
 

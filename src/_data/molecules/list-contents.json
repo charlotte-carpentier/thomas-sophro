@@ -1,0 +1,49 @@
+{
+  "globalStyle": "flex flex-col space-y-6",
+  "variants": {
+    "default": "space-y-6",
+    "compact": "space-y-4",
+    "expanded": "space-y-8",
+    "grid": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+  },
+  "itemStyle": {
+    "default": "w-full",
+    "bordered": "w-full border border-gray-200 rounded-md p-4",
+    "shadowed": "w-full shadow-md rounded-md p-4",
+    "highlighted": "w-full border-l-4 border-blue-500 pl-4"
+  },
+  "list_contents": [
+    {
+      "name": " forgotten_legends",
+      "style": "default",
+      "itemStyle": "default",
+      "items": [
+        {
+          "lockupName": "forgotten_prophecy"
+        },
+        {
+          "lockupName": "forbidden_tome"
+        },
+        {
+          "lockupName": "blade_of_fate"
+        }
+      ]
+    },
+    {
+      "name": "mystical_artifacts",
+      "style": "compact",
+      "itemStyle": "shadowed",
+      "items": [
+        {
+          "lockupName": "mysterious_vendor"
+        },
+        {
+          "lockupName": "wizard_hat"
+        },
+        {
+          "lockupName": "cursed_treasure"
+        }
+      ]
+    }
+  ]
+}
