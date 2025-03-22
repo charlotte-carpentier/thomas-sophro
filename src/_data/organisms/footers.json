@@ -10,7 +10,7 @@
         {
             "name": "standard",
             "containerStyle": "bg-gray-100 py-8",
-            "menus": [
+            "": [
                 {
                     "name": "main_navigation",
                     "position": "column_1"

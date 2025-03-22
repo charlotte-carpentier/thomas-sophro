@@ -4,6 +4,8 @@
 =========================
 #}
 
+{% from "01-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
+
 {% macro renderMenu(options) %}
   {% if options.datas %}
     {% set globalStyle = options.datas.globalStyle %}
@@ -21,13 +23,6 @@
       {% set menuData = options.datas.menus[0] %}
     {% endif %}
     
-    {% set stateClasses = {
-      'default': options.datas.variants.default | default('text-gray-800'),
-      'hover': options.datas.variants.hover | default('text-gray-600'),
-      'focus': options.datas.variants.focus | default('text-gray-800 outline-2 outline-blue-500 outline-offset-2'),
-      'active': options.datas.variants.active | default('text-blue-600 font-bold')
-    } %}
-    
     {% set headingText = menuData.heading %}
     {% set headingLevel = 2 %}
     {% set headingStyle = menuData.headingStyle %}
@@ -44,39 +39,14 @@
     
     <nav class="{{ globalStyle }} {{ options.class | default('') }}">
       <h{{ headingLevel }} class="{{ headingStyle }}">{{ headingText }}</h{{ headingLevel }}>
-      <ul class="{{ menuData.menuStyle }}">
-        {% for item in menuData.links %}
-          <li>
-            {% if options.links %}
-              {# Try to find the corresponding link #}
-              {% set linkFound = false %}
-              {% for link in options.links.links %}
-                {% if link.name == item.name %}
-                  <a href="{{ link.href }}" 
-                     class="{{ stateClasses.default }}"
-                     onmouseover="this.className='{{ stateClasses.hover }}'" 
-                     onmouseout="this.className='{{ stateClasses.default }}'"
-                     onfocus="this.className='{{ stateClasses.focus }}'"
-                     onblur="this.className='{{ stateClasses.default }}'">
-                    {{ link.text }}
-                  </a>
-                  {% set linkFound = true %}
-                {% endif %}
-              {% endfor %}
-              
-              {% if not linkFound %}
-                <span class="{{ stateClasses.default }}">
-                  {{ item.name }}
-                </span>
-              {% endif %}
-            {% else %}
-              <span class="{{ stateClasses.default }}">
-                {{ item.name }}
-              </span>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
+      
+      {# Utilisation directe du composant navigation-secondary comme pattern dans header.njk #}
+      {{ renderNavigationSecondary({ 
+          name: menuData['navigation-secondarys'],
+          datas: options['navigation-secondarys'],
+          links: options.links,
+          class: menuData.menuStyle
+      }) }}
     </nav>
   {% else %}
     <span class="text-red-500">Menu data not found</span>
@@ -96,6 +66,7 @@ Summon HAT Components Wisely
 {{ renderMenu({ 
     name: "main_navigation",
     datas: organisms.menus,
+    "navigation-secondarys": organisms["navigation-secondarys"],
     links: atoms.links,
     headings: atoms.headings
 }) }}
@@ -104,26 +75,21 @@ Summon HAT Components Wisely
 {{ renderMenu({ 
     name: "footer_navigation",
     datas: organisms.menus,
+    "navigation-secondarys": organisms["navigation-secondarys"],
     links: atoms.links,
     headings: atoms.headings,
     class: "my-custom-menu-class"
 }) }}
 
-4. Structure of menus.json
+4. Structure of navigation-secondarys.json
 {
-  "menus": [
+  "navigation-secondarys": [
     {
-      "name": "main_navigation",
-      "heading": "Quest Log",
-      "menuStyle": "flex flex-col space-y-2",
-      "headingStyle": "text-lg font-semibold text-gray-900 mb-2",
+      "name": "sidebar",
       "links": [
-        {
-          "name": "tavern"
-        },
-        {
-          "name": "lore"
-        }
+        "tavern",
+        "lore",
+        "guild_services"
       ]
     }
   ]

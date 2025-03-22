@@ -12,98 +12,28 @@
       "heading": "quest_log",
       "menuStyle": "flex flex-col space-y-1",
       "headingStyle": "text-lg font-semibold text-gray-900 mb-2",
-      "links": [
-        {
-          "name": "tavern"
-        },
-        {
-          "name": "lore"
-        },
-        {
-          "name": "guild_services"
-        },
-        {
-          "name": "hall_of_legends"
-        },
-        {
-          "name": "bard_tales"
-        },
-        {
-          "name": "send_a_raven"
-        }
-      ]
+      "navigation-secondarys": "site_navigation"
     },
     {
       "name": "footer_navigation",
       "heading": "ancient_scrolls",
       "menuStyle": "flex flex-col space-y-1",
       "headingStyle": "text-lg font-semibold text-gray-900 mb-2",
-      "links": [
-        {
-          "name": "sacred_decrees"
-        },
-        {
-          "name": "laws_of_the_realm"
-        },
-        {
-          "name": "magic_biscuits"
-        },
-        {
-          "name": "map_of_the_kingdom"
-        },
-        {
-          "name": "guild_recruitment"
-        },
-        {
-          "name": "oracle_whispers"
-        }
-      ]
+      "navigation-secondarys": "footer_navigation"
     },
     {
       "name": "royal_services",
       "heading": "kingdom_services",
       "menuStyle": "flex flex-col space-y-1",
       "headingStyle": "text-lg font-semibold text-gray-900 mb-2",
-      "links": [
-        {
-          "name": "blacksmith_forge"
-        },
-        {
-          "name": "potion_brewing"
-        },
-        {
-          "name": "spell_enchantments"
-        },
-        {
-          "name": "royal_courier"
-        },
-        {
-          "name": "dragon_rentals"
-        },
-        {
-          "name": "bard_entertainment"
-        }
-      ]
+      "navigation-secondarys": "royal_services"
     },
     {
       "name": "socials",
       "heading": "socials",
       "menuStyle": "flex flex-col space-y-1",
       "headingStyle": "text-lg font-semibold text-gray-900 mb-2",
-      "links": [
-        {
-          "name": "scroll_of_faces"
-        },
-        {
-          "name": "chirping_birds"
-        },
-        {
-          "name": "illusion_mirror"
-        },
-        {
-          "name": "guild_registry"
-        }
-      ]
+      "navigation-secondarys": "socials"
     }
   ]
 }

@@ -407,20 +407,7 @@ layout: '01-organisms/base.njk'
         </div>
     </div>
 
-    {# Menu Molecule #}
-    <h3 class="text-xl font-semibold mb-4">Menu</h3>
-    <div class="space-y-4">
-        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
-            {# Render existing menu component #}
-            {{ renderMenu({ 
-                name: "main_navigation",
-                datas: organisms.menus,
-                links: atoms.links,
-                headings: atoms.headings
-            }) }}
-    </div>
-
-    {# Navigation Molecule #}
+    {# Navigation Organism #}
     <h3 class="text-xl font-semibold mb-4">Navigation</h3>
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
@@ -432,15 +419,29 @@ layout: '01-organisms/base.njk'
             }) }}
     </div>
 
-    {# Navigation secondary Molecule #}
+    {# Navigation secondary Organism #}
     <h3 class="text-xl font-semibold mb-4">Navigation secondary</h3>
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing navigation-secondary component #}
             {{ renderNavigationSecondary({ 
-                name: "sidebar",
+                name: "main",
                 datas: organisms["navigation-secondarys"],
                 links: atoms.links
+            }) }}
+    </div>
+
+    {# Menu Organism #}
+    <h3 class="text-xl font-semibold mb-4">Menu</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing menu component #}
+            {{ renderMenu({ 
+                name: "main_navigation",
+                datas: organisms.menus,
+                "navigation-secondarys": organisms["navigation-secondarys"],
+                links: atoms.links,
+                headings: atoms.headings
             }) }}
     </div>
 

@@ -37,23 +37,23 @@
     
     <footer class="{{ globalStyle }} {{ footerData.containerStyle }} {{ options.class | default('') }}">
       <div class="container mx-auto px-4">
-        {# Logo au début du footer #}
+        {# Logo at the top of the footer #}
         {% if footerData.vectors and options.vectors %}
           <div class="mb-6 flex justify-start">
             {{ renderVector({ name: footerData.vectors, datas: options.vectors }) }}
           </div>
         {% endif %}
         
-        {# Grid des menus #}
+        {# Menu grid #}
         <div class="flex flex-col space-y-6 md:grid md:grid-cols-4 md:gap-8 md:space-y-0">
-          {# Boucle à travers les menus #}
-          {% for menuConfig in footerData.menus %}
+          {# Loop through menus - using footerData[""] instead of footerData.menus #}
+          {% for menuConfig in footerData[""] %}
             <div class="footer-column {{ menuConfig.position }}">
-              {# Cherche les données de menu dans options.menus (qui sera organisms.menus) #}
+              {# Find menu data in options.menus (which will be organisms.menus) #}
               {% if options.menus and options.menus.menus %}
                 {% for menuData in options.menus.menus %}
                   {% if menuData.name == menuConfig.name %}
-                    {# Affiche le titre du menu #}
+                    {# Display menu heading #}
                     {% if menuData.heading and options.headings and options.headings.headings %}
                       {% for heading in options.headings.headings %}
                         {% if heading.name == menuData.heading %}
@@ -62,24 +62,37 @@
                       {% endfor %}
                     {% endif %}
                     
-                    {# Menu standard pour tous les types de menus #}
-                    <ul class="{{ menuData.menuStyle }}">
-                      {% for linkItem in menuData.links %}
-                        <li class="{% if menuData.name == 'socials' %}mb-2{% endif %}">
+                    {# Find navigation-secondary configuration #}
+                    {% set navSecondaryData = null %}
+                    {% if options["navigation-secondarys"] and options["navigation-secondarys"]["navigation-secondarys"] %}
+                      {% for navSecondary in options["navigation-secondarys"]["navigation-secondarys"] %}
+                        {% if navSecondary.name == menuData["navigation-secondarys"] %}
+                          {% set navSecondaryData = navSecondary %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                    
+                    {# Important: Use nav with navigation-secondary class and data-nav-secondary attribute
+                       to ensure your current-link.js recognizes it correctly #}
+                    <nav class="{{ menuData.menuStyle }} navigation-secondary" data-nav-secondary data-nav-container>
+                      {% if navSecondaryData and navSecondaryData.links %}
+                        {# Loop through the links from navigation-secondary #}
+                        {% for linkName in navSecondaryData.links %}
                           {% if options.links and options.links.links %}
                             {% for linkData in options.links.links %}
-                              {% if linkData.name == linkItem.name %}
-                                {% if menuData.name == "socials" and options.icons %}
-                                  {# Traitement spécial pour les liens sociaux avec icônes #}
+                              {% if linkData.name == linkName %}
+                                {% if menuData.name == "socials" and footerData.icons %}
+                                  {# Special treatment for social links with icons #}
                                   <a href="{{ linkData.href }}" 
-                                     class="{{ stateClasses.default }} flex items-center gap-2"
-                                     onmouseover="this.className='{{ stateClasses.hover }} flex items-center gap-2'" 
-                                     onmouseout="this.className='{{ stateClasses.default }} flex items-center gap-2'"
-                                     onfocus="this.className='{{ stateClasses.focus }} flex items-center gap-2'"
-                                     onblur="this.className='{{ stateClasses.default }} flex items-center gap-2'"
-                                     aria-label="{{ linkData.text }}">
+                                     class="{{ stateClasses.default }} flex items-center gap-2 mb-2"
+                                     onmouseover="this.className='{{ stateClasses.hover }} flex items-center gap-2 mb-2'" 
+                                     onmouseout="this.className='{{ stateClasses.default }} flex items-center gap-2 mb-2'"
+                                     onfocus="this.className='{{ stateClasses.focus }} flex items-center gap-2 mb-2'"
+                                     onblur="this.className='{{ stateClasses.default }} flex items-center gap-2 mb-2'"
+                                     aria-label="{{ linkData.text }}"
+                                     data-nav-link>
                                     
-                                    {# Recherche l'icône correspondante #}
+                                    {# Find corresponding icon #}
                                     {% set iconData = null %}
                                     {% if options.icons and options.icons.icons %}
                                       {% for icon in options.icons.icons %}
@@ -90,9 +103,9 @@
                                     {% endif %}
                                     
                                     {% if iconData and iconData.path %}
-                                      {# Ajout de la classe spéciale pour le script JS qui charge les SVG #}
+                                      {# Add special class for JS script that loads SVGs #}
                                       <span 
-                                        data-svg-src="{{ iconData.path }}" 
+                                        data-svg-src="{{ iconData.path | default('/assets/images/icons/' + iconData.name + '.svg') }}" 
                                         class="icon w-4 h-4 mr-2"
                                         aria-hidden="true"
                                       ></span>
@@ -101,141 +114,155 @@
                                     <span>{{ linkData.text }}</span>
                                   </a>
                                 {% else %}
-                                  {# Utilisation de renderLink pour les liens standard #}
-                                  {{ renderLink({ name: linkData.name, datas: options.links }) }}
+                                  {# Use renderLink for standard links with dataNavLink parameter set to true #}
+                                  <div class="mb-2">
+                                    {{ renderLink({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
+                                  </div>
                                 {% endif %}
                               {% endif %}
                             {% endfor %}
-                          {% else %}
-                            <span>Label</span>
                           {% endif %}
-                        </li>
-                      {% endfor %}
-                    </ul>
+                        {% endfor %}
+                      {% else %}
+                        {# Fallback if no links found in navigation-secondarys #}
+                        <span class="block mb-2">Menu item</span>
+                        <span class="block mb-2">Menu item</span>
+                      {% endif %}
+                    </nav>
                   {% endif %}
                 {% endfor %}
               {% else %}
-                <h4 class="mb-2 font-bold text-lg">Heading</h4>
-                <ul class="space-y-2">
-                  <li><span>Label</span></li>
-                  <li><span>Label</span></li>
-                  <li><span>Label</span></li>
-                  <li><span>Label</span></li>
-                </ul>
+                {# Fallback if no menu data found #}
+                <h4 class="mb-2 font-bold text-lg">Menu</h4>
+                <div class="space-y-2">
+                  <span class="block">Menu item</span>
+                  <span class="block">Menu item</span>
+                </div>
               {% endif %}
             </div>
           {% endfor %}
         </div>
         
-        {# Section du bas avec copyright et liens #}
+        {# Bottom section with copyright and links - Use regular nav without secondary class #}
         <div class="mt-8">
-          {# VERSION MOBILE #}
+          {# MOBILE VERSION #}
           <div class="flex flex-col items-start space-y-4 md:hidden">
-            {# Liens en premier sur mobile - Ordre inversé #}
-            <div class="space-y-2 w-full">
-              {% if footerData.links and footerData.links.length > 0 %}
+            {# Links in footer on mobile - Use nav without secondary class for horizontal indicators #}
+            <nav class="space-y-2 w-full navigation" data-nav-container>
+              {% if footerData.links %}
                 {% for linkConfig in footerData.links %}
-                  {% set linkFound = false %}
-                  
-                  {% if options.links and options.links.links %}
-                    {% for linkData in options.links.links %}
-                      {% if linkData.name == linkConfig.name %}
-                        {% set linkFound = true %}
-                        <div>
-                          {# Utilisation de renderLink au lieu de créer manuellement le lien #}
-                          {{ renderLink({ name: linkData.name, datas: options.links }) }}
-                        </div>
-                      {% endif %}
-                    {% endfor %}
-                  {% endif %}
-                  
-                  {# Fallback si le lien n'est pas trouvé - On utilise un style par défaut #}
-                  {% if not linkFound %}
-                    <div>
+                  <div>
+                    {% set linkFound = false %}
+                    {% if options.links and options.links.links %}
+                      {% for linkData in options.links.links %}
+                        {% if linkData.name == linkConfig.name %}
+                          {% set linkFound = true %}
+                          {{ renderLink({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                    
+                    {% if not linkFound %}
                       {% if linkConfig.name == 'accessibility' %}
-                        <a href="/accessibility" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
-                          Accessibilité
+                        <a href="/accessibility" 
+                           class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
+                           data-nav-link>
+                          Accessibility
                         </a>
                       {% elif linkConfig.name == 'creator' %}
-                        <a href="https://hat.fr" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
+                        <a href="https://hat.fr" 
+                           class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
+                           data-nav-link>
                           Website by hat
                         </a>
                       {% endif %}
-                    </div>
-                  {% endif %}
+                    {% endif %}
+                  </div>
                 {% endfor %}
               {% else %}
-                {# Fallback si aucun lien n'est défini dans footerData #}
+                {# Standard links if none defined #}
                 <div>
-                  <a href="/accessibility" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
-                    Accessibilité
+                  <a href="/accessibility" 
+                     class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
+                     data-nav-link>
+                    Accessibility
                   </a>
                 </div>
                 <div>
-                  <a href="https://hat.fr" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
+                  <a href="https://hat.fr" 
+                     class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
+                     data-nav-link>
                     Website by hat
                   </a>
                 </div>
               {% endif %}
-            </div>
+            </nav>
             
-            {# Copyright en dernier sur mobile #}
+            {# Copyright on mobile #}
             <div class="text-sm mt-4">
-              <p>© {% year %} {{ footerData.copyright | default('Starter kit tous droits réservés') }}</p>
+              <p>© {% year %} {{ footerData.copyright | default('Starter kit all rights reserved') }}</p>
             </div>
           </div>
           
-          {# VERSION DESKTOP #}
+          {# DESKTOP VERSION #}
           <div class="hidden md:flex md:items-center md:text-sm md:w-full md:mt-10">
-            {# Copyright en premier sur desktop #}
-            <span>© {% year %} {{ footerData.copyright | default('Starter kit tous droits réservés') }}</span>
+            {# Copyright #}
+            <span>© {% year %} {{ footerData.copyright | default('Starter kit all rights reserved') }}</span>
             
-            {# Version avec séparateur #}
+            {# Version with separator #}
             {% if footerData.version %}
               <span class="mx-2" aria-hidden="true">•</span>
               <span>v{{ footerData.version }}</span>
             {% endif %}
             
-            {# Liens avec séparateurs #}
-            {% if footerData.links and footerData.links.length > 0 %}
-              {% for linkConfig in footerData.links %}
-                <span class="mx-2" aria-hidden="true">•</span>
-                
-                {% set linkFound = false %}
-                {% if options.links and options.links.links %}
-                  {% for linkData in options.links.links %}
-                    {% if linkData.name == linkConfig.name %}
-                      {% set linkFound = true %}
-                      {# Utilisation de renderLink au lieu de créer manuellement le lien #}
-                      {{ renderLink({ name: linkData.name, datas: options.links }) }}
+            {# Links in footer on desktop - Use nav without secondary class for horizontal indicators #}
+            <nav class="flex items-center navigation" data-nav-container>
+              {% if footerData.links %}
+                  {% for linkConfig in footerData.links %}
+                    <span class="mx-2" aria-hidden="true">•</span>
+                    
+                    {% set linkFound = false %}
+                    {% if options.links and options.links.links %}
+                      {% for linkData in options.links.links %}
+                        {% if linkData.name == linkConfig.name %}
+                          {% set linkFound = true %}
+                          {{ renderLink({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                    
+                    {% if not linkFound %}
+                      {% if linkConfig.name == 'accessibility' %}
+                        <a href="/accessibility" 
+                           class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
+                           data-nav-link>
+                          Accessibility
+                        </a>
+                      {% elif linkConfig.name == 'creator' %}
+                        <a href="https://hat.fr" 
+                           class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
+                           data-nav-link>
+                          Website by hat
+                        </a>
+                      {% endif %}
                     {% endif %}
                   {% endfor %}
-                {% endif %}
-                
-                {# Fallback si le lien n'est pas trouvé #}
-                {% if not linkFound %}
-                  {% if linkConfig.name == 'accessibility' %}
-                    <a href="/accessibility" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
-                      Accessibilité
-                    </a>
-                  {% elif linkConfig.name == 'creator' %}
-                    <a href="https://hat.fr" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
-                      Website by hat
-                    </a>
-                  {% endif %}
-                {% endif %}
-              {% endfor %}
-            {% else %}
-              {# Fallback si aucun lien n'est défini dans footerData #}
-              <span class="mx-2" aria-hidden="true">•</span>
-              <a href="/accessibility" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
-                Accessibilité
-              </a>
-              <span class="mx-2" aria-hidden="true">•</span>
-              <a href="https://hat.fr" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
-                Website by hat
-              </a>
-            {% endif %}
+              {% else %}
+                {# Standard links if none defined #}
+                <span class="mx-2" aria-hidden="true">•</span>
+                <a href="/accessibility" 
+                   class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
+                   data-nav-link>
+                  Accessibility
+                </a>
+                <span class="mx-2" aria-hidden="true">•</span>
+                <a href="https://hat.fr" 
+                   class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
+                   data-nav-link>
+                  Website by hat
+                </a>
+              {% endif %}
+            </nav>
           </div>
         </div>
       </div>
@@ -262,10 +289,11 @@ Summon HAT Components Wisely
     links: atoms.links,
     headings: atoms.headings,
     icons: atoms.icons,
-    vectors: atoms.vectors
+    vectors: atoms.vectors,
+    "navigation-secondarys": atoms["navigation-secondarys"]
 }) }}
 
-3. Usage avec styles personnalisés
+3. Usage with custom styles
 {{ renderFooter({ 
     name: "standard", 
     datas: organisms.footers,
@@ -274,8 +302,9 @@ Summon HAT Components Wisely
     headings: atoms.headings,
     icons: atoms.icons,
     vectors: atoms.vectors,
+    "navigation-secondarys": atoms["navigation-secondarys"],
     class: "my-custom-footer-class"
 }) }}
 
-Ne sous-estimez jamais la puissance d'un bon footer! 👣🧙
+Treasures often lie at the bottom 💰🔍
 #}
