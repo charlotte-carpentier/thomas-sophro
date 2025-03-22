@@ -1,3 +1,9 @@
+---
+title: Test
+description: This is the test page
+layout: '01-organisms/base.njk'
+---
+
 {# Import required atom macros #}
 {% from "03-atoms/link.njk" import renderLink %}
 {% from "03-atoms/chip-notification.njk" import renderChipNotification %}
@@ -33,6 +39,9 @@
 {% from "02-molecules/list-value.njk" import renderListValue %}
 {% from "02-molecules/list-content.njk" import renderListContent %}
 {% from "02-molecules/card.njk" import renderCard %}
+
+{# Import required molecules macros #}
+{% from "01-organisms/menu.njk" import renderMenu %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -394,6 +403,19 @@
                 buttons: atoms.buttons
             }) }}
         </div>
+    </div>
+
+    {# Menu Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Menu</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing menu component #}
+            {{ renderMenu({ 
+                name: "main_navigation",
+                datas: organisms.menus,
+                links: atoms.links,
+                headings: atoms.headings
+            }) }}
     </div>
 
     {# Portal to the Sacred Codex #}

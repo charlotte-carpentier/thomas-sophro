@@ -4,7 +4,8 @@
     "default": "text-gray-800 hover:text-gray-600",
     "primary": "text-blue-600 hover:text-blue-800 underline",
     "secondary": "text-gray-500 hover:text-gray-700",
-    "navigation": "text-gray-700 relative transition-colors duration-200 ease-in-out hover:text-gray-800 hover:after:content-[''] hover:after:absolute hover:after:left-1/2 hover:after:bottom-[-8px] hover:after:w-1 hover:after:h-1 hover:after:bg-gray-400 hover:after:rounded-full hover:after:transform hover:after:-translate-x-1/2 focus:outline focus:outline-2 focus:outline-blue-500 focus:outline-offset-2 focus:rounded-md focus:after:hidden"
+    "navigation": "text-gray-700 relative transition-colors duration-200 ease-in-out hover:text-gray-800 hover:after:content-[''] hover:after:absolute hover:after:left-1/2 hover:after:bottom-[-8px] hover:after:w-1 hover:after:h-1 hover:after:bg-gray-400 hover:after:rounded-full hover:after:transform hover:after:-translate-x-1/2 focus:outline focus:outline-2 focus:outline-blue-500 focus:outline-offset-2 focus:rounded-md focus:after:hidden",
+    "footer": "text-gray-500 underline hover:text-gray-700 hover:no-underline"
   },
   "links": [
     {
@@ -42,6 +43,150 @@
       "href": "/guild",
       "text": "Heroes' Guild Hall",
       "style": "secondary"
+    },
+    {
+      "name": "tavern",
+      "href": "/tavern",
+      "text": "Tavern",
+      "style": "secondary"
+    },
+    {
+      "name": "lore",
+      "href": "/lore",
+      "text": "Lore",
+      "style": "secondary"
+    },
+    {
+      "name": "guild_services",
+      "href": "/guild_services",
+      "text": "Guild services",
+      "style": "secondary"
+    },
+    {
+      "name": "hall_of_legends",
+      "href": "/hall_of_legends",
+      "text": "Hall of legends",
+      "style": "secondary"
+    },
+    {
+      "name": "bard_tales",
+      "href": "/bard_tales",
+      "text": "Bard tales",
+      "style": "secondary"
+    },
+    {
+      "name": "send_a_raven",
+      "href": "/send_a_raven",
+      "text": "Send a raven",
+      "style": "secondary"
+    },
+    {
+      "name": "sacred_decrees",
+      "href": "/sacred_decrees",
+      "text": "Sacred decrees",
+      "style": "secondary"
+    },
+    {
+      "name": "laws_of_the_realm",
+      "href": "/laws_of_the_realm",
+      "text": "Laws of the realm",
+      "style": "secondary"
+    },
+    {
+      "name": "magic_biscuits",
+      "href": "/magic_biscuits",
+      "text": "Magic biscuits",
+      "style": "secondary"
+    },
+    {
+      "name": "map_of_the_kingdom",
+      "href": "/map_of_the_kingdom",
+      "text": "Map of the kingdom",
+      "style": "secondary"
+    },
+    {
+      "name": "guild_recruitment",
+      "href": "/guild_recruitment",
+      "text": "Guild recruitment",
+      "style": "secondary"
+    },
+    {
+      "name": "oracle_whispers",
+      "href": "/oracle_whispers",
+      "text": "Oracle whispers",
+      "style": "secondary"
+    },
+    {
+      "name": "blacksmith_forge",
+      "href": "/blacksmith_forge",
+      "text": "Blacksmith forge",
+      "style": "secondary"
+    },
+    {
+      "name": "potion_brewing",
+      "href": "/potion_brewing",
+      "text": "Potion brewing",
+      "style": "secondary"
+    },
+    {
+      "name": "spell_enchantments",
+      "href": "/spell_enchantments",
+      "text": "Spell enchantments",
+      "style": "secondary"
+    },
+    {
+      "name": "royal_courier",
+      "href": "/royal_courier",
+      "text": "Royal courier",
+      "style": "secondary"
+    },
+    {
+      "name": "dragon_rentals",
+      "href": "/dragon_rentals",
+      "text": "Dragon rentals",
+      "style": "secondary"
+    },
+    {
+      "name": "bard_entertainment",
+      "href": "/bard_entertainment",
+      "text": "Bard entertainment",
+      "style": "secondary"
+    },
+    {
+      "name": "scroll_of_faces",
+      "href": "/scroll_of_faces",
+      "text": "Scroll of faces",
+      "style": "secondary"
+    },
+    {
+      "name": "chirping_birds",
+      "href": "/chirping_birds",
+      "text": "Chirping birds",
+      "style": "secondary"
+    },
+    {
+      "name": "illusion_mirror",
+      "href": "/illusion_mirror",
+      "text": "Illusion mirror",
+      "style": "secondary"
+    },
+    {
+      "name": "guild_registry",
+      "href": "/guild_registry",
+      "text": "Guild registry",
+      "style": "secondary"
+    },
+    {
+      "name": "accessibility",
+      "href": "/accessibility",
+      "text": "Accessibility",
+      "style": "footer"
+    },
+    {
+      "name": "creator",
+      "href": "/creator",
+      "text": "Website by Hat",
+      "style": "footer"
     }
   ]
 }

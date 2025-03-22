@@ -67,7 +67,16 @@
     </main>
     
     {# Footer organism call #}
-    {% include '01-organisms/footer.njk' %}
+    {% from "01-organisms/footer.njk" import renderFooter %}
+      {{ renderFooter({ 
+          name: "standard",
+          datas: organisms.footers,
+          menus: organisms.menus,
+          links: atoms.links,
+          headings: atoms.headings,
+          icons: atoms.icons,
+          vectors: atoms.vectors
+      }) }}
 
     {# Decap CMS - redirect user back to the /admin/ path #}
     <script>

@@ -1,0 +1,58 @@
+{
+    "globalStyle": "typography-body-m footer-container bg-gray-200 shadow-md",
+    "variants": {
+        "default": "text-gray-800",
+        "hover": "text-gray-600",
+        "focus": "text-gray-800 outline-2 outline-blue-500 outline-offset-2 rounded-md",
+        "disabled": "text-gray-400 cursor-not-allowed"
+    },
+    "footers": [
+        {
+            "name": "standard",
+            "containerStyle": "bg-gray-100 py-8",
+            "menus": [
+                {
+                    "name": "main_navigation",
+                    "position": "column_1"
+                },
+                {
+                    "name": "footer_navigation",
+                    "position": "column_2"
+                },
+                {
+                    "name": "royal_services",
+                    "position": "column_3"
+                },
+                {
+                    "name": "socials",
+                    "position": "column_4"
+                }
+            ],
+            "copyright": "Starter kit tous droits réservés",
+            "version": "1.0.0",
+            "vectors": "logo_full",
+            "icons": [
+                {
+                    "name": "facebook"
+                },
+                {
+                    "name": "linkedin"
+                },
+                {
+                    "name": "twitter"
+                },
+                {
+                    "name": "instagram"
+                }
+            ],
+            "links": [
+                {
+                  "name": "accessibility"
+                },
+                {
+                  "name": "creator"
+                }
+            ]
+        }
+    ]
+}

@@ -12,7 +12,7 @@
   "toasts": [
     {
       "name": "info_notification",
-      "message": "An informative message for the user",
+      "message": "A new scroll of wisdom has arrived!",
       "style": "info",
       "icon": "info",
       "duration": 5000,
@@ -20,7 +20,7 @@
     },
     {
       "name": "success_notification",
-      "message": "Operation completed successfully",
+      "message": "Quest completed! The kingdom rejoices!",
       "style": "success", 
       "icon": "success",
       "duration": 5000,
@@ -28,7 +28,7 @@
     },
     {
       "name": "warning_notification", 
-      "message": "Something requires your attention",
+      "message": "Beware, traveler! Dark forces stir...",
       "style": "warning",
       "icon": "warning", 
       "duration": 5000,
@@ -36,7 +36,7 @@
     },
     {
       "name": "error_notification",
-      "message": "An error occurred. Please try again.",
+      "message": "The spell failed! Try again before the curse spreads!",
       "style": "error",
       "icon": "error",
       "duration": 5000, 

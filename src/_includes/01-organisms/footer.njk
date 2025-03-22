@@ -1,8 +1,281 @@
-<footer class="grid grid-cols-3 items-center p-4 bg-gray-200">
-    <!-- logos -->
-    <div class="flex justify-end">
-        <img src="{{ site.logos }}" alt="logos" class="w-32 h-auto">
-    </div>
-    <!-- Footer text -->
-    <p class="text-center mt-4 text-sm"">©{% year %} HAT Company. All rights reserved.</p>
-</footer>
+{# 
+=======================
+        FOOTER        
+=======================
+#}
+
+{% from "03-atoms/link.njk" import renderLink %}
+{% from "03-atoms/heading.njk" import renderHeading %}
+{% from "03-atoms/icon.njk" import renderIcon %}
+{% from "03-atoms/vector.njk" import renderVector %}
+
+{% macro renderFooter(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set variants = options.datas.variants %}
+    
+    {# Define state classes for link variants #}
+    {% set stateClasses = {
+      'default': variants.default | default('text-gray-800'),
+      'hover': variants.hover | default('text-gray-600'),
+      'focus': variants.focus | default('text-gray-800 outline-2 outline-blue-500 outline-offset-2'),
+      'disabled': variants.disabled | default('text-gray-400 cursor-not-allowed')
+    } %}
+    
+    {% set footerData = null %}
+    {% if options.name %}
+      {% for footerSet in options.datas.footers %}
+        {% if footerSet.name == options.name %}
+          {% set footerData = footerSet %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not footerData %}
+      {% set footerData = options.datas.footers[0] %}
+    {% endif %}
+    
+    <footer class="{{ globalStyle }} {{ footerData.containerStyle }} {{ options.class | default('') }}">
+      <div class="container mx-auto px-4">
+        {# Logo au début du footer #}
+        {% if footerData.vectors and options.vectors %}
+          <div class="mb-6 flex justify-start">
+            {{ renderVector({ name: footerData.vectors, datas: options.vectors }) }}
+          </div>
+        {% endif %}
+        
+        {# Grid des menus #}
+        <div class="flex flex-col space-y-6 md:grid md:grid-cols-4 md:gap-8 md:space-y-0">
+          {# Boucle à travers les menus #}
+          {% for menuConfig in footerData.menus %}
+            <div class="footer-column {{ menuConfig.position }}">
+              {# Cherche les données de menu dans options.menus (qui sera organisms.menus) #}
+              {% if options.menus and options.menus.menus %}
+                {% for menuData in options.menus.menus %}
+                  {% if menuData.name == menuConfig.name %}
+                    {# Affiche le titre du menu #}
+                    {% if menuData.heading and options.headings and options.headings.headings %}
+                      {% for heading in options.headings.headings %}
+                        {% if heading.name == menuData.heading %}
+                          <h{{ heading.level | default(4) }} class="{{ menuData.headingStyle }}">{{ heading.text }}</h{{ heading.level | default(4) }}>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                    
+                    {# Menu standard pour tous les types de menus #}
+                    <ul class="{{ menuData.menuStyle }}">
+                      {% for linkItem in menuData.links %}
+                        <li class="{% if menuData.name == 'socials' %}mb-2{% endif %}">
+                          {% if options.links and options.links.links %}
+                            {% for linkData in options.links.links %}
+                              {% if linkData.name == linkItem.name %}
+                                {% if menuData.name == "socials" and options.icons %}
+                                  {# Traitement spécial pour les liens sociaux avec icônes #}
+                                  <a href="{{ linkData.href }}" 
+                                     class="{{ stateClasses.default }} flex items-center gap-2"
+                                     onmouseover="this.className='{{ stateClasses.hover }} flex items-center gap-2'" 
+                                     onmouseout="this.className='{{ stateClasses.default }} flex items-center gap-2'"
+                                     onfocus="this.className='{{ stateClasses.focus }} flex items-center gap-2'"
+                                     onblur="this.className='{{ stateClasses.default }} flex items-center gap-2'"
+                                     aria-label="{{ linkData.text }}">
+                                    
+                                    {# Recherche l'icône correspondante #}
+                                    {% set iconData = null %}
+                                    {% if options.icons and options.icons.icons %}
+                                      {% for icon in options.icons.icons %}
+                                        {% if icon.name == linkData.name %}
+                                          {% set iconData = icon %}
+                                        {% endif %}
+                                      {% endfor %}
+                                    {% endif %}
+                                    
+                                    {% if iconData and iconData.path %}
+                                      {# Ajout de la classe spéciale pour le script JS qui charge les SVG #}
+                                      <span 
+                                        data-svg-src="{{ iconData.path }}" 
+                                        class="icon w-4 h-4 mr-2"
+                                        aria-hidden="true"
+                                      ></span>
+                                    {% endif %}
+                                    
+                                    <span>{{ linkData.text }}</span>
+                                  </a>
+                                {% else %}
+                                  {# Utilisation de renderLink pour les liens standard #}
+                                  {{ renderLink({ name: linkData.name, datas: options.links }) }}
+                                {% endif %}
+                              {% endif %}
+                            {% endfor %}
+                          {% else %}
+                            <span>Label</span>
+                          {% endif %}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                <h4 class="mb-2 font-bold text-lg">Heading</h4>
+                <ul class="space-y-2">
+                  <li><span>Label</span></li>
+                  <li><span>Label</span></li>
+                  <li><span>Label</span></li>
+                  <li><span>Label</span></li>
+                </ul>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+        
+        {# Section du bas avec copyright et liens #}
+        <div class="mt-8">
+          {# VERSION MOBILE #}
+          <div class="flex flex-col items-start space-y-4 md:hidden">
+            {# Liens en premier sur mobile - Ordre inversé #}
+            <div class="space-y-2 w-full">
+              {% if footerData.links and footerData.links.length > 0 %}
+                {% for linkConfig in footerData.links %}
+                  {% set linkFound = false %}
+                  
+                  {% if options.links and options.links.links %}
+                    {% for linkData in options.links.links %}
+                      {% if linkData.name == linkConfig.name %}
+                        {% set linkFound = true %}
+                        <div>
+                          {# Utilisation de renderLink au lieu de créer manuellement le lien #}
+                          {{ renderLink({ name: linkData.name, datas: options.links }) }}
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  
+                  {# Fallback si le lien n'est pas trouvé - On utilise un style par défaut #}
+                  {% if not linkFound %}
+                    <div>
+                      {% if linkConfig.name == 'accessibility' %}
+                        <a href="/accessibility" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
+                          Accessibilité
+                        </a>
+                      {% elif linkConfig.name == 'creator' %}
+                        <a href="https://hat.fr" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
+                          Website by hat
+                        </a>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                {# Fallback si aucun lien n'est défini dans footerData #}
+                <div>
+                  <a href="/accessibility" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
+                    Accessibilité
+                  </a>
+                </div>
+                <div>
+                  <a href="https://hat.fr" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
+                    Website by hat
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+            
+            {# Copyright en dernier sur mobile #}
+            <div class="text-sm mt-4">
+              <p>© {% year %} {{ footerData.copyright | default('Starter kit tous droits réservés') }}</p>
+            </div>
+          </div>
+          
+          {# VERSION DESKTOP #}
+          <div class="hidden md:flex md:items-center md:text-sm md:w-full md:mt-10">
+            {# Copyright en premier sur desktop #}
+            <span>© {% year %} {{ footerData.copyright | default('Starter kit tous droits réservés') }}</span>
+            
+            {# Version avec séparateur #}
+            {% if footerData.version %}
+              <span class="mx-2" aria-hidden="true">•</span>
+              <span>v{{ footerData.version }}</span>
+            {% endif %}
+            
+            {# Liens avec séparateurs #}
+            {% if footerData.links and footerData.links.length > 0 %}
+              {% for linkConfig in footerData.links %}
+                <span class="mx-2" aria-hidden="true">•</span>
+                
+                {% set linkFound = false %}
+                {% if options.links and options.links.links %}
+                  {% for linkData in options.links.links %}
+                    {% if linkData.name == linkConfig.name %}
+                      {% set linkFound = true %}
+                      {# Utilisation de renderLink au lieu de créer manuellement le lien #}
+                      {{ renderLink({ name: linkData.name, datas: options.links }) }}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+                
+                {# Fallback si le lien n'est pas trouvé #}
+                {% if not linkFound %}
+                  {% if linkConfig.name == 'accessibility' %}
+                    <a href="/accessibility" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
+                      Accessibilité
+                    </a>
+                  {% elif linkConfig.name == 'creator' %}
+                    <a href="https://hat.fr" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
+                      Website by hat
+                    </a>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              {# Fallback si aucun lien n'est défini dans footerData #}
+              <span class="mx-2" aria-hidden="true">•</span>
+              <a href="/accessibility" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
+                Accessibilité
+              </a>
+              <span class="mx-2" aria-hidden="true">•</span>
+              <a href="https://hat.fr" class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}">
+                Website by hat
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </footer>
+  {% else %}
+    <span class="text-red-500">Footer data not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/footer.njk" import renderFooter %}
+
+2. Call the footer component with a specific name
+{{ renderFooter({ 
+    name: "standard",
+    datas: organisms.footers,
+    menus: organisms.menus,
+    links: atoms.links,
+    headings: atoms.headings,
+    icons: atoms.icons,
+    vectors: atoms.vectors
+}) }}
+
+3. Usage avec styles personnalisés
+{{ renderFooter({ 
+    name: "standard", 
+    datas: organisms.footers,
+    menus: organisms.menus,
+    links: atoms.links,
+    headings: atoms.headings,
+    icons: atoms.icons,
+    vectors: atoms.vectors,
+    class: "my-custom-footer-class"
+}) }}
+
+Ne sous-estimez jamais la puissance d'un bon footer! 👣🧙
+#}

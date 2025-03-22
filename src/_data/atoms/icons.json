@@ -104,6 +104,30 @@
       "path": "/assets/icons/burger-solid.svg", 
       "alt": "Header burger Icon",
       "defaultSize": "md"
+    },
+    {
+      "name": "scroll_of_faces",
+      "path": "/assets/icons/facebook.svg", 
+      "alt": "Facebook Icon",
+      "defaultSize": "sm"
+    },
+    {
+      "name": "guild_registry",
+      "path": "/assets/icons/linkedin.svg", 
+      "alt": "Linkedin Icon",
+      "defaultSize": "sm"
+    },
+    {
+      "name": "chirping_birds",
+      "path": "/assets/icons/twitter.svg", 
+      "alt": "Twitter Icon",
+      "defaultSize": "sm"
+    },
+    {
+      "name": "illusion_mirror",
+      "path": "/assets/icons/instagram.svg", 
+      "alt": "Instagram Icon",
+      "defaultSize": "sm"
     }
   ]
 }

@@ -138,6 +138,30 @@
       "level": 4,
       "text": "Bard for Hire",
       "style": "default"
+    },
+    {
+      "name": "quest_log",
+      "level": 4,
+      "text": "Quest Log",
+      "style": "default"
+    },
+    {
+      "name": "ancient_scrolls",
+      "level": 4,
+      "text": "Ancient Scrolls",
+      "style": "default"
+    },
+    {
+      "name": "kingdom_services",
+      "level": 4,
+      "text": "Kingdom Services",
+      "style": "default"
+    },
+    {
+      "name": "socials",
+      "level": 4,
+      "text": "Socials",
+      "style": "default"
     }
   ]
 }
