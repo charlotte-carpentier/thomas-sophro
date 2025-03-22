@@ -1,0 +1,27 @@
+{
+  "globalStyle": "flex flex-wrap items-center gap-x-8",
+  "variants": {
+    "default": "text-gray-800",
+    "hover": "text-gray-600",
+    "focus": "text-gray-800 outline-2 outline-blue-500 outline-offset-2 rounded-md",
+    "disabled": "text-gray-400 cursor-not-allowed"
+  },
+  "navigations": [
+    {
+      "name": "main",
+      "links": [
+        "camp",
+        "chronicles",
+        "pigeon"
+      ]
+    },
+    {
+      "name": "alternate",
+      "links": [
+        "camp",
+        "chronicles",
+        "pigeon"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{#
+=========================
+       NAVIGATION        
+=========================
+#}
+
+{% from "03-atoms/link.njk" import renderLink %}
+
+{% macro renderNavigation(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    
+    {% set navigationData = null %}
+    {% if options.name %}
+      {% for navSet in options.datas.navigations %}
+        {% if navSet.name == options.name %}
+          {% set navigationData = navSet %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not navigationData %}
+      {% set navigationData = options.datas.navigations[0] %}
+    {% endif %}
+    
+    <nav class="{{ globalStyle }} {{ options.class | default('') }}" data-nav-container>
+      {% for linkName in navigationData.links %}
+        {{ renderLink({ name: linkName, datas: options.links, dataNavLink: true }) }}
+      {% endfor %}
+    </nav>
+  {% else %}
+    <span class="text-red-500">Navigation data not found</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/navigation.njk" import renderNavigation %}
+
+2. Call the navigation component with a specific name
+{{ renderNavigation({ 
+    name: "main",
+    datas: organisms.navigations,
+    links: atoms.links
+}) }}
+
+3. Using custom styles
+{{ renderNavigation({ 
+    name: "main",
+    datas: organisms.navigations,
+    links: atoms.links,
+    class: "my-custom-navigation-class"
+}) }}
+
+#}

@@ -42,6 +42,8 @@ layout: '01-organisms/base.njk'
 
 {# Import required molecules macros #}
 {% from "01-organisms/menu.njk" import renderMenu %}
+{% from "01-organisms/navigation.njk" import renderNavigation %}
+{% from "01-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
 
 {# Component Display Section #}
 <div class="max-w-2xl mx-auto bg-white rounded-md p-6">
@@ -415,6 +417,30 @@ layout: '01-organisms/base.njk'
                 datas: organisms.menus,
                 links: atoms.links,
                 headings: atoms.headings
+            }) }}
+    </div>
+
+    {# Navigation Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Navigation</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing navigation component #}
+            {{ renderNavigation({ 
+                name: "main",
+                datas: organisms.navigations,
+                links: atoms.links
+            }) }}
+    </div>
+
+    {# Navigation secondary Molecule #}
+    <h3 class="text-xl font-semibold mb-4">Navigation secondary</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing navigation-secondary component #}
+            {{ renderNavigationSecondary({ 
+                name: "sidebar",
+                datas: organisms["navigation-secondarys"],
+                links: atoms.links
             }) }}
     </div>
 

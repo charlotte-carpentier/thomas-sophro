@@ -25,12 +25,12 @@
     >
       {{ linkData.text }}
     </a>
+    {# Include external JS files #}
+    <script src="/js/atoms/current-link.js"></script>
   {% else %}
     <span class="text-red-500">Link not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
-
-
 
 {#
 ============================

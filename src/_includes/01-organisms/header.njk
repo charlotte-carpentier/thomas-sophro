@@ -5,8 +5,8 @@
 #}
 
 {% from "03-atoms/vector.njk" import renderVector %}
-{% from "03-atoms/link.njk" import renderLink %}
 {% from "03-atoms/icon.njk" import renderIcon %}
+{% from "01-organisms/navigation.njk" import renderNavigation %}
 
 {% macro renderHeader(options) %}
   {% if options.datas %}
@@ -18,7 +18,6 @@
     {% set toggleButtonIcon = options.datas.variants.toggleButton.icon %}
     {% set toggleButtonIconStyle = options.datas.variants.toggleButton.iconStyle | default('') %}
     {% set dropdownMenuStyle = options.datas.variants.dropdownMenu.default %}
-    {% set menuListStyle = options.datas.variants.menuList.default %}
     
     {% set headerData = null %}
     {% if options.name %}
@@ -35,14 +34,14 @@
     
     <header class="{{ globalStyle }} {{ options.class | default('') }}">
       <div class="{{ containerStyle }}">
-        <nav class="{{ navStyle }}">
+        <div class="{{ navStyle }}">
           {# Logo #}
           {{ renderVector({ name: headerData.logo, datas: options.vectors }) }}
 
-          {# Menu #}
+          {# Menu Container avec hamburger et dropdown #}
           <div class="{{ menuContainerStyle }}">
+            {# Bouton hamburger #}
             <div class="{{ toggleButtonStyle }}">
-              {# Utilisation de data-svg-src pour charger le SVG via le svg-loader #}
               {% set iconData = null %}
               {% if options.icons %}
                 {% for icon in options.icons.icons %}
@@ -57,30 +56,28 @@
                   <!-- SVG will be loaded here -->
                 </span>
               {% else %}
-                {# Fallback - icône burger en inline SVG si l'icône n'est pas trouvée #}
                 <span class="inline-flex items-center justify-center w-6 h-6 {{ toggleButtonIconStyle }}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </span>
               {% endif %}
             </div>
 
+            {# Menu déroulant qui contient la navigation #}
             <div class="{{ dropdownMenuStyle }}">
-              <ul role="list" class="{{ menuListStyle }}">
-                {% for linkName in headerData.links %}
-                  <li>
-                    {{ renderLink({ name: linkName, datas: options.links, dataNavLink: true }) }}
-                  </li>
-                {% endfor %}
-              </ul>
+              {# Utilisation du composant Navigation #}
+              {{ renderNavigation({ 
+                name: headerData.navigation | default(headerData.name),
+                datas: options.navigations,
+                links: options.links
+              }) }}
             </div>
           </div>
-        </nav>
+        </div>
       </div>
     </header>
 
     {# Include external JS files #}
     <script src="/js/organisms/header-menu.js"></script>
-    <script src="/js/utils/svg-loader.js"></script>
   {% else %}
     <span class="text-red-500">Header data not found</span>
   {% endif %}
@@ -98,6 +95,7 @@ Summon HAT Components Wisely
 {{ renderHeader({ 
     name: "main",
     datas: organisms.headers,
+    navigations: organisms.navigations,
     vectors: atoms.vectors,
     links: atoms.links,
     icons: atoms.icons
@@ -107,14 +105,11 @@ Summon HAT Components Wisely
 {{ renderHeader({ 
     name: "main",
     datas: organisms.headers,
+    navigations: organisms.navigations,
     vectors: atoms.vectors,
     links: atoms.links,
     icons: atoms.icons,
     class: "my-custom-header-class"
 }) }}
 
-4. Structure of headers.json explained in file
-   Follow similar pattern as breadcrumbs.json
-
-Guided by fate, or just really good UI? 🧭✨
 #}

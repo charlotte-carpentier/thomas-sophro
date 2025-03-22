@@ -10,30 +10,19 @@
       "iconStyle": "text-gray-500"
     },
     "dropdownMenu": {
-      "default": "dropdown-menu absolute -top-full left-0 max-lg:bg-gray-200 w-full flex flex-col gap-6 items-center py-2 font-bold text-lg lg:static lg:flex-row lg:justify-end"
-    },
-    "menuList": {
-      "default": "flex flex-col gap-6 items-center lg:flex-row lg:gap-8"
+      "default": "dropdown-menu absolute -top-full left-0 max-lg:bg-gray-200 w-full py-2 font-bold text-lg lg:static lg:flex-row lg:justify-end"
     }
   },
   "headers": [
     {
       "name": "main",
       "logo": "logo_full",
-      "links": [
-        "camp",
-        "chronicles",
-        "pigeon"
-      ]
+      "navigation": "main"
     },
     {
       "name": "alternate",
       "logo": "logo_minimal",
-      "links": [
-        "camp",
-        "chronicles",
-        "pigeon"
-      ]
+      "navigation": "alternate"
     }
   ]
 }

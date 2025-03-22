@@ -1,0 +1,133 @@
+{#
+=========================
+  NAVIGATION SECONDARY   
+=========================
+#}
+
+{% from "03-atoms/link.njk" import renderLink %}
+
+{% macro renderNavigationSecondary(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    
+    {% set navigationData = null %}
+    {% if options.name %}
+      {% for navSet in options.datas.navigations %}
+        {% if navSet.name == options.name %}
+          {% set navigationData = navSet %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not navigationData %}
+      {% set navigationData = options.datas.navigations[0] %}
+    {% endif %}
+    
+    <nav class="{{ globalStyle }} navigation-secondary {{ options.class | default('') }}" data-nav-container data-nav-secondary>
+      {% for linkName in navigationData.links %}
+        {{ renderLink({ name: linkName, datas: options.links, dataNavLink: true }) }}
+      {% endfor %}
+    </nav>
+  {% else %}
+    <span class="text-red-500">Navigation data not found</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
+
+2. Call the navigation-secondary component with a specific name
+{{ renderNavigationSecondary({ 
+    name: "main",
+    datas: organisms["navigation-secondarys"],
+    links: atoms.links
+}) }}
+
+3. Using custom styles
+{{ renderNavigationSecondary({ 
+    name: "main",
+    datas: organisms["navigation-secondarys"],
+    links: atoms.links,
+    class: "my-custom-navigation-class"
+}) }}
+
+4. Style personnalisé pour l'espacement
+{{ renderNavigationSecondary({ 
+    name: "main",
+    datas: organisms["navigation-secondarys"],
+    links: atoms.links,
+    class: "pl-4"
+}) }}
+
+#}{#
+=========================
+  NAVIGATION SECONDARY   
+=========================
+#}
+
+{% from "03-atoms/link.njk" import renderLink %}
+
+{% macro renderNavigationSecondary(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    
+    {% set navigationData = null %}
+    {% if options.name %}
+      {% for navSet in options.datas.navigations %}
+        {% if navSet.name == options.name %}
+          {% set navigationData = navSet %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not navigationData %}
+      {% set navigationData = options.datas.navigations[0] %}
+    {% endif %}
+    
+    <nav class="{{ globalStyle }} navigation-secondary {{ options.class | default('') }}" data-nav-container data-nav-secondary>
+      {% for linkName in navigationData.links %}
+        {{ renderLink({ name: linkName, datas: options.links, dataNavLink: true }) }}
+      {% endfor %}
+    </nav>
+  {% else %}
+    <span class="text-red-500">Navigation data not found</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
+
+2. Call the navigation-secondary component with a specific name
+{{ renderNavigationSecondary({ 
+    name: "main",
+    datas: organisms["navigation-secondarys"],
+    links: atoms.links
+}) }}
+
+3. Using custom styles
+{{ renderNavigationSecondary({ 
+    name: "main",
+    datas: organisms["navigation-secondarys"],
+    links: atoms.links,
+    class: "my-custom-navigation-class"
+}) }}
+
+4. Style personnalisé pour l'espacement
+{{ renderNavigationSecondary({ 
+    name: "main",
+    datas: organisms["navigation-secondarys"],
+    links: atoms.links,
+    class: "pl-4"
+}) }}
+
+#}
