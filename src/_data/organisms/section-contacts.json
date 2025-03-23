@@ -1,0 +1,49 @@
+{
+  "globalStyle": "section-contact py-8",
+  "containerStyle": "container mx-auto px-4",
+  "variants": {
+    "default": "bg-white",
+    "alternate": "bg-gray-100",
+    "dark": "bg-gray-800 text-white"
+  },
+  "layout": {
+    "mobile": "flex flex-col gap-6",
+    "desktop": "lg:grid lg:grid-cols-2 lg:gap-12 lg:items-start"
+  },
+  "sections": [
+    {
+      "name": "default",
+      "form": {
+        "name": "contact_form",
+        "wrapperStyle": "form-wrapper w-full",
+        "submitButton": {
+          "name": "submit",
+          "style": "primary"
+        }
+      },
+      "content": {
+        "headingTitle": "longest_label",
+        "headingLevel": "h2",
+        "textStyle": "mt-4 text-gray-600",
+        "text": "In need of guidance, a side quest, or just some friendly banter? The oracle (a.k.a. our team) is ready to answer. Use the form below and let the adventure begin."
+      }
+    },
+    {
+      "name": "newsletter",
+      "form": {
+        "name": "newsletter_signup",
+        "wrapperStyle": "form-wrapper w-full",
+        "submitButton": {
+          "name": "subscribe",
+          "style": "secondary"
+        }
+      },
+      "content": {
+        "headingTitle": "newsletter_signup",
+        "headingLevel": "h3",
+        "textStyle": "mt-4 text-gray-600",
+        "text": "Sign up for our newsletter to receive updates and special offers."
+      }
+    }
+  ]
+}

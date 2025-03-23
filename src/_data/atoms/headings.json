@@ -198,6 +198,12 @@
       "level": 2,
       "text": "Legends of the Fellowship",
       "style": "default"
+    },
+    {
+      "name": "longest_label",
+      "level": 2,
+      "text": "Wise counsel awaits",
+      "style": "default"
     }
   ]
 }

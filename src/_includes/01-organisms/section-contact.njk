@@ -1,0 +1,131 @@
+{#
+=========================
+     SECTION-CONTACT        
+=========================
+#}
+
+{% from "03-atoms/heading.njk" import renderHeading %}
+{% from "02-molecules/list-form.njk" import renderListForm %}
+
+{% macro renderSectionContact(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set containerStyle = options.datas.containerStyle | default('container mx-auto px-4') %}
+    
+    {% set sectionData = null %}
+    {% if options.name %}
+      {% for section in options.datas.sections %}
+        {% if section.name == options.name %}
+          {% set sectionData = section %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not sectionData %}
+      {% set sectionData = options.datas.sections[0] %}
+    {% endif %}
+    
+    {% set variantStyle = options.datas.variants[options.variant | default('default')] | default(options.datas.variants.default) %}
+    {% set layoutMobile = options.datas.layout.mobile | default('flex flex-col gap-6') %}
+    {% set layoutDesktop = options.datas.layout.desktop | default('lg:grid lg:grid-cols-2 lg:gap-12 lg:items-start') %}
+    
+    <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
+      <div class="{{ containerStyle }}">
+        <div class="{{ layoutMobile }} {{ layoutDesktop }}">
+          {# Form area #}
+          <div class="{{ sectionData.form.wrapperStyle }}">
+            {{ renderListForm({
+              name: sectionData.form.name,
+              datas: options.listForms,
+              atoms: options.atoms
+            }) }}
+            
+            {% if options.buttons and sectionData.form.submitButton %}
+              {% set buttonData = null %}
+              {% for button in options.buttons.buttons %}
+                {% if button.name == sectionData.form.submitButton.name %}
+                  {% set buttonData = button %}
+                {% endif %}
+              {% endfor %}
+              
+              {% if buttonData %}
+                <button 
+                  type="submit" 
+                  class="{{ options.buttons.variants[sectionData.form.submitButton.style] | default(options.buttons.variants.primary) }} mt-4">
+                  {{ buttonData.text }}
+                </button>
+              {% else %}
+                <button type="submit" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">
+                  Submit
+                </button>
+              {% endif %}
+            {% else %}
+              <button type="submit" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">
+                Submit
+              </button>
+            {% endif %}
+          </div>
+          
+          {# Content area #}
+          <div class="content-wrapper">
+            {{ renderHeading({
+              name: sectionData.content.headingTitle,
+              level: sectionData.content.headingLevel | replace('h', '') | int,
+              datas: options.headings
+            }) }}
+            
+            <p class="{{ sectionData.content.textStyle }}">
+              {{ sectionData.content.text }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <span class="text-red-500">Section contact data not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/section-contact.njk" import renderSectionContact %}
+
+2. Call the section-contact component with a specific name
+{{ renderSectionContact({ 
+    name: "default",
+    datas: organisms["section-contacts"],
+    headings: atoms.headings,
+    listForms: molecules["list-forms"],
+    buttons: atoms.buttons,
+    atoms: atoms
+}) }}
+
+3. Using a different variant
+{{ renderSectionContact({ 
+    name: "newsletter", 
+    variant: "alternate",
+    datas: organisms["section-contacts"],
+    headings: atoms.headings,
+    listForms: molecules["list-forms"],
+    buttons: atoms.buttons,
+    atoms: atoms
+}) }}
+
+4. Using custom styles
+{{ renderSectionContact({ 
+    name: "default",
+    datas: organisms["section-contacts"],
+    headings: atoms.headings,
+    listForms: molecules["list-forms"],
+    buttons: atoms.buttons,
+    atoms: atoms,
+    class: "my-custom-section-class"
+}) }}
+
+Don’t send a carrier pigeon, just use the form 📝✉️
+#}

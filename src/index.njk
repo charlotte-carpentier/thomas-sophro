@@ -59,3 +59,15 @@ layout: '00-core/base.njk'
         headings: atoms.headings,
         images: atoms.images
     }) }}
+
+{# Include section-contact #}
+{% from "01-organisms/section-contact.njk" import renderSectionContact %}
+
+    {{ renderSectionContact({ 
+        name: "default",
+        datas: organisms["section-contacts"],
+        headings: atoms.headings,
+        listForms: molecules["list-forms"],
+        buttons: atoms.buttons,
+        atoms: atoms
+    }) }}
