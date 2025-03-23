@@ -1,0 +1,27 @@
+{
+  "globalStyle": "section-about py-12 px-4 md:px-8",
+  "variants": {
+    "default": "bg-white",
+    "dark": "bg-gray-800 text-white",
+    "light": "bg-gray-100",
+    "primary": "bg-blue-50"
+  },
+  "sectionStyles": {
+    "container": "container mx-auto px-4",
+    "contentWrapper": "flex flex-col md:flex-row md:items-start md:gap-8",
+    "textContent": "w-full md:w-1/2 mb-6 md:mb-0",
+    "mediaContent": "w-full md:w-1/2",
+    "buttonContainer": "flex flex-wrap gap-4 mt-6"
+  },
+"sections": [
+    {
+      "name": "about_us",
+      "variant": "default",
+      "superHeading": "about_title",
+      "heading": "about_subtitle",
+      "content": "Forged in the fires of creativity, our guild embarks on epic quests to craft digital wonders. With every line of code and stroke of design, we weave spells that shape realms beyond imagination.",
+      "primaryButton": "submit_quest",
+      "secondaryButton": "flee_battle"
+    }
+  ]
+}

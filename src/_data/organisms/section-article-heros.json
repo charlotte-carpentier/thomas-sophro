@@ -1,0 +1,26 @@
+{
+  "globalStyle": "w-full py-8",
+  "variants": {
+    "default": "bg-white",
+    "primary": "bg-blue-50",
+    "secondary": "bg-gray-50"
+  },
+  "containerStyle": "px-4 md:px-6",
+  "contentWrapperStyle": "max-w-4xl mx-auto",
+  "imageContainerStyle": "flex justify-center",
+  "titleContainerStyle": "mt-4 text-center",
+  "heroSections": [
+    {
+      "name": "article_hero_default",
+      "variant": "default",
+      "headingName": "page_title",
+      "image": "placeholder_large"
+    },
+    {
+      "name": "article_hero_secondary",
+      "variant": "secondary",
+      "headingName": "section_title",
+      "image": "placeholder_medium"
+    }
+  ]
+}

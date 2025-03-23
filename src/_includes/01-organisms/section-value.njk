@@ -1,0 +1,139 @@
+{#
+=========================
+    SECTION-VALUE        
+=========================
+#}
+
+{% from "03-atoms/heading.njk" import renderHeading %}
+{% from "02-molecules/card.njk" import renderCard %}
+
+{% macro renderSectionValue(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set containerStyle = options.datas.containerStyle %}
+    {% set headingContainerStyle = options.datas.headingContainerStyle %}
+    {% set cardsContainerStyle = options.datas.cardsContainerStyle %}
+    
+    {% set sectionData = null %}
+    {% if options.name %}
+      {% for section in options.datas.sectionValues %}
+        {% if section.name == options.name %}
+          {% set sectionData = section %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not sectionData %}
+      {% set sectionData = options.datas.sectionValues[0] %}
+    {% endif %}
+    
+    {% set variant = sectionData.variant | default('default') %}
+    {% set variantStyle = options.datas.variants[variant] | default(options.datas.variants.default) %}
+    
+    <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
+      <div class="{{ containerStyle }}">
+        {# Heading section #}
+        <div class="{{ headingContainerStyle }}">
+          {# SuperHeading #}
+          {% if sectionData.superHeading and options.headings %}
+            {% set superHeading = null %}
+            {% for heading in options.headings.headings %}
+              {% if heading.name == sectionData.superHeading %}
+                {% set superHeading = heading %}
+              {% endif %}
+            {% endfor %}
+            
+            {% if superHeading %}
+              <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}">
+                {{ superHeading.text }}
+              </{{ "h" + superHeading.level }}>
+            {% endif %}
+          {% endif %}
+          
+          {# Main Heading #}
+          {% if sectionData.heading and options.headings %}
+            {% set mainHeading = null %}
+            {% for heading in options.headings.headings %}
+              {% if heading.name == sectionData.heading %}
+                {% set mainHeading = heading %}
+              {% endif %}
+            {% endfor %}
+            
+            {% if mainHeading %}
+              <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }}">
+                {{ mainHeading.text }}
+              </{{ "h" + mainHeading.level }}>
+            {% else %}
+              <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }}">
+                {{ sectionData.heading }}
+              </h2>
+            {% endif %}
+          {% endif %}
+          
+          {% if sectionData.description %}
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mt-4">{{ sectionData.description }}</p>
+          {% endif %}
+        </div>
+        
+        {# Cards container #}
+        <div class="{{ cardsContainerStyle }}">
+          {% for card in sectionData.cards %}
+            <div class="card-wrapper">
+              {{ renderCard({
+                name: card.name,
+                datas: options.cards,
+                headings: options.headings,
+                buttons: options.buttons,
+                heading: card.heading,
+                content: card.content,
+                button: card.button,
+                class: card.class | default('')
+              }) }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <span class="text-red-500">Section value data not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-organisms/section-value.njk" import renderSectionValue %}
+
+2. Call the section-value component with a specific name
+{{ renderSectionValue({ 
+    name: "core_values",
+    datas: organisms["section-values"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    cards: molecules.cards
+}) }}
+
+3. Using custom styles
+{{ renderSectionValue({ 
+    name: "user_benefits",
+    datas: organisms["section-values"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    cards: molecules.cards,
+    class: "bg-gray-100"
+}) }}
+
+4. Default usage (will use the first section in the JSON)
+{{ renderSectionValue({ 
+    datas: organisms["section-values"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    cards: molecules.cards
+}) }}
+
+Values that inspire, cards that engage! 🛡️✨
+#}

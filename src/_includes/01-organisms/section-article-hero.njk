@@ -1,0 +1,99 @@
+{#
+=========================
+   SECTION ARTICLE HERO        
+=========================
+#}
+
+{% from "03-atoms/heading.njk" import renderHeading %}
+
+{% macro renderSectionArticleHero(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    
+    {# Find the hero data by name #}
+    {% set variant = null %}
+    {% if options.name %}
+      {% for heroSection in options.datas.heroSections %}
+        {% if heroSection.name == options.name %}
+          {% set variant = heroSection %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {# If no matching hero found, use the first one #}
+    {% if not variant %}
+      {% set variant = options.datas.heroSections[0] %}
+    {% endif %}
+    
+    {% set variantStyle = options.datas.variants[variant.variant] | default(options.datas.variants.default) %}
+    
+    <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
+      <div class="{{ options.datas.containerStyle }}">
+        <div class="{{ options.datas.contentWrapperStyle }}">
+          {# Both image and title in the same container for proper alignment #}
+          <div>
+            {# Image with centering #}
+            <div class="{{ options.datas.imageContainerStyle }}">
+              {% if variant.image and options.images %}
+                {% set heroImage = null %}
+                {% for image in options.images.images %}
+                  {% if image.name == variant.image %}
+                    {% set heroImage = image %}
+                  {% endif %}
+                {% endfor %}
+                
+                {% if heroImage %}
+                  {% set imageVariant = options.images.variants[heroImage.size] %}
+                  <img src="{{ heroImage.src }}" 
+                       alt="{{ heroImage.alt }}" 
+                       class="{{ options.images.globalStyle }} {{ imageVariant }}">
+                {% endif %}
+              {% endif %}
+            </div>
+            
+            {# Title container - centered as in the design #}
+            <div class="{{ options.datas.titleContainerStyle }}">
+              {% if variant.headingName and options.headings %}
+                {{ renderHeading({ 
+                  name: variant.headingName, 
+                  datas: options.headings
+                }) }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <span class="text-red-500">Section article hero data not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/section-article-hero.njk" import renderSectionArticleHero %}
+
+2. Call the section article hero component with a specific name
+{{ renderSectionArticleHero({ 
+    name: "article_hero_default", 
+    datas: organisms["section-article-hero"],
+    images: atoms.images,
+    headings: atoms.headings
+}) }}
+
+3. Using custom styles
+{{ renderSectionArticleHero({ 
+    name: "article_hero_default",
+    datas: organisms["section-article-hero"],
+    images: atoms.images,
+    headings: atoms.headings,
+    class: "my-custom-section-class"
+}) }}
+
+Grab your quill, roll for inspiration, and start your journey 🛡️📜
+#}

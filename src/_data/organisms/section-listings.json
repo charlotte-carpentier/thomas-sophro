@@ -1,0 +1,108 @@
+{
+  "globalStyle": "w-full",
+  "variants": {
+    "default": "bg-white py-8 md:py-12",
+    "primary": "bg-blue-50 py-8 md:py-12",
+    "secondary": "bg-gray-50 py-8 md:py-12",
+    "featured": "bg-white py-8 md:py-12 border-t border-b border-gray-200"
+  },
+  "titleContainerStyle": {
+    "default": "mb-6 md:mb-8",
+    "centered": "mb-6 md:mb-8 text-center"
+  },
+  "cardsContainerStyle": {
+    "default": "flex flex-col items-center gap-6 md:grid md:grid-cols-4 md:gap-6 mb-8 md:items-stretch"
+  },
+  "paginationContainerStyle": {
+    "default": "mt-6 md:mt-8 flex flex-col md:flex-row md:justify-between md:items-center"
+  },
+  "mobilePaginationStyle": {
+    "default": "flex justify-center md:hidden"
+  },
+  "desktopPaginationStyle": {
+    "default": "hidden md:flex md:items-center md:justify-center md:w-full"
+  },
+  "section_listings": [
+    {
+      "name": "adventure_quests",
+      "style": "default",
+      "titleContainer": "default",
+      "heading": {
+        "name": "section_title",
+        "text": "Adventure Quests"
+      },
+      "cards": [
+        {
+          "name": "goblin_menace"
+        },
+        {
+          "name": "lost_wizard_hat"
+        },
+        {
+          "name": "goblin_menace"
+        },
+        {
+          "name": "lost_wizard_hat"
+        }
+      ],
+      "pagination": {
+        "mobile": "navigation-pager",
+        "desktop": "pager"
+      }
+    },
+    {
+      "name": "blog_posts",
+      "style": "secondary",
+      "titleContainer": "centered",
+      "heading": {
+        "name": "about_title",
+        "text": "Latest Articles"
+      },
+      "cards": [
+        {
+          "name": "post_template"
+        },
+        {
+          "name": "post_template"
+        },
+        {
+          "name": "post_template"
+        },
+        {
+          "name": "post_template"
+        }
+      ],
+      "pagination": {
+        "mobile": "navigation-pager",
+        "desktop": "pager"
+      }
+    },
+    {
+      "name": "featured_items",
+      "style": "featured",
+      "titleContainer": "default",
+      "heading": {
+        "name": "subsection_title",
+        "text": "Featured Items"
+      },
+      "cards": [
+        {
+          "name": "lost_wizard_hat"
+        },
+        {
+          "name": "goblin_menace"
+        },
+        {
+          "name": "lost_wizard_hat"
+        },
+        {
+          "name": "goblin_menace"
+        }
+      ],
+      "pagination": {
+        "mobile": "navigation-pager",
+        "desktop": "pager"
+      }
+    }
+  ]
+}

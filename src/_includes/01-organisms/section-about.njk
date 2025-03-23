@@ -1,0 +1,169 @@
+{#
+=========================
+      SECTION ABOUT        
+=========================
+#}
+
+{% from "03-atoms/heading.njk" import renderHeading %}
+{% from "03-atoms/button.njk" import renderButton %}
+
+{% macro renderSectionAbout(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set sectionStyles = options.datas.sectionStyles %}
+    
+    {% set sectionData = null %}
+    {% if options.name %}
+      {% for section in options.datas.sections %}
+        {% if section.name == options.name %}
+          {% set sectionData = section %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if not sectionData %}
+      {% set sectionData = options.datas.sections[0] %}
+    {% endif %}
+    
+    {% set variant = options.datas.variants[sectionData.variant] | default(options.datas.variants.default) %}
+    
+    <section class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }}">
+      <div class="{{ sectionStyles.container }}">
+        {# Mobile layout (flex column) #}
+        <div class="md:hidden">
+          {# Heading first in mobile #}
+          {% if sectionData.heading and options.headings %}
+            {{ renderHeading({
+              name: sectionData.heading,
+              datas: options.headings
+            }) }}
+          {% endif %}
+          
+          {# Super Heading second #}
+          {% if sectionData.superHeading and options.headings %}
+            {{ renderHeading({
+              name: sectionData.superHeading,
+              datas: options.headings
+            }) }}
+          {% endif %}
+          
+          {# Content #}
+          {% if sectionData.content %}
+            <div class="mt-4">
+              {{ sectionData.content }}
+            </div>
+          {% endif %}
+          
+          {# Buttons #}
+          {% if (sectionData.primaryButton or sectionData.secondaryButton) and options.buttons %}
+            <div class="{{ sectionStyles.buttonContainer }}">
+              {% if sectionData.primaryButton %}
+                {{ renderButton({
+                  name: sectionData.primaryButton,
+                  datas: options.buttons,
+                  class: 'mr-4'
+                }) }}
+              {% endif %}
+              
+              {% if sectionData.secondaryButton %}
+                {{ renderButton({
+                  name: sectionData.secondaryButton,
+                  datas: options.buttons
+                }) }}
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+        
+        {# Desktop layout (two columns) #}
+        <div class="hidden md:flex {{ sectionStyles.contentWrapper }}">
+          {# Left column: Super Heading, content and buttons #}
+          <div class="{{ sectionStyles.textContent }}">
+            {# Super Heading #}
+            {% if sectionData.superHeading and options.headings %}
+              {{ renderHeading({
+                name: sectionData.superHeading,
+                datas: options.headings
+              }) }}
+            {% endif %}
+            
+            {# Content #}
+            {% if sectionData.content %}
+              <div class="mt-4">
+                {{ sectionData.content }}
+              </div>
+            {% endif %}
+            
+            {# Buttons #}
+            {% if (sectionData.primaryButton or sectionData.secondaryButton) and options.buttons %}
+              <div class="{{ sectionStyles.buttonContainer }}">
+                {% if sectionData.primaryButton %}
+                  {{ renderButton({
+                    name: sectionData.primaryButton,
+                    datas: options.buttons,
+                    class: 'mr-4'
+                  }) }}
+                {% endif %}
+                
+                {% if sectionData.secondaryButton %}
+                  {{ renderButton({
+                    name: sectionData.secondaryButton,
+                    datas: options.buttons
+                  }) }}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+          
+          {# Right column: Main heading #}
+          <div class="{{ sectionStyles.mediaContent }}">
+            {# Main Heading #}
+            {% if sectionData.heading and options.headings %}
+              {{ renderHeading({
+                name: sectionData.heading,
+                datas: options.headings,
+                class: "md:text-5xl"
+              }) }}
+            {% endif %}
+            
+            {# Optional image content #}
+            {% if sectionData.image %}
+              <img src="{{ sectionData.image }}" alt="{{ sectionData.imageAlt | default('') }}" class="w-full h-auto mt-6">
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <span class="text-red-500">Section About data not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/section-about.njk" import renderSectionAbout %}
+
+2. Call the component with the required data
+{{ renderSectionAbout({ 
+    name: "about_us", 
+    datas: organisms["section-abouts"], 
+    headings: atoms.headings, 
+    buttons: atoms.buttons 
+}) }}
+
+3. Using custom styles
+{{ renderSectionAbout({ 
+    name: "about_us", 
+    datas: organisms["section-abouts"], 
+    headings: atoms.headings, 
+    buttons: atoms.buttons,
+    class: "my-custom-section-class" 
+}) }}
+
+Saving kingdoms and collecting trinkets since forever 🏰⚔️
+#}
