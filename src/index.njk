@@ -1,13 +1,18 @@
 ---
 title: Hat dynamic site
-layout: '01-organisms/base.njk'
+layout: '00-core/base.njk'
 ---
 
-{# Set hero section data from hero.json #}
-{% set pageData = hero %}
+{# Include hero-section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
-{# Include hero section #}
-{% include '01-organisms-sections/section-hero.njk' %}
+    {{ renderSectionHero({ 
+        name: "default_hero",
+        datas: organisms["section-heros"],
+        headings: atoms.headings,
+        buttons: atoms.buttons,
+        images: atoms.images
+    }) }}
 
 {# Include featured section #}
 {% include '01-organisms-sections/section-featured.njk' %}

@@ -5,12 +5,14 @@
     "default": "bg-white hover:shadow-lg",
     "primary": "bg-blue-50 hover:shadow-lg",
     "secondary": "bg-gray-50 hover:shadow-lg",
-    "featured": "bg-white hover:shadow-xl border-2 border-blue-500"
+    "featured": "bg-white hover:shadow-xl border-2 border-blue-500",
+    "post": "bg-gray-200 shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] w-full max-w-sm rounded-lg overflow-hidden mx-auto font-[sans-serif] mt-4"
   },
   "contentStyle": "p-4 flex flex-col gap-4",
   "contentStyles": {
     "default": "text-gray-700",
-    "secondary": "text-gray-600 text-sm"
+    "secondary": "text-gray-600 text-sm",
+    "post": "p-6"
   },
   "cards": [
     {
@@ -46,6 +48,16 @@
       "button": {
         "name": "card"
       }
+    },
+    {
+      "name": "post_template",
+      "type": "post",
+      "imageStyle": "min-h-[256px] w-full",
+      "titleStyle": "text-gray-800 text-xl font-bold",
+      "metaStyle": "snippet__meta",
+      "descriptionStyle": "my-4 text-sm text-gray-500 leading-relaxed",
+      "buttonContainerStyle": "flex justify-center",
+      "buttonName": "read_more"
     }
   ]
 }

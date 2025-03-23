@@ -1,0 +1,149 @@
+{#
+=========================
+      SECTION HERO        
+=========================
+#}
+
+{% macro renderSectionHero(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set variant = options.name and options.datas.heroes | selectattr("name", "equalto", options.name) | first | default(options.datas.heroes[0]) %}
+    
+    {% set variantStyle = options.datas.variants[variant.variant] | default(options.datas.variants.default) %}
+    {% set containerStyle = options.datas.containerStyle %}
+    {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
+    {% set textContainerStyle = options.datas.textContainerStyle %}
+    {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center md:justify-start" %}
+    {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
+    
+    <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
+      <div class="{{ containerStyle }}">
+        <div class="{{ contentLayoutStyle.mobile }} {{ contentLayoutStyle.desktop }}">
+          {# Text Content Column #}
+          <div class="{{ textContainerStyle }}">
+            {# SuperHeading #}
+            {% if variant.superHeading and options.headings %}
+              {% set superHeading = null %}
+              {% for heading in options.headings.headings %}
+                {% if heading.name == variant.superHeading %}
+                  {% set superHeading = heading %}
+                {% endif %}
+              {% endfor %}
+              
+              {% if superHeading %}
+                <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}">
+                  {{ superHeading.text }}
+                </{{ "h" + superHeading.level }}>
+              {% endif %}
+            {% endif %}
+            
+            {# Main Heading #}
+            {% if variant.heading and options.headings %}
+              {% set mainHeading = null %}
+              {% for heading in options.headings.headings %}
+                {% if heading.name == variant.heading %}
+                  {% set mainHeading = heading %}
+                {% endif %}
+              {% endfor %}
+              
+              {% if mainHeading %}
+                <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }}">
+                  {{ mainHeading.text }}
+                </{{ "h" + mainHeading.level }}>
+              {% else %}
+                <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }}">
+                  {{ variant.heading }}
+                </h2>
+              {% endif %}
+            {% endif %}
+            
+            {# Description #}
+            {% if variant.description %}
+              <p class="{{ variant.descriptionStyle }}">
+                {{ variant.description }}
+              </p>
+            {% endif %}
+            
+            {# Buttons Container #}
+            <div class="{{ buttonsContainerStyle }}">
+              {# Import button rendering macro #}
+              {% from "03-atoms/button.njk" import renderButton %}
+              
+              {# Primary Button #}
+              {% if variant.primaryButton %}
+                {{ renderButton({ 
+                    name: variant.primaryButton,
+                    datas: options.buttons
+                }) }}
+              {% endif %}
+              
+              {# Secondary Button #}
+              {% if variant.secondaryButton %}
+                {{ renderButton({ 
+                    name: variant.secondaryButton,
+                    datas: options.buttons
+                }) }}
+              {% endif %}
+            </div>
+          </div>
+          
+          {# Image Column #}
+          <div class="{{ imageContainerStyle }}">
+            {% if variant.image and options.images %}
+              {% set heroImage = null %}
+              {% for image in options.images.images %}
+                {% if image.name == variant.image %}
+                  {% set heroImage = image %}
+                {% endif %}
+              {% endfor %}
+              
+              {% if heroImage %}
+                {% set imageVariant = options.images.variants[heroImage.size] %}
+                <img src="{{ heroImage.src }}" 
+                     alt="{{ heroImage.alt }}" 
+                     class="{{ options.images.globalStyle }} {{ imageVariant }}">
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <span class="text-red-500">Section Hero data not found</span>
+  {% endif %}
+{% endmacro %}
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+2. Call the section-hero component with a specific name
+{{ renderSectionHero({ 
+    name: "default_hero",
+    datas: organisms["section-hero"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images
+}) }}
+
+3. Using custom styles
+{{ renderSectionHero({ 
+    name: "product_hero",
+    datas: organisms["section-hero"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    class: "my-custom-hero-class"
+}) }}
+
+4. Note about button rendering
+The section-hero component uses the renderButton macro from "03-atoms/button.njk".
+This ensures consistent button styling and behavior across all components.
+
+Every journey begins with a hero section! 🏰🛡️
+#}

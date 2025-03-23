@@ -162,6 +162,18 @@
       "level": 4,
       "text": "Socials",
       "style": "default"
+    },
+    {
+      "name": "hero_title",
+      "level": 4,
+      "text": "A New Hatventure Begins",
+      "style": "default"
+    },
+    {
+      "name": "hero_subtitle",
+      "level": 2,
+      "text": "Every story needs a hero... and every page needs one too",
+      "style": "default"
     }
   ]
 }

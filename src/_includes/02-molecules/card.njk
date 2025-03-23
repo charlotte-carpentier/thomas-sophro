@@ -22,100 +22,183 @@
       {% set cardData = options.datas.cards[0] %}
     {% endif %}
     
-    {# Get variant style #}
-    {% set variantStyle = options.datas.variants[options.variant] | default(options.datas.variants.default) %}
+    {# Check if this is a post card #}
+    {% set isPostCard = cardData.type == 'post' %}
     
-    <div class="{{ globalStyle }} {{ widthStyle }} {{ variantStyle }} {{ options.class | default('') }}">
-      {# Image section #}
-      {% if cardData.image and options.images %}
-        {% set imageData = null %}
-        {% for img in options.images.images %}
-          {% if img.name == cardData.image.name %}
-            {% set imageData = img %}
-          {% endif %}
-        {% endfor %}
-        
-        {% if imageData %}
-          {% set imgSize = options.images.variants[imageData.size] | default('') %}
-          <div class="card-image-container">
-            <img 
-              src="{{ imageData.src }}" 
-              alt="{{ imageData.alt }}" 
-              class="{{ options.images.globalStyle }} {{ imgSize }} w-full h-auto"
-            >
-          </div>
-        {% endif %}
-      {% endif %}
-      
-      {# Content section #}
-      <div class="{{ options.datas.contentStyle }}">
-        {# Render heading if present #}
-        {% if cardData.heading and options.headings %}
-          {% set headingData = null %}
-          {% for heading in options.headings.headings %}
-            {% if heading.name == cardData.heading.name %}
-              {% set headingData = heading %}
+    {# Get variant style #}
+    {% set variantStyle = '' %}
+    {% if isPostCard %}
+      {% set variantStyle = options.datas.variants.post %}
+    {% else %}
+      {% set variantStyle = options.datas.variants[options.variant] | default(options.datas.variants.default) %}
+    {% endif %}
+    
+    {# For regular cards, render normally #}
+    {% if not isPostCard and not options.post %}
+      <div class="{{ globalStyle }} {{ widthStyle }} {{ variantStyle }} {{ options.class | default('') }}">
+        {# Image section #}
+        {% if cardData.image and options.images %}
+          {% set imageData = null %}
+          {% for img in options.images.images %}
+            {% if img.name == cardData.image.name %}
+              {% set imageData = img %}
             {% endif %}
           {% endfor %}
           
-          {% if headingData %}
-            {% set hLevel = headingData.level | default(3) %}
-            {% set headingStyle = options.headings.variants[headingData.style] | default(options.headings.variants.default) %}
-            {% set sizeStyle = options.headings.sizeStyles['h' + hLevel] | default('') %}
-            
-            <h{{ hLevel }} class="{{ options.headings.globalStyle }} {{ sizeStyle }} {{ headingStyle }}">
-              {{ headingData.text }}
-            </h{{ hLevel }}>
-          {% endif %}
-        {% endif %}
-        
-        {# Render content text #}
-        {% if cardData.content %}
-          {% set contentStyle = options.datas.contentStyles[cardData.content.style] | default(options.datas.contentStyles.default) %}
-          {% set maxLines = cardData.content.maxLines | default(0) %}
-          <p class="{{ contentStyle }} {% if maxLines > 0 %}line-clamp-{{ maxLines }}{% endif %}">{{ cardData.content.text }}</p>
-        {% endif %}
-        
-        {# Render button if present #}
-        {% if cardData.button and options.buttons %}
-          {% set buttonData = null %}
-          {% for button in options.buttons.buttons %}
-            {% if button.name == cardData.button.name %}
-              {% set buttonData = button %}
-            {% endif %}
-          {% endfor %}
-          
-          {% if buttonData %}
-            {% set btnVariant = buttonData.style | default('primary') %}
-            {% set btnSize = buttonData.size | default('button') %}
-            {% set btnDefaultState = options.buttons.variants[btnVariant].default | default('') %}
-            {% set btnSizeStyle = options.buttons.sizes[btnSize] | default('') %}
-            
-            <div class="mt-auto pt-2 flex justify-center">
-              <a 
-                href="{{ buttonData.href | default('#') }}" 
-                class="{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}"
-                {% if buttonData.target %}target="{{ buttonData.target }}"{% endif %}
-                onmouseover="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].hover }} {{ btnSizeStyle }}'"
-                onmouseout="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
-                onfocus="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].focus }} {{ btnSizeStyle }}'"
-                onblur="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
+          {% if imageData %}
+            {% set imgSize = options.images.variants[imageData.size] | default('') %}
+            <div class="card-image-container">
+              <img 
+                src="{{ imageData.src }}" 
+                alt="{{ imageData.alt }}" 
+                class="{{ options.images.globalStyle }} {{ imgSize }} w-full h-auto"
               >
-                {% if buttonData.iconBefore %}
-                  <img src="{{ buttonData.iconBefore }}" alt="" class="inline-block mr-2 h-4 w-4">
-                {% endif %}
-                
-                {{ buttonData.text }}
-                
-                {% if buttonData.iconAfter %}
-                  <img src="{{ buttonData.iconAfter }}" alt="" class="inline-block ml-2 h-4 w-4">
-                {% endif %}
-              </a>
             </div>
           {% endif %}
         {% endif %}
+        
+        {# Content section #}
+        <div class="{{ options.datas.contentStyle }}">
+          {# Render heading if present #}
+          {% if cardData.heading and options.headings %}
+            {% set headingData = null %}
+            {% for heading in options.headings.headings %}
+              {% if heading.name == cardData.heading.name %}
+                {% set headingData = heading %}
+              {% endif %}
+            {% endfor %}
+            
+            {% if headingData %}
+              {% set hLevel = headingData.level | default(3) %}
+              {% set headingStyle = options.headings.variants[headingData.style] | default(options.headings.variants.default) %}
+              {% set sizeStyle = options.headings.sizeStyles['h' + hLevel] | default('') %}
+              
+              <h{{ hLevel }} class="{{ options.headings.globalStyle }} {{ sizeStyle }} {{ headingStyle }}">
+                {{ headingData.text }}
+              </h{{ hLevel }}>
+            {% endif %}
+          {% endif %}
+          
+          {# Render content text #}
+          {% if cardData.content %}
+            {% set contentStyle = options.datas.contentStyles[cardData.content.style] | default(options.datas.contentStyles.default) %}
+            {% set maxLines = cardData.content.maxLines | default(0) %}
+            <p class="{{ contentStyle }} {% if maxLines > 0 %}line-clamp-{{ maxLines }}{% endif %}">{{ cardData.content.text }}</p>
+          {% endif %}
+          
+          {# Render button if present #}
+          {% if cardData.button and options.buttons %}
+            {% set buttonData = null %}
+            {% for button in options.buttons.buttons %}
+              {% if button.name == cardData.button.name %}
+                {% set buttonData = button %}
+              {% endif %}
+            {% endfor %}
+            
+            {% if buttonData %}
+              {% set btnVariant = buttonData.style | default('primary') %}
+              {% set btnSize = buttonData.size | default('button') %}
+              {% set btnDefaultState = options.buttons.variants[btnVariant].default | default('') %}
+              {% set btnSizeStyle = options.buttons.sizes[btnSize] | default('') %}
+              
+              <div class="mt-auto pt-2 flex justify-center">
+                <a 
+                  href="{{ buttonData.href | default('#') }}" 
+                  class="{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}"
+                  {% if buttonData.target %}target="{{ buttonData.target }}"{% endif %}
+                  onmouseover="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].hover }} {{ btnSizeStyle }}'"
+                  onmouseout="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
+                  onfocus="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].focus }} {{ btnSizeStyle }}'"
+                  onblur="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
+                >
+                  {% if buttonData.iconBefore %}
+                    <img src="{{ buttonData.iconBefore }}" alt="" class="inline-block mr-2 h-4 w-4">
+                  {% endif %}
+                  
+                  {{ buttonData.text }}
+                  
+                  {% if buttonData.iconAfter %}
+                    <img src="{{ buttonData.iconAfter }}" alt="" class="inline-block ml-2 h-4 w-4">
+                  {% endif %}
+                </a>
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
       </div>
-    </div>
+    {% else %}
+      {# For post cards, render with the post structure #}
+      {% set postCard = cardData %}
+      {% if options.post %}
+        {% set post = options.post %}
+        <li>
+          <article class="{{ variantStyle }} {{ options.class | default('') }}">
+            <div class="{{ postCard.imageStyle | default('min-h-[256px]') }}">
+              <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="w-full">
+            </div>
+            <div class="{{ options.datas.contentStyles.post | default('p-6') }}">
+              <h3 class="{{ postCard.titleStyle | default('text-gray-800 text-xl font-bold') }}">{{ post.data.title }}</h3>
+              <p class="{{ postCard.metaStyle | default('snippet__meta') }}">by
+                <span>{{ post.data.author }}</span>
+                on
+                <span>{{ post.data.date | postDate }}</span>
+              </p>
+              <p class="{{ postCard.descriptionStyle | default('my-4 text-sm text-gray-500 leading-relaxed') }}">{{ post.data.description }}</p>
+              <div class="{{ postCard.buttonContainerStyle | default('flex justify-center') }}">
+                {% if options.buttons %}
+                  {% set btnName = postCard.buttonName | default('read_more') %}
+                  {% set buttonData = null %}
+                  {% for button in options.buttons.buttons %}
+                    {% if button.name == btnName %}
+                      {% set buttonData = button %}
+                    {% endif %}
+                  {% endfor %}
+                  
+                  {% if buttonData %}
+                    {% set btnVariant = buttonData.style | default('primary') %}
+                    {% set btnSize = buttonData.size | default('button') %}
+                    {% set btnDefaultState = options.buttons.variants[btnVariant].default | default('') %}
+                    {% set btnSizeStyle = options.buttons.sizes[btnSize] | default('') %}
+                    
+                    <a 
+                      href="{{ post.url }}" 
+                      class="{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}"
+                      onmouseover="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].hover }} {{ btnSizeStyle }}'"
+                      onmouseout="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
+                      onfocus="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].focus }} {{ btnSizeStyle }}'"
+                      onblur="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
+                    >
+                      {% if buttonData.iconBefore %}
+                        <img src="{{ buttonData.iconBefore }}" alt="" class="inline-block mr-2 h-4 w-4">
+                      {% endif %}
+                      
+                      {{ buttonData.text }}
+                      
+                      {% if buttonData.iconAfter %}
+                        <img src="{{ buttonData.iconAfter }}" alt="" class="inline-block ml-2 h-4 w-4">
+                      {% endif %}
+                    </a>
+                  {% else %}
+                    {# Fallback for button if no matching button found #}
+                    <a href="{{ post.url }}" class="inline-block px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                      Read more
+                    </a>
+                  {% endif %}
+                {% else %}
+                  {# Simple button fallback if no buttons object provided #}
+                  <a href="{{ post.url }}" class="inline-block px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    Read more
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+        </li>
+      {% else %}
+        {# Placeholder for when post card type is requested but no post data is provided #}
+        <span class="text-red-500">Post data not provided for post card type</span>
+      {% endif %}
+    {% endif %}
   {% else %}
     <span class="text-red-500">Card data not found</span>
   {% endif %}
@@ -157,7 +240,19 @@ Summon HAT Components Wisely
   {{ renderCard({ name: "lost_wizard_hat", variant: "featured", datas: molecules.cards, images: atoms.images, headings: atoms.headings, buttons: atoms.buttons }) }}
 </div>
 
-5. Structure of cards.json
+5. For post cards
+<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {% for post in collections.posts %}
+    {{ renderCard({ 
+        name: "post_template", 
+        datas: molecules.cards,
+        buttons: atoms.buttons,
+        post: post
+    }) }}
+  {% endfor %}
+</ul>
+
+6. Structure of cards.json
 {
   "cards": [
     {
@@ -171,11 +266,21 @@ Summon HAT Components Wisely
       "content": {
         "text": "A band of mischievous goblins is causing chaos...",
         "style": "default",
-        "maxLines": 2  // Optional: Limits text to 2 lines with ellipsis
+        "maxLines": 2
       },
       "button": {
         "name": "card"
       }
+    },
+    {
+      "name": "post_template",
+      "type": "post",
+      "imageStyle": "min-h-[256px] w-full",
+      "titleStyle": "text-gray-800 text-xl font-bold",
+      "metaStyle": "snippet__meta",
+      "descriptionStyle": "my-4 text-sm text-gray-500 leading-relaxed",
+      "buttonContainerStyle": "flex justify-center",
+      "buttonName": "read_more"
     }
   ]
 }

@@ -1,9 +1,10 @@
 ---
 title: Blog
 description: This is the blog page
-layout: '01-organisms/base.njk'
+layout: '00-core/base.njk'
 ---
 
+{% from "02-molecules/card.njk" import renderCard %}
 {# For blog page, use hero_blog.json #}
 {% set pageData = hero_blog %}
 {% include "01-organisms-sections/section-page-hero.njk" %}
@@ -16,7 +17,12 @@ layout: '01-organisms/base.njk'
     <ul role="list" class="articles__list space-y-8">
         {%- for post in collections.post | reverse -%}
             <li class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                {% include '01-molecules-cards/card-post.njk' %}
+                {{ renderCard({ 
+                    name: "post_template", 
+                    datas: molecules.cards,
+                    buttons: atoms.buttons,
+                    post: collections.posts[0]
+                }) }}
             </li>
         {%- endfor -%}
     </ul>
