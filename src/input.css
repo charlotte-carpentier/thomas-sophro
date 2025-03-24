@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "./assets/css/fonts.css";
+@import "./assets/fonts/fonts.css";
 
 @source "./src/**/*.njk";
 @theme {
