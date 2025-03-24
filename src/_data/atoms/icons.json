@@ -10,9 +10,63 @@
   "globalClass": "icon",
   "icons": [
     {
-      "name": "brand",
-      "path": "/assets/icons/brand.svg",
-      "alt": "Brand Flag Icon", 
+      "name": "arrow_right_orange",
+      "path": "/assets/icons/FLECHE-D-orange.svg",
+      "alt": "Arrow right orange icon", 
+      "defaultSize": "md"
+    },
+    {
+      "name": "arrow-left_orange",
+      "path": "/assets/icons/FLECHE-G-orange.svg", 
+      "alt": "Arrow left orange icon",
+      "defaultSize": "md"
+    },
+    {
+      "name": "arrow_scroll_beige",
+      "path": "/assets/icons/FLECHE-SCROLL-beige.svg", 
+      "alt": "Arrow scroll beige icon",
+      "defaultSize": "md"
+    },
+    {
+      "name": "arrow_scroll_blue",
+      "path": "/assets/icons/FLECHE-SCROLL-bleu.svg",
+      "alt": "Arrow scroll blue", 
+      "defaultSize": "md"
+    },
+    {
+      "name": "wheel-orange",
+      "path": "/assets/icons/ROUE-orange.svg",
+      "alt": "Wheel orange icon", 
+      "defaultSize": "md"
+    },
+    {
+      "name": "wheel_orange_bg_white",
+      "path": "/assets/icons/ROUE-orangeFondBlanc.svg", 
+      "alt": "Wheel orange bg white icon",
+      "defaultSize": "md"
+    },
+    {
+      "name": "wheel_orange_bg_blue",
+      "path": "/assets/icons/ROUE-orangeFondbleu.svg", 
+      "alt": "Wheel orange bg blue icon",
+      "defaultSize": "md"
+    },
+    {
+      "name": "wheel_green",
+      "path": "/assets/icons/ROUE-verte.svg",
+      "alt": "Wheel green icon", 
+      "defaultSize": "md"
+    },
+    {
+      "name": "treasure_chest",
+      "path": "/assets/icons/treasure-chest.svg",
+      "alt": "Treasure chest icon", 
+      "defaultSize": "lg"
+    },
+    {
+      "name": "treasure_chest_white",
+      "path": "/assets/icons/treasure-chest-white.svg",
+      "alt": "Treasure chest white icon", 
       "defaultSize": "lg"
     },
     {

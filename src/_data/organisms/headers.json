@@ -1,7 +1,7 @@
 {
   "globalStyle": "bg-[theme(--ma-nautic-blue)] shadow-md",
   "containerStyle": "container mx-auto px-4 py-4 flex justify-between items-center",
-  "logoContainerStyle": "relative z-10 -mb-24",
+  "logoContainerStyle": "relative z-30 -mb-24",
   "logoSize": "w-32 md:w-48 h-32 md:h-48",
   "navContainerStyle": "flex-1 flex justify-end",
   "navStyle": "flex items-center gap-8",
@@ -9,11 +9,13 @@
   "variants": {
     "toggleButton": {
       "default": "toggle-button lg:hidden",
-      "icon": "burger_solid",
-      "iconStyle": "text-[theme(--ma-nautic-white)]"
+      "icon": "treasure_chest_white",
+      "iconStyle": "text-[theme(--ma-nautic-white)]",
+      "containerSize": "w-8 h-8",
+      "iconSize": "32"
     },
     "dropdownMenu": {
-      "default": "dropdown-menu absolute -top-full left-0 max-lg:bg-[theme(--ma-nautic-blue)] w-full py-2 transition-all duration-500 ease-in-out font-[theme(--font-display)] lg:static lg:flex-row lg:justify-end"
+      "default": "dropdown-menu absolute -top-full left-0 max-lg:bg-[theme(--ma-nautic-blue)] w-full py-2 transition-all duration-500 ease-in-out font-[theme(--font-display)] lg:static lg:flex-row lg:justify-end z-20"
     }
   },
   "headers": [

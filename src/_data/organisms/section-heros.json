@@ -1,5 +1,5 @@
 {
-  "globalStyle": "section-hero py-12 px-4 md:px-8",
+  "globalStyle": "section-hero py-12 px-4 md:px-8 relative",
   "variants": {
     "default": "py-8 md:py-12 lg:py-16",
     "compact": "py-6 md:py-8 lg:py-10",
@@ -15,21 +15,11 @@
   "imageContainerStyle": "mt-6 md:mt-0",
   "heroes": [
     {
-      "name": "default_hero",
-      "variant": "default",
-      "superHeading": "hero_title",
-      "heading": "hero_subtitle"
-    },
-    {
-      "name": "adventure_hero",
-      "variant": "default",
-      "superHeading": "quest_log",
-      "heading": "goblin_menace",
-      "description": "Embark on a perilous journey through the ancient forests where goblins have been terrorizing local villages. Prepare your gear, sharpen your blade, and bring peace to the realm.",
-      "descriptionStyle": "text-base text-gray-500 max-w-prose",
-      "primaryButton": "submit_quest",
-      "secondaryButton": "quest_details",
-      "image": "placeholder_medium"
+      "name": "ma_nautic_hero",
+      "variant": "ma-nautic",
+      "superHeading": "location_bateaux",
+      "heading": "golfe_st_florent",
+      "backgroundImage": "hero_background"
     }
   ]
 }

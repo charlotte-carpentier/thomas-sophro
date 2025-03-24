@@ -23,6 +23,12 @@
   },
   "images": [
     {
+      "name": "hero_background",
+      "src": "/assets/images/ACCUEIL-1.jpg",
+      "alt": "Image du port de St Florent",
+      "group": "block-media"
+    },
+    {
       "name": "placeholder_small",
       "src": "/assets/images/placeholder-small.png",
       "alt": "Small placeholder image",
