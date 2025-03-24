@@ -3,16 +3,17 @@ title: M.A Nautic
 layout: '00-core/base.njk'
 ---
 
-{# Section hero #}
+{# Import le macro existant #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
-    {{ renderSectionHero({ 
-        name: "default_hero",
-        datas: organisms["section-heros"],
-        headings: atoms.headings,
-        buttons: atoms.buttons,
-        images: atoms.images
-    }) }}
+{# Hero section pour MA-Nautic #}
+{{ renderSectionHero({
+    name: "ma_nautic_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images
+}) }}
 
 {# Section Qui sommes-nous #}
 {% from "01-organisms/section-about.njk" import renderSectionAbout %}

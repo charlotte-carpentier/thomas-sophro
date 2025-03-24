@@ -9,17 +9,31 @@
     "h6": "text-base"
   },
   "variants": {
-    "default": "text-[--ma-nautic-blue]",
+    "default": "text-[theme(--ma-nautic-blue)]",
     "section-title": "ma-nautic-section-title",
     "boat-title": "ma-nautic-boat-title",
-    "hero": "ma-nautic-hero-heading"
+    "hero": "ma-nautic-hero-heading",
+    "ma_nautic_main_title": "font-[theme(--ma-nautic-font-display)] text-[theme(--ma-nautic-beige)] text-5xl md:text-6xl lg:text-7xl mb-4 tracking-wide",
+    "ma_nautic_subtitle": "font-script text-white text-3xl md:text-4xl lg:text-5xl italic"
   },
   "iconStyles": {
     "default": "text-[--ma-nautic-teal] inline-flex items-center mr-2"
   },
   "headings": [
     {
-      "name": "hero_title",
+      "name": "location_bateaux",
+      "text": "LOCATION DE BATEAUX",
+      "level": "1",
+      "style": "ma_nautic_main_title"
+    },
+    {
+      "name": "golfe_st_florent",
+      "text": "Golfe de St Florent",
+      "level": "2",
+      "style": "ma_nautic_subtitle"
+    },
+    {
+      "name": "drop_title",
       "level": 1,
       "text": "AGENCE DE LOCATION DE BATEAUX EN CORSE",
       "style": "hero"

@@ -20,6 +20,8 @@
     {% set toggleButtonStyle = options.datas.variants.toggleButton.default %}
     {% set toggleButtonIcon = options.datas.variants.toggleButton.icon %}
     {% set toggleButtonIconStyle = options.datas.variants.toggleButton.iconStyle | default('') %}
+    {% set toggleButtonContainerSize = options.datas.variants.toggleButton.containerSize | default('w-6 h-6') %}
+    {% set toggleButtonIconSize = options.datas.variants.toggleButton.iconSize | default('24') %}
     {% set dropdownMenuStyle = options.datas.variants.dropdownMenu.default %}
     
     {% set headerData = null %}
@@ -50,7 +52,7 @@
             {# Menu Container avec hamburger et dropdown #}
             <div class="{{ menuContainerStyle }}">
               {# Bouton hamburger #}
-              <div class="{{ toggleButtonStyle }}">
+              <div class="{{ toggleButtonStyle }}" data-container-size="{{ toggleButtonContainerSize }}" data-icon-size="{{ toggleButtonIconSize }}">
                 {% set iconData = null %}
                 {% if options.icons %}
                   {% for icon in options.icons.icons %}
@@ -61,12 +63,12 @@
                 {% endif %}
                 
                 {% if iconData %}
-                  <span data-svg-src="{{ iconData.path }}" class="inline-flex items-center justify-center w-6 h-6 {{ toggleButtonIconStyle }}">
+                  <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ toggleButtonIconSize }}" data-svg-height="{{ toggleButtonIconSize }}" class="inline-flex items-center justify-center {{ toggleButtonContainerSize }} {{ toggleButtonIconStyle }}">
                     <!-- SVG will be loaded here -->
                   </span>
                 {% else %}
-                  <span class="inline-flex items-center justify-center w-6 h-6 {{ toggleButtonIconStyle }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                  <span class="inline-flex items-center justify-center {{ toggleButtonContainerSize }} {{ toggleButtonIconStyle }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="{{ toggleButtonIconSize }}" height="{{ toggleButtonIconSize }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                   </span>
                 {% endif %}
               </div>

@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-svg-src]').forEach(element => {
       const svgPath = element.getAttribute('data-svg-src');
       const originalClasses = element.className || '';
+      const svgWidth = element.getAttribute('data-svg-width');
+      const svgHeight = element.getAttribute('data-svg-height');
       
       // Load the SVG using fetch
       fetch(svgPath)
@@ -34,6 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Keep any existing classes on the SVG
             const existingClasses = svg.getAttribute('class') || '';
             svg.setAttribute('class', `${existingClasses} ${originalClasses}`.trim());
+          }
+          
+          // Apply custom width and height if specified
+          if (svgWidth) {
+            svg.setAttribute('width', svgWidth);
+          }
+          if (svgHeight) {
+            svg.setAttribute('height', svgHeight);
           }
           
           // Ensure SVG inherits color

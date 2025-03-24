@@ -16,98 +16,159 @@
     {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center md:justify-start" %}
     {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
     
-    <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
-      <div class="{{ containerStyle }}">
-        <div class="{{ contentLayoutStyle.mobile }} {{ contentLayoutStyle.desktop }}">
-          {# Text Content Column #}
-          <div class="{{ textContainerStyle }}">
-            {# SuperHeading #}
+    {# Spécifique à MA-Nautic hero #}
+    {% if variant.name == "ma_nautic_hero" %}
+      <section class="{{ globalStyle }} {{ variantStyle }} relative h-screen overflow-hidden {{ options.class | default('') }}">
+        {# Background image #}
+        {% if variant.backgroundImage %}
+          {% set bgImage = null %}
+          {% for image in options.images.images %}
+            {% if image.name == variant.backgroundImage %}
+              {% set bgImage = image %}
+            {% endif %}
+          {% endfor %}
+          
+          {% if bgImage %}
+            <div class="absolute inset-0 z-0">
+              <img src="{{ bgImage.src }}" alt="{{ bgImage.alt }}" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-ma-nautic-blue/30"></div>
+            </div>
+          {% endif %}
+        {% endif %}
+        
+        {# Content container #}
+        <div class="{{ containerStyle }} relative z-10 h-full flex items-center justify-center">
+          <div class="flex flex-col items-center justify-center">
+            {# Main Title - using headings system #}
             {% if variant.superHeading and options.headings %}
-              {% set superHeading = null %}
+              {% set mainTitle = null %}
               {% for heading in options.headings.headings %}
                 {% if heading.name == variant.superHeading %}
-                  {% set superHeading = heading %}
+                  {% set mainTitle = heading %}
                 {% endif %}
               {% endfor %}
               
-              {% if superHeading %}
-                <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}">
-                  {{ superHeading.text }}
-                </{{ "h" + superHeading.level }}>
+              {% if mainTitle %}
+                <{{ "h" + mainTitle.level }} class="{{ options.headings.variants[mainTitle.style] }}">
+                  {{ mainTitle.text }}
+                </{{ "h" + mainTitle.level }}>
               {% endif %}
             {% endif %}
             
-            {# Main Heading #}
+            {# Subtitle - using headings system #}
             {% if variant.heading and options.headings %}
-              {% set mainHeading = null %}
+              {% set subtitle = null %}
               {% for heading in options.headings.headings %}
                 {% if heading.name == variant.heading %}
-                  {% set mainHeading = heading %}
+                  {% set subtitle = heading %}
                 {% endif %}
               {% endfor %}
               
-              {% if mainHeading %}
-                <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }}">
-                  {{ mainHeading.text }}
-                </{{ "h" + mainHeading.level }}>
-              {% else %}
-                <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }}">
-                  {{ variant.heading }}
-                </h2>
-              {% endif %}
-            {% endif %}
-            
-            {# Description #}
-            {% if variant.description %}
-              <p class="{{ variant.descriptionStyle }}">
-                {{ variant.description }}
-              </p>
-            {% endif %}
-            
-            {# Buttons Container #}
-            <div class="{{ buttonsContainerStyle }}">
-              {# Import button rendering macro #}
-              {% from "03-atoms/button.njk" import renderButton %}
-              
-              {# Primary Button #}
-              {% if variant.primaryButton %}
-                {{ renderButton({ 
-                    name: variant.primaryButton,
-                    datas: options.buttons
-                }) }}
-              {% endif %}
-              
-              {# Secondary Button #}
-              {% if variant.secondaryButton %}
-                {{ renderButton({ 
-                    name: variant.secondaryButton,
-                    datas: options.buttons
-                }) }}
-              {% endif %}
-            </div>
-          </div>
-          
-          {# Image Column #}
-          <div class="{{ imageContainerStyle }}">
-            {% if variant.image and options.images %}
-              {% set heroImage = null %}
-              {% for image in options.images.images %}
-                {% if image.name == variant.image %}
-                  {% set heroImage = image %}
-                {% endif %}
-              {% endfor %}
-              
-              {% if heroImage %}
-                {% set imageVariant = options.images.variants[heroImage.size] %}
-                <img src="{{ heroImage.src }}" 
-                     alt="{{ heroImage.alt }}" 
-                     class="{{ options.images.globalStyle }} {{ imageVariant }}">
+              {% if subtitle %}
+                <{{ "h" + subtitle.level }} class="{{ options.headings.variants[subtitle.style] }}">
+                  {{ subtitle.text }}
+                </{{ "h" + subtitle.level }}>
               {% endif %}
             {% endif %}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      
+    {# Section Hero standard pour les autres variantes #}
+    {% else %}
+      <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
+        <div class="{{ containerStyle }}">
+          <div class="{{ contentLayoutStyle.mobile }} {{ contentLayoutStyle.desktop }}">
+            {# Text Content Column #}
+            <div class="{{ textContainerStyle }}">
+              {# SuperHeading #}
+              {% if variant.superHeading and options.headings %}
+                {% set superHeading = null %}
+                {% for heading in options.headings.headings %}
+                  {% if heading.name == variant.superHeading %}
+                    {% set superHeading = heading %}
+                  {% endif %}
+                {% endfor %}
+                
+                {% if superHeading %}
+                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}">
+                    {{ superHeading.text }}
+                  </{{ "h" + superHeading.level }}>
+                {% endif %}
+              {% endif %}
+              
+              {# Main Heading #}
+              {% if variant.heading and options.headings %}
+                {% set mainHeading = null %}
+                {% for heading in options.headings.headings %}
+                  {% if heading.name == variant.heading %}
+                    {% set mainHeading = heading %}
+                  {% endif %}
+                {% endfor %}
+                
+                {% if mainHeading %}
+                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }}">
+                    {{ mainHeading.text }}
+                  </{{ "h" + mainHeading.level }}>
+                {% else %}
+                  <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }}">
+                    {{ variant.heading }}
+                  </h2>
+                {% endif %}
+              {% endif %}
+              
+              {# Description #}
+              {% if variant.description %}
+                <p class="{{ variant.descriptionStyle }}">
+                  {{ variant.description }}
+                </p>
+              {% endif %}
+              
+              {# Buttons Container #}
+              <div class="{{ buttonsContainerStyle }}">
+                {# Import button rendering macro #}
+                {% from "03-atoms/button.njk" import renderButton %}
+                
+                {# Primary Button #}
+                {% if variant.primaryButton %}
+                  {{ renderButton({ 
+                      name: variant.primaryButton,
+                      datas: options.buttons
+                  }) }}
+                {% endif %}
+                
+                {# Secondary Button #}
+                {% if variant.secondaryButton %}
+                  {{ renderButton({ 
+                      name: variant.secondaryButton,
+                      datas: options.buttons
+                  }) }}
+                {% endif %}
+              </div>
+            </div>
+            
+            {# Image Column #}
+            <div class="{{ imageContainerStyle }}">
+              {% if variant.image and options.images %}
+                {% set heroImage = null %}
+                {% for image in options.images.images %}
+                  {% if image.name == variant.image %}
+                    {% set heroImage = image %}
+                  {% endif %}
+                {% endfor %}
+                
+                {% if heroImage %}
+                  {% set imageVariant = options.images.variants[heroImage.size] %}
+                  <img src="{{ heroImage.src }}" 
+                       alt="{{ heroImage.alt }}" 
+                       class="{{ options.images.globalStyle }} {{ imageVariant }}">
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endif %}
   {% else %}
     <span class="text-red-500">Section Hero data not found</span>
   {% endif %}
@@ -125,7 +186,7 @@ Summon HAT Components Wisely
 2. Call the section-hero component with a specific name
 {{ renderSectionHero({ 
     name: "default_hero",
-    datas: organisms["section-hero"],
+    datas: organisms["section-heros"],
     headings: atoms.headings,
     buttons: atoms.buttons,
     images: atoms.images
@@ -134,16 +195,20 @@ Summon HAT Components Wisely
 3. Using custom styles
 {{ renderSectionHero({ 
     name: "product_hero",
-    datas: organisms["section-hero"],
+    datas: organisms["section-heros"],
     headings: atoms.headings,
     buttons: atoms.buttons,
     images: atoms.images,
     class: "my-custom-hero-class"
 }) }}
 
-4. Note about button rendering
-The section-hero component uses the renderButton macro from "03-atoms/button.njk".
-This ensures consistent button styling and behavior across all components.
+4. Using MA-Nautic Hero
+{{ renderSectionHero({ 
+    name: "ma_nautic_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    images: atoms.images
+}) }}
 
 Every journey begins with a hero section! 🏰🛡️
 #}
