@@ -1,18 +1,14 @@
 ---
-title: Blog
-description: This is the blog page
+title: Nos bateaux
+description: Page des bateaux
 layout: '00-core/base.njk'
 ---
-
-{# For blog page, use hero_blog.json #}
-{% set pageData = hero_blog %}
-{% include "01-organisms/section-page-hero.njk" %}
 
 <div class="section container mx-auto py-8 px-4">
     <h1 class="text-3xl font-semibold text-center text-gray-900 mb-6">{{ pageData.title }}</h1>
     <p class="text-lg text-center text-gray-700 mb-8">{{ pageData.description }}</p>
 
-    {#  List of blog posts  #}
+    {#  List of bateau posts  #}
     <ul role="list" class="articles__list space-y-8">
         {%- for post in collections.post | reverse -%}
             <li class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">

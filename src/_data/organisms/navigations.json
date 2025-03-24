@@ -10,17 +10,10 @@
     {
       "name": "main",
       "links": [
-        "camp",
-        "chronicles",
-        "pigeon"
-      ]
-    },
-    {
-      "name": "alternate",
-      "links": [
-        "camp",
-        "chronicles",
-        "pigeon"
+        "accueil",
+        "nos-bateaux",
+        "lieux-interets",
+        "contact"
       ]
     }
   ]

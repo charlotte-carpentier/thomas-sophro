@@ -1,7 +1,57 @@
 @import "tailwindcss";
+@import "./assets/css/fonts.css";
 
 @source "./src/**/*.njk";
 @theme {
+
+/* =============================================== */
+/* =============== MA-NAUTIC ==================== */
+/* =============================================== */
+
+/* Couleurs principales */
+--ma-nautic-blue: #2b3947;       /* bleu foncé */
+--ma-nautic-teal: #63a595;       /* vert/turquoise */
+--ma-nautic-beige: #eae7dc;      /* beige clair */
+--ma-nautic-gold: #e8ab55;       /* orange/ocre */
+--ma-nautic-white: #ffffff;
+--ma-nautic-black: #000000;
+
+/* Polices */
+--ma-nautic-font-display: "Vibur", cursive;     /* pour titres/navigation */
+--ma-nautic-font-body: "Roboto", sans-serif;    /* pour texte standard */
+
+/* Tailles de police */
+--ma-nautic-font-size-heading: 40px;  /* vibur, pour les grands titres */
+--ma-nautic-font-size-nav: 25px;      /* vibur, pour la navigation */
+--ma-nautic-font-size-section: 24px;  /* vibur, pour titres de section */
+--ma-nautic-font-size-body: 18px;     /* roboto Regular */
+--ma-nautic-font-size-title: 38px;    /* roboto Bold */
+
+/* Espacements de lettres */
+--ma-nautic-letter-spacing-title: 24px;
+--ma-nautic-letter-spacing-subtitle: 30px;
+
+/* Poids des polices */
+--ma-nautic-font-weight-regular: 400;
+--ma-nautic-font-weight-bold: 700;
+--ma-nautic-font-weight-black: 900;
+
+/* Espacement */
+--ma-nautic-spacing-xs: 0.25rem;
+--ma-nautic-spacing-sm: 0.5rem;
+--ma-nautic-spacing-md: 1rem;
+--ma-nautic-spacing-lg: 1.5rem;
+--ma-nautic-spacing-xl: 2rem;
+--ma-nautic-spacing-2xl: 3rem;
+
+/* Boutons */
+--ma-nautic-btn-padding-x: 1.5rem;
+--ma-nautic-btn-padding-y: 0.75rem;
+--ma-nautic-btn-border-radius: 0;
+
+/* Bordures */
+--ma-nautic-border-width-default: 1px;
+--ma-nautic-border-width-large: 2px;
 
 /* =============================================== */
 /* ================ TYPOGRAPHY =================== */
@@ -12,7 +62,6 @@
 
 /* Default font */
 --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
 
 /* ================== DISPLAY ==================== */
 
@@ -387,7 +436,6 @@
   --padding-heading-bottom-h5: var(--spacing-2); /* 0.5rem */
   --padding-heading-bottom-h6: var(--spacing-1\.5); /* 0.375rem */
 
-
 /* =============================================== */
 /* ================== LAYOUT ===================== */
 /* =============================================== */
@@ -429,6 +477,109 @@
   --layout-margin-main: var(--spacing-16); /* Main margin for desktop */
   --layout-margin-main-mob: var(--spacing-4); /* Main margin for mobile */
   --layout-gutter: var(--spacing-8); /* Spacing between columns */
-  
+}
 
+/* =============================================== */
+/* ========== MA-NAUTIC CUSTOM CLASSES ========== */
+/* =============================================== */
+
+/* Navigation links with custom hover effect */
+.ma-nautic-nav-link {
+  position: relative;
+  color: theme(--ma-nautic-white);
+  font-family: theme(--ma-nautic-font-display);
+  font-size: theme(--ma-nautic-font-size-nav);
+  transition: all 300ms;
+}
+
+.ma-nautic-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: theme(--ma-nautic-border-width-large);
+  background-color: theme(--ma-nautic-gold);
+  transition: all 300ms;
+}
+
+.ma-nautic-nav-link:hover::after {
+  width: 100%;
+}
+
+/* Section headers with underscore prefix (_Qui sommes-nous?) */
+.ma-nautic-section-title {
+  font-family: theme(--ma-nautic-font-display);
+  font-size: theme(--ma-nautic-font-size-section);
+  color: theme(--ma-nautic-blue);
+}
+
+/* CTA Buttons */
+.ma-nautic-btn-primary {
+  background-color: theme(--ma-nautic-teal);
+  color: theme(--ma-nautic-white);
+  padding: theme(--ma-nautic-btn-padding-y) theme(--ma-nautic-btn-padding-x);
+  font-weight: theme(--ma-nautic-font-weight-bold);
+  transition: all 300ms;
+}
+
+.ma-nautic-btn-primary:hover {
+  background-color: theme(--ma-nautic-blue);
+}
+
+.ma-nautic-btn-reserve {
+  background-color: theme(--ma-nautic-gold);
+  color: theme(--ma-nautic-white);
+  padding: theme(--ma-nautic-btn-padding-y) theme(--ma-nautic-btn-padding-x);
+  font-weight: theme(--ma-nautic-font-weight-bold);
+  transition: all 300ms;
+}
+
+.ma-nautic-btn-reserve:hover {
+  background-color: theme(--ma-nautic-blue);
+}
+
+/* Hero section text */
+.ma-nautic-hero-heading {
+  font-weight: theme(--ma-nautic-font-weight-bold);
+  font-size: theme(--ma-nautic-font-size-title);
+  letter-spacing: theme(--ma-nautic-letter-spacing-title);
+}
+
+.ma-nautic-subtitle {
+  font-weight: theme(--ma-nautic-font-weight-bold);
+  font-size: theme(--ma-nautic-font-size-nav);
+  letter-spacing: theme(--ma-nautic-letter-spacing-subtitle);
+}
+
+/* Boat card */
+.ma-nautic-boat-card {
+  border: theme(--ma-nautic-border-width-default) solid theme(--ma-nautic-blue);
+  padding: theme(--ma-nautic-spacing-lg);
+}
+
+.ma-nautic-boat-title {
+  font-family: theme(--ma-nautic-font-display);
+  font-size: theme(--ma-nautic-font-size-section);
+}
+
+/* Content links with underline animation (like in the reference website) */
+.ma-nautic-content-link {
+  position: relative;
+  color: theme(--ma-nautic-teal);
+}
+
+.ma-nautic-content-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: theme(--ma-nautic-border-width-default);
+  background-color: currentColor;
+  transition: all 300ms;
+}
+
+.ma-nautic-content-link:hover::after {
+  width: 100%;
 }

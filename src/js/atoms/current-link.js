@@ -1,13 +1,13 @@
 // current-link.js - Detect and style active navigation links based on their context
 document.addEventListener('DOMContentLoaded', function() {
-  // Add global CSS for completely disabling hover effects on current links
+  // Add global CSS for styling current links according to Ma-Nautic theme
   const style = document.createElement('style');
   style.textContent = `
-    /* Aggressive solution to prevent ANY hover effects on current links */
+    /* Specific styling for current navigation links */
     [aria-current="page"] {
       pointer-events: none !important; /* Disable hover entirely */
       cursor: pointer !important; /* But still look clickable */
-      color: #9ca3af !important; /* Force text-gray-400 color */
+      color: var(--ma-nautic-white) !important; /* Text stays white for active links */
     }
     
     /* Prevent hover effects on any child elements */
@@ -17,21 +17,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     /* Hide any pseudo-elements that might be used for hover effects */
     [aria-current="page"]::after,
-    [aria-current="page"]::before,
-    [aria-current="page"] *::after,
-    [aria-current="page"] *::before {
-      display: none !important;
-      opacity: 0 !important;
-      visibility: hidden !important;
+    [aria-current="page"]::before {
+      /* Instead of hiding completely, show the underline for active links */
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      width: 100% !important; /* Full width underline for active links */
+      background-color: var(--ma-nautic-gold) !important; /* Gold color for underline */
+      height: 2px !important; /* Thicker underline */
     }
     
     /* For extra safety - specific targeting for navigation links */
-    .navigation-secondary [data-nav-link][aria-current="page"]:hover::after,
-    .navigation-secondary [data-nav-link][aria-current="page"]:hover::before,
-    nav [data-nav-link][aria-current="page"]:hover::after,
-    nav [data-nav-link][aria-current="page"]:hover::before {
-      display: none !important;
-      content: none !important;
+    .ma-nautic-nav-link[aria-current="page"]::after {
+      content: '' !important;
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 2px !important; /* Thicker underline */
+      background-color: #e8ab55 !important; /* Gold color for underline */
     }
   `;
   document.head.appendChild(style);
@@ -55,11 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
       // Mark as active for accessibility
       link.setAttribute('aria-current', 'page');
       
-      // Remove any existing text color classes that might conflict
-      link.classList.remove('text-gray-900', 'text-gray-800', 'text-gray-700', 'text-gray-600');
-      
-      // Set the text color to gray-400 for all current links
-      link.classList.add('text-gray-400');
+      // Add Ma-Nautic specific class if it doesn't already have it
+      if (!link.classList.contains('ma-nautic-nav-link')) {
+        link.classList.add('ma-nautic-nav-link');
+      }
       
       // Position the link relatively (needed for absolute positioning of indicator)
       link.classList.add('relative');
@@ -67,20 +70,24 @@ document.addEventListener('DOMContentLoaded', function() {
       // Determine if the link is in a secondary navigation
       const isSecondaryNav = isLinkInSecondaryNav(link);
       
-      // Create and add the indicator line
-      const indicator = document.createElement('span');
-      
-      if (isSecondaryNav) {
-        // For secondary navigation: indicator goes to the left
-        // Smaller height (h-5 instead of h-8) and rounded corners (rounded-full)
-        indicator.className = 'absolute left-[-12px] top-1/2 w-1 h-5 bg-gray-400 rounded-full transform -translate-y-1/2';
-      } else {
-        // For primary navigation: indicator goes to the bottom
-        indicator.className = 'absolute left-1/2 bottom-[-8px] w-8 h-1 bg-gray-400 rounded-full transform -translate-x-1/2';
+      // Create and add the indicator line (only if not already using ma-nautic-nav-link style)
+      if (!link.querySelector('.nav-indicator')) {
+        const indicator = document.createElement('span');
+        indicator.classList.add('nav-indicator');
+        
+        if (isSecondaryNav) {
+          // For secondary navigation: indicator goes to the left
+          indicator.className = 'nav-indicator absolute left-[-12px] top-1/2 w-2 h-5 bg-[#e8ab55] rounded-full transform -translate-y-1/2';
+        } else {
+          // No need for additional indicator if using ma-nautic-nav-link
+          // The ::after pseudo-element handles this
+        }
+        
+        // Only add the indicator if it's in secondary nav
+        if (isSecondaryNav) {
+          link.appendChild(indicator);
+        }
       }
-      
-      // Add the indicator to the link
-      link.appendChild(indicator);
     }
   });
   

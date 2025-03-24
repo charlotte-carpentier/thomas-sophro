@@ -1,209 +1,58 @@
 {
-  "globalStyle": "font-serif font-bold mb-4 leading-tight",
+  "globalStyle": "mb-4 leading-tight",
   "sizeStyles": {
-    "h1": "text-4xl md:text-5xl",
-    "h2": "text-3xl md:text-4xl",
-    "h3": "text-2xl md:text-3xl",
-    "h4": "text-xl md:text-2xl",
-    "h5": "text-lg md:text-xl",
-    "h6": "text-base md:text-lg"
+    "h1": "text-4xl",
+    "h2": "text-3xl",
+    "h3": "text-2xl",
+    "h4": "text-xl",
+    "h5": "text-lg",
+    "h6": "text-base"
   },
   "variants": {
-    "default": "text-gray-800",
-    "primary": "text-blue-700",
-    "secondary": "text-gray-600",
-    "accent": "text-purple-600",
-    "hero": "text-gray-900 tracking-tight"
+    "default": "text-[--ma-nautic-blue]",
+    "section-title": "ma-nautic-section-title",
+    "boat-title": "ma-nautic-boat-title",
+    "hero": "ma-nautic-hero-heading"
   },
   "iconStyles": {
-    "default": "text-purple-500 inline-flex items-center mr-2"
+    "default": "text-[--ma-nautic-teal] inline-flex items-center mr-2"
   },
   "headings": [
     {
-      "name": "page_title",
+      "name": "hero_title",
       "level": 1,
-      "text": "Heading",
+      "text": "AGENCE DE LOCATION DE BATEAUX EN CORSE",
       "style": "hero"
     },
     {
-      "name": "section_title",
+      "name": "qui_sommes_nous",
       "level": 2,
-      "text": "Heading",
+      "text": "Qui sommes-nous ?",
+      "style": "section-title"
+    },
+    {
+      "name": "que_faisons_nous",
+      "level": 2,
+      "text": "Que faisons-nous ?",
+      "style": "section-title"
+    },
+    {
+      "name": "nos_bateaux",
+      "level": 2,
+      "text": "NOS BATEAUX EN LOCATION À SAINT-FLORENT",
       "style": "default"
     },
     {
-      "name": "subsection_title",
+      "name": "boat_name",
       "level": 3,
-      "text": "Heading",
-      "style": "default"
+      "text": "Capelli Tempest 500",
+      "style": "boat-title"
     },
     {
-      "name": "component_title",
-      "level": 4,
-      "text": "Heading",
-      "style": "default"
-    },
-    {
-      "name": "mini_title",
-      "level": 5,
-      "text": "Heading",
-      "style": "default"
-    },
-    {
-      "name": "micro_title",
-      "level": 6,
-      "text": "Heading",
-      "style": "default"
-    },
-    {
-      "name": "dropzone_upload",
-      "level": 4,
-      "text": "Upload file",
-      "style": "default"
-    },
-    {
-      "name": "progress_bar",
-      "level": 5,
-      "text": "Label",
-      "style": "default"
-    },
-    {
-      "name": "ancient_prophecy",
-      "level": 4,
-      "text": "Ancient prophecy",
-      "style": "default"
-    },
-    {
-      "name": "guild_rank",
-      "level": 4,
-      "text": "Guild rank",
-      "style": "default"
-    },
-    {
-      "name": "forgotten_prophecy",
-      "level": 4,
-      "text": "Forgotten Prophecy",
-      "style": "default"
-    },
-    {
-      "name": "forbidden_tome",
-      "level": 4,
-      "text": "Forbidden Tome",
-      "style": "default"
-    },
-    {
-      "name": "blade_of_fate",
-      "level": 4,
-      "text": "Blade of Fate",
-      "style": "default"
-    },
-    {
-      "name": "mysterious_vendor",
-      "level": 4,
-      "text": "Mysterious Vendor",
-      "style": "default"
-    },
-    {
-      "name": "wizard_hat",
-      "level": 4,
-      "text": "Wizard's Hat",
-      "style": "default"
-    },
-    {
-      "name": "cursed_treasure",
-      "level": 4,
-      "text": "Cursed Treasure",
-      "style": "default"
-    },
-    {
-      "name": "goblin_menace",
-      "level": 3,
-      "text": "Goblin Menace",
-      "style": "default"
-    },
-    {
-      "name": "lost_wizard_hat",
-      "level": 4,
-      "text": "Lost Wizard Hat",
-      "style": "default"
-    },
-    {
-      "name": "dragon_sighting",
-      "level": 4,
-      "text": "Dragon Sighting",
-      "style": "default"
-    },
-    {
-      "name": "bard_for_hire",
-      "level": 4,
-      "text": "Bard for Hire",
-      "style": "default"
-    },
-    {
-      "name": "quest_log",
-      "level": 4,
-      "text": "Quest Log",
-      "style": "default"
-    },
-    {
-      "name": "ancient_scrolls",
-      "level": 4,
-      "text": "Ancient Scrolls",
-      "style": "default"
-    },
-    {
-      "name": "kingdom_services",
-      "level": 4,
-      "text": "Kingdom Services",
-      "style": "default"
-    },
-    {
-      "name": "socials",
-      "level": 4,
-      "text": "Socials",
-      "style": "default"
-    },
-    {
-      "name": "hero_title",
-      "level": 4,
-      "text": "A New Hatventure Begins",
-      "style": "default"
-    },
-    {
-      "name": "hero_subtitle",
+      "name": "petits_plus",
       "level": 2,
-      "text": "Every story needs a hero... and every page needs one too",
-      "style": "default"
-    },
-    {
-      "name": "value_title",
-      "level": 4,
-      "text": "Hatmotiv",
-      "style": "default"
-    },
-    {
-      "name": "value_subtitle",
-      "level": 2,
-      "text": "With every sunrise, we sharpen our skills and set forth on the path of mastery",
-      "style": "default"
-    },
-    {
-      "name": "about_title",
-      "level": 4,
-      "text": "The Guild's Tale",
-      "style": "default"
-    },
-    {
-      "name": "about_subtitle",
-      "level": 2,
-      "text": "Legends of the Fellowship",
-      "style": "default"
-    },
-    {
-      "name": "longest_label",
-      "level": 2,
-      "text": "Wise counsel awaits",
-      "style": "default"
+      "text": "Les petits plus",
+      "style": "section-title"
     }
   ]
 }

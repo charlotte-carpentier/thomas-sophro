@@ -18,34 +18,7 @@
       "name": "default_hero",
       "variant": "default",
       "superHeading": "hero_title",
-      "heading": "hero_subtitle",
-      "description": "Beyond this threshold, the Hat Realm unfolds: a land where design meets magic and code sparks life. Step forward, hero.",
-      "descriptionStyle": "text-base text-gray-500 max-w-prose",
-      "primaryButton": "submit_quest",
-      "secondaryButton": "flee_battle",
-      "image": "placeholder_medium"
-    },
-    {
-      "name": "product_hero",
-      "variant": "expanded",
-      "superHeading": "ancient_prophecy",
-      "heading": "section_title",
-      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
-      "descriptionStyle": "text-base text-gray-500 max-w-prose",
-      "primaryButton": "submit_quest",
-      "secondaryButton": "flee_battle",
-      "image": "placeholder_large"
-    },
-    {
-      "name": "compact_hero",
-      "variant": "compact",
-      "superHeading": "kingdom_services",
-      "heading": "section_title",
-      "description": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
-      "descriptionStyle": "text-sm text-gray-500 max-w-prose",
-      "primaryButton": "browse_button",
-      "secondaryButton": "card",
-      "image": "placeholder_small"
+      "heading": "hero_subtitle"
     },
     {
       "name": "adventure_hero",

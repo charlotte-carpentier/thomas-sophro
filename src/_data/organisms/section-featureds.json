@@ -1,7 +1,7 @@
 {
     "featureds": [
       {
-        "name": "blog_featured",
+        "name": "bateau_featured",
         "id": "featured-articles",
         "title": "Featured articles",
         "description": "Here is a sample of articles which I feel give you a good idea of what this site is all about.",

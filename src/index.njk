@@ -1,9 +1,9 @@
 ---
-title: Hat dynamic site
+title: M.A Nautic
 layout: '00-core/base.njk'
 ---
 
-{# Include section-hero #}
+{# Section hero #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
     {{ renderSectionHero({ 
@@ -14,10 +14,47 @@ layout: '00-core/base.njk'
         images: atoms.images
     }) }}
 
-{# Include section-value #}
-{% include '01-organisms/section-featured.njk' %}
+{# Section Qui sommes-nous #}
+{% from "01-organisms/section-about.njk" import renderSectionAbout %}
 
-{# Include section-about #}
+    {{ renderSectionAbout({ 
+        name: "about_us", 
+        datas: organisms["section-abouts"], 
+        headings: atoms.headings, 
+        buttons: atoms.buttons 
+    }) }}
+
+{# Section Qui sommes-nous #}
+{% from "01-organisms/section-about.njk" import renderSectionAbout %}
+
+    {{ renderSectionAbout({ 
+        name: "about_us", 
+        datas: organisms["section-abouts"], 
+        headings: atoms.headings, 
+        buttons: atoms.buttons 
+    }) }}  
+
+{# Section Découverte #}
+{% from "01-organisms/section-about.njk" import renderSectionAbout %}
+
+    {{ renderSectionAbout({ 
+        name: "about_us", 
+        datas: organisms["section-abouts"], 
+        headings: atoms.headings, 
+        buttons: atoms.buttons 
+    }) }}
+
+{# Section Que faisons-nous #}
+{% from "01-organisms/section-about.njk" import renderSectionAbout %}
+
+    {{ renderSectionAbout({ 
+        name: "about_us", 
+        datas: organisms["section-abouts"], 
+        headings: atoms.headings, 
+        buttons: atoms.buttons 
+    }) }}
+
+{# Section Les petits plus #}
 {% from "01-organisms/section-about.njk" import renderSectionAbout %}
 
     {{ renderSectionAbout({ 

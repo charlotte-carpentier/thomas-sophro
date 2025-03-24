@@ -1,5 +1,5 @@
 {
-  "globalStyle": "page-header bg-gray-200 shadow-md",
+  "globalStyle": "bg-[theme(--ma-nautic-blue)] shadow-md",
   "containerStyle": "container mx-auto px-4 py-4",
   "navStyle": "flex items-center justify-between px-12 h-16 gap-8",
   "menuContainerStyle": "menu-burger",
@@ -7,10 +7,10 @@
     "toggleButton": {
       "default": "toggle-button lg:hidden",
       "icon": "burger_solid",
-      "iconStyle": "text-gray-500"
+      "iconStyle": "text-[theme(--color-primary)]"
     },
     "dropdownMenu": {
-      "default": "dropdown-menu absolute -top-full left-0 max-lg:bg-gray-200 w-full py-2 font-bold text-lg lg:static lg:flex-row lg:justify-end"
+      "default": "dropdown-menu absolute -top-full left-0 max-lg:bg-[theme(--color-light-bg)] w-full py-2 font-[theme(--font-display)] lg:static lg:flex-row lg:justify-end"
     }
   },
   "headers": [

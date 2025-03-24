@@ -1,131 +1,66 @@
 {
-  "globalStyle": "btn-base rounded-md",
+  "globalStyle": "font-medium transition-all duration-300",
   "sizes": {
-    "button": "px-4 py-2 text-base",
-    "button-small": "px-3 py-1 text-sm"
+    "button": "px-6 py-3 text-base",
+    "button-small": "px-4 py-2 text-sm"
   },
   "variants": {
     "primary": {
-      "default": "bg-gray-500 text-white",
-      "hover": "bg-gray-600 text-white",
-      "focus": "bg-gray-400 text-white ring-2 ring-blue-500",
-      "active": "bg-gray-700 text-white",
-      "disabled": "bg-gray-300 text-white"
+      "default": "ma-nautic-btn-primary font-['Roboto'] font-bold",
+      "hover": "bg-[--ma-nautic-blue]",
+      "focus": "bg-[--ma-nautic-teal] ring-2 ring-[--ma-nautic-blue]",
+      "active": "bg-[--ma-nautic-blue]",
+      "disabled": "bg-[--ma-nautic-teal] opacity-50"
+    },
+    "reserve": {
+      "default": "ma-nautic-btn-reserve font-['Roboto'] font-bold",
+      "hover": "bg-[--ma-nautic-blue]",
+      "focus": "bg-[--ma-nautic-gold] ring-2 ring-[--ma-nautic-blue]",
+      "active": "bg-[--ma-nautic-blue]",
+      "disabled": "bg-[--ma-nautic-gold] opacity-50"
     },
     "secondary": {
-      "default": "bg-white text-gray-500 border border-gray-500",
-      "hover": "bg-white text-gray-600 border border-gray-600",
-      "focus": "bg-white text-gray-500 ring-2 ring-blue-500",
-      "active": "bg-gray-500 text-white",
-      "disabled": "bg-white text-gray-500 border border-gray-500"
-    },
-    "secondary-small": {
-      "default": "bg-white text-gray-500 border border-gray-500",
-      "hover": "bg-white text-gray-600",
-      "focus": "bg-white text-gray-500 ring-2 ring-blue-500",
-      "active": "bg-gray-500 text-white",
-      "disabled": "bg-white text-gray-500 border border-gray-500"
-    },
-    "fixed": {
-      "default": "bg-white text-gray-500",
-      "hover": "bg-gray-200 text-gray-500",
-      "focus": "bg-white text-gray-500 ring-1 ring-blue-500",
-      "active": "bg-gray-500 text-white",
-      "disabled": "bg-white text-gray-500"
+      "default": "bg-[--ma-nautic-beige] text-[--ma-nautic-blue] border border-[--ma-nautic-blue] font-['Roboto'] font-bold",
+      "hover": "bg-[--ma-nautic-beige] text-[--ma-nautic-teal] border border-[--ma-nautic-teal]",
+      "focus": "bg-[--ma-nautic-beige] text-[--ma-nautic-blue] ring-2 ring-[--ma-nautic-teal]",
+      "active": "bg-[--ma-nautic-blue] text-[--ma-nautic-white]",
+      "disabled": "bg-[--ma-nautic-beige] text-[--ma-nautic-blue] opacity-50"
     },
     "icon": {
-      "default": "bg-white text-gray-400",
-      "hover": "bg-gray-200 text-gray-500",
-      "focus": "bg-white text-gray-500 ring-1 ring-blue-500",
-      "active": "bg-gray-500 text-white",
-      "disabled": "bg-white text-gray-500"
-    },
-    "ghost": {
-      "default": "bg-white text-gray-500",
-      "hover": "bg-gray-200 text-gray-500",
-      "focus": "bg-white text-gray-500 ring-1 ring-blue-500",
-      "active": "bg-gray-500 text-white",
-      "disabled": "bg-white text-gray-500"
+      "default": "bg-transparent text-[--ma-nautic-blue] font-['Roboto']",
+      "hover": "bg-[--ma-nautic-beige] text-[--ma-nautic-teal]",
+      "focus": "bg-transparent text-[--ma-nautic-blue] ring-2 ring-[--ma-nautic-teal]",
+      "active": "bg-[--ma-nautic-beige] text-[--ma-nautic-blue]",
+      "disabled": "bg-transparent text-[--ma-nautic-blue] opacity-50"
     }
   },
   "states": {
-    "current": "text-black"
+    "current": "text-[--ma-nautic-teal]"
   },
-"buttons": [
-  {
-    "name": "submit_quest",
-    "text": "Accept the Quest",
-    "size": "button",
-    "style": "primary",
-    "iconBefore": "/assets/icons/icon-light.svg",
-    "iconAfter": "/assets/icons/icon-light.svg"
-  },
-  {
-    "name": "flee_battle",
-    "text": "Flee like a Coward",
-    "size": "button",
-    "style": "secondary",
-    "iconBefore": "/assets/icons/icon-light.svg",
-    "iconAfter": "/assets/icons/icon-light.svg"
-  },
-  {
-    "name": "inventory",
-    "text": "Inventory",
-    "size": "button-small",
-    "style": "icon",
-    "iconBefore": "/assets/icons/icon-light.svg"
-  },
-  {
-    "name": "quest_details",
-    "text": "Quest Details",
-    "size": "button",
-    "style": "secondary-small",
-    "iconBefore": "/assets/icons/icon-light.svg",
-    "iconAfter": "/assets/icons/icon-light.svg"
-  },
-  {
-    "name": "quantity_button",
-    "number": "42",
-    "size": "button-small",
-    "style": "fixed"
-  },
-  {
-    "name": "ghost_button",
-    "text": "Clear Filters",
-    "size": "button",
-    "style": "ghost",
-    "iconBefore": "/assets/icons/icon-light.svg",
-    "iconAfter": "/assets/icons/icon-light.svg"
-  },
-  {
-    "name": "browse_button",
-    "text": "Browse files",
-    "size": "button",
-    "style": "primary"
-  },
-  {
-    "name": "segmented_control01",
-    "text": "Roll",
-    "size": "button",
-    "style": "primary"
-  },
-  {
-    "name": "segmented_control02",
-    "text": "Purge",
-    "size": "button",
-    "style": "primary"
-  },
-  {
-    "name": "segmented_control03",
-    "text": "Loot",
-    "size": "button",
-    "style": "primary"
-  },
-  {
-    "name": "card",
-    "text": "Venture forth",
-    "size": "button",
-    "style": "secondary"
-  }
-]
+  "buttons": [
+    {
+      "name": "contactez_nous",
+      "text": "CONTACTEZ-NOUS",
+      "size": "button",
+      "style": "primary"
+    },
+    {
+      "name": "decouvrir",
+      "text": "DÉCOUVRIR",
+      "size": "button",
+      "style": "primary"
+    },
+    {
+      "name": "voir_bateaux",
+      "text": "VOIR NOS BATEAUX",
+      "size": "button",
+      "style": "secondary"
+    },
+    {
+      "name": "reserver",
+      "text": "RÉSERVEZ",
+      "size": "button",
+      "style": "reserve"
+    }
+  ]
 }

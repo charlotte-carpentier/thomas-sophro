@@ -2,8 +2,8 @@ backend:
   name: git-gateway # Git-based backend for Netlify CMS
   branch: main # The branch to update (default is master)
 
-media_folder: "./public/assets/blog" # Folder where uploaded images are stored
-public_folder: "/assets/blog" # Public URL path for images
+media_folder: "./public/assets/bateau" # Folder where uploaded images are stored
+public_folder: "/assets/bateau" # Public URL path for images
 
 collections:
   - name: "home" # Collection for home page content
@@ -27,21 +27,21 @@ collections:
           - { label: "Paragraph 02", name: "paragraph02", widget: "text", required: false }
           - { label: "Image", name: "image", widget: "image" }
           - { label: "Image Alt Text", name: "imageAlt", widget: "string" }
-  - name: "blog-hero" # Collection for blog posts
-    label: "Blog hero section"
+  - name: "bateau-hero" # Collection for bateau posts
+    label: "bateau hero section"
     files:
-      - name: "blog_hero"
-        label: "Blog hero section"
-        file: "src/_data/hero_blog.json"  # Create this file
+      - name: "bateau_hero"
+        label: "bateau hero section"
+        file: "src/_data/hero_bateau.json"  # Create this file
         fields:
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Paragraph 01", name: "paragraph01", widget: "text" }
           - { label: "Paragraph 02", name: "paragraph02", widget: "text", required: false }
           - { label: "Image", name: "image", widget: "image" }
           - { label: "Image Alt Text", name: "imageAlt", widget: "string" }
-  - name: "blog"
-    label: "Blog"
-    folder: "src/blog"
+  - name: "bateau"
+    label: "Bateau"
+    folder: "src/bateau"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
