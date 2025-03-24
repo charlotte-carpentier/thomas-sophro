@@ -1,0 +1,30 @@
+{#
+=========================
+      CARD POST       
+=========================
+#}
+
+{% from "02-molecules/card.njk" import renderCard %}
+
+{# Featured post card using the card component #}
+<li>
+    {{ renderCard({ 
+        name: "post_template", 
+        datas: molecules.cards,
+        buttons: atoms.buttons,
+        post: post
+    }) }}
+</li>
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Include this template in your page
+{% include "02-molecules/card-post.njk" %}
+
+2. Make sure to pass the 'post' variable, molecules.cards, and atoms.buttons in your context
+
+Display your quest logs with style! 📜✨
+#}

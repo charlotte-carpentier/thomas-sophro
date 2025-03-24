@@ -1,11 +1,17 @@
+{#
+=========================
+    SECTION FEATURED    
+=========================
+#}
+
 {% from "02-molecules/card.njk" import renderCard %}
-<!-- Featured section -->
-<!-- Featured title & description -->
-<section id="featured-articles" class="featured-articles py-12 bg-warning">
+{# Featured section #}
+{# Featured title & description #}
+<section id="featured-articles" class="featured-articles py-12 bg-gray-200">
     <div class="container mx-auto px-4">
         <h2 class="section-title text-3xl font-semibold text-center text-gray-800 mb-4">Featured articles</h2>
         <p class="typography-h1 text-center text-lg text-gray-600 mb-8">Here is a sample of articles which I feel give you a good idea of what this site is all about.</p>
-        <!-- Featured articles grid -->
+        {# Featured articles grid #}
         <ul role="list" class="articles__list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {%- for post in collections.featured | reverse -%}
                 {{ renderCard({ 
@@ -18,3 +24,15 @@
         </ul>
     </div>
 </section>
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% include '01-organisms/section-featured.njk' %}
+
+Showcase your treasures for all adventurers to see! 📚✨
+#}

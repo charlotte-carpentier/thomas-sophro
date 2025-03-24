@@ -1,4 +1,4 @@
 {
-    "layout": "01-organisms-sections/article.njk",
+    "layout": "01-organisms/article.njk",
     "tags": "post"
 }

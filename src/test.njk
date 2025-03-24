@@ -44,9 +44,15 @@ layout: '00-core/base.njk'
 {% from "01-organisms/menu.njk" import renderMenu %}
 {% from "01-organisms/navigation.njk" import renderNavigation %}
 {% from "01-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+{% from "01-organisms/section-value.njk" import renderSectionValue %}
+{% from "01-organisms/section-about.njk" import renderSectionAbout %}
+{% from "01-organisms/section-listing.njk" import renderSectionListing %}
+{% from "01-organisms/section-article-hero.njk" import renderSectionArticleHero %}
+{% from "01-organisms/section-contact.njk" import renderSectionContact %}
 
 {# Component Display Section #}
-<div class="max-w-2xl mx-auto bg-white rounded-md p-6">
+<div class="w-3/4 mx-auto bg-white rounded-md p-6 flex flex-col items-center">
 
     {# Section Title #}
     <h2 class="text-2xl font-semibold mb-6">HAT Component Playground</h2>
@@ -442,6 +448,93 @@ layout: '00-core/base.njk'
                 "navigation-secondarys": organisms["navigation-secondarys"],
                 links: atoms.links,
                 headings: atoms.headings
+            }) }}
+    </div>
+
+    {# Section Hero Organism #}
+    <h3 class="text-xl font-semibold mb-4">Section Hero</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing section-hero component #}
+            {{ renderSectionHero({ 
+                name: "default_hero",
+                datas: organisms["section-heros"],
+                headings: atoms.headings,
+                buttons: atoms.buttons,
+                images: atoms.images
+            }) }}
+    </div>
+
+    {# Section Value Organism #}
+    <h3 class="text-xl font-semibold mb-4">Section Value</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing section-value component #}
+            {{ renderSectionValue({ 
+                name: "core_values",
+                datas: organisms["section-values"],
+                headings: atoms.headings,
+                buttons: atoms.buttons,
+                cards: molecules.cards
+            }) }}
+    </div>
+
+    {# Section About Organism #}
+    <h3 class="text-xl font-semibold mb-4">Section About</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing section-about component #}
+            {{ renderSectionAbout({ 
+                name: "about_us", 
+                datas: organisms["section-abouts"], 
+                headings: atoms.headings, 
+                buttons: atoms.buttons 
+            }) }}
+    </div>
+
+    {# Section Listing Organism #}
+    <h3 class="text-xl font-semibold mb-4">Section Listing</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing section-listing component #}
+            {{ renderSectionListing({ 
+                name: "adventure_quests",
+                datas: organisms["section-listings"],
+                headings: atoms.headings,
+                cards: molecules.cards,
+                paginations: molecules.paginations,
+                buttons: atoms.buttons,
+                icons: atoms.icons,
+                selects: atoms.selects,
+                images: atoms.images
+            }) }}
+    </div>
+
+    {# Section Article Hero Organism #}
+    <h3 class="text-xl font-semibold mb-4">Section Article Hero</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing section-article-hero component #}
+            {{ renderSectionArticleHero({ 
+                name: "article_hero_secondary", 
+                datas: organisms["section-article-heros"],
+                headings: atoms.headings,
+                images: atoms.images
+            }) }}
+    </div>
+
+    {# Section Contact Organism #}
+    <h3 class="text-xl font-semibold mb-4">Section Contact</h3>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+            {# Render existing section-contact component #}
+            {{ renderSectionContact({ 
+                name: "default",
+                datas: organisms["section-contacts"],
+                headings: atoms.headings,
+                listForms: molecules["list-forms"],
+                buttons: atoms.buttons,
+                atoms: atoms
             }) }}
     </div>
 

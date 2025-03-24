@@ -15,15 +15,7 @@ layout: '00-core/base.njk'
     }) }}
 
 {# Include section-value #}
-{% from "01-organisms/section-value.njk" import renderSectionValue %}
-
-    {{ renderSectionValue({ 
-        name: "core_values",
-        datas: organisms["section-values"],
-        headings: atoms.headings,
-        buttons: atoms.buttons,
-        cards: molecules.cards
-    }) }}
+{% include '01-organisms/section-featured.njk' %}
 
 {# Include section-about #}
 {% from "01-organisms/section-about.njk" import renderSectionAbout %}
@@ -33,41 +25,4 @@ layout: '00-core/base.njk'
         datas: organisms["section-abouts"], 
         headings: atoms.headings, 
         buttons: atoms.buttons 
-    }) }}
-
-{# Include section-listing #}
-{% from "01-organisms/section-listing.njk" import renderSectionListing %}
-
-    {{ renderSectionListing({ 
-        name: "adventure_quests",
-        datas: organisms["section-listings"],
-        headings: atoms.headings,
-        cards: molecules.cards,
-        paginations: molecules.paginations,
-        buttons: atoms.buttons,
-        icons: atoms.icons,
-        selects: atoms.selects,
-        images: atoms.images
-    }) }}
-
-{# Include section-listing #}
-{% from "01-organisms/section-article-hero.njk" import renderSectionArticleHero %}
-
-    {{ renderSectionArticleHero({ 
-        name: "article_hero_secondary", 
-        datas: organisms["section-article-heros"],
-        headings: atoms.headings,
-        images: atoms.images
-    }) }}
-
-{# Include section-contact #}
-{% from "01-organisms/section-contact.njk" import renderSectionContact %}
-
-    {{ renderSectionContact({ 
-        name: "default",
-        datas: organisms["section-contacts"],
-        headings: atoms.headings,
-        listForms: molecules["list-forms"],
-        buttons: atoms.buttons,
-        atoms: atoms
-    }) }}
+    }) }}  
