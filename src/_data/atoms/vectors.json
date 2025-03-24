@@ -8,16 +8,16 @@
   },
   "vectors": [
     {
-      "name": "logo_full",
-      "src": "/assets/logos/logo-full.svg",
-      "alt": "Starter kit full logo",
+      "name": "logo_ma",
+      "src": "/assets/logos/logo-test.svg",
+      "alt": "M.A Nautic logo",
       "size": "medium"
     },
     {
-      "name": "logo_minimal",
-      "src": "/assets/logos/logo-minimal.svg",
-      "alt": "Starter kit symbol logo",
-      "size": "xsmall"
+      "name": "logo_ma_mini",
+      "src": "/assets/logos/logo-test.svg",
+      "alt": "Mini M.A Nautic  logo",
+      "size": "small"
     }
   ]
 }

@@ -12,6 +12,9 @@
   {% if options.datas %}
     {% set globalStyle = options.datas.globalStyle %}
     {% set containerStyle = options.datas.containerStyle %}
+    {% set logoContainerStyle = options.datas.logoContainerStyle | default('') %}
+    {% set logoSize = options.datas.logoSize | default('') %}
+    {% set navContainerStyle = options.datas.navContainerStyle | default('') %}
     {% set navStyle = options.datas.navStyle %}
     {% set menuContainerStyle = options.datas.menuContainerStyle %}
     {% set toggleButtonStyle = options.datas.variants.toggleButton.default %}
@@ -34,42 +37,49 @@
     
     <header class="{{ globalStyle }} {{ options.class | default('') }}">
       <div class="{{ containerStyle }}">
-        <div class="{{ navStyle }}">
-          {# Logo #}
-          {{ renderVector({ name: headerData.logo, datas: options.vectors }) }}
+        {# Logo #}
+        <div class="{{ logoContainerStyle }}">
+          <div class="{{ logoSize }}">
+            {{ renderVector({ name: headerData.logo, datas: options.vectors }) }}
+          </div>
+        </div>
 
-          {# Menu Container avec hamburger et dropdown #}
-          <div class="{{ menuContainerStyle }}">
-            {# Bouton hamburger #}
-            <div class="{{ toggleButtonStyle }}">
-              {% set iconData = null %}
-              {% if options.icons %}
-                {% for icon in options.icons.icons %}
-                  {% if icon.name == toggleButtonIcon %}
-                    {% set iconData = icon %}
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
-              
-              {% if iconData %}
-                <span data-svg-src="{{ iconData.path }}" class="inline-flex items-center justify-center w-6 h-6 {{ toggleButtonIconStyle }}">
-                  <!-- SVG will be loaded here -->
-                </span>
-              {% else %}
-                <span class="inline-flex items-center justify-center w-6 h-6 {{ toggleButtonIconStyle }}">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                </span>
-              {% endif %}
-            </div>
+        {# Navigation container #}
+        <div class="{{ navContainerStyle }}">
+          <div class="{{ navStyle }}">
+            {# Menu Container avec hamburger et dropdown #}
+            <div class="{{ menuContainerStyle }}">
+              {# Bouton hamburger #}
+              <div class="{{ toggleButtonStyle }}">
+                {% set iconData = null %}
+                {% if options.icons %}
+                  {% for icon in options.icons.icons %}
+                    {% if icon.name == toggleButtonIcon %}
+                      {% set iconData = icon %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+                
+                {% if iconData %}
+                  <span data-svg-src="{{ iconData.path }}" class="inline-flex items-center justify-center w-6 h-6 {{ toggleButtonIconStyle }}">
+                    <!-- SVG will be loaded here -->
+                  </span>
+                {% else %}
+                  <span class="inline-flex items-center justify-center w-6 h-6 {{ toggleButtonIconStyle }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                  </span>
+                {% endif %}
+              </div>
 
-            {# Menu déroulant qui contient la navigation #}
-            <div class="{{ dropdownMenuStyle }}">
-              {# Utilisation du composant Navigation #}
-              {{ renderNavigation({ 
-                name: headerData.navigation | default(headerData.name),
-                datas: options.navigations,
-                links: options.links
-              }) }}
+              {# Menu déroulant qui contient la navigation #}
+              <div class="{{ dropdownMenuStyle }}">
+                {# Utilisation du composant Navigation #}
+                {{ renderNavigation({ 
+                  name: headerData.navigation | default(headerData.name),
+                  datas: options.navigations,
+                  links: options.links
+                }) }}
+              </div>
             </div>
           </div>
         </div>

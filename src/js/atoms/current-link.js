@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
       visibility: visible !important;
       width: 100% !important; /* Full width underline for active links */
       background-color: var(--ma-nautic-gold) !important; /* Gold color for underline */
-      height: 2px !important; /* Thicker underline */
+      height: var(--ma-nautic-border-width-large) !important; /* Thicker underline */
     }
     
     /* For extra safety - specific targeting for navigation links */
@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
       bottom: 0 !important;
       left: 0 !important;
       width: 100% !important;
-      height: 2px !important; /* Thicker underline */
-      background-color: #e8ab55 !important; /* Gold color for underline */
+      height: var(--ma-nautic-border-width-large) !important; /* Thicker underline */
+      background-color: var(--ma-nautic-gold) !important; /* Gold color for underline */
     }
   `;
   document.head.appendChild(style);
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (isSecondaryNav) {
           // For secondary navigation: indicator goes to the left
-          indicator.className = 'nav-indicator absolute left-[-12px] top-1/2 w-2 h-5 bg-[#e8ab55] rounded-full transform -translate-y-1/2';
+          indicator.className = 'nav-indicator absolute left-[-12px] top-1/2 w-2 h-5 bg-[var(--ma-nautic-gold)] rounded-full transform -translate-y-1/2';
         } else {
           // No need for additional indicator if using ma-nautic-nav-link
           // The ::after pseudo-element handles this
