@@ -1,19 +1,25 @@
 /**
  * Header burger menu functionality
  * Toggles the dropdown menu visibility and rotates the burger icon
- * on mobile devices
+ * on mobile devices with dynamic sizing
  */
 document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.querySelector(".toggle-button");
     const dropdown = document.querySelector(".dropdown-menu");
 
     if (toggleBtn && dropdown) {
+        // Récupérer dynamiquement les tailles et styles du bouton
+        const containerSize = toggleBtn.dataset.containerSize || 'w-8 h-8';
+        const iconSize = toggleBtn.dataset.iconSize || '32';
+
         // Ajuster le z-index du bouton toggle
         toggleBtn.style.position = 'relative';
         toggleBtn.style.zIndex = '50';
         
+        // Ajouter les classes de taille dynamiquement
+        toggleBtn.classList.add(...containerSize.split(' '));
+        
         // Rotation explicite avec une classe CSS plutôt qu'un style inline
-        // Ajout d'une classe CSS pour la rotation
         const styleElement = document.createElement('style');
         styleElement.textContent = `
             .toggle-rotate {
