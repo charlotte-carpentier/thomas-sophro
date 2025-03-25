@@ -21,12 +21,12 @@
   "headers": [
     {
       "name": "main",
-      "logo": "logo_ma",
+      "logo": "ma_logo",
       "navigation": "main"
     },
     {
       "name": "alternate",
-      "logo": "logo_ma_mini",
+      "logo": "ma_logo_mini",
       "navigation": "alternate"
     }
   ]

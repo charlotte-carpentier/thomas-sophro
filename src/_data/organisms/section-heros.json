@@ -17,8 +17,7 @@
     {
       "name": "ma_nautic_hero",
       "variant": "ma-nautic",
-      "superHeading": "location_bateaux",
-      "heading": "golfe_st_florent",
+      "image": "ma_title",
       "backgroundImage": "hero_background"
     }
   ]

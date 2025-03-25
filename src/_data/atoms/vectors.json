@@ -8,14 +8,14 @@
   },
   "vectors": [
     {
-      "name": "logo_ma",
-      "src": "/assets/logos/logo-test.svg",
+      "name": "ma_logo",
+      "src": "/assets/logos/ma-logo.png",
       "alt": "M.A Nautic logo",
       "size": "medium"
     },
     {
-      "name": "logo_ma_mini",
-      "src": "/assets/logos/logo-test.svg",
+      "name": "ma_logo_mini",
+      "src": "/assets/logos/ma-logo.png",
       "alt": "Mini M.A Nautic  logo",
       "size": "small"
     }
