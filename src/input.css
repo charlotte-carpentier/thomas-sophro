@@ -24,6 +24,7 @@
 --ma-nautic-font-size-heading: 40px;  /* vibur, pour les grands titres */
 --ma-nautic-font-size-nav: 25px;      /* vibur, pour la navigation */
 --ma-nautic-font-size-section: 24px;  /* vibur, pour titres de section */
+--ma-nautic-font-size-subtitle: 20px;  /* vibur, pour petits titres de section */
 --ma-nautic-font-size-body: 18px;     /* roboto Regular */
 --ma-nautic-font-size-title: 38px;    /* roboto Bold */
 
@@ -563,10 +564,11 @@
   font-size: theme(--ma-nautic-font-size-section);
 }
 
-/* Content links with underline animation (like in the reference website) */
+/* Content links with permanent gold underline */
 .ma-nautic-content-link {
   position: relative;
-  color: theme(--ma-nautic-teal);
+  color: theme(--ma-nautic-blue);
+  text-decoration: none;
 }
 
 .ma-nautic-content-link::after {
@@ -574,12 +576,214 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0;
-  height: theme(--ma-nautic-border-width-default);
-  background-color: currentColor;
-  transition: all 300ms;
+  width: 100%;
+  height: theme(--ma-nautic-border-width-large);
+  background-color: theme(--ma-nautic-gold);
 }
 
-.ma-nautic-content-link:hover::after {
+/* Optional: Hover effect to make it more interactive */
+.ma-nautic-content-link:hover {
+  color: theme(--ma-nautic-teal);
+}
+
+/* =============================================== */
+/* ====== CLASSES UTILITAIRES POUR HEADINGS ====== */
+/* =============================================== */
+
+/* Classes de taille de police pour les headings */
+.text-ma-title {
+  font-size: var(--ma-nautic-font-size-title);
+}
+
+.text-ma-subtitle {
+  font-size: var(--ma-nautic-font-size-subtitle);
+}
+
+.text-ma-section {
+  font-size: var(--ma-nautic-font-size-section);
+}
+
+.text-ma-heading {
+  font-size: var(--ma-nautic-font-size-heading);
+}
+
+/* Classes pour les poids de police */
+.font-ma-black {
+  font-weight: var(--ma-nautic-font-weight-black);
+}
+
+.font-ma-bold {
+  font-weight: var(--ma-nautic-font-weight-bold);
+}
+
+.font-ma-regular {
+  font-weight: var(--ma-nautic-font-weight-regular);
+}
+
+/* =============================================== */
+/* ============== CAROUSEL STYLES ================ */
+/* =============================================== */
+
+/* Wrapper du carousel avec navigation externe */
+[data-carousel] {
+  position: relative;
+  padding: 0 40px; /* Espace pour les flèches de navigation */
+  margin-bottom: 20px;
+}
+
+/* Container du carrousel */
+.carousel-container {
+  position: relative;
   width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  min-height: 400px; /* Hauteur minimale fixe */
+}
+
+/* Track contenant les slides */
+.carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Styles individuels des slides */
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1;
+  display: none;
+}
+
+/* Slide active */
+.carousel-slide.active {
+  opacity: 1;
+  z-index: 2;
+  display: block;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Images dans les slides */
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Boutons de navigation externe */
+.carousel-prev,
+.carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: none;
+  outline: none;
+}
+
+.carousel-prev {
+  left: -24px;
+}
+
+.carousel-next {
+  right: -24px;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Style spécifique pour les flèches du carousel MA-Nautic */
+.carousel-prev img,
+.carousel-next img {
+  width: 48px;
+  height: 48px;
+}
+
+/* Indicateurs de slides positionnés à l'extérieur */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  position: relative;
+  z-index: 5;
+}
+
+[data-carousel-indicator] {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: theme(--ma-nautic-white);
+  opacity: 0.6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid theme(--ma-nautic-blue);
+
+  /* Indicateur actif */
+  [data-carousel-indicator].active {
+    background-color: theme(--ma-nautic-gold);
+    border-color: theme(--ma-nautic-blue);
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  
+  [data-carousel-indicator]:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+  
+  /* Animation pour les slides */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Adaptation pour les appareils mobiles */
+  @media (max-width: 640px) {
+    [data-carousel] {
+      padding: 0 24px;
+    }
+    
+    .carousel-prev,
+    .carousel-next {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .carousel-prev {
+      left: -18px;
+    }
+    
+    .carousel-next {
+      right: -18px;
+    }
+    
+    .carousel-prev img,
+    .carousel-next img {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .carousel-container {
+      min-height: 300px;
+    }
+  }
 }

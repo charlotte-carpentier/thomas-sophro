@@ -3,7 +3,7 @@
   "variants": {
     "default": "text-[--ma-nautic-blue] font-['Roboto']",
     "navigation": "ma-nautic-nav-link font-['Vibur'] text-[25px]",
-    "content": "ma-nautic-content-link font-['Roboto']",
+    "content": "ma-nautic-content-link font-['Vibur']",
     "footer": "text-[--ma-nautic-blue] hover:text-[--ma-nautic-teal] font-['Roboto']"
   },
   "links": [

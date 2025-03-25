@@ -9,7 +9,7 @@
   "variants": {
     "toggleButton": {
       "default": "toggle-button lg:hidden",
-      "icon": "treasure_chest_white",
+      "icon": "wheel",
       "iconStyle": "text-[theme(--ma-nautic-white)]",
       "containerSize": "w-8 h-8",
       "iconSize": "32"

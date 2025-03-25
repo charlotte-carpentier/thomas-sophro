@@ -5,56 +5,52 @@
     "md": "24x24",
     "lg": "32x32", 
     "xl": "48x48",
-    "xxl": "64x64"
+    "xxl": "64x64",
+    "arrow-nav": "72x72",
+    "arrow-scroll": "112x112"
   },
   "globalClass": "icon",
   "icons": [
     {
-      "name": "arrow_right_orange",
+      "name": "arrow_right",
       "path": "/assets/icons/FLECHE-D-orange.svg",
-      "alt": "Arrow right orange icon", 
+      "alt": "Arrow right icon", 
+      "defaultSize": "arrow-nav"
+    },
+    {
+      "name": "arrow_left",
+      "path": "/assets/icons/arrow-left.svg", 
+      "alt": "Arrow left icon",
+      "defaultSize": "arrow-nav"
+    },
+    {
+      "name": "arrow_scroll_down",
+      "path": "/assets/icons/arrow-scroll-down.svg", 
+      "alt": "Arrow scroll down icon",
+      "defaultSize": "arrow-scroll"
+    },
+    {
+      "name": "arrow_scroll_up",
+      "path": "/assets/icons/arrow-scroll-up.svg",
+      "alt": "Arrow scroll up icon", 
+      "defaultSize": "arrow-scroll"
+    },
+    {
+      "name": "wheel",
+      "path": "/assets/icons/wheel.svg",
+      "alt": "Wheel icon", 
       "defaultSize": "md"
     },
     {
-      "name": "arrow-left_orange",
-      "path": "/assets/icons/FLECHE-G-orange.svg", 
-      "alt": "Arrow left orange icon",
+      "name": "wheel_bg_white",
+      "path": "/assets/icons/wheel-bg-white.svg", 
+      "alt": "Wheel bg white icon",
       "defaultSize": "md"
     },
     {
-      "name": "arrow_scroll_beige",
-      "path": "/assets/icons/FLECHE-SCROLL-beige.svg", 
-      "alt": "Arrow scroll beige icon",
-      "defaultSize": "md"
-    },
-    {
-      "name": "arrow_scroll_blue",
-      "path": "/assets/icons/FLECHE-SCROLL-bleu.svg",
-      "alt": "Arrow scroll blue", 
-      "defaultSize": "md"
-    },
-    {
-      "name": "wheel-orange",
-      "path": "/assets/icons/ROUE-orange.svg",
-      "alt": "Wheel orange icon", 
-      "defaultSize": "md"
-    },
-    {
-      "name": "wheel_orange_bg_white",
-      "path": "/assets/icons/ROUE-orangeFondBlanc.svg", 
-      "alt": "Wheel orange bg white icon",
-      "defaultSize": "md"
-    },
-    {
-      "name": "wheel_orange_bg_blue",
-      "path": "/assets/icons/ROUE-orangeFondbleu.svg", 
-      "alt": "Wheel orange bg blue icon",
-      "defaultSize": "md"
-    },
-    {
-      "name": "wheel_green",
-      "path": "/assets/icons/ROUE-verte.svg",
-      "alt": "Wheel green icon", 
+      "name": "wheel_bg_blue",
+      "path": "/assets/icons/wheel-bg-blue.svg", 
+      "alt": "Wheel bg blue icon",
       "defaultSize": "md"
     },
     {
