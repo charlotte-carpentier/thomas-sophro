@@ -4,6 +4,8 @@
     "small": "w-64 md:w-72 lg:w-80",
     "medium": "w-80 md:w-96 lg:w-[28rem]",
     "large": "w-96 md:w-[28rem] lg:w-[32rem]",
+    "xlarge": "w-[28rem] md:w-[32rem] lg:w-[36rem]",
+    "xxlarge": "w-[32rem] md:w-[36rem] lg:w-[40rem]",
     "avatar": "w-14 h-14 rounded-md object-cover"
   },
   "groups": {
@@ -23,8 +25,21 @@
   },
   "images": [
     {
+      "name": "ma_title",
+      "src": "/assets/images/ma-title.png",
+      "alt": "Image du port de St Florent",
+      "size": "xxlarge",
+      "group": "block-media"
+    },
+    {
       "name": "hero_background",
-      "src": "/assets/images/ACCUEIL-1.jpg",
+      "src": "/assets/images/ma-home-01.jpg",
+      "alt": "Image du port de St Florent",
+      "group": "block-media"
+    },
+    {
+      "name": "section_background",
+      "src": "/assets/images/ma-home-02.jpg",
       "alt": "Image du port de St Florent",
       "group": "block-media"
     },

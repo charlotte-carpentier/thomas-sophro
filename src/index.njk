@@ -7,22 +7,23 @@ layout: '00-core/base.njk'
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
 {# Hero section pour MA-Nautic #}
-{{ renderSectionHero({
-    name: "ma_nautic_hero",
-    datas: organisms["section-heros"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images
-}) }}
+    {{ renderSectionHero({
+        name: "ma_nautic_hero",
+        datas: organisms["section-heros"],
+        headings: atoms.headings,
+        buttons: atoms.buttons,
+        images: atoms.images
+    }) }}
 
 {# Section Qui sommes-nous #}
 {% from "01-organisms/section-about.njk" import renderSectionAbout %}
 
     {{ renderSectionAbout({ 
-        name: "about_us", 
+        name: "ma_nautic_about", 
         datas: organisms["section-abouts"], 
         headings: atoms.headings, 
-        buttons: atoms.buttons 
+        links: atoms.links,
+        icons: atoms.icons 
     }) }}
 
 {# Section Qui sommes-nous #}

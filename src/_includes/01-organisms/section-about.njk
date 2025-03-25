@@ -5,6 +5,8 @@
 #}
 
 {% from "03-atoms/heading.njk" import renderHeading %}
+{% from "03-atoms/link.njk" import renderLink %}
+{% from "03-atoms/icon.njk" import renderIcon %}
 {% from "03-atoms/button.njk" import renderButton %}
 
 {% macro renderSectionAbout(options) %}
@@ -27,11 +29,48 @@
     
     {% set variant = options.datas.variants[sectionData.variant] | default(options.datas.variants.default) %}
     
-    <section class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }}">
+    <section class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }} pb-12" data-section-about="{{ sectionData.name }}">
+      {# Titre principal (bande en haut) avec centrage vertical #}
+      {% if sectionData.mainTitle and options.headings %}
+        <div class="{{ sectionStyles.mainTitleWrapper }}">
+          {{ renderHeading({
+            name: sectionData.mainTitle,
+            datas: options.headings,
+            class: sectionStyles.mainTitleStyle
+          }) }}
+          
+          {# Flèche de défilement (si configurée) #}
+          {% if sectionData.scrollArrowIcon and options.icons %}
+            <div class="{{ sectionStyles.scrollArrowWrapper }}">
+              {{ renderIcon({
+                name: sectionData.scrollArrowIcon,
+                datas: options.icons,
+                class: "rounded-full bg-white"
+              }) }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+      
       <div class="{{ sectionStyles.container }}">
+        {% if sectionData.topTitle %}
+          <div class="{{ sectionStyles.topTitleWrapper }}">
+            <h1 class="{{ sectionStyles.topTitleStyle }}">{{ sectionData.topTitle }}</h1>
+          </div>
+        {% endif %}
+        
         {# Mobile layout (flex column) #}
         <div class="md:hidden">
-          {# Heading first in mobile #}
+          {# Super Heading (section title with underscore) #}
+          {% if sectionData.superHeading and options.headings %}
+            {{ renderHeading({
+              name: sectionData.superHeading,
+              datas: options.headings,
+              class: "mb-6 mt-8 ma-nautic-section-title"
+            }) }}
+          {% endif %}
+          
+          {# Main Heading (title) #}
           {% if sectionData.heading and options.headings %}
             {{ renderHeading({
               name: sectionData.heading,
@@ -39,101 +78,186 @@
             }) }}
           {% endif %}
           
-          {# Super Heading second #}
-          {% if sectionData.superHeading and options.headings %}
-            {{ renderHeading({
-              name: sectionData.superHeading,
-              datas: options.headings
-            }) }}
+          {# Icon if present #}
+          {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
+            <div class="{{ sectionStyles.iconWrapper }}">
+              {{ renderIcon({
+                name: sectionData.iconName,
+                datas: options.icons,
+                class: sectionStyles.iconMobile
+              }) }}
+            </div>
           {% endif %}
           
           {# Content #}
           {% if sectionData.content %}
-            <div class="mt-4">
-              {{ sectionData.content }}
+            <div class="{{ sectionStyles.contentContainer }}">
+              {{ sectionData.content | safe }}
             </div>
           {% endif %}
           
-          {# Buttons #}
-          {% if (sectionData.primaryButton or sectionData.secondaryButton) and options.buttons %}
-            <div class="{{ sectionStyles.buttonContainer }}">
-              {% if sectionData.primaryButton %}
-                {{ renderButton({
-                  name: sectionData.primaryButton,
-                  datas: options.buttons,
-                  class: 'mr-4'
-                }) }}
-              {% endif %}
+          {# Primary Button (Contact) #}
+          {% if sectionData.primaryButton and options.buttons %}
+            <div class="{{ sectionStyles.buttonWrapper }}">
+              {{ renderButton({
+                name: sectionData.primaryButton,
+                datas: options.buttons
+              }) }}
+            </div>
+          {% endif %}
+          
+          {# Primary Link (Contact) #}
+          {% if sectionData.primaryLink and options.links %}
+            <div class="{{ sectionStyles.buttonWrapper }}">
+              {{ renderLink({
+                name: sectionData.primaryLink,
+                datas: options.links
+              }) }}
+            </div>
+          {% endif %}
+          
+          {# Carousel for mobile - Mise à jour pour navigation externe #}
+          {% if sectionData.hasCarousel and sectionData.carouselImages %}
+            <div class="{{ sectionStyles.carouselWrapper }}" data-carousel="{{ sectionData.name }}">
+              <div class="carousel-container">
+                <div class="carousel-track">
+                  {% for image in sectionData.carouselImages %}
+                    <div class="carousel-slide {% if loop.first %}active{% endif %}">
+                      <img src="{{ image.src }}" alt="{{ image.alt }}" class="w-full h-full object-cover">
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
               
-              {% if sectionData.secondaryButton %}
-                {{ renderButton({
-                  name: sectionData.secondaryButton,
-                  datas: options.buttons
+              {# Boutons de navigation maintenant à l'extérieur #}
+              <button type="button" class="{{ sectionStyles.carouselNavButton }} carousel-prev" aria-label="Previous slide">
+                {{ renderIcon({
+                  name: "arrow-left_orange",
+                  datas: options.icons
                 }) }}
-              {% endif %}
+              </button>
+              <button type="button" class="{{ sectionStyles.carouselNavButton }} carousel-next" aria-label="Next slide">
+                {{ renderIcon({
+                  name: "arrow_right_orange",
+                  datas: options.icons
+                }) }}
+              </button>
+              
+              {# Indicateurs maintenant à l'extérieur #}
+              <div class="carousel-indicators">
+                {% for image in sectionData.carouselImages %}
+                  <button type="button" class="{{ sectionStyles.carouselIndicator }} {% if loop.first %}active{% endif %}" data-carousel-indicator="{{ loop.index0 }}" aria-label="Go to slide {{ loop.index }}"></button>
+                {% endfor %}
+              </div>
             </div>
           {% endif %}
         </div>
         
         {# Desktop layout (two columns) #}
         <div class="hidden md:flex {{ sectionStyles.contentWrapper }}">
-          {# Left column: Super Heading, content and buttons #}
+          {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
           <div class="{{ sectionStyles.textContent }}">
-            {# Super Heading #}
+            {# Super Heading (section title with underscore) #}
             {% if sectionData.superHeading and options.headings %}
               {{ renderHeading({
                 name: sectionData.superHeading,
+                datas: options.headings,
+                class: "mb-6 mt-8 ma-nautic-section-title"
+              }) }}
+            {% endif %}
+            
+            {# Main Heading (title) #}
+            {% if sectionData.heading and options.headings %}
+              {{ renderHeading({
+                name: sectionData.heading,
                 datas: options.headings
               }) }}
             {% endif %}
             
-            {# Content #}
-            {% if sectionData.content %}
-              <div class="mt-4">
-                {{ sectionData.content }}
+            {# Icon if present #}
+            {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
+              <div class="{{ sectionStyles.iconWrapper }}">
+                {{ renderIcon({
+                  name: sectionData.iconName,
+                  datas: options.icons,
+                  class: sectionStyles.iconDesktop
+                }) }}
               </div>
             {% endif %}
             
-            {# Buttons #}
-            {% if (sectionData.primaryButton or sectionData.secondaryButton) and options.buttons %}
-              <div class="{{ sectionStyles.buttonContainer }}">
-                {% if sectionData.primaryButton %}
-                  {{ renderButton({
-                    name: sectionData.primaryButton,
-                    datas: options.buttons,
-                    class: 'mr-4'
-                  }) }}
-                {% endif %}
-                
-                {% if sectionData.secondaryButton %}
-                  {{ renderButton({
-                    name: sectionData.secondaryButton,
-                    datas: options.buttons
-                  }) }}
-                {% endif %}
+            {# Content #}
+            {% if sectionData.content %}
+              <div class="{{ sectionStyles.contentContainerDesktop }}">
+                {{ sectionData.content | safe }}
+              </div>
+            {% endif %}
+            
+            {# Primary Button (Contact) #}
+            {% if sectionData.primaryButton and options.buttons %}
+              <div class="{{ sectionStyles.buttonWrapper }}">
+                {{ renderButton({
+                  name: sectionData.primaryButton,
+                  datas: options.buttons
+                }) }}
+              </div>
+            {% endif %}
+            
+            {# Primary Link (Contact) #}
+            {% if sectionData.primaryLink and options.links %}
+              <div class="{{ sectionStyles.buttonWrapper }}">
+                {{ renderLink({
+                  name: sectionData.primaryLink,
+                  datas: options.links
+                }) }}
               </div>
             {% endif %}
           </div>
           
-          {# Right column: Main heading #}
+          {# Right column: Carousel - Mise à jour pour navigation externe #}
           <div class="{{ sectionStyles.mediaContent }}">
-            {# Main Heading #}
-            {% if sectionData.heading and options.headings %}
-              {{ renderHeading({
-                name: sectionData.heading,
-                datas: options.headings,
-                class: "md:text-5xl"
-              }) }}
-            {% endif %}
-            
-            {# Optional image content #}
-            {% if sectionData.image %}
-              <img src="{{ sectionData.image }}" alt="{{ sectionData.imageAlt | default('') }}" class="w-full h-auto mt-6">
+            {% if sectionData.hasCarousel and sectionData.carouselImages %}
+              <div class="{{ sectionStyles.carouselWrapper }}" data-carousel="{{ sectionData.name }}">
+                <div class="carousel-container">
+                  <div class="carousel-track">
+                    {% for image in sectionData.carouselImages %}
+                      <div class="carousel-slide {% if loop.first %}active{% endif %}">
+                        <img src="{{ image.src }}" alt="{{ image.alt }}" class="w-full h-full object-cover">
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                
+                {# Boutons de navigation maintenant à l'extérieur #}
+                <button type="button" class="{{ sectionStyles.carouselNavButton }} carousel-prev" aria-label="Previous slide">
+                  {{ renderIcon({
+                    name: "arrow-left_orange",
+                    datas: options.icons
+                  }) }}
+                </button>
+                <button type="button" class="{{ sectionStyles.carouselNavButton }} carousel-next" aria-label="Next slide">
+                  {{ renderIcon({
+                    name: "arrow_right_orange",
+                    datas: options.icons
+                  }) }}
+                </button>
+                
+                {# Indicateurs maintenant à l'extérieur #}
+                <div class="carousel-indicators">
+                  {% for image in sectionData.carouselImages %}
+                    <button type="button" class="{{ sectionStyles.carouselIndicator }} {% if loop.first %}active{% endif %}" data-carousel-indicator="{{ loop.index0 }}" aria-label="Go to slide {{ loop.index }}"></button>
+                  {% endfor %}
+                </div>
+              </div>
             {% endif %}
           </div>
         </div>
       </div>
     </section>
+    
+    {# Inclure le script externe du carrousel si nécessaire #}
+    {% if sectionData.hasCarousel %}
+      <script src="/js/organisms/carousel.js"></script>
+    {% endif %}
   {% else %}
     <span class="text-red-500">Section About data not found</span>
   {% endif %}
@@ -142,7 +266,7 @@
 
 {#
 ============================
-Summon HAT Components Wisely
+Summon MA-NAUTIC Components Wisely
 ============================
 
 1. Import the macro at the top of your page
@@ -150,20 +274,22 @@ Summon HAT Components Wisely
 
 2. Call the component with the required data
 {{ renderSectionAbout({ 
-    name: "about_us", 
+    name: "ma_nautic_about", 
     datas: organisms["section-abouts"], 
     headings: atoms.headings, 
-    buttons: atoms.buttons 
+    links: atoms.links,
+    icons: atoms.icons 
 }) }}
 
 3. Using custom styles
 {{ renderSectionAbout({ 
-    name: "about_us", 
+    name: "ma_nautic_about", 
     datas: organisms["section-abouts"], 
     headings: atoms.headings, 
-    buttons: atoms.buttons,
+    links: atoms.links,
+    icons: atoms.icons,
     class: "my-custom-section-class" 
 }) }}
 
-Saving kingdoms and collecting trinkets since forever 🏰⚔️
+N'oubliez pas d'initialiser le carousel dans votre fichier JavaScript !
 #}

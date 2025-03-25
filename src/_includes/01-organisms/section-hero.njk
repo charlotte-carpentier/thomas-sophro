@@ -39,23 +39,27 @@
         {# Content container #}
         <div class="{{ containerStyle }} relative z-10 h-full flex items-center justify-center">
           <div class="flex flex-col items-center justify-center">
-            {# Main Title - using headings system #}
-            {% if variant.superHeading and options.headings %}
-              {% set mainTitle = null %}
-              {% for heading in options.headings.headings %}
-                {% if heading.name == variant.superHeading %}
-                  {% set mainTitle = heading %}
+            {# Logo image à la place des headings #}
+            {% if variant.image %}
+              {% set logoImg = null %}
+              {% for image in options.images.images %}
+                {% if image.name == variant.image %}
+                  {% set logoImg = image %}
                 {% endif %}
               {% endfor %}
               
-              {% if mainTitle %}
-                <{{ "h" + mainTitle.level }} class="{{ options.headings.variants[mainTitle.style] }}">
-                  {{ mainTitle.text }}
-                </{{ "h" + mainTitle.level }}>
+              {% if logoImg %}
+                <div class="mb-8">
+                  <img 
+                    src="{{ logoImg.src }}" 
+                    alt="{{ logoImg.alt }}" 
+                    class="{{ options.images.globalStyle }} {{ options.images.variants[logoImg.size] }}"
+                  >
+                </div>
               {% endif %}
             {% endif %}
             
-            {# Subtitle - using headings system #}
+            {# Subtitle sous le logo si nécessaire #}
             {% if variant.heading and options.headings %}
               {% set subtitle = null %}
               {% for heading in options.headings.headings %}
@@ -159,9 +163,11 @@
                 
                 {% if heroImage %}
                   {% set imageVariant = options.images.variants[heroImage.size] %}
-                  <img src="{{ heroImage.src }}" 
-                       alt="{{ heroImage.alt }}" 
-                       class="{{ options.images.globalStyle }} {{ imageVariant }}">
+                  <img 
+                    src="{{ heroImage.src }}" 
+                    alt="{{ heroImage.alt }}" 
+                    class="{{ options.images.globalStyle }} {{ imageVariant }}"
+                  >
                 {% endif %}
               {% endif %}
             </div>
@@ -202,7 +208,7 @@ Summon HAT Components Wisely
     class: "my-custom-hero-class"
 }) }}
 
-4. Using MA-Nautic Hero
+4. Using MA-Nautic Hero with Logo
 {{ renderSectionHero({ 
     name: "ma_nautic_hero",
     datas: organisms["section-heros"],
