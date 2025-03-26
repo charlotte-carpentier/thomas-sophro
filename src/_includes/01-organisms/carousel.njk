@@ -1,0 +1,167 @@
+{# 
+===========================
+        CAROUSEL
+===========================
+#}
+
+{% macro renderCarousel(options) %}
+  {# Variables pour stocker les données du carousel #}
+  {% set carouselData = null %}
+  
+  {# Vérifier si nous avons des données de carousel #}
+  {% if options.datas %}
+    {# Récupérer les styles et paramètres globaux #}
+    {% set globalStyle = options.datas.globalStyle | default('w-full relative overflow-hidden') %}
+    
+    {# Trouver le carousel spécifique par son nom #}
+    {% if options.datas.carousels %}
+      {% for carousel in options.datas.carousels %}
+        {% if carousel.name == options.name %}
+          {% set carouselData = carousel %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    
+    {% if carouselData %}
+      {# Récupérer les infos des boutons #}
+      {% set buttonPrev = options.datas.buttons.prev %}
+      {% set buttonNext = options.datas.buttons.next %}
+      
+      {# Créer une ID unique pour ce carousel #}
+      {% set carouselId = "carousel-" ~ carouselData.name %}
+      
+      <div 
+        class="{{ globalStyle }} {{ options.class | default('') }}"
+        id="{{ carouselId }}"
+        data-carousel="{{ carouselData.name }}"
+      >
+        {# Conteneur des images #}
+        <div class="relative w-full h-full">
+          {% for image in carouselData.images %}
+            <div 
+              class="absolute inset-0 transition-opacity duration-500 ease-in-out {% if loop.first %}opacity-100{% else %}opacity-0{% endif %}"
+              data-carousel-item
+            >
+              {# Adapter à la structure de options.images (tableau ou objet avec propriété images) #}
+              {% set imagesArray = options.images.images | default(options.images) %}
+              
+              {# Rechercher l'image dans le tableau d'images #}
+              {% set foundImage = null %}
+              {% if imagesArray %}
+                {% for img in imagesArray %}
+                  {% if img.name == image.name %}
+                    {% set foundImage = img %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+              
+              {% if foundImage %}
+                <img 
+                  src="{{ foundImage.src }}" 
+                  alt="{{ foundImage.alt | default(image.name) }}" 
+                  class="w-full h-full object-cover"
+                />
+              {% else %}
+                {# Image placeholder si l'image n'est pas trouvée #}
+                <div class="w-full h-full flex items-center justify-center bg-gray-200">
+                  <span class="text-gray-500">Image {{ image.name }} non disponible</span>
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+        
+        {# Navigation #}
+        <div class="absolute inset-0 flex items-center justify-between p-4">
+          {# Bouton précédent #}
+          <button 
+            class="z-10 p-2 rounded-full bg-white bg-opacity-50 hover:bg-opacity-80 transition-all duration-300"
+            data-carousel-prev
+            aria-label="Image précédente"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          {# Bouton suivant #}
+          <button 
+            class="z-10 p-2 rounded-full bg-white bg-opacity-50 hover:bg-opacity-80 transition-all duration-300"
+            data-carousel-next
+            aria-label="Image suivante"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      {# Simple inclusion du script JS #}
+      <script src="/js/organisms/carousel.js"></script>
+    {% else %}
+      <span class="text-red-500">Carousel not found: {{ options.name }}</span>
+    {% endif %}
+  {% else %}
+    <span class="text-red-500">Carousel data not provided</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/carousel.njk" import renderCarousel %}
+
+2. Call a specific carousel by its name
+{{ renderCarousel({ 
+    name: "carousel_1", 
+    datas: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons
+}) }}
+
+3. Call with custom classes
+{{ renderCarousel({ 
+    name: "carousel_1", 
+    datas: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons,
+    class: "h-96 my-8"
+}) }}
+
+4. Structure de images.json
+{
+  "images": [
+    {
+      "name": "carousel_slide_1",
+      "src": "/path/to/image.jpg",
+      "alt": "Description of the image"
+    },
+    ...
+  ]
+}
+
+5. Structure de carousels.json
+{
+  "globalStyle": "w-full h-auto",
+  "buttons": {
+    "prev": "carousel_prev",
+    "next": "carousel_next"
+  },
+  "carousels": [
+    {
+      "name": "carousel_1",
+      "images": [
+        { "name": "carousel_slide_1" },
+        { "name": "carousel_slide_2" }
+      ]
+    }
+  ]
+}
+
+Cherchez au fond du trésor 💰🔍
+==============================
+#}

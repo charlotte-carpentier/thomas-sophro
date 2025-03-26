@@ -44,6 +44,36 @@
       "group": "block-media"
     },
     {
+      "name": "carousel_slide_1",
+      "src": "/assets/images/carousel-1/carousel-slide-1.jpg",
+      "alt": "Photo de quatre personnes sur un bateau",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_slide_2",
+      "src": "/assets/images/carousel-1/carousel-slide-2.jpg",
+      "alt": "Photo d'un bateau devant une île",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_slide_3",
+      "src": "/assets/images/carousel-1/carousel-slide-3.jpg",
+      "alt": "Photo de trois personnes sur un bateau",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_slide_4",
+      "src": "/assets/images/carousel-1/carousel-slide-4.jpg",
+      "alt": "Photo d'un chemin de sable vers la mer'",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_slide_5",
+      "src": "/assets/images/carousel-1/carousel-slide-1.jpg",
+      "alt": "Photo de deux personnes sur une bouée dans la mer",
+      "group": "block-media"
+    },
+    {
       "name": "placeholder_small",
       "src": "/assets/images/placeholder-small.png",
       "alt": "Small placeholder image",

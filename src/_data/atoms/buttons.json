@@ -32,6 +32,10 @@
       "focus": "bg-transparent text-[--ma-nautic-blue] ring-2 ring-[--ma-nautic-teal]",
       "active": "bg-[--ma-nautic-beige] text-[--ma-nautic-blue]",
       "disabled": "bg-transparent text-[--ma-nautic-blue] opacity-50"
+    },
+    "carouselNav": {
+      "default": "absolute top-1/2 transform -translate-y-1/2 bg-[--ma-nautic-blue] text-white px-4 py-2 rounded-full shadow-md hover:bg-[--ma-nautic-teal]",
+      "hover": "bg-[--ma-nautic-teal] text-white"
     }
   },
   "states": {
@@ -61,6 +65,18 @@
       "text": "RÉSERVEZ",
       "size": "button",
       "style": "reserve"
+    },
+    {
+      "name": "carousel_prev",
+      "icon": "arrow_left",
+      "size": "button-small",
+      "style": "carouselNav"
+    },
+    {
+      "name": "carousel_next",
+      "icon": "arrow_right",
+      "size": "button-small",
+      "style": "carouselNav"
     }
   ]
 }

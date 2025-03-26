@@ -8,6 +8,7 @@
 {% from "03-atoms/link.njk" import renderLink %}
 {% from "03-atoms/icon.njk" import renderIcon %}
 {% from "03-atoms/button.njk" import renderButton %}
+{% from "01-organisms/carousel.njk" import renderCarousel %}
 
 {% macro renderSectionAbout(options) %}
   {% if options.datas %}
@@ -116,39 +117,16 @@
             </div>
           {% endif %}
           
-          {# Carousel for mobile - Mise à jour pour navigation externe #}
+          {# Carousel pour mobile - Utilisation du composant carousel #}
           {% if sectionData.hasCarousel and sectionData.carouselImages %}
-            <div class="{{ sectionStyles.carouselWrapper }}" data-carousel="{{ sectionData.name }}">
-              <div class="carousel-container">
-                <div class="carousel-track">
-                  {% for image in sectionData.carouselImages %}
-                    <div class="carousel-slide {% if loop.first %}active{% endif %}">
-                      <img src="{{ image.src }}" alt="{{ image.alt }}" class="w-full h-full object-cover">
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
-              
-              {# Boutons de navigation maintenant à l'extérieur #}
-              <button type="button" class="{{ sectionStyles.carouselNavButton }} carousel-prev" aria-label="Previous slide">
-                {{ renderIcon({
-                  name: "arrow-left_orange",
-                  datas: options.icons
-                }) }}
-              </button>
-              <button type="button" class="{{ sectionStyles.carouselNavButton }} carousel-next" aria-label="Next slide">
-                {{ renderIcon({
-                  name: "arrow_right_orange",
-                  datas: options.icons
-                }) }}
-              </button>
-              
-              {# Indicateurs maintenant à l'extérieur #}
-              <div class="carousel-indicators">
-                {% for image in sectionData.carouselImages %}
-                  <button type="button" class="{{ sectionStyles.carouselIndicator }} {% if loop.first %}active{% endif %}" data-carousel-indicator="{{ loop.index0 }}" aria-label="Go to slide {{ loop.index }}"></button>
-                {% endfor %}
-              </div>
+            <div class="{{ sectionStyles.carouselWrapper }}">
+              {{ renderCarousel({
+                name: sectionData.name + "_carousel",
+                customImages: sectionData.carouselImages,
+                datas: options.carousels,
+                buttons: options.buttons,
+                class: "ma-nautic-carousel"
+              }) }}
             </div>
           {% endif %}
         </div>
@@ -213,51 +191,23 @@
             {% endif %}
           </div>
           
-          {# Right column: Carousel - Mise à jour pour navigation externe #}
+          {# Right column: Carousel - Utilisation du composant carousel #}
           <div class="{{ sectionStyles.mediaContent }}">
             {% if sectionData.hasCarousel and sectionData.carouselImages %}
-              <div class="{{ sectionStyles.carouselWrapper }}" data-carousel="{{ sectionData.name }}">
-                <div class="carousel-container">
-                  <div class="carousel-track">
-                    {% for image in sectionData.carouselImages %}
-                      <div class="carousel-slide {% if loop.first %}active{% endif %}">
-                        <img src="{{ image.src }}" alt="{{ image.alt }}" class="w-full h-full object-cover">
-                      </div>
-                    {% endfor %}
-                  </div>
-                </div>
-                
-                {# Boutons de navigation maintenant à l'extérieur #}
-                <button type="button" class="{{ sectionStyles.carouselNavButton }} carousel-prev" aria-label="Previous slide">
-                  {{ renderIcon({
-                    name: "arrow-left_orange",
-                    datas: options.icons
-                  }) }}
-                </button>
-                <button type="button" class="{{ sectionStyles.carouselNavButton }} carousel-next" aria-label="Next slide">
-                  {{ renderIcon({
-                    name: "arrow_right_orange",
-                    datas: options.icons
-                  }) }}
-                </button>
-                
-                {# Indicateurs maintenant à l'extérieur #}
-                <div class="carousel-indicators">
-                  {% for image in sectionData.carouselImages %}
-                    <button type="button" class="{{ sectionStyles.carouselIndicator }} {% if loop.first %}active{% endif %}" data-carousel-indicator="{{ loop.index0 }}" aria-label="Go to slide {{ loop.index }}"></button>
-                  {% endfor %}
-                </div>
+              <div class="{{ sectionStyles.carouselWrapper }}">
+                {{ renderCarousel({
+                  name: sectionData.name + "_carousel",
+                  customImages: sectionData.carouselImages,
+                  datas: options.carousels,
+                  buttons: options.buttons,
+                  class: "ma-nautic-carousel"
+                }) }}
               </div>
             {% endif %}
           </div>
         </div>
       </div>
     </section>
-    
-    {# Inclure le script externe du carrousel si nécessaire #}
-    {% if sectionData.hasCarousel %}
-      <script src="/js/organisms/carousel.js"></script>
-    {% endif %}
   {% else %}
     <span class="text-red-500">Section About data not found</span>
   {% endif %}
@@ -278,7 +228,9 @@ Summon MA-NAUTIC Components Wisely
     datas: organisms["section-abouts"], 
     headings: atoms.headings, 
     links: atoms.links,
-    icons: atoms.icons 
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    buttons: atoms.buttons
 }) }}
 
 3. Using custom styles
@@ -288,8 +240,8 @@ Summon MA-NAUTIC Components Wisely
     headings: atoms.headings, 
     links: atoms.links,
     icons: atoms.icons,
+    carousels: organisms.carousels,
+    buttons: atoms.buttons,
     class: "my-custom-section-class" 
 }) }}
-
-N'oubliez pas d'initialiser le carousel dans votre fichier JavaScript !
 #}

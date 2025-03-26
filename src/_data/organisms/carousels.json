@@ -1,0 +1,44 @@
+{
+  "globalStyle": "relative w-full h-96 overflow-hidden rounded-lg shadow-lg",
+  "variants": {
+    "default": "bg-white",
+    "primary": "bg-slate-100",
+    "secondary": "bg-gray-50"
+  },
+  "carousels": [
+    {
+      "name": "carousel_1",
+      "style": "default",
+      "pauseOnHover": true,
+      "images": [
+        { "name": "carousel_slide_1" },
+        { "name": "carousel_slide_2" },
+        { "name": "carousel_slide_3" },
+        { "name": "carousel_slide_4" },
+        { "name": "carousel_slide_5" }
+      ]
+    },
+    {
+      "name": "carousel_2",
+      "style": "primary",
+      "pauseOnHover": true,
+      "images": [
+        { "name": "carousel_slide_1" },
+        { "name": "carousel_slide_2" },
+        { "name": "carousel_slide_3" },
+        { "name": "carousel_slide_4" },
+        { "name": "carousel_slide_5" }
+      ]
+    },
+    {
+      "name": "hero_carousel",
+      "style": "secondary",
+      "pauseOnHover": false,
+      "images": [
+        { "name": "hero_slide_1" },
+        { "name": "hero_slide_2" },
+        { "name": "hero_slide_3" }
+      ]
+    }
+  ]
+}
