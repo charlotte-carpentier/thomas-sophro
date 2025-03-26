@@ -5,15 +5,10 @@
 #}
 
 {% macro renderCarousel(options) %}
-  {# Variables pour stocker les données du carousel #}
   {% set carouselData = null %}
-  
-  {# Vérifier si nous avons des données de carousel #}
   {% if options.datas %}
-    {# Récupérer les styles et paramètres globaux #}
     {% set globalStyle = options.datas.globalStyle | default('w-full relative overflow-hidden') %}
     
-    {# Trouver le carousel spécifique par son nom #}
     {% if options.datas.carousels %}
       {% for carousel in options.datas.carousels %}
         {% if carousel.name == options.name %}
@@ -23,29 +18,79 @@
     {% endif %}
     
     {% if carouselData %}
-      {# Récupérer les infos des boutons #}
-      {% set buttonPrev = options.datas.buttons.prev %}
-      {% set buttonNext = options.datas.buttons.next %}
-      
-      {# Créer une ID unique pour ce carousel #}
       {% set carouselId = "carousel-" ~ carouselData.name %}
+      {% set prevButtonId = options.datas.buttons.prev %}
+      {% set nextButtonId = options.datas.buttons.next %}
+      
+      {% set prevButton = null %}
+      {% set nextButton = null %}
+      
+      {% if options.buttons %}
+        {% set buttonsArray = options.buttons.buttons | default(options.buttons) %}
+        {% for button in buttonsArray %}
+          {% if button.name == prevButtonId %}
+            {% set prevButton = button %}
+          {% endif %}
+          {% if button.name == nextButtonId %}
+            {% set nextButton = button %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      
+      {# Get carousel button styles from carousels.json #}
+      {% set carouselPrevStyle = "" %}
+      {% set carouselNextStyle = "" %}
+      {% set prevIconSrc = "" %}
+      {% set nextIconSrc = "" %}
+      
+      {% if options.datas.variants %}
+        {% if options.datas.variants.prevButton %}
+          {% set prevButtonStyles = options.datas.variants.prevButton %}
+          {% set carouselPrevStyle = "" %}
+          
+          {% if prevButtonStyles.containerSize %}
+            {% set carouselPrevStyle = carouselPrevStyle ~ " " ~ prevButtonStyles.containerSize %}
+          {% endif %}
+          
+          {% if prevButtonStyles.default %}
+            {% set carouselPrevStyle = carouselPrevStyle ~ " " ~ prevButtonStyles.default %}
+          {% endif %}
+          
+          {% set prevIconSrc = prevButtonStyles.icon | default("arrow_left") %}
+          {% set prevIconStyle = prevButtonStyles.iconStyle | default("") %}
+          {% set prevIconSize = prevButtonStyles.iconSize | default("") %}
+        {% endif %}
+        
+        {% if options.datas.variants.nextButton %}
+          {% set nextButtonStyles = options.datas.variants.nextButton %}
+          {% set carouselNextStyle = "" %}
+          
+          {% if nextButtonStyles.containerSize %}
+            {% set carouselNextStyle = carouselNextStyle ~ " " ~ nextButtonStyles.containerSize %}
+          {% endif %}
+          
+          {% if nextButtonStyles.default %}
+            {% set carouselNextStyle = carouselNextStyle ~ " " ~ nextButtonStyles.default %}
+          {% endif %}
+          
+          {% set nextIconSrc = nextButtonStyles.icon | default("arrow_right") %}
+          {% set nextIconStyle = nextButtonStyles.iconStyle | default("") %}
+          {% set nextIconSize = nextButtonStyles.iconSize | default("") %}
+        {% endif %}
+      {% endif %}
       
       <div 
-        class="{{ globalStyle }} {{ options.class | default('') }}"
+        class="{{ globalStyle }} {{ options.class | default('') }} relative"
         id="{{ carouselId }}"
         data-carousel="{{ carouselData.name }}"
       >
-        {# Conteneur des images #}
         <div class="relative w-full h-full">
           {% for image in carouselData.images %}
             <div 
               class="absolute inset-0 transition-opacity duration-500 ease-in-out {% if loop.first %}opacity-100{% else %}opacity-0{% endif %}"
               data-carousel-item
             >
-              {# Adapter à la structure de options.images (tableau ou objet avec propriété images) #}
               {% set imagesArray = options.images.images | default(options.images) %}
-              
-              {# Rechercher l'image dans le tableau d'images #}
               {% set foundImage = null %}
               {% if imagesArray %}
                 {% for img in imagesArray %}
@@ -54,15 +99,15 @@
                   {% endif %}
                 {% endfor %}
               {% endif %}
-              
               {% if foundImage %}
                 <img 
                   src="{{ foundImage.src }}" 
                   alt="{{ foundImage.alt | default(image.name) }}" 
                   class="w-full h-full object-cover"
+                  style="object-position: {{ image.objectPosition | default('center') }};"
+                  loading="lazy"
                 />
               {% else %}
-                {# Image placeholder si l'image n'est pas trouvée #}
                 <div class="w-full h-full flex items-center justify-center bg-gray-200">
                   <span class="text-gray-500">Image {{ image.name }} non disponible</span>
                 </div>
@@ -71,33 +116,55 @@
           {% endfor %}
         </div>
         
-        {# Navigation #}
-        <div class="absolute inset-0 flex items-center justify-between p-4">
+        {# Conteneur externe pour les boutons (en dehors du slider) #}
+        <div class="flex items-center justify-between w-full absolute top-1/2 transform -translate-y-1/2 pointer-events-none" style="width: calc(100% + 1rem); left: -0.5rem;">
           {# Bouton précédent #}
           <button 
-            class="z-10 p-2 rounded-full bg-white bg-opacity-50 hover:bg-opacity-80 transition-all duration-300"
+            class="pointer-events-auto {{ carouselPrevStyle }} {{ prevButton.class | default('') }} flex items-center justify-center"
             data-carousel-prev
             aria-label="Image précédente"
+            {% if options.datas.variants.prevButton.debug %}
+            data-debug="{{ carouselPrevStyle }}"
+            {% endif %}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
+            {% if prevIconSrc == "arrow_left" %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ prevIconStyle }} {{ prevIconSize }} w-full h-full">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            {% elif prevButton.icon %}
+              {# Fallback to button icon if defined #}
+              {{ prevButton.icon | safe }}
+            {% else %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ prevIconStyle }} {{ prevIconSize }} w-full h-full">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            {% endif %}
           </button>
           
           {# Bouton suivant #}
           <button 
-            class="z-10 p-2 rounded-full bg-white bg-opacity-50 hover:bg-opacity-80 transition-all duration-300"
+            class="pointer-events-auto {{ carouselNextStyle }} {{ nextButton.class | default('') }} flex items-center justify-center"
             data-carousel-next
             aria-label="Image suivante"
+            {% if options.datas.variants.nextButton.debug %}
+            data-debug="{{ carouselNextStyle }}"
+            {% endif %}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
+            {% if nextIconSrc == "arrow_right" %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ nextIconStyle }} {{ nextIconSize }} w-full h-full">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            {% elif nextButton.icon %}
+              {# Fallback to button icon if defined #}
+              {{ nextButton.icon | safe }}
+            {% else %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ nextIconStyle }} {{ nextIconSize }} w-full h-full">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            {% endif %}
           </button>
         </div>
       </div>
-      
-      {# Simple inclusion du script JS #}
       <script src="/js/organisms/carousel.js"></script>
     {% else %}
       <span class="text-red-500">Carousel not found: {{ options.name }}</span>
@@ -151,13 +218,47 @@ Summon HAT Components Wisely
     "prev": "carousel_prev",
     "next": "carousel_next"
   },
+  "variants": {
+    "prevButton": {
+      "default": "rounded-full p-3 transition-colors duration-300",
+      "icon": "arrow_left",
+      "iconStyle": "text-[theme(--ma-nautic-gold)]",
+      "containerSize": "w-12 h-12",
+      "iconSize": "arrow-nav"
+    },
+    "nextButton": {
+      "default": "rounded-full p-3 transition-colors duration-300",
+      "icon": "arrow_right",
+      "iconStyle": "text-[theme(--ma-nautic-gold)]",
+      "containerSize": "w-12 h-12",
+      "iconSize": "arrow-nav"
+    }
+  },
   "carousels": [
     {
       "name": "carousel_1",
       "images": [
-        { "name": "carousel_slide_1" },
-        { "name": "carousel_slide_2" }
+        { "name": "carousel_slide_1", "objectPosition": "center" },
+        { "name": "carousel_slide_2", "objectPosition": "center top" }
       ]
+    }
+  ]
+}
+
+6. Structure de buttons.json
+{
+  "buttons": [
+    {
+      "name": "carousel_prev",
+      "icon": "arrow_left",
+      "size": "button-small",
+      "style": "carouselNav"
+    },
+    {
+      "name": "carousel_next",
+      "icon": "arrow_right",
+      "size": "button-small",
+      "style": "carouselNav"
     }
   ]
 }

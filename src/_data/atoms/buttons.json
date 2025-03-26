@@ -35,7 +35,7 @@
     },
     "carouselNav": {
       "default": "absolute top-1/2 transform -translate-y-1/2 bg-[--ma-nautic-blue] text-white px-4 py-2 rounded-full shadow-md hover:bg-[--ma-nautic-teal]",
-      "hover": "bg-[--ma-nautic-teal] text-white"
+      "hover": "bg-[--ma-nautic-teal] text-[--ma-nautic-teal]"
     }
   },
   "states": {
