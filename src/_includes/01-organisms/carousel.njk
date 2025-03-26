@@ -5,17 +5,15 @@
 #}
 
 {% macro renderCarousel(options) %}
-  {% set carouselData = null %}
   {% if options.datas %}
     {% set globalStyle = options.datas.globalStyle | default('w-full relative overflow-hidden') %}
     
-    {% if options.datas.carousels %}
-      {% for carousel in options.datas.carousels %}
-        {% if carousel.name == options.name %}
-          {% set carouselData = carousel %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+    {% set carouselData = null %}
+    {% for carousel in options.datas.carousels %}
+      {% if carousel.name == options.name %}
+        {% set carouselData = carousel %}
+      {% endif %}
+    {% endfor %}
     
     {% if carouselData %}
       {% set carouselId = "carousel-" ~ carouselData.name %}
@@ -37,134 +35,98 @@
         {% endfor %}
       {% endif %}
       
-      {# Get carousel button styles from carousels.json #}
-      {% set carouselPrevStyle = "" %}
-      {% set carouselNextStyle = "" %}
-      {% set prevIconSrc = "" %}
-      {% set nextIconSrc = "" %}
+      {# Extract button styles #}
+      {% set prevButtonStyles = options.datas.variants.prevButton %}
+      {% set nextButtonStyles = options.datas.variants.nextButton %}
       
-      {% if options.datas.variants %}
-        {% if options.datas.variants.prevButton %}
-          {% set prevButtonStyles = options.datas.variants.prevButton %}
-          {% set carouselPrevStyle = "" %}
-          
-          {% if prevButtonStyles.containerSize %}
-            {% set carouselPrevStyle = carouselPrevStyle ~ " " ~ prevButtonStyles.containerSize %}
-          {% endif %}
-          
-          {% if prevButtonStyles.default %}
-            {% set carouselPrevStyle = carouselPrevStyle ~ " " ~ prevButtonStyles.default %}
-          {% endif %}
-          
-          {% set prevIconSrc = prevButtonStyles.icon | default("arrow_left") %}
-          {% set prevIconStyle = prevButtonStyles.iconStyle | default("") %}
-          {% set prevIconSize = prevButtonStyles.iconSize | default("") %}
-        {% endif %}
-        
-        {% if options.datas.variants.nextButton %}
-          {% set nextButtonStyles = options.datas.variants.nextButton %}
-          {% set carouselNextStyle = "" %}
-          
-          {% if nextButtonStyles.containerSize %}
-            {% set carouselNextStyle = carouselNextStyle ~ " " ~ nextButtonStyles.containerSize %}
-          {% endif %}
-          
-          {% if nextButtonStyles.default %}
-            {% set carouselNextStyle = carouselNextStyle ~ " " ~ nextButtonStyles.default %}
-          {% endif %}
-          
-          {% set nextIconSrc = nextButtonStyles.icon | default("arrow_right") %}
-          {% set nextIconStyle = nextButtonStyles.iconStyle | default("") %}
-          {% set nextIconSize = nextButtonStyles.iconSize | default("") %}
-        {% endif %}
-      {% endif %}
+      {% set carouselPrevStyle = prevButtonStyles.containerSize ~ " " ~ prevButtonStyles.default %}
+      {% set carouselNextStyle = nextButtonStyles.containerSize ~ " " ~ nextButtonStyles.default %}
       
-      <div 
-        class="{{ globalStyle }} {{ options.class | default('') }} relative"
-        id="{{ carouselId }}"
-        data-carousel="{{ carouselData.name }}"
-      >
-        <div class="relative w-full h-full">
-          {% for image in carouselData.images %}
-            <div 
-              class="absolute inset-0 transition-opacity duration-500 ease-in-out {% if loop.first %}opacity-100{% else %}opacity-0{% endif %}"
-              data-carousel-item
+      {% set prevIconStyle = prevButtonStyles.iconStyle | default("") %}
+      {% set nextIconStyle = nextButtonStyles.iconStyle | default("") %}
+      
+      <!-- Main carousel structure -->
+      <div class="w-full">
+        <!-- Carousel container -->
+        <div 
+          class="{{ globalStyle }} {{ options.class | default('') }} relative h-[256px] md:h-[384px]"
+          id="{{ carouselId }}"
+          data-carousel="{{ carouselData.name }}"
+          {% if carouselData.autoplay %}data-autoplay="true"{% endif %}
+          {% if carouselData.pauseOnHover %}data-pause-on-hover="true"{% endif %}
+        >
+          <!-- Carousel slides -->
+          <div class="relative w-full h-full">
+            {% for image in carouselData.images %}
+              <div 
+                class="absolute inset-0 transition-opacity duration-500 ease-in-out {% if loop.first %}opacity-100{% else %}opacity-0{% endif %}"
+                data-carousel-item
+              >
+                {% set imagesArray = options.images.images | default(options.images) %}
+                {% set foundImage = null %}
+                {% if imagesArray %}
+                  {% for img in imagesArray %}
+                    {% if img.name == image.name %}
+                      {% set foundImage = img %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+                {% if foundImage %}
+                  <img 
+                    src="{{ foundImage.src }}" 
+                    alt="{{ foundImage.alt | default(image.name) }}" 
+                    class="w-full h-full object-cover"
+                    style="object-position: {{ image.objectPosition | default('center') }};"
+                    loading="lazy"
+                  />
+                {% else %}
+                  <div class="w-full h-full flex items-center justify-center bg-gray-200">
+                    <span class="text-gray-500">Image {{ image.name }} non disponible</span>
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+          
+          <!-- Navigation buttons -->
+          <div class="flex items-center justify-between w-full absolute top-1/2 transform -translate-y-1/2 pointer-events-none" style="width: calc(100% + 1rem); left: -0.5rem;">
+            <!-- Previous button -->
+            <button 
+              class="pointer-events-auto {{ carouselPrevStyle }} {{ prevButton.class | default('') }} flex items-center justify-center"
+              data-carousel-prev
+              aria-label="Previous image"
             >
-              {% set imagesArray = options.images.images | default(options.images) %}
-              {% set foundImage = null %}
-              {% if imagesArray %}
-                {% for img in imagesArray %}
-                  {% if img.name == image.name %}
-                    {% set foundImage = img %}
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
-              {% if foundImage %}
-                <img 
-                  src="{{ foundImage.src }}" 
-                  alt="{{ foundImage.alt | default(image.name) }}" 
-                  class="w-full h-full object-cover"
-                  style="object-position: {{ image.objectPosition | default('center') }};"
-                  loading="lazy"
-                />
-              {% else %}
-                <div class="w-full h-full flex items-center justify-center bg-gray-200">
-                  <span class="text-gray-500">Image {{ image.name }} non disponible</span>
-                </div>
-              {% endif %}
-            </div>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ prevIconStyle }} w-full h-full">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            
+            <!-- Next button -->
+            <button 
+              class="pointer-events-auto {{ carouselNextStyle }} {{ nextButton.class | default('') }} flex items-center justify-center"
+              data-carousel-next
+              aria-label="Next image"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ nextIconStyle }} w-full h-full">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Indicators (dots) -->
+        <div class="flex items-center justify-center mt-2 md:mt-4 space-x-1 md:space-x-2">
+          {% for image in carouselData.images %}
+            <button 
+              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator {% if loop.first %}carousel-indicator-active{% endif %}"
+              data-carousel-indicator="{{ loop.index0 }}"
+              data-carousel-target="{{ carouselId }}"
+              aria-label="Go to image {{ loop.index }}"
+            ></button>
           {% endfor %}
         </div>
-        
-        {# Conteneur externe pour les boutons (en dehors du slider) #}
-        <div class="flex items-center justify-between w-full absolute top-1/2 transform -translate-y-1/2 pointer-events-none" style="width: calc(100% + 1rem); left: -0.5rem;">
-          {# Bouton précédent #}
-          <button 
-            class="pointer-events-auto {{ carouselPrevStyle }} {{ prevButton.class | default('') }} flex items-center justify-center"
-            data-carousel-prev
-            aria-label="Image précédente"
-            {% if options.datas.variants.prevButton.debug %}
-            data-debug="{{ carouselPrevStyle }}"
-            {% endif %}
-          >
-            {% if prevIconSrc == "arrow_left" %}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ prevIconStyle }} {{ prevIconSize }} w-full h-full">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            {% elif prevButton.icon %}
-              {# Fallback to button icon if defined #}
-              {{ prevButton.icon | safe }}
-            {% else %}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ prevIconStyle }} {{ prevIconSize }} w-full h-full">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            {% endif %}
-          </button>
-          
-          {# Bouton suivant #}
-          <button 
-            class="pointer-events-auto {{ carouselNextStyle }} {{ nextButton.class | default('') }} flex items-center justify-center"
-            data-carousel-next
-            aria-label="Image suivante"
-            {% if options.datas.variants.nextButton.debug %}
-            data-debug="{{ carouselNextStyle }}"
-            {% endif %}
-          >
-            {% if nextIconSrc == "arrow_right" %}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ nextIconStyle }} {{ nextIconSize }} w-full h-full">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            {% elif nextButton.icon %}
-              {# Fallback to button icon if defined #}
-              {{ nextButton.icon | safe }}
-            {% else %}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ nextIconStyle }} {{ nextIconSize }} w-full h-full">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            {% endif %}
-          </button>
-        </div>
       </div>
+      
       <script src="/js/organisms/carousel.js"></script>
     {% else %}
       <span class="text-red-500">Carousel not found: {{ options.name }}</span>
@@ -196,73 +158,6 @@ Summon HAT Components Wisely
     datas: organisms.carousels,
     images: atoms.images,
     buttons: atoms.buttons,
-    class: "h-96 my-8"
+    class: "my-8"
 }) }}
-
-4. Structure de images.json
-{
-  "images": [
-    {
-      "name": "carousel_slide_1",
-      "src": "/path/to/image.jpg",
-      "alt": "Description of the image"
-    },
-    ...
-  ]
-}
-
-5. Structure de carousels.json
-{
-  "globalStyle": "w-full h-auto",
-  "buttons": {
-    "prev": "carousel_prev",
-    "next": "carousel_next"
-  },
-  "variants": {
-    "prevButton": {
-      "default": "rounded-full p-3 transition-colors duration-300",
-      "icon": "arrow_left",
-      "iconStyle": "text-[theme(--ma-nautic-gold)]",
-      "containerSize": "w-12 h-12",
-      "iconSize": "arrow-nav"
-    },
-    "nextButton": {
-      "default": "rounded-full p-3 transition-colors duration-300",
-      "icon": "arrow_right",
-      "iconStyle": "text-[theme(--ma-nautic-gold)]",
-      "containerSize": "w-12 h-12",
-      "iconSize": "arrow-nav"
-    }
-  },
-  "carousels": [
-    {
-      "name": "carousel_1",
-      "images": [
-        { "name": "carousel_slide_1", "objectPosition": "center" },
-        { "name": "carousel_slide_2", "objectPosition": "center top" }
-      ]
-    }
-  ]
-}
-
-6. Structure de buttons.json
-{
-  "buttons": [
-    {
-      "name": "carousel_prev",
-      "icon": "arrow_left",
-      "size": "button-small",
-      "style": "carouselNav"
-    },
-    {
-      "name": "carousel_next",
-      "icon": "arrow_right",
-      "size": "button-small",
-      "style": "carouselNav"
-    }
-  ]
-}
-
-Cherchez au fond du trésor 💰🔍
-==============================
 #}

@@ -1,18 +1,15 @@
 {
-  "globalStyle": "relative w-full h-48 md:h-64 lg:h-96 lg:max-w-md lg:mx-auto overflow-hidden",
+  "globalStyle": "relative w-full overflow-hidden",
   "variants": {
-    "default": "",
-    "primary": "",
-    "secondary": "",
     "prevButton": {
-      "default": "rounded-full p-3 transition-colors duration-300",
+      "default": "rounded-full p-2 md:p-3 transition-colors duration-300",
       "iconStyle": "text-[theme(--ma-nautic-gold)]",
-      "containerSize": "w-12 h-12"
+      "containerSize": "w-10 h-10 md:w-12 md:h-12"
     },
     "nextButton": {
-      "default": "rounded-full p-3 transition-colors duration-300",
+      "default": "rounded-full p-2 md:p-3 transition-colors duration-300",
       "iconStyle": "text-[theme(--ma-nautic-gold)]",
-      "containerSize": "w-12 h-12"
+      "containerSize": "w-10 h-10 md:w-12 md:h-12"
     }
   },
   "buttons": {
@@ -22,7 +19,7 @@
   "carousels": [
     {
       "name": "carousel_1",
-      "style": "default",
+      "autoplay": true,
       "pauseOnHover": true,
       "images": [
         { "name": "carousel_slide_1", "objectPosition": "center" },
@@ -34,7 +31,7 @@
     },
     {
       "name": "carousel_2",
-      "style": "primary",
+      "autoplay": true,
       "pauseOnHover": true,
       "images": [
         { "name": "carousel_slide_1", "objectPosition": "center" },
@@ -46,7 +43,7 @@
     },
     {
       "name": "hero_carousel",
-      "style": "secondary",
+      "autoplay": true,
       "pauseOnHover": false,
       "images": [
         { "name": "hero_slide_1", "objectPosition": "center" },
