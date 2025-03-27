@@ -77,6 +77,10 @@
       "icon": "arrow_right",
       "size": "button-small",
       "style": "carouselNav"
+    },
+    {
+      "name": "arrow_scroll",
+      "icon": "arrow_scroll_down"
     }
   ]
 }

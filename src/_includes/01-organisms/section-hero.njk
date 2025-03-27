@@ -18,7 +18,7 @@
     
     {# Spécifique à MA-Nautic hero #}
     {% if variant.name == "ma_nautic_hero" %}
-      <section class="{{ globalStyle }} {{ variantStyle }} relative h-screen overflow-hidden {{ options.class | default('') }}">
+      <section class="{{ globalStyle }} {{ variantStyle }} relative h-[75vh] overflow-hidden {{ options.class | default('') }}">
         {# Background image #}
         {% if variant.backgroundImage %}
           {% set bgImage = null %}
