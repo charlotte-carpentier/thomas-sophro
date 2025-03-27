@@ -83,6 +83,18 @@
       "level": 2,
       "text": "Notre location de bateaux près de la plage du Lotu",
       "style": "ma_nautic_subtitle_light"
+    },
+    {
+      "name": "voguez",
+      "level": 2,
+      "text": "_Voguez en Corse",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "ma_nautic_merveille",
+      "level": 2,
+      "text": "Découvrez les Merveilles de Saint-Florent à bord de nos bateaux",
+      "style": "ma_nautic_section_subtitle"
     }
   ]
 }

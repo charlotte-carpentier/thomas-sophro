@@ -49,10 +49,24 @@
     {% endif %}
 
     {% set containerStyle = options.datas.containerStyle %}
-    {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
-    {% set textContainerStyle = options.datas.textContainerStyle ~ " flex flex-col items-center text-center" %}
+    
+    {# Vérifier si une image est définie pour cette section #}
+    {% set hasImage = variant.image is defined and variant.image %}
+    
+    {% if hasImage %}
+      {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
+      {% set textContainerStyle = options.datas.textContainerStyle %}
+      {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
+    {% else %}
+      {% set contentLayoutStyle = {
+        "mobile": "flex flex-col gap-6",
+        "desktop": "grid grid-cols-1 gap-8 items-center"
+      } %}
+      {% set textContainerStyle = options.datas.textContainerStyle ~ " mx-auto max-w-4xl text-center" %}
+      {% set imageContainerStyle = "hidden" %}
+    {% endif %}
+    
     {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center" %}
-    {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
 
     {# Spécifique à MA-Nautic section text #}
     {% if variant and variant.name == "ma_nautic_discover" %}
@@ -242,22 +256,24 @@
               </div>
             </div>
 
-            {# Image Column #}
-            <div class="{{ imageContainerStyle }}">
-              {% if variant.image and options.images and options.images.images %}
-                {% set sectionImage = null %}
-                {% for image in options.images.images %}
-                  {% if image.name == variant.image %}
-                    {% set sectionImage = image %}
-                  {% endif %}
-                {% endfor %}
+            {# Image Column - Afficher uniquement si hasImage est vrai #}
+            {% if hasImage %}
+              <div class="{{ imageContainerStyle }}">
+                {% if variant.image and options.images and options.images.images %}
+                  {% set sectionImage = null %}
+                  {% for image in options.images.images %}
+                    {% if image.name == variant.image %}
+                      {% set sectionImage = image %}
+                    {% endif %}
+                  {% endfor %}
 
-                {% if sectionImage %}
-                  {% set imageVariant = options.images.variants[sectionImage.size] | default('') %}
-                  <img src="{{ sectionImage.src }}" alt="{{ sectionImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }} mx-auto">
+                  {% if sectionImage %}
+                    {% set imageVariant = options.images.variants[sectionImage.size] | default('') %}
+                    <img src="{{ sectionImage.src }}" alt="{{ sectionImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }} mx-auto">
+                  {% endif %}
                 {% endif %}
-              {% endif %}
-            </div>
+              </div>
+            {% endif %}
           </div>
         </div>
       </section>

@@ -66,3 +66,15 @@ layout: '00-core/base.njk'
     images: atoms.images,
     links: atoms.links
 }) }}
+
+{# Section Les petits merveilles #}
+{% from "01-organisms/section-text.njk" import renderSectionText %}
+
+{{ renderSectionText({ 
+    name: "ma_nautic_marvelous",
+    datas: organisms["section-texts"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links
+}) }}
