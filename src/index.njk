@@ -56,4 +56,13 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Section Les petits plus #}
-{# À venir #}
+{% from "01-organisms/section-text.njk" import renderSectionText %}
+
+{{ renderSectionText({ 
+    name: "ma_nautic_plus",
+    datas: organisms["section-texts"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links
+}) }}

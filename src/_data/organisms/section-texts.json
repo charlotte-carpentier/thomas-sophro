@@ -3,12 +3,18 @@
   "variants": {
     "default": "py-8 md:py-12 lg:py-16",
     "compact": "py-6 md:py-8 lg:py-10",
-    "expanded": "py-10 md:py-16 lg:py-20"
+    "expanded": "py-10 md:py-16 lg:py-20",
+    "ma-nautic-blue": "bg-[theme(--ma-nautic-blue)]"
   },
   "containerStyle": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
   "contentLayoutStyle": {
     "mobile": "flex flex-col gap-6",
     "desktop": "grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center"
+  },
+  "heights": {
+    "default": "py-16 md:py-20 lg:py-24",
+    "tall": "py-20 md:py-28 lg:py-32",
+    "short": "py-12 md:py-16 lg:py-20"
   },
   "textContainerStyle": "flex flex-col gap-4",
   "buttonsContainerStyle": "flex flex-wrap gap-4 mt-2 md:mt-4",
@@ -20,6 +26,16 @@
       "content": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Au départ de Saint-Florent, vous n’aurez que l’embarras du choix pour décider vers quelle merveille nos bateaux vous porteront.</p> <p class='text-[theme(--ma-nautic-white)] mb-4'>À l’ouest où vous verrez les plages de sable blanc du désert des Agriates, du Lotu jusqu’à l’Acciola en passant par Saleccia ou encore les plages de Malfalcu avec Ghignu et Travu vous offrent leur panorama paradisiaque.</p> <p class='text-[theme(--ma-nautic-white)] mb-4'>Ou bien, virez de bord, direction le nord, où le Cap Corse et ses falaises escarpées qui abritent encore de petits ports de pêche à l’âme tranquille.</p>",
       "backgroundImage": "section_background",
       "link": "decouvrir"
+    },
+    {
+      "name": "ma_nautic_plus",
+      "variant": "ma-nautic-blue",
+      "heightVariant": "tall",
+      "superHeading": "petits_plus",
+      "heading": "ma_nautic_plus",
+      "text": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Outre le confort de ses bateaux, <strong>l’équipe de M.A NAUTIC</strong> vous apporte ses conseils pour organiser au mieux votre <strong>journée d’excursion maritime</strong> en famille ou entre amis.</p> <p class='text-[theme(--ma-nautic-white)] mb-4'>Nous vous guidons ainsi dans votre navigation, à moins que vous n’optiez pour les <strong>services de notre skipper</strong>. Celui-ci pilotera le bateau et vous n’aurez pas à vous soucier des aspects techniques. Il vous indiquera également les meilleurs spots pour votre sortie en mer.</p> <p class='text-[theme(--ma-nautic-white)] mb-4'>À votre écoute, il vous conduira où vous le désirez dans le respect du code maritime et de l’environnement bien entendu.</p> <p class='text-[theme(--ma-nautic-white)] mb-6'>N’hésitez pas à nous contacter par <strong>mail</strong> ou par <strong>téléphone</strong> pour de plus amples renseignements !</p> <p class='text-[theme(--ma-nautic-white)] mb-6'>Ou bien, passez nous voir sur <strong>le port de Saint-Florent</strong>, un parking est à la disposition de nos clients.</p>",
+      "image": "ma_group",
+      "link": "contactez-nous_light"
     }
   ]
 }

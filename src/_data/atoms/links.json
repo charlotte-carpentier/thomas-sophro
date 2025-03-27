@@ -39,6 +39,12 @@
       "style": "content"
     },
     {
+      "name": "contactez-nous_light",
+      "href": "/contact",
+      "text": "CONTACTEZ-NOUS",
+      "style": "content-light"
+    },
+    {
       "name": "decouvrir",
       "href": "/lieu",
       "text": "découvrir",
