@@ -7,7 +7,7 @@
 {% macro renderSectionText(options) %}
   {% if options.datas %}
     {% set globalStyle = options.datas.globalStyle %}
-    
+
     {# Récupérer le variant sans utiliser selectattr #}
     {% set variant = null %}
     {% if options.name and options.datas.sections %}
@@ -16,29 +16,44 @@
           {% set variant = item %}
         {% endif %}
       {% endfor %}
-      
+
       {# Si aucun variant trouvé, utiliser le premier par défaut #}
-      {% if not variant and options.datas.sections[0] %}
-        {% set variant = options.datas.sections[0] %}
+      {% if not variant and options
+        .datas
+        .sections[0] %}
+        {% set variant = options
+          .datas
+          .sections[0] %}
       {% endif %}
-    {% elif options.datas.sections and options.datas.sections[0] %}
-      {% set variant = options.datas.sections[0] %}
+    {% elif options
+        .datas
+        .sections and options
+        .datas
+        .sections[0] %}
+      {% set variant = options
+        .datas
+        .sections[0] %}
     {% else %}
       {% set variant = {} %}
     {% endif %}
-    
-    {% if variant.variant and options.datas.variants[variant.variant] %}
-      {% set variantStyle = options.datas.variants[variant.variant] %}
+
+    {% if variant
+      .variant and options
+      .datas
+      .variants[variant.variant] %}
+      {% set variantStyle = options
+        .datas
+        .variants[variant.variant] %}
     {% else %}
       {% set variantStyle = options.datas.variants.default %}
     {% endif %}
-    
+
     {% set containerStyle = options.datas.containerStyle %}
     {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
     {% set textContainerStyle = options.datas.textContainerStyle %}
     {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center md:justify-start" %}
     {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
-    
+
     {# Spécifique à MA-Nautic section text #}
     {% if variant and variant.name == "ma_nautic_discover" %}
       <section class="{{ globalStyle }} {{ variantStyle }} relative h-[75vh] overflow-hidden {{ options.class | default('') }}">
@@ -50,15 +65,14 @@
               {% set bgImage = image %}
             {% endif %}
           {% endfor %}
-          
+
           {% if bgImage %}
-            <div class="absolute inset-0 z-0">
-              <img src="{{ bgImage.src }}" alt="{{ bgImage.alt }}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 z-0 ma-nautic-bg-fixed" style="background-image: url('{{ bgImage.src }}');">
               <div class="absolute inset-0 bg-ma-nautic-blue/30"></div>
             </div>
           {% endif %}
         {% endif %}
-        
+
         {# Content container #}
         <div class="{{ containerStyle }} relative z-10 h-full flex items-center justify-center">
           <div class="flex flex-col items-center justify-center text-center">
@@ -70,18 +84,14 @@
                   {% set logoImg = image %}
                 {% endif %}
               {% endfor %}
-              
+
               {% if logoImg %}
                 <div class="mb-8">
-                  <img 
-                    src="{{ logoImg.src }}" 
-                    alt="{{ logoImg.alt }}" 
-                    class="{{ options.images.globalStyle }} {{ options.images.variants[logoImg.size] }}"
-                  >
+                  <img src="{{ logoImg.src }}" alt="{{ logoImg.alt }}" class="{{ options.images.globalStyle }} {{ options.images.variants[logoImg.size] }}">
                 </div>
               {% endif %}
             {% endif %}
-            
+
             {# Subtitle sous le logo si nécessaire #}
             {% if variant.heading and options.headings and options.headings.headings %}
               {% set subtitle = null %}
@@ -90,21 +100,21 @@
                   {% set subtitle = heading %}
                 {% endif %}
               {% endfor %}
-              
+
               {% if subtitle %}
                 <{{ "h" + subtitle.level }} class="{{ options.headings.variants[subtitle.style] }} ma-nautic-subtitle">
                   {{ subtitle.text }}
                 </{{ "h" + subtitle.level }}>
               {% endif %}
             {% endif %}
-            
+
             {# Contenu descriptif - Utilise content au lieu de text avec classe ma-nautic-subtitle #}
             {% if variant.content %}
-              <div class="max-w-4xl my-6 ma-nautic-subtitle">
+              <div class="text-xs sm:text-lg max-w-4xl my-6 ma-nautic-subtitle">
                 {{ variant.content | safe }}
               </div>
             {% endif %}
-            
+
             {# Lien "Découvrir" - Récupère les données du lien via son nom #}
             {% if variant.link and options.links and options.links.links %}
               {% set linkData = null %}
@@ -113,7 +123,7 @@
                   {% set linkData = link %}
                 {% endif %}
               {% endfor %}
-              
+
               {% if linkData %}
                 <a href="{{ linkData.href }}" class="{{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }} uppercase mt-4">
                   {{ linkData.text }}
@@ -128,8 +138,8 @@
           </div>
         </div>
       </section>
-      
-    {# Section Text standard pour les autres variantes #}
+
+      {# Section Text standard pour les autres variantes #}
     {% else %}
       <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
         <div class="{{ containerStyle }}">
@@ -144,14 +154,14 @@
                     {% set superHeading = heading %}
                   {% endif %}
                 {% endfor %}
-                
+
                 {% if superHeading %}
-                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}">
+                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles[" h" + superheading.level] }} {{ options.headings.variants[superheading.style] }}"="h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}"">
                     {{ superHeading.text }}
-                  </{{ "h" + superHeading.level }}>
+                  </{{ "h" + superheading.level }}>
                 {% endif %}
               {% endif %}
-              
+
               {# Main Heading #}
               {% if variant.heading and options.headings and options.headings.headings %}
                 {% set mainHeading = null %}
@@ -160,37 +170,37 @@
                     {% set mainHeading = heading %}
                   {% endif %}
                 {% endfor %}
-                
+
                 {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }} ma-nautic-subtitle">
+                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles[" h" + mainheading.level] }} {{ options.headings.variants[mainheading.style] }} ma-nautic-subtitle"="h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }} ma-nautic-subtitle"">
                     {{ mainHeading.text }}
-                  </{{ "h" + mainHeading.level }}>
+                  </{{ "h" + mainheading.level }}>
                 {% else %}
                   <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }} ma-nautic-subtitle">
                     {{ variant.heading }}
                   </h2>
                 {% endif %}
               {% endif %}
-              
+
               {# Description #}
               {% if variant.description %}
                 <p class="{{ variant.descriptionStyle }} ma-nautic-subtitle">
                   {{ variant.description }}
                 </p>
               {% endif %}
-              
+
               {# Content - Ajout du support de content comme alternative à description #}
               {% if variant.content %}
                 <div class="{{ variant.contentStyle | default('') }} ma-nautic-subtitle">
                   {{ variant.content | safe }}
                 </div>
               {% endif %}
-              
+
               {# Buttons Container #}
               <div class="{{ buttonsContainerStyle }}">
                 {# Import button rendering macro #}
                 {% from "03-atoms/button.njk" import renderButton %}
-                
+
                 {# Primary Button #}
                 {% if variant.primaryButton %}
                   {{ renderButton({ 
@@ -198,7 +208,7 @@
                       datas: options.buttons
                   }) }}
                 {% endif %}
-                
+
                 {# Secondary Button #}
                 {% if variant.secondaryButton %}
                   {{ renderButton({ 
@@ -208,7 +218,7 @@
                 {% endif %}
               </div>
             </div>
-            
+
             {# Image Column #}
             <div class="{{ imageContainerStyle }}">
               {% if variant.image and options.images and options.images.images %}
@@ -218,14 +228,12 @@
                     {% set sectionImage = image %}
                   {% endif %}
                 {% endfor %}
-                
+
                 {% if sectionImage %}
-                  {% set imageVariant = options.images.variants[sectionImage.size] %}
-                  <img 
-                    src="{{ sectionImage.src }}" 
-                    alt="{{ sectionImage.alt }}" 
-                    class="{{ options.images.globalStyle }} {{ imageVariant }}"
-                  >
+                  {% set imageVariant = options
+                    .images
+                    .variants[sectionImage.size] %}
+                  <img src="{{ sectionImage.src }}" alt="{{ sectionImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }}">
                 {% endif %}
               {% endif %}
             </div>
@@ -237,7 +245,6 @@
     <span class="text-red-500">Section Text data not found</span>
   {% endif %}
 {% endmacro %}
-
 
 {#
 ============================

@@ -8,14 +8,16 @@
   {% if options.datas %}
     {% set globalStyle = options.datas.globalStyle %}
     {% set variant = options.name and options.datas.heroes | selectattr("name", "equalto", options.name) | first | default(options.datas.heroes[0]) %}
-    
-    {% set variantStyle = options.datas.variants[variant.variant] | default(options.datas.variants.default) %}
+
+    {% set variantStyle = options
+      .datas
+      .variants[variant.variant] | default(options.datas.variants.default) %}
     {% set containerStyle = options.datas.containerStyle %}
     {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
     {% set textContainerStyle = options.datas.textContainerStyle %}
     {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center md:justify-start" %}
     {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
-    
+
     {# Spécifique à MA-Nautic hero #}
     {% if variant.name == "ma_nautic_hero" %}
       <section class="{{ globalStyle }} {{ variantStyle }} relative h-[75vh] overflow-hidden {{ options.class | default('') }}">
@@ -27,15 +29,14 @@
               {% set bgImage = image %}
             {% endif %}
           {% endfor %}
-          
+
           {% if bgImage %}
-            <div class="absolute inset-0 z-0">
-              <img src="{{ bgImage.src }}" alt="{{ bgImage.alt }}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 z-0 ma-nautic-bg-fixed" style="background-image: url('{{ bgImage.src }}');">
               <div class="absolute inset-0 bg-ma-nautic-blue/30"></div>
             </div>
           {% endif %}
         {% endif %}
-        
+
         {# Content container #}
         <div class="{{ containerStyle }} relative z-10 h-full flex items-center justify-center">
           <div class="flex flex-col items-center justify-center">
@@ -47,18 +48,14 @@
                   {% set logoImg = image %}
                 {% endif %}
               {% endfor %}
-              
+
               {% if logoImg %}
                 <div class="mb-8">
-                  <img 
-                    src="{{ logoImg.src }}" 
-                    alt="{{ logoImg.alt }}" 
-                    class="{{ options.images.globalStyle }} {{ options.images.variants[logoImg.size] }}"
-                  >
+                  <img src="{{ logoImg.src }}" alt="{{ logoImg.alt }}" class="{{ options.images.globalStyle }} {{ options.images.variants[logoImg.size] }}">
                 </div>
               {% endif %}
             {% endif %}
-            
+
             {# Subtitle sous le logo si nécessaire #}
             {% if variant.heading and options.headings %}
               {% set subtitle = null %}
@@ -67,7 +64,7 @@
                   {% set subtitle = heading %}
                 {% endif %}
               {% endfor %}
-              
+
               {% if subtitle %}
                 <{{ "h" + subtitle.level }} class="{{ options.headings.variants[subtitle.style] }}">
                   {{ subtitle.text }}
@@ -77,8 +74,8 @@
           </div>
         </div>
       </section>
-      
-    {# Section Hero standard pour les autres variantes #}
+
+      {# Section Hero standard pour les autres variantes #}
     {% else %}
       <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
         <div class="{{ containerStyle }}">
@@ -93,14 +90,14 @@
                     {% set superHeading = heading %}
                   {% endif %}
                 {% endfor %}
-                
+
                 {% if superHeading %}
-                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}">
+                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles[" h" + superheading.level] }} {{ options.headings.variants[superheading.style] }}"="h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}"">
                     {{ superHeading.text }}
-                  </{{ "h" + superHeading.level }}>
+                  </{{ "h" + superheading.level }}>
                 {% endif %}
               {% endif %}
-              
+
               {# Main Heading #}
               {% if variant.heading and options.headings %}
                 {% set mainHeading = null %}
@@ -109,30 +106,30 @@
                     {% set mainHeading = heading %}
                   {% endif %}
                 {% endfor %}
-                
+
                 {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }}">
+                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles[" h" + mainheading.level] }} {{ options.headings.variants[mainheading.style] }}"="h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }}"">
                     {{ mainHeading.text }}
-                  </{{ "h" + mainHeading.level }}>
+                  </{{ "h" + mainheading.level }}>
                 {% else %}
                   <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }}">
                     {{ variant.heading }}
                   </h2>
                 {% endif %}
               {% endif %}
-              
+
               {# Description #}
               {% if variant.description %}
                 <p class="{{ variant.descriptionStyle }}">
                   {{ variant.description }}
                 </p>
               {% endif %}
-              
+
               {# Buttons Container #}
               <div class="{{ buttonsContainerStyle }}">
                 {# Import button rendering macro #}
                 {% from "03-atoms/button.njk" import renderButton %}
-                
+
                 {# Primary Button #}
                 {% if variant.primaryButton %}
                   {{ renderButton({ 
@@ -140,7 +137,7 @@
                       datas: options.buttons
                   }) }}
                 {% endif %}
-                
+
                 {# Secondary Button #}
                 {% if variant.secondaryButton %}
                   {{ renderButton({ 
@@ -150,7 +147,7 @@
                 {% endif %}
               </div>
             </div>
-            
+
             {# Image Column #}
             <div class="{{ imageContainerStyle }}">
               {% if variant.image and options.images %}
@@ -160,14 +157,12 @@
                     {% set heroImage = image %}
                   {% endif %}
                 {% endfor %}
-                
+
                 {% if heroImage %}
-                  {% set imageVariant = options.images.variants[heroImage.size] %}
-                  <img 
-                    src="{{ heroImage.src }}" 
-                    alt="{{ heroImage.alt }}" 
-                    class="{{ options.images.globalStyle }} {{ imageVariant }}"
-                  >
+                  {% set imageVariant = options
+                    .images
+                    .variants[heroImage.size] %}
+                  <img src="{{ heroImage.src }}" alt="{{ heroImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }}">
                 {% endif %}
               {% endif %}
             </div>
@@ -179,7 +174,6 @@
     <span class="text-red-500">Section Hero data not found</span>
   {% endif %}
 {% endmacro %}
-
 
 {#
 ============================

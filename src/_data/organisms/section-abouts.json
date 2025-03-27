@@ -43,13 +43,26 @@
       "scrollArrowButtonVariant": "icon",
       "superHeading": "qui_sommes_nous",
       "heading": "ma_nautic_corse",
-      "content": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>M.A NAUTIC vous propose de louer ses bateaux au départ de Saint-Florent en Haute-Corse pour partir à la découverte d'une belle région située entre le Cap Corse et la Balagne :</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Le désert des Agriates. Terre aride et majestueuse à la fois, bordée de magnifiques plages sauvages et désertiques, elle demeure très difficile d'accès.</p><p class='text-[theme(--ma-nautic-blue)] mb-6'>La navigation reste donc la meilleure façon de visiter notre île et son littoral parsemé de « pépites » naturelles préservées de l'affluence.</p>",
+      "content": "<p class='text-[theme(--ma-nautic-blue)] mb-4'><strong>M.A NAUTIC</strong> vous propose de louer ses bateaux au départ de Saint-Florent en Haute-Corse pour partir à la découverte d’une <strong>belle région</strong> située entre le Cap Corse et la Balagne :</p> <p class='text-[theme(--ma-nautic-blue)] mb-4'>Le désert des Agriates. Terre aride et majestueuse à la fois, bordée de magnifiques plages sauvages et désertiques, elle demeure très difficile d’accès.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'><strong>La navigation</strong> reste donc la meilleure façon de visiter notre île et son littoral parsemé de « pépites » naturelles préservées de l’affluence.</p>",
       "primaryLink": "contactez-nous",
       "hasIcon": true,
       "iconName": "wheel",
       "iconVariant": "wheelIcon",
       "hasCarousel": true,
       "carouselName": "carousel_1"
+    },
+    {
+      "name": "ma_nautic_services",
+      "variant": "ma-nautic",
+      "superHeading": "que_faisons_nous",
+      "heading": "ma_nautic_bateaux",
+      "content": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>Quel que soit votre programme ou le nombre de participants, pour 4 personnes comme pour 12, avec ou sans skipper, <strong>M.A NAUTIC</strong> dispose d’une <strong>flotte de coques rigides et semi-rigides</strong> pour vous transporter.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'>Avide de <strong>découvertes</strong> ou de <strong>sensations fortes</strong>, tracté par une bouée ou debout sur un wakeboard, vous trouverez le <strong>bateau</strong> qui convient à votre activité nautique.</p>",
+      "primaryLink": "voir-bateaux",
+      "hasIcon": true,
+      "iconName": "wheel",
+      "iconVariant": "wheelIcon",
+      "hasCarousel": true,
+      "carouselName": "carousel_2"
     }
   ]
 }

@@ -40,9 +40,15 @@
     },
     {
       "name": "decouvrir",
-      "href": "/bateau",
+      "href": "/lieu",
       "text": "découvrir",
       "style": "content-light"
+    },
+    {
+      "name": "voir-bateaux",
+      "href": "/bateau",
+      "text": "VOIR NOS BATEAUX",
+      "style": "content"
     },
     {
       "name": "credits",

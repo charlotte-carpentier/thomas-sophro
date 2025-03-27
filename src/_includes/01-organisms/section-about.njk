@@ -14,6 +14,7 @@
   {% if options.datas %}
     {% set globalStyle = options.datas.globalStyle | default("section-about") %}
     {% set sectionStyles = options.datas.sectionStyles | default({}) %}
+    {% set reversed = options.reversed | default(false) %}
 
     {% set sectionData = null %}
     {% if options.name %}
@@ -112,7 +113,7 @@
     <div class="relative">
       {# Titre principal (bande en haut) #}
       {% if sectionData.mainTitle and options.headings %}
-        <div class="{{ mainTitleWrapperStyle }}" style="border-bottom: none;">
+        <div class="{{ mainTitleWrapperStyle }} ma-nautic-main" style="border-bottom: none;">
           {{ renderHeading({
             name: sectionData.mainTitle,
             datas: options.headings,
@@ -215,7 +216,8 @@
           </div>
 
           {# Desktop layout (two columns) - Visible à partir du breakpoint lg #}
-          <div class="hidden lg:flex {{ contentWrapperStyle }} items-center h-[600px]">
+          {% if not reversed %}
+          <div class="hidden lg:flex lg:flex-row items-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
             {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
             <div class="{{ textContentStyle }} h-full flex flex-col items-center justify-center text-center px-8">
               {# Super Heading (section title with underscore) #}
@@ -290,6 +292,83 @@
               {% endif %}
             </div>
           </div>
+          {% else %}
+          <div class="hidden lg:flex lg:flex-row-reverse items-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
+            {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
+            <div class="{{ textContentStyle }} h-full flex flex-col items-center justify-center text-center px-8">
+              {# Super Heading (section title with underscore) #}
+              {% if sectionData.superHeading and options.headings %}
+                {{ renderHeading({
+                  name: sectionData.superHeading,
+                  datas: options.headings,
+                  class: "mb-6 mt-8 ma-nautic-section-title"
+                }) }}
+              {% endif %}
+
+              {# Main Heading (title) #}
+              {% if sectionData.heading and options.headings %}
+                {{ renderHeading({
+                  name: sectionData.heading,
+                  datas: options.headings
+                }) }}
+              {% endif %}
+
+              {# Icon if present - Utilisation de data-svg-src pour le chargement JS #}
+              {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
+                <div class="{{ iconWrapperStyle }}">
+                  {% set iconData = null %}
+                  {% for icon in options.icons.icons %}
+                    {% if icon.name == sectionData.iconName %}
+                      {% set iconData = icon %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if iconData %}
+                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
+                      <!-- SVG will be loaded here -->
+                    </span>
+                  {% else %}
+                    <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {# Content #}
+              {% if sectionData.content %}
+                <div class="{{ contentContainerDesktopStyle }}">
+                  {{ sectionData.content | safe }}
+                </div>
+              {% endif %}
+
+              {# Primary Link #}
+              {% if sectionData.primaryLink and options.links %}
+                <div class="{{ buttonWrapperStyle }}">
+                  {{ renderLink({
+                    name: sectionData.primaryLink,
+                    datas: options.links
+                  }) }}
+                </div>
+              {% endif %}
+            </div>
+
+            {# Right column: Carousel - Réduit à 75% de sa taille d'origine #}
+            <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16">
+              {% if sectionData.hasCarousel and sectionData.carouselName %}
+                <div class="w-4/5 mx-auto">
+                  {{ renderCarousel({
+                    name: sectionData.carouselName,
+                    datas: options.carousels,
+                    images: options.images,
+                    buttons: options.buttons,
+                    class: "ma-nautic-carousel w-full"
+                  }) }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
 
           {# Carousel pour mobile - Réduit à 75% de sa taille d'origine #}
           {% if sectionData.hasCarousel and sectionData.carouselName %}
@@ -346,5 +425,18 @@ Summon MA-NAUTIC Components Wisely
     buttons: atoms.buttons,
     images: atoms.images,
     class: "my-custom-section-class" 
+}) }}
+
+4. Using reversed layout (colonnes inversées)
+{{ renderSectionAbout({ 
+    name: "ma_nautic_about", 
+    datas: organisms["section-abouts"], 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    reversed: true 
 }) }}
 #}

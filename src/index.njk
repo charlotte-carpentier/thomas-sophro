@@ -41,7 +41,19 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Section Que faisons-nous #}
-{# À venir #}
+{% from "01-organisms/section-about.njk" import renderSectionAbout %}
+
+{{ renderSectionAbout({ 
+    name: "ma_nautic_services", 
+    datas: organisms["section-abouts"], 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    reversed: true 
+}) }}
 
 {# Section Les petits plus #}
 {# À venir #}

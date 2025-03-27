@@ -549,8 +549,21 @@
 .ma-nautic-subtitle {
   font-family: theme(--ma-nautic-font-body);
   font-weight: theme(--ma-nautic-font-weight-bold);
-  font-size: theme(--ma-nautic-font-size-nav);
+  font-size: theme(--ma-nautic-font-size-nav); /* taille par défaut */
   /* letter-spacing: theme(--ma-nautic-letter-spacing-subtitle); */
+}
+
+/* Pour les écrans mobiles (taille <= 640px, ajuste selon tes besoins) */
+@media (max-width: 640px) {
+  .ma-nautic-subtitle {
+    font-size: theme(--ma-nautic-font-size-subtitle); /* petite taille pour mobile */
+  }
+}
+
+@media (max-width: 640px) {
+  .ma-nautic-main {
+    font-size: theme(--ma-nautic-font-size-subtitle); /* petite taille pour mobile */
+  }
 }
 
 /* Boat card */
@@ -638,6 +651,17 @@
   width: 100%;
 }
 
+/* =============================================== */
+/* ======= CLASSES UTILITAIRES POUR IMAGES ======= */
+/* =============================================== */
+
+/* Background image with fixed parallax effect */
+.ma-nautic-bg-fixed {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
 
 /* =============================================== */
 /* ====== CLASSES UTILITAIRES POUR HEADINGS ====== */
