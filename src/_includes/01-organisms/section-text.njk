@@ -53,10 +53,21 @@
     {# Vérifier si une image est définie pour cette section #}
     {% set hasImage = variant.image is defined and variant.image %}
     
-    {% if hasImage %}
+    {# Vérifier si la section a UNIQUEMENT une image sans texte ni autre contenu #}
+    {% set imageOnlySection = hasImage and not variant.heading and not variant.content and not variant.text and not variant.description and not variant.superHeading and not variant.primaryButton and not variant.secondaryButton and not variant.link %}
+    
+    {% if hasImage and not imageOnlySection %}
       {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
       {% set textContainerStyle = options.datas.textContainerStyle %}
       {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
+    {% elif imageOnlySection %}
+      {# Style spécifique pour une section avec uniquement une image #}
+      {% set contentLayoutStyle = {
+        "mobile": "flex flex-col items-center justify-center",
+        "desktop": "flex items-center justify-center"
+      } %}
+      {% set textContainerStyle = "hidden" %}
+      {% set imageContainerStyle = "w-full flex justify-center items-center" %}
     {% else %}
       {% set contentLayoutStyle = {
         "mobile": "flex flex-col gap-6",
@@ -147,6 +158,29 @@
                 <a href="#" class="uppercase mt-4">
                   {{ variant.link }}
                 </a>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </section>
+
+    {# Cas spécifique pour une section avec uniquement une image (ma_nautic_map) #}
+    {% elif imageOnlySection %}
+      <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }} {% if variant.height %}{{ variant.height }}{% else %}py-16 md:py-20 lg:py-24{% endif %}">
+        <div class="{{ containerStyle }}">
+          <div class="{{ contentLayoutStyle.mobile }} {{ contentLayoutStyle.desktop }}">
+            {# Affichage de l'image centrée #}
+            {% if variant.image and options.images and options.images.images %}
+              {% set sectionImage = null %}
+              {% for image in options.images.images %}
+                {% if image.name == variant.image %}
+                  {% set sectionImage = image %}
+                {% endif %}
+              {% endfor %}
+
+              {% if sectionImage %}
+                {% set imageVariant = options.images.variants[sectionImage.size] | default('') %}
+                <img src="{{ sectionImage.src }}" alt="{{ sectionImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }} mx-auto">
               {% endif %}
             {% endif %}
           </div>
@@ -256,8 +290,8 @@
               </div>
             </div>
 
-            {# Image Column - Afficher uniquement si hasImage est vrai #}
-            {% if hasImage %}
+            {# Image Column - Afficher uniquement si hasImage est vrai et pas une section imageOnly #}
+            {% if hasImage and not imageOnlySection %}
               <div class="{{ imageContainerStyle }}">
                 {% if variant.image and options.images and options.images.images %}
                   {% set sectionImage = null %}
@@ -328,6 +362,13 @@ Summon HAT Components Wisely
     headings: atoms.headings,
     images: atoms.images,
     links: atoms.links
+}) }}
+
+6. Using MA-Nautic Map (image only section)
+{{ renderSectionText({ 
+    name: "ma_nautic_map",
+    datas: organisms["section-texts"],
+    images: atoms.images
 }) }}
 
 Every journey begins with a discover section! 🏰🛡️

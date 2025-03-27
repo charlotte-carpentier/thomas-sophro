@@ -29,6 +29,11 @@
       "link": "decouvrir"
     },
     {
+      "name": "ma_nautic_map",
+      "variant": "ma-nautic-blue",
+      "image": "ma_map"
+    },
+    {
       "name": "ma_nautic_plus",
       "variant": "ma-nautic-blue",
       "heightVariant": "tall",

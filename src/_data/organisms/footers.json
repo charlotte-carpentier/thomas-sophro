@@ -8,7 +8,7 @@
     },
     "footers": [
         {
-            "name": "standard",
+            "name": "ma_nautic_footer",
             "containerStyle": "bg-gray-100 py-8",
             "": [
                 {

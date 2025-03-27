@@ -74,6 +74,12 @@
       "group": "block-media"
     },
     {
+      "name": "ma_map",
+      "src": "/assets/images/plan.png",
+      "alt": "Carte des points d'intérêts",
+      "group": "block-media"
+    },
+    {
       "name": "carousel_slide_A",
       "src": "/assets/images/carousel-2/carousel-slide-a.jpg",
       "alt": "Photo de bateau",

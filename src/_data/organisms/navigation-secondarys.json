@@ -10,12 +10,10 @@
     {
       "name": "site_navigation",
       "links": [
-        "tavern",
-        "lore",
-        "guild_services",
-        "hall_of_legends",
-        "bard_tales",
-        "send_a_raven"
+        "accueil",
+        "nos-bateaux",
+        "lieux-interets",
+        "contact"
       ]
     },
     {
@@ -30,23 +28,11 @@
       ]
     },
     {
-      "name": "royal_services",
-      "links": [
-        "blacksmith_forge",
-        "potion_brewing",
-        "spell_enchantments",
-        "royal_courier",
-        "bard_entertainment",
-        "dragon_rentals"
-      ]
-    },
-    {
       "name": "socials",
       "links": [
-        "scroll_of_faces",
-        "chirping_birds",
-        "illusion_mirror",
-        "guild_registry"
+        "facebook",
+        "linkedin",
+        "youtube"
       ]
     }
   ]
