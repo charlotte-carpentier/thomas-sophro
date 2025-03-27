@@ -38,16 +38,22 @@ document.addEventListener("DOMContentLoaded", function () {
       updateIndicators();
     }
     
-    // Mettre à jour l'apparence des indicateurs en ciblant directement les styles CSS
+    // Mettre à jour l'apparence des indicateurs
     function updateIndicators() {
       indicators.forEach((indicator, i) => {
+        // Supprime d'abord la classe active de tous les indicateurs
+        indicator.classList.remove("carousel-indicator-active");
+        
         if (i === index) {
-          // Indicateur actif : changer la couleur de fond et l'opacité
+          // Ajoute la classe active à l'indicateur courant
+          indicator.classList.add("carousel-indicator-active");
+          
+          // Styles CSS directs (en complément de la classe)
           indicator.style.backgroundColor = "#2b3947"; // Gris très foncé (--ma-nautic-blue)
-          indicator.style.opacity = "0.6"; // Pleine opacité pour l'indicateur actif
+          indicator.style.opacity = "0.6"; // Opacité pour l'indicateur actif
         } else {
-          // Autres indicateurs : couleur plus claire et semi-transparent
-          indicator.style.backgroundColor = "#2b3947"; // Gris clair (--ma-nautic-beige)
+          // Styles pour les indicateurs inactifs
+          indicator.style.backgroundColor = "#2b3947"; // Gris très foncé (--ma-nautic-blue)
           indicator.style.opacity = "0.2"; // Opacité réduite
         }
       });

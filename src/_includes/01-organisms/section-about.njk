@@ -12,8 +12,8 @@
 
 {% macro renderSectionAbout(options) %}
   {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set sectionStyles = options.datas.sectionStyles %}
+    {% set globalStyle = options.datas.globalStyle | default("section-about") %}
+    {% set sectionStyles = options.datas.sectionStyles | default({}) %}
     
     {% set sectionData = null %}
     {% if options.name %}
@@ -30,111 +30,98 @@
     
     {% set variant = options.datas.variants[sectionData.variant] | default(options.datas.variants.default) %}
     
-    <section class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }} pb-12" data-section-about="{{ sectionData.name }}">
-      {# Titre principal (bande en haut) avec centrage vertical #}
+    {# Extraction des styles d'icônes avec valeurs par défaut #}
+    {% set iconStyle = "" %}
+    {% set iconContainerSize = "" %}
+    {% set iconDefault = "" %}
+    {% if sectionData.iconVariant and options.datas.variants[sectionData.iconVariant] %}
+      {% set iconDefault = options.datas.variants[sectionData.iconVariant].default | default('mx-auto') %}
+      {% set iconStyle = options.datas.variants[sectionData.iconVariant].iconStyle | default('text-[theme(--ma-nautic-teal)]') %}
+      {% set iconContainerSize = options.datas.variants[sectionData.iconVariant].containerSize | default('w-12 h-12 lg:w-16 lg:h-16') %}
+    {% else %}
+      {% set iconDefault = 'mx-auto' %}
+      {% set iconStyle = 'text-[theme(--ma-nautic-teal)]' %}
+      {% set iconContainerSize = 'w-12 h-12 lg:w-16 lg:h-16' %}
+    {% endif %}
+    
+    {# Extraction des styles de flèche avec valeurs par défaut #}
+    {% set arrowStyle = "" %}
+    {% set arrowIconStyle = "" %}
+    {% set arrowContainerSize = "" %}
+    {% if sectionData.scrollArrowIconVariant and options.datas.variants[sectionData.scrollArrowIconVariant] %}
+      {% set arrowStyle = options.datas.variants[sectionData.scrollArrowIconVariant].default | default('mx-auto') %}
+      {% set arrowIconStyle = options.datas.variants[sectionData.scrollArrowIconVariant].iconStyle | default('text-[theme(--ma-nautic-beige)]') %}
+      {% set arrowContainerSize = options.datas.variants[sectionData.scrollArrowIconVariant].containerSize | default('w-16 h-16') %}
+    {% else %}
+      {% set arrowStyle = 'mx-auto' %}
+      {% set arrowIconStyle = 'text-[theme(--ma-nautic-beige)]' %}
+      {% set arrowContainerSize = 'w-16 h-16' %}
+    {% endif %}
+    
+    {# Définition des styles de section avec valeurs par défaut #}
+    {% set containerStyle = sectionStyles.container | default("container mx-auto px-4 lg:px-8") %}
+    {% set contentWrapperStyle = sectionStyles.contentWrapper | default("flex flex-col lg:flex-row lg:items-start lg:gap-8") %}
+    {% set textContentStyle = sectionStyles.textContent | default("w-full lg:w-1/2 mb-6 lg:mb-0 text-center") %}
+    {% set mediaContentStyle = sectionStyles.mediaContent | default("w-full lg:w-1/2") %}
+    {% set buttonContainerStyle = sectionStyles.buttonContainer | default("flex flex-wrap gap-4 mt-6") %}
+    {% set carouselWrapperStyle = sectionStyles.carouselWrapper | default("relative") %}
+    {% set mainTitleWrapperStyle = sectionStyles.mainTitleWrapper | default("w-full bg-[theme(--ma-nautic-beige)] py-6 text-center mb-8 flex items-center justify-center min-h-[120px] relative") %}
+    {% set mainTitleStyle = sectionStyles.mainTitleStyle | default("font-[theme(--ma-nautic-font-display)] text-[theme(--ma-nautic-gold)] text-4xl lg:text-5xl") %}
+    {% set topTitleWrapperStyle = sectionStyles.topTitleWrapper | default("text-center mb-8") %}
+    {% set topTitleStyle = sectionStyles.topTitleStyle | default("ma-nautic-hero-heading text-[theme(--ma-nautic-beige)]") %}
+    {% set iconWrapperStyle = sectionStyles.iconWrapper | default("flex justify-center my-0") %}
+    {% set contentContainerStyle = sectionStyles.contentContainer | default("mt-4") %}
+    {% set contentContainerDesktopStyle = sectionStyles.contentContainerDesktop | default("mt-4 text-center") %}
+    {% set buttonWrapperStyle = sectionStyles.buttonWrapper | default("mt-6 flex justify-center") %}
+    
+    <div class="relative">
+      {# Titre principal (bande en haut) #}
       {% if sectionData.mainTitle and options.headings %}
-        <div class="{{ sectionStyles.mainTitleWrapper }}">
+        <div class="{{ mainTitleWrapperStyle }}" style="border-bottom: none;">
           {{ renderHeading({
             name: sectionData.mainTitle,
             datas: options.headings,
-            class: sectionStyles.mainTitleStyle
+            class: mainTitleStyle ~ " m-0 p-0"
           }) }}
+        </div>
+      {% endif %}
+      
+      {# Flèche de défilement #}
+      {% if sectionData.scrollArrowIcon and options.icons %}
+        <div class="absolute left-1/2 top-[120px] transform -translate-x-1/2 translate-y-[-33%] z-20">
+          {% set arrowIconData = null %}
+          {% if options.icons %}
+            {% for icon in options.icons.icons %}
+              {% if icon.name == sectionData.scrollArrowIcon %}
+                {% set arrowIconData = icon %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
           
-          {# Flèche de défilement (si configurée) #}
-          {% if sectionData.scrollArrowIcon and options.icons %}
-            <div class="{{ sectionStyles.scrollArrowWrapper }}">
-              {{ renderIcon({
-                name: sectionData.scrollArrowIcon,
-                datas: options.icons,
-                class: "rounded-full bg-white"
-              }) }}
-            </div>
+          {% if arrowIconData %}
+            <span data-svg-src="{{ arrowIconData.path }}" class="{{ arrowStyle }} {{ arrowContainerSize }} {{ arrowIconStyle }}">
+              <!-- SVG will be loaded here -->
+            </span>
+          {% else %}
+            {{ renderIcon({
+              name: sectionData.scrollArrowIcon,
+              datas: options.icons,
+              class: arrowStyle ~ " " ~ arrowContainerSize ~ " " ~ arrowIconStyle
+            }) }}
           {% endif %}
         </div>
       {% endif %}
       
-      <div class="{{ sectionStyles.container }}">
-        {% if sectionData.topTitle %}
-          <div class="{{ sectionStyles.topTitleWrapper }}">
-            <h1 class="{{ sectionStyles.topTitleStyle }}">{{ sectionData.topTitle }}</h1>
-          </div>
-        {% endif %}
-        
-        {# Mobile layout (flex column) #}
-        <div class="md:hidden">
-          {# Super Heading (section title with underscore) #}
-          {% if sectionData.superHeading and options.headings %}
-            {{ renderHeading({
-              name: sectionData.superHeading,
-              datas: options.headings,
-              class: "mb-6 mt-8 ma-nautic-section-title"
-            }) }}
-          {% endif %}
-          
-          {# Main Heading (title) #}
-          {% if sectionData.heading and options.headings %}
-            {{ renderHeading({
-              name: sectionData.heading,
-              datas: options.headings
-            }) }}
-          {% endif %}
-          
-          {# Icon if present #}
-          {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
-            <div class="{{ sectionStyles.iconWrapper }}">
-              {{ renderIcon({
-                name: sectionData.iconName,
-                datas: options.icons,
-                class: sectionStyles.iconMobile
-              }) }}
+      <section class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }} pb-12 border-t-0" data-section-about="{{ sectionData.name }}">
+        <div class="{{ containerStyle }}">
+          {% if sectionData.topTitle %}
+            <div class="{{ topTitleWrapperStyle }}">
+              <h1 class="{{ topTitleStyle }}">{{ sectionData.topTitle }}</h1>
             </div>
           {% endif %}
           
-          {# Content #}
-          {% if sectionData.content %}
-            <div class="{{ sectionStyles.contentContainer }}">
-              {{ sectionData.content | safe }}
-            </div>
-          {% endif %}
-          
-          {# Primary Button (Contact) #}
-          {% if sectionData.primaryButton and options.buttons %}
-            <div class="{{ sectionStyles.buttonWrapper }}">
-              {{ renderButton({
-                name: sectionData.primaryButton,
-                datas: options.buttons
-              }) }}
-            </div>
-          {% endif %}
-          
-          {# Primary Link (Contact) #}
-          {% if sectionData.primaryLink and options.links %}
-            <div class="{{ sectionStyles.buttonWrapper }}">
-              {{ renderLink({
-                name: sectionData.primaryLink,
-                datas: options.links
-              }) }}
-            </div>
-          {% endif %}
-          
-          {# Carousel pour mobile - Utilisation du composant carousel #}
-          {% if sectionData.hasCarousel and sectionData.carouselImages %}
-            <div class="{{ sectionStyles.carouselWrapper }}">
-              {{ renderCarousel({
-                name: sectionData.name + "_carousel",
-                customImages: sectionData.carouselImages,
-                datas: options.carousels,
-                buttons: options.buttons,
-                class: "ma-nautic-carousel"
-              }) }}
-            </div>
-          {% endif %}
-        </div>
-        
-        {# Desktop layout (two columns) #}
-        <div class="hidden md:flex {{ sectionStyles.contentWrapper }}">
-          {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
-          <div class="{{ sectionStyles.textContent }}">
+          {# Mobile layout (flex column) - Éléments centrés - Visible jusqu'au breakpoint lg #}
+          <div class="lg:hidden text-center px-6">
             {# Super Heading (section title with underscore) #}
             {% if sectionData.superHeading and options.headings %}
               {{ renderHeading({
@@ -154,25 +141,40 @@
             
             {# Icon if present #}
             {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
-              <div class="{{ sectionStyles.iconWrapper }}">
-                {{ renderIcon({
-                  name: sectionData.iconName,
-                  datas: options.icons,
-                  class: sectionStyles.iconDesktop
-                }) }}
+              <div class="{{ iconWrapperStyle }}">
+                {% set iconData = null %}
+                {% if options.icons %}
+                  {% for icon in options.icons.icons %}
+                    {% if icon.name == sectionData.iconName %}
+                      {% set iconData = icon %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+                
+                {% if iconData %}
+                  <span data-svg-src="{{ iconData.path }}" class="{{ iconDefault }} {{ iconContainerSize }} {{ iconStyle }}">
+                    <!-- SVG will be loaded here -->
+                  </span>
+                {% else %}
+                  {{ renderIcon({
+                    name: sectionData.iconName,
+                    datas: options.icons,
+                    class: iconDefault ~ " " ~ iconContainerSize ~ " " ~ iconStyle
+                  }) }}
+                {% endif %}
               </div>
             {% endif %}
             
             {# Content #}
             {% if sectionData.content %}
-              <div class="{{ sectionStyles.contentContainerDesktop }}">
+              <div class="{{ contentContainerStyle }} text-center">
                 {{ sectionData.content | safe }}
               </div>
             {% endif %}
             
             {# Primary Button (Contact) #}
             {% if sectionData.primaryButton and options.buttons %}
-              <div class="{{ sectionStyles.buttonWrapper }}">
+              <div class="{{ buttonWrapperStyle }}">
                 {{ renderButton({
                   name: sectionData.primaryButton,
                   datas: options.buttons
@@ -182,7 +184,7 @@
             
             {# Primary Link (Contact) #}
             {% if sectionData.primaryLink and options.links %}
-              <div class="{{ sectionStyles.buttonWrapper }}">
+              <div class="{{ buttonWrapperStyle }}">
                 {{ renderLink({
                   name: sectionData.primaryLink,
                   datas: options.links
@@ -191,23 +193,114 @@
             {% endif %}
           </div>
           
-          {# Right column: Carousel - Utilisation du composant carousel #}
-          <div class="{{ sectionStyles.mediaContent }}">
-            {% if sectionData.hasCarousel and sectionData.carouselImages %}
-              <div class="{{ sectionStyles.carouselWrapper }}">
+          {# Desktop layout (two columns) - Visible à partir du breakpoint lg #}
+          <div class="hidden lg:flex {{ contentWrapperStyle }} items-center h-[600px]">
+            {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
+            <div class="{{ textContentStyle }} h-full flex flex-col items-center justify-center text-center px-16">
+              {# Super Heading (section title with underscore) #}
+              {% if sectionData.superHeading and options.headings %}
+                {{ renderHeading({
+                  name: sectionData.superHeading,
+                  datas: options.headings,
+                  class: "mb-6 mt-8 ma-nautic-section-title"
+                }) }}
+              {% endif %}
+              
+              {# Main Heading (title) #}
+              {% if sectionData.heading and options.headings %}
+                {{ renderHeading({
+                  name: sectionData.heading,
+                  datas: options.headings
+                }) }}
+              {% endif %}
+              
+              {# Icon if present #}
+              {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
+                <div class="{{ iconWrapperStyle }}">
+                  {% set iconData = null %}
+                  {% if options.icons %}
+                    {% for icon in options.icons.icons %}
+                      {% if icon.name == sectionData.iconName %}
+                        {% set iconData = icon %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  
+                  {% if iconData %}
+                    <span data-svg-src="{{ iconData.path }}" class="{{ iconDefault }} {{ iconContainerSize }} {{ iconStyle }}">
+                      <!-- SVG will be loaded here -->
+                    </span>
+                  {% else %}
+                    {{ renderIcon({
+                      name: sectionData.iconName,
+                      datas: options.icons,
+                      class: iconDefault ~ " " ~ iconContainerSize ~ " " ~ iconStyle
+                    }) }}
+                  {% endif %}
+                </div>
+              {% endif %}
+              
+              {# Content #}
+              {% if sectionData.content %}
+                <div class="{{ contentContainerDesktopStyle }}">
+                  {{ sectionData.content | safe }}
+                </div>
+              {% endif %}
+              
+              {# Primary Button #}
+              {% if sectionData.primaryButton and options.buttons %}
+                <div class="{{ buttonWrapperStyle }}">
+                  {{ renderButton({
+                    name: sectionData.primaryButton,
+                    datas: options.buttons
+                  }) }}
+                </div>
+              {% endif %}
+              
+              {# Primary Link #}
+              {% if sectionData.primaryLink and options.links %}
+                <div class="{{ buttonWrapperStyle }}">
+                  {{ renderLink({
+                    name: sectionData.primaryLink,
+                    datas: options.links
+                  }) }}
+                </div>
+              {% endif %}
+            </div>
+            
+            {# Right column: Carousel - Réduit à 75% de sa taille d'origine #}
+            <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16">
+              {% if sectionData.hasCarousel and sectionData.carouselName %}
+                <div class="w-4/5 mx-auto">
+                  {{ renderCarousel({
+                    name: sectionData.carouselName,
+                    datas: options.carousels,
+                    images: options.images,
+                    buttons: options.buttons,
+                    class: "ma-nautic-carousel w-full"
+                  }) }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          
+          {# Carousel pour mobile - Réduit à 75% de sa taille d'origine #}
+          {% if sectionData.hasCarousel and sectionData.carouselName %}
+            <div class="lg:hidden mt-8">
+              <div class="w-4/5 mx-auto">
                 {{ renderCarousel({
-                  name: sectionData.name + "_carousel",
-                  customImages: sectionData.carouselImages,
+                  name: sectionData.carouselName,
                   datas: options.carousels,
+                  images: options.images,
                   buttons: options.buttons,
                   class: "ma-nautic-carousel"
                 }) }}
               </div>
-            {% endif %}
-          </div>
+            </div>
+          {% endif %}
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   {% else %}
     <span class="text-red-500">Section About data not found</span>
   {% endif %}
@@ -230,7 +323,8 @@ Summon MA-NAUTIC Components Wisely
     links: atoms.links,
     icons: atoms.icons,
     carousels: organisms.carousels,
-    buttons: atoms.buttons
+    buttons: atoms.buttons,
+    images: atoms.images
 }) }}
 
 3. Using custom styles
@@ -242,6 +336,7 @@ Summon MA-NAUTIC Components Wisely
     icons: atoms.icons,
     carousels: organisms.carousels,
     buttons: atoms.buttons,
+    images: atoms.images,
     class: "my-custom-section-class" 
 }) }}
 #}

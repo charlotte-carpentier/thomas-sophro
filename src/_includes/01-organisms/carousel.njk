@@ -6,7 +6,7 @@
 
 {% macro renderCarousel(options) %}
   {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle | default('w-full relative overflow-hidden') %}
+    {% set globalStyle = options.datas.globalStyle | default('w-full') %}
     
     {% set carouselData = null %}
     {% for carousel in options.datas.carousels %}
@@ -45,85 +45,89 @@
       {% set prevIconStyle = prevButtonStyles.iconStyle | default("") %}
       {% set nextIconStyle = nextButtonStyles.iconStyle | default("") %}
       
-      <!-- Main carousel structure -->
+      <!-- Main carousel structure with its own positioning context -->
       <div class="w-full">
-        <!-- Carousel container -->
-        <div 
-          class="{{ globalStyle }} {{ options.class | default('') }} relative h-[256px] md:h-[384px]"
-          id="{{ carouselId }}"
-          data-carousel="{{ carouselData.name }}"
-          {% if carouselData.autoplay %}data-autoplay="true"{% endif %}
-          {% if carouselData.pauseOnHover %}data-pause-on-hover="true"{% endif %}
-        >
-          <!-- Carousel slides -->
-          <div class="relative w-full h-full">
-            {% for image in carouselData.images %}
-              <div 
-                class="absolute inset-0 transition-opacity duration-500 ease-in-out {% if loop.first %}opacity-100{% else %}opacity-0{% endif %}"
-                data-carousel-item
-              >
-                {% set imagesArray = options.images.images | default(options.images) %}
-                {% set foundImage = null %}
-                {% if imagesArray %}
-                  {% for img in imagesArray %}
-                    {% if img.name == image.name %}
-                      {% set foundImage = img %}
+        <!-- Carousel container - Main positioning context for all elements -->
+        <div class="relative {{ options.class | default('') }}">
+          <!-- Carousel content with overflow hidden -->
+          <div 
+            class="{{ globalStyle }} overflow-hidden"
+            id="{{ carouselId }}"
+            data-carousel="{{ carouselData.name }}"
+            {% if carouselData.autoplay %}data-autoplay="true"{% endif %}
+            {% if carouselData.pauseOnHover %}data-pause-on-hover="true"{% endif %}
+          >
+            <!-- Conteneur avec ratio carré maintenu via padding-bottom -->
+            <div class="relative w-full pb-[100%]">
+              <!-- Carousel slides -->
+              <div class="absolute inset-0 w-full h-full">
+                {% for image in carouselData.images %}
+                  <div 
+                    class="absolute inset-0 transition-opacity duration-500 ease-in-out {% if loop.first %}opacity-100{% else %}opacity-0{% endif %}"
+                    data-carousel-item
+                  >
+                    {% set imagesArray = options.images.images | default(options.images) %}
+                    {% set foundImage = null %}
+                    {% if imagesArray %}
+                      {% for img in imagesArray %}
+                        {% if img.name == image.name %}
+                          {% set foundImage = img %}
+                        {% endif %}
+                      {% endfor %}
                     {% endif %}
-                  {% endfor %}
-                {% endif %}
-                {% if foundImage %}
-                  <img 
-                    src="{{ foundImage.src }}" 
-                    alt="{{ foundImage.alt | default(image.name) }}" 
-                    class="w-full h-full object-cover"
-                    style="object-position: {{ image.objectPosition | default('center') }};"
-                    loading="lazy"
-                  />
-                {% else %}
-                  <div class="w-full h-full flex items-center justify-center bg-gray-200">
-                    <span class="text-gray-500">Image {{ image.name }} non disponible</span>
+                    {% if foundImage %}
+                      <img 
+                        src="{{ foundImage.src }}" 
+                        alt="{{ foundImage.alt | default(image.name) }}" 
+                        class="w-full h-full object-cover"
+                        style="object-position: {{ image.objectPosition | default('center') }};"
+                        loading="lazy"
+                      />
+                    {% else %}
+                      <div class="w-full h-full flex items-center justify-center bg-gray-200">
+                        <span class="text-gray-500">Image {{ image.name }} non disponible</span>
+                      </div>
+                    {% endif %}
                   </div>
-                {% endif %}
+                {% endfor %}
               </div>
-            {% endfor %}
+            </div>
           </div>
           
-          <!-- Navigation buttons -->
-          <div class="flex items-center justify-between w-full absolute top-1/2 transform -translate-y-1/2 pointer-events-none" style="width: calc(100% + 1rem); left: -0.5rem;">
-            <!-- Previous button -->
-            <button 
-              class="pointer-events-auto {{ carouselPrevStyle }} {{ prevButton.class | default('') }} flex items-center justify-center"
-              data-carousel-prev
-              aria-label="Previous image"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ prevIconStyle }} w-full h-full">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-            
-            <!-- Next button -->
-            <button 
-              class="pointer-events-auto {{ carouselNextStyle }} {{ nextButton.class | default('') }} flex items-center justify-center"
-              data-carousel-next
-              aria-label="Next image"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ nextIconStyle }} w-full h-full">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
+          <!-- Navigation buttons - Independently positioned relative to the main container -->
+          <!-- Bouton précédent -->
+          <button 
+            class="absolute left-[-48px] top-1/2 transform -translate-y-1/2 z-10 {{ carouselPrevStyle }} {{ prevButton.class | default('') }} flex items-center justify-center"
+            data-carousel-prev
+            aria-label="Previous image"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ prevIconStyle }} w-full h-full">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          
+          <!-- Bouton suivant -->
+          <button 
+            class="absolute right-[-48px] top-1/2 transform -translate-y-1/2 z-10 {{ carouselNextStyle }} {{ nextButton.class | default('') }} flex items-center justify-center"
+            data-carousel-next
+            aria-label="Next image"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="{{ nextIconStyle }} w-full h-full">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+          
+          <!-- Indicators (dots) -->
+          <div class="flex items-center justify-center mt-2 md:mt-4 space-x-1 md:space-x-2">
+            {% for image in carouselData.images %}
+              <button 
+                class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator {% if loop.first %}carousel-indicator-active{% endif %}"
+                data-carousel-indicator="{{ loop.index0 }}"
+                data-carousel-target="{{ carouselId }}"
+                aria-label="Go to image {{ loop.index }}"
+              ></button>
+            {% endfor %}
           </div>
-        </div>
-        
-        <!-- Indicators (dots) -->
-        <div class="flex items-center justify-center mt-2 md:mt-4 space-x-1 md:space-x-2">
-          {% for image in carouselData.images %}
-            <button 
-              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator {% if loop.first %}carousel-indicator-active{% endif %}"
-              data-carousel-indicator="{{ loop.index0 }}"
-              data-carousel-target="{{ carouselId }}"
-              aria-label="Go to image {{ loop.index }}"
-            ></button>
-          {% endfor %}
         </div>
       </div>
       
