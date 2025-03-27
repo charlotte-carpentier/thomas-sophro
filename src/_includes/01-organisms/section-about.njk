@@ -73,6 +73,7 @@
     {% set contentContainerStyle = sectionStyles.contentContainer | default("mt-4") %}
     {% set contentContainerDesktopStyle = sectionStyles.contentContainerDesktop | default("mt-4 text-center") %}
     {% set buttonWrapperStyle = sectionStyles.buttonWrapper | default("mt-6 flex justify-center") %}
+    {% set scrollArrowWrapperStyle = sectionStyles.scrollArrowWrapper | default("absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 z-20") %}
     
     <div class="relative">
       {# Titre principal (bande en haut) #}
@@ -83,31 +84,31 @@
             datas: options.headings,
             class: mainTitleStyle ~ " m-0 p-0"
           }) }}
-        </div>
-      {% endif %}
-      
-      {# Flèche de défilement #}
-      {% if sectionData.scrollArrowIcon and options.icons %}
-        <div class="absolute left-1/2 top-[120px] transform -translate-x-1/2 translate-y-[-33%] z-20">
-          {% set arrowIconData = null %}
-          {% if options.icons %}
-            {% for icon in options.icons.icons %}
-              {% if icon.name == sectionData.scrollArrowIcon %}
-                {% set arrowIconData = icon %}
-              {% endif %}
-            {% endfor %}
-          {% endif %}
           
-          {% if arrowIconData %}
-            <span data-svg-src="{{ arrowIconData.path }}" class="{{ arrowStyle }} {{ arrowContainerSize }} {{ arrowIconStyle }}">
-              <!-- SVG will be loaded here -->
-            </span>
-          {% else %}
-            {{ renderIcon({
-              name: sectionData.scrollArrowIcon,
-              datas: options.icons,
-              class: arrowStyle ~ " " ~ arrowContainerSize ~ " " ~ arrowIconStyle
-            }) }}
+          {# Flèche de défilement positionnée en bas du mainTitle #}
+          {% if sectionData.scrollArrowIcon and options.icons %}
+            <div class="{{ scrollArrowWrapperStyle }}">
+              {% set arrowIconData = null %}
+              {% if options.icons %}
+                {% for icon in options.icons.icons %}
+                  {% if icon.name == sectionData.scrollArrowIcon %}
+                    {% set arrowIconData = icon %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+              
+              {% if arrowIconData %}
+                <span data-svg-src="{{ arrowIconData.path }}" class="{{ arrowStyle }} {{ arrowContainerSize }} {{ arrowIconStyle }}">
+                  <!-- SVG will be loaded here -->
+                </span>
+              {% else %}
+                {{ renderIcon({
+                  name: sectionData.scrollArrowIcon,
+                  datas: options.icons,
+                  class: arrowStyle ~ " " ~ arrowContainerSize ~ " " ~ arrowIconStyle
+                }) }}
+              {% endif %}
+            </div>
           {% endif %}
         </div>
       {% endif %}

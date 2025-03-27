@@ -490,7 +490,6 @@
   color: theme(--ma-nautic-white);
   font-family: theme(--ma-nautic-font-display);
   font-size: theme(--ma-nautic-font-size-nav);
-  transition: all 300ms;
 }
 
 .ma-nautic-nav-link::after {
@@ -501,7 +500,7 @@
   width: 0;
   height: theme(--ma-nautic-border-width-large);
   background-color: theme(--ma-nautic-gold);
-  transition: all 300ms;
+  transition: all 600ms;
 }
 
 .ma-nautic-nav-link:hover::after {
@@ -564,13 +563,15 @@
   font-size: theme(--ma-nautic-font-size-section);
 }
 
-/* Content links with permanent gold underline */
+/* Content links */
 .ma-nautic-content-link {
   position: relative;
   color: theme(--ma-nautic-blue);
-  text-decoration: none;
+  font-family: theme(--ma-nautic-font-display);
+  font-size: theme(--ma-nautic-font-size-section);
 }
 
+.ma-nautic-content-link::before,
 .ma-nautic-content-link::after {
   content: '';
   position: absolute;
@@ -578,12 +579,25 @@
   left: 0;
   width: 100%;
   height: theme(--ma-nautic-border-width-large);
+  transition: all 600ms;
+}
+
+.ma-nautic-content-link::before {
   background-color: theme(--ma-nautic-gold);
 }
 
-/* Optional: Hover effect to make it more interactive */
-.ma-nautic-content-link:hover {
-  color: theme(--ma-nautic-teal);
+.ma-nautic-content-link::after {
+  background-color: theme(--ma-nautic-teal);
+  width: 0;
+}
+
+.ma-nautic-content-link:hover::before {
+  width: 0;
+  left: 100%;
+}
+
+.ma-nautic-content-link:hover::after {
+  width: 100%;
 }
 
 /* =============================================== */

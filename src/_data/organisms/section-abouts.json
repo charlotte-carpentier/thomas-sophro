@@ -24,7 +24,7 @@
     "mediaContent": "w-full lg:w-1/2",
     "buttonContainer": "flex flex-wrap gap-4 mt-6",
     "carouselWrapper": "relative",
-    "mainTitleWrapper": "w-full bg-[theme(--ma-nautic-beige)] py-6 text-center mb-8 flex items-center justify-center min-h-[120px] relative",
+    "mainTitleWrapper": "w-full bg-[theme(--ma-nautic-beige)] py-6 pt-12 text-center mb-8 flex items-center justify-center min-h-[120px] relative",
     "mainTitleStyle": "font-[theme(--ma-nautic-font-display)] text-[theme(--ma-nautic-gold)] text-4xl lg:text-5xl",
     "topTitleWrapper": "text-center mb-8",
     "topTitleStyle": "ma-nautic-hero-heading text-[theme(--ma-nautic-beige)]",
@@ -32,7 +32,7 @@
     "contentContainer": "mt-4",
     "contentContainerDesktop": "mt-4 text-center",
     "buttonWrapper": "mt-6 flex justify-center",
-    "scrollArrowWrapper": "absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 z-10"
+    "scrollArrowWrapper": "absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-[75%] z-20"
   },
   "sections": [
     {
