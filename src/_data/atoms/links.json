@@ -4,6 +4,7 @@
     "default": "text-[--ma-nautic-blue] font-['Roboto']",
     "navigation": "ma-nautic-nav-link font-['Vibur'] text-[25px]",
     "content": "ma-nautic-content-link font-['Vibur']",
+    "content-light": "ma-content-link-light font-['Vibur']",
     "footer": "text-[--ma-nautic-blue] hover:text-[--ma-nautic-teal] font-['Roboto']"
   },
   "links": [
@@ -36,6 +37,12 @@
       "href": "/contact",
       "text": "CONTACTEZ-NOUS",
       "style": "content"
+    },
+    {
+      "name": "decouvrir",
+      "href": "/bateau",
+      "text": "découvrir",
+      "style": "content-light"
     },
     {
       "name": "credits",

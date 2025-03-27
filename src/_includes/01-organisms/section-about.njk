@@ -14,7 +14,7 @@
   {% if options.datas %}
     {% set globalStyle = options.datas.globalStyle | default("section-about") %}
     {% set sectionStyles = options.datas.sectionStyles | default({}) %}
-    
+
     {% set sectionData = null %}
     {% if options.name %}
       {% for section in options.datas.sections %}
@@ -25,11 +25,15 @@
     {% endif %}
 
     {% if not sectionData %}
-      {% set sectionData = options.datas.sections[0] %}
+      {% set sectionData = options
+        .datas
+        .sections[0] %}
     {% endif %}
-    
-    {% set variant = options.datas.variants[sectionData.variant] | default(options.datas.variants.default) %}
-    
+
+    {% set variant = options
+      .datas
+      .variants[sectionData.variant] | default(options.datas.variants.default) %}
+
     {# Recherche explicite du bouton de défilement #}
     {% set scrollButton = null %}
     {% if sectionData.scrollArrowButton and options.buttons %}
@@ -44,32 +48,47 @@
     {% set arrowStyle = "" %}
     {% set arrowButtonStyle = "" %}
     {% set arrowContainerSize = "" %}
-    {% if sectionData.scrollArrowButtonVariant and options.datas.variants[sectionData.scrollArrowButtonVariant] %}
+    {% if sectionData
+      .scrollArrowButtonVariant and options
+      .datas
+      .variants[sectionData.scrollArrowButtonVariant] %}
       {% set arrowStyle = options.datas.variants[sectionData.scrollArrowButtonVariant].default | default('mx-auto') %}
       {% set arrowButtonStyle = options.datas.variants[sectionData.scrollArrowButtonVariant].iconStyle | default('text-[theme(--ma-nautic-beige)]') %}
-      {% set arrowContainerSize = options.datas.variants[sectionData.scrollArrowButtonVariant].containerSize | default('w-16 h-16') %}
+      {% set arrowContainerSize = options
+        .datas
+        .variants[sectionData.scrollArrowButtonVariant]
+        .containerSize | default('w-16 h-16') %}
     {% else %}
       {% set arrowStyle = 'mx-auto' %}
       {% set arrowButtonStyle = 'text-[theme(--ma-nautic-beige)]' %}
       {% set arrowContainerSize = 'w-16 h-16' %}
     {% endif %}
-    
+
     {# Extraction des styles d'icône avec valeurs par défaut #}
     {% set iconStyle = "" %}
     {% set iconContainerSize = "" %}
     {% set iconDefault = "" %}
     {% set iconSize = "32" %}
-    {% if sectionData.iconVariant and options.datas.variants[sectionData.iconVariant] %}
+    {% if sectionData
+      .iconVariant and options
+      .datas
+      .variants[sectionData.iconVariant] %}
       {% set iconDefault = options.datas.variants[sectionData.iconVariant].default | default('mx-auto') %}
       {% set iconStyle = options.datas.variants[sectionData.iconVariant].iconStyle | default('text-[theme(--ma-nautic-teal)]') %}
-      {% set iconContainerSize = options.datas.variants[sectionData.iconVariant].containerSize | default('w-12 h-12 lg:w-16 lg:h-16') %}
-      {% set iconSize = options.datas.variants[sectionData.iconVariant].iconSize | default('32') %}
+      {% set iconContainerSize = options
+        .datas
+        .variants[sectionData.iconVariant]
+        .containerSize | default('w-12 h-12 lg:w-16 lg:h-16') %}
+      {% set iconSize = options
+        .datas
+        .variants[sectionData.iconVariant]
+        .iconSize | default('32') %}
     {% else %}
       {% set iconDefault = 'mx-auto' %}
       {% set iconStyle = 'text-[theme(--ma-nautic-teal)]' %}
       {% set iconContainerSize = 'w-12 h-12 lg:w-16 lg:h-16' %}
     {% endif %}
-    
+
     {# Définition des styles de section avec valeurs par défaut #}
     {% set containerStyle = sectionStyles.container | default("container mx-auto px-4 lg:px-8") %}
     {% set contentWrapperStyle = sectionStyles.contentWrapper | default("flex flex-col lg:flex-row lg:items-start lg:gap-8") %}
@@ -86,10 +105,10 @@
     {% set contentContainerDesktopStyle = sectionStyles.contentContainerDesktop | default("mt-4 text-center") %}
     {% set buttonWrapperStyle = sectionStyles.buttonWrapper | default("mt-6 flex justify-center") %}
     {% set scrollArrowWrapperStyle = sectionStyles.scrollArrowWrapper | default("absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-[75%] z-20") %}
-    
+
     {# Créer un ID unique pour la section à partir du nom #}
     {% set sectionId = "section-" ~ (sectionData.name | replace(" ", "-") | lower) %}
-    
+
     <div class="relative">
       {# Titre principal (bande en haut) #}
       {% if sectionData.mainTitle and options.headings %}
@@ -99,15 +118,11 @@
             datas: options.headings,
             class: mainTitleStyle ~ " m-0 p-0"
           }) }}
-          
+
           {# Bouton de défilement positionné en bas du mainTitle #}
           {% if scrollButton %}
             <div class="{{ scrollArrowWrapperStyle }}">
-              <a 
-                href="#{{ sectionId }}"
-                class="ma-nautic-scroll-arrow {{ arrowStyle }}"
-                aria-label="Défiler vers le contenu"
-              >
+              <a href="#{{ sectionId }}" class="ma-nautic-scroll-arrow {{ arrowStyle }}" aria-label="Défiler vers le contenu">
                 {% if scrollButton.icon and options.icons %}
                   {% set arrowIconData = null %}
                   {% for icon in options.icons.icons %}
@@ -115,7 +130,7 @@
                       {% set arrowIconData = icon %}
                     {% endif %}
                   {% endfor %}
-                  
+
                   {% if arrowIconData %}
                     <span data-svg-src="{{ arrowIconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ arrowContainerSize }} {{ arrowButtonStyle }}">
                       <!-- SVG will be loaded here -->
@@ -131,19 +146,15 @@
           {% endif %}
         </div>
       {% endif %}
-      
-      <section 
-        class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }} pb-12 border-t-0" 
-        data-section-about="{{ sectionData.name }}"
-        id="{{ sectionId }}"
-      >
+
+      <section class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }} pb-12 border-t-0" data-section-about="{{ sectionData.name }}" id="{{ sectionId }}">
         <div class="{{ containerStyle }}">
           {% if sectionData.topTitle %}
             <div class="{{ topTitleWrapperStyle }}">
               <h1 class="{{ topTitleStyle }}">{{ sectionData.topTitle }}</h1>
             </div>
           {% endif %}
-          
+
           {# Mobile layout (flex column) - Éléments centrés - Visible jusqu'au breakpoint lg #}
           <div class="lg:hidden text-center px-6">
             {# Super Heading (section title with underscore) #}
@@ -154,7 +165,7 @@
                 class: "mb-6 mt-8 ma-nautic-section-title"
               }) }}
             {% endif %}
-            
+
             {# Main Heading (title) #}
             {% if sectionData.heading and options.headings %}
               {{ renderHeading({
@@ -162,7 +173,7 @@
                 datas: options.headings
               }) }}
             {% endif %}
-            
+
             {# Icon if present - Utilisation de data-svg-src pour le chargement JS #}
             {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
               <div class="{{ iconWrapperStyle }}">
@@ -172,26 +183,26 @@
                     {% set iconData = icon %}
                   {% endif %}
                 {% endfor %}
-                
+
                 {% if iconData %}
                   <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
                     <!-- SVG will be loaded here -->
                   </span>
                 {% else %}
                   <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
                   </span>
                 {% endif %}
               </div>
             {% endif %}
-            
+
             {# Content #}
             {% if sectionData.content %}
               <div class="{{ contentContainerStyle }} text-center">
                 {{ sectionData.content | safe }}
               </div>
             {% endif %}
-            
+
             {# Primary Link #}
             {% if sectionData.primaryLink and options.links %}
               <div class="{{ buttonWrapperStyle }}">
@@ -202,7 +213,7 @@
               </div>
             {% endif %}
           </div>
-          
+
           {# Desktop layout (two columns) - Visible à partir du breakpoint lg #}
           <div class="hidden lg:flex {{ contentWrapperStyle }} items-center h-[600px]">
             {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
@@ -215,7 +226,7 @@
                   class: "mb-6 mt-8 ma-nautic-section-title"
                 }) }}
               {% endif %}
-              
+
               {# Main Heading (title) #}
               {% if sectionData.heading and options.headings %}
                 {{ renderHeading({
@@ -223,7 +234,7 @@
                   datas: options.headings
                 }) }}
               {% endif %}
-              
+
               {# Icon if present - Utilisation de data-svg-src pour le chargement JS #}
               {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
                 <div class="{{ iconWrapperStyle }}">
@@ -233,26 +244,26 @@
                       {% set iconData = icon %}
                     {% endif %}
                   {% endfor %}
-                  
+
                   {% if iconData %}
                     <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
                       <!-- SVG will be loaded here -->
                     </span>
                   {% else %}
                     <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
                     </span>
                   {% endif %}
                 </div>
               {% endif %}
-              
+
               {# Content #}
               {% if sectionData.content %}
                 <div class="{{ contentContainerDesktopStyle }}">
                   {{ sectionData.content | safe }}
                 </div>
               {% endif %}
-              
+
               {# Primary Link #}
               {% if sectionData.primaryLink and options.links %}
                 <div class="{{ buttonWrapperStyle }}">
@@ -263,7 +274,7 @@
                 </div>
               {% endif %}
             </div>
-            
+
             {# Right column: Carousel - Réduit à 75% de sa taille d'origine #}
             <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16">
               {% if sectionData.hasCarousel and sectionData.carouselName %}
@@ -279,7 +290,7 @@
               {% endif %}
             </div>
           </div>
-          
+
           {# Carousel pour mobile - Réduit à 75% de sa taille d'origine #}
           {% if sectionData.hasCarousel and sectionData.carouselName %}
             <div class="lg:hidden mt-8">
@@ -298,13 +309,11 @@
       </section>
     </div>
     {# Include external JS files #}
-<script src="/js/organisms/section-scroll.js"></script>
+    <script src="/js/organisms/section-scroll.js"></script>
   {% else %}
     <span class="text-red-500">Section About data not found</span>
   {% endif %}
 {% endmacro %}
-
-
 
 {#
 ============================
