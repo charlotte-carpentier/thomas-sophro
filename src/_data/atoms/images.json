@@ -74,6 +74,30 @@
       "group": "block-media"
     },
     {
+      "name": "carousel_slide_A",
+      "src": "/assets/images/carousel-2/carousel-slide-a.jpg",
+      "alt": "Photo de bateau",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_slide_B",
+      "src": "/assets/images/carousel-2/carousel-slide-b.jpg",
+      "alt": "Photo d'un bateau",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_slide_C",
+      "src": "/assets/images/carousel-2/carousel-slide-c.jpg",
+      "alt": "Photo de bateau",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_slide_D",
+      "src": "/assets/images/carousel-2/carousel-slide-d.jpg",
+      "alt": "Photo d'un bateau'",
+      "group": "block-media"
+    },
+    {
       "name": "placeholder_small",
       "src": "/assets/images/placeholder-small.png",
       "alt": "Small placeholder image",

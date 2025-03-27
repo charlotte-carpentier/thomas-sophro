@@ -38,7 +38,7 @@
     {
       "name": "agence_corse",
       "level": 1,
-      "text": "AGENCE DE LOCATION DE BATEAUX EN CORSE",
+      "text": "AGENCE DE LOCATION DE BATEAUX À SAINT-FLORENT",
       "style": "ma_nautic_section_drop"
     },
     {
@@ -57,13 +57,13 @@
       "name": "que_faisons_nous",
       "level": 2,
       "text": "_Que faisons-nous ?",
-      "style": "section-title"
+      "style": "ma_nautic_section_title"
     },
     {
-      "name": "nos_bateaux",
+      "name": "ma_nautic_bateaux",
       "level": 2,
-      "text": "NOS BATEAUX EN LOCATION À SAINT-FLORENT",
-      "style": "default"
+      "text": "Notre location de bateaux près du désert des Agriates",
+      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "boat_name",
@@ -75,7 +75,7 @@
       "name": "petits_plus",
       "level": 2,
       "text": "_Les petits plus",
-      "style": "section-title"
+      "style": "ma_nautic_section_title"
     }
   ]
 }

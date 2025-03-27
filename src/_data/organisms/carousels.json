@@ -34,21 +34,10 @@
       "autoplay": true,
       "pauseOnHover": true,
       "images": [
-        { "name": "carousel_slide_1", "objectPosition": "center" },
-        { "name": "carousel_slide_2", "objectPosition": "center" },
-        { "name": "carousel_slide_3", "objectPosition": "center" },
-        { "name": "carousel_slide_4", "objectPosition": "center" },
-        { "name": "carousel_slide_5", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "hero_carousel",
-      "autoplay": true,
-      "pauseOnHover": false,
-      "images": [
-        { "name": "hero_slide_1", "objectPosition": "center" },
-        { "name": "hero_slide_2", "objectPosition": "center" },
-        { "name": "hero_slide_3", "objectPosition": "center" }
+        { "name": "carousel_slide_A", "objectPosition": "center" },
+        { "name": "carousel_slide_B", "objectPosition": "center" },
+        { "name": "carousel_slide_C", "objectPosition": "center" },
+        { "name": "carousel_slide_D", "objectPosition": "center" }
       ]
     }
   ]

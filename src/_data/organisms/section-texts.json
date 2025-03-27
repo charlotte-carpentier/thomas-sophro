@@ -1,0 +1,25 @@
+{
+  "globalStyle": "section-hero py-12 px-4 md:px-8 relative",
+  "variants": {
+    "default": "py-8 md:py-12 lg:py-16",
+    "compact": "py-6 md:py-8 lg:py-10",
+    "expanded": "py-10 md:py-16 lg:py-20"
+  },
+  "containerStyle": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+  "contentLayoutStyle": {
+    "mobile": "flex flex-col gap-6",
+    "desktop": "grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center"
+  },
+  "textContainerStyle": "flex flex-col gap-4",
+  "buttonsContainerStyle": "flex flex-wrap gap-4 mt-2 md:mt-4",
+  "imageContainerStyle": "mt-6 md:mt-0",
+  "sections": [
+    {
+      "name": "ma_nautic_discover",
+      "variant": "ma-nautic",
+      "content": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Au départ de Saint-Florent, vous n’aurez que l’embarras du choix pour décider vers quelle merveille nos bateaux vous porteront.</p> <p class='text-[theme(--ma-nautic-white)] mb-4'>À l’ouest où vous verrez les plages de sable blanc du désert des Agriates, du Lotu jusqu’à l’Acciola en passant par Saleccia ou encore les plages de Malfalcu avec Ghignu et Travu vous offrent leur panorama paradisiaque.</p> <p class='text-[theme(--ma-nautic-white)] mb-4'>Ou bien, virez de bord, direction le nord, où le Cap Corse et ses falaises escarpées qui abritent encore de petits ports de pêche à l’âme tranquille.</p>",
+      "backgroundImage": "section_background",
+      "link": "decouvrir"
+    }
+  ]
+}

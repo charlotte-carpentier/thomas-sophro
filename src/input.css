@@ -547,9 +547,23 @@
 }
 
 .ma-nautic-subtitle {
+  font-family: theme(--ma-nautic-font-body);
   font-weight: theme(--ma-nautic-font-weight-bold);
-  font-size: theme(--ma-nautic-font-size-nav);
-  letter-spacing: theme(--ma-nautic-letter-spacing-subtitle);
+  font-size: theme(--ma-nautic-font-size-nav); /* taille par défaut */
+  /* letter-spacing: theme(--ma-nautic-letter-spacing-subtitle); */
+}
+
+/* Pour les écrans mobiles (taille <= 640px, ajuste selon tes besoins) */
+@media (max-width: 640px) {
+  .ma-nautic-subtitle {
+    font-size: theme(--ma-nautic-font-size-subtitle); /* petite taille pour mobile */
+  }
+}
+
+@media (max-width: 640px) {
+  .ma-nautic-main {
+    font-size: theme(--ma-nautic-font-size-subtitle); /* petite taille pour mobile */
+  }
 }
 
 /* Boat card */
@@ -563,7 +577,7 @@
   font-size: theme(--ma-nautic-font-size-section);
 }
 
-/* Content links */
+/* Content links dark */
 .ma-nautic-content-link {
   position: relative;
   color: theme(--ma-nautic-blue);
@@ -598,6 +612,55 @@
 
 .ma-nautic-content-link:hover::after {
   width: 100%;
+}
+
+/* Content links light */
+.ma-content-link-light {
+  position: relative;
+  color: theme(--ma-nautic-white);
+  font-family: theme(--ma-nautic-font-display);
+  font-size: theme(--ma-nautic-font-size-section);
+}
+
+.ma-content-link-light::before,
+.ma-content-link-light::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: theme(--ma-nautic-border-width-large);
+  transition: all 600ms;
+}
+
+.ma-content-link-light::before {
+  background-color: theme(--ma-nautic-gold);
+}
+
+.ma-content-link-light::after {
+  background-color: theme(--ma-nautic-teal);
+  width: 0;
+}
+
+.ma-content-link-light:hover::before {
+  width: 0;
+  left: 100%;
+}
+
+.ma-content-link-light:hover::after {
+  width: 100%;
+}
+
+/* =============================================== */
+/* ======= CLASSES UTILITAIRES POUR IMAGES ======= */
+/* =============================================== */
+
+/* Background image with fixed parallax effect */
+.ma-nautic-bg-fixed {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 /* =============================================== */
