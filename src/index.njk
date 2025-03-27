@@ -7,61 +7,33 @@ layout: '00-core/base.njk'
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
 {# Hero section pour MA-Nautic #}
-    {{ renderSectionHero({
-        name: "ma_nautic_hero",
-        datas: organisms["section-heros"],
-        headings: atoms.headings,
-        buttons: atoms.buttons,
-        images: atoms.images
-    }) }}
+{{ renderSectionHero({
+    name: "ma_nautic_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images
+}) }}
 
 {# Section Qui sommes-nous #}
 {% from "01-organisms/section-about.njk" import renderSectionAbout %}
 
-    {{ renderSectionAbout({ 
-        name: "ma_nautic_about", 
-        datas: organisms["section-abouts"], 
-        headings: atoms.headings, 
-        links: atoms.links,
-        icons: atoms.icons 
-    }) }}
-
-{# Section Qui sommes-nous #}
-{% from "01-organisms/section-about.njk" import renderSectionAbout %}
-
-    {{ renderSectionAbout({ 
-        name: "about_us", 
-        datas: organisms["section-abouts"], 
-        headings: atoms.headings, 
-        buttons: atoms.buttons 
-    }) }}  
+{{ renderSectionAbout({ 
+    name: "ma_nautic_about", 
+    datas: organisms["section-abouts"], 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    buttons: atoms.buttons,
+    images: atoms.images
+}) }}
 
 {# Section Découverte #}
-{% from "01-organisms/section-about.njk" import renderSectionAbout %}
-
-    {{ renderSectionAbout({ 
-        name: "about_us", 
-        datas: organisms["section-abouts"], 
-        headings: atoms.headings, 
-        buttons: atoms.buttons 
-    }) }}
+{# À venir #}
 
 {# Section Que faisons-nous #}
-{% from "01-organisms/section-about.njk" import renderSectionAbout %}
-
-    {{ renderSectionAbout({ 
-        name: "about_us", 
-        datas: organisms["section-abouts"], 
-        headings: atoms.headings, 
-        buttons: atoms.buttons 
-    }) }}
+{# À venir #}
 
 {# Section Les petits plus #}
-{% from "01-organisms/section-about.njk" import renderSectionAbout %}
-
-    {{ renderSectionAbout({ 
-        name: "about_us", 
-        datas: organisms["section-abouts"], 
-        headings: atoms.headings, 
-        buttons: atoms.buttons 
-    }) }}  
+{# À venir #}
