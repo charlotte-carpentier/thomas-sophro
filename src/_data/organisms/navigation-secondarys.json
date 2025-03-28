@@ -8,23 +8,22 @@
   },
   "navigation-secondarys": [
     {
+      "name": "contact_navigation",
+      "links": [
+        "adresse",
+        "telephone",
+        "formulaire",
+        "horaires"
+      ]
+    },
+    {
       "name": "site_navigation",
       "links": [
         "accueil",
         "nos-bateaux",
         "lieux-interets",
-        "contact"
-      ]
-    },
-    {
-      "name": "footer_navigation",
-      "links": [
-        "sacred_decrees",
-        "laws_of_the_realm",
-        "magic_biscuits",
-        "map_of_the_kingdom",
-        "guild_recruitment",
-        "oracle_whispers"
+        "contact",
+        "faq"
       ]
     },
     {

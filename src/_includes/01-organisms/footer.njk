@@ -14,14 +14,7 @@
     {% set globalStyle = options.datas.globalStyle %}
     {% set variants = options.datas.variants %}
     
-    {# Define state classes for link variants #}
-    {% set stateClasses = {
-      'default': variants.default | default('text-gray-800'),
-      'hover': variants.hover | default('text-gray-600'),
-      'focus': variants.focus | default('text-gray-800 outline-2 outline-blue-500 outline-offset-2'),
-      'disabled': variants.disabled | default('text-gray-400 cursor-not-allowed')
-    } %}
-    
+    {# Récupération du footer spécifique #}
     {% set footerData = null %}
     {% if options.name %}
       {% for footerSet in options.datas.footers %}
@@ -35,234 +28,166 @@
       {% set footerData = options.datas.footers[0] %}
     {% endif %}
     
+    {# Debug: Afficher les données disponibles #}
+    {# <pre class="text-white text-xs">{{ options | json }}</pre> #}
+    
     <footer class="{{ globalStyle }} {{ footerData.containerStyle }} {{ options.class | default('') }}">
-      <div class="container mx-auto px-4">
-        {# Logo at the top of the footer #}
-        {% if footerData.vectors and options.vectors %}
-          <div class="mb-6 flex justify-start">
-            {{ renderVector({ name: footerData.vectors, datas: options.vectors }) }}
+      <div class="container mx-auto px-4 py-6">
+        {# Nouvelle structure: logo à gauche des colonnes #}
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {# 1. Logo dans la première colonne #}
+          <div class="flex justify-center md:justify-start items-start">
+            {% if footerData.vectors and options.vectors %}
+              {% set vectorData = null %}
+              {% for vector in options.vectors.vectors %}
+                {% if vector.name == footerData.vectors %}
+                  {% set vectorData = vector %}
+                {% endif %}
+              {% endfor %}
+
+              {% if vectorData %}
+                <img src="{{ vectorData.src }}" alt="{{ vectorData.alt }}" class="{{ options.vectors.globalStyle }} {{ options.vectors.sizes[vectorData.size] }} md:max-w-[150px]">
+              {% endif %}
+            {% endif %}
           </div>
-        {% endif %}
-        
-        {# Menu grid #}
-        <div class="flex flex-col space-y-6 md:grid md:grid-cols-4 md:gap-8 md:space-y-0">
-          {# Loop through menus - using footerData[""] instead of footerData.menus #}
-          {% for menuConfig in footerData[""] %}
-            <div class="footer-column {{ menuConfig.position }}">
-              {# Find menu data in options.menus (which will be organisms.menus) #}
-              {% if options.menus and options.menus.menus %}
-                {% for menuData in options.menus.menus %}
-                  {% if menuData.name == menuConfig.name %}
-                    {# Display menu heading #}
-                    {% if menuData.heading and options.headings and options.headings.headings %}
-                      {% for heading in options.headings.headings %}
-                        {% if heading.name == menuData.heading %}
-                          <h{{ heading.level | default(4) }} class="{{ menuData.headingStyle }}">{{ heading.text }}</h{{ heading.level | default(4) }}>
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                    
-                    {# Find navigation-secondary configuration #}
-                    {% set navSecondaryData = null %}
-                    {% if options["navigation-secondarys"] and options["navigation-secondarys"]["navigation-secondarys"] %}
-                      {% for navSecondary in options["navigation-secondarys"]["navigation-secondarys"] %}
-                        {% if navSecondary.name == menuData["navigation-secondarys"] %}
-                          {% set navSecondaryData = navSecondary %}
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                    
-                    {# Important: Use nav with navigation-secondary class and data-nav-secondary attribute
-                       to ensure your current-link.js recognizes it correctly #}
-                    <nav class="{{ menuData.menuStyle }} navigation-secondary" data-nav-secondary data-nav-container>
-                      {% if navSecondaryData and navSecondaryData.links %}
-                        {# Loop through the links from navigation-secondary #}
-                        {% for linkName in navSecondaryData.links %}
+          
+          {# 2-4. Trois colonnes de liens #}
+          {% if footerData.columns %}
+            {% for menuConfig in footerData.columns %}
+              <div class="footer-column">
+                {# Titres des sections #}
+                {% if menuConfig.name == "contact_navigation" %}
+                  <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">CONTACT</h4>
+                {% elif menuConfig.name == "site_navigation" %}
+                  <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">NAVIGATION</h4>
+                {% elif menuConfig.name == "socials" %}
+                  <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">SUIVEZ-NOUS</h4>
+                {% endif %}
+                
+                {# Navigation secondaire basée directement sur les données #}
+                <nav class="space-y-3">
+                  {% if options["navigation-secondarys"] and options["navigation-secondarys"]["navigation-secondarys"] %}
+                    {% for navGroup in options["navigation-secondarys"]["navigation-secondarys"] %}
+                      {% if navGroup.name == menuConfig.name and navGroup.links %}
+                        {% for linkName in navGroup.links %}
                           {% if options.links and options.links.links %}
-                            {% for linkData in options.links.links %}
-                              {% if linkData.name == linkName %}
-                                {% if menuData.name == "socials" and footerData.icons %}
-                                  {# Special treatment for social links with icons #}
-                                  <a href="{{ linkData.href }}" 
-                                     class="{{ stateClasses.default }} flex items-center gap-2 mb-2"
-                                     onmouseover="this.className='{{ stateClasses.hover }} flex items-center gap-2 mb-2'" 
-                                     onmouseout="this.className='{{ stateClasses.default }} flex items-center gap-2 mb-2'"
-                                     onfocus="this.className='{{ stateClasses.focus }} flex items-center gap-2 mb-2'"
-                                     onblur="this.className='{{ stateClasses.default }} flex items-center gap-2 mb-2'"
-                                     aria-label="{{ linkData.text }}"
-                                     data-nav-link>
+                            {% for link in options.links.links %}
+                              {% if link.name == linkName %}
+                                {# Contact Navigation avec icônes #}
+                                {% if menuConfig.name == "contact_navigation" %}
+                                  <div class="flex items-center mb-3">
+                                    {# Détermination de l'icône à utiliser #}
+                                    {% set iconName = "" %}
+                                    {% if link.name == "adresse" %}{% set iconName = "dot" %}
+                                    {% elif link.name == "telephone" %}{% set iconName = "phone" %}
+                                    {% elif link.name == "formulaire" %}{% set iconName = "mail" %}
+                                    {% elif link.name == "horaires" %}{% set iconName = "clock" %}
+                                    {% else %}{% set iconName = "dot" %}{% endif %}
                                     
-                                    {# Find corresponding icon #}
-                                    {% set iconData = null %}
+                                    {# Recherche de l'icône #}
                                     {% if options.icons and options.icons.icons %}
                                       {% for icon in options.icons.icons %}
-                                        {% if icon.name == linkData.name %}
-                                          {% set iconData = icon %}
+                                        {% if icon.name == iconName %}
+                                          <span 
+                                            data-svg-src="{{ icon.path }}" 
+                                            class="icon w-4 h-4 text-[theme(--ma-nautic-teal)] mr-2"
+                                            aria-hidden="true"
+                                          ></span>
                                         {% endif %}
                                       {% endfor %}
                                     {% endif %}
                                     
-                                    {% if iconData and iconData.path %}
-                                      {# Add special class for JS script that loads SVGs #}
-                                      <span 
-                                        data-svg-src="{{ iconData.path | default('/assets/images/icons/' + iconData.name + '.svg') }}" 
-                                        class="icon w-4 h-4 mr-2"
-                                        aria-hidden="true"
-                                      ></span>
+                                    <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)]">
+                                      {{ link.text | safe }}
+                                    </a>
+                                  </div>
+                                
+                                {# Réseaux sociaux avec icônes #}
+                                {% elif menuConfig.name == "socials" %}
+                                  <div class="flex items-center mb-3">
+                                    {# Recherche de l'icône sociale #}
+                                    {% if options.icons and options.icons.icons %}
+                                      {% for icon in options.icons.icons %}
+                                        {% if icon.name == link.name %}
+                                          <span 
+                                            data-svg-src="{{ icon.path }}" 
+                                            class="icon w-4 h-4 text-[theme(--ma-nautic-teal)] mr-2"
+                                            aria-hidden="true"
+                                          ></span>
+                                        {% endif %}
+                                      {% endfor %}
                                     {% endif %}
                                     
-                                    <span>{{ linkData.text }}</span>
-                                  </a>
+                                    <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)]">
+                                      {{ link.text }}
+                                    </a>
+                                  </div>
+                                
+                                {# Liens de navigation standards #}
                                 {% else %}
-                                  {# Use renderLink for standard links with dataNavLink parameter set to true #}
-                                  <div class="mb-2">
-                                    {{ renderLink({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
+                                  <div class="mb-3">
+                                    <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
+                                      {{ link.text }}
+                                    </a>
                                   </div>
                                 {% endif %}
                               {% endif %}
                             {% endfor %}
                           {% endif %}
                         {% endfor %}
-                      {% else %}
-                        {# Fallback if no links found in navigation-secondarys #}
-                        <span class="block mb-2">Menu item</span>
-                        <span class="block mb-2">Menu item</span>
                       {% endif %}
-                    </nav>
+                    {% endfor %}
+                  {% else %}
+                    <div class="text-[theme(--ma-nautic-teal)] text-sm">Navigation non configurée</div>
                   {% endif %}
-                {% endfor %}
-              {% else %}
-                {# Fallback if no menu data found #}
-                <h4 class="mb-2 font-bold text-lg">Menu</h4>
-                <div class="space-y-2">
-                  <span class="block">Menu item</span>
-                  <span class="block">Menu item</span>
-                </div>
-              {% endif %}
-            </div>
-          {% endfor %}
+                </nav>
+              </div>
+            {% endfor %}
+          {% endif %}
         </div>
         
-        {# Bottom section with copyright and links - Use regular nav without secondary class #}
-        <div class="mt-8">
-          {# MOBILE VERSION #}
-          <div class="flex flex-col items-start space-y-4 md:hidden">
-            {# Links in footer on mobile - Use nav without secondary class for horizontal indicators #}
-            <nav class="space-y-2 w-full navigation" data-nav-container>
-              {% if footerData.links %}
-                {% for linkConfig in footerData.links %}
-                  <div>
-                    {% set linkFound = false %}
-                    {% if options.links and options.links.links %}
-                      {% for linkData in options.links.links %}
-                        {% if linkData.name == linkConfig.name %}
-                          {% set linkFound = true %}
-                          {{ renderLink({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                    
-                    {% if not linkFound %}
-                      {% if linkConfig.name == 'accessibility' %}
-                        <a href="/accessibility" 
-                           class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
-                           data-nav-link>
-                          Accessibility
-                        </a>
-                      {% elif linkConfig.name == 'creator' %}
-                        <a href="https://hat.fr" 
-                           class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
-                           data-nav-link>
-                          Website by hat
-                        </a>
-                      {% endif %}
-                    {% endif %}
-                  </div>
-                {% endfor %}
-              {% else %}
-                {# Standard links if none defined #}
-                <div>
-                  <a href="/accessibility" 
-                     class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
-                     data-nav-link>
-                    Accessibility
-                  </a>
-                </div>
-                <div>
-                  <a href="https://hat.fr" 
-                     class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
-                     data-nav-link>
-                    Website by hat
-                  </a>
-                </div>
+        {# 5. Bottom section with copyright and links (in line) #}
+        <div class="mt-12 border-t border-[theme(--ma-nautic-gold)] pt-4">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between text-sm">
+            {# Copyright et liens légaux #}
+            <div class="text-[theme(--ma-nautic-white)] mb-4 md:mb-0 flex flex-wrap items-center gap-1">
+              <span>© {% year %} {{ footerData.copyright | default('M.A Nautic tous droits réservés') }}</span>
+              
+              {# Version avec séparateur #}
+              {% if footerData.version %}
+                <span class="mx-2" aria-hidden="true">•</span>
+                <span>v{{ footerData.version }}</span>
               {% endif %}
-            </nav>
-            
-            {# Copyright on mobile #}
-            <div class="text-sm mt-4">
-              <p>© {% year %} {{ footerData.copyright | default('Starter kit all rights reserved') }}</p>
-            </div>
-          </div>
-          
-          {# DESKTOP VERSION #}
-          <div class="hidden md:flex md:items-center md:text-sm md:w-full md:mt-10">
-            {# Copyright #}
-            <span>© {% year %} {{ footerData.copyright | default('Starter kit all rights reserved') }}</span>
-            
-            {# Version with separator #}
-            {% if footerData.version %}
-              <span class="mx-2" aria-hidden="true">•</span>
-              <span>v{{ footerData.version }}</span>
-            {% endif %}
-            
-            {# Links in footer on desktop - Use nav without secondary class for horizontal indicators #}
-            <nav class="flex items-center navigation" data-nav-container>
-              {% if footerData.links %}
-                  {% for linkConfig in footerData.links %}
+              
+              {# Lien Crédits et mentions légales #}
+              {% if footerData.links and footerData.links[0] and footerData.links[0].name == "credit" %}
+                {% for link in options.links.links %}
+                  {% if link.name == "credits" %}
                     <span class="mx-2" aria-hidden="true">•</span>
-                    
-                    {% set linkFound = false %}
-                    {% if options.links and options.links.links %}
-                      {% for linkData in options.links.links %}
-                        {% if linkData.name == linkConfig.name %}
-                          {% set linkFound = true %}
-                          {{ renderLink({ name: linkData.name, datas: options.links, dataNavLink: true }) }}
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                    
-                    {% if not linkFound %}
-                      {% if linkConfig.name == 'accessibility' %}
-                        <a href="/accessibility" 
-                           class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
-                           data-nav-link>
-                          Accessibility
-                        </a>
-                      {% elif linkConfig.name == 'creator' %}
-                        <a href="https://hat.fr" 
-                           class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
-                           data-nav-link>
-                          Website by hat
+                    <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
+                      {{ link.text }}
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
+            
+            {# Autres liens du bas #}
+            <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0">
+              {% for linkConfig in footerData.links %}
+                {% if linkConfig.name == "creator" %}
+                  {% if options.links and options.links.links %}
+                    {% for link in options.links.links %}
+                      {% if link.name == linkConfig.name %}
+                        <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
+                          {{ link.text }}
                         </a>
                       {% endif %}
-                    {% endif %}
-                  {% endfor %}
-              {% else %}
-                {# Standard links if none defined #}
-                <span class="mx-2" aria-hidden="true">•</span>
-                <a href="/accessibility" 
-                   class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
-                   data-nav-link>
-                  Accessibility
-                </a>
-                <span class="mx-2" aria-hidden="true">•</span>
-                <a href="https://hat.fr" 
-                   class="{{ options.links.variants.footer | default('text-gray-500 underline hover:text-gray-700') }}"
-                   data-nav-link>
-                  Website by hat
-                </a>
-              {% endif %}
-            </nav>
+                    {% endfor %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>
@@ -283,26 +208,26 @@ Summon HAT Components Wisely
 
 2. Call the footer component with a specific name
 {{ renderFooter({ 
-    name: "standard",
+    name: "ma_nautic_footer",
     datas: organisms.footers,
     menus: organisms.menus,
     links: atoms.links,
     headings: atoms.headings,
     icons: atoms.icons,
     vectors: atoms.vectors,
-    "navigation-secondarys": atoms["navigation-secondarys"]
+    "navigation-secondarys": organisms["navigation-secondarys"]
 }) }}
 
 3. Usage with custom styles
 {{ renderFooter({ 
-    name: "standard", 
+    name: "ma_nautic_footer", 
     datas: organisms.footers,
     menus: organisms.menus,
     links: atoms.links,
     headings: atoms.headings,
     icons: atoms.icons,
     vectors: atoms.vectors,
-    "navigation-secondarys": atoms["navigation-secondarys"],
+    "navigation-secondarys": organisms["navigation-secondarys"],
     class: "my-custom-footer-class"
 }) }}
 
