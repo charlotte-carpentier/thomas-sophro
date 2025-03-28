@@ -74,6 +74,12 @@
       "group": "block-media"
     },
     {
+      "name": "ma_map",
+      "src": "/assets/images/plan.png",
+      "alt": "Carte des points d'intérêts",
+      "group": "block-media"
+    },
+    {
       "name": "carousel_slide_A",
       "src": "/assets/images/carousel-2/carousel-slide-a.jpg",
       "alt": "Photo de bateau",
@@ -95,6 +101,12 @@
       "name": "carousel_slide_D",
       "src": "/assets/images/carousel-2/carousel-slide-d.jpg",
       "alt": "Photo d'un bateau'",
+      "group": "block-media"
+    },
+    {
+      "name": "ma_group",
+      "src": "/assets/images/ma-group.png",
+      "alt": "Photo d'un groupe de baigneurs",
       "group": "block-media"
     },
     {

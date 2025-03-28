@@ -3,9 +3,10 @@
   "variants": {
     "default": "text-[--ma-nautic-blue] font-['Roboto']",
     "navigation": "ma-nautic-nav-link font-['Vibur'] text-[25px]",
+    "navigation-secondary": "ma-nautic-nav-link font-['Roboto'] text-[25px]",
     "content": "ma-nautic-content-link font-['Vibur']",
     "content-light": "ma-content-link-light font-['Vibur']",
-    "footer": "text-[--ma-nautic-blue] hover:text-[--ma-nautic-teal] font-['Roboto']"
+    "footer": "text-[--ma-nautic-white] hover:text-[--ma-nautic-teal] font-['Roboto']"
   },
   "links": [
     {
@@ -39,6 +40,12 @@
       "style": "content"
     },
     {
+      "name": "contactez-nous_light",
+      "href": "/contact",
+      "text": "CONTACTEZ-NOUS",
+      "style": "content-light"
+    },
+    {
       "name": "decouvrir",
       "href": "/lieu",
       "text": "découvrir",
@@ -51,9 +58,63 @@
       "style": "content"
     },
     {
+      "name": "adresse",
+      "href": "/contact",
+      "text": "20217 Saint-Florent",
+      "style": "navigation"
+    },
+    {
+      "name": "telephone",
+      "href": "/contact",
+      "text": "<p>Jonathan +(33)6 26 02 63 71</p> <p>Florent +(33)6 25 70 47 10</p>",
+      "style": "navigation"
+    },
+    {
+      "name": "formulaire",
+      "href": "/contact",
+      "text": "Nous écrire",
+      "style": "navigation"
+    },
+    {
+      "name": "horaires",
+      "href": "/contact",
+      "text": "<p>Heures d’ouvertures : </p> <p>Tous les jours de 9h30 à 18h</p>",
+      "style": "navigation"
+    },
+    {
+      "name": "faq",
+      "href": "/faq",
+      "text": "FAQ",
+      "style": "navigation"
+    },
+    {
+      "name": "facebook",
+      "href": "/facebook",
+      "text": "Facebook",
+      "style": "navigation"
+    },
+    {
+      "name": "linkedin",
+      "href": "/linkedin",
+      "text": "Linkedin",
+      "style": "navigation"
+    },
+    {
+      "name": "youtube",
+      "href": "/youtube",
+      "text": "Youtube",
+      "style": "navigation"
+    },
+    {
       "name": "credits",
       "href": "/credits",
-      "text": "Crédits et mentions légales",
+      "text": "CREDITS & MENTIONS LEGALES",
+      "style": "footer"
+    },
+    {
+      "name": "creator",
+      "href": "/creator",
+      "text": "Design Marty - Website CC",
       "style": "footer"
     }
   ]

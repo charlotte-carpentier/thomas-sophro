@@ -49,10 +49,35 @@
     {% endif %}
 
     {% set containerStyle = options.datas.containerStyle %}
-    {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
-    {% set textContainerStyle = options.datas.textContainerStyle %}
-    {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center md:justify-start" %}
-    {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
+    
+    {# Vérifier si une image est définie pour cette section #}
+    {% set hasImage = variant.image is defined and variant.image %}
+    
+    {# Vérifier si la section a UNIQUEMENT une image sans texte ni autre contenu #}
+    {% set imageOnlySection = hasImage and not variant.heading and not variant.content and not variant.text and not variant.description and not variant.superHeading and not variant.primaryButton and not variant.secondaryButton and not variant.link %}
+    
+    {% if hasImage and not imageOnlySection %}
+      {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
+      {% set textContainerStyle = options.datas.textContainerStyle %}
+      {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
+    {% elif imageOnlySection %}
+      {# Style spécifique pour une section avec uniquement une image #}
+      {% set contentLayoutStyle = {
+        "mobile": "flex flex-col items-center justify-center",
+        "desktop": "flex items-center justify-center"
+      } %}
+      {% set textContainerStyle = "hidden" %}
+      {% set imageContainerStyle = "w-full flex justify-center items-center" %}
+    {% else %}
+      {% set contentLayoutStyle = {
+        "mobile": "flex flex-col gap-6",
+        "desktop": "grid grid-cols-1 gap-8 items-center"
+      } %}
+      {% set textContainerStyle = options.datas.textContainerStyle ~ " mx-auto max-w-4xl text-center" %}
+      {% set imageContainerStyle = "hidden" %}
+    {% endif %}
+    
+    {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center" %}
 
     {# Spécifique à MA-Nautic section text #}
     {% if variant and variant.name == "ma_nautic_discover" %}
@@ -102,7 +127,7 @@
               {% endfor %}
 
               {% if subtitle %}
-                <{{ "h" + subtitle.level }} class="{{ options.headings.variants[subtitle.style] }} ma-nautic-subtitle">
+                <{{ "h" + subtitle.level }} class="{{ options.headings.globalStyle }} {{ options.headings.variants[subtitle.style] }}">
                   {{ subtitle.text }}
                 </{{ "h" + subtitle.level }}>
               {% endif %}
@@ -139,9 +164,32 @@
         </div>
       </section>
 
+    {# Cas spécifique pour une section avec uniquement une image (ma_nautic_map) #}
+    {% elif imageOnlySection %}
+      <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }} {% if variant.height %}{{ variant.height }}{% else %}py-16 md:py-20 lg:py-24{% endif %}">
+        <div class="{{ containerStyle }}">
+          <div class="{{ contentLayoutStyle.mobile }} {{ contentLayoutStyle.desktop }}">
+            {# Affichage de l'image centrée #}
+            {% if variant.image and options.images and options.images.images %}
+              {% set sectionImage = null %}
+              {% for image in options.images.images %}
+                {% if image.name == variant.image %}
+                  {% set sectionImage = image %}
+                {% endif %}
+              {% endfor %}
+
+              {% if sectionImage %}
+                {% set imageVariant = options.images.variants[sectionImage.size] | default('') %}
+                <img src="{{ sectionImage.src }}" alt="{{ sectionImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }} mx-auto">
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </section>
+
       {# Section Text standard pour les autres variantes #}
     {% else %}
-      <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
+      <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }} {% if variant.height %}{{ variant.height }}{% else %}py-16 md:py-20 lg:py-24{% endif %}">
         <div class="{{ containerStyle }}">
           <div class="{{ contentLayoutStyle.mobile }} {{ contentLayoutStyle.desktop }}">
             {# Text Content Column #}
@@ -156,9 +204,9 @@
                 {% endfor %}
 
                 {% if superHeading %}
-                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles[" h" + superheading.level] }} {{ options.headings.variants[superheading.style] }}"="h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}"">
+                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}">
                     {{ superHeading.text }}
-                  </{{ "h" + superheading.level }}>
+                  </{{ "h" + superHeading.level }}>
                 {% endif %}
               {% endif %}
 
@@ -172,11 +220,11 @@
                 {% endfor %}
 
                 {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles[" h" + mainheading.level] }} {{ options.headings.variants[mainheading.style] }} ma-nautic-subtitle"="h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }} ma-nautic-subtitle"">
+                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }}">
                     {{ mainHeading.text }}
-                  </{{ "h" + mainheading.level }}>
+                  </{{ "h" + mainHeading.level }}>
                 {% else %}
-                  <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }} ma-nautic-subtitle">
+                  <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }}">
                     {{ variant.heading }}
                   </h2>
                 {% endif %}
@@ -184,15 +232,22 @@
 
               {# Description #}
               {% if variant.description %}
-                <p class="{{ variant.descriptionStyle }} ma-nautic-subtitle">
+                <p class="{{ variant.descriptionStyle | default('') }}">
                   {{ variant.description }}
                 </p>
               {% endif %}
 
-              {# Content - Ajout du support de content comme alternative à description #}
+              {# Content - Pour le contenu HTML #}
               {% if variant.content %}
-                <div class="{{ variant.contentStyle | default('') }} ma-nautic-subtitle">
+                <div class="{{ variant.contentStyle | default('') }}">
                   {{ variant.content | safe }}
+                </div>
+              {% endif %}
+
+              {# Text - Nouvelle section pour récupérer le texte (ajout) #}
+              {% if variant.text %}
+                <div class="{{ variant.textStyle | default('') }}">
+                  {{ variant.text | safe }}
                 </div>
               {% endif %}
 
@@ -216,27 +271,43 @@
                       datas: options.buttons
                   }) }}
                 {% endif %}
+                
+                {# Lien standard si défini #}
+                {% if variant.link and options.links and options.links.links %}
+                  {% set linkData = null %}
+                  {% for link in options.links.links %}
+                    {% if link.name | lower == variant.link | lower %}
+                      {% set linkData = link %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if linkData %}
+                    <a href="{{ linkData.href }}" class="{{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }} mt-6">
+                      {{ linkData.text }}
+                    </a>
+                  {% endif %}
+                {% endif %}
               </div>
             </div>
 
-            {# Image Column #}
-            <div class="{{ imageContainerStyle }}">
-              {% if variant.image and options.images and options.images.images %}
-                {% set sectionImage = null %}
-                {% for image in options.images.images %}
-                  {% if image.name == variant.image %}
-                    {% set sectionImage = image %}
-                  {% endif %}
-                {% endfor %}
+            {# Image Column - Afficher uniquement si hasImage est vrai et pas une section imageOnly #}
+            {% if hasImage and not imageOnlySection %}
+              <div class="{{ imageContainerStyle }}">
+                {% if variant.image and options.images and options.images.images %}
+                  {% set sectionImage = null %}
+                  {% for image in options.images.images %}
+                    {% if image.name == variant.image %}
+                      {% set sectionImage = image %}
+                    {% endif %}
+                  {% endfor %}
 
-                {% if sectionImage %}
-                  {% set imageVariant = options
-                    .images
-                    .variants[sectionImage.size] %}
-                  <img src="{{ sectionImage.src }}" alt="{{ sectionImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }}">
+                  {% if sectionImage %}
+                    {% set imageVariant = options.images.variants[sectionImage.size] | default('') %}
+                    <img src="{{ sectionImage.src }}" alt="{{ sectionImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }} mx-auto">
+                  {% endif %}
                 {% endif %}
-              {% endif %}
-            </div>
+              </div>
+            {% endif %}
           </div>
         </div>
       </section>
@@ -282,6 +353,22 @@ Summon HAT Components Wisely
     headings: atoms.headings,
     images: atoms.images,
     links: atoms.links
+}) }}
+
+5. Using MA-Nautic Plus Section with text support
+{{ renderSectionText({ 
+    name: "ma_nautic_plus",
+    datas: organisms["section-texts"],
+    headings: atoms.headings,
+    images: atoms.images,
+    links: atoms.links
+}) }}
+
+6. Using MA-Nautic Map (image only section)
+{{ renderSectionText({ 
+    name: "ma_nautic_map",
+    datas: organisms["section-texts"],
+    images: atoms.images
 }) }}
 
 Every journey begins with a discover section! 🏰🛡️

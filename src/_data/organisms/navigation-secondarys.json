@@ -8,45 +8,30 @@
   },
   "navigation-secondarys": [
     {
+      "name": "contact_navigation",
+      "links": [
+        "adresse",
+        "telephone",
+        "formulaire",
+        "horaires"
+      ]
+    },
+    {
       "name": "site_navigation",
       "links": [
-        "tavern",
-        "lore",
-        "guild_services",
-        "hall_of_legends",
-        "bard_tales",
-        "send_a_raven"
-      ]
-    },
-    {
-      "name": "footer_navigation",
-      "links": [
-        "sacred_decrees",
-        "laws_of_the_realm",
-        "magic_biscuits",
-        "map_of_the_kingdom",
-        "guild_recruitment",
-        "oracle_whispers"
-      ]
-    },
-    {
-      "name": "royal_services",
-      "links": [
-        "blacksmith_forge",
-        "potion_brewing",
-        "spell_enchantments",
-        "royal_courier",
-        "bard_entertainment",
-        "dragon_rentals"
+        "accueil",
+        "nos-bateaux",
+        "lieux-interets",
+        "contact",
+        "faq"
       ]
     },
     {
       "name": "socials",
       "links": [
-        "scroll_of_faces",
-        "chirping_birds",
-        "illusion_mirror",
-        "guild_registry"
+        "facebook",
+        "linkedin",
+        "youtube"
       ]
     }
   ]

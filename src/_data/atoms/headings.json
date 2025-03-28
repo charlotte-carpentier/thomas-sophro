@@ -14,6 +14,7 @@
     "ma_nautic_subtitle": "font-script text-white text-3xl md:text-4xl lg:text-5xl italic",
     "ma_nautic_section_title": "font-['Roboto'] font-ma-black text-[theme(--ma-nautic-gold)] text-ma-subtitle mb-4 tracking-wide",
     "ma_nautic_section_subtitle": "font-['Roboto'] font-ma-bold text-[theme(--ma-nautic-blue)] text-ma-title",
+    "ma_nautic_subtitle_light": "font-['Roboto'] font-ma-bold text-[theme(--ma-nautic-white)] text-ma-title",
     "ma_nautic_section_drop": "font-['Vibur'] text-[theme(--ma-nautic-gold)] text-ma-heading",
     "section_title": "ma-nautic-section-title",
     "boat-title": "ma-nautic-boat-title",
@@ -76,6 +77,24 @@
       "level": 2,
       "text": "_Les petits plus",
       "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "ma_nautic_plus",
+      "level": 2,
+      "text": "Notre location de bateaux près de la plage du Lotu",
+      "style": "ma_nautic_subtitle_light"
+    },
+    {
+      "name": "voguez",
+      "level": 2,
+      "text": "_Voguez en Corse",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "ma_nautic_merveille",
+      "level": 2,
+      "text": "Découvrez les Merveilles de Saint-Florent à bord de nos bateaux",
+      "style": "ma_nautic_section_subtitle"
     }
   ]
 }

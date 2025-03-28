@@ -1,5 +1,5 @@
 {
-    "globalStyle": "typography-body-m footer-container bg-gray-200 shadow-md",
+    "globalStyle": "typography-body-m footer-container bg-[theme(--ma-nautic-blue)] shadow-md",
     "variants": {
         "default": "text-gray-800",
         "hover": "text-gray-600",
@@ -8,29 +8,25 @@
     },
     "footers": [
         {
-            "name": "standard",
-            "containerStyle": "bg-gray-100 py-8",
-            "": [
+            "name": "ma_nautic_footer",
+            "containerStyle": "bg-[theme(--ma-nautic-blue)] py-8",
+            "columns": [
                 {
-                    "name": "main_navigation",
+                    "name": "contact_navigation",
                     "position": "column_1"
                 },
                 {
-                    "name": "footer_navigation",
+                    "name": "site_navigation",
                     "position": "column_2"
                 },
                 {
-                    "name": "royal_services",
-                    "position": "column_3"
-                },
-                {
                     "name": "socials",
-                    "position": "column_4"
+                    "position": "column_3"
                 }
             ],
-            "copyright": "Starter kit tous droits réservés",
+            "copyright": "M.A Nautic tous droits réservés",
             "version": "1.0.0",
-            "vectors": "logo_full",
+            "vectors": "ma_logo",
             "icons": [
                 {
                     "name": "facebook"
@@ -39,15 +35,24 @@
                     "name": "linkedin"
                 },
                 {
-                    "name": "twitter"
+                    "name": "youtube"
                 },
                 {
-                    "name": "instagram"
+                    "name": "dot"
+                },
+                {
+                    "name": "phone"
+                },
+                {
+                    "name": "mail"
+                },
+                {
+                    "name": "clock"
                 }
             ],
             "links": [
                 {
-                  "name": "accessibility"
+                  "name": "credit"
                 },
                 {
                   "name": "creator"
