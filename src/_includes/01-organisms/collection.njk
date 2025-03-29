@@ -70,13 +70,20 @@
                   {% endif %}
                 {% endfor %}
 
+                {# Récupérer les styles d'icône spécifiques si disponibles #}
+                {% set iconVariantName = itemData.iconName ~ "Icon" %}
+                {% set iconDefaultClass = options.datas.variants[iconVariantName].default | default("") if options.datas.variants[iconVariantName] else "" %}
+                {% set iconStyle = options.datas.variants[iconVariantName].iconStyle | default("text-[theme(--ma-nautic-teal)]") if options.datas.variants[iconVariantName] else "text-[theme(--ma-nautic-teal)]" %}
+                {% set iconContainerSize = options.datas.variants[iconVariantName].containerSize | default("w-12 h-12 lg:w-16 lg:h-16") if options.datas.variants[iconVariantName] else "w-12 h-12 lg:w-16 lg:h-16" %}
+                {% set iconSize = options.datas.variants[iconVariantName].iconSize | default("32") if options.datas.variants[iconVariantName] else "32" %}
+
                 {% if iconData %}
-                  <span data-svg-src="{{ iconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
+                  <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
                     <!-- SVG will be loaded here -->
                   </span>
                 {% else %}
-                  <span class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="32" height="32" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                  <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
                   </span>
                 {% endif %}
               </div>
@@ -84,7 +91,7 @@
 
             {# Content - price, engine, passengersNumber #}
             <div class="{{ contentContainerStyle }} text-center">
-              <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} font-bold text-xl mb-2">{{ itemData.price }}</p>
+              <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} mb-2">{{ itemData.price }}</p>
               <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} mb-2">{{ itemData.engine }}</p>
               <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">{{ itemData.passengersNumber }}</p>
             </div>
@@ -102,9 +109,9 @@
 
           {# Desktop layout (two columns) - Visible à partir du breakpoint lg #}
           {% if not reversed %}
-          <div class="hidden lg:flex lg:flex-row items-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
+          <div class="hidden lg:flex lg:flex-row items-center justify-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
             {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
-            <div class="{{ textContentStyle }} h-full flex flex-col items-center justify-center text-center px-8">
+            <div class="w-auto min-w-[400px] max-w-[550px] mx-auto border border-[theme(--ma-nautic-white)] p-10 flex flex-col items-center justify-center text-center my-auto">
               {# Super Heading (section title with underscore) - équivalent du modèle #}
               {% if itemData.model and options.headings %}
                 {{ renderHeading({
@@ -132,13 +139,20 @@
                     {% endif %}
                   {% endfor %}
 
+                  {# Récupérer les styles d'icône spécifiques si disponibles #}
+                  {% set iconVariantName = itemData.iconName ~ "Icon" %}
+                  {% set iconDefaultClass = options.datas.variants[iconVariantName].default | default("") if options.datas.variants[iconVariantName] else "" %}
+                  {% set iconStyle = options.datas.variants[iconVariantName].iconStyle | default("text-[theme(--ma-nautic-teal)]") if options.datas.variants[iconVariantName] else "text-[theme(--ma-nautic-teal)]" %}
+                  {% set iconContainerSize = options.datas.variants[iconVariantName].containerSize | default("w-12 h-12 lg:w-16 lg:h-16") if options.datas.variants[iconVariantName] else "w-12 h-12 lg:w-16 lg:h-16" %}
+                  {% set iconSize = options.datas.variants[iconVariantName].iconSize | default("32") if options.datas.variants[iconVariantName] else "32" %}
+
                   {% if iconData %}
-                    <span data-svg-src="{{ iconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
+                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
                       <!-- SVG will be loaded here -->
                     </span>
                   {% else %}
-                    <span class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="32" height="32" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                    <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
                     </span>
                   {% endif %}
                 </div>
@@ -146,7 +160,7 @@
 
               {# Content - price, engine, passengersNumber #}
               <div class="{{ contentContainerDesktopStyle }}">
-                <p class="text-[theme(--ma-nautic-white)] font-bold text-xl mb-2">{{ itemData.price }}</p>
+                <p class="text-[theme(--ma-nautic-white)] mb-2">{{ itemData.price }}</p>
                 <p class="text-[theme(--ma-nautic-white)] mb-2">{{ itemData.engine }}</p>
                 <p class="text-[theme(--ma-nautic-white)]">{{ itemData.passengersNumber }}</p>
               </div>
@@ -178,9 +192,9 @@
             </div>
           </div>
           {% else %}
-          <div class="hidden lg:flex lg:flex-row-reverse items-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
+          <div class="hidden lg:flex lg:flex-row-reverse items-center justify-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
             {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
-            <div class="{{ textContentStyle }} h-full flex flex-col items-center justify-center text-center px-8">
+            <div class="w-auto min-w-[400px] max-w-[550px] mx-auto border border-[theme(--ma-nautic-blue)] p-10 flex flex-col items-center justify-center text-center my-auto">
               {# Super Heading (section title with underscore) - équivalent du modèle #}
               {% if itemData.model and options.headings %}
                 {{ renderHeading({
@@ -209,13 +223,20 @@
                     {% endif %}
                   {% endfor %}
 
+                  {# Récupérer les styles d'icône spécifiques si disponibles #}
+                  {% set iconVariantName = itemData.iconName ~ "Icon" %}
+                  {% set iconDefaultClass = options.datas.variants[iconVariantName].default | default("") if options.datas.variants[iconVariantName] else "" %}
+                  {% set iconStyle = options.datas.variants[iconVariantName].iconStyle | default("text-[theme(--ma-nautic-teal)]") if options.datas.variants[iconVariantName] else "text-[theme(--ma-nautic-teal)]" %}
+                  {% set iconContainerSize = options.datas.variants[iconVariantName].containerSize | default("w-12 h-12 lg:w-16 lg:h-16") if options.datas.variants[iconVariantName] else "w-12 h-12 lg:w-16 lg:h-16" %}
+                  {% set iconSize = options.datas.variants[iconVariantName].iconSize | default("32") if options.datas.variants[iconVariantName] else "32" %}
+
                   {% if iconData %}
-                    <span data-svg-src="{{ iconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
+                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
                       <!-- SVG will be loaded here -->
                     </span>
                   {% else %}
-                    <span class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="32" height="32" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                    <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
                     </span>
                   {% endif %}
                 </div>
@@ -223,7 +244,7 @@
 
               {# Content - price, engine, passengersNumber #}
               <div class="{{ contentContainerDesktopStyle }}">
-                <p class="text-[theme(--ma-nautic-blue)] font-bold text-xl mb-2">{{ itemData.price }}</p>
+                <p class="text-[theme(--ma-nautic-blue)] mb-2">{{ itemData.price }}</p>
                 <p class="text-[theme(--ma-nautic-blue)] mb-2">{{ itemData.engine }}</p>
                 <p class="text-[theme(--ma-nautic-blue)]">{{ itemData.passengersNumber }}</p>
               </div>
