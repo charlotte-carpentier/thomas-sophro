@@ -93,8 +93,8 @@
         </div>
       </section>
 
-    {# Spécifique à bateaux hero #}
-    {% elseif variant.name == "bateaux_hero" %}
+    {# Spécifique aux pages bateaux, lieux et contact - structure avec bande beige et vagues #}
+    {% elseif variant.name == "bateaux_hero" or variant.name == "lieux_hero" or variant.name == "contact_hero" %}
       {# CHANGEMENT ICI: Nous séparons la bande beige en dehors de la section principale #}
       {# Bande supérieure en beige pour le super heading #}
       <div class="bg-[theme(--ma-nautic-beige)] pt-16 md:pt-20 lg:pt-24 pb-12 w-full">
@@ -175,7 +175,7 @@
                 {% endif %}
               {% endif %}
 
-              {# Icon if present - Utilisation de data-svg-src pour le chargement JS - EXACTEMENT COMME DANS SECTION-ABOUT #}
+              {# Icon if present - Utilisation de data-svg-src pour le chargement JS #}
               {% if variant.hasIcon and variant.iconName and options.icons %}
                 <div class="flex justify-center my-0 mb-6">
                   {% set iconData = null %}
@@ -216,7 +216,16 @@
                 {% if scrollButton %}
                   <div class="relative mb-12">
                     <div class="{{ scrollArrowWrapperStyle }}">
-                      <a href="#boat-list" class="ma-nautic-scroll-arrow {{ arrowStyle }}" aria-label="Défiler vers la liste des bateaux">
+                      {% set scrollTarget = "" %}
+                      {% if variant.name == "bateaux_hero" %}
+                        {% set scrollTarget = "#boat-list" %}
+                      {% elif variant.name == "lieux_hero" %}
+                        {% set scrollTarget = "#lieux-list" %}
+                      {% elif variant.name == "contact_hero" %}
+                        {% set scrollTarget = "#contact-form" %}
+                      {% endif %}
+                      
+                      <a href="{{ scrollTarget }}" class="ma-nautic-scroll-arrow {{ arrowStyle }}" aria-label="Défiler vers le contenu">
                         {% if scrollButton.icon and options.icons %}
                           {% set arrowIconData = null %}
                           {% for icon in options.icons.icons %}
@@ -383,9 +392,9 @@ Summon HAT Components Wisely
     images: atoms.images
 }) }}
 
-5. Using Bateaux Hero with waves and special structure
+5. Using Bateaux, Lieux or Contact Hero with waves and special structure
 {{ renderSectionHero({ 
-    name: "bateaux_hero",
+    name: "bateaux_hero", // or "lieux_hero" or "contact_hero"
     datas: organisms["section-heros"],
     headings: atoms.headings,
     images: atoms.images,

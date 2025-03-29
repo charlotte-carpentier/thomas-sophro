@@ -49,6 +49,18 @@
       "style": "ma_nautic_section_drop"
     },
     {
+      "name": "agence_lieux",
+      "level": 1,
+      "text": "LIEUX D'INTÉRÊTS À SAINT-FLORENT",
+      "style": "ma_nautic_section_drop"
+    },
+    {
+      "name": "agence_contact",
+      "level": 1,
+      "text": "CONTACTEZ MA NAUTIC À SAINT-FLORENT",
+      "style": "ma_nautic_section_drop"
+    },
+    {
       "name": "qui_sommes_nous",
       "level": 2,
       "text": "_Qui sommes-nous ?",
@@ -101,6 +113,78 @@
       "level": 2,
       "text": "Découvrez les Merveilles de Saint-Florent à bord de nos bateaux",
       "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "capelli_500",
+      "level": 2,
+      "text": "_Capelli Tempest 500",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "ma_nine",
+      "level": 2,
+      "text": "Nine",
+      "style": "ma_nautic_subtitle_light" 
+    },
+    {
+      "name": "camarat_cc",
+      "level": 2,
+      "text": "_Cap Camarat 5.5 cc",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "ma_alba",
+      "level": 2,
+      "text": "Alba",
+      "style": "ma_nautic_section_subtitle" 
+    },
+    {
+      "name": "capelli_630",
+      "level": 2,
+      "text": "_Capelli 630 S",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "ma_first",
+      "level": 2,
+      "text": "First",
+      "style": "ma_nautic_subtitle_light" 
+    },
+    {
+      "name": "capelli_700",
+      "level": 2,
+      "text": "_Capelli Tempest 700",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "ma_libecciu",
+      "level": 2,
+      "text": "Libecciu",
+      "style": "ma_nautic_section_subtitle" 
+    },
+    {
+      "name": "motonautica_780",
+      "level": 2,
+      "text": "_Motonautica 780 confort",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "ma_enzo",
+      "level": 2,
+      "text": "Enzo",
+      "style": "ma_nautic_subtitle_light" 
+    },
+    {
+      "name": "lomac_850",
+      "level": 2,
+      "text": "_Lomac 850 in",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "ma_casablanca",
+      "level": 2,
+      "text": "Casa Blanca",
+      "style": "ma_nautic_section_subtitle" 
     }
   ]
 }

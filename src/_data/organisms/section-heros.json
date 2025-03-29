@@ -37,7 +37,7 @@
       "variant": "default",
       "superHeading": "agence_location",
       "heading": "ma_nautic_corse",
-      "description": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'><strong>M.A Nautic</strong> dispose d'une <strong>flotte de bateaux</strong> de différentes tailles et différents types, amarrés au <strong>port de Saint-Florent</strong> en Haute-Corse.</p><p class='mb-4'>Leurs gabarits vont de 5 mètres jusqu'à 8,5 mètres pouvant accueillir de 4 à 12 personnes à leur bord.</p><p class='mb-4'><strong>Polyvalents</strong>, dotés d'une coque rigide ou semi-rigide pour répondre à vos attentes et s'adapter à vos activités, nos <strong>bateaux</strong> affichent une <strong>puissance motrice</strong> variant de 80 chevaux pour les plus petits à 300 chevaux pour le plus gros.</p><p class='mb-4'>Ils sont équipés de <strong>sondeur-GPS</strong> et sont <strong>armés</strong> pour vous offrir une <strong>sécurité</strong> totale au cours de votre balade en mer ou lorsque vous y amarrerez un <strong>wakeboard</strong> ou une <strong>bouée tractée</strong>.</p></div>",
+      "description": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'><strong>M.A Nautic</strong> dispose d'une <strong>flotte de bateaux</strong> de différentes tailles et différents types, amarrés au <strong>port de Saint-Florent</strong> en Haute-Corse.</p><p class='mb-4'>Leurs gabarits vont de 5 mètres jusqu'à 8,5 mètres pouvant accueillir de 4 à 12 personnes à leur bord. <strong>Polyvalents</strong>, dotés d'une coque rigide ou semi-rigide pour répondre à vos attentes et s'adapter à vos activités, nos <strong>bateaux</strong> affichent une <strong>puissance motrice</strong> variant de 80 chevaux pour les plus petits à 300 chevaux pour le plus gros. Ils sont équipés de <strong>sondeur-GPS</strong> et sont <strong>armés</strong> pour vous offrir une <strong>sécurité</strong> totale au cours de votre balade en mer ou lorsque vous y amarrerez un <strong>wakeboard</strong> ou une <strong>bouée tractée</strong>.</p></div>",
       "scrollArrowButton": "arrow_scroll_up",
       "scrollArrowButtonVariant": "arrowScrollIcon",
       "image-right": "ma_wave_right",
@@ -50,24 +50,32 @@
     {
       "name": "lieux_hero",
       "variant": "default",
-      "superHeading": "quest_log",
-      "heading": "goblin_menace",
-      "description": "Embark on a perilous journey through the ancient forests where goblins have been terrorizing local villages. Prepare your gear, sharpen your blade, and bring peace to the realm.",
-      "descriptionStyle": "text-base text-gray-500 max-w-prose",
-      "primaryButton": "submit_quest",
-      "secondaryButton": "quest_details",
-      "image": "placeholder_medium"
+      "superHeading": "agence_lieux",
+      "heading": "ma_nautic_corse",
+      "description": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'><strong>M.A Nautic</strong> dispose d'une <strong>flotte de bateaux</strong> de différentes tailles et différents types, amarrés au <strong>port de Saint-Florent</strong> en Haute-Corse.</p><p class='mb-4'>Leurs gabarits vont de 5 mètres jusqu'à 8,5 mètres pouvant accueillir de 4 à 12 personnes à leur bord.</p><p class='mb-4'><strong>Polyvalents</strong>, dotés d'une coque rigide ou semi-rigide pour répondre à vos attentes et s'adapter à vos activités, nos <strong>bateaux</strong> affichent une <strong>puissance motrice</strong> variant de 80 chevaux pour les plus petits à 300 chevaux pour le plus gros.</p><p class='mb-4'>Ils sont équipés de <strong>sondeur-GPS</strong> et sont <strong>armés</strong> pour vous offrir une <strong>sécurité</strong> totale au cours de votre balade en mer ou lorsque vous y amarrerez un <strong>wakeboard</strong> ou une <strong>bouée tractée</strong>.</p></div>",
+      "scrollArrowButton": "arrow_scroll_up",
+      "scrollArrowButtonVariant": "arrowScrollIcon",
+      "image-right": "ma_wave_right",
+      "image-left": "ma_wave_left",
+      "icon": "wheel",
+      "iconVariant": "wheelIcon",
+      "hasIcon": true,
+      "iconName": "wheel"
     },
     {
       "name": "contact_hero",
       "variant": "default",
-      "superHeading": "quest_log",
-      "heading": "goblin_menace",
-      "description": "Embark on a perilous journey through the ancient forests where goblins have been terrorizing local villages. Prepare your gear, sharpen your blade, and bring peace to the realm.",
-      "descriptionStyle": "text-base text-gray-500 max-w-prose",
-      "primaryButton": "submit_quest",
-      "secondaryButton": "quest_details",
-      "image": "placeholder_medium"
+      "superHeading": "agence_contact",
+      "heading": "ma_nautic_corse",
+      "description": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'><strong>M.A Nautic</strong> dispose d'une <strong>flotte de bateaux</strong> de différentes tailles et différents types, amarrés au <strong>port de Saint-Florent</strong> en Haute-Corse.</p><p class='mb-4'>Leurs gabarits vont de 5 mètres jusqu'à 8,5 mètres pouvant accueillir de 4 à 12 personnes à leur bord.</p><p class='mb-4'><strong>Polyvalents</strong>, dotés d'une coque rigide ou semi-rigide pour répondre à vos attentes et s'adapter à vos activités, nos <strong>bateaux</strong> affichent une <strong>puissance motrice</strong> variant de 80 chevaux pour les plus petits à 300 chevaux pour le plus gros.</p><p class='mb-4'>Ils sont équipés de <strong>sondeur-GPS</strong> et sont <strong>armés</strong> pour vous offrir une <strong>sécurité</strong> totale au cours de votre balade en mer ou lorsque vous y amarrerez un <strong>wakeboard</strong> ou une <strong>bouée tractée</strong>.</p></div>",
+      "scrollArrowButton": "arrow_scroll_up",
+      "scrollArrowButtonVariant": "arrowScrollIcon",
+      "image-right": "ma_wave_right",
+      "image-left": "ma_wave_left",
+      "icon": "wheel",
+      "iconVariant": "wheelIcon",
+      "hasIcon": true,
+      "iconName": "wheel"
     }
   ]
 }

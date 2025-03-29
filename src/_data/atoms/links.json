@@ -116,6 +116,18 @@
       "href": "/creator",
       "text": "Design Marty - Website CC",
       "style": "footer"
+    },
+    {
+      "name": "reservez",
+      "href": "/contact",
+      "text": "RESERVEZ",
+      "style": "content"
+    },
+    {
+      "name": "reservez_light",
+      "href": "/contact",
+      "text": "RESERVEZ",
+      "style": "content-light"
     }
   ]
 }

@@ -13,6 +13,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextBtn = carousel.parentElement.querySelector("[data-carousel-next]");
     const indicators = document.querySelectorAll(`[data-carousel-target="${carouselId}"]`);
     
+    // Détermine si le carousel est dans une section avec fond blanc (reversed)
+    let isReversed = false;
+    let section = carousel.closest("[data-collection-item]") || carousel.closest("[data-section-about]");
+    if (section) {
+      isReversed = section.getAttribute("data-reversed") === "true";
+    }
+    
     let index = 0;
     let autoplayInterval = null;
     
@@ -49,12 +56,26 @@ document.addEventListener("DOMContentLoaded", function () {
           indicator.classList.add("carousel-indicator-active");
           
           // Styles CSS directs (en complément de la classe)
-          indicator.style.backgroundColor = "#2b3947"; // Gris très foncé (--ma-nautic-blue)
-          indicator.style.opacity = "0.6"; // Opacité pour l'indicateur actif
+          if (isReversed) {
+            // Fond blanc, indicateurs bleus pour le mode inversé
+            indicator.style.backgroundColor = "#2b3947"; // Bleu (--ma-nautic-blue)
+            indicator.style.opacity = "0.7";
+          } else {
+            // Fond bleu, indicateurs blancs pour le mode standard
+            indicator.style.backgroundColor = "#ffffff"; // Blanc
+            indicator.style.opacity = "0.8";
+          }
         } else {
           // Styles pour les indicateurs inactifs
-          indicator.style.backgroundColor = "#2b3947"; // Gris très foncé (--ma-nautic-blue)
-          indicator.style.opacity = "0.2"; // Opacité réduite
+          if (isReversed) {
+            // Fond blanc, indicateurs bleus pour le mode inversé
+            indicator.style.backgroundColor = "#2b3947"; // Bleu (--ma-nautic-blue)
+            indicator.style.opacity = "0.3";
+          } else {
+            // Fond bleu, indicateurs blancs pour le mode standard
+            indicator.style.backgroundColor = "#ffffff"; // Blanc
+            indicator.style.opacity = "0.3";
+          }
         }
       });
     }

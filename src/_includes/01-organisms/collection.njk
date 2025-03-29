@@ -1,0 +1,481 @@
+{# 
+=========================
+      COLLECTION DETAIL        
+=========================
+#}
+
+{% from "03-atoms/heading.njk" import renderHeading %}
+{% from "03-atoms/link.njk" import renderLink %}
+{% from "03-atoms/icon.njk" import renderIcon %}
+{% from "01-organisms/carousel.njk" import renderCarousel %}
+
+{% macro renderCollection(options) %}
+  {% if options.datas %}
+    {% set globalStyle = options.datas.globalStyle | default("boat-detail-container") %}
+    {% set sectionStyles = options.datas.sectionStyles | default({}) %}
+    {% set reversed = options.reversed | default(false) %}
+
+    {# Définition des styles avec valeurs par défaut #}
+    {% set containerStyle = sectionStyles.container | default("container mx-auto px-4 lg:px-8") %}
+    {% set contentWrapperStyle = sectionStyles.contentWrapper | default("flex flex-col lg:flex-row lg:items-start lg:gap-2") %}
+    {% set textContentStyle = sectionStyles.textContent | default("w-full lg:w-1/2 mb-6 lg:mb-0 text-center") %}
+    {% set mediaContentStyle = sectionStyles.mediaContent | default("w-full lg:w-1/2") %}
+    {% set iconWrapperStyle = sectionStyles.iconWrapper | default("flex justify-center my-0") %}
+    {% set contentContainerStyle = sectionStyles.contentContainer | default("mt-4") %}
+    {% set contentContainerDesktopStyle = sectionStyles.contentContainerDesktop | default("mt-4 text-center") %}
+    {% set buttonWrapperStyle = sectionStyles.buttonWrapper | default("mt-6 flex justify-center") %}
+    {% set indicatorsContainerStyle = sectionStyles.indicatorsContainer | default("mt-4 flex justify-center gap-2") %}
+
+    {# Créer un ID unique pour la section #}
+    {% set sectionId = "collection-" ~ (options.name | replace(" ", "-") | lower) %}
+
+    {# Récupérer les données de l'élément spécifique #}
+    {% set itemData = null %}
+    {% for item in options.datas.boats %}
+      {% if item.name == options.name %}
+        {% set itemData = item %}
+      {% endif %}
+    {% endfor %}
+
+    {% if itemData %}
+      <section class="{{ globalStyle }} {{ options.class | default('') }} pb-12 {% if not reversed %}bg-[theme(--ma-nautic-blue)]{% else %}bg-[theme(--ma-nautic-white)]{% endif %}" data-collection-item="{{ options.name }}" id="{{ sectionId }}" data-reversed="{{ reversed | string }}">
+        <div class="{{ containerStyle }}">
+          {# Mobile layout (flex column) - Éléments centrés - Visible jusqu'au breakpoint lg #}
+          <div class="lg:hidden text-center px-6">
+            {# Super Heading (section title with underscore) - équivalent du modèle #}
+            {% if itemData.model and options.headings %}
+              {{ renderHeading({
+                name: itemData.model,
+                datas: options.headings,
+                class: "mb-6 mt-8 ma-nautic-section-title {% if reversed %}text-[theme(--ma-nautic-blue)]{% endif %}"
+              }) }}
+            {% endif %}
+
+            {# Main Heading (title) - équivalent du name #}
+            {% if itemData.name and options.headings %}
+              {{ renderHeading({
+                name: itemData.name,
+                datas: options.headings,
+                class: "{% if reversed %}text-[theme(--ma-nautic-blue)]{% endif %}"
+              }) }}
+            {% endif %}
+
+            {# Icon #}
+            {% if itemData.iconName and options.icons %}
+              <div class="{{ iconWrapperStyle }}">
+                {% set iconData = null %}
+                {% for icon in options.icons.icons %}
+                  {% if icon.name == itemData.iconName %}
+                    {% set iconData = icon %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if iconData %}
+                  <span data-svg-src="{{ iconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
+                    <!-- SVG will be loaded here -->
+                  </span>
+                {% else %}
+                  <span class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="32" height="32" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                  </span>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {# Content - price, engine, passengersNumber #}
+            <div class="{{ contentContainerStyle }} text-center">
+              <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} font-bold text-xl mb-2">{{ itemData.price }}</p>
+              <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} mb-2">{{ itemData.engine }}</p>
+              <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">{{ itemData.passengersNumber }}</p>
+            </div>
+
+            {# Link #}
+            {% if itemData.link and options.links %}
+              <div class="{{ buttonWrapperStyle }}">
+                {{ renderLink({
+                  name: itemData.link,
+                  datas: options.links
+                }) }}
+              </div>
+            {% endif %}
+          </div>
+
+          {# Desktop layout (two columns) - Visible à partir du breakpoint lg #}
+          {% if not reversed %}
+          <div class="hidden lg:flex lg:flex-row items-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
+            {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
+            <div class="{{ textContentStyle }} h-full flex flex-col items-center justify-center text-center px-8">
+              {# Super Heading (section title with underscore) - équivalent du modèle #}
+              {% if itemData.model and options.headings %}
+                {{ renderHeading({
+                  name: itemData.model,
+                  datas: options.headings,
+                  class: "mb-6 mt-8 ma-nautic-section-title"
+                }) }}
+              {% endif %}
+
+              {# Main Heading (title) - équivalent du name #}
+              {% if itemData.name and options.headings %}
+                {{ renderHeading({
+                  name: itemData.name,
+                  datas: options.headings
+                }) }}
+              {% endif %}
+
+              {# Icon #}
+              {% if itemData.iconName and options.icons %}
+                <div class="{{ iconWrapperStyle }}">
+                  {% set iconData = null %}
+                  {% for icon in options.icons.icons %}
+                    {% if icon.name == itemData.iconName %}
+                      {% set iconData = icon %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if iconData %}
+                    <span data-svg-src="{{ iconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
+                      <!-- SVG will be loaded here -->
+                    </span>
+                  {% else %}
+                    <span class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="32" height="32" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {# Content - price, engine, passengersNumber #}
+              <div class="{{ contentContainerDesktopStyle }}">
+                <p class="text-[theme(--ma-nautic-white)] font-bold text-xl mb-2">{{ itemData.price }}</p>
+                <p class="text-[theme(--ma-nautic-white)] mb-2">{{ itemData.engine }}</p>
+                <p class="text-[theme(--ma-nautic-white)]">{{ itemData.passengersNumber }}</p>
+              </div>
+
+              {# Link #}
+              {% if itemData.link and options.links %}
+                <div class="{{ buttonWrapperStyle }}">
+                  {{ renderLink({
+                    name: itemData.link,
+                    datas: options.links
+                  }) }}
+                </div>
+              {% endif %}
+            </div>
+
+            {# Right column: Carousel #}
+            <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16">
+              {% if itemData.carousel %}
+                <div class="w-4/5 mx-auto">
+                  {{ renderCarousel({
+                    name: itemData.carousel,
+                    datas: options.carousels,
+                    images: options.images,
+                    buttons: options.buttons,
+                    class: "ma-nautic-carousel w-full"
+                  }) }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          {% else %}
+          <div class="hidden lg:flex lg:flex-row-reverse items-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
+            {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
+            <div class="{{ textContentStyle }} h-full flex flex-col items-center justify-center text-center px-8">
+              {# Super Heading (section title with underscore) - équivalent du modèle #}
+              {% if itemData.model and options.headings %}
+                {{ renderHeading({
+                  name: itemData.model,
+                  datas: options.headings,
+                  class: "mb-6 mt-8 ma-nautic-section-title text-[theme(--ma-nautic-blue)]"
+                }) }}
+              {% endif %}
+
+              {# Main Heading (title) - équivalent du name #}
+              {% if itemData.name and options.headings %}
+                {{ renderHeading({
+                  name: itemData.name,
+                  datas: options.headings,
+                  class: "text-[theme(--ma-nautic-blue)]"
+                }) }}
+              {% endif %}
+
+              {# Icon #}
+              {% if itemData.iconName and options.icons %}
+                <div class="{{ iconWrapperStyle }}">
+                  {% set iconData = null %}
+                  {% for icon in options.icons.icons %}
+                    {% if icon.name == itemData.iconName %}
+                      {% set iconData = icon %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if iconData %}
+                    <span data-svg-src="{{ iconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
+                      <!-- SVG will be loaded here -->
+                    </span>
+                  {% else %}
+                    <span class="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 text-[theme(--ma-nautic-teal)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="32" height="32" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {# Content - price, engine, passengersNumber #}
+              <div class="{{ contentContainerDesktopStyle }}">
+                <p class="text-[theme(--ma-nautic-blue)] font-bold text-xl mb-2">{{ itemData.price }}</p>
+                <p class="text-[theme(--ma-nautic-blue)] mb-2">{{ itemData.engine }}</p>
+                <p class="text-[theme(--ma-nautic-blue)]">{{ itemData.passengersNumber }}</p>
+              </div>
+
+              {# Link #}
+              {% if itemData.link and options.links %}
+                <div class="{{ buttonWrapperStyle }}">
+                  {{ renderLink({
+                    name: itemData.link,
+                    datas: options.links
+                  }) }}
+                </div>
+              {% endif %}
+            </div>
+
+            {# Right column: Carousel #}
+            <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16">
+              {% if itemData.carousel %}
+                <div class="w-4/5 mx-auto">
+                  {{ renderCarousel({
+                    name: itemData.carousel,
+                    datas: options.carousels,
+                    images: options.images,
+                    buttons: options.buttons,
+                    class: "ma-nautic-carousel w-full"
+                  }) }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+
+          {# Carousel pour mobile #}
+          {% if itemData.carousel %}
+            <div class="lg:hidden mt-8">
+              <div class="w-4/5 mx-auto">
+                {{ renderCarousel({
+                  name: itemData.carousel,
+                  datas: options.carousels,
+                  images: options.images,
+                  buttons: options.buttons,
+                  class: "ma-nautic-carousel"
+                }) }}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </section>
+    {% else %}
+      <span class="text-red-500">Collection item "{{ options.name }}" not found</span>
+    {% endif %}
+  {% else %}
+    <span class="text-red-500">Boat data not found</span>
+  {% endif %}
+  
+  {# Script pour initialiser les carousels avec des indicateurs bien visibles #}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Sélectionne toutes les sections collection
+      const collectionSections = document.querySelectorAll("[data-collection-item]");
+      
+      collectionSections.forEach(section => {
+        // Détermine si la section est en mode reversed ou non
+        const isReversed = section.getAttribute("data-reversed") === "true";
+        
+        // Sélectionne tous les carousels dans cette section
+        const carousels = section.querySelectorAll("[data-carousel]");
+        
+        carousels.forEach(carousel => {
+          initCarousel(carousel, isReversed);
+        });
+      });
+      
+      function initCarousel(carousel, isReversed) {
+        const carouselId = carousel.id;
+        const items = [...carousel.querySelectorAll("[data-carousel-item]")];
+        const prevBtn = carousel.parentElement.querySelector("[data-carousel-prev]");
+        const nextBtn = carousel.parentElement.querySelector("[data-carousel-next]");
+        const indicators = document.querySelectorAll(`[data-carousel-target="${carouselId}"]`);
+        
+        let index = 0;
+        let autoplayInterval = null;
+        
+        // Ajouter la transition à tous les éléments du carrousel
+        items.forEach(item => {
+          item.classList.add("transition-opacity", "duration-700");
+        });
+        
+        // Fonction pour afficher une slide spécifique
+        function showSlide(newIndex) {
+          // Masquer la slide actuelle
+          items[index].classList.remove("opacity-100");
+          items[index].classList.add("opacity-0");
+          
+          // Calculer le nouvel index
+          index = (newIndex + items.length) % items.length;
+          
+          // Afficher la nouvelle slide
+          items[index].classList.remove("opacity-0");
+          items[index].classList.add("opacity-100");
+          
+          // Mettre à jour les indicateurs
+          updateIndicators();
+        }
+        
+        // Mettre à jour l'apparence des indicateurs
+        function updateIndicators() {
+          indicators.forEach((indicator, i) => {
+            // Supprime d'abord la classe active de tous les indicateurs
+            indicator.classList.remove("carousel-indicator-active");
+            
+            if (i === index) {
+              // Ajoute la classe active à l'indicateur courant
+              indicator.classList.add("carousel-indicator-active");
+              
+              // Styles CSS directs (en complément de la classe)
+              // Utiliser des couleurs différentes selon que la section est inversée ou non
+              if (isReversed) {
+                // Fond blanc, indicateurs bleus pour le mode inversé
+                indicator.style.backgroundColor = "#2b3947"; // Bleu (--ma-nautic-blue)
+                indicator.style.opacity = "0.7";
+              } else {
+                // Fond bleu, indicateurs blancs pour le mode standard
+                indicator.style.backgroundColor = "#ffffff"; // Blanc
+                indicator.style.opacity = "0.8";
+              }
+            } else {
+              // Styles pour les indicateurs inactifs
+              if (isReversed) {
+                // Fond blanc, indicateurs bleus pour le mode inversé
+                indicator.style.backgroundColor = "#2b3947"; // Bleu (--ma-nautic-blue)
+                indicator.style.opacity = "0.3";
+              } else {
+                // Fond bleu, indicateurs blancs pour le mode standard
+                indicator.style.backgroundColor = "#ffffff"; // Blanc
+                indicator.style.opacity = "0.3";
+              }
+            }
+          });
+        }
+        
+        // Appliquer les styles initiaux des indicateurs
+        updateIndicators();
+        
+        // Gestionnaire d'événement pour le bouton précédent
+        if (prevBtn) {
+          prevBtn.addEventListener("click", () => {
+            showSlide(index - 1);
+            resetAutoplay();
+          });
+        }
+        
+        // Gestionnaire d'événement pour le bouton suivant
+        if (nextBtn) {
+          nextBtn.addEventListener("click", () => {
+            showSlide(index + 1);
+            resetAutoplay();
+          });
+        }
+        
+        // Gestionnaire d'événement pour les indicateurs
+        indicators.forEach((indicator, i) => {
+          indicator.addEventListener("click", () => {
+            showSlide(i);
+            resetAutoplay();
+          });
+        });
+        
+        // Fonction pour réinitialiser l'autoplay
+        function resetAutoplay() {
+          if (autoplayInterval) {
+            clearInterval(autoplayInterval);
+            startAutoplay();
+          }
+        }
+        
+        // Fonction pour démarrer l'autoplay
+        function startAutoplay() {
+          const autoplay = carousel.getAttribute("data-autoplay") === "true";
+          
+          if (autoplay) {
+            autoplayInterval = setInterval(() => {
+              showSlide(index + 1);
+            }, 7000); // Auto-slide toutes les 7s
+          }
+        }
+        
+        // Gestion de pause au survol
+        const pauseOnHover = carousel.getAttribute("data-pause-on-hover") === "true";
+        
+        if (pauseOnHover) {
+          carousel.addEventListener("mouseenter", () => {
+            if (autoplayInterval) {
+              clearInterval(autoplayInterval);
+            }
+          });
+          
+          carousel.addEventListener("mouseleave", () => {
+            startAutoplay();
+          });
+        }
+        
+        // Démarrer l'autoplay si configuré
+        startAutoplay();
+      }
+    });
+  </script>
+{% endmacro %}
+
+{#
+============================
+Summon MA-NAUTIC Collections Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/collection.njk" import renderCollection %}
+
+2. Appeler le composant pour afficher un élément spécifique
+{{ renderCollection({ 
+    name: "ma_nine", 
+    datas: boats, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons
+}) }}
+
+3. Avec mise en page inversée (colonnes inversées)
+{{ renderCollection({ 
+    name: "ma_nine", 
+    datas: boats, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons,
+    reversed: true
+}) }}
+
+4. Utiliser des styles personnalisés
+{{ renderCollection({ 
+    name: "ma_nine",
+    datas: boats, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons,
+    class: "my-custom-collection-class" 
+}) }}
+#}
