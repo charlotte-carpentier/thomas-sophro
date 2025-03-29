@@ -16,6 +16,7 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
+{# Section bateau "Nine" #}
 {% from "01-organisms/collection.njk" import renderCollection %}
 
 {{ renderCollection({ 
@@ -29,6 +30,7 @@ layout: '00-core/base.njk'
     buttons: atoms.buttons
 }) }}
 
+{# Section bateau "Alba" #}
 {% from "01-organisms/collection.njk" import renderCollection %}
 
 {{ renderCollection({ 
@@ -43,6 +45,7 @@ layout: '00-core/base.njk'
     reversed: true
 }) }}
 
+{# Section bateau "First" #}
 {% from "01-organisms/collection.njk" import renderCollection %}
 
 {{ renderCollection({ 
@@ -56,6 +59,7 @@ layout: '00-core/base.njk'
     buttons: atoms.buttons
 }) }}
 
+{# Section bateau "Libecciu" #}
 {% from "01-organisms/collection.njk" import renderCollection %}
 
 {{ renderCollection({ 
@@ -70,6 +74,8 @@ layout: '00-core/base.njk'
     reversed: true
 }) }}
 
+
+{# Section bateau "Enzo" #}
 {% from "01-organisms/collection.njk" import renderCollection %}
 
 {{ renderCollection({ 
@@ -83,6 +89,7 @@ layout: '00-core/base.njk'
     buttons: atoms.buttons
 }) }}
 
+{# Section bateau "Casa Blanca" #}
 {% from "01-organisms/collection.njk" import renderCollection %}
 
 {{ renderCollection({ 
@@ -95,4 +102,16 @@ layout: '00-core/base.njk'
     images: atoms.images,
     buttons: atoms.buttons,
     reversed: true
+}) }}
+
+{# Section Info & options #}
+{% from "01-organisms/section-text.njk" import renderSectionText %}
+
+{{ renderSectionText({ 
+    name: "ma_nautic_info",
+    datas: organisms["section-texts"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links
 }) }}

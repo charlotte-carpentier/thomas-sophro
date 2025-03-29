@@ -1,0 +1,35 @@
+{
+    "globalStyle": "flex flex-col space-y-4 boats-container",
+    "variants": {
+      "default": "text-gray-800",
+      "hover": "text-gray-600",
+      "focus": "text-gray-800 outline-2 outline-blue-500 outline-offset-2 rounded-md",
+      "active": "text-blue-600 font-bold",
+      "wheelIcon": {
+        "default": "mx-auto",
+        "iconStyle": "text-[theme(--ma-nautic-gold)]",
+        "containerSize": "w-8 h-8 lg:w-12 lg:h-12",
+        "iconSize": "24"
+      }
+    },
+    "spots": [
+      {
+        "name": "agriates_desert",
+        "heading": "ma_agriates",
+        "content": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Fiume Santu en 10 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller au <strong>La Cabane du Lotu</strong> en 15 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Saleccia & <strong>A Piniccia di Saleccia</strong> en 25 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Travu en 30 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Ghignu en 40 minutes (par mer calme !) depuis le port de Saint-Florent.</p>",
+        "links": [
+            { "name": "cabane_lotu" },
+            { "name": "piniccia_saleccia" }
+        ]
+      },
+      {
+        "name": "cap_corse",
+        "heading": "ma_capcorse",
+        "content":  "<p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Farinole & <strong>Le Bo'S Plage</strong> en 15 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Nonza en 25 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Cannelle et U Scogliu en 35 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Centuri & <strong>Le Langoustier</strong> en 55 minutes (par mer calme !) depuis le port de Saint-Florent.</p>",
+        "links": [
+            { "name": "bo_plage" },
+            { "name": "le_langoustier" }
+        ]
+      }
+    ]
+  }

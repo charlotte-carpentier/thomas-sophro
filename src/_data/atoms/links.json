@@ -128,6 +128,30 @@
       "href": "/contact",
       "text": "RESERVEZ",
       "style": "content-light"
+    },
+    {
+      "name": "cabane_lotu",
+      "href": "https://www.lacabanedulodu.com/",
+      "text": "La Cabane du Lotu",
+      "style": "default"
+    },
+    {
+      "name": "piniccia_saleccia",
+      "href": "https://www.apinicciadisaleccia.fr/",
+      "text": "A Piniccia di Saleccia",
+      "style": "default"
+    },
+    {
+      "name": "bo_plage",
+      "href": "https://www.facebook.com/bosplage/?locale=fr_FR",
+      "text": "Le Bo'S Plage",
+      "style": "default"
+    },
+    {
+      "name": "le_langoustier",
+      "href": "https://www.facebook.com/p/Restaurant-le-langoustier-100063756750272/?locale=fr_FR",
+      "text": "Le Langoustier",
+      "style": "default"
     }
   ]
 }

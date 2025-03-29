@@ -115,6 +115,12 @@
       "style": "ma_nautic_section_subtitle"
     },
     {
+      "name": "ma_nautic_flotte",
+      "level": 2,
+      "text": "Les caractéristiques de notre flotte en Haute-Corse",
+      "style": "ma_nautic_section_subtitle" 
+    },
+    {
       "name": "capelli_500",
       "level": 2,
       "text": "_Capelli Tempest 500",
@@ -185,6 +191,36 @@
       "level": 2,
       "text": "Casa Blanca",
       "style": "ma_nautic_section_subtitle" 
+    },
+    {
+      "name": "ma_info",
+      "level": 2,
+      "text": "INFORMATIONS",
+      "style": "ma_nautic_subtitle_light"
+    },
+    {
+      "name": "ma_options",
+      "level": 2,
+      "text": "OPTIONS",
+      "style": "ma_nautic_subtitle_light"
+    },
+    {
+      "name": "ma_nautic_discover",
+      "level": 2,
+      "text": "Découvrez tous les lieux d’intérêt en Haute-Corse",
+      "style": "ma_nautic_section_subtitle" 
+    },
+    {
+      "name": "ma_agriates",
+      "level": 2,
+      "text": "Le désert des Agriates, ses plages et restaurants",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "ma_capcorse",
+      "level": 2,
+      "text": "Le Cap Corse, ses plages et restaurants...",
+      "style": "ma_nautic_section_subtitle"
     }
   ]
 }

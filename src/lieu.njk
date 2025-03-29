@@ -17,20 +17,31 @@ layout: '00-core/base.njk'
 }) }}
 
 
-{# For bateau page, use hero_bateau.json #}
-{% set pageData = hero_bateau %}
-{% include "01-organisms/section-page-hero.njk" %}
+{# Section lieu "Agriates" #}
+{% from "01-organisms/collection.njk" import renderCollection %}
 
-<div class="section container mx-auto py-8 px-4">
-    <h1 class="text-3xl font-semibold text-center text-gray-900 mb-6">{{ pageData.title }}</h1>
-    <p class="text-lg text-center text-gray-700 mb-8">{{ pageData.description }}</p>
+{{ renderCollection({ 
+    name: "ma_nine", 
+    datas: boats, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons
+}) }}
 
-    {#  List of bateau posts  #}
-    <ul role="list" class="articles__list space-y-8">
-        {%- for post in collections.post | reverse -%}
-            <li class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                {% include '02-molecules/card-post.njk' %}
-            </li>
-        {%- endfor -%}
-    </ul>
-</div>
+{# Section lieu "Cap Corse" #}
+{% from "01-organisms/collection.njk" import renderCollection %}
+
+{{ renderCollection({ 
+    name: "ma_alba", 
+    datas: boats, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons,
+    reversed: true
+}) }}
