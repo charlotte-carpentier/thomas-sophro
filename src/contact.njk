@@ -4,6 +4,19 @@ description: This is the contact page
 layout: '00-core/base.njk' 
 ---
 
+{# Section Hero Page Contact #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "contact_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    icons: atoms.icons
+}) }}
+
+{# Section Formulaire #}
 {% from "01-organisms/section-contact.njk" import renderSectionContact %}
 
 {{ renderSectionContact({ 

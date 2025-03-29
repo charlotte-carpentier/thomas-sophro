@@ -2,7 +2,7 @@
   "globalStyle": "transition-all duration-300",
   "variants": {
     "default": "text-[--ma-nautic-blue] font-['Roboto']",
-    "navigation": "ma-nautic-nav-link font-['Vibur'] text-[25px]",
+    "navigation": "ma-nautic-nav-link font-['Vibur'] uppercase text-[25px]",
     "navigation-secondary": "ma-nautic-nav-link font-['Roboto'] text-[25px]",
     "content": "ma-nautic-content-link font-['Vibur']",
     "content-light": "ma-content-link-light font-['Vibur']",
@@ -12,25 +12,25 @@
     {
       "name": "accueil",
       "href": "/",
-      "text": "ACCUEIL",
+      "text": "Accueil",
       "style": "navigation"
     },
     {
       "name": "nos-bateaux",
       "href": "/bateau",
-      "text": "NOS BATEAUX",
+      "text": "Nos bateaux",
       "style": "navigation"
     },
     {
       "name": "lieux-interets",
       "href": "/lieu",
-      "text": "LIEUX D'INTERETS",
+      "text": "Lieux d'intérêt",
       "style": "navigation"
     },
     {
       "name": "contact",
       "href": "/contact",
-      "text": "CONTACT",
+      "text": "Contact",
       "style": "navigation"
     },
     {
@@ -116,6 +116,18 @@
       "href": "/creator",
       "text": "Design Marty - Website CC",
       "style": "footer"
+    },
+    {
+      "name": "reservez",
+      "href": "/contact",
+      "text": "RESERVEZ",
+      "style": "content"
+    },
+    {
+      "name": "reservez_light",
+      "href": "/contact",
+      "text": "RESERVEZ",
+      "style": "content-light"
     }
   ]
 }

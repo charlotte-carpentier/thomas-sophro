@@ -12,11 +12,11 @@
             "containerStyle": "bg-[theme(--ma-nautic-blue)] py-8",
             "columns": [
                 {
-                    "name": "contact_navigation",
+                    "name": "site_navigation",
                     "position": "column_1"
                 },
                 {
-                    "name": "site_navigation",
+                    "name": "contact_navigation",
                     "position": "column_2"
                 },
                 {

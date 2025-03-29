@@ -104,6 +104,20 @@
       "group": "block-media"
     },
     {
+      "name": "ma_wave_left",
+      "src": "/assets/images/ma-wave-left.svg",
+      "alt": "Image d'une vague à gauche",
+      "size": "medium",
+      "group": "block-media"
+    },
+    {
+      "name": "ma_wave_right",
+      "src": "/assets/images/ma-wave-right.svg",
+      "alt": "Image d'une vague à droite",
+      "size": "medium",
+      "group": "block-media"
+    },
+    {
       "name": "ma_group",
       "src": "/assets/images/ma-group.png",
       "alt": "Photo d'un groupe de baigneurs",

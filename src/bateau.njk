@@ -4,16 +4,95 @@ description: Page des bateaux
 layout: '00-core/base.njk'
 ---
 
-<div class="section container mx-auto py-8 px-4">
-    <h1 class="text-3xl font-semibold text-center text-gray-900 mb-6">{{ pageData.title }}</h1>
-    <p class="text-lg text-center text-gray-700 mb-8">{{ pageData.description }}</p>
+{# Section Hero Page Bateau #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
-    {#  List of bateau posts  #}
-    <ul role="list" class="articles__list space-y-8">
-        {%- for post in collections.post | reverse -%}
-            <li class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                {% include '02-molecules/card-post.njk' %}
-            </li>
-        {%- endfor -%}
-    </ul>
-</div>
+{{ renderSectionHero({ 
+    name: "bateaux_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    icons: atoms.icons
+}) }}
+
+{% from "01-organisms/collection.njk" import renderCollection %}
+
+{{ renderCollection({ 
+    name: "ma_nine", 
+    datas: boats, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons
+}) }}
+
+{% from "01-organisms/collection.njk" import renderCollection %}
+
+{{ renderCollection({ 
+    name: "ma_alba", 
+    datas: boats, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons,
+    reversed: true
+}) }}
+
+{% from "01-organisms/collection.njk" import renderCollection %}
+
+{{ renderCollection({ 
+    name: "ma_first", 
+    datas: boats, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons
+}) }}
+
+{% from "01-organisms/collection.njk" import renderCollection %}
+
+{{ renderCollection({ 
+    name: "ma_libecciu", 
+    datas: boats, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons,
+    reversed: true
+}) }}
+
+{% from "01-organisms/collection.njk" import renderCollection %}
+
+{{ renderCollection({ 
+    name: "ma_enzo", 
+    datas: boats, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons
+}) }}
+
+{% from "01-organisms/collection.njk" import renderCollection %}
+
+{{ renderCollection({ 
+    name: "ma_casablanca", 
+    datas: boats, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons,
+    reversed: true
+}) }}
