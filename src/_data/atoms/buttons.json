@@ -81,6 +81,10 @@
     {
       "name": "arrow_scroll",
       "icon": "arrow_scroll_down"
+    },
+    {
+      "name": "arrow_scroll_up",
+      "icon": "arrow_scroll_up"
     }
   ]
 }

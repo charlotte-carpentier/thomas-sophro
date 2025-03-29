@@ -6,12 +6,21 @@
 
 {% macro renderSectionHero(options) %}
   {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set variant = options.name and options.datas.heroes | selectattr("name", "equalto", options.name) | first | default(options.datas.heroes[0]) %}
+    {# Sélection de variante sans utiliser selectattr #}
+    {% set variant = null %}
+    {% for hero in options.datas.heroes %}
+      {% if hero.name == options.name %}
+        {% set variant = hero %}
+      {% endif %}
+    {% endfor %}
+    
+    {# Si aucune variante n'est trouvée, utiliser la première par défaut #}
+    {% if variant == null %}
+      {% set variant = options.datas.heroes[0] %}
+    {% endif %}
 
-    {% set variantStyle = options
-      .datas
-      .variants[variant.variant] | default(options.datas.variants.default) %}
+    {% set globalStyle = options.datas.globalStyle %}
+    {% set variantStyle = options.datas.variants[variant.variant] | default(options.datas.variants.default) %}
     {% set containerStyle = options.datas.containerStyle %}
     {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
     {% set textContainerStyle = options.datas.textContainerStyle %}
@@ -75,6 +84,140 @@
         </div>
       </section>
 
+    {# Spécifique à bateaux hero #}
+    {% elseif variant.name == "bateaux_hero" %}
+      <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible">
+        {# Vague gauche avec transparence conditionnelle #}
+        <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
+          {% if variant["image-left"] and options.images %}
+            {% set leftWave = null %}
+            {% for image in options.images.images %}
+              {% if image.name == variant["image-left"] %}
+                {% set leftWave = image %}
+              {% endif %}
+            {% endfor %}
+
+            {% if leftWave %}
+              {# Utiliser la variante de taille définie dans images.json #}
+              {% set imageVariantLeft = options.images.variants[leftWave.size] | default('w-auto h-auto') %}
+              <img src="{{ leftWave.src }}" alt="{{ leftWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantLeft }} max-w-none wave-image">
+            {% endif %}
+          {% endif %}
+        </div>
+
+        {# Vague droite avec transparence conditionnelle #}
+        <div class="absolute right-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
+          {% if variant["image-right"] and options.images %}
+            {% set rightWave = null %}
+            {% for image in options.images.images %}
+              {% if image.name == variant["image-right"] %}
+                {% set rightWave = image %}
+              {% endif %}
+            {% endfor %}
+
+            {% if rightWave %}
+              {# Utiliser la variante de taille définie dans images.json #}
+              {% set imageVariantRight = options.images.variants[rightWave.size] | default('w-auto h-auto') %}
+              <img src="{{ rightWave.src }}" alt="{{ rightWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantRight }} max-w-none wave-image">
+            {% endif %}
+          {% endif %}
+        </div>
+        
+        {# Bande supérieure en beige pour le super heading #}
+        <div class="bg-[theme(--ma-nautic-beige)] py-6 relative z-10">
+          <div class="{{ containerStyle }}">
+            {# SuperHeading #}
+            {% if variant.superHeading and options.headings %}
+              {% set superHeading = null %}
+              {% for heading in options.headings.headings %}
+                {% if heading.name == variant.superHeading %}
+                  {% set superHeading = heading %}
+                {% endif %}
+              {% endfor %}
+
+              {% if superHeading %}
+                <{{ "h" + superHeading.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[superHeading.style] }}">
+                  {{ superHeading.text }}
+                </{{ "h" + superHeading.level }}>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+
+        {# Fond blanc pour le contenu principal #}
+        <div class="bg-white py-12 relative z-10">
+          <div class="{{ containerStyle }} relative z-10">
+            <div class="flex flex-col items-center">
+              {# Main Heading #}
+              {% if variant.heading and options.headings %}
+                {% set mainHeading = null %}
+                {% for heading in options.headings.headings %}
+                  {% if heading.name == variant.heading %}
+                    {% set mainHeading = heading %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if mainHeading %}
+                  <{{ "h" + mainHeading.level }} class="text-center mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[mainHeading.style] }}">
+                    {{ mainHeading.text }}
+                  </{{ "h" + mainHeading.level }}>
+                {% endif %}
+              {% endif %}
+
+              {# Icon #}
+              {% if variant.icon and options.icons %}
+                {% set iconData = null %}
+                {% for icon in options.icons.icons %}
+                  {% if icon.name == variant.icon %}
+                    {% set iconData = icon %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if iconData %}
+                  <div class="mb-6">
+                    <img src="{{ iconData.path }}" alt="{{ iconData.alt }}" class="w-12 h-12 text-[theme(--ma-nautic-teal)]">
+                  </div>
+                {% endif %}
+              {% endif %}
+
+              {# Description #}
+              {% if variant.description %}
+                <div class="text-center max-w-3xl mx-auto mb-8">
+                  {{ variant.description | safe }}
+                </div>
+              {% endif %}
+
+              {# ScrollArrow Button #}
+              {% if variant.scrollArrowButton and options.buttons %}
+                {% set arrowData = null %}
+                {% for button in options.buttons.buttons %}
+                  {% if button.name == variant.scrollArrowButton %}
+                    {% set arrowData = button %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if arrowData and arrowData.icon and options.icons %}
+                  {% set iconImage = null %}
+                  {% for icon in options.icons.icons %}
+                    {% if icon.name == arrowData.icon %}
+                      {% set iconImage = icon %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if iconImage %}
+                    <div class="mt-8">
+                      <a href="#boat-list" class="inline-block">
+                        <img src="{{ iconImage.path }}" alt="{{ iconImage.alt }}" class="w-10 h-10 mx-auto">
+                      </a>
+                    </div>
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {# Section Hero standard pour les autres variantes #}
     {% else %}
       <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
@@ -92,9 +235,9 @@
                 {% endfor %}
 
                 {% if superHeading %}
-                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles[" h" + superheading.level] }} {{ options.headings.variants[superheading.style] }}"="h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}"">
+                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}">
                     {{ superHeading.text }}
-                  </{{ "h" + superheading.level }}>
+                  </{{ "h" + superHeading.level }}>
                 {% endif %}
               {% endif %}
 
@@ -108,9 +251,9 @@
                 {% endfor %}
 
                 {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles[" h" + mainheading.level] }} {{ options.headings.variants[mainheading.style] }}"="h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }}"">
+                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }}">
                     {{ mainHeading.text }}
-                  </{{ "h" + mainheading.level }}>
+                  </{{ "h" + mainHeading.level }}>
                 {% else %}
                   <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }}">
                     {{ variant.heading }}
@@ -159,9 +302,7 @@
                 {% endfor %}
 
                 {% if heroImage %}
-                  {% set imageVariant = options
-                    .images
-                    .variants[heroImage.size] %}
+                  {% set imageVariant = options.images.variants[heroImage.size] %}
                   <img src="{{ heroImage.src }}" alt="{{ heroImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }}">
                 {% endif %}
               {% endif %}
@@ -185,11 +326,12 @@ Summon HAT Components Wisely
 
 2. Call the section-hero component with a specific name
 {{ renderSectionHero({ 
-    name: "default_hero",
+    name: "bateaux_hero",
     datas: organisms["section-heros"],
     headings: atoms.headings,
     buttons: atoms.buttons,
-    images: atoms.images
+    images: atoms.images,
+    icons: atoms.icons
 }) }}
 
 3. Using custom styles
@@ -199,6 +341,7 @@ Summon HAT Components Wisely
     headings: atoms.headings,
     buttons: atoms.buttons,
     images: atoms.images,
+    icons: atoms.icons,
     class: "my-custom-hero-class"
 }) }}
 
@@ -208,6 +351,16 @@ Summon HAT Components Wisely
     datas: organisms["section-heros"],
     headings: atoms.headings,
     images: atoms.images
+}) }}
+
+5. Using Bateaux Hero with waves and special structure
+{{ renderSectionHero({ 
+    name: "bateaux_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    images: atoms.images,
+    icons: atoms.icons,
+    buttons: atoms.buttons
 }) }}
 
 Every journey begins with a hero section! 🏰🛡️

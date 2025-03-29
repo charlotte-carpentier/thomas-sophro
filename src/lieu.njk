@@ -4,6 +4,18 @@ description: Page des lieux d'intérêts
 layout: '00-core/base.njk'
 ---
 
+{# Section Hero Page Lieux #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({
+    name: "ma_nautic_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images
+}) }}
+
+
 {# For bateau page, use hero_bateau.json #}
 {% set pageData = hero_bateau %}
 {% include "01-organisms/section-page-hero.njk" %}

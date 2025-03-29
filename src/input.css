@@ -459,6 +459,7 @@
   --breakpoint-lg: 64rem;
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 90rem;
+  --breakpoint-3xl: 94rem;  /* Nouveau breakpoint à 1500px (94rem) */
 
   /* Column widths for desktop layout */
   --layout-desktop-target: var(--breakpoint-2xl); /* Target width for desktop */
@@ -703,4 +704,18 @@
 
 .shadow-bottom {
   box-shadow: 0 15px 20px -3px rgba(0, 0, 0, 0.5);
+}
+
+/* =============================================== */
+/* ========= CLASSES POUR LES VAGUES ============ */
+/* =============================================== */
+
+.wave-image {
+  opacity: 1;
+}
+
+@media (max-width: 1500px) {
+  .wave-image {
+    opacity: 0.3;
+  }
 }

@@ -43,6 +43,12 @@
       "style": "ma_nautic_section_drop"
     },
     {
+      "name": "agence_location",
+      "level": 1,
+      "text": "NOS BATEAUX EN LOCATION À SAINT-FLORENT",
+      "style": "ma_nautic_section_drop"
+    },
+    {
       "name": "qui_sommes_nous",
       "level": 2,
       "text": "_Qui sommes-nous ?",
