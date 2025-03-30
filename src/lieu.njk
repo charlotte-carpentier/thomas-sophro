@@ -16,13 +16,15 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
+{# Conteneur pour la liste des bateaux avec l'ID boat-list pour le scroll #}
+<div id="spot-list">
 
 {# Section lieu "Agriates" #}
 {% from "01-organisms/collection.njk" import renderCollection %}
 
 {{ renderCollection({ 
-    name: "ma_nine", 
-    datas: boats, 
+    name: "agriates_desert", 
+    datas: spots, 
     headings: atoms.headings, 
     links: atoms.links,
     icons: atoms.icons,
@@ -35,8 +37,8 @@ layout: '00-core/base.njk'
 {% from "01-organisms/collection.njk" import renderCollection %}
 
 {{ renderCollection({ 
-    name: "ma_alba", 
-    datas: boats, 
+    name: "cap_corse", 
+    datas: spots, 
     headings: atoms.headings, 
     links: atoms.links,
     icons: atoms.icons,
@@ -45,3 +47,6 @@ layout: '00-core/base.njk'
     buttons: atoms.buttons,
     reversed: true
 }) }}
+
+{# Ajouter l'inclusion du script pour le défilement ici #}
+<script src="/js/organisms/section-scroll.js"></script>

@@ -1,35 +1,70 @@
 {
-    "globalStyle": "flex flex-col space-y-4 boats-container",
-    "variants": {
-      "default": "text-gray-800",
-      "hover": "text-gray-600",
-      "focus": "text-gray-800 outline-2 outline-blue-500 outline-offset-2 rounded-md",
-      "active": "text-blue-600 font-bold",
-      "wheelIcon": {
-        "default": "mx-auto",
-        "iconStyle": "text-[theme(--ma-nautic-gold)]",
-        "containerSize": "w-8 h-8 lg:w-12 lg:h-12",
-        "iconSize": "24"
-      }
+  "globalStyle": "flex flex-col space-y-4 boats-container",
+  "variants": {
+    "default": "text-gray-800",
+    "hover": "text-gray-600",
+    "focus": "text-gray-800 outline-2 outline-blue-500 outline-offset-2 rounded-md",
+    "active": "text-blue-600 font-bold",
+    "wheelIcon": {
+      "default": "mx-auto",
+      "iconStyle": "text-[theme(--ma-nautic-gold)]",
+      "containerSize": "w-8 h-8 lg:w-12 lg:h-12",
+      "iconSize": "24"
+    }
+  },
+  "spots": [
+    {
+      "name": "agriates_desert",
+      "heading": "ma_agriates",
+      "contentBlocks": [
+        {
+          "text": "Aller à Fiume Santu en 10 minutes (par mer calme !) depuis le port de Saint-Florent."
+        },
+        {
+          "text": "Aller au <strong><a href='/spots/cabane_lotu'>La Cabane du Lotu</a></strong> en 15 minutes (par mer calme !) depuis le port de Saint-Florent."
+        },
+        {
+          "text": "Aller à Saleccia & <strong><a href='/spots/piniccia_saleccia'>A Piniccia di Saleccia</a></strong> en 25 minutes (par mer calme !) depuis le port de Saint-Florent."
+        },
+        {
+          "text": "Aller à Travu en 30 minutes (par mer calme !) depuis le port de Saint-Florent."
+        },
+        {
+          "text": "Aller à Ghignu en 40 minutes (par mer calme !) depuis le port de Saint-Florent."
+        }
+      ],
+      "carousel": "carousel_agriates",
+      "imageAlt": "Photos du désert des Agriates",
+      "tags": ["post"],
+      "iconName": "wheel",
+      "ctaLinks": [
+        { "name": "contactez-nous_light" }
+      ]
     },
-    "spots": [
-      {
-        "name": "agriates_desert",
-        "heading": "ma_agriates",
-        "content": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Fiume Santu en 10 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller au <strong>La Cabane du Lotu</strong> en 15 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Saleccia & <strong>A Piniccia di Saleccia</strong> en 25 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Travu en 30 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Ghignu en 40 minutes (par mer calme !) depuis le port de Saint-Florent.</p>",
-        "links": [
-            { "name": "cabane_lotu" },
-            { "name": "piniccia_saleccia" }
-        ]
-      },
-      {
-        "name": "cap_corse",
-        "heading": "ma_capcorse",
-        "content":  "<p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Farinole & <strong>Le Bo'S Plage</strong> en 15 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Nonza en 25 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Cannelle et U Scogliu en 35 minutes (par mer calme !) depuis le port de Saint-Florent.</p><p class='text-[theme(--ma-nautic-blue)] mb-4'>Aller à Centuri & <strong>Le Langoustier</strong> en 55 minutes (par mer calme !) depuis le port de Saint-Florent.</p>",
-        "links": [
-            { "name": "bo_plage" },
-            { "name": "le_langoustier" }
-        ]
-      }
-    ]
-  }
+    {
+      "name": "cap_corse",
+      "heading": "ma_capcorse",
+      "contentBlocks": [
+        {
+          "text": "Aller à Farinole & <strong><a href='/spots/bo_plage'>Le Bo'S Plage</a></strong> en 15 minutes (par mer calme !) depuis le port de Saint-Florent."
+        },
+        {
+          "text": "Aller à Nonza en 25 minutes (par mer calme !) depuis le port de Saint-Florent."
+        },
+        {
+          "text": "Aller à Cannelle et U Scogliu en 35 minutes (par mer calme !) depuis le port de Saint-Florent."
+        },
+        {
+          "text": "Aller à Centuri & <strong><a href='/spots/le_langoustier'>Le Langoustier</a></strong> en 55 minutes (par mer calme !) depuis le port de Saint-Florent."
+        }
+      ],
+      "carousel": "carousel_capcorse",
+      "imageAlt": "Photos du Cap Corse",
+      "tags": ["post"],
+      "iconName": "wheel",
+      "ctaLinks": [
+        { "name": "contactez-nous" }
+      ]
+    }
+  ]
+}

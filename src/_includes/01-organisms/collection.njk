@@ -2,6 +2,7 @@
 =========================
       COLLECTION DETAIL        
 =========================
+
 #}
 
 {% from "03-atoms/heading.njk" import renderHeading %}
@@ -26,13 +27,24 @@
     {% set buttonWrapperStyle = sectionStyles.buttonWrapper | default("mt-6 flex justify-center") %}
     {% set indicatorsContainerStyle = sectionStyles.indicatorsContainer | default("mt-4 flex justify-center gap-2") %}
 
+    {# Déterminer si nous utilisons des bateaux ou des spots #}
+    {% set isSpot = false %}
+    {% if options.datas.spots %}
+      {% set isSpot = true %}
+      {% set itemsCollection = options.datas.spots %}
+      {% set itemKeyName = "name" %} {# Le champ servant d'identifiant dans spot est "name" #}
+    {% else %}
+      {% set itemsCollection = options.datas.boats %}
+      {% set itemKeyName = "name" %} {# Le champ servant d'identifiant dans boat est "name" #}
+    {% endif %}
+
     {# Créer un ID unique pour la section #}
     {% set sectionId = "collection-" ~ (options.name | replace(" ", "-") | lower) %}
 
     {# Récupérer les données de l'élément spécifique #}
     {% set itemData = null %}
-    {% for item in options.datas.boats %}
-      {% if item.name == options.name %}
+    {% for item in itemsCollection %}
+      {% if item[itemKeyName] == options.name %}
         {% set itemData = item %}
       {% endif %}
     {% endfor %}
@@ -42,22 +54,34 @@
         <div class="{{ containerStyle }}">
           {# Mobile layout (flex column) - Éléments centrés - Visible jusqu'au breakpoint lg #}
           <div class="lg:hidden text-center px-6">
-            {# Super Heading (section title with underscore) - équivalent du modèle #}
-            {% if itemData.model and options.headings %}
-              {{ renderHeading({
-                name: itemData.model,
-                datas: options.headings,
-                class: "mb-6 mt-8 ma-nautic-section-title {% if reversed %}text-[theme(--ma-nautic-blue)]{% endif %}"
-              }) }}
+            {# Super Heading (section title with underscore) - équivalent du modèle pour bateaux #}
+            {% if not isSpot %}
+              {% if itemData.model and options.headings %}
+                {{ renderHeading({
+                  name: itemData.model,
+                  datas: options.headings,
+                  class: "mb-6 mt-8 ma-nautic-section-title {% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}"
+                }) }}
+              {% endif %}
             {% endif %}
 
-            {# Main Heading (title) - équivalent du name #}
-            {% if itemData.name and options.headings %}
-              {{ renderHeading({
-                name: itemData.name,
-                datas: options.headings,
-                class: "{% if reversed %}text-[theme(--ma-nautic-blue)]{% endif %}"
-              }) }}
+            {# Main Heading (title) - équivalent du name pour bateaux ou heading pour spots #}
+            {% if isSpot %}
+              {% if itemData.heading and options.headings %}
+                {{ renderHeading({
+                  name: itemData.heading,
+                  datas: options.headings,
+                  class: "{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}"
+                }) }}
+              {% endif %}
+            {% else %}
+              {% if itemData.name and options.headings %}
+                {{ renderHeading({
+                  name: itemData.name,
+                  datas: options.headings,
+                  class: "{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}"
+                }) }}
+              {% endif %}
             {% endif %}
 
             {# Icon #}
@@ -89,18 +113,49 @@
               </div>
             {% endif %}
 
-            {# Content - price, engine, passengersNumber #}
+            {# Content - price, engine, passengersNumber pour boats ou contentBlocks pour spots #}
             <div class="{{ contentContainerStyle }} text-center">
-              <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} font-bold text-xl mb-2">{{ itemData.price }}</p>
-              <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} mb-2">{{ itemData.engine }}</p>
-              <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">{{ itemData.passengersNumber }}</p>
+              {% if isSpot %}
+                {# Afficher les contentBlocks structurés pour les spots #}
+                <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} text-left">
+                  {% for block in itemData.contentBlocks %}
+                    <p class="mb-4">
+                      {{ block.text | safe }}
+                    </p>
+                  {% endfor %}
+                </div>
+                
+                {# Afficher les liens CTA #}
+                {% if itemData.ctaLinks and options.links %}
+                  <div class="mt-4 flex flex-wrap justify-center gap-4">
+                    {% for linkItem in itemData.ctaLinks %}
+                      {{ renderLink({
+                        name: linkItem.name,
+                        datas: options.links
+                      }) }}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              {% else %}
+                {# Afficher les informations de prix, moteur et passagers pour les bateaux #}
+                <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} font-bold text-xl mb-2">{{ itemData.price }}</p>
+                <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} mb-2">{{ itemData.engine }}</p>
+                <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">{{ itemData.passengersNumber }}</p>
+              {% endif %}
             </div>
 
-            {# Link #}
-            {% if itemData.link and options.links %}
+            {# Link - "reservez" pour boat ou "contactez-nous" pour spot #}
+            {% if not isSpot and itemData.link and options.links %}
               <div class="{{ buttonWrapperStyle }}">
                 {{ renderLink({
                   name: itemData.link,
+                  datas: options.links
+                }) }}
+              </div>
+            {% elif isSpot and options.links %}
+              <div class="{{ buttonWrapperStyle }}">
+                {{ renderLink({
+                  name: "contactez_nous",
                   datas: options.links
                 }) }}
               </div>
@@ -112,21 +167,34 @@
           <div class="hidden lg:flex lg:flex-row items-center justify-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
             {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
             <div class="w-auto min-w-[400px] max-w-[550px] min-h-[450px] mx-auto border border-[theme(--ma-nautic-white)] p-10 flex flex-col items-center justify-center text-center my-auto">
-              {# Super Heading (section title with underscore) - équivalent du modèle #}
-              {% if itemData.model and options.headings %}
-                {{ renderHeading({
-                  name: itemData.model,
-                  datas: options.headings,
-                  class: "mb-6 mt-8 ma-nautic-section-title"
-                }) }}
+              {# Super Heading (section title with underscore) - uniquement pour les bateaux #}
+              {% if not isSpot %}
+                {% if itemData.model and options.headings %}
+                  {{ renderHeading({
+                    name: itemData.model,
+                    datas: options.headings,
+                    class: "mb-6 mt-8 ma-nautic-section-title text-[theme(--ma-nautic-white)]"
+                  }) }}
+                {% endif %}
               {% endif %}
 
-              {# Main Heading (title) - équivalent du name #}
-              {% if itemData.name and options.headings %}
-                {{ renderHeading({
-                  name: itemData.name,
-                  datas: options.headings
-                }) }}
+              {# Main Heading (title) #}
+              {% if isSpot %}
+                {% if itemData.heading and options.headings %}
+                  {{ renderHeading({
+                    name: itemData.heading,
+                    datas: options.headings,
+                    class: "text-[theme(--ma-nautic-white)]"
+                  }) }}
+                {% endif %}
+              {% else %}
+                {% if itemData.name and options.headings %}
+                  {{ renderHeading({
+                    name: itemData.name,
+                    datas: options.headings,
+                    class: "text-[theme(--ma-nautic-white)]"
+                  }) }}
+                {% endif %}
               {% endif %}
 
               {# Icon #}
@@ -158,15 +226,39 @@
                 </div>
               {% endif %}
 
-              {# Content - price, engine, passengersNumber #}
+              {# Content - différent selon le type #}
               <div class="{{ contentContainerDesktopStyle }}">
-                <p class="text-[theme(--ma-nautic-white)] font-bold text-xl mb-2">{{ itemData.price }}</p>
-                <p class="text-[theme(--ma-nautic-white)] mb-2">{{ itemData.engine }}</p>
-                <p class="text-[theme(--ma-nautic-white)]">{{ itemData.passengersNumber }}</p>
+                {% if isSpot %}
+                  {# Afficher les contentBlocks structurés pour les spots #}
+                  <div class="text-[theme(--ma-nautic-white)] text-left">
+                    {% for block in itemData.contentBlocks %}
+                      <p class="mb-4">
+                        {{ block.text | safe }}
+                      </p>
+                    {% endfor %}
+                  </div>
+                  
+                  {# Afficher les liens CTA #}
+                  {% if itemData.ctaLinks and options.links %}
+                    <div class="mt-4 flex flex-wrap justify-center gap-4">
+                      {% for linkItem in itemData.ctaLinks %}
+                        {{ renderLink({
+                          name: linkItem.name,
+                          datas: options.links
+                        }) }}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                {% else %}
+                  {# Afficher les informations de prix, moteur et passagers pour les bateaux #}
+                  <p class="text-[theme(--ma-nautic-white)] font-bold text-xl mb-2">{{ itemData.price }}</p>
+                  <p class="text-[theme(--ma-nautic-white)] mb-2">{{ itemData.engine }}</p>
+                  <p class="text-[theme(--ma-nautic-white)]">{{ itemData.passengersNumber }}</p>
+                {% endif %}
               </div>
 
-              {# Link #}
-              {% if itemData.link and options.links %}
+              {# Link - différent selon le type #}
+              {% if not isSpot and itemData.link and options.links %}
                 <div class="{{ buttonWrapperStyle }}">
                   {{ renderLink({
                     name: itemData.link,
@@ -195,22 +287,34 @@
           <div class="hidden lg:flex lg:flex-row-reverse items-center justify-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
             {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
             <div class="w-auto min-w-[400px] max-w-[550px] min-h-[450px] mx-auto border border-[theme(--ma-nautic-blue)] p-10 flex flex-col items-center justify-center text-center my-auto">
-              {# Super Heading (section title with underscore) - équivalent du modèle #}
-              {% if itemData.model and options.headings %}
-                {{ renderHeading({
-                  name: itemData.model,
-                  datas: options.headings,
-                  class: "mb-6 mt-8 ma-nautic-section-title text-[theme(--ma-nautic-blue)]"
-                }) }}
+              {# Super Heading (section title with underscore) - uniquement pour les bateaux #}
+              {% if not isSpot %}
+                {% if itemData.model and options.headings %}
+                  {{ renderHeading({
+                    name: itemData.model,
+                    datas: options.headings,
+                    class: "mb-6 mt-8 ma-nautic-section-title text-[theme(--ma-nautic-blue)]"
+                  }) }}
+                {% endif %}
               {% endif %}
 
-              {# Main Heading (title) - équivalent du name #}
-              {% if itemData.name and options.headings %}
-                {{ renderHeading({
-                  name: itemData.name,
-                  datas: options.headings,
-                  class: "text-[theme(--ma-nautic-blue)]"
-                }) }}
+              {# Main Heading (title) #}
+              {% if isSpot %}
+                {% if itemData.heading and options.headings %}
+                  {{ renderHeading({
+                    name: itemData.heading,
+                    datas: options.headings,
+                    class: "text-[theme(--ma-nautic-blue)]"
+                  }) }}
+                {% endif %}
+              {% else %}
+                {% if itemData.name and options.headings %}
+                  {{ renderHeading({
+                    name: itemData.name,
+                    datas: options.headings,
+                    class: "text-[theme(--ma-nautic-blue)]"
+                  }) }}
+                {% endif %}
               {% endif %}
 
               {# Icon #}
@@ -242,15 +346,39 @@
                 </div>
               {% endif %}
 
-              {# Content - price, engine, passengersNumber #}
+              {# Content - différent selon le type #}
               <div class="{{ contentContainerDesktopStyle }}">
-                <p class="text-[theme(--ma-nautic-blue)] font-bold text-xl mb-2">{{ itemData.price }}</p>
-                <p class="text-[theme(--ma-nautic-blue)] mb-2">{{ itemData.engine }}</p>
-                <p class="text-[theme(--ma-nautic-blue)]">{{ itemData.passengersNumber }}</p>
+                {% if isSpot %}
+                  {# Afficher les contentBlocks structurés pour les spots #}
+                  <div class="text-[theme(--ma-nautic-blue)] text-left">
+                    {% for block in itemData.contentBlocks %}
+                      <p class="mb-4">
+                        {{ block.text | safe }}
+                      </p>
+                    {% endfor %}
+                  </div>
+                  
+                  {# Afficher les liens CTA #}
+                  {% if itemData.ctaLinks and options.links %}
+                    <div class="mt-4 flex flex-wrap justify-center gap-4">
+                      {% for linkItem in itemData.ctaLinks %}
+                        {{ renderLink({
+                          name: linkItem.name,
+                          datas: options.links
+                        }) }}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                {% else %}
+                  {# Afficher les informations de prix, moteur et passagers pour les bateaux #}
+                  <p class="text-[theme(--ma-nautic-blue)] font-bold text-xl mb-2">{{ itemData.price }}</p>
+                  <p class="text-[theme(--ma-nautic-blue)] mb-2">{{ itemData.engine }}</p>
+                  <p class="text-[theme(--ma-nautic-blue)]">{{ itemData.passengersNumber }}</p>
+                {% endif %}
               </div>
 
-              {# Link #}
-              {% if itemData.link and options.links %}
+              {# Link - différent selon le type #}
+              {% if not isSpot and itemData.link and options.links %}
                 <div class="{{ buttonWrapperStyle }}">
                   {{ renderLink({
                     name: itemData.link,
@@ -297,7 +425,7 @@
       <span class="text-red-500">Collection item "{{ options.name }}" not found</span>
     {% endif %}
   {% else %}
-    <span class="text-red-500">Boat data not found</span>
+    <span class="text-red-500">Collection data not found</span>
   {% endif %}
   
   {# Script pour initialiser les carousels avec des indicateurs bien visibles #}
@@ -462,7 +590,7 @@ Summon MA-NAUTIC Collections Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/collection.njk" import renderCollection %}
 
-2. Appeler le composant pour afficher un élément spécifique
+2. Appeler le composant pour afficher un bateau spécifique
 {{ renderCollection({ 
     name: "ma_nine", 
     datas: boats, 
@@ -498,5 +626,30 @@ Summon MA-NAUTIC Collections Wisely
     images: atoms.images,
     buttons: atoms.buttons,
     class: "my-custom-collection-class" 
+}) }}
+
+5. Pour afficher un spot (lieu d'intérêt) avec contentBlocks
+{{ renderCollection({ 
+    name: "agriates_desert", 
+    datas: spots, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons
+}) }}
+
+6. Spot avec mise en page inversée
+{{ renderCollection({ 
+    name: "cap_corse", 
+    datas: spots, 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons,
+    reversed: true
 }) }}
 #}
