@@ -39,6 +39,14 @@
 
     {# Créer un ID unique pour la section #}
     {% set sectionId = "collection-" ~ (options.name | replace(" ", "-") | lower) %}
+    
+    {# Définir l'ID de la liste selon le type (spots ou bateaux) #}
+    {% set listId = "" %}
+    {% if isSpot %}
+      {% set listId = "spot-list" %}
+    {% else %}
+      {% set listId = "boat-list" %}
+    {% endif %}
 
     {# Récupérer les données de l'élément spécifique #}
     {% set itemData = null %}
@@ -49,7 +57,7 @@
     {% endfor %}
 
     {% if itemData %}
-      <section class="{{ globalStyle }} {{ options.class | default('') }} pb-12 {% if not reversed %}bg-[theme(--ma-nautic-blue)]{% else %}bg-[theme(--ma-nautic-white)]{% endif %}" data-collection-item="{{ options.name }}" id="{{ sectionId }}" data-reversed="{{ reversed | string }}">
+      <section id="{{ listId }}" class="{{ globalStyle }} {{ options.class | default('') }} pb-12 {% if not reversed %}bg-[theme(--ma-nautic-blue)]{% else %}bg-[theme(--ma-nautic-white)]{% endif %}" data-collection-item="{{ options.name }}" data-section-id="{{ sectionId }}" data-reversed="{{ reversed | string }}">
         <div class="{{ containerStyle }}">
           {# Mobile layout (flex column) - Éléments centrés - Visible jusqu'au breakpoint lg #}
           <div class="lg:hidden text-center px-6">
@@ -143,18 +151,11 @@
               {% endif %}
             </div>
 
-            {# Link - "reservez" pour boat ou "contactez-nous" pour spot #}
+            {# Link - "reservez" pour boat uniquement #}
             {% if not isSpot and itemData.link and options.links %}
               <div class="{{ buttonWrapperStyle }}">
                 {{ renderLink({
                   name: itemData.link,
-                  datas: options.links
-                }) }}
-              </div>
-            {% elif isSpot and options.links %}
-              <div class="{{ buttonWrapperStyle }}">
-                {{ renderLink({
-                  name: "contactez_nous",
                   datas: options.links
                 }) }}
               </div>
@@ -164,7 +165,45 @@
           {# Desktop layout (two columns) - Visible à partir du breakpoint lg #}
           <div class="hidden lg:flex {% if reversed %}lg:flex-row-reverse{% else %}lg:flex-row{% endif %} items-center justify-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
             {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
-            <div class="w-auto min-w-[400px] max-w-[550px] min-h-[450px] mx-auto border {% if not reversed %}border-[theme(--ma-nautic-white)]{% else %}border-[theme(--ma-nautic-blue)]{% endif %} p-10 flex flex-col items-center justify-center text-center my-auto">
+            <div class="w-auto min-w-[400px] max-w-[550px] min-h-[450px] mx-auto border {% if not reversed %}border-[theme(--ma-nautic-white)]{% else %}border-[theme(--ma-nautic-blue)]{% endif %} p-10 flex flex-col items-center justify-center text-center my-auto relative">
+              
+              {# Icône au coin de la bordure #}
+              <div class="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2">
+                {% if itemData.iconName and options.icons %}
+                  {% set iconData = null %}
+                  {% for icon in options.icons.icons %}
+                    {% if icon.name == itemData.iconName %}
+                      {% set iconData = icon %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {# Récupérer les styles d'icône spécifiques si disponibles #}
+                  {% set iconVariantName = itemData.iconName ~ "Icon" %}
+                  {% set iconStyle = "text-[theme(--ma-nautic-gold)]" %}
+                  {% set iconContainerSize = "w-20 h-20" %}
+                  {% set iconSize = "40" %}
+                  
+                  {# Adaptation des styles en fonction du mode reversed #}
+                  {% if reversed %}
+                    {% set bgColor = "bg-[theme(--ma-nautic-white)]" %}
+                  {% else %}
+                    {% set bgColor = "bg-[theme(--ma-nautic-blue)]" %}
+                  {% endif %}
+
+                  {% if iconData %}
+                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ bgColor }} rounded-full p-3">
+                      <!-- SVG will be loaded here -->
+                    </span>
+                  {% else %}
+                    <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ bgColor }} rounded-full p-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
+                    </span>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
+                    </span>
+                  {% endif %}
+                {% endif %}
+              </div>
+              
               {# Super Heading (section title with underscore) - uniquement pour les bateaux #}
               {% if not isSpot %}
                 {% if itemData.model and options.headings %}
@@ -193,35 +232,6 @@
                     class: "{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}"
                   }) }}
                 {% endif %}
-              {% endif %}
-
-              {# Icon #}
-              {% if itemData.iconName and options.icons %}
-                <div class="{{ iconWrapperStyle }}">
-                  {% set iconData = null %}
-                  {% for icon in options.icons.icons %}
-                    {% if icon.name == itemData.iconName %}
-                      {% set iconData = icon %}
-                    {% endif %}
-                  {% endfor %}
-
-                  {# Récupérer les styles d'icône spécifiques si disponibles #}
-                  {% set iconVariantName = itemData.iconName ~ "Icon" %}
-                  {% set iconDefaultClass = options.datas.variants[iconVariantName].default | default("") if options.datas.variants[iconVariantName] else "" %}
-                  {% set iconStyle = options.datas.variants[iconVariantName].iconStyle | default("text-[theme(--ma-nautic-teal)]") if options.datas.variants[iconVariantName] else "text-[theme(--ma-nautic-teal)]" %}
-                  {% set iconContainerSize = options.datas.variants[iconVariantName].containerSize | default("w-12 h-12 lg:w-16 lg:h-16") if options.datas.variants[iconVariantName] else "w-12 h-12 lg:w-16 lg:h-16" %}
-                  {% set iconSize = options.datas.variants[iconVariantName].iconSize | default("32") if options.datas.variants[iconVariantName] else "32" %}
-
-                  {% if iconData %}
-                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
-                      <!-- SVG will be loaded here -->
-                    </span>
-                  {% else %}
-                    <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
-                    </span>
-                  {% endif %}
-                </div>
               {% endif %}
 
               {# Content - différent selon le type #}
