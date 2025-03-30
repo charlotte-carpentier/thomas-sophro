@@ -2,7 +2,6 @@
 =========================
       COLLECTION DETAIL        
 =========================
-
 #}
 
 {% from "03-atoms/heading.njk" import renderHeading %}
@@ -32,10 +31,10 @@
     {% if options.datas.spots %}
       {% set isSpot = true %}
       {% set itemsCollection = options.datas.spots %}
-      {% set itemKeyName = "name" %} {# Le champ servant d'identifiant dans spot est "name" #}
+      {% set itemKeyName = "name" %}
     {% else %}
       {% set itemsCollection = options.datas.boats %}
-      {% set itemKeyName = "name" %} {# Le champ servant d'identifiant dans boat est "name" #}
+      {% set itemKeyName = "name" %}
     {% endif %}
 
     {# Créer un ID unique pour la section #}
@@ -107,7 +106,7 @@
                   </span>
                 {% else %}
                   <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
                   </span>
                 {% endif %}
               </div>
@@ -120,7 +119,7 @@
                 <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} text-left">
                   {% for block in itemData.contentBlocks %}
                     <p class="mb-4">
-                      {{ block.text | replace("<a href=", "<a class='font-bold transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]' href=") | safe }}
+                      {{ block.text | safe }}
                     </p>
                   {% endfor %}
                 </div>
@@ -163,17 +162,16 @@
           </div>
 
           {# Desktop layout (two columns) - Visible à partir du breakpoint lg #}
-          {% if not reversed %}
-          <div class="hidden lg:flex lg:flex-row items-center justify-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
+          <div class="hidden lg:flex {% if reversed %}lg:flex-row-reverse{% else %}lg:flex-row{% endif %} items-center justify-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
             {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
-            <div class="w-auto min-w-[400px] max-w-[550px] min-h-[450px] mx-auto border border-[theme(--ma-nautic-white)] p-10 flex flex-col items-center justify-center text-center my-auto">
+            <div class="w-auto min-w-[400px] max-w-[550px] min-h-[450px] mx-auto border {% if not reversed %}border-[theme(--ma-nautic-white)]{% else %}border-[theme(--ma-nautic-blue)]{% endif %} p-10 flex flex-col items-center justify-center text-center my-auto">
               {# Super Heading (section title with underscore) - uniquement pour les bateaux #}
               {% if not isSpot %}
                 {% if itemData.model and options.headings %}
                   {{ renderHeading({
                     name: itemData.model,
                     datas: options.headings,
-                    class: "mb-6 mt-8 ma-nautic-section-title text-[theme(--ma-nautic-white)]"
+                    class: "mb-6 mt-8 ma-nautic-section-title {% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}"
                   }) }}
                 {% endif %}
               {% endif %}
@@ -184,7 +182,7 @@
                   {{ renderHeading({
                     name: itemData.heading,
                     datas: options.headings,
-                    class: "text-[theme(--ma-nautic-white)]"
+                    class: "{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}"
                   }) }}
                 {% endif %}
               {% else %}
@@ -192,7 +190,7 @@
                   {{ renderHeading({
                     name: itemData.name,
                     datas: options.headings,
-                    class: "text-[theme(--ma-nautic-white)]"
+                    class: "{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}"
                   }) }}
                 {% endif %}
               {% endif %}
@@ -220,7 +218,7 @@
                     </span>
                   {% else %}
                     <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
                     </span>
                   {% endif %}
                 </div>
@@ -230,10 +228,10 @@
               <div class="{{ contentContainerDesktopStyle }}">
                 {% if isSpot %}
                   {# Afficher les contentBlocks structurés pour les spots #}
-                  <div class="text-[theme(--ma-nautic-white)] text-left">
+                  <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} text-left">
                     {% for block in itemData.contentBlocks %}
                       <p class="mb-4">
-                        {{ block.text | replace("<a href=", "<a class='font-bold transition-all duration-300 text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] font-[\"Roboto\"]' href=") | safe }}
+                        {{ block.text | safe }}
                       </p>
                     {% endfor %}
                   </div>
@@ -251,9 +249,9 @@
                   {% endif %}
                 {% else %}
                   {# Afficher les informations de prix, moteur et passagers pour les bateaux #}
-                  <p class="text-[theme(--ma-nautic-white)] font-bold text-xl mb-2">{{ itemData.price }}</p>
-                  <p class="text-[theme(--ma-nautic-white)] mb-2">{{ itemData.engine }}</p>
-                  <p class="text-[theme(--ma-nautic-white)]">{{ itemData.passengersNumber }}</p>
+                  <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} font-bold text-xl mb-2">{{ itemData.price }}</p>
+                  <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} mb-2">{{ itemData.engine }}</p>
+                  <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">{{ itemData.passengersNumber }}</p>
                 {% endif %}
               </div>
 
@@ -283,127 +281,6 @@
               {% endif %}
             </div>
           </div>
-          {% else %}
-          <div class="hidden lg:flex lg:flex-row-reverse items-center justify-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
-            {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
-            <div class="w-auto min-w-[400px] max-w-[550px] min-h-[450px] mx-auto border border-[theme(--ma-nautic-blue)] p-10 flex flex-col items-center justify-center text-center my-auto">
-              {# Super Heading (section title with underscore) - uniquement pour les bateaux #}
-              {% if not isSpot %}
-                {% if itemData.model and options.headings %}
-                  {{ renderHeading({
-                    name: itemData.model,
-                    datas: options.headings,
-                    class: "mb-6 mt-8 ma-nautic-section-title text-[theme(--ma-nautic-blue)]"
-                  }) }}
-                {% endif %}
-              {% endif %}
-
-              {# Main Heading (title) #}
-              {% if isSpot %}
-                {% if itemData.heading and options.headings %}
-                  {{ renderHeading({
-                    name: itemData.heading,
-                    datas: options.headings,
-                    class: "text-[theme(--ma-nautic-blue)]"
-                  }) }}
-                {% endif %}
-              {% else %}
-                {% if itemData.name and options.headings %}
-                  {{ renderHeading({
-                    name: itemData.name,
-                    datas: options.headings,
-                    class: "text-[theme(--ma-nautic-blue)]"
-                  }) }}
-                {% endif %}
-              {% endif %}
-
-              {# Icon #}
-              {% if itemData.iconName and options.icons %}
-                <div class="{{ iconWrapperStyle }}">
-                  {% set iconData = null %}
-                  {% for icon in options.icons.icons %}
-                    {% if icon.name == itemData.iconName %}
-                      {% set iconData = icon %}
-                    {% endif %}
-                  {% endfor %}
-
-                  {# Récupérer les styles d'icône spécifiques si disponibles #}
-                  {% set iconVariantName = itemData.iconName ~ "Icon" %}
-                  {% set iconDefaultClass = options.datas.variants[iconVariantName].default | default("") if options.datas.variants[iconVariantName] else "" %}
-                  {% set iconStyle = options.datas.variants[iconVariantName].iconStyle | default("text-[theme(--ma-nautic-teal)]") if options.datas.variants[iconVariantName] else "text-[theme(--ma-nautic-teal)]" %}
-                  {% set iconContainerSize = options.datas.variants[iconVariantName].containerSize | default("w-12 h-12 lg:w-16 lg:h-16") if options.datas.variants[iconVariantName] else "w-12 h-12 lg:w-16 lg:h-16" %}
-                  {% set iconSize = options.datas.variants[iconVariantName].iconSize | default("32") if options.datas.variants[iconVariantName] else "32" %}
-
-                  {% if iconData %}
-                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
-                      <!-- SVG will be loaded here -->
-                    </span>
-                  {% else %}
-                    <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-                    </span>
-                  {% endif %}
-                </div>
-              {% endif %}
-
-              {# Content - différent selon le type #}
-              <div class="{{ contentContainerDesktopStyle }}">
-                {% if isSpot %}
-                  {# Afficher les contentBlocks structurés pour les spots #}
-                  <div class="text-[theme(--ma-nautic-blue)] text-left">
-                    {% for block in itemData.contentBlocks %}
-                      <p class="mb-4">
-                        {{ block.text | replace("<a href=", "<a class='font-bold transition-all duration-300 text-[theme(--ma-nautic-blue)] hover:text-[theme(--ma-nautic-teal)] font-[\"Roboto\"]' href=") | safe }}
-                      </p>
-                    {% endfor %}
-                  </div>
-                  
-                  {# Afficher les liens CTA #}
-                  {% if itemData.ctaLinks and options.links %}
-                    <div class="mt-4 flex flex-wrap justify-center gap-4">
-                      {% for linkItem in itemData.ctaLinks %}
-                        {{ renderLink({
-                          name: linkItem.name,
-                          datas: options.links
-                        }) }}
-                      {% endfor %}
-                    </div>
-                  {% endif %}
-                {% else %}
-                  {# Afficher les informations de prix, moteur et passagers pour les bateaux #}
-                  <p class="text-[theme(--ma-nautic-blue)] font-bold text-xl mb-2">{{ itemData.price }}</p>
-                  <p class="text-[theme(--ma-nautic-blue)] mb-2">{{ itemData.engine }}</p>
-                  <p class="text-[theme(--ma-nautic-blue)]">{{ itemData.passengersNumber }}</p>
-                {% endif %}
-              </div>
-
-              {# Link - différent selon le type #}
-              {% if not isSpot and itemData.link and options.links %}
-                <div class="{{ buttonWrapperStyle }}">
-                  {{ renderLink({
-                    name: itemData.link,
-                    datas: options.links
-                  }) }}
-                </div>
-              {% endif %}
-            </div>
-
-            {# Right column: Carousel #}
-            <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16">
-              {% if itemData.carousel %}
-                <div class="w-4/5 mx-auto">
-                  {{ renderCarousel({
-                    name: itemData.carousel,
-                    datas: options.carousels,
-                    images: options.images,
-                    buttons: options.buttons,
-                    class: "ma-nautic-carousel w-full"
-                  }) }}
-                </div>
-              {% endif %}
-            </div>
-          </div>
-          {% endif %}
 
           {# Carousel pour mobile #}
           {% if itemData.carousel %}
@@ -427,159 +304,8 @@
   {% else %}
     <span class="text-red-500">Collection data not found</span>
   {% endif %}
-  
-  {# Script pour initialiser les carousels avec des indicateurs bien visibles #}
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Sélectionne toutes les sections collection
-      const collectionSections = document.querySelectorAll("[data-collection-item]");
-      
-      collectionSections.forEach(section => {
-        // Détermine si la section est en mode reversed ou non
-        const isReversed = section.getAttribute("data-reversed") === "true";
-        
-        // Sélectionne tous les carousels dans cette section
-        const carousels = section.querySelectorAll("[data-carousel]");
-        
-        carousels.forEach(carousel => {
-          initCarousel(carousel, isReversed);
-        });
-      });
-      
-      function initCarousel(carousel, isReversed) {
-        const carouselId = carousel.id;
-        const items = [...carousel.querySelectorAll("[data-carousel-item]")];
-        const prevBtn = carousel.parentElement.querySelector("[data-carousel-prev]");
-        const nextBtn = carousel.parentElement.querySelector("[data-carousel-next]");
-        const indicators = document.querySelectorAll(`[data-carousel-target="${carouselId}"]`);
-        
-        let index = 0;
-        let autoplayInterval = null;
-        
-        // Ajouter la transition à tous les éléments du carrousel
-        items.forEach(item => {
-          item.classList.add("transition-opacity", "duration-700");
-        });
-        
-        // Fonction pour afficher une slide spécifique
-        function showSlide(newIndex) {
-          // Masquer la slide actuelle
-          items[index].classList.remove("opacity-100");
-          items[index].classList.add("opacity-0");
-          
-          // Calculer le nouvel index
-          index = (newIndex + items.length) % items.length;
-          
-          // Afficher la nouvelle slide
-          items[index].classList.remove("opacity-0");
-          items[index].classList.add("opacity-100");
-          
-          // Mettre à jour les indicateurs
-          updateIndicators();
-        }
-        
-        // Mettre à jour l'apparence des indicateurs
-        function updateIndicators() {
-          indicators.forEach((indicator, i) => {
-            // Supprime d'abord la classe active de tous les indicateurs
-            indicator.classList.remove("carousel-indicator-active");
-            
-            if (i === index) {
-              // Ajoute la classe active à l'indicateur courant
-              indicator.classList.add("carousel-indicator-active");
-              
-              // Styles CSS directs (en complément de la classe)
-              // Utiliser des couleurs différentes selon que la section est inversée ou non
-              if (isReversed) {
-                // Fond blanc, indicateurs bleus pour le mode inversé
-                indicator.style.backgroundColor = "#2b3947"; // Bleu (--ma-nautic-blue)
-                indicator.style.opacity = "0.7";
-              } else {
-                // Fond bleu, indicateurs blancs pour le mode standard
-                indicator.style.backgroundColor = "#ffffff"; // Blanc
-                indicator.style.opacity = "0.8";
-              }
-            } else {
-              // Styles pour les indicateurs inactifs
-              if (isReversed) {
-                // Fond blanc, indicateurs bleus pour le mode inversé
-                indicator.style.backgroundColor = "#2b3947"; // Bleu (--ma-nautic-blue)
-                indicator.style.opacity = "0.3";
-              } else {
-                // Fond bleu, indicateurs blancs pour le mode standard
-                indicator.style.backgroundColor = "#ffffff"; // Blanc
-                indicator.style.opacity = "0.3";
-              }
-            }
-          });
-        }
-        
-        // Appliquer les styles initiaux des indicateurs
-        updateIndicators();
-        
-        // Gestionnaire d'événement pour le bouton précédent
-        if (prevBtn) {
-          prevBtn.addEventListener("click", () => {
-            showSlide(index - 1);
-            resetAutoplay();
-          });
-        }
-        
-        // Gestionnaire d'événement pour le bouton suivant
-        if (nextBtn) {
-          nextBtn.addEventListener("click", () => {
-            showSlide(index + 1);
-            resetAutoplay();
-          });
-        }
-        
-        // Gestionnaire d'événement pour les indicateurs
-        indicators.forEach((indicator, i) => {
-          indicator.addEventListener("click", () => {
-            showSlide(i);
-            resetAutoplay();
-          });
-        });
-        
-        // Fonction pour réinitialiser l'autoplay
-        function resetAutoplay() {
-          if (autoplayInterval) {
-            clearInterval(autoplayInterval);
-            startAutoplay();
-          }
-        }
-        
-        // Fonction pour démarrer l'autoplay
-        function startAutoplay() {
-          const autoplay = carousel.getAttribute("data-autoplay") === "true";
-          
-          if (autoplay) {
-            autoplayInterval = setInterval(() => {
-              showSlide(index + 1);
-            }, 7000); // Auto-slide toutes les 7s
-          }
-        }
-        
-        // Gestion de pause au survol
-        const pauseOnHover = carousel.getAttribute("data-pause-on-hover") === "true";
-        
-        if (pauseOnHover) {
-          carousel.addEventListener("mouseenter", () => {
-            if (autoplayInterval) {
-              clearInterval(autoplayInterval);
-            }
-          });
-          
-          carousel.addEventListener("mouseleave", () => {
-            startAutoplay();
-          });
-        }
-        
-        // Démarrer l'autoplay si configuré
-        startAutoplay();
-      }
-    });
-  </script>
+  <script src="/js/organisms/section-scroll.js"></script>
+  <script src="/js/organisms/carousel.js" defer></script>
 {% endmacro %}
 
 {#

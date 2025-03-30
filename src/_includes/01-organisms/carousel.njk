@@ -7,6 +7,7 @@
 {% macro renderCarousel(options) %}
   {% if options.datas %}
     {% set globalStyle = options.datas.globalStyle | default('w-full') %}
+    {% set theme = options.theme | default('auto') %}
     
     {% set carouselData = null %}
     {% for carousel in options.datas.carousels %}
@@ -56,6 +57,7 @@
             data-carousel="{{ carouselData.name }}"
             {% if carouselData.autoplay %}data-autoplay="true"{% endif %}
             {% if carouselData.pauseOnHover %}data-pause-on-hover="true"{% endif %}
+            data-carousel-theme="{{ theme }}"
           >
             <!-- Conteneur avec ratio carré maintenu via padding-bottom -->
             <div class="relative w-full pb-[100%]">
@@ -130,8 +132,6 @@
           </div>
         </div>
       </div>
-      
-      <script src="/js/organisms/carousel.js"></script>
     {% else %}
       <span class="text-red-500">Carousel not found: {{ options.name }}</span>
     {% endif %}
@@ -163,5 +163,14 @@ Summon HAT Components Wisely
     images: atoms.images,
     buttons: atoms.buttons,
     class: "my-8"
+}) }}
+
+4. Specify the theme for indicators (dark/light/auto)
+{{ renderCarousel({ 
+    name: "carousel_1", 
+    datas: organisms.carousels,
+    images: atoms.images,
+    buttons: atoms.buttons,
+    theme: "dark"  // Pour fond foncé, indicateurs clairs
 }) }}
 #}

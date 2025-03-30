@@ -13,12 +13,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextBtn = carousel.parentElement.querySelector("[data-carousel-next]");
     const indicators = document.querySelectorAll(`[data-carousel-target="${carouselId}"]`);
     
-    // Détermine si le carousel est dans une section avec fond blanc (reversed)
+    // Déterminer le thème des indicateurs
+    let theme = carousel.getAttribute("data-carousel-theme") || "auto";
     let isReversed = false;
-    let section = carousel.closest("[data-collection-item]") || carousel.closest("[data-section-about]");
-    if (section) {
-      isReversed = section.getAttribute("data-reversed") === "true";
+    
+    if (theme === "auto") {
+      // Utiliser l'ancienne logique de détection mais améliorée
+      let currentElement = carousel;
+      while (currentElement && currentElement !== document.body) {
+        if (currentElement.hasAttribute("data-reversed")) {
+          isReversed = currentElement.getAttribute("data-reversed") === "true";
+          break;
+        }
+        currentElement = currentElement.parentElement;
+      }
+    } else {
+      // Utiliser le thème explicite
+      isReversed = theme === "light"; // "light" = fond clair, indicateurs foncés
     }
+    
+    console.log("Carousel:", carouselId, "Theme:", theme, "IsReversed:", isReversed);
     
     let index = 0;
     let autoplayInterval = null;
@@ -57,22 +71,22 @@ document.addEventListener("DOMContentLoaded", function () {
           
           // Styles CSS directs (en complément de la classe)
           if (isReversed) {
-            // Fond blanc, indicateurs bleus pour le mode inversé
+            // Fond blanc/clair, indicateurs bleus pour le mode inversé
             indicator.style.backgroundColor = "#2b3947"; // Bleu (--ma-nautic-blue)
             indicator.style.opacity = "0.7";
           } else {
-            // Fond bleu, indicateurs blancs pour le mode standard
+            // Fond bleu/foncé, indicateurs blancs pour le mode standard
             indicator.style.backgroundColor = "#ffffff"; // Blanc
             indicator.style.opacity = "0.8";
           }
         } else {
           // Styles pour les indicateurs inactifs
           if (isReversed) {
-            // Fond blanc, indicateurs bleus pour le mode inversé
+            // Fond blanc/clair, indicateurs bleus pour le mode inversé
             indicator.style.backgroundColor = "#2b3947"; // Bleu (--ma-nautic-blue)
             indicator.style.opacity = "0.3";
           } else {
-            // Fond bleu, indicateurs blancs pour le mode standard
+            // Fond bleu/foncé, indicateurs blancs pour le mode standard
             indicator.style.backgroundColor = "#ffffff"; // Blanc
             indicator.style.opacity = "0.3";
           }
