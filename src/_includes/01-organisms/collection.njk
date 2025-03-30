@@ -120,7 +120,7 @@
                 <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} text-left">
                   {% for block in itemData.contentBlocks %}
                     <p class="mb-4">
-                      {{ block.text | safe }}
+                      {{ block.text | replace("<a href=", "<a class='font-bold transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]' href=") | safe }}
                     </p>
                   {% endfor %}
                 </div>
@@ -233,7 +233,7 @@
                   <div class="text-[theme(--ma-nautic-white)] text-left">
                     {% for block in itemData.contentBlocks %}
                       <p class="mb-4">
-                        {{ block.text | safe }}
+                        {{ block.text | replace("<a href=", "<a class='font-bold transition-all duration-300 text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] font-[\"Roboto\"]' href=") | safe }}
                       </p>
                     {% endfor %}
                   </div>
@@ -353,7 +353,7 @@
                   <div class="text-[theme(--ma-nautic-blue)] text-left">
                     {% for block in itemData.contentBlocks %}
                       <p class="mb-4">
-                        {{ block.text | safe }}
+                        {{ block.text | replace("<a href=", "<a class='font-bold transition-all duration-300 text-[theme(--ma-nautic-blue)] hover:text-[theme(--ma-nautic-teal)] font-[\"Roboto\"]' href=") | safe }}
                       </p>
                     {% endfor %}
                   </div>
