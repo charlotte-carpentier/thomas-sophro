@@ -58,7 +58,7 @@
     
     {% if hasImage and not imageOnlySection %}
       {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
-      {% set textContainerStyle = options.datas.textContainerStyle %}
+      {% set textContainerStyle = options.datas.textContainerStyle ~ " flex justify-center md:justify-start" %}
       {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
     {% elif imageOnlySection %}
       {# Style spécifique pour une section avec uniquement une image #}
@@ -183,6 +183,98 @@
                 <img src="{{ sectionImage.src }}" alt="{{ sectionImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }} mx-auto">
               {% endif %}
             {% endif %}
+          </div>
+        </div>
+      </section>
+
+    {# Nouvelle section spécifique pour ma_nautic_info #}
+    {% elif variant and variant.name == "ma_nautic_info" %}
+      <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }} {% if variant.heightVariant %}{{ options.datas.heights[variant.heightVariant] }}{% else %}py-16 md:py-20 lg:py-24{% endif %}">
+        <div class="{{ containerStyle }}">
+          <div class="{{ contentLayoutStyle.mobile }} {{ contentLayoutStyle.desktop }}">
+            {# Text Content Column #}
+            <div class="{{ textContainerStyle }}">
+              {# Premier titre - headingInfo #}
+              {% if variant.headingInfo and options.headings and options.headings.headings %}
+                {% set infoHeading = null %}
+                {% for heading in options.headings.headings %}
+                  {% if heading.name == variant.headingInfo %}
+                    {% set infoHeading = heading %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if infoHeading %}
+                  <{{ "h" + infoHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + infoHeading.level] }} {{ options.headings.variants[infoHeading.style] }}">
+                    {{ infoHeading.text }}
+                  </{{ "h" + infoHeading.level }}>
+                {% endif %}
+              {% endif %}
+
+              {# Informations principales #}
+              {% if variant.infos %}
+                <div class="my-4">
+                  {{ variant.infos | safe }}
+                </div>
+              {% endif %}
+
+              {# Deuxième titre - headingExtra #}
+              {% if variant.headingExtra and options.headings and options.headings.headings %}
+                {% set extraHeading = null %}
+                {% for heading in options.headings.headings %}
+                  {% if heading.name == variant.headingExtra %}
+                    {% set extraHeading = heading %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if extraHeading %}
+                  <{{ "h" + extraHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + extraHeading.level] }} {{ options.headings.variants[extraHeading.style] }} mt-6">
+                    {{ extraHeading.text }}
+                  </{{ "h" + extraHeading.level }}>
+                {% endif %}
+              {% endif %}
+
+              {# Informations supplémentaires #}
+              {% if variant.extras %}
+                <div class="my-4">
+                  {{ variant.extras | safe }}
+                </div>
+              {% endif %}
+
+              {# Lien standard si défini #}
+              {% if variant.link and options.links and options.links.links %}
+                {% set linkData = null %}
+                {% for link in options.links.links %}
+                  {% if link.name | lower == variant.link | lower %}
+                    {% set linkData = link %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if linkData %}
+                  <div class="flex justify-center">
+                    <a href="{{ linkData.href }}" class="{{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }} mt-6">
+                      {{ linkData.text }}
+                    </a>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+
+            {# Image Column #}
+            <div class="{{ imageContainerStyle }}">
+              {% if variant.image and options.images and options.images.images %}
+                {% set sectionImage = null %}
+                {% for image in options.images.images %}
+                  {% if image.name == variant.image %}
+                    {% set sectionImage = image %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if sectionImage %}
+                  {% set imageVariant = options.images.variants[sectionImage.size] | default('') %}
+                  <img src="{{ sectionImage.src }}" alt="{{ sectionImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }} mx-auto">
+                {% endif %}
+              {% endif %}
+            </div>
           </div>
         </div>
       </section>
@@ -369,6 +461,15 @@ Summon HAT Components Wisely
     name: "ma_nautic_map",
     datas: organisms["section-texts"],
     images: atoms.images
+}) }}
+
+7. Using MA-Nautic Info Section with dual headings and lists
+{{ renderSectionText({ 
+    name: "ma_nautic_info",
+    datas: organisms["section-texts"],
+    headings: atoms.headings,
+    images: atoms.images,
+    links: atoms.links
 }) }}
 
 Every journey begins with a discover section! 🏰🛡️

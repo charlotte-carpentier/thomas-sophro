@@ -6,7 +6,8 @@
     "navigation-secondary": "ma-nautic-nav-link font-['Roboto'] text-[25px]",
     "content": "ma-nautic-content-link font-['Vibur']",
     "content-light": "ma-content-link-light font-['Vibur']",
-    "footer": "text-[--ma-nautic-white] hover:text-[--ma-nautic-teal] font-['Roboto']"
+    "footer": "text-[--ma-nautic-white] hover:text-[--ma-nautic-teal] font-['Roboto']",
+    "footer-dark": "text-[--ma-nautic-blue] hover:text-[--ma-nautic-teal] font-['Roboto']"
   },
   "links": [
     {
@@ -128,6 +129,30 @@
       "href": "/contact",
       "text": "RESERVEZ",
       "style": "content-light"
+    },
+    {
+      "name": "cabane_lotu",
+      "href": "https://www.lacabanedulodu.com/",
+      "text": "La Cabane du Lotu",
+      "style": "footer"
+    },
+    {
+      "name": "piniccia_saleccia",
+      "href": "https://www.apinicciadisaleccia.fr/",
+      "text": "A Piniccia di Saleccia",
+      "style": "footer"
+    },
+    {
+      "name": "bo_plage",
+      "href": "https://www.facebook.com/bosplage/?locale=fr_FR",
+      "text": "Le Bo'S Plage",
+      "style": "footer"
+    },
+    {
+      "name": "le_langoustier",
+      "href": "https://www.facebook.com/p/Restaurant-le-langoustier-100063756750272/?locale=fr_FR",
+      "text": "Le Langoustier",
+      "style": "footer"
     }
   ]
 }

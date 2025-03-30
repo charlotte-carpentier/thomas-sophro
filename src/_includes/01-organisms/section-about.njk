@@ -15,6 +15,17 @@
     {% set globalStyle = options.datas.globalStyle | default("section-about") %}
     {% set sectionStyles = options.datas.sectionStyles | default({}) %}
     {% set reversed = options.reversed | default(false) %}
+    
+    {# Déterminer le thème du carousel en fonction du nom de la section #}
+    {% if options.name == "ma_nautic_about" %}
+      {% set carouselTheme = "light" %}
+    {% else %}
+      {% if reversed %}
+        {% set carouselTheme = "light" %}
+      {% else %}
+        {% set carouselTheme = "dark" %}
+      {% endif %}
+    {% endif %}
 
     {% set sectionData = null %}
     {% if options.name %}
@@ -26,14 +37,10 @@
     {% endif %}
 
     {% if not sectionData %}
-      {% set sectionData = options
-        .datas
-        .sections[0] %}
+      {% set sectionData = options.datas.sections[0] %}
     {% endif %}
 
-    {% set variant = options
-      .datas
-      .variants[sectionData.variant] | default(options.datas.variants.default) %}
+    {% set variant = options.datas.variants[sectionData.variant] | default(options.datas.variants.default) %}
 
     {# Recherche explicite du bouton de défilement #}
     {% set scrollButton = null %}
@@ -49,16 +56,10 @@
     {% set arrowStyle = "" %}
     {% set arrowButtonStyle = "" %}
     {% set arrowContainerSize = "" %}
-    {% if sectionData
-      .scrollArrowButtonVariant and options
-      .datas
-      .variants[sectionData.scrollArrowButtonVariant] %}
+    {% if sectionData.scrollArrowButtonVariant and options.datas.variants[sectionData.scrollArrowButtonVariant] %}
       {% set arrowStyle = options.datas.variants[sectionData.scrollArrowButtonVariant].default | default('mx-auto') %}
       {% set arrowButtonStyle = options.datas.variants[sectionData.scrollArrowButtonVariant].iconStyle | default('text-[theme(--ma-nautic-beige)]') %}
-      {% set arrowContainerSize = options
-        .datas
-        .variants[sectionData.scrollArrowButtonVariant]
-        .containerSize | default('w-16 h-16') %}
+      {% set arrowContainerSize = options.datas.variants[sectionData.scrollArrowButtonVariant].containerSize | default('w-16 h-16') %}
     {% else %}
       {% set arrowStyle = 'mx-auto' %}
       {% set arrowButtonStyle = 'text-[theme(--ma-nautic-beige)]' %}
@@ -70,20 +71,11 @@
     {% set iconContainerSize = "" %}
     {% set iconDefault = "" %}
     {% set iconSize = "32" %}
-    {% if sectionData
-      .iconVariant and options
-      .datas
-      .variants[sectionData.iconVariant] %}
+    {% if sectionData.iconVariant and options.datas.variants[sectionData.iconVariant] %}
       {% set iconDefault = options.datas.variants[sectionData.iconVariant].default | default('mx-auto') %}
       {% set iconStyle = options.datas.variants[sectionData.iconVariant].iconStyle | default('text-[theme(--ma-nautic-teal)]') %}
-      {% set iconContainerSize = options
-        .datas
-        .variants[sectionData.iconVariant]
-        .containerSize | default('w-12 h-12 lg:w-16 lg:h-16') %}
-      {% set iconSize = options
-        .datas
-        .variants[sectionData.iconVariant]
-        .iconSize | default('32') %}
+      {% set iconContainerSize = options.datas.variants[sectionData.iconVariant].containerSize | default('w-12 h-12 lg:w-16 lg:h-16') %}
+      {% set iconSize = options.datas.variants[sectionData.iconVariant].iconSize | default('32') %}
     {% else %}
       {% set iconDefault = 'mx-auto' %}
       {% set iconStyle = 'text-[theme(--ma-nautic-teal)]' %}
@@ -113,7 +105,7 @@
     <div class="relative">
       {# Titre principal (bande en haut) #}
       {% if sectionData.mainTitle and options.headings %}
-        <div class="{{ mainTitleWrapperStyle }} ma-nautic-main" style="border-bottom: none;">
+        <div class="{{ mainTitleWrapperStyle }} ma-nautic-main" style="border-bottom: none;" data-reversed="{{ reversed | string }}">
           {{ renderHeading({
             name: sectionData.mainTitle,
             datas: options.headings,
@@ -148,7 +140,7 @@
         </div>
       {% endif %}
 
-      <section class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }} pb-12 border-t-0" data-section-about="{{ sectionData.name }}" id="{{ sectionId }}">
+      <section class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }} pb-12 border-t-0" data-section-about="{{ sectionData.name }}" id="{{ sectionId }}" data-reversed="{{ reversed | string }}">
         <div class="{{ containerStyle }}">
           {% if sectionData.topTitle %}
             <div class="{{ topTitleWrapperStyle }}">
@@ -191,7 +183,7 @@
                   </span>
                 {% else %}
                   <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
                   </span>
                 {% endif %}
               </div>
@@ -253,7 +245,7 @@
                     </span>
                   {% else %}
                     <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
                     </span>
                   {% endif %}
                 </div>
@@ -278,7 +270,7 @@
             </div>
 
             {# Right column: Carousel - Réduit à 75% de sa taille d'origine #}
-            <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16">
+            <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16" data-reversed="{{ reversed | string }}">
               {% if sectionData.hasCarousel and sectionData.carouselName %}
                 <div class="w-4/5 mx-auto">
                   {{ renderCarousel({
@@ -286,7 +278,8 @@
                     datas: options.carousels,
                     images: options.images,
                     buttons: options.buttons,
-                    class: "ma-nautic-carousel w-full"
+                    class: "ma-nautic-carousel w-full",
+                    theme: carouselTheme
                   }) }}
                 </div>
               {% endif %}
@@ -329,7 +322,7 @@
                     </span>
                   {% else %}
                     <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
                     </span>
                   {% endif %}
                 </div>
@@ -354,7 +347,7 @@
             </div>
 
             {# Right column: Carousel - Réduit à 75% de sa taille d'origine #}
-            <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16">
+            <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16" data-reversed="{{ reversed | string }}">
               {% if sectionData.hasCarousel and sectionData.carouselName %}
                 <div class="w-4/5 mx-auto">
                   {{ renderCarousel({
@@ -362,7 +355,8 @@
                     datas: options.carousels,
                     images: options.images,
                     buttons: options.buttons,
-                    class: "ma-nautic-carousel w-full"
+                    class: "ma-nautic-carousel w-full",
+                    theme: carouselTheme
                   }) }}
                 </div>
               {% endif %}
@@ -372,14 +366,15 @@
 
           {# Carousel pour mobile - Réduit à 75% de sa taille d'origine #}
           {% if sectionData.hasCarousel and sectionData.carouselName %}
-            <div class="lg:hidden mt-8">
+            <div class="lg:hidden mt-8" data-reversed="{{ reversed | string }}">
               <div class="w-4/5 mx-auto">
                 {{ renderCarousel({
                   name: sectionData.carouselName,
                   datas: options.carousels,
                   images: options.images,
                   buttons: options.buttons,
-                  class: "ma-nautic-carousel"
+                  class: "ma-nautic-carousel",
+                  theme: carouselTheme
                 }) }}
               </div>
             </div>
@@ -389,6 +384,7 @@
     </div>
     {# Include external JS files #}
     <script src="/js/organisms/section-scroll.js"></script>
+    <script src="/js/organisms/carousel.js" defer></script>
   {% else %}
     <span class="text-red-500">Section About data not found</span>
   {% endif %}
