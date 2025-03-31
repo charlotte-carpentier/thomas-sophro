@@ -11,8 +11,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('./src/docs');
   // Copy JavaScript files to output
   eleventyConfig.addPassthroughCopy('./src/js');
-  // Copy CSS files (make sure output.css is copied to the public directory)
-  eleventyConfig.addPassthroughCopy('./public/css');  // Ajouté pour le CSS généré
 
   // Add shortcode to display current year dynamically
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
