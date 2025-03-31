@@ -1,0 +1,97 @@
+{#
+=========================
+      SECTION PAGE - SIMPLIFIED        
+=========================
+#}
+
+{% macro renderSectionPage(options) %}
+  {% if options.datas %}
+    {% set variant = null %}
+    {% for item in options.datas.faqs %}
+      {% if item.name == options.name %}
+        {% set variant = item %}
+      {% endif %}
+    {% endfor %}
+
+    {% if not variant and options.datas.faqs[0] %}
+      {% set variant = options.datas.faqs[0] %}
+    {% endif %}
+
+    <section class="py-16 md:py-20 lg:py-24 bg-[theme(--ma-nautic-beige)]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {# Titre FAQ #}
+        <h2 class="text-center font-black text-[20px] text-[theme(--ma-nautic-gold)]" style="margin-bottom: 40px;">_{% if options.title %}{{ options.title }}{% else %}Questions fréquentes{% endif %}</h2>
+
+        {# Icône si définie #}
+        {% if variant.iconName and options.icons and options.icons.icons %}
+          {% set iconFound = false %}
+          {% for icon in options.icons.icons %}
+            {% if icon.name == variant.iconName and icon.src and not iconFound %}
+              <div class="flex justify-center mb-8">
+                <div class="w-12 h-12 flex items-center justify-center">
+                  {% include icon.src %}
+                </div>
+              </div>
+              {% set iconFound = true %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {# Questions et réponses #}
+        <div class="max-w-4xl mx-auto text-center">
+          {% if variant.contentBlocks %}
+            <div class="divide-y divide-[theme(--ma-nautic-teal)]">
+              {% for item in variant.contentBlocks %}
+                <div class="py-6 first:pt-0 last:pb-0">
+                  <details>
+                    <summary class="font-bold cursor-pointer text-[theme(--ma-nautic-blue)] mx-auto">
+                      {{ item.question }}
+                    </summary>
+                    <p class="mt-4 text-[theme(--ma-nautic-blue)]">
+                      {{ item.answer }}
+                    </p>
+                  </details>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {# Lien de la FAQ si défini #}
+          {% if variant.links and options.links and options.links.links %}
+            {% set linkFound = false %}
+            {% for link in options.links.links %}
+              {% if link.name | lower == variant.links | lower and not linkFound %}
+                <div class="flex justify-center mt-12">
+                  <a href="{{ link.href }}" class="{{ options.links.globalStyle }} {{ options.links.variants[link.style] }}">
+                    {{ link.text }}
+                  </a>
+                </div>
+                {% set linkFound = true %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <span class="text-red-500">Section Page data not found</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Utilisation du composant section-page
+============================
+
+1. Import du macro en haut de votre page
+{% from "01-organisms/section-page.njk" import renderSectionPage %}
+
+2. Appel du composant section-page
+{{ renderSectionPage({ 
+    name: "ma_faq",
+    datas: faqs,
+    icons: atoms.icons,
+    links: atoms.links
+}) }}
+
+#}

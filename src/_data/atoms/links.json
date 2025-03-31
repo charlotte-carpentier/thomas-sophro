@@ -18,13 +18,13 @@
     },
     {
       "name": "nos-bateaux",
-      "href": "/bateau",
+      "href": "/nos-bateaux",
       "text": "Nos bateaux",
       "style": "navigation"
     },
     {
       "name": "lieux-interets",
-      "href": "/lieu",
+      "href": "/lieux-interet",
       "text": "Lieux d'intérêt",
       "style": "navigation"
     },
@@ -48,13 +48,13 @@
     },
     {
       "name": "decouvrir",
-      "href": "/lieu",
+      "href": "/lieux-interet",
       "text": "découvrir",
       "style": "content-light"
     },
     {
       "name": "voir-bateaux",
-      "href": "/bateau",
+      "href": "/nos-bateaux",
       "text": "VOIR NOS BATEAUX",
       "style": "content"
     },

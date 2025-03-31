@@ -92,6 +92,30 @@
       "iconVariant": "wheelIcon",
       "hasIcon": true,
       "iconName": "wheel"
+    },
+    {
+      "name": "faq_hero",
+      "variant": "default",
+      "superHeading": "agence_faq",
+      "heading": "ma_nautic_faq",
+      "image-right": "ma_wave_right",
+      "image-left": "ma_wave_left",
+      "icon": "wheel",
+      "iconVariant": "wheelIcon",
+      "hasIcon": true,
+      "iconName": "wheel"
+    },
+    {
+      "name": "legal_hero",
+      "variant": "default",
+      "superHeading": "agence_legal",
+      "heading": "ma_nautic_legal",
+      "image-right": "ma_wave_right",
+      "image-left": "ma_wave_left",
+      "icon": "wheel",
+      "iconVariant": "wheelIcon",
+      "hasIcon": true,
+      "iconName": "wheel"
     }
   ]
 }

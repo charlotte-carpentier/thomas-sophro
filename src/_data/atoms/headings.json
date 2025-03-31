@@ -227,6 +227,30 @@
       "level": 2,
       "text": "Contactez notre agence de location de bateaux en Haute-Corse ",
       "style": "ma_nautic_section_subtitle" 
+    },
+    {
+      "name": "agence_faq",
+      "level": 1,
+      "text": "QUESTIONS ET RÉPONSES LES PLUS FRÉQUENTES SUR NOS LOCATIONS DE BATEAUX À SAINT-FLORENT",
+      "style": "ma_nautic_section_drop"
+    },
+    {
+      "name": "ma_nautic_faq",
+      "level": 2,
+      "text": "Réponses aux questions les plus fréquentes sur nos locations de bateaux en Haute-Corse",
+      "style": "ma_nautic_section_subtitle" 
+    },
+    {
+      "name": "agence_legal",
+      "level": 1,
+      "text": "QUESTIONS ET RÉPONSES LES PLUS FRÉQUENTES SUR NOS LOCATIONS DE BATEAUX À SAINT-FLORENT",
+      "style": "ma_nautic_section_drop"
+    },
+    {
+      "name": "ma_nautic_legal",
+      "level": 2,
+      "text": "Réponses aux questions les plus fréquentes sur nos locations de bateaux en Haute-Corse",
+      "style": "ma_nautic_section_subtitle" 
     }
   ]
 }
