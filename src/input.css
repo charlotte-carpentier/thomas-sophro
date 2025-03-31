@@ -1,41 +1,6 @@
 @import "tailwindcss";
-@import "./assets/fonts/fonts.css";
-
-/* Déclarations des polices pour un meilleur contrôle */
-@font-face {
-  font-family: 'Vibur';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/vibur.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/roboto-regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/assets/fonts/roboto-bold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('/assets/fonts/roboto-black.woff2') format('woff2');
-}
 
 @source "./src/**/*.njk";
-
 @theme {
   /* Couleurs principales */
   --ma-nautic-blue: #2b3947;       /* bleu foncé */
