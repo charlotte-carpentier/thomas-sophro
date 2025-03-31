@@ -30,14 +30,30 @@ layout: '00-core/base.njk'
     atoms: atoms
 }) }}
 
-<iframe 
-    id="map-canvas" 
-    style="width: 100%; height: 500px;" 
-    frameborder="0" 
-    scrolling="no" 
-    marginheight="0" 
-    marginwidth="0" 
-    src="https://maps.google.com/maps?q=42.6780,9.2970&z=15&output=embed">
-</iframe>
+    {# Carte Leaflet.js avec marqueur sur M.A Nautic #}
+    <div id="map" style="width: 100%; height: 500px;"></div>
 
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var map = L.map('map').setView([42.681846, 9.303704], 15);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // Définir une icône personnalisée
+            var customIcon = L.icon({
+                iconUrl: '/assets/logos/ma-logo.svg',
+                iconSize: [50, 50], // Taille de l'icône
+                iconAnchor: [25, 50], // Point d'ancrage
+                popupAnchor: [0, -50] // Position du popup
+            });
+            
+            L.marker([42.681846, 9.303704], {icon: customIcon})
+                .addTo(map)
+                .bindPopup("<b>M.A Nautic</b><br>Saint-Florent, Corse")
+                .openPopup();
+        });
+    </script>
+</div>

@@ -60,6 +60,12 @@
       "defaultSize": "sm"
     },
     {
+      "name": "instagram",
+      "path": "/assets/icons/instagram.svg", 
+      "alt": "Instagram Icon",
+      "defaultSize": "sm"
+    },
+    {
       "name": "linkedin",
       "path": "/assets/icons/linkedin.svg", 
       "alt": "Linkedin Icon",
