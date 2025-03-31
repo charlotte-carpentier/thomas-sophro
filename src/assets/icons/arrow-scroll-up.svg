@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Groupe principal centré dans le viewBox -->
+  <g transform="translate(256, 256) scale(6) translate(-53.815, -54.665)">
+    <!-- Semi-cercle de fond -->
+    <path fill="currentColor" class="background" d="M53.75,22.2c-22.54,0-40.81,18.27-40.81,40.81h81.62C94.57,40.47,76.29,22.2,53.75,22.2z"/>
+    <!-- Flèches -->
+    <g class="arrow">
+      <line stroke="white" stroke-width="3.5624" stroke-linecap="round" stroke-miterlimit="10" fill="none" x1="62.5" y1="48.57" x2="53.74" y2="57.33"/>
+      <line stroke="white" stroke-width="3.5624" stroke-linecap="round" stroke-miterlimit="10" fill="none" x1="45.01" y1="48.57" x2="53.77" y2="57.33"/>
+    </g>
+  </g>
+</svg>
