@@ -57,7 +57,7 @@
     {% endfor %}
 
     {% if itemData %}
-      <section id="{{ listId }}" class="{{ globalStyle }} {{ options.class | default('') }} pb-12 {% if not reversed %}bg-[theme(--ma-nautic-blue)]{% else %}bg-[theme(--ma-nautic-white)]{% endif %}" data-collection-item="{{ options.name }}" data-section-id="{{ sectionId }}" data-reversed="{{ reversed | string }}">
+      <section id="{{ listId }}" class="{{ globalStyle }} {{ options.class | default('') }} pb-12 {% if isSpot %}pt-16{% endif %} {% if not reversed %}bg-[theme(--ma-nautic-blue)]{% else %}bg-[theme(--ma-nautic-white)]{% endif %}" data-collection-item="{{ options.name }}" data-section-id="{{ sectionId }}" data-reversed="{{ reversed | string }}">
         <div class="{{ containerStyle }}">
           {# Mobile layout (flex column) - Éléments centrés - Visible jusqu'au breakpoint lg #}
           <div class="lg:hidden text-center px-6 pt-8">
