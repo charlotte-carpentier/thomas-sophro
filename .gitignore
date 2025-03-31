@@ -1,15 +1,11 @@
-# dependencies installed by npm
-node_modules
+node_modules/
 
-# build artefacts
-public
-css
-
-# secrets and errors
+# Secrets and logs
 .env
-.log
+*.log  # Ignore tous les fichiers logs
 
 # macOS related files
 .DS_Store
 
-*storybook.log
+# Storybook logs
+storybook.log
