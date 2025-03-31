@@ -56,9 +56,17 @@
     {# Vérifier si la section a UNIQUEMENT une image sans texte ni autre contenu #}
     {% set imageOnlySection = hasImage and not variant.heading and not variant.content and not variant.text and not variant.description and not variant.superHeading and not variant.primaryButton and not variant.secondaryButton and not variant.link %}
     
-    {% if hasImage and not imageOnlySection %}
+    {# Styles conditionnels selon le type de section #}
+    {% if variant and variant.name == "ma_nautic_plus" %}
+      {% set contentLayoutStyle = {
+        "mobile": "flex flex-col gap-8",
+        "desktop": "md:grid md:grid-cols-2 md:gap-16 md:items-center"
+      } %}
+      {% set textContainerStyle = options.datas.textContainerStyle ~ " flex flex-col items-center text-center [&_p]:mb-6" %}
+      {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center mt-6 md:mt-0" %}
+    {% elif hasImage and not imageOnlySection %}
       {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
-      {% set textContainerStyle = options.datas.textContainerStyle ~ " flex justify-center md:justify-start" %}
+      {% set textContainerStyle = options.datas.textContainerStyle ~ " flex justify-center md:justify-start [&_p]:mb-6" %}
       {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
     {% elif imageOnlySection %}
       {# Style spécifique pour une section avec uniquement une image #}
@@ -73,7 +81,7 @@
         "mobile": "flex flex-col gap-6",
         "desktop": "grid grid-cols-1 gap-8 items-center"
       } %}
-      {% set textContainerStyle = options.datas.textContainerStyle ~ " mx-auto max-w-4xl text-center" %}
+      {% set textContainerStyle = options.datas.textContainerStyle ~ " mx-auto max-w-4xl text-center [&_p]:mb-6" %}
       {% set imageContainerStyle = "hidden" %}
     {% endif %}
     
@@ -81,7 +89,7 @@
 
     {# Spécifique à MA-Nautic section text #}
     {% if variant and variant.name == "ma_nautic_discover" %}
-      <section class="{{ globalStyle }} {{ variantStyle }} relative h-[75vh] overflow-hidden {{ options.class | default('') }}">
+      <section class="{{ globalStyle }} {{ variantStyle }} relative min-h-[75vh] overflow-y-auto {{ options.class | default('') }}">
         {# Background image #}
         {% if variant.backgroundImage and options.images and options.images.images %}
           {% set bgImage = null %}
@@ -99,8 +107,8 @@
         {% endif %}
 
         {# Content container #}
-        <div class="{{ containerStyle }} relative z-10 h-full flex items-center justify-center">
-          <div class="flex flex-col items-center justify-center text-center">
+        <div class="{{ containerStyle }} relative z-10 h-full flex items-center justify-center py-6 md:py-8">
+          <div class="flex flex-col items-center justify-center text-center px-4 md:px-6 w-full">
             {# Logo image à la place des headings #}
             {% if variant.image and options.images and options.images.images %}
               {% set logoImg = null %}
@@ -111,7 +119,7 @@
               {% endfor %}
 
               {% if logoImg %}
-                <div class="mb-8">
+                <div class="mb-6">
                   <img src="{{ logoImg.src }}" alt="{{ logoImg.alt }}" class="{{ options.images.globalStyle }} {{ options.images.variants[logoImg.size] }}">
                 </div>
               {% endif %}
@@ -135,7 +143,7 @@
 
             {# Contenu descriptif - Utilise content au lieu de text avec classe ma-nautic-subtitle #}
             {% if variant.content %}
-              <div class="text-xs sm:text-lg max-w-4xl my-6 ma-nautic-subtitle">
+              <div class="text-sm sm:text-lg max-w-4xl my-4 md:my-6 ma-nautic-subtitle [&_p]:mb-[30px]">
                 {{ variant.content | safe }}
               </div>
             {% endif %}
@@ -212,7 +220,7 @@
 
               {# Informations principales #}
               {% if variant.infos %}
-                <div class="my-4">
+                <div class="my-4 [&_p]:mb-6">
                   {{ variant.infos | safe }}
                 </div>
               {% endif %}
@@ -235,7 +243,7 @@
 
               {# Informations supplémentaires #}
               {% if variant.extras %}
-                <div class="my-4">
+                <div class="my-4 [&_p]:mb-6">
                   {{ variant.extras | safe }}
                 </div>
               {% endif %}
@@ -331,14 +339,14 @@
 
               {# Content - Pour le contenu HTML #}
               {% if variant.content %}
-                <div class="{{ variant.contentStyle | default('') }}">
+                <div class="{{ variant.contentStyle | default('') }} [&_p]:mb-6">
                   {{ variant.content | safe }}
                 </div>
               {% endif %}
 
               {# Text - Nouvelle section pour récupérer le texte (ajout) #}
               {% if variant.text %}
-                <div class="{{ variant.textStyle | default('') }}">
+                <div class="{{ variant.textStyle | default('') }} [&_p]:mb-6">
                   {{ variant.text | safe }}
                 </div>
               {% endif %}

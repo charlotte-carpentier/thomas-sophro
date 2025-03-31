@@ -39,7 +39,7 @@
           {% if footerData.columns %}
             {% for menuConfig in footerData.columns %}
               {% if loop.index <= 2 %}
-                <div class="footer-column">
+                <div class="footer-column text-center md:text-left">
                   {# Titres des sections #}
                   {% if menuConfig.name == "contact_navigation" %}
                     <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">CONTACT</h4>
@@ -60,7 +60,7 @@
                                 {% if link.name == linkName %}
                                   {# Contact Navigation avec icônes #}
                                   {% if menuConfig.name == "contact_navigation" %}
-                                    <div class="flex items-center mb-3">
+                                    <div class="flex items-center mb-3 justify-center md:justify-start">
                                       {# Détermination de l'icône à utiliser #}
                                       {% set iconName = "" %}
                                       {% if link.name == "adresse" %}{% set iconName = "dot" %}
@@ -89,7 +89,7 @@
                                   
                                   {# Réseaux sociaux avec icônes #}
                                   {% elif menuConfig.name == "socials" %}
-                                    <div class="flex items-center mb-3">
+                                    <div class="flex items-center mb-3 justify-center md:justify-start">
                                       {# Recherche de l'icône sociale #}
                                       {% if options.icons and options.icons.icons %}
                                         {% for icon in options.icons.icons %}
@@ -110,7 +110,7 @@
                                   
                                   {# Liens de navigation standards #}
                                   {% else %}
-                                    <div class="mb-3">
+                                    <div class="mb-3 text-center md:text-left">
                                       <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
                                         {{ link.text }}
                                       </a>
@@ -131,8 +131,8 @@
             {% endfor %}
           {% endif %}
           
-          {# Logo maintenant au milieu (3ème position) - MODIFIÉ: aligné à gauche au lieu du centre #}
-          <div class="flex justify-start items-start">
+          {# Logo maintenant au milieu (3ème position) #}
+          <div class="flex justify-center md:justify-start items-center">
             {% if footerData.vectors and options.vectors %}
               {% set vectorData = null %}
               {% for vector in options.vectors.vectors %}
@@ -151,7 +151,7 @@
           {% if footerData.columns %}
             {% for menuConfig in footerData.columns %}
               {% if loop.index == 3 %}
-                <div class="footer-column">
+                <div class="footer-column text-center md:text-left">
                   {# Titres des sections #}
                   {% if menuConfig.name == "contact_navigation" %}
                     <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">CONTACT</h4>
@@ -172,7 +172,7 @@
                                 {% if link.name == linkName %}
                                   {# Contact Navigation avec icônes #}
                                   {% if menuConfig.name == "contact_navigation" %}
-                                    <div class="flex items-center mb-3">
+                                    <div class="flex items-center mb-3 justify-center md:justify-start">
                                       {# Détermination de l'icône à utiliser #}
                                       {% set iconName = "" %}
                                       {% if link.name == "adresse" %}{% set iconName = "dot" %}
@@ -201,7 +201,7 @@
                                   
                                   {# Réseaux sociaux avec icônes #}
                                   {% elif menuConfig.name == "socials" %}
-                                    <div class="flex items-center mb-3">
+                                    <div class="flex items-center mb-3 justify-center md:justify-start">
                                       {# Recherche de l'icône sociale #}
                                       {% if options.icons and options.icons.icons %}
                                         {% for icon in options.icons.icons %}
@@ -222,7 +222,7 @@
                                   
                                   {# Liens de navigation standards #}
                                   {% else %}
-                                    <div class="mb-3">
+                                    <div class="mb-3 text-center md:text-left">
                                       <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
                                         {{ link.text }}
                                       </a>
@@ -248,7 +248,7 @@
         <div class="mt-12 border-t border-[theme(--ma-nautic-gold)] pt-4">
           <div class="flex flex-col md:flex-row md:items-center md:justify-between text-sm">
             {# Copyright et liens légaux #}
-            <div class="text-[theme(--ma-nautic-white)] mb-4 md:mb-0 flex flex-wrap items-center gap-1">
+            <div class="text-[theme(--ma-nautic-white)] mb-4 md:mb-0 flex flex-wrap items-center justify-center md:justify-start gap-1">
               <span>© {% year %} {{ footerData.copyright | default('M.A Nautic tous droits réservés') }}</span>
               
               {# Version avec séparateur #}
@@ -271,7 +271,7 @@
             </div>
             
             {# Autres liens du bas #}
-            <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0">
+            <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 items-center md:items-start">
               {% for linkConfig in footerData.links %}
                 {% if linkConfig.name == "creator" %}
                   {% if options.links and options.links.links %}
