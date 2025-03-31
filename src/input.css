@@ -1,12 +1,65 @@
 @import "tailwindcss";
 @import "./assets/fonts/fonts.css";
 
+/* Déclarations des polices pour un meilleur contrôle */
+@font-face {
+  font-family: 'Vibur';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/vibur.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/roboto-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/roboto-bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/assets/fonts/roboto-black.woff2') format('woff2');
+}
+
 @source "./src/**/*.njk";
 @theme {
 
 /* =============================================== */
 /* =============== MA-NAUTIC ==================== */
 /* =============================================== */
+
+/* Polices et gestion du FOUT */
+html:not(.fonts-loaded) {
+  /* Polices système similaires en attendant le chargement */
+  --ma-nautic-font-display: Tahoma, Geneva, sans-serif; /* Similaire à Vibur */
+  --ma-nautic-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; /* Similaire à Roboto */
+
+  /* Ajustements de taille pour éviter les sauts de mise en page */
+  --ma-nautic-font-size-heading: 38px; /* légèrement réduit pour compenser */
+  --ma-nautic-font-size-nav: 24px;
+  --ma-nautic-font-size-section: 23px;
+}
+
+html.fonts-loaded {
+  --ma-nautic-font-display: "Vibur", cursive;     /* pour titres/navigation */
+  --ma-nautic-font-body: "Roboto", sans-serif;    /* pour texte standard */
+  --ma-nautic-font-size-heading: 40px;
+  --ma-nautic-font-size-nav: 25px;
+  --ma-nautic-font-size-section: 24px;
+}
 
 /* Couleurs principales */
 --ma-nautic-blue: #2b3947;       /* bleu foncé */
@@ -16,14 +69,7 @@
 --ma-nautic-white: #ffffff;
 --ma-nautic-black: #000000;
 
-/* Polices */
---ma-nautic-font-display: "Vibur", cursive;     /* pour titres/navigation */
---ma-nautic-font-body: "Roboto", sans-serif;    /* pour texte standard */
-
 /* Tailles de police */
---ma-nautic-font-size-heading: 40px;  /* vibur, pour les grands titres */
---ma-nautic-font-size-nav: 25px;      /* vibur, pour la navigation */
---ma-nautic-font-size-section: 24px;  /* vibur, pour titres de section */
 --ma-nautic-font-size-subtitle: 20px;  /* vibur, pour petits titres de section */
 --ma-nautic-font-size-body: 18px;     /* roboto Regular */
 --ma-nautic-font-size-title: 38px;    /* roboto Bold */
@@ -45,436 +91,14 @@
 --ma-nautic-spacing-xl: 2rem;
 --ma-nautic-spacing-2xl: 3rem;
 
+/* Boutons */
+--ma-nautic-btn-padding-x: 1.5rem;
+--ma-nautic-btn-padding-y: 0.75rem;
+--ma-nautic-btn-border-radius: 0.7rem; /* Modifié pour ajouter des coins arrondis (équivalent à rounded-md) */
+
 /* Bordures */
 --ma-nautic-border-width-default: 1px;
 --ma-nautic-border-width-large: 2px;
-
-/* =============================================== */
-/* ================ TYPOGRAPHY =================== */
-/* =============================================== */
-
-/* ============== FONT PROPERTIES ================ */
-/* =============================================== */
-
-/* Default font */
---font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
-/* ================== DISPLAY ==================== */
-
-/* Font weight for display text */
---display-font-weight: var(--font-weight-bold);
-
-  /* Display large bold */
-  --display-l-font-size: var(--text-7xl);
-  --display-l-line-height: var(--text-7xl--line-height);
-  --display-l-letter-spacing: 0;
-  --display-l-paragraph-spacing: 3rem;
-
-  /* Display small bold */
-  --display-s-font-size: var(--text-5xl);
-  --display-s-line-height: var(--text-5xl--line-height);
-  --display-s-letter-spacing: 0;
-  --display-s-paragraph-spacing: 2.5rem;
-
-  /* Display mobile large bold */
-  --display-mobile-l-font-size: var(--text-5xl);
-  --display-mobile-l-line-height: var(--text-5xl--line-height);
-  --display-mobile-l-letter-spacing: 0;
-  --display-mobile-l-paragraph-spacing: 3rem;
-
-  /* Display mobile small bold */
-  --display-mobile-s-font-size: var(--text-4xl);
-  --display-mobile-s-line-height: var(--text-4xl--line-height);
-  --display-mobile-s-letter-spacing: 0;
-  --display-mobile-s-paragraph-spacing: 2.5rem;
-
-
-  /* ================== HEADING ==================== */
-  
-  /* Font weight for heading text */
-  --heading-font-weight: var(--font-weight-bold);
-
-    /* Heading h1 */
-    --h1-font-size: var(--text-4xl);
-    --h1-line-height: var(--text-4xl--line-height);
-    --h1-letter-spacing: -0.05em;
-  
-    /* Heading h2 */
-    --h2-font-size: var(--text-3xl);  
-    --h2-line-height: var(--text-3xl--line-height); 
-    --h2-letter-spacing: -0.025em;
-  
-    /* Heading h3 */
-    --h3-font-size: var(--text-2xl);  
-    --h3-line-height: var(--text-2xl--line-height); 
-    --h3-letter-spacing: -0.05em;
-  
-    /* Heading h4 */
-    --h4-font-size: var(--text-xl);  
-    --h4-line-height: var(--text-xl--line-height); 
-    --h4-letter-spacing: -0.05em;
-  
-    /* Heading h5 */
-    --h5-font-size: var(--text-lg);  
-    --h5-line-height: var(--text-lg--line-height);  
-    --h5-letter-spacing: -0.05em;
-  
-    /* Heading h6 */
-    --h6-font-size: var(--text-base);  
-    --h6-line-height: var(--text-base--line-height);  
-    --h6-letter-spacing: -0.05em;
-
-
-  /* ================== BODY ===================== */
-  
-  /* Font weight for body text */
-  --body-font-weight: var(--font-weight-regular);
-
-    /* Body large regular */
-    --body-l-font-size: var(--text-base);
-    --body-l-line-height: var(--text-base--line-height);
-    --body-l-paragraph-spacing: 3rem;
-  
-    /* Body small regular */
-    --body-s-font-size: var(--text-sm);
-    --body-s-line-height: var(--text-sm--line-height);
-    --body-s-paragraph-spacing: 2.5rem;
-
-
-  /* =================== LABEL ===================== */
-  
-    /* Font weight for label text */
-    --label-font-weight: var(--font-weight-medium);
-
-    /* Label large regular */
-    --label-l-font-size: var(--text-base);
-    --label-l-letter-spacing: -0.05em;
-  
-    /* Label small regular */
-    --label-s-font-size: var(--text-sm);
-    --label-s-letter-spacing: -0.025em;
-  
-    /* Component xsmall tag */
-    --label-xs-font-size: var(--text-xs);
-    --label-xs-line-height: var(--text-xs--line-height);
-    --label-xs-letter-spacing: 0.025em;
-
-
-  /* ================== PLACEHOLDER ================== */
-
-    --placeholder-font-size: var(--text-base);
-    --placeholder-letter-spacing: -0.05em;
-
-/* =============================================== */
-/* =================== COLORS ==================== */
-/* =============================================== */
-
-/* ================ PRIMITIVES =================== */
-/* =============================================== */
-
-/* =============== BRAND COLORS ================== */
-
-  /* Primary Colors */
-
-  --color-primary-000: #070414;
-  --color-primary-200: #3f3927;
-  --color-primary-300: #514c3f;
-  --color-primary-400: #6d6755;
-  --color-primary-500: #8c846e;
-  --color-primary-600: #a39d8b;
-  --color-primary-700: #beb9ac;
-  --color-primary-800: #d6d2cb;
-  --color-primary-900: #f3f0ea;
-
-  /* Neutral Colors */
-
-  --color-neutral-000: #000000;
-  --color-neutral-050: #1a1a1a;
-  --color-neutral-100: #333333;
-  --color-neutral-120: #4d4d4d;
-  --color-neutral-140: #5c5c5c;
-  --color-neutral-200: #666666;
-  --color-neutral-300: #707070;
-  --color-neutral-320: #808080;
-  --color-neutral-360: #999999;
-  --color-neutral-400: #b2b2b2;
-  --color-neutral-500: #c2c2c2;
-  --color-neutral-550: #b8b8b8;
-  --color-neutral-600: #cccccc;
-  --color-neutral-640: #d6d6d6;
-  --color-neutral-700: #e0e0e0;
-  --color-neutral-800: #e5e5e5;
-  --color-neutral-900: #f2f2f2;
-  --color-neutral-1000: #ffffff;
-
-  /* ============= UTILITY COLORS =============== */
-
-  /* Information */
-
-  --color-information-100: #000e29;
-  --color-information-110: #001133;
-  --color-information-120: #002266;
-  --color-information-200: #003aad;
-  --color-information-270: #0047d3;
-  --color-information-300: #0759ff;
-  --color-information-400: #3377ff;
-  --color-information-500: #578fff;
-  --color-information-600: #669bff;
-  --color-information-700: #99bcff;
-  --color-information-800: #d0e2ff;
-  --color-information-900: #ebf7ff;
-
-  /* Success */
-
-  --color-success-100: #001c0d;
-  --color-success-110: #005122;
-  --color-success-120: #00692a;
-  --color-success-200: #0d823c;
-  --color-success-300: #1e9850;
-  --color-success-400: #16df67;
-  --color-success-500: #4fed8f;
-  --color-success-600: #74f1a7;
-  --color-success-700: #a2f6c4;
-  --color-success-800: #dafbe7;
-  --color-success-900: #f7fdfa;
-
-  /* Warning */
-
-  --color-warning-100: #290f00;
-  --color-warning-110: #331300;
-  --color-warning-120: #662500;
-  --color-warning-200: #a43c00;
-  --color-warning-300: #c74900;
-  --color-warning-400: #ee5800;
-  --color-warning-500: #ff711f;
-  --color-warning-600: #ff995c;
-  --color-warning-700: #ffceae;
-  --color-warning-800: #ffe0cc;
-  --color-warning-900: #ffefe4;
-
-  /* Critical */
-
-  --color-critical-100: #290004;
-  --color-critical-110: #3d0006;
-  --color-critical-120: #72000c;
-  --color-critical-200: #9c0010;
-  --color-critical-300: #d20319;
-  --color-critical-400: #e8132a;
-  --color-critical-500: #f0384b;
-  --color-critical-600: #f4717e;
-  --color-critical-700: #ffb1b9;
-  --color-critical-800: #ffd6db;
-  --color-critical-900: #fff0f1;
-
-/* =============================================== */
-/* =================== COLORS ==================== */
-/* =============================================== */
-
-/* =================== TOKENS ==================== */
-/* =============================================== */
-
-  /* ============= GLOBAL COLORS ================= */
-
-  --color-default: #0D0E14;
-  --color-white: #FFFFFF;
-  --color-heading: #373C59;
-  --color-accent: #514C3F;
-  
-  /* Contrast */
-
-  --color-contrast-light-01: #4C537C;
-  --color-contrast-light-02: #777FB0;
-  --color-contrast-light-03: #C8CDEC;
-  --color-contrast-light-04: var(--color-neutral-800);
-
-  /* =========== BUTTON PRIMARY COLORS ========= */
-
-  --color-button-prim: var(--color-primary-500);
-  --color-button-prim-hover: var(--color-primary-400);
-  --color-button-prim-active: var(--color-primary-500);
-  --color-button-prim-contrast-high: var(--color-neutral-1000);
-
-  /* ========= BUTTON SECONDARY COLORS ======== */
-
-  --color-button-sec: var(--color-primary-500);
-  --color-button-sec-hover: var(--color-primary-400);
-  --color-button-sec-active: var(--color-primary-500);
-  --color-button-sec-hover-light: var(--color-neutral-100);
-  --color-button-sec-contrast-high: var(--color-neutral-1000);
-
-  /* ========= BUTTON TERTIARY COLORS ======== */
-
-  --color-button-ter: var(--color-success-900);
-  --color-button-ter-hover: var(--color-success-700);
-
-  /* ============== FORM COLORS ============== */
-
-  --color-form: #4C537C;
-  --color-form-hover: #222437;
-  --color-form-active: var(--color-default);
-  --color-control-checked: var(--color-primary-500);
-
-  /* ============ DISABLED COLORS ============ */
-
-  --color-disabled: #61699E;
-  --color-disabled-contrast-light: var(--color-neutral-200);
-
-  /* ============ SEMANTIC COLORS ============ */
-
-  /* Information */
-
-  --color-information: var(--color-information-270);
-  --color-information-contrast-light-01: var(--color-information-800);
-  --color-information-contrast-light-02: var(--color-information-900);
-  --color-information-focus: var(--color-information-300);
-
-  /* Success */
-
-  --color-success: var(--color-success-120);
-  --color-success-contrast-light-01: var(--color-success-700);
-  --color-success-contrast-light-02: var(--color-success-800);
-
-  /* Warning */
-
-  --color-warning: var(--color-warning-300);
-  --color-warning-contrast-light-01: var(--color-warning-800);
-  --color-warning-contrast-light-02: var(--color-warning-900);
-  --color-warning-contrast-dark: var(--color-warning-200);
-
-  /* Critical */
-
-  --color-critical: var(--color-critical-300);
-  --color-critical-contrast-light-01: var(--color-critical-800);
-  --color-critical-contrast-light-02: var(--color-critical-900);
-
-
-  /* =========== GRADIENTS COLORS =========== */
-
-  --color-gradient-header: linear-gradient(0deg, var(--color-utility-primary-30), var(--color-utility-primary-10));
-  --color-gradient-delet-cell: linear-gradient(-90deg, var(--color-utility-critical-100), var(--color-utility-critical-00));
-
-/* =============================================== */
-/* ================ ELEVATION ==================== */
-/* =============================================== */
-
-  --drop-shadow-short: var(--drop-shadow-sm);
-  --drop-shadow-medium: var(--drop-shadow-md);
-  --drop-shadow-tall: var(--drop-shadow-lg);
-
-/* =============================================== */
-/* =============== BORDER RADIUS ================= */
-/* =============================================== */
-
-  --radius-2: var(--radius-xs);  /* 0.125rem */
-  --radius-4: var(--radius-sm);  /* 0.25rem */
-  --radius-6: var(--radius-md);  /* 0.375rem */
-  --radius-8: var(--radius-lg);  /* 0.5rem */
-  --radius-12: var(--radius-xl); /* 0.75rem */
-  --radius-16: var(--radius-2xl); /* 1rem */
-  --radius-24: var(--radius-3xl); /* 1.5rem */
-  --radius-32: var(--radius-4xl); /* 2rem */
-
-  /* Button border radius */
-  --radius-button: var(--radius-md);  /* 0.375rem */
-  --radius-button-s: var(--radius-sm);  /* 0.25rem */
-
-  /* Form border radius */
-  --radius-form: var(--radius-md);  /* 0.375rem */
-  --radius-form-s: var(--radius-sm);  /* 0.25rem */
-
-
-/* =============================================== */
-/* ================== SPACING ==================== */
-/* =============================================== */
-
-  --spacing-0\.5: 0.125rem;
-  --spacing-1: 0.25rem;
-  --spacing-1\.5: 0.375rem;
-  --spacing-2: 0.5rem;
-  --spacing-2\.5: 0.625rem;
-  --spacing-3: 0.75rem;
-  --spacing-4: 1rem;
-  --spacing-5: 1.25rem;
-  --spacing-6: 1.5rem;
-  --spacing-7: 1.75rem;
-  --spacing-8: 2rem;
-  --spacing-9: 2.25rem;
-  --spacing-10: 2.5rem;
-  --spacing-12: 3rem;
-  --spacing-14: 3.5rem;
-  --spacing-16: 4rem;
-  --spacing-20: 5rem;
-  --spacing-24: 6rem;
-
-  /* Global shape labels */
-  --gap-global-shape-label-l: var(--spacing-2); /* 0.5rem */
-  --gap-global-shape-label-s: var(--spacing-1\.5); /* 0.375rem */
-
-  /* Form spacing */
-  --gap-form-label-field: var(--spacing-2); /* 0.5rem */
-  --gap-form-group-label: var(--spacing-0\.5); /* 0.125rem */
-  --gap-form-group-field: var(--spacing-1\.5); /* 0.375rem */
-
-  /* Button spacing */
-  --gap-button-action-l: var(--spacing-4); /* 1rem */
-  --gap-button-action-s: var(--spacing-2); /* 0.5rem */
-
-  /* Form button padding */
-  --padding-form-button-h: var(--spacing-3); /* 0.75rem */
-  --padding-form-button-v-l: var(--spacing-3); /* 0.75rem */
-  --padding-form-button-v-s: var(--spacing-2); /* 0.5rem */
-
-  /* Heading bottom padding */
-  --padding-heading-bottom-h1: var(--spacing-10); /* 2.5rem */
-  --padding-heading-bottom-h2: var(--spacing-6); /* 1.5rem */
-  --padding-heading-bottom-h3: var(--spacing-4); /* 1rem */
-  --padding-heading-bottom-h4: var(--spacing-3); /* 0.75rem */
-  --padding-heading-bottom-h5: var(--spacing-2); /* 0.5rem */
-  --padding-heading-bottom-h6: var(--spacing-1\.5); /* 0.375rem */
-
-/* =============================================== */
-/* ================== LAYOUT ===================== */
-/* =============================================== */
-
-  /* Container widths */
-  --container-7xs: 5rem;
-  --container-6xs: 12rem;
-  --container-5xs: 19rem;
-  --container-4xs: 26rem;
-  --container-3xs: 40rem;
-  --container-2xs: 54rem;
-  --container-xs: 61rem;
-  --container-sm: 68rem;
-  --container-md: 82rem;
-  --container-lg: 90rem;
-
-  /* Breakpoints */
-  --breakpoint-sm: 40rem;
-  --breakpoint-md: 48rem;
-  --breakpoint-lg: 64rem;
-  --breakpoint-xl: 80rem;
-  --breakpoint-2xl: 90rem;
-  --breakpoint-3xl: 94rem;  /* Nouveau breakpoint à 1500px (94rem) */
-
-  /* Column widths for desktop layout */
-  --layout-desktop-target: var(--breakpoint-2xl); /* Target width for desktop */
-  --layout-desktop-workzone: var(--container-md); /* 12 columns */
-  --layout-column-desktop-06: var(--container-3xs); /* 6 columns */
-  --layout-column-desktop-04: var(--container-4xs); /* 4 columns */
-  --layout-column-desktop-03: var(--container-5xs); /* 3 columns */
-  --layout-column-desktop-02: var(--container-6xs); /* 2 columns */
-  --layout-column-desktop-01: var(--container-7xs); /* 1 column */
-
-  /* Column widths for mobile layout */
-  --layout-mobile-target: var(--breakpoint-sm); /* Target width for mobile */
-  --layout-column-mobile-02: var(--container-6xs); /* 2 columns */
-  --layout-column-mobile-01: var(--container-7xs); /* 1 column */
-
-  /* Margins and gutters */
-  --layout-margin-main: var(--spacing-16); /* Main margin for desktop */
-  --layout-margin-main-mob: var(--spacing-4); /* Main margin for mobile */
-  --layout-gutter: var(--spacing-8); /* Spacing between columns */
-}
 
 /* =============================================== */
 /* ========== MA-NAUTIC CUSTOM CLASSES ========== */
@@ -715,4 +339,5 @@
   .wave-image {
     opacity: 0.3;
   }
+}
 }

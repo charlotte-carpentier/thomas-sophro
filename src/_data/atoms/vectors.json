@@ -9,13 +9,13 @@
   "vectors": [
     {
       "name": "ma_logo",
-      "src": "/assets/logos/ma-logo-round.png",
+      "src": "/assets/logos/ma-logo.svg",
       "alt": "M.A Nautic logo",
       "size": "medium"
     },
     {
       "name": "ma_logo_mini",
-      "src": "/assets/logos/ma-logo-round.png",
+      "src": "/assets/logos/ma-logo.svg",
       "alt": "Mini M.A Nautic  logo",
       "size": "small"
     }
