@@ -1175,9 +1175,6 @@
   .p-6 {
     padding: calc(var(--spacing) * 6);
   }
-  .p-7 {
-    padding: calc(var(--spacing) * 7);
-  }
   .p-8 {
     padding: calc(var(--spacing) * 8);
   }
@@ -2376,69 +2373,6 @@
       color: var(--color-gray-400);
     }
   }
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('/assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf') format('truetype-variations');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('/assets/fonts/Roboto/static/Roboto-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('/assets/fonts/Roboto/static/Roboto-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Roboto';
-  src: url('/assets/fonts/Roboto/static/Roboto-Black.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Vibur';
-  src: url('/assets/fonts/Vibur/Vibur-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Vibur';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/vibur.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/roboto-regular.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/assets/fonts/roboto-bold.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('/assets/fonts/roboto-black.woff2') format('woff2');
 }
 .ma-nautic-nav-link {
   position: relative;
