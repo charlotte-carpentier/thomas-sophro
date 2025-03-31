@@ -1,0 +1,29 @@
+--- 
+title: Legal
+description: This is the legal page 
+permalink: "/credits-mentions-legales/" 
+layout: '00-core/base.njk' 
+---
+
+{# Section Hero Page Législation & RGPD #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "legal_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    icons: atoms.icons
+}) }}
+
+{# Section Législation & RGPD #}
+{% from "01-organisms/section-page.njk" import renderSectionPage %}
+
+{{ renderSectionPage({ 
+    name: "ma_legal",
+    datas: legals,
+    headings: atoms.headings,
+    links: atoms.links,
+    icons: atoms.icons
+}) }}

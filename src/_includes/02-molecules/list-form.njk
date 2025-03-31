@@ -4,7 +4,7 @@
 =========================
 #}
 
-{% macro renderInput(input, atoms) %}
+{% macro renderInput(input, atoms, width='w-full', containerClass='') %}
   {% set inputData = null %}
   {% for inputDef in atoms.inputs.inputs %}
     {% if inputDef.name == input.name %}
@@ -20,9 +20,9 @@
       'disabled': atoms.inputs.variants.disabled | default('border-gray-300 text-gray-400 bg-gray-100 cursor-not-allowed')
     } %}
     
-    <div class="mb-4">
-      <label for="{{ inputData.id }}" class="block mb-1 typography-label-m">
-        {{ inputData.label }}{% if input.required %}<span class="text-red-500 ml-1">*</span>{% endif %}
+    <div class="mb-4 {{ width }} {{ containerClass }}">
+      <label for="{{ inputData.id }}" class="block mb-1 typography-label-m text-white">
+        {{ inputData.label }}{% if inputData.required %}<span class="text-red-500 ml-1">*</span>{% endif %}
       </label>
       
       {% if inputData.type == 'textarea' %}
@@ -30,48 +30,52 @@
           id="{{ inputData.id }}" 
           name="{{ inputData.name }}" 
           placeholder="{{ inputData.placeholder }}" 
-          class="w-full px-3 py-2 border rounded-md {{ stateClasses.default }}"
-          onmouseover="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.hover }}'" 
-          onmouseout="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
-          onfocus="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.focus }}'"
-          onblur="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
-          {% if input.required %}required{% endif %}
+          class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947]"
+          rows="5"
+          {% if inputData.required %}required{% endif %}
         ></textarea>
-      {% elseif inputData.type == 'select' or inputData.type == 'multi-select' %}
-        <select 
+      {% elseif inputData.type == 'select' %}
+        <div class="relative">
+          <select 
+            id="{{ inputData.id }}" 
+            name="{{ inputData.name }}" 
+            class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947] appearance-none pr-8"
+            {% if inputData.required %}required{% endif %}
+          >
+            <option value="" disabled selected>Sélectionnez un bateau...</option>
+            {% for option in inputData.options %}
+              <option value="{{ option.value }}">{{ option.label }}</option>
+            {% endfor %}
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#2b3947]">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+          </div>
+        </div>
+      {% elseif inputData.type == 'phone' %}
+        <input 
+          type="tel" 
           id="{{ inputData.id }}" 
           name="{{ inputData.name }}" 
-          class="w-full px-3 py-2 border rounded-md {{ stateClasses.default }}"
-          onmouseover="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.hover }}'" 
-          onmouseout="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
-          onfocus="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.focus }}'"
-          onblur="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
-          {% if input.required %}required{% endif %}
-          {% if inputData.type == 'multi-select' %}multiple{% endif %}
+          placeholder="{{ inputData.placeholder }}" 
+          class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947]"
+          {% if inputData.required %}required{% endif %}
         >
-          <option value="" disabled selected>Please select...</option>
-          {% for option in inputData.options %}
-            <option value="{{ option.value }}">{{ option.label }}</option>
-          {% endfor %}
-        </select>
       {% else %}
         <input 
           type="{{ inputData.type }}" 
           id="{{ inputData.id }}" 
           name="{{ inputData.name }}" 
           placeholder="{{ inputData.placeholder }}" 
-          class="w-full px-3 py-2 border rounded-md {{ stateClasses.default }}"
-          onmouseover="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.hover }}'" 
-          onmouseout="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
-          onfocus="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.focus }}'"
-          onblur="this.className='w-full px-3 py-2 border rounded-md {{ stateClasses.default }}'"
-          {% if input.required %}required{% endif %}
+          class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947]"
+          {% if inputData.required %}required{% endif %}
         >
       {% endif %}
       
+      {% if inputData.errorMessage %}
       <div class="error-message hidden text-red-500 text-sm mt-1">
         {{ inputData.errorMessage }}
       </div>
+      {% endif %}
     </div>
   {% else %}
     <div class="error-message text-red-500 text-sm my-2">Input "{{ input.name }}" not found</div>
@@ -95,20 +99,52 @@
       {% set formData = options.datas.forms[0] %}
     {% endif %}
     
-    {% set stateClasses = {
-      'default': options.datas.variants.default | default('bg-white rounded-lg border border-gray-300 p-6'),
-      'hover': options.datas.variants.hover | default('bg-gray-50'),
-      'focus': options.datas.variants.focus | default('border-blue-500 ring-2 ring-blue-300'),
-      'disabled': options.datas.variants.disabled | default('bg-gray-100 cursor-not-allowed')
-    } %}
-    
-    <div class="{{ globalStyle }} {{ stateClasses.default }} {{ options.class | default('') }}">
-      <div id="inputs-{{ formData.name }}" class="space-y-2">
+    <form id="form-{{ formData.name }}" class="w-full {{ options.class | default('') }}" action="{{ options.action | default('#') }}" method="{{ options.method | default('POST') }}">
+      {# Première ligne - Nom et Email #}
+      <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
         {% for input in formData.inputs %}
-          {{ renderInput(input, options.atoms) }}
+          {% if input.name == 'input_name' or input.name == 'input_email' %}
+            {{ renderInput(input, options.atoms, 'w-full md:w-1/2') }}
+          {% endif %}
         {% endfor %}
       </div>
-    </div>
+      
+      {# Deuxième ligne - Téléphone et Bateaux #}
+      <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+        {% for input in formData.inputs %}
+          {% if input.name == 'input_phone' or input.name == 'input_boat' %}
+            {{ renderInput(input, options.atoms, 'w-full md:w-1/2') }}
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      {# Troisième ligne - Message #}
+      <div class="w-full mb-6">
+        {% for input in formData.inputs %}
+          {% if input.name == 'input_message' %}
+            {{ renderInput(input, options.atoms, 'w-full') }}
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      {# Quatrième ligne - reCAPTCHA #}
+      <div class="w-full flex justify-center mb-6">
+        <div class="g-recaptcha" data-sitekey="{{ options.recaptchaSiteKey | default('VOTRE_RECAPTCHA_SITE_KEY') }}"></div>
+      </div>
+      
+      {# Cinquième ligne - Bouton Envoyer #}
+      <div class="w-full flex justify-center mb-6">
+        <button type="submit" class="bg-[#63a595] hover:bg-[#e8ab55] text-white px-6 py-3 transition-colors duration-300 rounded-full">
+          {{ options.submitLabel | default('Envoyer') }}
+        </button>
+      </div>
+      
+      {# Mentions légales #}
+      <div class="w-full text-xs text-white opacity-80">
+        <p>Pour traiter votre demande, nous utiliserons et conserverons vos données personnelles pendant 2 ans après notre dernier contact. Elles resteront confidentielles et ne seront pas partagées avec des tiers.</p>
+        <p class="mt-2">Conformément à la loi Informatique et Libertés du 6 janvier 1978 modifiée, vous bénéficiez d'un droit d'accès et de rectification des données vous concernant, d'un droit d'opposition pour motifs légitimes, d'un droit à l'effacement des données. Vous disposez également d'un droit à la réception et à la portabilité des données dans certains cas spécifiquement prévus par la loi.</p>
+      </div>
+    </form>
   {% else %}
     <span class="text-red-500">List form data not found</span>
   {% endif %}
@@ -117,52 +153,21 @@
 
 {#
 ============================
-Summon HAT Components Wisely
+Utilisation du composant
 ============================
 
-1. Import the macro at the top of your page
+1. Import du macro en haut de la page
 {% from "02-molecules/list-form.njk" import renderListForm %}
 
-2. Call the list-form component with a specific name
+2. Appel du composant list-form 
 {{ renderListForm({ 
-    name: "hero_registration",
-    datas: molecules["list-forms"],
-    atoms: atoms
-}) }}
-
-3. Using custom styles
-{{ renderListForm({ 
-    name: "quest_submission",
+    name: "ma_registration",
     datas: molecules["list-forms"],
     atoms: atoms,
-    class: "my-custom-form-class"
+    recaptchaSiteKey: "VOTRE_CLE_RECAPTCHA",
+    submitLabel: "Envoyer",
+    action: "/contact",
+    method: "POST",
+    class: "bg-[#2b3947]"
 }) }}
-
-4. Structure of list-forms.json
-{
-  "forms": [
-    {
-      "name": "hero_registration",
-      "title": "Hero Registration",
-      "description": "Register your hero for epic adventures",
-      "submitLabel": "Register Hero",
-      "inputs": [
-        {
-          "name": "hero_name",
-          "required": true
-        },
-        {
-          "name": "guild_phone",
-          "required": true
-        },
-        {
-          "name": "weapon_choice",
-          "required": true
-        }
-      ]
-    }
-  ]
-}
-
-Choose your destiny... but first, paperwork 🏹📄
 #}

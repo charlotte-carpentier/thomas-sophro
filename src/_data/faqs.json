@@ -1,0 +1,48 @@
+{
+    "globalStyle": "flex flex-col space-y-4 boats-container",
+    "variants": {
+        "default": "text-gray-800",
+        "hover": "text-gray-600",
+        "focus": "text-gray-800 outline-2 outline-blue-500 outline-offset-2 rounded-md",
+        "active": "text-blue-600 font-bold",
+        "wheelIcon": {
+            "default": "mx-auto",
+            "iconStyle": "text-[theme(--ma-nautic-gold)]",
+            "containerSize": "w-8 h-8 lg:w-12 lg:h-12",
+            "iconSize": "24"
+        }
+    },
+    "faqs": [
+        {
+            "name": "ma_faq",
+            "contentBlocks": [
+                {
+                    "question": "OÙ DOIS-JE FAIRE LE PLEIN D’ESSENCE APRÈS MA SORTIE EN BATEAU ?",
+                    "answer": "La station de ravitaillement à l’entrée du port de Saint-Florent permet de refaire le plein facilement après votre journée de location."
+                },
+                {
+                    "question": "COMBIEN DE TEMPS DE NAVIGATION FAUT-IL POUR ATTEINDRE LA PLAGE DE SALECCIA ?",
+                    "answer": "Il faut compter 25 minutes pour aller sur la plage de Saleccia."
+                },
+                {
+                    "question": "EN CAS DE MAUVAISE MÉTÉO MARINE, QUE SE PASSE-T-IL ?",
+                    "answer": "Dans le cas d’une mauvaise météo, nous prenons contact avec le locataire pour essayer de reporter la location. Si nous devons annuler, le locataire sera remboursé."
+                },
+                {
+                    "question": "PEUT-ON TROUVER M.A NAUTIC ET SE GARER FACILEMENT À SAINT-FLORENT ?",
+                    "answer": "Nous nous situons dans le port privé de Saint-Florent et avons un parking dédié. Vous pourrez donc vous garer juste devant nos bateaux."
+                },
+                {
+                    "question": "LES BATEAUX SONT-ILS ARMÉS À LA NAVIGATION ?",
+                    "answer": "Tous nos bateaux ont un armement complet qui respecte la division 240, à savoir les gilets de sauvetage, la bouée fer à cheval, un extincteur, une écope, des fusées à main, un feu à retournement, un compas et un système lumineux. Pour les enfants, nous fournissons aussi des gilets de sauvetage adaptés."
+                },
+                {
+                    "question": "PEUT-ON SE RESTAURER DANS LES AGRIATES ?",
+                    "answer": "Deux paillotes existent dans les Agriates, une sur la plage du Lotu (La cabane du Lotu) et l’autre sur la plage de Saleccia (A Piniccia). En pleine saison, il sera nécessaire de réserver."
+                }
+            ],
+            "iconName": "wheel",
+            "links": "contactez-nous"
+        }
+    ]
+}

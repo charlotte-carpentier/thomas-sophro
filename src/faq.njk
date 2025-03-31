@@ -1,0 +1,29 @@
+--- 
+title: F.A.Q.
+description: This is the F.A.Q. page 
+permalink: "/faq/" 
+layout: '00-core/base.njk' 
+---
+
+{# Section Hero Page FAQ #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "faq_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    icons: atoms.icons
+}) }}
+
+{# Section faq #}
+{% from "01-organisms/section-page.njk" import renderSectionPage %}
+
+{{ renderSectionPage({ 
+    name: "ma_faq",
+    datas: faqs,
+    headings: atoms.headings,
+    links: atoms.links,
+    icons: atoms.icons
+}) }}

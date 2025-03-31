@@ -94,8 +94,7 @@
       </section>
 
     {# Spécifique aux pages bateaux, lieux et contact - structure avec bande beige et vagues #}
-    {% elseif variant.name == "bateaux_hero" or variant.name == "lieux_hero" or variant.name == "contact_hero" %}
-      {# CHANGEMENT ICI: Nous séparons la bande beige en dehors de la section principale #}
+    {% elseif variant.name == "bateaux_hero" or variant.name == "lieux_hero" or variant.name == "contact_hero" or variant.name == "faq_hero" or variant.name == "legal_hero" %}
       {# Bande supérieure en beige pour le super heading #}
       <div class="bg-[theme(--ma-nautic-beige)] pt-16 md:pt-20 lg:pt-24 pb-12 w-full">
         <div class="{{ containerStyle }}">
@@ -109,7 +108,7 @@
             {% endfor %}
 
             {% if superHeading %}
-              <{{ "h" + superHeading.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[superHeading.style] }}">
+              <{{ "h" + superHeading.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[superHeading.style] }} max-w-2/3 mx-auto text-center">
                 {{ superHeading.text }}
               </{{ "h" + superHeading.level }}>
             {% endif %}
@@ -169,7 +168,7 @@
                 {% endfor %}
 
                 {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="text-center mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[mainHeading.style] }}">
+                  <{{ "h" + mainHeading.level }} class="text-center mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[mainHeading.style] }} max-w-2/3 mx-auto text-center">
                     {{ mainHeading.text }}
                   </{{ "h" + mainHeading.level }}>
                 {% endif %}
@@ -197,8 +196,14 @@
                 </div>
               {% endif %}
 
-              {# Description #}
-              {% if variant.description %}
+              {# Description ou ContentBlocks selon la variante #}
+              {% if variant.name == "contact_hero" and variant.contentBlocks %}
+                <div id="contact-form" class="text-center max-w-3xl mx-auto text-[theme(--ma-nautic-blue)] space-y-4">
+                  {% for block in variant.contentBlocks %}
+                    <p class="mb-4">{{ block.text | safe }}</p>
+                  {% endfor %}
+                </div>
+              {% elseif variant.description %}
                 <div class="text-center max-w-3xl mx-auto">
                   {{ variant.description | safe }}
                 </div>
@@ -223,7 +228,7 @@
             {% if variant.name == "bateaux_hero" %}
               {% set scrollTarget = "#boat-list" %}
             {% elif variant.name == "lieux_hero" %}
-              {% set scrollTarget = "#lieux-list" %}
+              {% set scrollTarget = "#spot-list" %}
             {% elif variant.name == "contact_hero" %}
               {% set scrollTarget = "#contact-form" %}
             {% endif %}
@@ -269,7 +274,7 @@
                 {% endfor %}
 
                 {% if superHeading %}
-                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }}">
+                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }} max-w-2/3 mx-auto text-center">
                     {{ superHeading.text }}
                   </{{ "h" + superHeading.level }}>
                 {% endif %}
@@ -285,11 +290,11 @@
                 {% endfor %}
 
                 {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }}">
+                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }} max-w-2/3 mx-auto text-center">
                     {{ mainHeading.text }}
                   </{{ "h" + mainHeading.level }}>
                 {% else %}
-                  <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }}">
+                  <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }} max-w-2/3 mx-auto text-center">
                     {{ variant.heading }}
                   </h2>
                 {% endif %}
@@ -297,7 +302,7 @@
 
               {# Description #}
               {% if variant.description %}
-                <p class="{{ variant.descriptionStyle }}">
+                <p class="{{ variant.descriptionStyle }} max-w-2/3 mx-auto text-center">
                   {{ variant.description }}
                 </p>
               {% endif %}
@@ -348,10 +353,11 @@
   {% else %}
     <span class="text-red-500">Section Hero data not found</span>
   {% endif %}
+  {# Inclusion du script pour le défilement #}
+<script src="/js/organisms/section-scroll.js"></script>
 {% endmacro %}
 
-{# Inclusion du script pour le défilement #}
-<script src="/js/organisms/section-scroll.js"></script>
+
 
 {#
 ============================
