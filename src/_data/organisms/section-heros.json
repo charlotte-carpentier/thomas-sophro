@@ -66,8 +66,24 @@
       "name": "contact_hero",
       "variant": "default",
       "superHeading": "agence_contact",
-      "heading": "ma_nautic_corse",
-      "description": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'><strong>M.A Nautic</strong> dispose d'une <strong>flotte de bateaux</strong> de différentes tailles et différents types, amarrés au <strong>port de Saint-Florent</strong> en Haute-Corse.</p><p class='mb-4'>Leurs gabarits vont de 5 mètres jusqu'à 8,5 mètres pouvant accueillir de 4 à 12 personnes à leur bord.</p><p class='mb-4'><strong>Polyvalents</strong>, dotés d'une coque rigide ou semi-rigide pour répondre à vos attentes et s'adapter à vos activités, nos <strong>bateaux</strong> affichent une <strong>puissance motrice</strong> variant de 80 chevaux pour les plus petits à 300 chevaux pour le plus gros.</p><p class='mb-4'>Ils sont équipés de <strong>sondeur-GPS</strong> et sont <strong>armés</strong> pour vous offrir une <strong>sécurité</strong> totale au cours de votre balade en mer ou lorsque vous y amarrerez un <strong>wakeboard</strong> ou une <strong>bouée tractée</strong>.</p></div>",
+      "heading": "ma_nautic_contact",
+      "contentBlocks": [
+        {
+          "text": "Si notre <strong>F.A.Q.</strong> n’a pas su répondre à vos questions concernant notre <strong>location de bateaux</strong> à Saint-Florent (20217) en Haute-Corse, n’hésitez pas à contacter <strong>M.A Nautic</strong> !"
+        },
+        {
+          "text": "Appelez-nous au <strong>06.25.70.47.10</strong>, nous sommes disponibles du lundi au dimanche de 9h30 à 18h."
+        },
+        {
+          "text": "Vous pouvez aussi remplir le formulaire ci-dessous pour nous poser vos questions :"
+        },
+        {
+          "text": "Suivez notre actualité sur les réseaux sociaux :"
+        },
+        {
+          "text": "<strong><a href='{{ links.facebook }}' target='_blank'>Facebook</a></strong> & <strong><a href='{links.instagram}' target='_blank'>Instagram</a></strong>"
+        }
+      ],
       "scrollArrowButton": "arrow_scroll_up",
       "scrollArrowButtonVariant": "arrowScrollIcon",
       "image-right": "ma_wave_right",

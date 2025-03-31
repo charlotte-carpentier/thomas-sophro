@@ -6,7 +6,7 @@
   },
   "variants": {
     "primary": {
-      "default": "ma-nautic-btn-primary font-['Roboto'] font-bold",
+      "default": "font-['Roboto'] font-bold",
       "hover": "bg-[--ma-nautic-blue]",
       "focus": "bg-[--ma-nautic-teal] ring-2 ring-[--ma-nautic-blue]",
       "active": "bg-[--ma-nautic-blue]",
@@ -85,6 +85,12 @@
     {
       "name": "arrow_scroll_up",
       "icon": "arrow_scroll_up"
+    },
+    {
+      "name": "submit",
+      "text": "Envoyer",
+      "size": "button",
+      "style": "primary"
     }
   ]
 }

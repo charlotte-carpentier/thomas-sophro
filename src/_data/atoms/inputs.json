@@ -11,62 +11,53 @@
   },
   "inputs": [
     {
-      "name": "hero_name",
+      "name": "input_name",
       "type": "text",
-      "label": "Hero Name",
-      "id": "heroName",
-      "placeholder": "Enter your legendary name...",
+      "label": "Votre nom ou société",
+      "id": "clientName",
+      "placeholder": "Tapez votre nom...",
       "required": true,
-      "errorMessage": "A hero without a name? Impossible!"
+      "errorMessage": "Champ obligatoire"
     },
     {
-      "name": "guild_phone",
+      "name": "input_email",
+      "type": "text",
+      "label": "Votre adresse email",
+      "id": "clientEmail",
+      "placeholder": "Tapez votre adresse email...",
+      "required": true,
+      "errorMessage": "Champ obligatoire"
+    },
+    {
+      "name": "input_phone",
       "type": "phone",
-      "label": "Guild Contact Number",
-      "id": "guildPhone",
-      "placeholder": "+1 555 123 4567",
+      "label": "Votre numéro de téléphone",
+      "id": "clientPhone",
+      "placeholder": "Tapez votre numéro de téléphone...",
       "required": true,
-      "errorMessage": "How will the King summon you without a number?"
+      "errorMessage": "Champ obligatoire"
     },
     {
-      "name": "quest_description",
-      "type": "textarea",
-      "label": "Quest Description",
-      "id": "questDescription",
-      "placeholder": "Describe your epic quest...",
-      "required": false,
-      "errorMessage": "Even the most mysterious quests need a description!"
-    },
-    {
-      "name": "weapon_choice",
+      "name": "input_boat",
       "type": "select",
-      "label": "Choose Your Weapon",
-      "id": "weaponChoice",
+      "label": "Choisissez votre bateau (facultatif)",
+      "id": "clientChoice",
       "options": [
-        { "value": "sword", "label": "Legendary Sword" },
-        { "value": "bow", "label": "Elven Bow" },
-        { "value": "staff", "label": "Wizard's Staff" }
-      ],
-      "errorMessage": "You cannot embark on a journey without a weapon!"
+        { "value": "nine", "label": "Capelli Tempest 500 Nine" },
+        { "value": "alba", "label": "Cap Camarat 5.5 cc Alba" },
+        { "value": "first", "label": "Capelli 630 S First" },
+        { "value": "libecciu", "label": "Capelli Tempest 700 Libecciu" },
+        { "value": "enzo", "label": "Motonautica 780 confort Enzo" },
+        { "value": "casablanca", "label": "Lomac 850 in Casa Blanca" }
+      ]
     },
     {
-      "name": "party_members",
-      "type": "multi-select",
-      "label": "Select Your Companions",
-      "id": "partyMembers",
-      "options": [
-        { "value": "warrior", "label": "Bearded Warrior" },
-        { "value": "mage", "label": "Eccentric Mage" },
-        { "value": "rogue", "label": "Mysterious Rogue" }
-      ],
-      "errorMessage": "Going on an adventure alone? Risky..."
-    },
-    {
-      "name": "adventure_date",
-      "type": "datepicker",
-      "label": "Adventure Start Date",
-      "id": "adventureDate",
-      "errorMessage": "Every epic journey needs a starting date!"
+      "name": "input_message",
+      "type": "textarea",
+      "label": "Votre message (facultatif)",
+      "id": "clientMessage",
+      "placeholder": "Ecrivez-nous ici...",
+      "required": false
     }
   ]
 }

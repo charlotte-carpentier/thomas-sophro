@@ -197,8 +197,14 @@
                 </div>
               {% endif %}
 
-              {# Description #}
-              {% if variant.description %}
+              {# Description ou ContentBlocks selon la variante #}
+              {% if variant.name == "contact_hero" and variant.contentBlocks %}
+                <div class="text-center max-w-3xl mx-auto text-[theme(--ma-nautic-blue)] space-y-4">
+                  {% for block in variant.contentBlocks %}
+                    <p class="mb-4">{{ block.text | safe }}</p>
+                  {% endfor %}
+                </div>
+              {% elseif variant.description %}
                 <div class="text-center max-w-3xl mx-auto">
                   {{ variant.description | safe }}
                 </div>

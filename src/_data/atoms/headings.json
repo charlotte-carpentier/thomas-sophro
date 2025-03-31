@@ -221,6 +221,12 @@
       "level": 2,
       "text": "Le Cap Corse, ses plages et restaurants...",
       "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "ma_nautic_corse",
+      "level": 2,
+      "text": "Contactez notre agence de location de bateaux en Haute-Corse ",
+      "style": "ma_nautic_section_subtitle" 
     }
   ]
 }

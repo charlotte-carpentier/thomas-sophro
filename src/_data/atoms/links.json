@@ -90,7 +90,7 @@
     },
     {
       "name": "facebook",
-      "href": "/facebook",
+      "href": "https://www.facebook.com/M.A.Nautic/",
       "text": "Facebook",
       "style": "navigation"
     },
@@ -98,6 +98,12 @@
       "name": "linkedin",
       "href": "/linkedin",
       "text": "Linkedin",
+      "style": "navigation"
+    },
+    {
+      "name": "instagram",
+      "href": "https://www.instagram.com/m.a.nautic/",
+      "text": "Instagram",
       "style": "navigation"
     },
     {

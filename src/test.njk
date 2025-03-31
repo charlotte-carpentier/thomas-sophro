@@ -26,6 +26,15 @@ layout: '00-core/base.njk'
 }) }}
     </div>
 
+    {% from "02-molecules/list-form.njk" import renderListForm %}
+
+{{ renderListForm({ 
+    name: "ma_registration",
+    datas: molecules["list-forms"],
+    atoms: atoms
+}) }}
+
+
 
     {# Development Status Indicator #}
     <div class="mt-12 text-center">
