@@ -15,20 +15,13 @@ collections:
     identifier_field: "model"
     summary: "{{name}}"
     description: "Gérez la liste des bateaux affichés sur le site."
-    folder: "_data"  # Dossier où le fichier _data/boats.json est stocké
+    file: "_data/boats.json"
     create: true
-    files:
-      - file: "_data/boats.json"  # Spécifie le fichier JSON contenant les bateaux
-        label: "Liste des Bateaux"
-        name: "boats"
-        fields:
-  - label: "Bateaux"
-    name: "boats"
-    widget: "object"
     fields:
-      - label: "Liste des bateaux"
-        name: "list"
+      - label: "Bateaux"
+        name: "boats"
         widget: "list"
+        path: "boats"  # 🔥 Indique à Decap CMS où se trouvent les bateaux dans le JSON
         fields:
           - { label: "Modèle", name: "model", widget: "string" }
           - { label: "Nom", name: "name", widget: "string" }
@@ -37,6 +30,7 @@ collections:
           - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
           - { label: "ID du carousel", name: "carousel", widget: "string" }
           - { label: "Texte alternatif de l’image", name: "imageAlt", widget: "string" }
+
 
 
 
