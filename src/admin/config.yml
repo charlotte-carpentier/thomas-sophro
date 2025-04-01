@@ -8,26 +8,17 @@ public_folder: "/images" # URL publique des images
 collections:
   - name: "boats"
     label: "Bateaux"
-    editor:
-      preview: false
-    format: "json"
-    extension: "json"
-    identifier_field: "model"
-    summary: "{{name}}"
-    description: "Gérez la liste des bateaux affichés sur le site."
-    files:
-      - name: "boats"
-        label: "Liste des bateaux"
-        file: "_data/boats.json"
-        fields:
-          - label: "Bateaux"
-            name: "boats"
-            widget: "list"
-            fields:
-              - { label: "Modèle", name: "model", widget: "string" }
-              - { label: "Nom", name: "name", widget: "string" }
-              - { label: "Prix", name: "price", widget: "string" }
-              - { label: "Moteur", name: "engine", widget: "string" }
-              - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
-              - { label: "ID du carousel", name: "carousel", widget: "string" }
-              - { label: "Texte alternatif de l’image", name: "imageAlt", widget: "string" }
+    files:  # To manage a single file rather than multiple entries
+      - label: "Bateau Content"  
+        name: "bateau"  
+        file: "src/_data/boats.json"  # The file where is data
+        create: true
+        delete: false
+        fields: 
+          - { label: "Modèle", name: "model", widget: "string" }
+          - { label: "Nom", name: "name", widget: "string" }
+          - { label: "Prix", name: "price", widget: "string" }
+          - { label: "Moteur", name: "engine", widget: "string" }
+          - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
+          - { label: "ID du carousel", name: "carousel", widget: "string" }
+          - { label: "Texte alternatif de l’image", name: "imageAlt", widget: "string" }
