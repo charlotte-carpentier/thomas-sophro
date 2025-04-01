@@ -1,3 +1,10 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/images" # Stockage local des images uploadées
+public_folder: "/images" # URL publique des images
+
 collections:
   - name: "boats"
     label: "Bateaux"
