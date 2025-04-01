@@ -22,6 +22,14 @@ collections:
         label: "Liste des Bateaux"
         name: "boats"
         fields:
+  - label: "Bateaux"
+    name: "boats"
+    widget: "object"
+    fields:
+      - label: "Liste des bateaux"
+        name: "list"
+        widget: "list"
+        fields:
           - { label: "Modèle", name: "model", widget: "string" }
           - { label: "Nom", name: "name", widget: "string" }
           - { label: "Prix", name: "price", widget: "string" }
