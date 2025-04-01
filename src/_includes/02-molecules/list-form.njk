@@ -100,8 +100,7 @@
     {% endif %}
     
     <form id="form-{{ formData.name }}" 
-      class="w-full {{ options.class | default('') }}" 
-      action="{{ options.action | default('/merci') }}" 
+      class="w-full {{ options.class | default('') }}"  
       method="{{ options.method | default('POST') }}" 
       data-netlify="true"
       data-netlify-redirect="/merci"
