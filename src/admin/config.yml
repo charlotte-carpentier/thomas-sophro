@@ -1,10 +1,3 @@
-backend:
-  name: git-gateway
-  branch: main
-
-media_folder: "static/images" # Stockage local des images uploadées
-public_folder: "/images" # URL publique des images
-
 collections:
   - name: "boats"
     label: "Bateaux"
@@ -15,16 +8,19 @@ collections:
     identifier_field: "model"
     summary: "{{name}}"
     description: "Gérez la liste des bateaux affichés sur le site."
-    file: "_data/boats.json"  # 🔥 Édition d'un fichier unique JSON
-    fields:
-      - label: "Liste des bateaux"
-        name: "boats"
-        widget: "list"
+    files:
+      - name: "boats"
+        label: "Liste des bateaux"
+        file: "_data/boats.json"
         fields:
-          - { label: "Modèle", name: "model", widget: "string" }
-          - { label: "Nom", name: "name", widget: "string" }
-          - { label: "Prix", name: "price", widget: "string" }
-          - { label: "Moteur", name: "engine", widget: "string" }
-          - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
-          - { label: "ID du carousel", name: "carousel", widget: "string" }
-          - { label: "Texte alternatif de l’image", name: "imageAlt", widget: "string" }
+          - label: "Bateaux"
+            name: "boats"
+            widget: "list"
+            fields:
+              - { label: "Modèle", name: "model", widget: "string" }
+              - { label: "Nom", name: "name", widget: "string" }
+              - { label: "Prix", name: "price", widget: "string" }
+              - { label: "Moteur", name: "engine", widget: "string" }
+              - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
+              - { label: "ID du carousel", name: "carousel", widget: "string" }
+              - { label: "Texte alternatif de l’image", name: "imageAlt", widget: "string" }
