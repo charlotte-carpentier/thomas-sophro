@@ -15,12 +15,12 @@ collections:
     identifier_field: "model"
     summary: "{{name}}"
     description: "Gérez la liste des bateaux affichés sur le site."
-    folder: "_data/boats"  # Dossier où les fichiers seront stockés
+    folder: "_data"  # Dossier où le fichier _data/boats.json est stocké
     create: true
-    fields:
-      - label: "Bateaux"
+    files:
+      - file: "_data/boats.json"  # Spécifie le fichier JSON contenant les bateaux
+        label: "Liste des Bateaux"
         name: "boats"
-        widget: "list"
         fields:
           - { label: "Modèle", name: "model", widget: "string" }
           - { label: "Nom", name: "name", widget: "string" }
@@ -29,5 +29,6 @@ collections:
           - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
           - { label: "ID du carousel", name: "carousel", widget: "string" }
           - { label: "Texte alternatif de l’image", name: "imageAlt", widget: "string" }
+
 
 
