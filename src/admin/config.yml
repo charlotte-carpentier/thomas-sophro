@@ -1,10 +1,3 @@
-backend:
-  name: git-gateway # Git-based backend for Netlify CMS
-  branch: main # The branch to update (default is master)
-
-media_folder: "./static/images" # Le chemin local où les images sont stockées pendant l'édition
-public_folder: "/images" # Public URL path for images
-
 collections:
   - name: "boats"
     label: "Bateaux"
@@ -15,13 +8,11 @@ collections:
     identifier_field: "model"
     summary: "{{name}}"
     description: "Gérez la liste des bateaux affichés sur le site."
-    file: "_data/boats.json"
-    create: true
+    **file: "_data/boats.json"**  # 🔥 Pour éditer UN SEUL fichier
     fields:
       - label: "Bateaux"
         name: "boats"
         widget: "list"
-        path: "boats"  # 🔥 Indique à Decap CMS où se trouvent les bateaux dans le JSON
         fields:
           - { label: "Modèle", name: "model", widget: "string" }
           - { label: "Nom", name: "name", widget: "string" }
@@ -30,7 +21,3 @@ collections:
           - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
           - { label: "ID du carousel", name: "carousel", widget: "string" }
           - { label: "Texte alternatif de l’image", name: "imageAlt", widget: "string" }
-
-
-
-
