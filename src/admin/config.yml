@@ -2,8 +2,8 @@ backend:
   name: git-gateway # Git-based backend for Netlify CMS
   branch: main # The branch to update (default is master)
 
-media_folder: "./static/assets/images/bateaux" # Le chemin local où les images sont stockées pendant l'édition
-public_folder: "/assets/images/bateaux" # Public URL path for images
+media_folder: "./static/images" # Le chemin local où les images sont stockées pendant l'édition
+public_folder: "/images" # Public URL path for images
 
 collections:
   - name: "boats"
@@ -15,7 +15,7 @@ collections:
     identifier_field: "model"
     summary: "{{name}}"
     description: "Gérez la liste des bateaux affichés sur le site."
-    file: "_data/boats.json"
+    folder: "_data/boats"  # Dossier où les fichiers seront stockés
     create: true
     fields:
       - label: "Bateaux"
@@ -29,4 +29,5 @@ collections:
           - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
           - { label: "ID du carousel", name: "carousel", widget: "string" }
           - { label: "Texte alternatif de l’image", name: "imageAlt", widget: "string" }
+
 
