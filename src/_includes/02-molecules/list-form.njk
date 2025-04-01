@@ -101,10 +101,11 @@
     
     <form id="form-{{ formData.name }}" 
       class="w-full {{ options.class | default('') }}" 
-      action="{{ options.action | default('#') }}" 
+      action="{{ options.action | default('/contact') }}" 
       method="{{ options.method | default('POST') }}" 
       data-netlify="true"
-      netlify-honeypot="bot-field">
+      netlify-honeypot="bot-field"
+      action="/merci">
 
       <p style="display: none;">
         <label>Ne remplissez pas ce champ si vous êtes humain :  
