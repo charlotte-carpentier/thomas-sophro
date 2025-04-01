@@ -101,13 +101,16 @@
     
     <form id="form-{{ formData.name }}" 
       class="w-full {{ options.class | default('') }}" 
-      action="/merci/" 
-      method="POST" 
-      data-netlify="true" 
+      action="{{ options.action | default('/merci') }}" 
+      method="{{ options.method | default('POST') }}" 
+      data-netlify="true"
       netlify-honeypot="bot-field">
-      
-    <input type="hidden" name="form-name" value="contact">
-    <input type="text" name="bot-field" style="display: none;">
+
+      <p style="display: none;">
+        <label>Ne remplissez pas ce champ si vous êtes humain :  
+          <input name="bot-field">
+        </label>
+      </p>
 
       {# Première ligne - Nom et Email #}
       <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
