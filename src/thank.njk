@@ -1,0 +1,13 @@
+--- 
+title: Message envoyé
+description: This is the thanks page 
+permalink: "/merci/" 
+layout: '00-core/base.njk' 
+---
+{% set thanksData = thanks %}
+
+<div class="{{ thanksData.container.classes }}">
+    <h1 class="{{ thanksData.title.classes }}">{{ thanksData.title.text }}</h1>
+    <p class="{{ thanksData.message.classes }}">{{ thanksData.message.text }}</p>
+    <a href="{{ thanksData.backLink.href }}" class="{{ thanksData.backLink.classes }}">{{ thanksData.backLink.text }}</a>
+</div>

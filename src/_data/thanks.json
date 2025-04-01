@@ -1,0 +1,18 @@
+{
+    "container": {
+      "classes": "flex flex-col items-center justify-center h-[500px] text-center bg-[theme(--ma-nautic-beige)]"
+    },
+    "title": {
+      "classes": "text-3xl font-semibold font-[theme(--ma-nautic-font-display)] text-[theme(--ma-nautic-gold)]",
+      "text": "MERCI POUR VOTRE MESSAGE !"
+    },
+    "message": {
+      "classes": "mt-4 text-lg font-[theme(--ma-nautic-font-body)] text-[theme(--ma-nautic-blue)]",
+      "text": "Nous vous répondrons dans les plus brefs délais."
+    },
+    "backLink": {
+      "classes": "mt-4 font-[theme(--ma-nautic-font-body)] text-[theme(--ma-nautic-blue)] hover:text-[theme(--ma-nautic-teal)]",
+      "text": "Retour à l'accueil",
+      "href": "/"
+    }
+  }

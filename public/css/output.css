@@ -72,6 +72,7 @@
     --ma-nautic-gold: #e8ab55;
     --ma-nautic-white: #ffffff;
     --ma-nautic-font-display: 'Vibur', cursive;
+    --ma-nautic-font-body: 'Roboto', sans-serif;
     --ma-nautic-border-width-large: 2px;
   }
 }
@@ -1082,6 +1083,9 @@
   .font-\[\'Vibur\'\] {
     font-family: 'Vibur';
   }
+  .font-\[theme\(--ma-nautic-font-body\)\] {
+    font-family: 'Roboto', sans-serif;
+  }
   .font-\[theme\(--ma-nautic-font-display\)\] {
     font-family: 'Vibur', cursive;
   }
@@ -1181,6 +1185,9 @@
   }
   .text-\[theme\(--ma-nautic-blue\)\] {
     color: #2b3947;
+  }
+  .text-\[theme\(--ma-nautic-font-display\)\] {
+    color: 'Vibur', cursive;
   }
   .text-\[theme\(--ma-nautic-gold\)\] {
     color: #e8ab55;
