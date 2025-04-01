@@ -1063,14 +1063,17 @@
     
     
     <form id="form-ma_registration" 
-      class="w-full bg-[#2b3947]" 
-      action="/merci" 
+      class="w-full bg-[#2b3947]"  
       method="POST" 
-      data-netlify="true" 
+      data-netlify="true"
+      action="/thank"
       netlify-honeypot="bot-field">
-      
-    <input type="hidden" name="form-name" value="contact">
-    <input type="text" name="bot-field" style="display: none;">
+
+    <p style="display: none;">
+      <label>Ne remplissez pas ce champ si vous êtes humain :  
+        <input name="bot-field">
+      </label>
+    </p>
 
       
       <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
