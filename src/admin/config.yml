@@ -1,8 +1,8 @@
 backend:
-  name: git-gateway # Git-based backend for Netlify CMS
-  branch: main # The branch to update (default is master)
+  name: git-gateway
+  branch: main
 
-media_folder: "./static/images" # Stockage local des images uploadées
+media_folder: "static/images" # Stockage local des images uploadées
 public_folder: "/images" # URL publique des images
 
 collections:
@@ -17,7 +17,7 @@ collections:
     description: "Gérez la liste des bateaux affichés sur le site."
     file: "_data/boats.json"  # 🔥 Édition d'un fichier unique JSON
     fields:
-      - label: "Bateaux"
+      - label: "Liste des bateaux"
         name: "boats"
         widget: "list"
         fields:
