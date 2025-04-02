@@ -14,76 +14,8 @@
   },
   "boats": [
     {
-      "model": "capelli_500",
-      "name": "ma_nine",
-      "price": "À partir de 230 €/jour",
-      "engine": "80 ch YAMAHA - 5 m",
-      "passengersNumber": "4 personnes MAX",
-      "carousel": "carousel_nine",
-      "imageAlt": "Photos du bateau \"Nine\"",
-      "tags": ["post"],
       "iconName": "wheel",
       "link": "reservez_light"
-    },
-    {
-      "model": "camarat_cc",
-      "name": "ma_alba",
-      "price": "À partir de 250 €/jour",
-      "engine": "100 ch YAMAHA - 5,5 m",
-      "passengersNumber": "4 personnes MAX",
-      "carousel": "carousel_alba",
-      "imageAlt": "Photos du bateau \"Nine\"",
-      "tags": ["post"],
-      "iconName": "wheel",
-      "link": "reservez"
-    },
-    {
-      "model": "capelli_630",
-      "name": "ma_first",
-      "price": "À partir de 300 €/jour",
-      "engine": "150 ch YAMAHA - 6,3 m",
-      "passengersNumber": "6 personnes MAX",
-      "carousel": "carousel_first",
-      "imageAlt": "Photos du bateau \"Enzo\"",
-      "tags": ["post"],
-      "iconName": "wheel",
-      "link": "reservez_light"
-    },
-    {
-      "model": "capelli_700",
-      "name": "ma_libecciu",
-      "price": "À partir de 360 €/jour",
-      "engine": "225 ch YAMAHA - 7 m",
-      "passengersNumber": "8-10 personnes MAX",
-      "carousel": "carousel_libecciu",
-      "imageAlt": "Photos du bateau \"Enzo\"",
-      "tags": ["post"],
-      "iconName": "wheel",
-      "link": "reservez"
-    },
-    {
-      "model": "motonautica_780",
-      "name": "ma_enzo",
-      "price": "À partir de 380 €/jour",
-      "engine": "250 ch MERCURY - 7,8 m",
-      "passengersNumber": "10 personnes MAX",
-      "carousel": "carousel_enzo",
-      "imageAlt": "Photos du bateau \"Enzo\"",
-      "tags": ["post"],
-      "iconName": "wheel",
-      "link": "reservez_light"
-    },
-    {
-      "model": "lomac_850",
-      "name": "ma_casablanca",
-      "price": "À partir de 500€/jour",
-      "engine": "300 ch MERCURY - 8,50m",
-      "passengersNumber": "12 personnes MAX",
-      "carousel": "carousel_casablanca",
-      "imageAlt": "Photos du bateau \"Casa Blanca\"",
-      "tags": ["post"],
-      "iconName": "wheel",
-      "link": "reservez"
     }
   ]
 }

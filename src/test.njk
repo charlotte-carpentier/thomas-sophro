@@ -18,12 +18,22 @@ layout: '00-core/base.njk'
     <div class="space-y-4">
         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
             {# Render existing lcomponent #}
-{{ renderCarousel({ 
-    name: "carousel_1", 
-    datas: organisms.carousels,
-    images: atoms.images,
-    buttons: atoms.buttons
-}) }}
+{% set carousel_alba = null %}
+{% for carousel_item in collections.carousel %}
+  {% if carousel_item.data.name == "carousel_alba" and not carousel_alba %}
+    {% set carousel_alba = carousel_item %}
+  {% endif %}
+{% endfor %}
+
+{% if carousel_alba %}
+  {{ renderCarousel({ 
+      markdown: true,
+      carousel: carousel_alba.data,
+      datas: organisms.carousels,
+      images: atoms.images,
+      buttons: atoms.buttons
+  }) }}
+{% endif %}
     </div>
 
     {% from "02-molecules/list-form.njk" import renderListForm %}

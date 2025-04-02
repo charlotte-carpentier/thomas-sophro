@@ -127,7 +127,7 @@
       "style": "ma_nautic_section_title"
     },
     {
-      "name": "ma_nine",
+      "name": "boat_nine",
       "level": 2,
       "text": "Nine",
       "style": "ma_nautic_subtitle_light" 
@@ -139,7 +139,7 @@
       "style": "ma_nautic_section_title"
     },
     {
-      "name": "ma_alba",
+      "name": "boat_alba",
       "level": 2,
       "text": "Alba",
       "style": "ma_nautic_section_subtitle" 
@@ -151,7 +151,7 @@
       "style": "ma_nautic_section_title"
     },
     {
-      "name": "ma_first",
+      "name": "boat_first",
       "level": 2,
       "text": "First",
       "style": "ma_nautic_subtitle_light" 
@@ -163,7 +163,7 @@
       "style": "ma_nautic_section_title"
     },
     {
-      "name": "ma_libecciu",
+      "name": "boat_libecciu",
       "level": 2,
       "text": "Libecciu",
       "style": "ma_nautic_section_subtitle" 
@@ -175,7 +175,7 @@
       "style": "ma_nautic_section_title"
     },
     {
-      "name": "ma_enzo",
+      "name": "boat_enzo",
       "level": 2,
       "text": "Enzo",
       "style": "ma_nautic_subtitle_light" 
@@ -187,7 +187,7 @@
       "style": "ma_nautic_section_title"
     },
     {
-      "name": "ma_casablanca",
+      "name": "boat_casablanca",
       "level": 2,
       "text": "Casa Blanca",
       "style": "ma_nautic_section_subtitle" 

@@ -19,83 +19,149 @@ layout: '00-core/base.njk'
 
 {# Conteneur pour la liste des bateaux avec l'ID boat-list pour le scroll #}
 <div id="boat-list">
+    {% from "01-organisms/section-boat.njk" import renderSectionBoat %}
+
+    {# Récupérer tous les bateaux et leurs carousels associés #}
+    {% set boat_nine = null %}
+    {% set boat_alba = null %}
+    {% set boat_first = null %}
+    {% set boat_libecciu = null %}
+    {% set boat_enzo = null %}
+    {% set boat_casablanca = null %}
+    
+    {% set carousel_nine = null %}
+    {% set carousel_alba = null %}
+    {% set carousel_first = null %}
+    {% set carousel_libecciu = null %}
+    {% set carousel_enzo = null %}
+    {% set carousel_casablanca = null %}
+    
+    {# Récupérer tous les bateaux #}
+    {% for boat in collections.boat %}
+        {% if boat.data.name == "boat_nine" %}
+            {% set boat_nine = boat %}
+        {% elif boat.data.name == "boat_alba" %}
+            {% set boat_alba = boat %}
+        {% elif boat.data.name == "boat_first" %}
+            {% set boat_first = boat %}
+        {% elif boat.data.name == "boat_libecciu" %}
+            {% set boat_libecciu = boat %}
+        {% elif boat.data.name == "boat_enzo" %}
+            {% set boat_enzo = boat %}
+        {% elif boat.data.name == "boat_casablanca" %}
+            {% set boat_casablanca = boat %}
+        {% endif %}
+    {% endfor %}
+    
+    {# Récupérer tous les carousels #}
+    {% for carousel in collections.carousel %}
+        {% if carousel.data.name == "carousel_nine" %}
+            {% set carousel_nine = carousel %}
+        {% elif carousel.data.name == "carousel_alba" %}
+            {% set carousel_alba = carousel %}
+        {% elif carousel.data.name == "carousel_first" %}
+            {% set carousel_first = carousel %}
+        {% elif carousel.data.name == "carousel_libecciu" %}
+            {% set carousel_libecciu = carousel %}
+        {% elif carousel.data.name == "carousel_enzo" %}
+            {% set carousel_enzo = carousel %}
+        {% elif carousel.data.name == "carousel_casablanca" %}
+            {% set carousel_casablanca = carousel %}
+        {% endif %}
+    {% endfor %}
 
     {# Section bateau "Nine" #}
-    {% from "01-organisms/collection.njk" import renderCollection %}
-
-    {{ renderCollection({ 
-        name: "ma_nine", 
-        datas: boats, 
-        headings: atoms.headings, 
-        links: atoms.links,
-        icons: atoms.icons,
-        carousels: organisms.carousels,
-        images: atoms.images,
-        buttons: atoms.buttons
-    }) }}
-
+    {% if boat_nine %}
+        {{ renderSectionBoat({ 
+            boat: boat_nine.data, 
+            carouselItem: carousel_nine,
+            datas: boats, 
+            headings: atoms.headings, 
+            links: atoms.links,
+            icons: atoms.icons,
+            carousels: organisms.carousels,
+            images: atoms.images,
+            buttons: atoms.buttons
+        }) }}
+    {% endif %}
+    
     {# Section bateau "Alba" #}
-    {{ renderCollection({ 
-        name: "ma_alba", 
-        datas: boats, 
-        headings: atoms.headings, 
-        links: atoms.links,
-        icons: atoms.icons,
-        carousels: organisms.carousels,
-        images: atoms.images,
-        buttons: atoms.buttons,
-        reversed: true
-    }) }}
-
+    {% if boat_alba %}
+        {{ renderSectionBoat({ 
+            boat: boat_alba.data, 
+            carouselItem: carousel_alba,
+            datas: boats, 
+            headings: atoms.headings, 
+            links: atoms.links,
+            icons: atoms.icons,
+            carousels: organisms.carousels,
+            images: atoms.images,
+            buttons: atoms.buttons,
+            reversed: true
+        }) }}
+    {% endif %}
+    
     {# Section bateau "First" #}
-    {{ renderCollection({ 
-        name: "ma_first", 
-        datas: boats, 
-        headings: atoms.headings, 
-        links: atoms.links,
-        icons: atoms.icons,
-        carousels: organisms.carousels,
-        images: atoms.images,
-        buttons: atoms.buttons
-    }) }}
-
+    {% if boat_first %}
+        {{ renderSectionBoat({ 
+            boat: boat_first.data, 
+            carouselItem: carousel_first,
+            datas: boats, 
+            headings: atoms.headings, 
+            links: atoms.links,
+            icons: atoms.icons,
+            carousels: organisms.carousels,
+            images: atoms.images,
+            buttons: atoms.buttons
+        }) }}
+    {% endif %}
+    
     {# Section bateau "Libecciu" #}
-    {{ renderCollection({ 
-        name: "ma_libecciu", 
-        datas: boats, 
-        headings: atoms.headings, 
-        links: atoms.links,
-        icons: atoms.icons,
-        carousels: organisms.carousels,
-        images: atoms.images,
-        buttons: atoms.buttons,
-        reversed: true
-    }) }}
-
+    {% if boat_libecciu %}
+        {{ renderSectionBoat({ 
+            boat: boat_libecciu.data, 
+            carouselItem: carousel_libecciu,
+            datas: boats, 
+            headings: atoms.headings, 
+            links: atoms.links,
+            icons: atoms.icons,
+            carousels: organisms.carousels,
+            images: atoms.images,
+            buttons: atoms.buttons,
+            reversed: true
+        }) }}
+    {% endif %}
+    
     {# Section bateau "Enzo" #}
-    {{ renderCollection({ 
-        name: "ma_enzo", 
-        datas: boats, 
-        headings: atoms.headings, 
-        links: atoms.links,
-        icons: atoms.icons,
-        carousels: organisms.carousels,
-        images: atoms.images,
-        buttons: atoms.buttons
-    }) }}
-
+    {% if boat_enzo %}
+        {{ renderSectionBoat({ 
+            boat: boat_enzo.data, 
+            carouselItem: carousel_enzo,
+            datas: boats, 
+            headings: atoms.headings, 
+            links: atoms.links,
+            icons: atoms.icons,
+            carousels: organisms.carousels,
+            images: atoms.images,
+            buttons: atoms.buttons
+        }) }}
+    {% endif %}
+    
     {# Section bateau "Casa Blanca" #}
-    {{ renderCollection({ 
-        name: "ma_casablanca", 
-        datas: boats, 
-        headings: atoms.headings, 
-        links: atoms.links,
-        icons: atoms.icons,
-        carousels: organisms.carousels,
-        images: atoms.images,
-        buttons: atoms.buttons,
-        reversed: true
-    }) }}
+    {% if boat_casablanca %}
+        {{ renderSectionBoat({ 
+            boat: boat_casablanca.data, 
+            carouselItem: carousel_casablanca,
+            datas: boats, 
+            headings: atoms.headings, 
+            links: atoms.links,
+            icons: atoms.icons,
+            carousels: organisms.carousels,
+            images: atoms.images,
+            buttons: atoms.buttons,
+            reversed: true
+        }) }}
+    {% endif %}
 </div>
 
 {# Section Info & options #}
