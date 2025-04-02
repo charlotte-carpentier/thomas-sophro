@@ -10,23 +10,29 @@ collections:
     label: "Bateaux"
     folder: "src/collection-boats"
     create: true
+    delete: true
+    slug: "{{fields.name}}"
     fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "01-organisms/section-boat.njk" }
+      - { label: "Tags", name: "tags", widget: "hidden", default: "boat" }
+      - { label: "Nom", name: "name", widget: "string", pattern: ["^boat_.*", "Doit commencer par boat_"] }
       - { label: "Modèle", name: "model", widget: "string" }
-      - { label: "Nom", name: "name", widget: "string" }
       - { label: "Prix", name: "price", widget: "string" }
       - { label: "Moteur", name: "engine", widget: "string" }
       - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
+      - { label: "Carousel", name: "carousel", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"], hint: "Lien vers le carousel (ex: carousel_alba)" }
+      - { label: "Alt de l'image", name: "imageAlt", widget: "string" }
+  
   - name: "carousels"
     label: "Carousels"
     folder: "src/collection-carousels"
     create: true
     delete: true
-    slug: "carousel_{{fields.title}}"
+    slug: "{{fields.name}}"
     fields:
-      - { label: "Layout", name: "layout", widget: "hidden", default: "carousel.njk" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "01-organisms/carousel.njk" }
       - { label: "Tags", name: "tags", widget: "hidden", default: "carousel" }
-      - { label: "Nom du Carousel", name: "name", widget: "hidden", pattern: ["^carousel_.*", "Doit commencer par carousel_"], default: "carousel_" }
-      - { label: "Titre", name: "title", widget: "string", hint: "Nom du bateau ou section (ex: alba, nine, etc.)" }
+      - { label: "Nom", name: "name", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"] }
       - label: "Images"
         name: "images"
         widget: "list"
