@@ -198,8 +198,6 @@
                     <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ bgColor }} rounded-full p-3">
                       <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
                     </span>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
-                    </span>
                   {% endif %}
                 {% endif %}
               </div>
@@ -280,13 +278,34 @@
             <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16">
               {% if itemData.carousel %}
                 <div class="w-4/5 mx-auto">
-                  {{ renderCarousel({
-                    name: itemData.carousel,
-                    datas: options.carousels,
-                    images: options.images,
-                    buttons: options.buttons,
-                    class: "ma-nautic-carousel w-full"
-                  }) }}
+                  {# Essayer d'abord le carousel Markdown si disponible #}
+                  {% set carousel_name = itemData.carousel %}
+                  {% set carousel_found = false %}
+                  
+                  {% for carousel_item in collections.carousel %}
+                    {% if carousel_item.data.name == carousel_name and not carousel_found %}
+                      {{ renderCarousel({
+                        markdown: true,
+                        carousel: carousel_item.data,
+                        datas: options.carousels,
+                        images: options.images,
+                        buttons: options.buttons,
+                        class: "ma-nautic-carousel w-full"
+                      }) }}
+                      {% set carousel_found = true %}
+                    {% endif %}
+                  {% endfor %}
+                  
+                  {# Si aucun carousel Markdown n'est trouvé, utiliser le carousel JSON #}
+                  {% if not carousel_found %}
+                    {{ renderCarousel({
+                      name: carousel_name,
+                      datas: options.carousels,
+                      images: options.images,
+                      buttons: options.buttons,
+                      class: "ma-nautic-carousel w-full"
+                    }) }}
+                  {% endif %}
                 </div>
               {% endif %}
             </div>
@@ -296,13 +315,34 @@
           {% if itemData.carousel %}
             <div class="lg:hidden mt-8">
               <div class="w-4/5 mx-auto">
-                {{ renderCarousel({
-                  name: itemData.carousel,
-                  datas: options.carousels,
-                  images: options.images,
-                  buttons: options.buttons,
-                  class: "ma-nautic-carousel"
-                }) }}
+                {# Essayer d'abord le carousel Markdown si disponible #}
+                {% set carousel_name = itemData.carousel %}
+                {% set carousel_found = false %}
+                
+                {% for carousel_item in collections.carousel %}
+                  {% if carousel_item.data.name == carousel_name and not carousel_found %}
+                    {{ renderCarousel({
+                      markdown: true,
+                      carousel: carousel_item.data,
+                      datas: options.carousels,
+                      images: options.images,
+                      buttons: options.buttons,
+                      class: "ma-nautic-carousel"
+                    }) }}
+                    {% set carousel_found = true %}
+                  {% endif %}
+                {% endfor %}
+                
+                {# Si aucun carousel Markdown n'est trouvé, utiliser le carousel JSON #}
+                {% if not carousel_found %}
+                  {{ renderCarousel({
+                    name: carousel_name,
+                    datas: options.carousels,
+                    images: options.images,
+                    buttons: options.buttons,
+                    class: "ma-nautic-carousel"
+                  }) }}
+                {% endif %}
               </div>
             </div>
           {% endif %}
@@ -314,7 +354,6 @@
   {% else %}
     <span class="text-red-500">Collection data not found</span>
   {% endif %}
-  <script src="/js/organisms/carousel.js" defer></script>
 {% endmacro %}
 
 {#

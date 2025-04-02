@@ -41,72 +41,6 @@
       ]
     },
     {
-      "name": "carousel_nine",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_slide_A", "objectPosition": "center" },
-        { "name": "carousel_slide_B", "objectPosition": "center" },
-        { "name": "carousel_slide_C", "objectPosition": "center" },
-        { "name": "carousel_slide_D", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "carousel_alba",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_slide_A", "objectPosition": "center" },
-        { "name": "carousel_slide_B", "objectPosition": "center" },
-        { "name": "carousel_slide_C", "objectPosition": "center" },
-        { "name": "carousel_slide_D", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "carousel_first",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_slide_A", "objectPosition": "center" },
-        { "name": "carousel_slide_B", "objectPosition": "center" },
-        { "name": "carousel_slide_C", "objectPosition": "center" },
-        { "name": "carousel_slide_D", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "carousel_libecciu",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_slide_A", "objectPosition": "center" },
-        { "name": "carousel_slide_B", "objectPosition": "center" },
-        { "name": "carousel_slide_C", "objectPosition": "center" },
-        { "name": "carousel_slide_D", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "carousel_enzo",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_slide_A", "objectPosition": "center" },
-        { "name": "carousel_slide_B", "objectPosition": "center" },
-        { "name": "carousel_slide_C", "objectPosition": "center" },
-        { "name": "carousel_slide_D", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "carousel_casablanca",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_slide_A", "objectPosition": "center" },
-        { "name": "carousel_slide_B", "objectPosition": "center" },
-        { "name": "carousel_slide_C", "objectPosition": "center" },
-        { "name": "carousel_slide_D", "objectPosition": "center" }
-      ]
-    },
-    {
       "name": "carousel_agriates",
       "autoplay": true,
       "pauseOnHover": true,
@@ -124,6 +58,13 @@
         { "name": "carousel_slide_2", "objectPosition": "center" },
         { "name": "carousel_slide_3", "objectPosition": "center" }
       ]
+    },
+    {
+      "carousel-boat": {
+        "autoplay": true,
+        "pauseOnHover": true,
+        "objectPosition": "center"
+      }
     }
   ]
 }

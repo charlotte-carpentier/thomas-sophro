@@ -21,9 +21,9 @@ layout: '00-core/base.njk'
 <div id="spot-list">
 
 {# Section lieu "Agriates" #}
-{% from "01-organisms/collection.njk" import renderCollection %}
+{% from "01-organisms/section-spot.njk" import renderSectionSpot %}
 
-{{ renderCollection({ 
+{{ renderSectionSpot({ 
     name: "agriates_desert", 
     datas: spots, 
     headings: atoms.headings, 
@@ -35,9 +35,9 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Section lieu "Cap Corse" #}
-{% from "01-organisms/collection.njk" import renderCollection %}
+{% from "01-organisms/section-spot.njk" import renderSectionSpot %}
 
-{{ renderCollection({ 
+{{ renderSectionSpot({ 
     name: "cap_corse", 
     datas: spots, 
     headings: atoms.headings, 

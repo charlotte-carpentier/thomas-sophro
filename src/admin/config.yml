@@ -1,24 +1,36 @@
 backend:
-  name: git-gateway
-  branch: main
+  name: git-gateway  # Authenticate and manage content via Git
+  branch: main       # Changes committed here
 
-media_folder: "static/images" # Stockage local des images uploadées
-public_folder: "/images" # URL publique des images
+media_folder: "public/images/bateaux"  # To store media
+public_folder: "/images/bateaux"       # URL path for accessing media files
 
-collections:
-  - name: "boats"
+collections: 
+  - name: "bateaux"
     label: "Bateaux"
-    files:  # To manage a single file rather than multiple entries
-      - label: "Bateau Content"  
-        name: "bateau"  
-        file: "src/_data/boats.json"  # The file where is data
-        create: true
-        delete: false
-        fields: 
-          - { label: "Modèle", name: "model", widget: "string" }
-          - { label: "Nom", name: "name", widget: "string" }
-          - { label: "Prix", name: "price", widget: "string" }
-          - { label: "Moteur", name: "engine", widget: "string" }
-          - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
-          - { label: "ID du carousel", name: "carousel", widget: "string" }
-          - { label: "Texte alternatif de l’image", name: "imageAlt", widget: "string" }
+    folder: "src/collection-boats"
+    create: true
+    fields:
+      - { label: "Modèle", name: "model", widget: "string" }
+      - { label: "Nom", name: "name", widget: "string" }
+      - { label: "Prix", name: "price", widget: "string" }
+      - { label: "Moteur", name: "engine", widget: "string" }
+      - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
+  - name: "carousels"
+    label: "Carousels"
+    folder: "src/collection-carousels"
+    create: true
+    delete: true
+    slug: "carousel_{{fields.title}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "carousel.njk" }
+      - { label: "Tags", name: "tags", widget: "hidden", default: "carousel" }
+      - { label: "Nom du Carousel", name: "name", widget: "hidden", pattern: ["^carousel_.*", "Doit commencer par carousel_"], default: "carousel_" }
+      - { label: "Titre", name: "title", widget: "string", hint: "Nom du bateau ou section (ex: alba, nine, etc.)" }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        min: 1
+        max: 10
+        fields:
+          - { label: "Nom", name: "name", widget: "string", hint: "ID de l'image (ex: carousel_slide_A)" }

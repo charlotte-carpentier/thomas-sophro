@@ -26,6 +26,15 @@ export default function (eleventyConfig) {
     return str.toString().toLowerCase().endsWith(suffix.toLowerCase());
   });
 
+  // Create a custom collection for carousels
+  eleventyConfig.addCollection('carousel', function(collection) {
+    return collection.getFilteredByGlob('./src/collection-carousels/*.md');
+  });
+  // Create a custom collection for boats
+  eleventyConfig.addCollection("boat", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("./src/collection-boats/*.md");
+  });
+
   return {
     dir: {
       input: "src",
