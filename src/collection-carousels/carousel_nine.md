@@ -2,7 +2,11 @@
 layout: 01-organisms/carousel.njk
 tags: carousel
 name: carousel_nine
+autoplay: false
+pauseOnHover: false
 images:
-  - name: capelli-tempest-500-proue.jpg
-  - name: capelli-tempest-500-Console.jpg
+  - objectPosition: center
+    name: image_nine_1
+  - objectPosition: center
+    name: image_nine_2
 ---
