@@ -11,12 +11,7 @@ export function syncBoatImages() {
   const carouselsDir = './src/collection-carousels';
   const imagesJsonPath = './src/_data/atoms/images.json';
   
-  // Vérifier si le dossier des carousels existe
-  if (!fs.existsSync(carouselsDir)) {
-    fs.mkdirSync(carouselsDir, { recursive: true });
-  }
-  
-  // Charger images.json
+  // Charger le fichier images.json pour obtenir les chemins réels des images
   let imagesJson;
   try {
     imagesJson = JSON.parse(fs.readFileSync(imagesJsonPath, 'utf8'));
@@ -24,9 +19,6 @@ export function syncBoatImages() {
     console.error('Erreur lors de la lecture de images.json:', error);
     return;
   }
-  
-  // Créer un Set pour vérifier l'existence des images
-  const existingImageIds = new Set(imagesJson.images.map(img => img.name));
   
   // Traiter chaque fichier de bateau
   if (fs.existsSync(boatsDir)) {
@@ -46,17 +38,21 @@ export function syncBoatImages() {
           const carouselContent = fs.readFileSync(carouselFilePath, 'utf8');
           const carouselData = matter(carouselContent).data;
           
-          // Récupérer les chemins des images depuis les données du carousel
+          // Récupérer les chemins des images depuis le fichier images.json
           const carouselImages = carouselData.images 
-            ? carouselData.images.map(img => img.name)
+            ? carouselData.images.map(imgRef => {
+                // Trouver le chemin réel de l'image dans images.json
+                const imageInfo = imagesJson.images.find(img => img.name === imgRef.name);
+                return imageInfo ? imageInfo.src : null;
+              }).filter(img => img !== null)
             : [];
           
           // Ajouter ces images au boat_images s'ils n'y sont pas déjà
           const existingBoatImages = boatData.boat_images || [];
           const updatedBoatImages = [
             ...existingBoatImages,
-            ...carouselImages.filter(imgName => 
-              !existingBoatImages.includes(imgName)
+            ...carouselImages.filter(imgSrc => 
+              !existingBoatImages.includes(imgSrc)
             )
           ];
           
