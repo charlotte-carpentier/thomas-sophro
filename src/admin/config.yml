@@ -20,7 +20,7 @@ collections:
       - { label: "Prix", name: "price", widget: "string" }
       - { label: "Moteur", name: "engine", widget: "string" }
       - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
-      - { label: "Carousel", name: "carousel", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"], hint: "Lien vers le carousel (ex: carousel_alba)" }
+      - { label: "Carousel", name: "carousel_name", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"], hint: "Lien vers le carousel (ex: carousel_alba)" }
       - { label: "Alt de l'image", name: "imageAlt", widget: "string" }
   
   - name: "carousels"
