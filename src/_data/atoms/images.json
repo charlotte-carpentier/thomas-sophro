@@ -185,6 +185,18 @@
       "alt": "Character avatar",
       "size": "avatar",
       "group": "block-media-small"
+    },
+    {
+      "name": "carousel_nine_slide_1",
+      "src": "/assets/images/uploaded/capelli-tempest-500-proue.jpg",
+      "alt": "Photos du bateau \\\"Nine\\\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_nine_slide_2",
+      "src": "/assets/images/uploaded/capelli-tempest-500-console.jpg",
+      "alt": "Photos du bateau \\\"Nine\\\"",
+      "group": "block-media"
     }
   ]
 }
