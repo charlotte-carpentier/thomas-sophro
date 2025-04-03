@@ -41,7 +41,7 @@ collections:
         min: 1
         max: 10
         fields:
-          - { label: "ID", name: "name", widget: "hidden", default: "slide_${fields.src}", pattern: ["^slide_.*"] }
+          - { label: "ID", name: "name", widget: "string", default: "slide_1", hint: "ID unique pour cette image (ex: slide_1)" }
           - { label: "Image", name: "src", widget: "image", hint: "Sélectionnez l'image à afficher" }
           - { label: "Texte alternatif", name: "alt", widget: "string", hint: "Description de l'image pour l'accessibilité" }
           - { label: "Position", name: "objectPosition", widget: "hidden", default: "center" }
