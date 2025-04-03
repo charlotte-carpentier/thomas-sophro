@@ -37,8 +37,47 @@ export function syncBoatImages() {
         // Lire le fichier du bateau
         const boatFilePath = path.join(boatsDir, file);
         const boatContent = fs.readFileSync(boatFilePath, 'utf8');
-        const boatData = matter(boatContent).data;
+        const { data: boatData, content } = matter(boatContent);
         
+        // Récupérer le carousel correspondant
+        const carouselFilePath = path.join(carouselsDir, `${boatData.carousel_name}.md`);
+        
+        if (fs.existsSync(carouselFilePath)) {
+          const carouselContent = fs.readFileSync(carouselFilePath, 'utf8');
+          const carouselData = matter(carouselContent).data;
+          
+          // Récupérer les chemins des images depuis images.json
+          const carouselImages = carouselData.images
+            ? carouselData.images
+              .map(imgRef => {
+                const imageInfo = imagesJson.images.find(img => img.name === imgRef.name);
+                return imageInfo ? imageInfo.src : null;
+              })
+              .filter(img => img !== null)
+            : [];
+          
+          // Fusionner les images existantes avec les nouvelles du carousel
+          const existingBoatImages = boatData.boat_images || [];
+          const updatedBoatImages = [
+            ...existingBoatImages,
+            ...carouselImages.filter(imgSrc => 
+              !existingBoatImages.includes(imgSrc)
+            )
+          ];
+          
+          // Mettre à jour le frontmatter si de nouvelles images sont trouvées
+          if (updatedBoatImages.length !== existingBoatImages.length) {
+            const updatedContent = matter.stringify({
+              ...boatData,
+              boat_images: updatedBoatImages
+            }, content);
+            
+            fs.writeFileSync(boatFilePath, updatedContent);
+            console.log(`Mise à jour des images pour ${file}`);
+          }
+        }
+        
+        // CONSERVER LE CODE EXISTANT POUR LA CRÉATION DES CAROUSELS
         // Ignorer si pas de carousel défini
         if (!boatData.carousel) {
           return;
