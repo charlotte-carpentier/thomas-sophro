@@ -12,14 +12,16 @@ collections:
     create: true
     delete: true
     slug: "{{fields.name}}"
+    identifier_field: "name"
+    summary: "{{name}} - {{model}} - {{price}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "01-organisms/section-boat.njk" }
       - { label: "Tags", name: "tags", widget: "hidden", default: "boat" }
-      - { label: "Nom technique", name: "name", widget: "hidden", default: "boat_{{uuid}}" }
+      - { label: "Nom technique", name: "name", widget: "string", pattern: ["^boat_.*", "Doit commencer par boat_"] }
       - { label: "Modèle", name: "model", widget: "string" }
       - { label: "Prix", name: "price", widget: "string" }
       - { label: "Moteur", name: "engine", widget: "string" }
       - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
-      - { label: "Carousel", name: "carousel", widget: "hidden", default: "carousel_{{uuid}}" }
-      - { label: "Images du bateau", name: "boat_images", widget: "list", summary: "Image {{fields.alt}}", field: { label: "Image", name: "image", widget: "image" } }
+      - { label: "Carousel", name: "carousel", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"] }
+      - { label: "Images du bateau", name: "boat_images", widget: "list", allow_add: true, allow_delete: true, field: { label: "Image", name: "image", widget: "image" } }
       - { label: "Alt de l'image principale", name: "imageAlt", widget: "string" }
