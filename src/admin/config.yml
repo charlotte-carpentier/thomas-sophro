@@ -51,7 +51,7 @@ collections:
     delete: true
     slug: "{{fields.name}}"
     fields:
-      - { label: "Layout", name: "layout", widget: "hidden", default: "00-atoms/image.njk" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "03-atoms/image.njk" }
       - { label: "Tags", name: "tags", widget: "hidden", default: "image" }
       - { label: "ID", name: "name", widget: "string", hint: "Identifiant unique de l'image (ex: carousel_slide_A)" }
       - { label: "Image", name: "src", widget: "image", hint: "Sélectionnez une image" }
