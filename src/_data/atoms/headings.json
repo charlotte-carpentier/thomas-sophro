@@ -15,6 +15,7 @@
     "ma_nautic_section_title": "font-['Roboto'] font-ma-black text-[theme(--ma-nautic-gold)] text-ma-subtitle mb-4 tracking-wide",
     "ma_nautic_section_subtitle": "font-['Roboto'] font-ma-bold text-[theme(--ma-nautic-blue)] text-ma-title",
     "ma_nautic_subtitle_light": "font-['Roboto'] font-ma-bold text-[theme(--ma-nautic-white)] text-ma-title",
+    "ma_nautic_subtitle_boat": "font-['Roboto'] font-ma-bold text-ma-title",
     "ma_nautic_section_drop": "font-['Vibur'] text-[theme(--ma-nautic-gold)] text-ma-heading",
     "section_title": "ma-nautic-section-title",
     "boat-title": "ma-nautic-boat-title",
@@ -130,7 +131,7 @@
       "name": "boat_nine",
       "level": 2,
       "text": "Nine",
-      "style": "ma_nautic_subtitle_light" 
+      "style": "ma_nautic_subtitle_boat" 
     },
     {
       "name": "camarat_cc",
@@ -142,7 +143,7 @@
       "name": "boat_alba",
       "level": 2,
       "text": "Alba",
-      "style": "ma_nautic_section_subtitle" 
+      "style": "ma_nautic_subtitle_boat" 
     },
     {
       "name": "capelli_630",
@@ -154,7 +155,7 @@
       "name": "boat_first",
       "level": 2,
       "text": "First",
-      "style": "ma_nautic_subtitle_light" 
+      "style": "ma_nautic_subtitle_boat" 
     },
     {
       "name": "capelli_700",
@@ -166,7 +167,7 @@
       "name": "boat_libecciu",
       "level": 2,
       "text": "Libecciu",
-      "style": "ma_nautic_section_subtitle" 
+      "style": "ma_nautic_subtitle_boat" 
     },
     {
       "name": "motonautica_780",
@@ -178,7 +179,7 @@
       "name": "boat_enzo",
       "level": 2,
       "text": "Enzo",
-      "style": "ma_nautic_subtitle_light" 
+      "style": "ma_nautic_subtitle_boat" 
     },
     {
       "name": "lomac_850",
@@ -190,7 +191,7 @@
       "name": "boat_casablanca",
       "level": 2,
       "text": "Casa Blanca",
-      "style": "ma_nautic_section_subtitle" 
+      "style": "ma_nautic_subtitle_boat" 
     },
     {
       "name": "ma_info",
