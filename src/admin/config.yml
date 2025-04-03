@@ -22,6 +22,6 @@ collections:
       - { label: "Prix", name: "price", widget: "string" }
       - { label: "Moteur", name: "engine", widget: "string" }
       - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
-      - { label: "Carousel", name: "carousel", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"] }
+      - { label: "Carousel", name: "carousel_name", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"] }
       - { label: "Images du bateau", name: "boat_images", widget: "list", allow_add: true, allow_delete: true, field: { label: "Image", name: "image", widget: "image" } }
       - { label: "Alt de l'image principale", name: "imageAlt", widget: "string" }
