@@ -7,13 +7,13 @@ public_folder: "/assets/images/uploaded"
 
 collections: 
   - name: "bateaux"
-    label: "Bateaux"
+    label: "Nos bateaux"
     folder: "src/collection-boats"
     create: true
     delete: true
     slug: "{{fields.name}}"
     identifier_field: "name"
-    summary: "{{name}} - {{model}} - {{price}}"
+    summary: "{{name}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "01-organisms/section-boat.njk" }
       - { label: "Tags", name: "tags", widget: "hidden", default: "boat" }
