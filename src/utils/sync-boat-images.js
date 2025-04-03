@@ -39,7 +39,7 @@ export function syncBoatImages() {
         const boatContent = fs.readFileSync(boatFilePath, 'utf8');
         const boatData = matter(boatContent).data;
         
-        // Récupérer les images du carousel existant AVANT le traitement habituel
+        // Récupérer les images du carousel existant
         if (boatData.carousel_name) {
           const currentCarouselFilePath = path.join(carouselsDir, `${boatData.carousel_name}.md`);
           
@@ -79,9 +79,9 @@ export function syncBoatImages() {
           }
         }
         
-        // CONSERVER INTÉGRALEMENT LE CODE EXISTANT
+        // CRÉATION DU CAROUSEL
         // Ignorer si pas de carousel défini
-        if (!boatData.carousel) {
+        if (!boatData.carousel_name) {
           return;
         }
         
@@ -92,7 +92,7 @@ export function syncBoatImages() {
         if (boatData.boat_images && Array.isArray(boatData.boat_images) && boatData.boat_images.length > 0) {
           boatData.boat_images.forEach((imgPath, index) => {
             // Créer un ID unique pour l'image
-            const imageId = `${boatData.carousel}_slide_${index + 1}`;
+            const imageId = `${boatData.carousel_name}_slide_${index + 1}`;
             
             // Vérifier si l'image existe déjà dans images.json
             if (!existingImageIds.has(imageId)) {
@@ -123,11 +123,11 @@ export function syncBoatImages() {
         }
         
         // Créer ou mettre à jour le fichier carousel
-        const carouselFilePath = path.join(carouselsDir, `${boatData.carousel}.md`);
+        const carouselFilePath = path.join(carouselsDir, `${boatData.carousel_name}.md`);
         const carouselContent = `---
 layout: 01-organisms/carousel.njk
 tags: carousel
-name: ${boatData.carousel}
+name: ${boatData.carousel_name}
 autoplay: true
 pauseOnHover: true
 images:
@@ -135,7 +135,7 @@ ${carouselImages.map(img => `  - name: ${img.name}\n    objectPosition: ${img.ob
 ---`;
         
         fs.writeFileSync(carouselFilePath, carouselContent);
-        console.log(`Carousel mis à jour: ${boatData.carousel}`);
+        console.log(`Carousel mis à jour: ${boatData.carousel_name}`);
         
       } catch (error) {
         console.error(`Erreur lors du traitement du bateau ${file}:`, error);
