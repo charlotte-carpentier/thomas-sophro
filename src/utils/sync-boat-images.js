@@ -4,19 +4,23 @@ import matter from 'gray-matter';
 
 /**
  * Synchronise les images entre bateaux et carousels dans les deux sens
+ * et ajoute les noms/modèles de bateaux au fichier headings.json
  * @returns {void}
  */
 export function syncBoatImages() {
   const boatsDir = './src/collection-boats';
   const carouselsDir = './src/collection-carousels';
   const imagesJsonPath = './src/_data/atoms/images.json';
+  const headingsJsonPath = './src/_data/atoms/headings.json';
   
   console.log("Démarrage de la synchronisation bidirectionnelle...");
   
+  // Vérifier et créer les dossiers nécessaires
   if (!fs.existsSync(carouselsDir)) {
     fs.mkdirSync(carouselsDir, { recursive: true });
   }
   
+  // Charger images.json
   let imagesJson;
   try {
     imagesJson = JSON.parse(fs.readFileSync(imagesJsonPath, 'utf8'));
@@ -26,7 +30,19 @@ export function syncBoatImages() {
     return;
   }
   
+  // Charger headings.json
+  let headingsJson;
+  try {
+    headingsJson = JSON.parse(fs.readFileSync(headingsJsonPath, 'utf8'));
+    console.log(`Headings.json chargé avec ${headingsJson.headings.length} entrées`);
+  } catch (error) {
+    console.error('Erreur lors de la lecture de headings.json:', error);
+    return;
+  }
+  
+  // Créer des sets pour les vérifications rapides
   const existingImageIds = new Set(imagesJson.images.map(img => img.name));
+  const existingHeadingNames = new Set(headingsJson.headings.map(heading => heading.name));
   
   // Charger tous les carousels existants
   const existingCarousels = {};
@@ -59,6 +75,41 @@ export function syncBoatImages() {
         const boatFilePath = path.join(boatsDir, file);
         const boatFileContent = fs.readFileSync(boatFilePath, 'utf8');
         const parsedBoatFile = matter(boatFileContent);
+        
+        // Gérer le modèle et le nom technique pour les nouveaux bateaux
+        if (parsedBoatFile.data.model) {
+          const modelName = parsedBoatFile.data.model;
+          
+          // Vérifier si le modèle existe déjà dans headings.json
+          if (!existingHeadingNames.has(modelName)) {
+            // Ajouter le nouveau modèle avec le formatage approprié
+            headingsJson.headings.push({
+              name: modelName,
+              text: `_${modelName}`,
+              level: 2,
+              style: "ma_nautic_section_title"
+            });
+            existingHeadingNames.add(modelName);
+            console.log(`Nouveau modèle ajouté à headings.json: ${modelName}`);
+          }
+        }
+        
+        if (parsedBoatFile.data.name) {
+          const technicalName = parsedBoatFile.data.name;
+          
+          // Vérifier si le nom technique existe déjà dans headings.json
+          if (!existingHeadingNames.has(technicalName)) {
+            // Ajouter le nouveau nom technique avec le formatage approprié
+            headingsJson.headings.push({
+              name: technicalName,
+              text: technicalName.replace('boat_', ''),
+              level: 2,
+              style: "ma_nautic_subtitle_boat"
+            });
+            existingHeadingNames.add(technicalName);
+            console.log(`Nouveau nom technique ajouté à headings.json: ${technicalName}`);
+          }
+        }
         
         // Déterminer le nom du carousel associé au bateau
         const carouselName = parsedBoatFile.data.carousel_name;
@@ -174,8 +225,11 @@ ${carouselImageRefs.map(img => `  - name: ${img.name}\n    objectPosition: ${img
       }
     });
     
-    // Sauvegarder les modifications dans images.json
+    // Sauvegarder les modifications dans les fichiers JSON
     fs.writeFileSync(imagesJsonPath, JSON.stringify(imagesJson, null, 2));
     console.log(`\nImages.json mis à jour avec ${imagesJson.images.length} images`);
+    
+    fs.writeFileSync(headingsJsonPath, JSON.stringify(headingsJson, null, 2));
+    console.log(`\nHeadings.json mis à jour avec ${headingsJson.headings.length} titres`);
   }
 }
