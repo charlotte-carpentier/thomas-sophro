@@ -12,6 +12,5 @@ boat_images:
   - /assets/images/carousel-2/carousel-slide-b.jpg
   - /assets/images/carousel-2/carousel-slide-c.jpg
   - /assets/images/carousel-2/carousel-slide-d.jpg
-  - /assets/images/uploaded/capelli-tempest-500-console.jpg
 imageAlt: Photos du bateau "Alba"
 ---
