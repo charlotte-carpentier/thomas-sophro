@@ -72,7 +72,7 @@ export default function (eleventyConfig) {
     const carouselsDir = './src/collection-carousels';
     const imagesJsonPath = './src/_data/atoms/images.json';
     
-    // Créer le dossier des carousels s'il n'existe pas
+    // Vérifier si le dossier des carousels existe
     if (!fs.existsSync(carouselsDir)) {
       fs.mkdirSync(carouselsDir, { recursive: true });
     }
@@ -81,31 +81,16 @@ export default function (eleventyConfig) {
     let imagesJson;
     try {
       imagesJson = JSON.parse(fs.readFileSync(imagesJsonPath, 'utf8'));
-      
-      // Garder une copie des images existantes pour référence
-      const originalImages = [...imagesJson.images];
-      
-      // Créer un ensemble des IDs d'images du système (non liées aux bateaux)
-      const systemImageIds = new Set(originalImages
-        .filter(img => !img.name.startsWith('carousel_'))
-        .map(img => img.name));
-      
-      // Nous allons reconstruire la liste des images liées aux bateaux
-      // tout en préservant les images système
-      imagesJson.images = originalImages.filter(img => 
-        !img.name.startsWith('carousel_') || 
-        systemImageIds.has(img.name)
-      );
-      
     } catch (error) {
       console.error('Erreur lors de la lecture de images.json:', error);
       return;
     }
     
-    // Créer un ensemble des IDs d'images existantes après le filtrage
+    // IMPORTANT: Ne pas filtrer les images existantes - les préserver toutes
+    // Créer uniquement un Set pour vérifier l'existence
     const existingImageIds = new Set(imagesJson.images.map(img => img.name));
     
-    // Traiter chaque fichier de bateau et reconstruire les images et carousels
+    // Traiter chaque fichier de bateau
     if (fs.existsSync(boatsDir)) {
       const boatFiles = fs.readdirSync(boatsDir).filter(file => file.endsWith('.md'));
       
