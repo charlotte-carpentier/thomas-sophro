@@ -1,42 +1,27 @@
 backend:
-  name: git-gateway  # Authenticate and manage content via Git
-  branch: main       # Changes committed here
+  name: git-gateway
+  branch: main
 
-media_folder: "public/images/bateaux"  # To store media
-public_folder: "/images/bateaux"       # URL path for accessing media files
+media_folder: "public/assets/images/uploaded"
+public_folder: "/assets/images/uploaded"
 
 collections: 
   - name: "bateaux"
-    label: "Bateaux"
+    label: "Nos bateaux"
     folder: "src/collection-boats"
     create: true
     delete: true
     slug: "{{fields.name}}"
+    identifier_field: "name"
+    summary: "{{name}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "01-organisms/section-boat.njk" }
       - { label: "Tags", name: "tags", widget: "hidden", default: "boat" }
-      - { label: "Nom", name: "name", widget: "string", pattern: ["^boat_.*", "Doit commencer par boat_"] }
+      - { label: "Nom technique", name: "name", widget: "string", pattern: ["^boat_.*", "Doit commencer par boat_"] }
       - { label: "Modèle", name: "model", widget: "string" }
       - { label: "Prix", name: "price", widget: "string" }
       - { label: "Moteur", name: "engine", widget: "string" }
       - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
-      - { label: "Carousel", name: "carousel_name", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"], hint: "Lien vers le carousel (ex: carousel_alba)" }
-      - { label: "Alt de l'image", name: "imageAlt", widget: "string" }
-  
-  - name: "carousels"
-    label: "Carousels"
-    folder: "src/collection-carousels"
-    create: true
-    delete: true
-    slug: "{{fields.name}}"
-    fields:
-      - { label: "Layout", name: "layout", widget: "hidden", default: "01-organisms/carousel.njk" }
-      - { label: "Tags", name: "tags", widget: "hidden", default: "carousel" }
-      - { label: "Nom", name: "name", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"] }
-      - label: "Images"
-        name: "images"
-        widget: "list"
-        min: 1
-        max: 10
-        fields:
-          - { label: "Nom", name: "name", widget: "string", hint: "ID de l'image (ex: carousel_slide_A)" }
+      - { label: "Carousel", name: "carousel_name", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"] }
+      - { label: "Images du bateau", name: "boat_images", widget: "list", allow_add: true, allow_delete: true, field: { label: "Image", name: "image", widget: "image" } }
+      - { label: "Alt de l'image principale", name: "imageAlt", widget: "string" }
