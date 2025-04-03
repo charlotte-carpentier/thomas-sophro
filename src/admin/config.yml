@@ -33,10 +33,26 @@ collections:
       - { label: "Layout", name: "layout", widget: "hidden", default: "01-organisms/carousel.njk" }
       - { label: "Tags", name: "tags", widget: "hidden", default: "carousel" }
       - { label: "Nom", name: "name", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"] }
+      - { label: "Autoplay", name: "autoplay", widget: "boolean", default: true }
+      - { label: "Pause on hover", name: "pauseOnHover", widget: "boolean", default: true }
       - label: "Images"
         name: "images"
         widget: "list"
         min: 1
         max: 10
         fields:
-          - { label: "Nom", name: "name", widget: "string", hint: "ID de l'image (ex: carousel_slide_A)" }
+          - { label: "ID", name: "name", widget: "string", hint: "ID de l'image (ex: carousel_slide_A)" }
+          - { label: "Position de l'objet", name: "objectPosition", widget: "select", options: ["center", "top", "bottom", "left", "right", "top left", "top right", "bottom left", "bottom right"], default: "center" }
+  
+  - name: "images"
+    label: "Images"
+    folder: "src/collection-images"
+    create: true
+    delete: true
+    slug: "{{fields.name}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "00-atoms/image.njk" }
+      - { label: "Tags", name: "tags", widget: "hidden", default: "image" }
+      - { label: "ID", name: "name", widget: "string", hint: "Identifiant unique de l'image (ex: carousel_slide_A)" }
+      - { label: "Image", name: "src", widget: "image", hint: "Sélectionnez une image" }
+      - { label: "Texte alternatif", name: "alt", widget: "string", hint: "Description de l'image pour l'accessibilité" }
