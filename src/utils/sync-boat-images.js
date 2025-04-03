@@ -37,72 +37,44 @@ export function syncBoatImages() {
         // Lire le fichier du bateau
         const boatFilePath = path.join(boatsDir, file);
         const boatContent = fs.readFileSync(boatFilePath, 'utf8');
-        const boatData = matter(boatContent).data;
+        const { data: boatData, content } = matter(boatContent);
         
-        // Ignorer si pas de carousel défini
-        if (!boatData.carousel) {
-          return;
-        }
+        // Récupérer les images du carousel correspondant
+        const carouselFilePath = path.join(carouselsDir, `${boatData.carousel_name}.md`);
         
-        // Préparer le contenu du carousel
-        const carouselImages = [];
-        
-        // Traiter les images du bateau (s'il y en a)
-        if (boatData.boat_images && Array.isArray(boatData.boat_images) && boatData.boat_images.length > 0) {
-          boatData.boat_images.forEach((imgPath, index) => {
-            // Créer un ID unique pour l'image
-            const imageId = `${boatData.carousel}_slide_${index + 1}`;
+        if (fs.existsSync(carouselFilePath)) {
+          const carouselContent = fs.readFileSync(carouselFilePath, 'utf8');
+          const carouselData = matter(carouselContent).data;
+          
+          // Récupérer les chemins des images depuis les données du carousel
+          const carouselImages = carouselData.images 
+            ? carouselData.images.map(img => img.name)
+            : [];
+          
+          // Ajouter ces images au boat_images s'ils n'y sont pas déjà
+          const existingBoatImages = boatData.boat_images || [];
+          const updatedBoatImages = [
+            ...existingBoatImages,
+            ...carouselImages.filter(imgName => 
+              !existingBoatImages.includes(imgName)
+            )
+          ];
+          
+          // Mettre à jour le frontmatter si nécessaire
+          if (updatedBoatImages.length !== existingBoatImages.length) {
+            const updatedContent = matter.stringify({
+              ...boatData,
+              boat_images: updatedBoatImages
+            }, content);
             
-            // Vérifier si l'image existe déjà dans images.json
-            if (!existingImageIds.has(imageId)) {
-              // Ajouter l'image à images.json
-              imagesJson.images.push({
-                name: imageId,
-                src: imgPath,
-                alt: boatData.imageAlt || `Image ${index + 1} du bateau ${boatData.model}`,
-                group: "block-media"
-              });
-              existingImageIds.add(imageId);
-              console.log(`Image ajoutée: ${imageId}`);
-            } else {
-              // Mettre à jour les informations de l'image si elle existe déjà
-              const imgIndex = imagesJson.images.findIndex(img => img.name === imageId);
-              if (imgIndex !== -1) {
-                imagesJson.images[imgIndex].src = imgPath;
-                imagesJson.images[imgIndex].alt = boatData.imageAlt || `Image ${index + 1} du bateau ${boatData.model}`;
-              }
-            }
-            
-            // Ajouter l'image au carousel
-            carouselImages.push({
-              name: imageId,
-              objectPosition: "center"
-            });
-          });
+            fs.writeFileSync(boatFilePath, updatedContent);
+            console.log(`Mise à jour des images pour ${file}`);
+          }
         }
-        
-        // Créer ou mettre à jour le fichier carousel
-        const carouselFilePath = path.join(carouselsDir, `${boatData.carousel}.md`);
-        const carouselContent = `---
-layout: 01-organisms/carousel.njk
-tags: carousel
-name: ${boatData.carousel}
-autoplay: true
-pauseOnHover: true
-images:
-${carouselImages.map(img => `  - name: ${img.name}\n    objectPosition: ${img.objectPosition}`).join('\n')}
----`;
-        
-        fs.writeFileSync(carouselFilePath, carouselContent);
-        console.log(`Carousel mis à jour: ${boatData.carousel}`);
         
       } catch (error) {
         console.error(`Erreur lors du traitement du bateau ${file}:`, error);
       }
     });
-    
-    // Écrire le fichier images.json mis à jour
-    fs.writeFileSync(imagesJsonPath, JSON.stringify(imagesJson, null, 2));
-    console.log(`Images.json mis à jour avec ${imagesJson.images.length} images`);
   }
 }
