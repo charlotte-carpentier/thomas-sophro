@@ -6,6 +6,6 @@ model: "capelli_700"
 price: "À partir de 360 €/jour"
 engine: "225 ch YAMAHA - 7 m"
 passengersNumber: "8-10 personnes MAX"
-carousel: "carousel_libecciu"
+carousel_name: "carousel_libecciu"
 imageAlt: "Photos du bateau \"Libecciu\""
 ---

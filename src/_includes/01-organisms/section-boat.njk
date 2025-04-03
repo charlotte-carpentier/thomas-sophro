@@ -39,18 +39,18 @@
           {% if itemData.model and options.headings %}
             {{ renderHeading({
               name: itemData.model,
-              datas: options.headings,
-              class: "mb-6 mt-8 ma-nautic-section-title {% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}"
+              datas: options.headings
             }) }}
           {% endif %}
 
-          {# Main Heading (name) #}
+          {# Main Heading (name) - Nous appliquons la couleur conditionnelle #}
           {% if itemData.name and options.headings %}
-            {{ renderHeading({
-              name: itemData.name,
-              datas: options.headings,
-              class: "{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}"
-            }) }}
+            <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">
+              {{ renderHeading({
+                name: itemData.name,
+                datas: options.headings
+              }) }}
+            </div>
           {% endif %}
 
           {# Icon #}
@@ -150,18 +150,18 @@
             {% if itemData.model and options.headings %}
               {{ renderHeading({
                 name: itemData.model,
-                datas: options.headings,
-                class: "mb-6 mt-8 ma-nautic-section-title {% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}"
+                datas: options.headings
               }) }}
             {% endif %}
 
-            {# Main Heading (name) #}
+            {# Main Heading (name) - Nous appliquons la couleur conditionnelle #}
             {% if itemData.name and options.headings %}
-              {{ renderHeading({
-                name: itemData.name,
-                datas: options.headings,
-                class: "{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}"
-              }) }}
+              <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">
+                {{ renderHeading({
+                  name: itemData.name,
+                  datas: options.headings
+                }) }}
+              </div>
             {% endif %}
 
             {# Content - price, engine, passengersNumber #}

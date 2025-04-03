@@ -6,6 +6,6 @@ model: "lomac_850"
 price: "À partir de 500€/jour"
 engine: "300 ch MERCURY - 8,50m"
 passengersNumber: "12 personnes MAX"
-carousel: "carousel_casablanca"
+carousel_name: "carousel_casablanca"
 imageAlt: "Photos du bateau \"Casa Blanca\""
 ---

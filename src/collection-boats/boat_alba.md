@@ -6,6 +6,6 @@ model: "camarat_cc"
 price: "À partir de 250 €/jour"
 engine: "100 ch YAMAHA - 5,5 m"
 passengersNumber: "4 personnes MAX"
-carousel: "carousel_alba"
+carousel_name: "carousel_alba"
 imageAlt: "Photos du bateau \"Alba\""
 ---
