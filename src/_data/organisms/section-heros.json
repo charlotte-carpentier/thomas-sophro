@@ -69,7 +69,7 @@
       "heading": "ma_nautic_contact",
       "contentBlocks": [
         {
-          "text": "Si notre <strong>F.A.Q.</strong> n’a pas su répondre à vos questions concernant notre <strong>location de bateaux</strong> à Saint-Florent (20217) en Haute-Corse, n’hésitez pas à contacter <strong>M.A Nautic</strong> !"
+          "text": "Si notre <strong>F.A.Q.</strong> n'a pas su répondre à vos questions concernant notre <strong>location de bateaux</strong> à Saint-Florent (20217) en Haute-Corse, n'hésitez pas à contacter <strong>M.A Nautic</strong> !"
         },
         {
           "text": "Appelez-nous au <strong>06.25.70.47.10</strong>, nous sommes disponibles du lundi au dimanche de 9h30 à 18h."
@@ -81,7 +81,7 @@
           "text": "Suivez notre actualité sur les réseaux sociaux :"
         },
         {
-          "text": "<strong><a href='{{ links.facebook }}' target='_blank'>Facebook</a></strong> & <strong><a href='{links.instagram}' target='_blank'>Instagram</a></strong>"
+          "text": "<strong><a href='https://www.facebook.com/M.A.Nautic/' target='_blank' class='transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]'>Facebook</a></strong> & <strong><a href='https://www.instagram.com/m.a.nautic/' target='_blank' class='transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]'>Instagram</a></strong>"
         }
       ],
       "scrollArrowButton": "arrow_scroll_up",

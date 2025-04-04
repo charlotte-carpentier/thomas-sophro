@@ -1,117 +1,142 @@
-// current-link.js - Detect and style active navigation links based on their context
+/**
+ * Active Navigation Link Highlighter
+ * 
+ * Robust solution for navigation link animation with:
+ * - Automatic current page detection
+ * - Animated underlines
+ * - Hover and focus interactions
+ * - Accessibility improvements
+ * - Prevention of click on current page link
+ * - Disabled home logo click when on homepage
+ * 
+ * @version 3.8
+ */
 document.addEventListener('DOMContentLoaded', function() {
-  // Add global CSS for styling current links according to Ma-Nautic theme
-  const style = document.createElement('style');
-  style.textContent = `
-    /* Specific styling for current navigation links */
-    [aria-current="page"] {
-      pointer-events: none !important; /* Disable hover entirely */
-      cursor: pointer !important; /* But still look clickable */
-      color: var(--ma-nautic-white) !important; /* Text stays white for active links */
-    }
-    
-    /* Prevent hover effects on any child elements */
-    [aria-current="page"] * {
-      pointer-events: none !important;
-    }
-    
-    /* Hide any pseudo-elements that might be used for hover effects */
-    [aria-current="page"]::after,
-    [aria-current="page"]::before {
-      /* Instead of hiding completely, show the underline for active links */
-      display: block !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-      width: 100% !important; /* Full width underline for active links */
-      background-color: var(--ma-nautic-gold) !important; /* Gold color for underline */
-      height: var(--ma-nautic-border-width-large) !important; /* Thicker underline */
-    }
-    
-    /* For extra safety - specific targeting for navigation links */
-    .ma-nautic-nav-link[aria-current="page"]::after {
-      content: '' !important;
-      position: absolute !important;
-      bottom: 0 !important;
-      left: 0 !important;
-      width: 100% !important;
-      height: var(--ma-nautic-border-width-large) !important; /* Thicker underline */
-      background-color: var(--ma-nautic-gold) !important; /* Gold color for underline */
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Get current path
+  // Get all navigation links
+  const navLinks = document.querySelectorAll('[data-nav-link]');
+  
+  // Find the active link and store a reference
+  let activeLink = null;
   const currentPath = window.location.pathname;
   
-  // Find all navigation links (with data-nav-link attribute)
-  const navLinks = document.querySelectorAll('[data-nav-link]');
+  // Check if we're on the homepage
+  const isHomePage = currentPath === '/' || currentPath === '/index.html';
+  
+  // If on homepage, disable the logo link
+  if (isHomePage) {
+    const logoLink = document.querySelector('header a[href="/"]');
+    if (logoLink) {
+      logoLink.addEventListener('click', function(event) {
+        event.preventDefault();
+      });
+      logoLink.style.cursor = 'default';
+      logoLink.setAttribute('aria-current', 'page');
+      logoLink.setAttribute('title', 'Page d\'accueil (page actuelle)');
+    }
+  }
   
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
     
-    // Consider a link active if it matches the current path
-    // or if it's a parent path (not the homepage)
-    const isActive = 
-      currentPath === href || 
+    // Determine if this is the active link
+    const isActive = currentPath === href || 
       (href !== '/' && currentPath.startsWith(href));
     
     if (isActive) {
       // Mark as active for accessibility
       link.setAttribute('aria-current', 'page');
+      activeLink = link;
       
-      // Add Ma-Nautic specific class if it doesn't already have it
+      // Disable active link (prevent navigation)
+      link.addEventListener('click', function(event) {
+        event.preventDefault();
+      });
+      
+      // Keep cursor as pointer for user experience
+      link.style.cursor = 'default';
+      
+      // Ensure navigation link class is applied
       if (!link.classList.contains('ma-nautic-nav-link')) {
         link.classList.add('ma-nautic-nav-link');
-      }
-      
-      // Position the link relatively (needed for absolute positioning of indicator)
-      link.classList.add('relative');
-      
-      // Determine if the link is in a secondary navigation
-      const isSecondaryNav = isLinkInSecondaryNav(link);
-      
-      // Create and add the indicator line (only if not already using ma-nautic-nav-link style)
-      if (!link.querySelector('.nav-indicator')) {
-        const indicator = document.createElement('span');
-        indicator.classList.add('nav-indicator');
-        
-        if (isSecondaryNav) {
-          // For secondary navigation: indicator goes to the left
-          indicator.className = 'nav-indicator absolute left-[-12px] top-1/2 w-2 h-5 bg-[var(--ma-nautic-gold)] rounded-full transform -translate-y-1/2';
-        } else {
-          // No need for additional indicator if using ma-nautic-nav-link
-          // The ::after pseudo-element handles this
-        }
-        
-        // Only add the indicator if it's in secondary nav
-        if (isSecondaryNav) {
-          link.appendChild(indicator);
-        }
       }
     }
   });
   
-  /**
-   * Checks if a link is inside a secondary navigation by traversing up the DOM tree
-   * @param {HTMLElement} link - The link element to check
-   * @return {boolean} - True if the link is inside a secondary navigation
-   */
-  function isLinkInSecondaryNav(link) {
-    // Look for parent with navigation element
-    let parent = link.parentElement;
-    
-    // Traverse up to find navigation container
-    while (parent && parent.tagName !== 'NAV') {
-      parent = parent.parentElement;
+  // If no active link is found, exit here
+  if (!activeLink) return;
+  
+  // Create elements for the animation
+  // We'll create real DOM elements rather than using pseudo-elements
+  // for better control
+  
+  // Create gold underline element (default)
+  const goldUnderline = document.createElement('span');
+  goldUnderline.className = 'active-link-gold-underline';
+  goldUnderline.style.cssText = `
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px; /* equivalent to var(--ma-nautic-border-width-large) */
+    background-color: #e8ab55; /* equivalent to var(--ma-nautic-gold) */
+    transition: all 600ms;
+    z-index: 1;
+  `;
+  
+  // Create teal underline element (for hover effect)
+  const tealUnderline = document.createElement('span');
+  tealUnderline.className = 'active-link-teal-underline';
+  tealUnderline.style.cssText = `
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px; /* equivalent to var(--ma-nautic-border-width-large) */
+    background-color: #63a595; /* equivalent to var(--ma-nautic-teal) */
+    transition: all 600ms;
+    z-index: 2;
+  `;
+  
+  // Ensure active link has position: relative
+  activeLink.style.position = 'relative';
+  
+  // Add underlines to active link
+  activeLink.appendChild(goldUnderline);
+  activeLink.appendChild(tealUnderline);
+  
+  // Add event listeners to other navigation links
+  navLinks.forEach(link => {
+    if (link !== activeLink) {
+      // When hovering over another link
+      link.addEventListener('mouseenter', function() {
+        // Animation: gold moves out to the right
+        goldUnderline.style.width = '0';
+        goldUnderline.style.left = '100%';
+        
+        // Animation: teal enters from the left
+        tealUnderline.style.width = '100%';
+      });
+      
+      // When leaving another link
+      link.addEventListener('mouseleave', function() {
+        // Animation: gold returns from the left
+        goldUnderline.style.width = '100%';
+        goldUnderline.style.left = '0';
+        
+        // Animation: teal disappears to the right
+        tealUnderline.style.width = '0';
+      });
     }
-    
-    // If no container found, return false
-    if (!parent) return false;
-    
-    // Check if it's a secondary navigation
-    return parent.classList.contains('navigation-secondary') || 
-           parent.hasAttribute('data-nav-secondary') || 
-           // Check if any parent element has a class that contains "secondary"
-           parent.closest('[class*="secondary"]') !== null;
+  });
+  
+  // Handle case when mouse leaves navigation completely
+  const navContainer = document.querySelector('[data-nav-container]');
+  if (navContainer) {
+    navContainer.addEventListener('mouseleave', function() {
+      // Reset to default state
+      goldUnderline.style.width = '100%';
+      goldUnderline.style.left = '0';
+      tealUnderline.style.width = '0';
+    });
   }
 });

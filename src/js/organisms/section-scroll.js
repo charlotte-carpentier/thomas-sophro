@@ -1,13 +1,34 @@
+/**
+ * Smooth Section Scrolling Utility
+ * 
+ * Enhances page navigation with:
+ * - Custom smooth scrolling to section anchors
+ * - Easing function for natural movement
+ * - Browser history management
+ * - Optimized animation frames
+ * 
+ * @version 1.3
+ */
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Script section-scroll.js chargé.");
+    console.log("Script section-scroll.js loaded.");
     
-    // Fonction de défilement personnalisé avec des options plus précises
+    /**
+     * Custom smooth scrolling function with precise options
+     * 
+     * @param {HTMLElement} target - The element to scroll to
+     * @param {number} duration - Duration of the scroll animation in milliseconds
+     */
     function smoothScroll(target, duration = 800) {
         const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
         const startPosition = window.pageYOffset;
         const distance = targetPosition - startPosition;
         let startTime = null;
 
+        /**
+         * Animation frame callback function
+         * 
+         * @param {number} currentTime - Current timestamp from requestAnimationFrame
+         */
         function animation(currentTime) {
             if (startTime === null) startTime = currentTime;
             const timeElapsed = currentTime - startTime;
@@ -16,7 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (timeElapsed < duration) requestAnimationFrame(animation);
         }
 
-        // Fonction d'ease pour un défilement plus naturel
+        /**
+         * Easing function for more natural scrolling
+         * Using quadratic ease-in-out function
+         * 
+         * @param {number} t - Current time
+         * @param {number} b - Start value
+         * @param {number} c - Change in value
+         * @param {number} d - Duration
+         * @returns {number} Calculated position
+         */
         function ease(t, b, c, d) {
             t /= d / 2;
             if (t < 1) return c / 2 * t * t + b;
@@ -27,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animation);
     }
 
-    // Ajouter un comportement de défilement fluide aux liens d'ancrage
+    // Add smooth scrolling behavior to all anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -36,10 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
-                // Utiliser le défilement personnalisé
+                // Use custom smooth scrolling
                 smoothScroll(targetElement);
                 
-                // Mettre à jour l'URL avec l'ancre (optionnel)
+                // Update URL with anchor (optional)
                 history.pushState(null, null, targetId);
             }
         });

@@ -21,10 +21,10 @@
           "text": "Aller à Fiume Santu en 10 minutes (par mer calme !) depuis le port de Saint-Florent."
         },
         {
-          "text": "Aller au <strong><a href='https://www.lacabanedulodu.com/'>La Cabane du Lotu</a></strong> en 15 minutes (par mer calme !) depuis le port de Saint-Florent."
+          "text": "Aller au <strong><a href='https://www.lacabanedulodu.com/' class='transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]'>La Cabane du Lotu</a></strong> en 15 minutes (par mer calme !) depuis le port de Saint-Florent."
         },
         {
-          "text": "Aller à Saleccia & <strong><a href='https://www.apinicciadisaleccia.fr/'>A Piniccia di Saleccia</a></strong> en 25 minutes (par mer calme !) depuis le port de Saint-Florent."
+          "text": "Aller à Saleccia & <strong><a href='https://www.apinicciadisaleccia.fr/' class='transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]'>A Piniccia di Saleccia</a></strong> en 25 minutes (par mer calme !) depuis le port de Saint-Florent."
         },
         {
           "text": "Aller à Travu en 30 minutes (par mer calme !) depuis le port de Saint-Florent."
@@ -46,7 +46,7 @@
       "heading": "ma_capcorse",
       "contentBlocks": [
         {
-          "text": "Aller à Farinole & <strong><a href='https://www.instagram.com/bos_plage/'>Le Bo'S Plage</a></strong> en 15 minutes (par mer calme !) depuis le port de Saint-Florent."
+          "text": "Aller à Farinole & <strong><a href='https://www.instagram.com/bos_plage/' class='transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]'>Le Bo'S Plage</a></strong> en 15 minutes (par mer calme !) depuis le port de Saint-Florent."
         },
         {
           "text": "Aller à Nonza en 25 minutes (par mer calme !) depuis le port de Saint-Florent."
@@ -55,7 +55,7 @@
           "text": "Aller à Cannelle et U Scogliu en 35 minutes (par mer calme !) depuis le port de Saint-Florent."
         },
         {
-          "text": "Aller à Centuri & <strong><a href='https://www.facebook.com/p/Restaurant-le-langoustier-100063756750272/?locale=fr_FR'>Le Langoustier</a></strong> en 55 minutes (par mer calme !) depuis le port de Saint-Florent."
+          "text": "Aller à Centuri & <strong><a href='https://www.facebook.com/p/Restaurant-le-langoustier-100063756750272/?locale=fr_FR' class='transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]'>Le Langoustier</a></strong> en 55 minutes (par mer calme !) depuis le port de Saint-Florent."
         }
       ],
       "carousel": "carousel_capcorse",

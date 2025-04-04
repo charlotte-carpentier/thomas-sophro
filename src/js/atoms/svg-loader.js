@@ -1,10 +1,19 @@
 /**
- * SVG Loader - Dynamically loads SVG files and injects them inline into the DOM
+ * SVG Loader Utility
  * 
- * This script finds elements with the data-svg-src attribute and replaces them
- * with the actual SVG content, allowing for styling with CSS and theme colors.
+ * Dynamically loads SVG files and injects them inline into the DOM with:
+ * - Asynchronous loading of external SVG files
+ * - Preservation of original element classes
+ * - Custom width and height support
+ * - Fallback mechanism for loading failures
+ * - Automatic color inheritance
+ * 
+ * @version 4.3
  */
 document.addEventListener('DOMContentLoaded', () => {
+  /**
+   * Finds elements with data-svg-src attribute and replaces them with the SVG content
+   */
   function loadSVGs() {
     document.querySelectorAll('[data-svg-src]').forEach(element => {
       const svgPath = element.getAttribute('data-svg-src');
