@@ -40,20 +40,25 @@
       
       {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
       
-      {% if inputData.type in ["text", "phone"] %}
+      {% if inputData.type in ["text", "tel", "email", "phone"] %}
         <input 
           type="{{ inputData.type }}" 
           id="{{ inputData.id }}" 
           name="{{ inputData.name }}" 
           placeholder="{{ inputData.placeholder }}" 
           class="{{ inputClasses }}"
-          onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
-          onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'" 
-          onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
-          onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }}'" 
-          {% if inputData.disabled %}disabled class="{{ stateClasses.disabled }}"{% endif %}
-          style="color: #2b3947;"
+          {% if inputData.pattern %}pattern="{{ inputData.pattern }}"{% endif %}
+          {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
+          {% if inputData.required %}required{% endif %}
+          aria-required="{{ inputData.required | default(false) }}"
+          aria-invalid="false"
         />
+        <span 
+          id="{{ inputData.id }}-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
       {% elif inputData.type == "textarea" %}
         <textarea 
           id="{{ inputData.id }}" 
@@ -61,45 +66,38 @@
           placeholder="{{ inputData.placeholder }}" 
           class="{{ inputClasses }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}"
           rows="{{ options.textareaRows | default('3') }}"
-          onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}'" 
-          onblur="this.className='{{ baseClasses }} {{ stateClasses.default }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}'" 
-          onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}'" 
-          onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}'" 
-          {% if inputData.disabled %}disabled class="{{ stateClasses.disabled }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}"{% endif %}
-          style="color: #2b3947;"
+          {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
+          {% if inputData.required %}required{% endif %}
+          aria-required="{{ inputData.required | default(false) }}"
+          aria-invalid="false"
         ></textarea>
+        <span 
+          id="{{ inputData.id }}-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
       {% elif inputData.type in ["select", "multi-select"] %}
-        <style>
-          /* Style pour assurer une couleur constante pour le select */
-          #{{ inputData.id }} {
-            color: #2b3947 !important; /* Ma-nautic-blue */
-          }
-          #{{ inputData.id }} option {
-            color: #2b3947 !important;
-          }
-        </style>
-        
-        <select id="{{ inputData.id }}" name="{{ inputData.name }}" 
+        <select 
+          id="{{ inputData.id }}" 
+          name="{{ inputData.name }}" 
           {% if inputData.type == "multi-select" %}multiple{% endif %} 
           class="{{ inputClasses }}"
-          {% if inputData.disabled %}disabled{% endif %}>
+          {% if inputData.required %}required{% endif %}
+          aria-required="{{ inputData.required | default(false) }}"
+          aria-invalid="false"
+        >
+          <option value="">{{ inputData.placeholder | default('Sélectionnez une option...') }}</option>
           {% for option in inputData.options %}
             <option value="{{ option.value }}">{{ option.label }}</option>
           {% endfor %}
         </select>
-      {% elif inputData.type == "datepicker" %}
-        <input 
-          type="date" 
-          id="{{ inputData.id }}" 
-          name="{{ inputData.name }}" 
-          class="{{ inputClasses }}"
-          onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
-          onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'" 
-          onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
-          onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }}'" 
-          {% if inputData.disabled %}class="{{ stateClasses.disabled }}" disabled{% endif %}
-          style="color: #2b3947;"
-        />
+        <span 
+          id="{{ inputData.id }}-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
       {% endif %}
 
       {% if inputData.state == 'critical' and inputData.errorMessage %}
@@ -110,8 +108,6 @@
     <span class="text-red-500">Input not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
-
-
 
 {#
 ============================
