@@ -10,17 +10,18 @@
       {
           "sectionName": "ma_legal",
           "contentBlocks": [
-              {
-                  "title": "Informations relatives à l'hébergeur",
-                  "content": "OVH\nSAS\nAdresse du siège social : 2 rue Kellermann - 59100 Roubaix - France\nNuméro de téléphone : 09 72 10 10 07"
-              },
+                {
+                "title": "Informations relatives à l'hébergeur",
+                "content": "Netlify, Inc.\nAdresse du siège social : 44 Montgomery Street, Suite 300, San Francisco, California 94104, USA\nSite web : https://www.netlify.com\nLes serveurs de Netlify sont situés en dehors de l’Union Européenne. Netlify certifie respecter le cadre juridique du Data Privacy Framework (DPF) entre les États-Unis et l’Union Européenne, garantissant un niveau de protection adéquat des données personnelles.\nPolitique de confidentialité : https://www.netlify.com/privacy/"
+              }
+              ,
               {
                   "title": "Informations relatives à l'éditeur",
                   "content": "Raison sociale : M.A NAUTIC\nForme juridique : SASU Société par actions simplifiée à associé unique\nCapital social : Non renseigné\nEnseigne : M.A NAUTIC\nAdresse : Lieu dit Schinu, Route de Calvi, 20217 Saint-Florent, France\nTéléphone : +33625704710\nE-mail : contact@ma-nautic.com\nDirecteur de publication : Florent MARTY\nSiren : 910893148\nSiret : 91089314800015"
               },
               {
-                  "title": "Médiateur à la consommation",
-                  "content": "Nom :\nOrganisme de médiation :\nEmail :\nTéléphone :\nAdresse :"
+                "title": "Médiateur à la consommation",
+                "content": "Conformément à l'article L. 612-1 du Code de la consommation, en cas de litige, le consommateur a la possibilité de recourir gratuitement à un médiateur de la consommation.\n\nNom : [Nom du médiateur]\nOrganisme de médiation : [Nom de l'organisme]\nEmail : [Email du médiateur]\nTéléphone : [Numéro de téléphone]\nAdresse : [Adresse postale]\n\nSi aucun médiateur spécifique n'est désigné, le consommateur peut consulter la plateforme de résolution des litiges en ligne de la Commission européenne : https://ec.europa.eu/consumers/odr/"
               },
               {
                   "title": "Conditions d'utilisation",
@@ -47,13 +48,16 @@
                   "content": "Tout le contenu du présent site, incluant, de façon non limitative, les graphismes, images, textes, vidéos, animations, sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété exclusive de la société M.A NAUTIC à l'exception des marques, logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs (ex: AdobeStock, ShutterStock, FontAwesome, Freepik).\nToute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, de ces différents éléments est strictement interdite sans l'accord express par écrit de M.A NAUTIC."
               },
               {
-                  "title": "Gestion des « cookies »",
-                  "content": "Qu'est-ce qu'un « cookie » ?\nUn « cookie » ou traceur est un fichier électronique déposé sur un terminal (ordinateur, tablette, smartphone,...) et lu par exemple lors de la consultation d'un site internet, de la lecture d'un courrier électronique, de l'installation ou de l'utilisation d'un logiciel ou d'une application mobile et ce quel que soit le type de terminal utilisé.\nEn naviguant sur ce site, des « cookies » émanant de la société responsable du site concerné et/ou des sociétés tiers pourront être déposés sur votre terminal."
+                "title": "Gestion des « cookies »",
+                "content": "Ce site n'utilise pas de cookies. Aucun cookie n'est déposé sans votre consentement. Si des cookies sont ajoutés à l'avenir, vous serez informé et pourrez gérer vos préférences à tout moment."
               },
               {
-                  "title": "Prestataire technique",
-                  "content": "Les prestations techniques sont assurées par Local.fr, Société par actions simplifiée (SAS) dont le siège social est situé au 8 Rue de l'Est 92100 Boulogne Billancourt.\nwww.local.fr"
+                "title": "Prestataire technique",
+                "content": "Les prestations techniques sont assurées par Charlotte Carpentier, micro-entreprise.\n\nNom de l'entreprise : Charlotte Carpentier\nStatut juridique : Micro-entreprise\nSIRET : 94076582900012\nAdresse : Disponible sur demande\nEmail : carpentier.dev@gmail.com"
               }
+              
+              
+              
           ]
       }
   ],
