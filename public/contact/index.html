@@ -1496,29 +1496,12 @@
     
     <div id="map" style="width: 100%; height: 500px;"></div>
 
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var map = L.map('map').setView([42.681846, 9.303704], 15);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(map);
-            
-            // Define custom icon
-            var customIcon = L.icon({
-                iconUrl: '/assets/logos/ma-logo.svg',
-                iconSize: [50, 50], // Icon size
-                iconAnchor: [25, 50], // Anchor point
-                popupAnchor: [0, -50] // Popup position
-            });
-            
-            L.marker([42.681846, 9.303704], {icon: customIcon})
-                .addTo(map)
-                .bindPopup("<b>M.A Nautic</b><br>Saint-Florent, Corse")
-                .openPopup();
-        });
-    </script>
+    
+    
+    <script src="/js/utils/map-contact.js"></script>
 </div>
     </main>
     
