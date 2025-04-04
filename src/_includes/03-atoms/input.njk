@@ -14,7 +14,7 @@
   {% endfor %}
 
   {% set globalStyle = options.datas.globalStyle %}
-  {% set inputWidth = options.inputWidth | default('w-64') %} 
+  {% set inputWidth = options.inputWidth | default('w-full md:w-64') %} 
   {% set inputHeight = options.inputHeight | default('py-3') %}
 
   {% if inputData %}
@@ -27,7 +27,7 @@
         </label>
       {% endif %}
 
-      {% set baseClasses = "border rounded-md px-3 py-2 focus:outline-none " ~ inputWidth %}
+      {% set baseClasses = "border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] " ~ inputWidth %}
       {% set stateClasses = {
         'default': options.datas.variants.default | default('border-gray-300'),
         'hover': options.datas.variants.hover | default('border-blue-400'),
@@ -52,6 +52,7 @@
           onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
           onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }}'" 
           {% if inputData.disabled %}disabled class="{{ stateClasses.disabled }}"{% endif %}
+          style="color: #2b3947;"
         />
       {% elif inputData.type == "textarea" %}
         <textarea 
@@ -65,6 +66,7 @@
           onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}'" 
           onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}'" 
           {% if inputData.disabled %}disabled class="{{ stateClasses.disabled }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}"{% endif %}
+          style="color: #2b3947;"
         ></textarea>
       {% elif inputData.type in ["select", "multi-select"] %}
         <style>
@@ -96,6 +98,7 @@
           onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
           onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }}'" 
           {% if inputData.disabled %}class="{{ stateClasses.disabled }}" disabled{% endif %}
+          style="color: #2b3947;"
         />
       {% endif %}
 
