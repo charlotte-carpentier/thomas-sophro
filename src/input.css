@@ -264,7 +264,7 @@
   opacity: 1;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1630px) {
   .wave-image {
     opacity: 0.3;
   }

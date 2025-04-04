@@ -146,7 +146,7 @@
         
         <!-- Navigation buttons -->
         <button 
-          class="absolute left-[-48px] top-1/2 transform -translate-y-1/2 z-10 {{ carouselPrevStyle }} {{ prevButton.class | default('') }} flex items-center justify-center"
+          class="absolute left-[-48px] top-1/2 transform -translate-y-1/2 z-10 {{ carouselPrevStyle }} {{ prevButton.class | default('') }} flex items-center justify-center cursor-pointer"
           data-carousel-prev
           aria-label="Previous image"
         >
@@ -156,7 +156,7 @@
         </button>
         
         <button 
-          class="absolute right-[-48px] top-1/2 transform -translate-y-1/2 z-10 {{ carouselNextStyle }} {{ nextButton.class | default('') }} flex items-center justify-center"
+          class="absolute right-[-48px] top-1/2 transform -translate-y-1/2 z-10 {{ carouselNextStyle }} {{ nextButton.class | default('') }} flex items-center justify-center cursor-pointer"
           data-carousel-next
           aria-label="Next image"
         >
@@ -169,7 +169,7 @@
         <div class="flex items-center justify-center mt-2 md:mt-4 space-x-1 md:space-x-2">
           {% for image in carouselData.images %}
             <button 
-              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator {% if loop.first %}carousel-indicator-active{% endif %}"
+              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator {% if loop.first %}carousel-indicator-active{% endif %} cursor-pointer"
               data-carousel-indicator="{{ loop.index0 }}"
               data-carousel-target="{{ carouselId }}"
               aria-label="Go to image {{ loop.index }}"

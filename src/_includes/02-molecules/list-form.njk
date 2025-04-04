@@ -4,85 +4,19 @@
 =========================
 #}
 
-{% macro renderInput(input, atoms, width='w-full', containerClass='') %}
-  {% set inputData = null %}
-  {% for inputDef in atoms.inputs.inputs %}
-    {% if inputDef.name == input.name %}
-      {% set inputData = inputDef %}
-    {% endif %}
-  {% endfor %}
-
-  {% if inputData %}
-    {% set stateClasses = {
-      'default': atoms.inputs.variants.default | default('border-gray-300 text-gray-800 bg-white'),
-      'hover': atoms.inputs.variants.hover | default('border-gray-400 text-gray-800 bg-white'),
-      'focus': atoms.inputs.variants.focus | default('border-blue-500 ring-2 ring-blue-300 bg-white'),
-      'disabled': atoms.inputs.variants.disabled | default('border-gray-300 text-gray-400 bg-gray-100 cursor-not-allowed')
-    } %}
-    
-    <div class="mb-4 {{ width }} {{ containerClass }}">
-      <label for="{{ inputData.id }}" class="block mb-1 typography-label-m text-white">
-        {{ inputData.label }}{% if inputData.required %}<span class="text-red-500 ml-1">*</span>{% endif %}
-      </label>
-      
-      {% if inputData.type == 'textarea' %}
-        <textarea 
-          id="{{ inputData.id }}" 
-          name="{{ inputData.name }}" 
-          placeholder="{{ inputData.placeholder }}" 
-          class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947]"
-          rows="5"
-          {% if inputData.required %}required{% endif %}
-        ></textarea>
-      {% elseif inputData.type == 'select' %}
-        <div class="relative">
-          <select 
-            id="{{ inputData.id }}" 
-            name="{{ inputData.name }}" 
-            class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947] appearance-none pr-8"
-            {% if inputData.required %}required{% endif %}
-          >
-            <option value="" disabled selected>Sélectionnez un bateau...</option>
-            {% for option in inputData.options %}
-              <option value="{{ option.value }}">{{ option.label }}</option>
-            {% endfor %}
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#2b3947]">
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-          </div>
-        </div>
-      {% elseif inputData.type == 'phone' %}
-        <input 
-          type="tel" 
-          id="{{ inputData.id }}" 
-          name="{{ inputData.name }}" 
-          placeholder="{{ inputData.placeholder }}" 
-          class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947]"
-          {% if inputData.required %}required{% endif %}
-        >
-      {% else %}
-        <input 
-          type="{{ inputData.type }}" 
-          id="{{ inputData.id }}" 
-          name="{{ inputData.name }}" 
-          placeholder="{{ inputData.placeholder }}" 
-          class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947]"
-          {% if inputData.required %}required{% endif %}
-        >
-      {% endif %}
-      
-      {% if inputData.errorMessage %}
-      <div class="error-message hidden text-red-500 text-sm mt-1">
-        {{ inputData.errorMessage }}
-      </div>
-      {% endif %}
-    </div>
-  {% else %}
-    <div class="error-message text-red-500 text-sm my-2">Input "{{ input.name }}" not found</div>
-  {% endif %}
-{% endmacro %}
+{# Importer le composant input #}
+{% from "03-atoms/input.njk" import renderInput as renderAtomInput %}
 
 {% macro renderListForm(options) %}
+  {# Valeurs par défaut pour les paramètres optionnels #}
+  {% set recaptchaSiteKey = options.recaptchaSiteKey | default('VOTRE_RECAPTCHA_SITE_KEY') %}
+  {% set submitLabel = options.submitLabel | default('Envoyer') %}
+  {% set action = options.action | default('/merci') %}
+  {% set method = options.method | default('POST') %}
+  {% set class = options.class | default('bg-[#2b3947]') %}
+        {% set inputWidth = options.inputWidth | default('w-80') %}
+      {% set messageInputWidth = options.messageInputWidth | default('w-full') %}
+
   {% if options.datas %}
     {% set globalStyle = options.datas.globalStyle %}
     
@@ -100,10 +34,10 @@
     {% endif %}
     
     <form id="form-{{ formData.name }}" 
-      class="w-full {{ options.class | default('') }}"  
-      method="{{ options.method | default('POST') }}" 
+      class="w-full {{ class }}"  
+      method="{{ method }}" 
       data-netlify="true"
-      action="/merci"
+      action="{{ action }}"
       netlify-honeypot="bot-field">
 
     <p style="display: none;">
@@ -113,41 +47,61 @@
     </p>
 
       {# Première ligne - Nom et Email #}
-      <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+      <div class="flex flex-col md:flex-row justify-center md:space-x-8 space-y-4 md:space-y-0 mb-4">
         {% for input in formData.inputs %}
           {% if input.name == 'input_name' or input.name == 'input_email' %}
-            {{ renderInput(input, options.atoms, 'w-full md:w-1/2') }}
+              <div class="flex justify-center">
+              {{ renderAtomInput({ 
+                name: input.name, 
+                datas: options.atoms.inputs,
+                inputWidth: inputWidth
+              }) }}
+            </div>
           {% endif %}
         {% endfor %}
       </div>
       
       {# Deuxième ligne - Téléphone et Bateaux #}
-      <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+      <div class="flex flex-col md:flex-row justify-center md:space-x-8 space-y-4 md:space-y-0 mb-4">
         {% for input in formData.inputs %}
           {% if input.name == 'input_phone' or input.name == 'input_boat' %}
-            {{ renderInput(input, options.atoms, 'w-full md:w-1/2') }}
+            <div class="flex justify-center">
+              {{ renderAtomInput({ 
+                name: input.name, 
+                datas: options.atoms.inputs,
+                inputWidth: inputWidth
+              }) }}
+            </div>
           {% endif %}
         {% endfor %}
       </div>
       
       {# Troisième ligne - Message #}
-      <div class="w-full mb-6">
+      <div class="flex justify-center mb-6 w-full">
         {% for input in formData.inputs %}
           {% if input.name == 'input_message' %}
-            {{ renderInput(input, options.atoms, 'w-full') }}
+            <div class="flex justify-center">
+              {{ renderAtomInput({ 
+                name: input.name, 
+                datas: options.atoms.inputs,
+                inputWidth: "w-80 md:min-w-[calc(2*20rem+2rem)]",
+                textareaHeight: "h-[6rem]",
+                textareaRows: "6"
+              }) }}
+            </div>
           {% endif %}
         {% endfor %}
       </div>
       
       {# Quatrième ligne - reCAPTCHA #}
       <div class="w-full flex justify-center mb-6">
-        <div class="g-recaptcha" data-sitekey="{{ options.recaptchaSiteKey | default('VOTRE_RECAPTCHA_SITE_KEY') }}"></div>
+        <div class="g-recaptcha" data-sitekey="{{ recaptchaSiteKey }}"></div>
       </div>
       
       {# Cinquième ligne - Bouton Envoyer #}
       <div class="w-full flex justify-center mb-6">
         <button type="submit" class="bg-[#63a595] hover:bg-[#e8ab55] text-white px-6 py-3 transition-colors duration-300 rounded-full">
-          {{ options.submitLabel | default('Envoyer') }}
+          {{ submitLabel }}
         </button>
       </div>
       
@@ -171,7 +125,22 @@ Utilisation du composant
 1. Import du macro en haut de la page
 {% from "02-molecules/list-form.njk" import renderListForm %}
 
-2. Appel du composant list-form 
+2. Appel simplifié du composant list-form (largeur d'input w-80 par défaut)
+{{ renderListForm({ 
+    name: "ma_registration",
+    datas: molecules["list-forms"],
+    atoms: atoms
+}) }}
+
+3. Appel avec largeur d'input personnalisée
+{{ renderListForm({ 
+    name: "ma_registration",
+    datas: molecules["list-forms"],
+    atoms: atoms,
+    inputWidth: "w-96"
+}) }}
+
+4. Appel complet avec tous les paramètres
 {{ renderListForm({ 
     name: "ma_registration",
     datas: molecules["list-forms"],
@@ -180,6 +149,7 @@ Utilisation du composant
     submitLabel: "Envoyer",
     action: "/contact",
     method: "POST",
-    class: "bg-[#2b3947]"
+    class: "bg-[#2b3947]",
+    inputWidth: "w-96"
 }) }}
 #}

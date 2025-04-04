@@ -14,15 +14,16 @@
   {% endfor %}
 
   {% set globalStyle = options.datas.globalStyle %}
-  {% set inputWidth = options.datas.inputWidth | default('w-64') %} 
+  {% set inputWidth = options.inputWidth | default('w-64') %} 
+  {% set inputHeight = options.inputHeight | default('py-3') %}
 
   {% if inputData %}
     {% set variantStyle = options.datas.variants[inputData.style] | default('') %}
     
     <div class="flex flex-col gap-1 {{ globalStyle }} {{ variantStyle }}">
       {% if inputData.label %}
-        <label for="{{ inputData.id }}" class="font-medium text-gray-700">
-          {{ inputData.label }}{% if inputData.required %} *{% endif %}
+        <label for="{{ inputData.id }}" class="font-medium text-[--ma-nautic-white]">
+          {{ inputData.label }}{% if inputData.required %} <span class="text-red-500">*</span>{% endif %}
         </label>
       {% endif %}
 
@@ -57,22 +58,29 @@
           id="{{ inputData.id }}" 
           name="{{ inputData.name }}" 
           placeholder="{{ inputData.placeholder }}" 
-          class="{{ inputClasses }}"
-          onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
-          onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'" 
-          onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
-          onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }}'" 
-          {% if inputData.disabled %}disabled class="{{ stateClasses.disabled }}"{% endif %}
+          class="{{ inputClasses }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}"
+          rows="{{ options.textareaRows | default('3') }}"
+          onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}'" 
+          onblur="this.className='{{ baseClasses }} {{ stateClasses.default }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}'" 
+          onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}'" 
+          onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}'" 
+          {% if inputData.disabled %}disabled class="{{ stateClasses.disabled }} {% if options.textareaHeight %}{{ options.textareaHeight }}{% else %}h-auto{% endif %}"{% endif %}
         ></textarea>
       {% elif inputData.type in ["select", "multi-select"] %}
+        <style>
+          /* Style pour assurer une couleur constante pour le select */
+          #{{ inputData.id }} {
+            color: #2b3947 !important; /* Ma-nautic-blue */
+          }
+          #{{ inputData.id }} option {
+            color: #2b3947 !important;
+          }
+        </style>
+        
         <select id="{{ inputData.id }}" name="{{ inputData.name }}" 
           {% if inputData.type == "multi-select" %}multiple{% endif %} 
           class="{{ inputClasses }}"
-          onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
-          onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'" 
-          onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
-          onmousedown="this.className='{{ baseClasses }} {{ stateClasses.active }}'" 
-          {% if inputData.disabled %}disabled class="{{ stateClasses.disabled }}"{% endif %}>
+          {% if inputData.disabled %}disabled{% endif %}>
           {% for option in inputData.options %}
             <option value="{{ option.value }}">{{ option.label }}</option>
           {% endfor %}
@@ -110,10 +118,10 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "03-atoms/input.njk" import renderInput %}
 
-2. Call a specific input by its name
-{{ renderInput({ name: "example_input1", datas: atoms.inputs }) }}
+2. Call a specific input by its name (avec largeur personnalisée)
+{{ renderInput({ name: "example_input1", datas: atoms.inputs, inputWidth: "w-96" }) }}
 
-3. Call multiple inputs from the data
+3. Call multiple inputs from the data (largeur par défaut w-64)
 {% for input in atoms.inputs.inputs %}
     {{ renderInput({ 
         name: input.name, 
@@ -121,14 +129,15 @@ Summon HAT Components Wisely
     }) }}
 {% endfor %}
 
-4. Direct input creation
+4. Direct input creation (largeur personnalisée)
 {{ renderInput({
     id: "custom-input", 
     name: "custom_input", 
     label: "Custom Input", 
     placeholder: "Enter something...", 
     type: "text", 
-    style: "primary"
+    style: "primary",
+    inputWidth: "w-80"
 }) }}
 
 5. Adding a new input to inputs.json

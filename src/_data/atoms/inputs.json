@@ -40,7 +40,7 @@
     {
       "name": "input_boat",
       "type": "select",
-      "label": "Choisissez votre bateau (facultatif)",
+      "label": "Choisissez votre bateau",
       "id": "clientChoice",
       "options": [
         { "value": "nine", "label": "Capelli Tempest 500 Nine" },
