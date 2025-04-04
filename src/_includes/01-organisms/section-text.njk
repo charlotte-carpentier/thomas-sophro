@@ -89,7 +89,7 @@
 
     {# Spécifique à MA-Nautic section text #}
     {% if variant and variant.name == "ma_nautic_discover" %}
-      <section class="{{ globalStyle }} {{ variantStyle }} relative min-h-[75vh] overflow-y-auto {{ options.class | default('') }}">
+      <section class="{{ globalStyle }} {{ variantStyle }} relative overflow-y-auto {{ options.class | default('') }}">
         {# Background image #}
         {% if variant.backgroundImage and options.images and options.images.images %}
           {% set bgImage = null %}

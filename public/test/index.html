@@ -962,7 +962,7 @@
         
         <!-- Navigation buttons -->
         <button 
-          class="absolute left-[-48px] top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full p-2 md:p-3 transition-colors duration-300  flex items-center justify-center"
+          class="absolute left-[-48px] top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full p-2 md:p-3 transition-colors duration-300  flex items-center justify-center cursor-pointer"
           data-carousel-prev
           aria-label="Previous image"
         >
@@ -972,7 +972,7 @@
         </button>
         
         <button 
-          class="absolute right-[-48px] top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full p-2 md:p-3 transition-colors duration-300  flex items-center justify-center"
+          class="absolute right-[-48px] top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full p-2 md:p-3 transition-colors duration-300  flex items-center justify-center cursor-pointer"
           data-carousel-next
           aria-label="Next image"
         >
@@ -985,28 +985,28 @@
         <div class="flex items-center justify-center mt-2 md:mt-4 space-x-1 md:space-x-2">
           
             <button 
-              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator carousel-indicator-active"
+              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator carousel-indicator-active cursor-pointer"
               data-carousel-indicator="0"
               data-carousel-target="carousel-carousel_alba"
               aria-label="Go to image 1"
             ></button>
           
             <button 
-              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator "
+              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator  cursor-pointer"
               data-carousel-indicator="1"
               data-carousel-target="carousel-carousel_alba"
               aria-label="Go to image 2"
             ></button>
           
             <button 
-              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator "
+              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator  cursor-pointer"
               data-carousel-indicator="2"
               data-carousel-target="carousel-carousel_alba"
               aria-label="Go to image 3"
             ></button>
           
             <button 
-              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator "
+              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator  cursor-pointer"
               data-carousel-indicator="3"
               data-carousel-target="carousel-carousel_alba"
               aria-label="Go to image 4"
@@ -1025,6 +1025,15 @@
 
 
   
+  
+  
+  
+  
+  
+        
+      
+
+  
     
     
     
@@ -1039,7 +1048,7 @@
     
     
     <form id="form-ma_registration" 
-      class="w-full "  
+      class="w-full bg-[#2b3947]"  
       method="POST" 
       data-netlify="true"
       action="/merci"
@@ -1052,10 +1061,12 @@
     </p>
 
       
-      <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+      <div class="flex flex-col md:flex-row justify-center md:space-x-8 space-y-4 md:space-y-0 mb-4">
         
           
-            
+              <div class="flex justify-center">
+              
+  
   
   
     
@@ -1072,12 +1083,23 @@
   
 
   
+   
+  
+
+  
     
     
-    <div class="mb-4 w-full md:w-1/2 ">
-      <label for="clientName" class="block mb-1 typography-label-m text-white">
-        Votre nom ou société<span class="text-red-500 ml-1">*</span>
-      </label>
+    <div class="flex flex-col gap-1 typography-label-l input ">
+      
+        <label for="clientName" class="font-medium text-[--ma-nautic-white]">
+          Votre nom ou société <span class="text-red-500">*</span>
+        </label>
+      
+
+      
+      
+      
+      
       
       
         <input 
@@ -1085,23 +1107,26 @@
           id="clientName" 
           name="input_name" 
           placeholder="Tapez votre nom..." 
-          class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947]"
-          required
-        >
+          class="border rounded-md px-3 py-2 focus:outline-none w-80 border-gray-300 text-gray-800 bg-white"
+          onfocus="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-blue-500 ring-2 ring-blue-300 bg-white'" 
+          onblur="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-gray-300 text-gray-800 bg-white'" 
+          onmouseover="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-gray-400 text-gray-800 bg-white'" 
+          onmousedown="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-blue-600 text-gray-900 bg-white'" 
+          
+        />
       
-      
-      
-      <div class="error-message hidden text-red-500 text-sm mt-1">
-        Champ obligatoire
-      </div>
+
       
     </div>
   
 
+            </div>
           
         
           
-            
+              <div class="flex justify-center">
+              
+  
   
   
     
@@ -1118,12 +1143,23 @@
   
 
   
+   
+  
+
+  
     
     
-    <div class="mb-4 w-full md:w-1/2 ">
-      <label for="clientEmail" class="block mb-1 typography-label-m text-white">
-        Votre adresse email<span class="text-red-500 ml-1">*</span>
-      </label>
+    <div class="flex flex-col gap-1 typography-label-l input ">
+      
+        <label for="clientEmail" class="font-medium text-[--ma-nautic-white]">
+          Votre adresse email <span class="text-red-500">*</span>
+        </label>
+      
+
+      
+      
+      
+      
       
       
         <input 
@@ -1131,19 +1167,20 @@
           id="clientEmail" 
           name="input_email" 
           placeholder="Tapez votre adresse email..." 
-          class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947]"
-          required
-        >
+          class="border rounded-md px-3 py-2 focus:outline-none w-80 border-gray-300 text-gray-800 bg-white"
+          onfocus="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-blue-500 ring-2 ring-blue-300 bg-white'" 
+          onblur="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-gray-300 text-gray-800 bg-white'" 
+          onmouseover="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-gray-400 text-gray-800 bg-white'" 
+          onmousedown="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-blue-600 text-gray-900 bg-white'" 
+          
+        />
       
-      
-      
-      <div class="error-message hidden text-red-500 text-sm mt-1">
-        Champ obligatoire
-      </div>
+
       
     </div>
   
 
+            </div>
           
         
           
@@ -1155,14 +1192,16 @@
       </div>
       
       
-      <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-4">
+      <div class="flex flex-col md:flex-row justify-center md:space-x-8 space-y-4 md:space-y-0 mb-4">
         
           
         
           
         
           
-            
+            <div class="flex justify-center">
+              
+  
   
   
     
@@ -1179,36 +1218,50 @@
   
 
   
+   
+  
+
+  
     
     
-    <div class="mb-4 w-full md:w-1/2 ">
-      <label for="clientPhone" class="block mb-1 typography-label-m text-white">
-        Votre numéro de téléphone<span class="text-red-500 ml-1">*</span>
-      </label>
+    <div class="flex flex-col gap-1 typography-label-l input ">
+      
+        <label for="clientPhone" class="font-medium text-[--ma-nautic-white]">
+          Votre numéro de téléphone <span class="text-red-500">*</span>
+        </label>
+      
+
+      
+      
+      
+      
       
       
         <input 
-          type="tel" 
+          type="phone" 
           id="clientPhone" 
           name="input_phone" 
           placeholder="Tapez votre numéro de téléphone..." 
-          class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947]"
-          required
-        >
+          class="border rounded-md px-3 py-2 focus:outline-none w-80 border-gray-300 text-gray-800 bg-white"
+          onfocus="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-blue-500 ring-2 ring-blue-300 bg-white'" 
+          onblur="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-gray-300 text-gray-800 bg-white'" 
+          onmouseover="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-gray-400 text-gray-800 bg-white'" 
+          onmousedown="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 border-blue-600 text-gray-900 bg-white'" 
+          
+        />
       
-      
-      
-      <div class="error-message hidden text-red-500 text-sm mt-1">
-        Champ obligatoire
-      </div>
+
       
     </div>
   
 
+            </div>
           
         
           
-            
+            <div class="flex justify-center">
+              
+  
   
   
     
@@ -1225,46 +1278,60 @@
   
 
   
+   
+  
+
+  
     
     
-    <div class="mb-4 w-full md:w-1/2 ">
-      <label for="clientChoice" class="block mb-1 typography-label-m text-white">
-        Choisissez votre bateau (facultatif)
-      </label>
+    <div class="flex flex-col gap-1 typography-label-l input ">
+      
+        <label for="clientChoice" class="font-medium text-[--ma-nautic-white]">
+          Choisissez votre bateau
+        </label>
+      
+
       
       
-        <div class="relative">
-          <select 
-            id="clientChoice" 
-            name="input_boat" 
-            class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947] appearance-none pr-8"
-            
+      
+      
+      
+      
+        <style>
+          /* Style pour assurer une couleur constante pour le select */
+          #clientChoice {
+            color: #2b3947 !important; /* Ma-nautic-blue */
+          }
+          #clientChoice option {
+            color: #2b3947 !important;
+          }
+        </style>
+        
+        <select id="clientChoice" name="input_boat" 
+           
+          class="border rounded-md px-3 py-2 focus:outline-none w-80 border-gray-300 text-gray-800 bg-white"
           >
-            <option value="" disabled selected>Sélectionnez un bateau...</option>
-            
-              <option value="nine">Capelli Tempest 500 Nine</option>
-            
-              <option value="alba">Cap Camarat 5.5 cc Alba</option>
-            
-              <option value="first">Capelli 630 S First</option>
-            
-              <option value="libecciu">Capelli Tempest 700 Libecciu</option>
-            
-              <option value="enzo">Motonautica 780 confort Enzo</option>
-            
-              <option value="casablanca">Lomac 850 in Casa Blanca</option>
-            
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#2b3947]">
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-          </div>
-        </div>
+          
+            <option value="nine">Capelli Tempest 500 Nine</option>
+          
+            <option value="alba">Cap Camarat 5.5 cc Alba</option>
+          
+            <option value="first">Capelli 630 S First</option>
+          
+            <option value="libecciu">Capelli Tempest 700 Libecciu</option>
+          
+            <option value="enzo">Motonautica 780 confort Enzo</option>
+          
+            <option value="casablanca">Lomac 850 in Casa Blanca</option>
+          
+        </select>
       
-      
+
       
     </div>
   
 
+            </div>
           
         
           
@@ -1272,7 +1339,7 @@
       </div>
       
       
-      <div class="w-full mb-6">
+      <div class="flex justify-center mb-6 w-full">
         
           
         
@@ -1283,7 +1350,9 @@
           
         
           
-            
+            <div class="flex justify-center">
+              
+  
   
   
     
@@ -1300,28 +1369,44 @@
   
 
   
+   
+  
+
+  
     
     
-    <div class="mb-4 w-full ">
-      <label for="clientMessage" class="block mb-1 typography-label-m text-white">
-        Votre message (facultatif)
-      </label>
+    <div class="flex flex-col gap-1 typography-label-l input ">
+      
+        <label for="clientMessage" class="font-medium text-[--ma-nautic-white]">
+          Votre message (facultatif)
+        </label>
+      
+
+      
+      
+      
+      
       
       
         <textarea 
           id="clientMessage" 
           name="input_message" 
           placeholder="Ecrivez-nous ici..." 
-          class="w-full px-3 py-2 border rounded-md bg-white text-[#2b3947]"
-          rows="5"
+          class="border rounded-md px-3 py-2 focus:outline-none w-80 md:min-w-[calc(2*20rem+2rem)] border-gray-300 text-gray-800 bg-white h-[6rem]"
+          rows="6"
+          onfocus="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 md:min-w-[calc(2*20rem+2rem)] border-blue-500 ring-2 ring-blue-300 bg-white h-[6rem]'" 
+          onblur="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 md:min-w-[calc(2*20rem+2rem)] border-gray-300 text-gray-800 bg-white h-[6rem]'" 
+          onmouseover="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 md:min-w-[calc(2*20rem+2rem)] border-gray-400 text-gray-800 bg-white h-[6rem]'" 
+          onmousedown="this.className='border rounded-md px-3 py-2 focus:outline-none w-80 md:min-w-[calc(2*20rem+2rem)] border-blue-600 text-gray-900 bg-white h-[6rem]'" 
           
         ></textarea>
       
-      
+
       
     </div>
   
 
+            </div>
           
         
       </div>

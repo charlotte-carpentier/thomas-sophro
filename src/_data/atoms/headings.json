@@ -71,7 +71,7 @@
       "name": "ma_nautic_corse",
       "level": 2,
       "text": "M.A Nautic en Haute-Corse",
-      "style": "ma_nautic_section_subtitle" 
+      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "que_faisons_nous",
@@ -119,7 +119,7 @@
       "name": "ma_nautic_flotte",
       "level": 2,
       "text": "Les caractéristiques de notre flotte en Haute-Corse",
-      "style": "ma_nautic_section_subtitle" 
+      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "capelli_500",
@@ -131,7 +131,7 @@
       "name": "boat_nine",
       "level": 2,
       "text": "Nine",
-      "style": "ma_nautic_subtitle_boat" 
+      "style": "ma_nautic_subtitle_boat"
     },
     {
       "name": "camarat_cc",
@@ -143,7 +143,7 @@
       "name": "boat_alba",
       "level": 2,
       "text": "Alba",
-      "style": "ma_nautic_subtitle_boat" 
+      "style": "ma_nautic_subtitle_boat"
     },
     {
       "name": "capelli_630",
@@ -155,7 +155,7 @@
       "name": "boat_first",
       "level": 2,
       "text": "First",
-      "style": "ma_nautic_subtitle_boat" 
+      "style": "ma_nautic_subtitle_boat"
     },
     {
       "name": "capelli_700",
@@ -167,7 +167,7 @@
       "name": "boat_libecciu",
       "level": 2,
       "text": "Libecciu",
-      "style": "ma_nautic_subtitle_boat" 
+      "style": "ma_nautic_subtitle_boat"
     },
     {
       "name": "motonautica_780",
@@ -179,7 +179,7 @@
       "name": "boat_enzo",
       "level": 2,
       "text": "Enzo",
-      "style": "ma_nautic_subtitle_boat" 
+      "style": "ma_nautic_subtitle_boat"
     },
     {
       "name": "lomac_850",
@@ -191,7 +191,7 @@
       "name": "boat_casablanca",
       "level": 2,
       "text": "Casa Blanca",
-      "style": "ma_nautic_subtitle_boat" 
+      "style": "ma_nautic_subtitle_boat"
     },
     {
       "name": "ma_info",
@@ -209,7 +209,7 @@
       "name": "ma_nautic_discover",
       "level": 2,
       "text": "Découvrez tous les lieux d’intérêt en Haute-Corse",
-      "style": "ma_nautic_section_subtitle" 
+      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "ma_agriates",
@@ -227,7 +227,7 @@
       "name": "ma_nautic_contact",
       "level": 2,
       "text": "Contactez notre agence de location de bateaux en Haute-Corse ",
-      "style": "ma_nautic_section_subtitle" 
+      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "agence_faq",
@@ -239,7 +239,7 @@
       "name": "ma_nautic_faq",
       "level": 2,
       "text": "Réponses aux questions les plus fréquentes sur nos locations de bateaux en Haute-Corse",
-      "style": "ma_nautic_section_subtitle" 
+      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "agence_legal",
@@ -251,7 +251,7 @@
       "name": "ma_nautic_legal",
       "level": 2,
       "text": "Législation & RGPD",
-      "style": "ma_nautic_section_subtitle" 
+      "style": "ma_nautic_section_subtitle"
     }
   ]
 }

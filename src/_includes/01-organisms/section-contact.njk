@@ -33,14 +33,11 @@
               <input type="text" name="website" tabindex="-1" autocomplete="off">
             </div>
             
+            {# Appel au composant list-form en utilisant la version simplifiée #}
             {{ renderListForm({
               name: sectionData.form.name,
               datas: options.listForms,
-              atoms: options.atoms,
-              submitLabel: options.submitLabel | default("Envoyer"),
-              action: options.action | default("#"),
-              method: options.method | default("POST"),
-              class: "bg-[#2b3947]"
+              atoms: options.atoms
             }) }}
           </div>
         </div>
@@ -60,11 +57,20 @@ Utilisation du composant
 1. Import the macro at the top of your page
 {% from "01-organisms/section-contact.njk" import renderSectionContact %}
 
-2. Call the section-contact component
+2. Call the section-contact component (appel simplifié)
 {{ renderSectionContact({ 
     name: "default",
     datas: organisms["section-contacts"],
     listForms: molecules["list-forms"],
     atoms: atoms
+}) }}
+
+3. Call with custom parameters (appel avec paramètres personnalisés)
+{{ renderSectionContact({ 
+    name: "default",
+    datas: organisms["section-contacts"],
+    listForms: molecules["list-forms"],
+    atoms: atoms,
+    class: "my-8"
 }) }}
 #}
