@@ -5,7 +5,7 @@ permalink: "/contact/"
 layout: '00-core/base.njk' 
 ---
 
-{# Section Hero Page Contact #}
+{# Contact Hero Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
 {{ renderSectionHero({ 
@@ -17,10 +17,10 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
-{# Conteneur pour le formulaire avec l'ID contact-form pour le scroll #}
+{# Container for form with contact-form ID for scrolling #}
 <div id="contact-form">
 
-    {# Section Formulaire #}
+    {# Form Section #}
     {% from "01-organisms/section-contact.njk" import renderSectionContact %}
 
     {{ renderSectionContact({ 
@@ -30,7 +30,7 @@ layout: '00-core/base.njk'
     atoms: atoms
 }) }}
 
-    {# Carte Leaflet.js avec marqueur sur M.A Nautic #}
+    {# Leaflet.js Map with marker on M.A Nautic #}
     <div id="map" style="width: 100%; height: 500px;"></div>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -42,12 +42,12 @@ layout: '00-core/base.njk'
                 attribution: '&copy; OpenStreetMap contributors'
             }).addTo(map);
             
-            // Définir une icône personnalisée
+            // Define custom icon
             var customIcon = L.icon({
                 iconUrl: '/assets/logos/ma-logo.svg',
-                iconSize: [50, 50], // Taille de l'icône
-                iconAnchor: [25, 50], // Point d'ancrage
-                popupAnchor: [0, -50] // Position du popup
+                iconSize: [50, 50], // Icon size
+                iconAnchor: [25, 50], // Anchor point
+                popupAnchor: [0, -50] // Popup position
             });
             
             L.marker([42.681846, 9.303704], {icon: customIcon})

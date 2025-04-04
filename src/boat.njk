@@ -5,7 +5,7 @@ permalink: "/nos-bateaux/"
 layout: '00-core/base.njk'
 ---
 
-{# Section Hero Page Bateau #}
+{# Boat Hero Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
 {{ renderSectionHero({ 
@@ -17,26 +17,26 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
-{# Conteneur pour la liste des bateaux avec l'ID boat-list pour le scroll #}
+{# Container for boat list with boat-list ID for scrolling #}
 <div id="boat-list">
     {% from "01-organisms/section-boat.njk" import renderSectionBoat %}
 
-    {# Utilisation du filtre sortByPrice pour trier les bateaux par prix croissant #}
+    {# Using sortByPrice filter to sort boats by increasing price #}
     {% set sortedBoats = collections.boat | sortByPrice %}
     
-    {% set isReversed = false %} {# Démarre en mode normal #}
+    {% set isReversed = false %} {# Starts in normal mode #}
 
 {% for boat in sortedBoats %}
     {% set carousel = null %}
 
-    {# Trouver le carousel correspondant #}
+    {# Find the corresponding carousel #}
     {% for item in collections.carousel %}
         {% if item.data.name == boat.data.carousel_name %}
             {% set carousel = item %}
         {% endif %}
     {% endfor %}
 
-    {# Afficher la section avec le mode normal ou inversé #}
+    {# Display section with normal or reversed mode #}
     {{ renderSectionBoat({ 
         boat: boat.data, 
         carouselItem: carousel,
@@ -50,12 +50,12 @@ layout: '00-core/base.njk'
         reversed: isReversed
     }) }}
 
-    {% set isReversed = not isReversed %} {# Inverse la valeur pour la prochaine boucle #}
+    {% set isReversed = not isReversed %} {# Invert value for next loop #}
 {% endfor %}
 
 </div>
 
-{# Section Info & options #}
+{# Info & options Section #}
 {% from "01-organisms/section-text.njk" import renderSectionText %}
 
 {{ renderSectionText({ 
