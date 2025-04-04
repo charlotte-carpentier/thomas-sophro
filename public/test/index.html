@@ -1108,13 +1108,18 @@
           name="input_name" 
           placeholder="Tapez votre nom..." 
           class="border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-300 text-gray-800 bg-white"
-          onfocus="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-blue-500 ring-2 ring-blue-300 bg-white'" 
-          onblur="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-300 text-gray-800 bg-white'" 
-          onmouseover="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-400 text-gray-800 bg-white'" 
-          onmousedown="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-blue-600 text-gray-900 bg-white'" 
-          
-          style="color: #2b3947;"
+          pattern="^[a-zA-ZÀ-ÿ&#92;s&#39;-]{2,50}$"
+          maxlength="50"
+          required
+          aria-required="true"
+          aria-invalid="false"
         />
+        <span 
+          id="clientName-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
       
 
       
@@ -1164,18 +1169,23 @@
       
       
         <input 
-          type="text" 
+          type="email" 
           id="clientEmail" 
           name="input_email" 
           placeholder="Tapez votre adresse email..." 
           class="border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-300 text-gray-800 bg-white"
-          onfocus="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-blue-500 ring-2 ring-blue-300 bg-white'" 
-          onblur="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-300 text-gray-800 bg-white'" 
-          onmouseover="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-400 text-gray-800 bg-white'" 
-          onmousedown="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-blue-600 text-gray-900 bg-white'" 
-          
-          style="color: #2b3947;"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+&#92;.[a-zA-Z]{2,}$"
+          maxlength="100"
+          required
+          aria-required="true"
+          aria-invalid="false"
         />
+        <span 
+          id="clientEmail-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
       
 
       
@@ -1240,18 +1250,23 @@
       
       
         <input 
-          type="phone" 
+          type="tel" 
           id="clientPhone" 
           name="input_phone" 
           placeholder="Tapez votre numéro de téléphone..." 
           class="border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-300 text-gray-800 bg-white"
-          onfocus="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-blue-500 ring-2 ring-blue-300 bg-white'" 
-          onblur="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-300 text-gray-800 bg-white'" 
-          onmouseover="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-400 text-gray-800 bg-white'" 
-          onmousedown="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-blue-600 text-gray-900 bg-white'" 
-          
-          style="color: #2b3947;"
+          pattern="^&#92;+?[0-9&#92;s()-]{10,20}$"
+          maxlength="20"
+          required
+          aria-required="true"
+          aria-invalid="false"
         />
+        <span 
+          id="clientPhone-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
       
 
       
@@ -1290,7 +1305,7 @@
     <div class="flex flex-col gap-1 typography-label-l input ">
       
         <label for="clientChoice" class="font-medium text-[--ma-nautic-white]">
-          Choisissez votre bateau
+          Choisissez votre bateau <span class="text-red-500">*</span>
         </label>
       
 
@@ -1300,20 +1315,16 @@
       
       
       
-        <style>
-          /* Style pour assurer une couleur constante pour le select */
-          #clientChoice {
-            color: #2b3947 !important; /* Ma-nautic-blue */
-          }
-          #clientChoice option {
-            color: #2b3947 !important;
-          }
-        </style>
-        
-        <select id="clientChoice" name="input_boat" 
+        <select 
+          id="clientChoice" 
+          name="input_boat" 
            
           class="border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-300 text-gray-800 bg-white"
-          >
+          required
+          aria-required="true"
+          aria-invalid="false"
+        >
+          <option value="">Sélectionnez une option...</option>
           
             <option value="nine">Capelli Tempest 500 Nine</option>
           
@@ -1328,6 +1339,12 @@
             <option value="casablanca">Lomac 850 in Casa Blanca</option>
           
         </select>
+        <span 
+          id="clientChoice-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
       
 
       
@@ -1397,13 +1414,17 @@
           placeholder="Ecrivez-nous ici..." 
           class="border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 md:min-w-[calc(2*20rem+2rem)] border-gray-300 text-gray-800 bg-white h-[6rem]"
           rows="6"
-          onfocus="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 md:min-w-[calc(2*20rem+2rem)] border-blue-500 ring-2 ring-blue-300 bg-white h-[6rem]'" 
-          onblur="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 md:min-w-[calc(2*20rem+2rem)] border-gray-300 text-gray-800 bg-white h-[6rem]'" 
-          onmouseover="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 md:min-w-[calc(2*20rem+2rem)] border-gray-400 text-gray-800 bg-white h-[6rem]'" 
-          onmousedown="this.className='border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 md:min-w-[calc(2*20rem+2rem)] border-blue-600 text-gray-900 bg-white h-[6rem]'" 
+          maxlength="500"
           
-          style="color: #2b3947;"
+          aria-required="false"
+          aria-invalid="false"
         ></textarea>
+        <span 
+          id="clientMessage-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
       
 
       

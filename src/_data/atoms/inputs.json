@@ -17,24 +17,33 @@
       "id": "clientName",
       "placeholder": "Tapez votre nom...",
       "required": true,
+      "maxLength": 50,
+      "pattern": "^[a-zA-ZÀ-ÿ\\s'-]{2,50}$",
+      "patternMessage": "Veuillez entrer un nom valide (2 à 50 caractères)",
       "errorMessage": "Champ obligatoire"
     },
     {
       "name": "input_email",
-      "type": "text",
+      "type": "email",
       "label": "Votre adresse email",
       "id": "clientEmail",
       "placeholder": "Tapez votre adresse email...",
       "required": true,
+      "maxLength": 100,
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "patternMessage": "Veuillez entrer une adresse email valide",
       "errorMessage": "Champ obligatoire"
     },
     {
       "name": "input_phone",
-      "type": "phone",
+      "type": "tel",
       "label": "Votre numéro de téléphone",
       "id": "clientPhone",
       "placeholder": "Tapez votre numéro de téléphone...",
       "required": true,
+      "maxLength": 20,
+      "pattern": "^\\+?[0-9\\s()-]{10,20}$",
+      "patternMessage": "Veuillez entrer un numéro de téléphone valide",
       "errorMessage": "Champ obligatoire"
     },
     {
@@ -49,7 +58,9 @@
         { "value": "libecciu", "label": "Capelli Tempest 700 Libecciu" },
         { "value": "enzo", "label": "Motonautica 780 confort Enzo" },
         { "value": "casablanca", "label": "Lomac 850 in Casa Blanca" }
-      ]
+      ],
+      "required": true,
+      "errorMessage": "Veuillez sélectionner un bateau"
     },
     {
       "name": "input_message",
@@ -57,7 +68,8 @@
       "label": "Votre message (facultatif)",
       "id": "clientMessage",
       "placeholder": "Ecrivez-nous ici...",
-      "required": false
+      "required": false,
+      "maxLength": 500
     }
   ]
 }
