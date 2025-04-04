@@ -1121,6 +1121,9 @@
   .whitespace-pre-line {
     white-space: pre-line;
   }
+  .text-\[\#2b3947\] {
+    color: #2b3947;
+  }
   .text-\[--ma-nautic-blue\] {
     color: --ma-nautic-blue;
   }
@@ -1498,6 +1501,11 @@
   .md\:w-48 {
     @media (width >= 48rem) {
       width: calc(var(--spacing) * 48);
+    }
+  }
+  .md\:w-64 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 64);
     }
   }
   .md\:w-72 {
