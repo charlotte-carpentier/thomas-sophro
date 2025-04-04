@@ -84,7 +84,7 @@
               {% endfor %}
 
               {% if subtitle %}
-                <{{ "h" + subtitle.level }} class="{{ options.headings.variants[subtitle.style] }}">
+                <{{ "h" + subtitle.level }} class="{{ options.headings.variants[subtitle.style] }} max-w-[40rem] mx-auto">
                   {{ subtitle.text }}
                 </{{ "h" + subtitle.level }}>
               {% endif %}
@@ -108,7 +108,7 @@
             {% endfor %}
 
             {% if superHeading %}
-              <{{ "h" + superHeading.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[superHeading.style] }} max-w-2/3 mx-auto text-center">
+              <{{ "h" + superHeading.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[superHeading.style] }} max-w-[40rem] mx-auto">
                 {{ superHeading.text }}
               </{{ "h" + superHeading.level }}>
             {% endif %}
@@ -168,7 +168,7 @@
                 {% endfor %}
 
                 {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="text-center mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[mainHeading.style] }} max-w-2/3 mx-auto text-center">
+                  <{{ "h" + mainHeading.level }} class="text-center mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[mainHeading.style] }} max-w-[40rem] mx-auto">
                     {{ mainHeading.text }}
                   </{{ "h" + mainHeading.level }}>
                 {% endif %}
@@ -198,13 +198,13 @@
 
               {# Description ou ContentBlocks selon la variante #}
               {% if variant.name == "contact_hero" and variant.contentBlocks %}
-                <div id="contact-form" class="text-center max-w-3xl mx-auto text-[theme(--ma-nautic-blue)] space-y-4">
+                <div id="contact-form" class="text-center max-w-[40rem] mx-auto text-[theme(--ma-nautic-blue)] space-y-4">
                   {% for block in variant.contentBlocks %}
                     <p class="mb-4">{{ block.text | safe }}</p>
                   {% endfor %}
                 </div>
               {% elseif variant.description %}
-                <div class="text-center max-w-3xl mx-auto">
+                <div class="text-center max-w-[40rem] mx-auto">
                   {{ variant.description | safe }}
                 </div>
               {% endif %}
@@ -274,7 +274,7 @@
                 {% endfor %}
 
                 {% if superHeading %}
-                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }} max-w-2/3 mx-auto text-center">
+                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }} max-w-[40rem] mx-auto text-center">
                     {{ superHeading.text }}
                   </{{ "h" + superHeading.level }}>
                 {% endif %}
@@ -290,11 +290,11 @@
                 {% endfor %}
 
                 {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }} max-w-2/3 mx-auto text-center">
+                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }} max-w-[40rem] mx-auto text-center">
                     {{ mainHeading.text }}
                   </{{ "h" + mainHeading.level }}>
                 {% else %}
-                  <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }} max-w-2/3 mx-auto text-center">
+                  <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }} max-w-[40rem] mx-auto text-center">
                     {{ variant.heading }}
                   </h2>
                 {% endif %}
@@ -302,7 +302,7 @@
 
               {# Description #}
               {% if variant.description %}
-                <p class="{{ variant.descriptionStyle }} max-w-2/3 mx-auto text-center">
+                <p class="{{ variant.descriptionStyle }} max-w-[40rem] mx-auto text-center">
                   {{ variant.description }}
                 </p>
               {% endif %}
