@@ -40,7 +40,7 @@
       <section class="py-16 md:py-20 lg:py-24 bg-[theme(--ma-nautic-beige)]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {# Titre de la section #}
-          <h2 class="text-center font-black text-[20px] text-[theme(--ma-nautic-gold)]" style="margin-bottom: 40px;">_{% if options.title %}{{ options.title }}{% else %}{% if dataType == "faqs" %}Questions fréquentes{% else %}Mentions légales{% endif %}{% endif %}</h2>
+          <h2 class="text-center font-black text-[20px] text-[theme(--ma-nautic-gold)] max-w-[40rem] mx-auto" style="margin-bottom: 40px;">_{% if options.title %}{{ options.title }}{% else %}{% if dataType == "faqs" %}Questions fréquentes{% else %}Mentions légales{% endif %}{% endif %}</h2>
 
           {# Icône si définie #}
           {% if variant.iconName and options.icons and options.icons.icons %}
@@ -58,7 +58,7 @@
           {% endif %}
 
           {# Contenu principal #}
-          <div class="max-w-4xl mx-auto text-center">
+          <div class="max-w-[40rem] mx-auto text-center">
             {% if variant.contentBlocks %}
               <div class="divide-y divide-[theme(--ma-nautic-teal)]">
                 {% for item in variant.contentBlocks %}
@@ -66,17 +66,17 @@
                     {% if dataType == "faqs" and item.question is defined %}
                       {# Affichage format FAQ #}
                       <details>
-                        <summary class="font-bold cursor-pointer text-[theme(--ma-nautic-blue)] mx-auto">
+                        <summary class="font-bold cursor-pointer text-[theme(--ma-nautic-blue)] mx-auto max-w-[40rem]">
                           {{ item.question }}
                         </summary>
-                        <p class="mt-4 text-[theme(--ma-nautic-blue)]">
+                        <p class="mt-4 text-[theme(--ma-nautic-blue)] max-w-[40rem] mx-auto">
                           {{ item.answer }}
                         </p>
                       </details>
                     {% elif dataType == "legal" and item.title is defined %}
                       {# Affichage format Mentions légales #}
-                      <h3 class="font-bold text-[theme(--ma-nautic-blue)] mb-4">{{ item.title }}</h3>
-                      <div class="text-[theme(--ma-nautic-blue)] whitespace-pre-line">
+                      <h3 class="font-bold text-[theme(--ma-nautic-blue)] mb-4 max-w-[40rem] mx-auto">{{ item.title }}</h3>
+                      <div class="text-[theme(--ma-nautic-blue)] whitespace-pre-line max-w-[40rem] mx-auto">
                         {{ item.content }}
                       </div>
                     {% endif %}

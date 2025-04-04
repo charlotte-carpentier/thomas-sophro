@@ -94,8 +94,8 @@
     {% set topTitleWrapperStyle = sectionStyles.topTitleWrapper | default("text-center mb-8") %}
     {% set topTitleStyle = sectionStyles.topTitleStyle | default("ma-nautic-hero-heading text-[theme(--ma-nautic-beige)]") %}
     {% set iconWrapperStyle = sectionStyles.iconWrapper | default("flex justify-center my-0") %}
-    {% set contentContainerStyle = sectionStyles.contentContainer | default("mt-4") %}
-    {% set contentContainerDesktopStyle = sectionStyles.contentContainerDesktop | default("mt-4 text-center") %}
+    {% set contentContainerStyle = sectionStyles.contentContainer | default("mt-4 max-w-[40rem] mx-auto") %}
+    {% set contentContainerDesktopStyle = sectionStyles.contentContainerDesktop | default("mt-4 text-center max-w-[40rem] mx-auto") %}
     {% set buttonWrapperStyle = sectionStyles.buttonWrapper | default("mt-6 flex justify-center") %}
     {% set scrollArrowWrapperStyle = sectionStyles.scrollArrowWrapper | default("absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-[75%] z-20") %}
 
@@ -109,7 +109,7 @@
           {{ renderHeading({
             name: sectionData.mainTitle,
             datas: options.headings,
-            class: mainTitleStyle ~ " m-0 p-0"
+            class: mainTitleStyle ~ " m-0 p-0 max-w-[40rem] mx-auto"
           }) }}
 
           {# Bouton de défilement positionné en bas du mainTitle #}
@@ -144,7 +144,7 @@
         <div class="{{ containerStyle }}">
           {% if sectionData.topTitle %}
             <div class="{{ topTitleWrapperStyle }}">
-              <h1 class="{{ topTitleStyle }}">{{ sectionData.topTitle }}</h1>
+              <h1 class="{{ topTitleStyle }} max-w-[40rem] mx-auto">{{ sectionData.topTitle }}</h1>
             </div>
           {% endif %}
 
@@ -155,7 +155,7 @@
               {{ renderHeading({
                 name: sectionData.superHeading,
                 datas: options.headings,
-                class: "mb-6 mt-8 ma-nautic-section-title"
+                class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
               }) }}
             {% endif %}
 
@@ -163,7 +163,8 @@
             {% if sectionData.heading and options.headings %}
               {{ renderHeading({
                 name: sectionData.heading,
-                datas: options.headings
+                datas: options.headings,
+                class: "max-w-[40rem] mx-auto"
               }) }}
             {% endif %}
 
@@ -217,7 +218,7 @@
                 {{ renderHeading({
                   name: sectionData.superHeading,
                   datas: options.headings,
-                  class: "mb-6 mt-8 ma-nautic-section-title"
+                  class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
                 }) }}
               {% endif %}
 
@@ -225,7 +226,8 @@
               {% if sectionData.heading and options.headings %}
                 {{ renderHeading({
                   name: sectionData.heading,
-                  datas: options.headings
+                  datas: options.headings,
+                  class: "max-w-[40rem] mx-auto"
                 }) }}
               {% endif %}
 
@@ -294,7 +296,7 @@
                 {{ renderHeading({
                   name: sectionData.superHeading,
                   datas: options.headings,
-                  class: "mb-6 mt-8 ma-nautic-section-title"
+                  class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
                 }) }}
               {% endif %}
 
@@ -302,7 +304,8 @@
               {% if sectionData.heading and options.headings %}
                 {{ renderHeading({
                   name: sectionData.heading,
-                  datas: options.headings
+                  datas: options.headings,
+                  class: "max-w-[40rem] mx-auto"
                 }) }}
               {% endif %}
 
