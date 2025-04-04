@@ -5,7 +5,7 @@ permalink: "/lieux-interet/"
 layout: '00-core/base.njk'
 ---
 
-{# Section Hero Page Lieu #}
+{# Location Hero Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
 {{ renderSectionHero({ 
@@ -17,10 +17,10 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
-{# Conteneur pour la liste des bateaux avec l'ID spot-list pour le scroll #}
+{# Container for location list with spot-list ID for scrolling #}
 <div id="spot-list">
 
-{# Section lieu "Agriates" #}
+{# Location section "Agriates" #}
 {% from "01-organisms/section-spot.njk" import renderSectionSpot %}
 
 {{ renderSectionSpot({ 
@@ -34,7 +34,7 @@ layout: '00-core/base.njk'
     buttons: atoms.buttons
 }) }}
 
-{# Section lieu "Cap Corse" #}
+{# Location section "Cap Corse" #}
 {% from "01-organisms/section-spot.njk" import renderSectionSpot %}
 
 {{ renderSectionSpot({ 
