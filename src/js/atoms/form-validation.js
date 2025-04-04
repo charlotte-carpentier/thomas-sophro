@@ -1,96 +1,289 @@
 /**
- * Form validation utility for Ma-Nautic
+ * Enhanced Form Validation Utility for Ma-Nautic
  * 
- * This script provides client-side validation for form inputs
- * based on HTML5 validation attributes (required, pattern)
+ * Provides robust client-side form validation with:
+ * - Input sanitization
+ * - Advanced validation
+ * - Internationalization support
+ * - Accessibility improvements
  * 
  * @author Charlie
+ * @version 2.0
  */
-
-/**
- * Validates an input field based on its pattern and required attributes
- * @param {HTMLElement} input - The input element to validate
- * @param {string} patternMessage - Custom message for pattern validation failure
- * @param {string} requiredMessage - Custom message for required field
- */
-function validateInput(input, patternMessage, requiredMessage) {
-    // Get error span
-    const errorSpan = document.getElementById(`${input.id}-error`);
-    if (!errorSpan) return;
-    
-    // Apply base classes
-    let baseClasses = input.className.split(' ')
-      .filter(cls => !cls.startsWith('border-'))
-      .join(' ');
-    
-    // Check if field is empty but required
-    if (input.required && !input.value.trim()) {
-      input.className = `${baseClasses} border-red-500`;
-      errorSpan.textContent = requiredMessage || "Ce champ est obligatoire";
-      errorSpan.style.display = 'block';
-      return;
-    }
-    
-    // If field has pattern and value doesn't match
-    if (input.pattern && input.value && !new RegExp(input.pattern).test(input.value)) {
-      input.className = `${baseClasses} border-red-500`;
-      errorSpan.textContent = patternMessage || "Format invalide";
-      errorSpan.style.display = 'block';
-      return;
-    }
-    
-    // Check select without selected value
-    if (input.tagName === 'SELECT' && input.required && !input.value) {
-      input.className = `${baseClasses} border-red-500`;
-      errorSpan.textContent = requiredMessage || "Veuillez sélectionner une option";
-      errorSpan.style.display = 'block';
-      return;
-    }
-    
-    // Valid input
-    input.className = `${baseClasses} border-gray-300`;
-    errorSpan.style.display = 'none';
-  }
-  
+class EnhancedFormValidator {
   /**
-   * Validates all inputs in a form
-   * @param {HTMLFormElement} form - The form to validate
-   * @returns {boolean} - True if all inputs are valid
+   * Constructor for form validator
+   * @param {string} formId - ID of the form to validate
+   * @param {Object} config - Validation configuration
+   * @param {Object} options - Additional validation options
    */
-  function validateForm(form) {
+  constructor(formId, config, options = {}) {
+    this.form = document.getElementById(formId);
+    if (!this.form) {
+      console.error(`Form with ID ${formId} not found`);
+      return;
+    }
+
+    this.config = config;
+    this.options = {
+      lang: 'fr',
+      maxLength: 500,
+      sanitize: true,
+      debug: false,
+      ...options
+    };
+
+    this.initValidation();
+  }
+
+  /**
+   * Sanitize input to prevent XSS
+   * @param {string} input - Input to sanitize
+   * @returns {string} Sanitized input
+   */
+  sanitizeInput(input) {
+    if (!this.options.sanitize) return input;
+    return input
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .trim();
+  }
+
+  /**
+   * Advanced email validation
+   * @param {string} email - Email to validate
+   * @returns {boolean} Whether email is valid
+   */
+  validateEmail(email) {
+    // Comprehensive email validation regex
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    return emailRegex.test(email);
+  }
+
+  /**
+   * Advanced phone number validation
+   * @param {string} phone - Phone number to validate
+   * @returns {boolean} Whether phone number is valid
+   */
+  validatePhone(phone) {
+    // International phone number validation
+    const phoneRegex = /^(\+?[0-9]{1,4}[-\s]?)?(\([0-9]{1,4}\)[-\s]?)?[0-9]{1,5}[-\s]?[0-9]{1,5}([-\s]?[0-9]{1,5})?([-\s]?[0-9]{1,5})?$/;
+    return phoneRegex.test(phone);
+  }
+
+  /**
+   * Get localized error messages
+   * @param {string} type - Type of error
+   * @param {string} lang - Language code
+   * @returns {string} Localized error message
+   */
+  getErrorMessage(type, lang = 'fr') {
+    const messages = {
+      fr: {
+        required: 'Ce champ est obligatoire',
+        email: 'Veuillez entrer un email valide',
+        phone: 'Numéro de téléphone invalide',
+        maxLength: 'Le champ est trop long',
+        pattern: 'Format invalide'
+      },
+      en: {
+        required: 'This field is required',
+        email: 'Please enter a valid email',
+        phone: 'Invalid phone number',
+        maxLength: 'Field is too long',
+        pattern: 'Invalid format'
+      }
+    };
+
+    return messages[lang][type] || messages['fr'][type];
+  }
+
+  /**
+   * Validate a single input
+   * @param {HTMLInputElement} input - Input to validate
+   * @returns {boolean} Whether input is valid
+   */
+  validateInput(input) {
+    // Sanity check
+    if (!input) return true;
+
+    // Get associated error span
+    const errorSpan = document.getElementById(`${input.id}-error`);
+    if (!errorSpan) return true;
+
+    // Sanitize input value
+    const value = this.sanitizeInput(input.value);
+    input.value = value;
+
+    // Reset error state
+    errorSpan.textContent = '';
+    errorSpan.style.display = 'none';
+    input.setAttribute('aria-invalid', 'false');
+
+    // Get validation rules
+    const rules = this.config[input.name] || {};
+
+    // Required field validation
+    if (rules.required && (!value || value.trim() === '')) {
+      this.showError(input, errorSpan, 
+        this.getErrorMessage('required', this.options.lang)
+      );
+      return false;
+    }
+
+    // Skip further validation for empty optional fields
+    if (!rules.required && !value) return true;
+
+    // Max length validation
+    const maxLength = input.maxLength || this.options.maxLength;
+    if (maxLength && value.length > maxLength) {
+      this.showError(input, errorSpan, 
+        this.getErrorMessage('maxLength', this.options.lang)
+      );
+      return false;
+    }
+
+    // Type-specific validations
+    switch(input.type) {
+      case 'email':
+        if (!this.validateEmail(value)) {
+          this.showError(input, errorSpan, 
+            this.getErrorMessage('email', this.options.lang)
+          );
+          return false;
+        }
+        break;
+      case 'tel':
+        if (!this.validatePhone(value)) {
+          this.showError(input, errorSpan, 
+            this.getErrorMessage('phone', this.options.lang)
+          );
+          return false;
+        }
+        break;
+    }
+
+    // Pattern validation
+    if (input.pattern && !new RegExp(input.pattern).test(value)) {
+      this.showError(input, errorSpan, 
+        this.getErrorMessage('pattern', this.options.lang)
+      );
+      return false;
+    }
+
+    // Debug logging
+    if (this.options.debug) {
+      console.log(`Validation passed for ${input.name}`);
+    }
+
+    return true;
+  }
+
+  /**
+   * Show validation error
+   * @param {HTMLInputElement} input - Input with error
+   * @param {HTMLElement} errorSpan - Error message span
+   * @param {string} message - Error message
+   */
+  showError(input, errorSpan, message) {
+    // Update input classes
+    input.classList.add('border-red-500');
+    input.setAttribute('aria-invalid', 'true');
+
+    // Show error message
+    errorSpan.textContent = message;
+    errorSpan.style.display = 'block';
+
+    // Optional: focus on invalid input
+    input.focus();
+  }
+
+  /**
+   * Validate entire form
+   * @returns {boolean} Whether the entire form is valid
+   */
+  validateForm() {
     let isValid = true;
-    
-    // Validate all inputs
-    const inputs = form.querySelectorAll('input, textarea, select');
+    const inputs = this.form.querySelectorAll('input, select, textarea');
+
     inputs.forEach(input => {
-      // Trigger validation
-      const event = new Event('blur');
-      input.dispatchEvent(event);
-      
-      // Check if input has error
-      const errorSpan = document.getElementById(`${input.id}-error`);
-      if (errorSpan && errorSpan.style.display !== 'none') {
+      if (!this.validateInput(input)) {
         isValid = false;
       }
     });
-    
+
     return isValid;
   }
-  
-  // Add form validation to all forms when DOM is loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-      form.addEventListener('submit', function(event) {
-        if (!validateForm(this)) {
-          event.preventDefault();
-          // Scroll to first error
-          const firstError = form.querySelector('[id$="-error"][style*="block"]');
-          if (firstError) {
-            firstError.previousElementSibling.focus();
-            firstError.previousElementSibling.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }
+
+  /**
+   * Initialize form validation
+   */
+  initValidation() {
+    // Real-time validation on blur
+    this.form.addEventListener('blur', (event) => {
+      if (event.target.matches('input, select, textarea')) {
+        this.validateInput(event.target);
+      }
+    }, true);
+
+    // Form submission validation
+    this.form.addEventListener('submit', (event) => {
+      if (!this.validateForm()) {
+        event.preventDefault();
+        this.scrollToFirstError();
+      }
+    });
+  }
+
+  /**
+   * Scroll to first validation error
+   */
+  scrollToFirstError() {
+    const firstError = this.form.querySelector('[aria-invalid="true"]');
+    if (firstError) {
+      firstError.focus();
+      firstError.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
       });
+    }
+  }
+}
+
+// Default validation configuration
+const defaultValidationConfig = {
+  input_name: {
+    required: true,
+    maxLength: 50
+  },
+  input_email: {
+    required: true,
+    type: 'email'
+  },
+  input_phone: {
+    required: true,
+    type: 'tel'
+  },
+  input_boat: {
+    required: true
+  },
+  input_message: {
+    required: false,
+    maxLength: 500
+  }
+};
+
+// Initialize form validation when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Find all forms and apply validation
+  const forms = document.querySelectorAll('form');
+  forms.forEach(form => {
+    new EnhancedFormValidator(form.id, defaultValidationConfig, {
+      lang: 'fr',
+      sanitize: true,
+      debug: false
     });
   });
+});

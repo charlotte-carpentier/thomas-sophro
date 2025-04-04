@@ -119,12 +119,6 @@
       "style": "footer"
     },
     {
-      "name": "creator",
-      "href": "/creator",
-      "text": "Design Marty - Website CC",
-      "style": "footer"
-    },
-    {
       "name": "reservez",
       "href": "/contact",
       "text": "RESERVEZ",
@@ -150,7 +144,7 @@
     },
     {
       "name": "bo_plage",
-      "href": "https://www.facebook.com/bosplage/?locale=fr_FR",
+      "href": "https://www.instagram.com/bos_plage/",
       "text": "Le Bo'S Plage",
       "style": "footer"
     },

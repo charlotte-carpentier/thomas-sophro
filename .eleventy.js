@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
 import fs from 'fs';
 import path from 'path';
-import { syncBoatImages } from './src/js/utils/sync-boat-images.js';
-import { sortBoatsByPrice } from './src/js/utils/price-utils.js';
+import { syncBoatImages } from './src/utils/sync-boat-images.js';
+import { sortBoatsByPrice } from './src/utils/price-utils.js';
 
 export default function (eleventyConfig) {
   // Copy static assets directory to output
