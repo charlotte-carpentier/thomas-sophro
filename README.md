@@ -55,8 +55,9 @@ Le site est automatiquement déployé sur Netlify à chaque mise à jour de la b
 Le CMS est accessible via /admin.
 
 📌 À propos
-Développement : CC
-Design : EM (PDF, SVG, textes)
-SEO: PC
-Technos : Eleventy, Nunjucks, Tailwind v4, Decap CMS
-Version actuelle : v1.0.0
+
+- Développement : CC
+- Design : EM (PDF, SVG, textes)
+- SEO: PC
+- Technos : Eleventy, Nunjucks, Tailwind v4, Decap CMS
+- Version actuelle : v1.0.0
