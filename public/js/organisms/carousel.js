@@ -8,7 +8,7 @@
  * - Light/dark theme support
  * - Pause on hover functionality
  * 
- * @version 5.7
+ * @version 6.0
  */
 document.addEventListener("DOMContentLoaded", function () {
   // Select all carousels on the page
@@ -25,12 +25,30 @@ document.addEventListener("DOMContentLoaded", function () {
    */
   function initCarousel(carousel) {
     const carouselId = carousel.id;
+    if (!carouselId) {
+      console.error("Carousel must have an ID attribute");
+      return;
+    }
+    
+    console.log(`Initializing carousel #${carouselId}`);
+    
+    // Core elements
     const items = [...carousel.querySelectorAll("[data-carousel-item]")];
+    if (items.length === 0) {
+      console.error(`No carousel items found for carousel #${carouselId}`);
+      return;
+    }
+    
+    // Navigation buttons
     const prevBtn = carousel.parentElement.querySelector("[data-carousel-prev]");
     const nextBtn = carousel.parentElement.querySelector("[data-carousel-next]");
-    const indicators = document.querySelectorAll(`[data-carousel-target="${carouselId}"]`);
     
-    // Determine the indicator theme
+    // Find all indicators that target this carousel
+    // IMPORTANT FIX: In the HTML template, indicators have both data-carousel-target AND data-carousel-indicator
+    const indicators = [...document.querySelectorAll(`[data-carousel-target="${carouselId}"]`)];
+    console.log(`Found ${indicators.length} indicators for carousel #${carouselId}`);
+    
+    // Theme detection
     let theme = carousel.getAttribute("data-carousel-theme") || "auto";
     let isReversed = false;
     
@@ -49,98 +67,130 @@ document.addEventListener("DOMContentLoaded", function () {
       isReversed = theme === "light"; // "light" = light background, dark indicators
     }
     
-    console.log("Carousel:", carouselId, "Theme:", theme, "IsReversed:", isReversed);
+    // Visual appearance settings
+    const activeColor = isReversed ? "#2b3947" : "#ffffff"; // Blue or White
+    const activeOpacity = isReversed ? "0.7" : "0.8";
+    const inactiveOpacity = "0.3";
     
-    let index = 0;
+    // State variables
+    let currentIndex = 0;
     let autoplayInterval = null;
-    
-    // Add transition to all carousel items
-    items.forEach(item => {
-      item.classList.add("transition-opacity", "duration-700");
-    });
+    let transitionLock = false;
     
     /**
      * Shows a specific slide by index
      * 
-     * @param {number} newIndex - The index of the slide to show
+     * @param {number} targetIndex - The index of the slide to show
      */
-    function showSlide(newIndex) {
-      // Hide current slide
-      items[index].classList.remove("opacity-100");
-      items[index].classList.add("opacity-0");
+    function showSlide(targetIndex) {
+      // Prevent rapid transitions and normalize index
+      if (transitionLock) return;
+      transitionLock = true;
       
-      // Calculate new index with wrapping
-      index = (newIndex + items.length) % items.length;
+      // Calculate valid index with wrapping
+      const newIndex = (targetIndex + items.length) % items.length;
       
-      // Show new slide
-      items[index].classList.remove("opacity-0");
-      items[index].classList.add("opacity-100");
+      // Skip if trying to show current slide
+      if (newIndex === currentIndex) {
+        transitionLock = false;
+        return;
+      }
       
-      // Update indicators
+      console.log(`Carousel #${carouselId}: changing slide from ${currentIndex} to ${newIndex}`);
+      
+      // Hide all slides first then show the target slide
+      items.forEach((item, i) => {
+        if (i === newIndex) {
+          item.classList.remove("opacity-0");
+          item.classList.add("opacity-100");
+        } else {
+          item.classList.remove("opacity-100");
+          item.classList.add("opacity-0");
+        }
+      });
+      
+      // Update state BEFORE updating indicators
+      currentIndex = newIndex;
+      
+      // Update indicators to match new state
       updateIndicators();
+      
+      // Release transition lock after animation completes
+      setTimeout(() => {
+        transitionLock = false;
+      }, 700); // Match to transition duration
     }
     
     /**
-     * Updates the appearance of all indicators based on current slide
+     * Updates all indicator dots based on the current slide
      */
     function updateIndicators() {
+      console.log(`Updating indicators for carousel #${carouselId}, current slide: ${currentIndex}`);
+      
       indicators.forEach((indicator, i) => {
-        // First remove active class from all indicators
+        // Get the indicator index from the data attribute, or use loop index if not available
+        const indicatorIndex = parseInt(indicator.getAttribute("data-carousel-indicator"), 10);
+        const indexToUse = isNaN(indicatorIndex) ? i : indicatorIndex;
+        
+        // Remove active class from all indicators
         indicator.classList.remove("carousel-indicator-active");
         
-        if (i === index) {
-          // Add active class to current indicator
+        // Update visual state based on whether this indicator matches current slide
+        if (indexToUse === currentIndex) {
+          // This indicator represents the current slide - make it active
           indicator.classList.add("carousel-indicator-active");
-          
-          // Direct CSS styles (complementing the class)
-          if (isReversed) {
-            // Light background, blue indicators for reversed mode
-            indicator.style.backgroundColor = "#2b3947"; // Blue (--ma-nautic-blue)
-            indicator.style.opacity = "0.7";
-          } else {
-            // Blue/dark background, white indicators for standard mode
-            indicator.style.backgroundColor = "#ffffff"; // White
-            indicator.style.opacity = "0.8";
-          }
+          indicator.style.backgroundColor = activeColor;
+          indicator.style.opacity = activeOpacity;
         } else {
-          // Styles for inactive indicators
-          if (isReversed) {
-            // Light background, blue indicators for reversed mode
-            indicator.style.backgroundColor = "#2b3947"; // Blue (--ma-nautic-blue)
-            indicator.style.opacity = "0.3";
-          } else {
-            // Blue/dark background, white indicators for standard mode
-            indicator.style.backgroundColor = "#ffffff"; // White
-            indicator.style.opacity = "0.3";
-          }
+          // This indicator is inactive
+          indicator.style.backgroundColor = activeColor;
+          indicator.style.opacity = inactiveOpacity;
         }
       });
     }
     
+    // Apply initial state for all slides
+    items.forEach((item, i) => {
+      if (i === 0) {
+        // First slide is visible
+        item.classList.add("opacity-100");
+        item.classList.remove("opacity-0");
+      } else {
+        // All other slides are hidden
+        item.classList.add("opacity-0");
+        item.classList.remove("opacity-100");
+      }
+    });
+    
     // Apply initial indicator styles
     updateIndicators();
     
-    // Event handler for previous button
+    // Event listeners for navigation
     if (prevBtn) {
       prevBtn.addEventListener("click", () => {
-        showSlide(index - 1);
+        showSlide(currentIndex - 1);
         resetAutoplay();
       });
     }
     
-    // Event handler for next button
     if (nextBtn) {
       nextBtn.addEventListener("click", () => {
-        showSlide(index + 1);
+        showSlide(currentIndex + 1);
         resetAutoplay();
       });
     }
     
-    // Event handler for indicators
-    indicators.forEach((indicator, i) => {
+    // Event listeners for direct indicator clicks
+    indicators.forEach((indicator) => {
       indicator.addEventListener("click", () => {
-        showSlide(i);
-        resetAutoplay();
+        // Get the index from the data attribute
+        const clickedIndex = parseInt(indicator.getAttribute("data-carousel-indicator"), 10);
+        
+        if (!isNaN(clickedIndex)) {
+          console.log(`Indicator for index ${clickedIndex} clicked for carousel #${carouselId}`);
+          showSlide(clickedIndex);
+          resetAutoplay();
+        }
       });
     });
     
@@ -162,7 +212,8 @@ document.addEventListener("DOMContentLoaded", function () {
       
       if (autoplay) {
         autoplayInterval = setInterval(() => {
-          showSlide(index + 1);
+          // Move to next slide
+          showSlide(currentIndex + 1);
         }, 7000); // Auto-slide every 7 seconds
       }
     }
