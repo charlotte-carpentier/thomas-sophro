@@ -18,7 +18,17 @@
 
 Le projet est structuré selon l’architecture **OMA** (Organism / Molecule / Atom) et les composants sont alimentés par des fichiers de données JSON et Markdown.
 
-src/ ├── _includes/ # Composants Nunjucks classés par OMA ├── _data/ # Fichiers JSON pour les contenus dynamiques ├── collection-boats/ # Fichiers Markdown pour chaque bateau ├── collection-carousels/ ├── pages .njk # Pages du site (index, contact, etc.) ├── assets/ # Images, icônes, polices ├── js/ # Scripts JS └── input.css # Fichier Tailwind v4
+```bash
+src/
+├── _includes/             # Composants Nunjucks classés par OMA (atoms, molecules, organisms)
+├── _data/                 # Fichiers JSON pour les contenus dynamiques
+├── collection-boats/      # Fichiers Markdown pour chaque bateau
+├── collection-carousels/  # Fichiers Markdown pour les carrousels d’images
+├── assets/                # Images, icônes, polices
+├── js/                    # Scripts JavaScript
+├── pages (.njk)           # Pages du site (index, contact, etc.)
+└── input.css              # Fichier Tailwind CSS v4
+```
 
 ---
 
@@ -27,7 +37,7 @@ src/ ├── _includes/ # Composants Nunjucks classés par OMA ├── _data
 Via **Decap CMS**, le client peut modifier :
 
 - **Les bateaux** : titre, description, photos, tarifs (`collection-boats/*.md`)
-- **Les carrousels d’images** : directement intégrés dans chaque fiche bateau (dans le même fichier `.md`)
+- **Les carrousels d’images** : directement intégrés dans chaque fiche bateau
 
 ---
 
