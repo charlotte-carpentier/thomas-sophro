@@ -115,7 +115,12 @@ class EnhancedFormValidator {
 
     // Sanitize input value
     const value = this.sanitizeInput(input.value);
-    input.value = value;
+    
+    // Only update value when sanitization changes it
+    // Ceci évite de perturber la saisie normale de l'utilisateur
+    if (value !== input.value) {
+      input.value = value;
+    }
 
     // Reset error state
     errorSpan.textContent = '';
@@ -196,8 +201,8 @@ class EnhancedFormValidator {
     errorSpan.textContent = message;
     errorSpan.style.display = 'block';
 
-    // Optional: focus on invalid input
-    input.focus();
+    // Ne pas forcer le focus automatiquement - cela pourrait bloquer la navigation
+    // input.focus(); // Cette ligne est commentée pour éviter de forcer le focus
   }
 
   /**
@@ -221,14 +226,15 @@ class EnhancedFormValidator {
    * Initialize form validation
    */
   initValidation() {
-    // Real-time validation on blur
-    this.form.addEventListener('blur', (event) => {
-      if (event.target.matches('input, select, textarea')) {
-        this.validateInput(event.target);
-      }
-    }, true);
+    // Validation uniquement lors de la sortie (blur) d'un champ
+    // N'intercepte pas les autres événements comme mousedown ou click
+    this.form.querySelectorAll('input, select, textarea').forEach(input => {
+      input.addEventListener('blur', () => {
+        this.validateInput(input);
+      });
+    });
 
-    // Form submission validation
+    // Form submission validation - bloque uniquement l'envoi du formulaire
     this.form.addEventListener('submit', (event) => {
       if (!this.validateForm()) {
         event.preventDefault();
@@ -243,11 +249,14 @@ class EnhancedFormValidator {
   scrollToFirstError() {
     const firstError = this.form.querySelector('[aria-invalid="true"]');
     if (firstError) {
-      firstError.focus();
-      firstError.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'center' 
-      });
+      // Utilise un délai pour éviter les problèmes de timing avec les événements
+      setTimeout(() => {
+        firstError.focus();
+        firstError.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }, 100);
     }
   }
 }
@@ -267,7 +276,7 @@ const defaultValidationConfig = {
     type: 'tel'
   },
   input_boat: {
-    required: true
+    required: false // Le select n'est pas obligatoire
   },
   input_message: {
     required: false,
@@ -278,7 +287,7 @@ const defaultValidationConfig = {
 // Initialize form validation when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   // Find all forms and apply validation
-  const forms = document.querySelectorAll('form');
+  const forms = document.querySelectorAll('form[id]');  // Seulement les formulaires avec un ID
   forms.forEach(form => {
     new EnhancedFormValidator(form.id, defaultValidationConfig, {
       lang: 'fr',
