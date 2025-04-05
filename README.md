@@ -46,7 +46,9 @@ Via **Decap CMS**, le client peut modifier :
 ```bash
 npm install
 npm run dev
-Le site sera accessible sur : http://localhost:8080
+```
+
+Le site sera accessible sur : <http://localhost:8080>
 
 🌍 Déploiement
 Le site est automatiquement déployé sur Netlify à chaque mise à jour de la branche principale (main).
@@ -54,11 +56,7 @@ Le CMS est accessible via /admin.
 
 📌 À propos
 Développement : CC
-
 Design : EM (PDF, SVG, textes)
-
 SEO: PC
-
 Technos : Eleventy, Nunjucks, Tailwind v4, Decap CMS
-
 Version actuelle : v1.0.0
