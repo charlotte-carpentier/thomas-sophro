@@ -59,8 +59,7 @@
         { "value": "enzo", "label": "Motonautica 780 confort Enzo" },
         { "value": "casablanca", "label": "Lomac 850 in Casa Blanca" }
       ],
-      "required": true,
-      "errorMessage": "Veuillez sélectionner un bateau"
+      "required": false
     },
     {
       "name": "input_message",
