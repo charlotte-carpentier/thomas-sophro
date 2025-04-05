@@ -7,9 +7,12 @@
 {% from "03-atoms/link.njk" import renderLink %}
 
 {% macro renderNavigation(options) %}
+  {# Check if data is provided #}
   {% if options.datas %}
+    {# Get global styling #}
     {% set globalStyle = options.datas.globalStyle %}
     
+    {# Find navigation configuration #}
     {% set navigationData = null %}
     {% if options.name %}
       {% for navSet in options.datas.navigations %}
@@ -19,10 +22,12 @@
       {% endfor %}
     {% endif %}
 
+    {# Fallback to first navigation if not found #}
     {% if not navigationData %}
       {% set navigationData = options.datas.navigations[0] %}
     {% endif %}
     
+    {# Render navigation with links #}
     <nav class="{{ globalStyle }} {{ options.class | default('') }}" data-nav-container>
       {% for linkName in navigationData.links %}
         {{ renderLink({ name: linkName, datas: options.links, dataNavLink: true }) }}
@@ -41,19 +46,12 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/navigation.njk" import renderNavigation %}
 
-2. Call the navigation component with a specific name
+2. Call a specific navigation by its name
 {{ renderNavigation({ 
     name: "main",
     datas: organisms.navigations,
     links: atoms.links
 }) }}
 
-3. Using custom styles
-{{ renderNavigation({ 
-    name: "main",
-    datas: organisms.navigations,
-    links: atoms.links,
-    class: "my-custom-navigation-class"
-}) }}
-
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

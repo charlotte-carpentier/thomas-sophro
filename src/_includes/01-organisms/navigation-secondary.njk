@@ -7,9 +7,12 @@
 {% from "03-atoms/link.njk" import renderLink %}
 
 {% macro renderNavigationSecondary(options) %}
+  {# Check if data is provided #}
   {% if options.datas %}
+    {# Get global styling #}
     {% set globalStyle = options.datas.globalStyle %}
     
+    {# Find navigation secondary configuration #}
     {% set navigationData = null %}
     {% if options.name %}
       {% for navSet in options.datas["navigation-secondarys"] %}
@@ -19,10 +22,12 @@
       {% endfor %}
     {% endif %}
 
+    {# Fallback to first navigation secondary if not found #}
     {% if not navigationData %}
       {% set navigationData = options.datas["navigation-secondarys"][0] %}
     {% endif %}
     
+    {# Render navigation secondary with links #}
     <nav class="{{ globalStyle }} navigation-secondary {{ options.class | default('') }}" data-nav-container data-nav-secondary>
       {% for linkName in navigationData.links %}
         {{ renderLink({ name: linkName, datas: options.links, dataNavLink: true }) }}
@@ -41,27 +46,12 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
 
-2. Call the navigation-secondary component with a specific name
+2. Call a specific navigation-secondary by its name
 {{ renderNavigationSecondary({ 
     name: "main",
     datas: organisms["navigation-secondarys"],
     links: atoms.links
 }) }}
 
-3. Using custom styles
-{{ renderNavigationSecondary({ 
-    name: "main",
-    datas: organisms["navigation-secondarys"],
-    links: atoms.links,
-    class: "my-custom-navigation-class"
-}) }}
-
-4. Style personnalisé pour l'espacement
-{{ renderNavigationSecondary({ 
-    name: "main",
-    datas: organisms["navigation-secondarys"],
-    links: atoms.links,
-    class: "pl-4"
-}) }}
-
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

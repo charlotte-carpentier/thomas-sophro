@@ -5,10 +5,12 @@
 #}
 
 {% macro renderSectionText(options) %}
+  {# Check if data is provided #}
   {% if options.datas %}
+    {# Get global styling #}
     {% set globalStyle = options.datas.globalStyle %}
 
-    {# Récupérer le variant sans utiliser selectattr #}
+    {# Find variant without using selectattr #}
     {% set variant = null %}
     {% if options.name and options.datas.sections %}
       {% for item in options.datas.sections %}
@@ -17,46 +19,33 @@
         {% endif %}
       {% endfor %}
 
-      {# Si aucun variant trouvé, utiliser le premier par défaut #}
-      {% if not variant and options
-        .datas
-        .sections[0] %}
-        {% set variant = options
-          .datas
-          .sections[0] %}
+      {# If no variant found, use first as default #}
+      {% if not variant and options.datas.sections[0] %}
+        {% set variant = options.datas.sections[0] %}
       {% endif %}
-    {% elif options
-        .datas
-        .sections and options
-        .datas
-        .sections[0] %}
-      {% set variant = options
-        .datas
-        .sections[0] %}
+    {% elif options.datas.sections and options.datas.sections[0] %}
+      {% set variant = options.datas.sections[0] %}
     {% else %}
       {% set variant = {} %}
     {% endif %}
 
-    {% if variant
-      .variant and options
-      .datas
-      .variants[variant.variant] %}
-      {% set variantStyle = options
-        .datas
-        .variants[variant.variant] %}
+    {# Get variant style #}
+    {% if variant.variant and options.datas.variants[variant.variant] %}
+      {% set variantStyle = options.datas.variants[variant.variant] %}
     {% else %}
       {% set variantStyle = options.datas.variants.default %}
     {% endif %}
 
+    {# Get container styling #}
     {% set containerStyle = options.datas.containerStyle %}
     
-    {# Vérifier si une image est définie pour cette section #}
+    {# Check if image is defined for this section #}
     {% set hasImage = variant.image is defined and variant.image %}
     
-    {# Vérifier si la section a UNIQUEMENT une image sans texte ni autre contenu #}
+    {# Check if section has ONLY an image without text or other content #}
     {% set imageOnlySection = hasImage and not variant.heading and not variant.content and not variant.text and not variant.description and not variant.superHeading and not variant.primaryButton and not variant.secondaryButton and not variant.link %}
     
-    {# Styles conditionnels selon le type de section #}
+    {# Conditional styles based on section type #}
     {% if variant and variant.name == "ma_nautic_plus" %}
       {% set contentLayoutStyle = {
         "mobile": "flex flex-col gap-8",
@@ -69,7 +58,7 @@
       {% set textContainerStyle = options.datas.textContainerStyle ~ " flex justify-center md:justify-start [&_p]:mb-6 max-w-[40rem] mx-auto" %}
       {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
     {% elif imageOnlySection %}
-      {# Style spécifique pour une section avec uniquement une image #}
+      {# Specific style for a section with only an image #}
       {% set contentLayoutStyle = {
         "mobile": "flex flex-col items-center justify-center",
         "desktop": "flex items-center justify-center"
@@ -85,9 +74,10 @@
       {% set imageContainerStyle = "hidden" %}
     {% endif %}
     
+    {# Get button container style #}
     {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center" %}
 
-    {# Spécifique à MA-Nautic section text #}
+    {# Specific to MA-Nautic section text #}
     {% if variant and variant.name == "ma_nautic_discover" %}
       <section class="{{ globalStyle }} {{ variantStyle }} relative overflow-y-auto {{ options.class | default('') }}">
         {# Background image #}
@@ -109,7 +99,7 @@
         {# Content container #}
         <div class="{{ containerStyle }} relative z-10 h-full flex items-center justify-center py-6 md:py-8">
           <div class="flex flex-col items-center justify-center text-center px-4 md:px-6 w-full">
-            {# Logo image à la place des headings #}
+            {# Logo image instead of headings #}
             {% if variant.image and options.images and options.images.images %}
               {% set logoImg = null %}
               {% for image in options.images.images %}
@@ -125,7 +115,7 @@
               {% endif %}
             {% endif %}
 
-            {# Subtitle sous le logo si nécessaire #}
+            {# Subtitle under logo if needed #}
             {% if variant.heading and options.headings and options.headings.headings %}
               {% set subtitle = null %}
               {% for heading in options.headings.headings %}
@@ -141,14 +131,14 @@
               {% endif %}
             {% endif %}
 
-            {# Contenu descriptif - Utilise content au lieu de text avec classe ma-nautic-subtitle #}
+            {# Descriptive content - Uses content instead of text with ma-nautic-subtitle class #}
             {% if variant.content %}
               <div class="text-sm sm:text-lg max-w-[40rem] my-4 md:my-6 ma-nautic-subtitle [&_p]:mb-[30px] mx-auto">
                 {{ variant.content | safe }}
               </div>
             {% endif %}
 
-            {# Lien "Découvrir" - Récupère les données du lien via son nom #}
+            {# "Discover" link - Gets link data via its name #}
             {% if variant.link and options.links and options.links.links %}
               {% set linkData = null %}
               {% for link in options.links.links %}
@@ -162,7 +152,7 @@
                   {{ linkData.text }}
                 </a>
               {% else %}
-                {# Fallback si le lien n'est pas trouvé dans la collection #}
+                {# Fallback if link not found in collection #}
                 <a href="#" class="uppercase mt-4">
                   {{ variant.link }}
                 </a>
@@ -172,12 +162,12 @@
         </div>
       </section>
 
-    {# Cas spécifique pour une section avec uniquement une image (ma_nautic_map) #}
+    {# Specific case for a section with only an image (ma_nautic_map) #}
     {% elif imageOnlySection %}
       <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }} {% if variant.height %}{{ variant.height }}{% else %}py-16 md:py-20 lg:py-24{% endif %}">
         <div class="{{ containerStyle }}">
           <div class="{{ contentLayoutStyle.mobile }} {{ contentLayoutStyle.desktop }}">
-            {# Affichage de l'image centrée #}
+            {# Display centered image #}
             {% if variant.image and options.images and options.images.images %}
               {% set sectionImage = null %}
               {% for image in options.images.images %}
@@ -195,14 +185,14 @@
         </div>
       </section>
 
-    {# Nouvelle section spécifique pour ma_nautic_info #}
+    {# New specific section for ma_nautic_info #}
     {% elif variant and variant.name == "ma_nautic_info" %}
       <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }} {% if variant.heightVariant %}{{ options.datas.heights[variant.heightVariant] }}{% else %}py-16 md:py-20 lg:py-24{% endif %}">
         <div class="{{ containerStyle }}">
           <div class="{{ contentLayoutStyle.mobile }} {{ contentLayoutStyle.desktop }}">
             {# Text Content Column #}
             <div class="{{ textContainerStyle }}">
-              {# Premier titre - headingInfo #}
+              {# First title - headingInfo #}
               {% if variant.headingInfo and options.headings and options.headings.headings %}
                 {% set infoHeading = null %}
                 {% for heading in options.headings.headings %}
@@ -218,14 +208,14 @@
                 {% endif %}
               {% endif %}
 
-              {# Informations principales #}
+              {# Main information #}
               {% if variant.infos %}
                 <div class="my-4 [&_p]:mb-6 max-w-[40rem] mx-auto">
                   {{ variant.infos | safe }}
                 </div>
               {% endif %}
 
-              {# Deuxième titre - headingExtra #}
+              {# Second title - headingExtra #}
               {% if variant.headingExtra and options.headings and options.headings.headings %}
                 {% set extraHeading = null %}
                 {% for heading in options.headings.headings %}
@@ -241,14 +231,14 @@
                 {% endif %}
               {% endif %}
 
-              {# Informations supplémentaires #}
+              {# Additional information #}
               {% if variant.extras %}
                 <div class="my-4 [&_p]:mb-6 max-w-[40rem] mx-auto">
                   {{ variant.extras | safe }}
                 </div>
               {% endif %}
 
-              {# Lien standard si défini #}
+              {# Standard link if defined #}
               {% if variant.link and options.links and options.links.links %}
                 {% set linkData = null %}
                 {% for link in options.links.links %}
@@ -287,7 +277,7 @@
         </div>
       </section>
 
-      {# Section Text standard pour les autres variantes #}
+      {# Standard Text Section for other variants #}
     {% else %}
       <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }} {% if variant.height %}{{ variant.height }}{% else %}py-16 md:py-20 lg:py-24{% endif %}">
         <div class="{{ containerStyle }}">
@@ -337,14 +327,14 @@
                 </p>
               {% endif %}
 
-              {# Content - Pour le contenu HTML #}
+              {# Content - For HTML content #}
               {% if variant.content %}
                 <div class="{{ variant.contentStyle | default('') }} [&_p]:mb-6 max-w-[40rem] mx-auto">
                   {{ variant.content | safe }}
                 </div>
               {% endif %}
 
-              {# Text - Nouvelle section pour récupérer le texte (ajout) #}
+              {# Text - New section to get text (addition) #}
               {% if variant.text %}
                 <div class="{{ variant.textStyle | default('') }} [&_p]:mb-6 max-w-[40rem] mx-auto">
                   {{ variant.text | safe }}
@@ -372,7 +362,7 @@
                   }) }}
                 {% endif %}
                 
-                {# Lien standard si défini #}
+                {# Standard link if defined #}
                 {% if variant.link and options.links and options.links.links %}
                   {% set linkData = null %}
                   {% for link in options.links.links %}
@@ -390,7 +380,7 @@
               </div>
             </div>
 
-            {# Image Column - Afficher uniquement si hasImage est vrai et pas une section imageOnly #}
+            {# Image Column - Display only if hasImage is true and not an imageOnly section #}
             {% if hasImage and not imageOnlySection %}
               <div class="{{ imageContainerStyle }}">
                 {% if variant.image and options.images and options.images.images %}
@@ -425,7 +415,7 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/section-text.njk" import renderSectionText %}
 
-2. Call the section-text component with a specific name
+2. Call a specific section-text by its name
 {{ renderSectionText({ 
     name: "default_text",
     datas: organisms["section-texts"],
@@ -435,50 +425,5 @@ Summon HAT Components Wisely
     links: atoms.links
 }) }}
 
-3. Using custom styles
-{{ renderSectionText({ 
-    name: "product_text",
-    datas: organisms["section-texts"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    links: atoms.links,
-    class: "my-custom-text-class"
-}) }}
-
-4. Using MA-Nautic Text with Logo
-{{ renderSectionText({ 
-    name: "ma_nautic_discover",
-    datas: organisms["section-texts"],
-    headings: atoms.headings,
-    images: atoms.images,
-    links: atoms.links
-}) }}
-
-5. Using MA-Nautic Plus Section with text support
-{{ renderSectionText({ 
-    name: "ma_nautic_plus",
-    datas: organisms["section-texts"],
-    headings: atoms.headings,
-    images: atoms.images,
-    links: atoms.links
-}) }}
-
-6. Using MA-Nautic Map (image only section)
-{{ renderSectionText({ 
-    name: "ma_nautic_map",
-    datas: organisms["section-texts"],
-    images: atoms.images
-}) }}
-
-7. Using MA-Nautic Info Section with dual headings and lists
-{{ renderSectionText({ 
-    name: "ma_nautic_info",
-    datas: organisms["section-texts"],
-    headings: atoms.headings,
-    images: atoms.images,
-    links: atoms.links
-}) }}
-
-Every journey begins with a discover section! 🏰🛡️
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

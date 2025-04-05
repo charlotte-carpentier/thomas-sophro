@@ -1,18 +1,17 @@
 {#
 =========================
-      SECTION PAGE - AUTO-DETECT        
+      SECTION PAGE       
 =========================
 #}
 
 {% macro renderSectionPage(options) %}
+  {# Check if data is provided #}
   {% if options.datas %}
-    {% set variant = null %}
-    
-    {# Détecter automatiquement le type de données #}
+    {# Automatically detect data type #}
     {% set hasFaqs = options.datas.faqs is defined %}
     {% set hasLegal = options.datas.legalInformation is defined %}
     
-    {# Sélectionner le bon tableau de données #}
+    {# Select the right data array #}
     {% if hasFaqs %}
       {% set dataItems = options.datas.faqs %}
       {% set dataType = "faqs" %}
@@ -24,14 +23,15 @@
       {% set dataType = "unknown" %}
     {% endif %}
     
-    {# Recherche de la section correspondante #}
+    {# Find the corresponding section #}
+    {% set variant = null %}
     {% for item in dataItems %}
       {% if item.name == options.name %}
         {% set variant = item %}
       {% endif %}
     {% endfor %}
 
-    {# Fallback au premier élément si la section n'est pas trouvée #}
+    {# Fallback to first item if section not found #}
     {% if not variant and dataItems[0] %}
       {% set variant = dataItems[0] %}
     {% endif %}
@@ -39,10 +39,10 @@
     {% if variant %}
       <section class="py-16 md:py-20 lg:py-24 bg-[theme(--ma-nautic-beige)]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {# Titre de la section #}
+          {# Section title #}
           <h2 class="text-center font-black text-[20px] text-[theme(--ma-nautic-gold)] max-w-[40rem] mx-auto" style="margin-bottom: 40px;">_{% if options.title %}{{ options.title }}{% else %}{% if dataType == "faqs" %}Questions fréquentes{% else %}Mentions légales{% endif %}{% endif %}</h2>
 
-          {# Icône si définie #}
+          {# Icon if defined #}
           {% if variant.iconName and options.icons and options.icons.icons %}
             {% set iconFound = false %}
             {% for icon in options.icons.icons %}
@@ -57,14 +57,14 @@
             {% endfor %}
           {% endif %}
 
-          {# Contenu principal #}
+          {# Main content #}
           <div class="max-w-[40rem] mx-auto text-center">
             {% if variant.contentBlocks %}
               <div class="divide-y divide-[theme(--ma-nautic-teal)]">
                 {% for item in variant.contentBlocks %}
                   <div class="py-6 first:pt-0 last:pb-0">
                     {% if dataType == "faqs" and item.question is defined %}
-                      {# Affichage format FAQ #}
+                      {# FAQ format display #}
                       <details>
                         <summary class="font-bold cursor-pointer text-[theme(--ma-nautic-blue)] mx-auto max-w-[40rem]">
                           {{ item.question }}
@@ -74,7 +74,7 @@
                         </p>
                       </details>
                     {% elif dataType == "legal" and item.title is defined %}
-                      {# Affichage format Mentions légales #}
+                      {# Legal notice format display #}
                       <h3 class="font-bold text-[theme(--ma-nautic-blue)] mb-4 max-w-[40rem] mx-auto">{{ item.title }}</h3>
                       <div class="text-[theme(--ma-nautic-blue)] whitespace-pre-line max-w-[40rem] mx-auto">
                         {{ item.content }}
@@ -85,7 +85,7 @@
               </div>
             {% endif %}
 
-            {# Lien de navigation si défini #}
+            {# Navigation link if defined #}
             {% if variant.links and options.links and options.links.links %}
               {% set linkFound = false %}
               {% for link in options.links.links %}
@@ -112,13 +112,13 @@
 
 {#
 ============================
-Utilisation du composant section-page
+Summon HAT Components Wisely
 ============================
 
-1. Import du macro en haut de votre page
+1. Import the macro at the top of your page
 {% from "01-organisms/section-page.njk" import renderSectionPage %}
 
-2. Appel du composant section-page pour FAQ
+2. Call a specific section-page by its name
 {{ renderSectionPage({ 
     name: "ma_faq",
     datas: faqs,
@@ -126,12 +126,5 @@ Utilisation du composant section-page
     links: atoms.links
 }) }}
 
-3. Appel du composant section-page pour Mentions légales
-{{ renderSectionPage({ 
-    name: "ma_legal",
-    datas: legals,
-    icons: atoms.icons,
-    links: atoms.links
-}) }}
-
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

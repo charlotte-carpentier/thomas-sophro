@@ -7,9 +7,12 @@
 {% from "01-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
 
 {% macro renderMenu(options) %}
+  {# Check if data is provided #}
   {% if options.datas %}
+    {# Get global styling #}
     {% set globalStyle = options.datas.globalStyle %}
     
+    {# Find menu configuration #}
     {% set menuData = null %}
     {% if options.name %}
       {% for menuSet in options.datas.menus %}
@@ -19,14 +22,17 @@
       {% endfor %}
     {% endif %}
 
+    {# Fallback to first menu if not found #}
     {% if not menuData %}
       {% set menuData = options.datas.menus[0] %}
     {% endif %}
     
+    {# Set heading properties #}
     {% set headingText = menuData.heading %}
     {% set headingLevel = 2 %}
     {% set headingStyle = menuData.headingStyle %}
     
+    {# Find heading configuration if available #}
     {% if options.headings %}
       {% for heading in options.headings.headings %}
         {% if heading.name == menuData.heading %}
@@ -37,10 +43,11 @@
       {% endfor %}
     {% endif %}
     
+    {# Render menu with heading and navigation #}
     <nav class="{{ globalStyle }} {{ options.class | default('') }}">
       <h{{ headingLevel }} class="{{ headingStyle }}">{{ headingText }}</h{{ headingLevel }}>
       
-      {# Utilisation directe du composant navigation-secondary comme pattern dans header.njk #}
+      {# Use navigation-secondary component directly #}
       {{ renderNavigationSecondary({ 
           name: menuData['navigation-secondarys'],
           datas: options['navigation-secondarys'],
@@ -62,7 +69,7 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "03-organisms/menu.njk" import renderMenu %}
 
-2. Call the menu component with a specific name
+2. Call a specific menu by its name
 {{ renderMenu({ 
     name: "main_navigation",
     datas: organisms.menus,
@@ -71,29 +78,5 @@ Summon HAT Components Wisely
     headings: atoms.headings
 }) }}
 
-3. Using custom styles
-{{ renderMenu({ 
-    name: "footer_navigation",
-    datas: organisms.menus,
-    "navigation-secondarys": organisms["navigation-secondarys"],
-    links: atoms.links,
-    headings: atoms.headings,
-    class: "my-custom-menu-class"
-}) }}
-
-4. Structure of navigation-secondarys.json
-{
-  "navigation-secondarys": [
-    {
-      "name": "sidebar",
-      "links": [
-        "tavern",
-        "lore",
-        "guild_services"
-      ]
-    }
-  ]
-}
-
-Each path leads to glory or peril ⚔️☠️
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

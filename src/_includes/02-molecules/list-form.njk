@@ -4,22 +4,24 @@
 =========================
 #}
 
-{# Importer le composant input #}
+{# Import the input component #}
 {% from "03-atoms/input.njk" import renderInput as renderAtomInput %}
 
 {% macro renderListForm(options) %}
-  {# Valeurs par défaut pour les paramètres optionnels #}
+  {# Default values for optional parameters #}
   {% set recaptchaSiteKey = options.recaptchaSiteKey | default('VOTRE_RECAPTCHA_SITE_KEY') %}
   {% set submitLabel = options.submitLabel | default('Envoyer') %}
   {% set action = options.action | default('/merci') %}
   {% set method = options.method | default('POST') %}
   {% set class = options.class | default('bg-[#2b3947]') %}
-        {% set inputWidth = options.inputWidth | default('w-80') %}
-      {% set messageInputWidth = options.messageInputWidth | default('w-full') %}
+  {% set inputWidth = options.inputWidth | default('w-80') %}
+  {% set messageInputWidth = options.messageInputWidth | default('w-full') %}
 
   {% if options.datas %}
+    {# Get global styling #}
     {% set globalStyle = options.datas.globalStyle %}
     
+    {# Find form configuration #}
     {% set formData = null %}
     {% if options.name %}
       {% for form in options.datas.forms %}
@@ -29,10 +31,12 @@
       {% endfor %}
     {% endif %}
 
+    {# Fallback to first form if not found #}
     {% if not formData %}
       {% set formData = options.datas.forms[0] %}
     {% endif %}
     
+    {# Render form with appropriate attributes #}
     <form id="form-{{ formData.name }}" 
       class="w-full {{ class }}"  
       method="{{ method }}" 
@@ -40,13 +44,14 @@
       action="{{ action }}"
       netlify-honeypot="bot-field">
 
+    {# Honeypot field for bot protection #}
     <p style="display: none;">
       <label>Ne remplissez pas ce champ si vous êtes humain :  
         <input name="bot-field">
       </label>
     </p>
 
-      {# Première ligne - Nom et Email #}
+      {# First row - Name and Email #}
       <div class="flex flex-col md:flex-row justify-center md:space-x-8 space-y-4 md:space-y-0 mb-4">
         {% for input in formData.inputs %}
           {% if input.name == 'input_name' or input.name == 'input_email' %}
@@ -61,7 +66,7 @@
         {% endfor %}
       </div>
       
-      {# Deuxième ligne - Téléphone et Bateaux #}
+      {# Second row - Phone and Boats #}
       <div class="flex flex-col md:flex-row justify-center md:space-x-8 space-y-4 md:space-y-0 mb-4">
         {% for input in formData.inputs %}
           {% if input.name == 'input_phone' or input.name == 'input_boat' %}
@@ -76,7 +81,7 @@
         {% endfor %}
       </div>
       
-      {# Troisième ligne - Message #}
+      {# Third row - Message #}
       <div class="flex justify-center mb-6 w-full">
         {% for input in formData.inputs %}
           {% if input.name == 'input_message' %}
@@ -93,19 +98,19 @@
         {% endfor %}
       </div>
       
-      {# Quatrième ligne - reCAPTCHA #}
+      {# Fourth row - reCAPTCHA #}
       <div class="w-full flex justify-center mb-6">
         <div class="g-recaptcha" data-sitekey="{{ recaptchaSiteKey }}"></div>
       </div>
       
-      {# Cinquième ligne - Bouton Envoyer #}
+      {# Fifth row - Submit button #}
       <div class="w-full flex justify-center mb-6">
         <button type="submit" class="bg-[#63a595] hover:bg-[#e8ab55] text-white px-6 py-3 transition-colors duration-300 rounded-full">
           {{ submitLabel }}
         </button>
       </div>
       
-      {# Mentions légales #}
+      {# Legal notices #}
       <div class="w-full text-xs text-white opacity-80">
         <p>Pour traiter votre demande, nous utiliserons et conserverons vos données personnelles pendant 2 ans après notre dernier contact. Elles resteront confidentielles et ne seront pas partagées avec des tiers.</p>
         <p class="mt-2">Conformément à la loi Informatique et Libertés du 6 janvier 1978 modifiée, vous bénéficiez d'un droit d'accès et de rectification des données vous concernant, d'un droit d'opposition pour motifs légitimes, d'un droit à l'effacement des données. Vous disposez également d'un droit à la réception et à la portabilité des données dans certains cas spécifiquement prévus par la loi.</p>
@@ -119,37 +124,18 @@
 
 {#
 ============================
-Utilisation du composant
+Summon HAT Components Wisely
 ============================
 
-1. Import du macro en haut de la page
+1. Import the macro at the top of your page
 {% from "02-molecules/list-form.njk" import renderListForm %}
 
-2. Appel simplifié du composant list-form (largeur d'input w-80 par défaut)
+2. Call a specific list-form by its name
 {{ renderListForm({ 
-    name: "ma_registration",
+    name: "contact_form",
     datas: molecules["list-forms"],
     atoms: atoms
 }) }}
 
-3. Appel avec largeur d'input personnalisée
-{{ renderListForm({ 
-    name: "ma_registration",
-    datas: molecules["list-forms"],
-    atoms: atoms,
-    inputWidth: "w-96"
-}) }}
-
-4. Appel complet avec tous les paramètres
-{{ renderListForm({ 
-    name: "ma_registration",
-    datas: molecules["list-forms"],
-    atoms: atoms,
-    recaptchaSiteKey: "VOTRE_CLE_RECAPTCHA",
-    submitLabel: "Envoyer",
-    action: "/contact",
-    method: "POST",
-    class: "bg-[#2b3947]",
-    inputWidth: "w-96"
-}) }}
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

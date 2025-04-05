@@ -35,7 +35,7 @@
 
 {#
 ============================
-Summon Icon Components Wisely
+Summon Hat Components Wisely
 ============================
 
 1. Import the macro at the top of your page
@@ -44,38 +44,8 @@ Summon Icon Components Wisely
 2. Call a specific icon by its name
 {{ renderIcon({ 
     name: "brand", 
-    size: "lg",
     datas: atoms.icons 
 }) }}
 
-3. Call multiple icons from the data with different sizes
-{% for size in ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] %}
-    {{ renderIcon({ 
-        name: "brand", 
-        size: size,
-        datas: atoms.icons 
-    }) }}
-{% endfor %}
-
-4. Direct icon usage with custom path
-{{ renderIcon({
-    path: "/assets/icons/custom-icon.svg", 
-    alt: "Custom Icon",
-    size: "md",
-    datas: atoms.icons
-}) }}
-
-5. Adding a new icon to icons.json
-{
-  "icons": [
-    {
-      "name": "new_icon_name",
-      "path": "/assets/icons/your-icon.svg",
-      "alt": "Your Icon Description",
-      "defaultSize": "md"
-    }
-  ]
-}
-
-May your designs defy the sands of time. ⏳⚡
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

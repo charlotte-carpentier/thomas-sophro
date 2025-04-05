@@ -7,10 +7,13 @@
 {% from "02-molecules/list-form.njk" import renderListForm %}
 
 {% macro renderSectionContact(options) %}
+  {# Check if data is provided #}
   {% if options.datas %}
+    {# Get global styling and container styles #}
     {% set globalStyle = options.datas.globalStyle %}
     {% set containerStyle = options.datas.containerStyle | default('container mx-auto px-4') %}
     
+    {# Find specific section configuration #}
     {% set sectionData = null %}
     {% if options.name %}
       {% for section in options.datas.sections %}
@@ -20,20 +23,22 @@
       {% endfor %}
     {% endif %}
 
+    {# Fallback to first section if not found #}
     {% if not sectionData %}
       {% set sectionData = options.datas.sections[0] %}
     {% endif %}
     
+    {# Render contact section with form #}
     <section class="{{ globalStyle }} bg-[#2b3947] text-white py-8 {{ options.class | default('') }}">
       <div class="{{ containerStyle }}">
         <div class="flex justify-center">
           <div class="w-full lg:w-1/2 {{ sectionData.form.wrapperStyle }}">
-            {# Champ honeypot pour protection anti-spam #}
+            {# Honeypot field for spam protection #}
             <div aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px;">
               <input type="text" name="website" tabindex="-1" autocomplete="off">
             </div>
             
-            {# Appel au composant list-form en utilisant la version simplifiée #}
+            {# Call list-form component with simplified version #}
             {{ renderListForm({
               name: sectionData.form.name,
               datas: options.listForms,
@@ -51,13 +56,13 @@
 
 {#
 ============================
-Utilisation du composant
+Summon HAT Components Wisely
 ============================
 
 1. Import the macro at the top of your page
 {% from "01-organisms/section-contact.njk" import renderSectionContact %}
 
-2. Call the section-contact component (appel simplifié)
+2. Call a specific section-contact by its name
 {{ renderSectionContact({ 
     name: "default",
     datas: organisms["section-contacts"],
@@ -65,12 +70,5 @@ Utilisation du composant
     atoms: atoms
 }) }}
 
-3. Call with custom parameters (appel avec paramètres personnalisés)
-{{ renderSectionContact({ 
-    name: "default",
-    datas: organisms["section-contacts"],
-    listForms: molecules["list-forms"],
-    atoms: atoms,
-    class: "my-8"
-}) }}
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

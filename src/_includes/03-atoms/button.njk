@@ -1,8 +1,7 @@
 {# 
-========================
+=========================
          BUTTON           
-========================
-Flexible button component with variant and state support
+=========================
 #}
 
 {% macro renderButton(option) %}
@@ -147,45 +146,17 @@ Flexible button component with variant and state support
 
 {# 
 ============================
-Summon HAT Button Wisely
+Summon HAT Components Wisely
 ============================
 
-Usage examples:
+1. Import the macro at the top of your page
+{% from "03-atoms/button.njk" import renderButton %}
 
-1. Use predefined button from buttons.json
+2. Call a specific button by its name
 {{ renderButton({ 
     name: "submit_quest",
     datas: atoms.buttons 
 }) }}
 
-2. Override button text
-{{ renderButton({ 
-    name: "submit_quest", 
-    text: "Custom Button Text",
-    datas: atoms.buttons 
-}) }}
-
-3. Change button style 
-{{ renderButton({
-    name: "submit_quest", 
-    style: "secondary",
-    datas: atoms.buttons 
-}) }}
-
-4. Disable a button
-{{ renderButton({
-    name: "submit_quest", 
-    disabled: true,
-    datas: atoms.buttons 
-}) }}
-
-5. Using SVG icons that inherit button text color
-   - Store your SVG files in a location like `/assets/icons/`
-   - In your SVG files, remove any hardcoded fill or stroke attributes
-   - Add `fill="currentColor"` to your SVG elements
-   - Reference icons in buttons.json like:
-     "iconBefore": "/assets/icons/arrow-left.svg",
-     "iconAfter": "/assets/icons/arrow-right.svg"
-
-May your buttons never miss their saving throw! 🎲🎯
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

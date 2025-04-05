@@ -10,12 +10,14 @@
 {% from "01-organisms/carousel.njk" import renderCarousel %}
 
 {% macro renderSectionSpot(options) %}
+  {# Check if data is provided #}
   {% if options.datas %}
+    {# Get global styling and configuration #}
     {% set globalStyle = options.datas.globalStyle | default("spot-section-container") %}
     {% set sectionStyles = options.datas.sectionStyles | default({}) %}
     {% set reversed = options.reversed | default(false) %}
 
-    {# Définition des styles avec valeurs par défaut #}
+    {# Define styles with default values #}
     {% set containerStyle = sectionStyles.container | default("container mx-auto px-4 lg:px-8") %}
     {% set contentWrapperStyle = sectionStyles.contentWrapper | default("flex flex-col lg:flex-row lg:items-start lg:gap-2") %}
     {% set textContentStyle = sectionStyles.textContent | default("w-full lg:w-1/2 mb-6 lg:mb-0 text-center") %}
@@ -26,7 +28,7 @@
     {% set buttonWrapperStyle = sectionStyles.buttonWrapper | default("mt-6 flex justify-center") %}
     {% set indicatorsContainerStyle = sectionStyles.indicatorsContainer | default("mt-4 flex justify-center gap-2") %}
 
-    {# Récupérer les données du spot spécifique #}
+    {# Get specific spot data #}
     {% set itemData = null %}
     {% for spot in options.datas.spots %}
       {% if spot.name == options.name %}
@@ -39,7 +41,7 @@
     {% if itemData %}
       <section id="spot-section" class="{{ globalStyle }} {{ options.class | default('') }} pb-12 pt-16 {% if not reversed %}bg-[theme(--ma-nautic-blue)]{% else %}bg-[theme(--ma-nautic-white)]{% endif %}" data-section-item="{{ options.name }}" data-section-id="{{ sectionId }}" data-reversed="{{ reversed | string }}">
         <div class="{{ containerStyle }}">
-          {# Mobile layout (flex column) - Éléments centrés - Visible jusqu'au breakpoint lg #}
+          {# Mobile layout (flex column) - Centered elements - Visible until lg breakpoint #}
           <div class="lg:hidden text-center px-6 pt-8">
             {# Main Heading (heading) #}
             {% if itemData.heading and options.headings %}
@@ -60,7 +62,7 @@
                   {% endif %}
                 {% endfor %}
 
-                {# Récupérer les styles d'icône spécifiques si disponibles #}
+                {# Get specific icon styles if available #}
                 {% set iconVariantName = itemData.iconName ~ "Icon" %}
                 {% set iconDefaultClass = options.datas.variants[iconVariantName].default | default("") if options.datas.variants[iconVariantName] else "" %}
                 {% set iconStyle = options.datas.variants[iconVariantName].iconStyle | default("text-[theme(--ma-nautic-teal)]") if options.datas.variants[iconVariantName] else "text-[theme(--ma-nautic-teal)]" %}
@@ -103,12 +105,12 @@
             {% endif %}
           </div>
 
-          {# Desktop layout (two columns) - Visible à partir du breakpoint lg #}
+          {# Desktop layout (two columns) - Visible from lg breakpoint #}
           <div class="hidden lg:flex {% if reversed %}lg:flex-row-reverse{% else %}lg:flex-row{% endif %} items-center justify-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
             {# Left column: Main Heading, Icon, Content and CTA Button #}
             <div class="w-auto min-w-[400px] max-w-[550px] min-h-[450px] mx-auto border {% if not reversed %}border-[theme(--ma-nautic-white)]{% else %}border-[theme(--ma-nautic-blue)]{% endif %} p-10 flex flex-col items-center justify-center text-center my-auto relative">
               
-              {# Icône au coin de la bordure #}
+              {# Icon at corner of border #}
               <div class="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2">
                 {% if itemData.iconName and options.icons %}
                   {% set iconData = null %}
@@ -118,13 +120,13 @@
                     {% endif %}
                   {% endfor %}
 
-                  {# Récupérer les styles d'icône spécifiques si disponibles #}
+                  {# Get specific icon styles #}
                   {% set iconVariantName = itemData.iconName ~ "Icon" %}
                   {% set iconStyle = "text-[theme(--ma-nautic-gold)]" %}
                   {% set iconContainerSize = "w-20 h-20" %}
                   {% set iconSize = "40" %}
                   
-                  {# Adaptation des styles en fonction du mode reversed #}
+                  {# Adapt styles based on reversed mode #}
                   {% if reversed %}
                     {% set bgColor = "bg-[theme(--ma-nautic-white)]" %}
                   {% else %}
@@ -192,7 +194,7 @@
             </div>
           </div>
 
-          {# Carousel pour mobile #}
+          {# Carousel for mobile #}
           {% if itemData.carousel %}
             <div class="lg:hidden mt-8">
               <div class="w-4/5 mx-auto">
@@ -218,13 +220,13 @@
 
 {#
 ============================
-Summon MA-NAUTIC Spot Section Wisely
+Summon HAT Components Wisely
 ============================
 
 1. Import the macro at the top of your page
 {% from "01-organisms/section-spot.njk" import renderSectionSpot %}
 
-2. Appeler le composant pour afficher un spot spécifique
+2. Call a specific section-spot by its name
 {{ renderSectionSpot({ 
     name: "agriates_desert", 
     datas: spots, 
@@ -236,29 +238,5 @@ Summon MA-NAUTIC Spot Section Wisely
     buttons: atoms.buttons
 }) }}
 
-3. Avec mise en page inversée (colonnes inversées)
-{{ renderSectionSpot({ 
-    name: "cap_corse", 
-    datas: spots, 
-    headings: atoms.headings, 
-    links: atoms.links,
-    icons: atoms.icons,
-    carousels: organisms.carousels,
-    images: atoms.images,
-    buttons: atoms.buttons,
-    reversed: true
-}) }}
-
-4. Utiliser des styles personnalisés
-{{ renderSectionSpot({ 
-    name: "agriates_desert",
-    datas: spots, 
-    headings: atoms.headings, 
-    links: atoms.links,
-    icons: atoms.icons,
-    carousels: organisms.carousels,
-    images: atoms.images,
-    buttons: atoms.buttons,
-    class: "my-custom-spot-section-class" 
-}) }}
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

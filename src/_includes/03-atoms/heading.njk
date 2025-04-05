@@ -47,11 +47,9 @@
   {% endif %}
 {% endmacro %}
 
-
-
 {#
 ============================
-Summon HAT Heading Component Wisely
+Summon HAT Components Wisely
 ============================
 
 1. Import the macro at the top of your page
@@ -60,42 +58,5 @@ Summon HAT Heading Component Wisely
 2. Call a specific heading by its name
 {{ renderHeading({ name: "page_title", datas: atoms.headings }) }}
 
-3. Call multiple headings from the data
-{% for heading in atoms.headings.headings %}
-    {{ renderHeading({ 
-        name: heading.name, 
-        datas: atoms.headings 
-    }) }}
-{% endfor %}
-
-4. Direct heading creation
-{{ renderHeading({
-    level: 2, 
-    text: "Custom Heading", 
-    style: "primary",
-    datas: atoms.headings
-}) }}
-
-5. Adding a new heading to headings.json
-{
-  "headings": [
-    {
-      "name": "new_heading_name",
-      "level": 2,
-      "text": "Your Heading Text",
-      "style": "primary"
-    }
-  ]
-}
-
-6. Using with an icon (optional)
-{{ renderHeading({
-    level: 3, 
-    text: "Heading with Icon", 
-    style: "secondary",
-    icon: "♦",
-    datas: atoms.headings
-}) }}
-
-A true hero's tale begins with a proper H1. 🏆📖
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}
