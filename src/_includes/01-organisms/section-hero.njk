@@ -5,8 +5,9 @@
 #}
 
 {% macro renderSectionHero(options) %}
+  {# Check if data is provided #}
   {% if options.datas %}
-    {# Sélection de variante sans utiliser selectattr #}
+    {# Find variant without using selectattr #}
     {% set variant = null %}
     {% for hero in options.datas.heroes %}
       {% if hero.name == options.name %}
@@ -14,11 +15,12 @@
       {% endif %}
     {% endfor %}
     
-    {# Si aucune variante n'est trouvée, utiliser la première par défaut #}
+    {# Fallback to first hero if not found #}
     {% if variant == null %}
       {% set variant = options.datas.heroes[0] %}
     {% endif %}
 
+    {# Get global styling and variants #}
     {% set globalStyle = options.datas.globalStyle %}
     {% set variantStyle = options.datas.variants[variant.variant] | default(options.datas.variants.default) %}
     {% set containerStyle = options.datas.containerStyle %}
@@ -27,16 +29,16 @@
     {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center md:justify-start" %}
     {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
 
-    {# Créer un ID unique pour la section à partir du nom #}
+    {# Create unique ID for the section from name #}
     {% set sectionId = "section-" ~ (variant.name | replace(" ", "-") | lower) %}
 
-    {# Styles spécifiques pour le bouton de défilement #}
+    {# Specific styles for scroll button #}
     {% set scrollArrowWrapperStyle = "absolute left-1/2 transform -translate-x-1/2 z-20" %}
     {% set arrowStyle = "mx-auto" %}
     {% set arrowButtonStyle = "text-[theme(--ma-nautic-blue)]" %}
     {% set arrowContainerSize = "w-16 h-16" %}
 
-    {# Spécifique à MA-Nautic hero #}
+    {# Specific to MA-Nautic hero #}
     {% if variant.name == "ma_nautic_hero" %}
       <section class="{{ globalStyle }} {{ variantStyle }} relative h-[75vh] overflow-hidden {{ options.class | default('') }}" id="{{ sectionId }}">
         {# Background image #}
@@ -58,7 +60,7 @@
         {# Content container #}
         <div class="{{ containerStyle }} relative z-10 h-full flex items-center justify-center">
           <div class="flex flex-col items-center justify-center">
-            {# Logo image à la place des headings #}
+            {# Logo image instead of headings #}
             {% if variant.image %}
               {% set logoImg = null %}
               {% for image in options.images.images %}
@@ -74,7 +76,7 @@
               {% endif %}
             {% endif %}
 
-            {# Subtitle sous le logo si nécessaire #}
+            {# Subtitle under logo if needed #}
             {% if variant.heading and options.headings %}
               {% set subtitle = null %}
               {% for heading in options.headings.headings %}
@@ -93,9 +95,9 @@
         </div>
       </section>
 
-    {# Spécifique aux pages bateaux, lieux et contact - structure avec bande beige et vagues #}
+    {# Specific to boat, location and contact pages - structure with beige band and waves #}
     {% elseif variant.name == "bateaux_hero" or variant.name == "lieux_hero" or variant.name == "contact_hero" or variant.name == "faq_hero" or variant.name == "legal_hero" %}
-      {# Bande supérieure en beige pour le super heading #}
+      {# Top beige band for super heading #}
       <div class="bg-[theme(--ma-nautic-beige)] pt-16 md:pt-20 lg:pt-24 pb-12 w-full">
         <div class="{{ containerStyle }}">
           {# SuperHeading #}
@@ -116,9 +118,9 @@
         </div>
       </div>
 
-      {# Section principale avec les vagues et le contenu #}
+      {# Main section with waves and content #}
       <section class="{{ globalStyle | replace('py-12', 'pt-12 pb-0') }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible pt-0" id="{{ sectionId }}">
-        {# Vague gauche avec transparence conditionnelle #}
+        {# Left wave with conditional transparency #}
         <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
           {% if variant["image-left"] and options.images %}
             {% set leftWave = null %}
@@ -129,14 +131,14 @@
             {% endfor %}
 
             {% if leftWave %}
-              {# Utiliser la variante de taille définie dans images.json #}
+              {# Use size variant defined in images.json #}
               {% set imageVariantLeft = options.images.variants[leftWave.size] | default('w-auto h-auto') %}
               <img src="{{ leftWave.src }}" alt="{{ leftWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantLeft }} max-w-none wave-image">
             {% endif %}
           {% endif %}
         </div>
 
-        {# Vague droite avec transparence conditionnelle #}
+        {# Right wave with conditional transparency #}
         <div class="absolute right-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
           {% if variant["image-right"] and options.images %}
             {% set rightWave = null %}
@@ -147,14 +149,14 @@
             {% endfor %}
 
             {% if rightWave %}
-              {# Utiliser la variante de taille définie dans images.json #}
+              {# Use size variant defined in images.json #}
               {% set imageVariantRight = options.images.variants[rightWave.size] | default('w-auto h-auto') %}
               <img src="{{ rightWave.src }}" alt="{{ rightWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantRight }} max-w-none wave-image">
             {% endif %}
           {% endif %}
         </div>
         
-        {# Fond blanc pour le contenu principal #}
+        {# White background for main content #}
         <div class="bg-white pt-4 md:pt-6 relative z-10">
           <div class="{{ containerStyle }} relative z-10">
             <div class="flex flex-col items-center">
@@ -174,7 +176,7 @@
                 {% endif %}
               {% endif %}
 
-              {# Icon if present - Utilisation de data-svg-src pour le chargement JS #}
+              {# Icon if present - Using data-svg-src for JS loading #}
               {% if variant.hasIcon and variant.iconName and options.icons %}
                 <div class="flex justify-center my-0 mb-6">
                   {% set iconData = null %}
@@ -196,7 +198,7 @@
                 </div>
               {% endif %}
 
-              {# Description ou ContentBlocks selon la variante #}
+              {# Description or ContentBlocks depending on variant #}
               {% if variant.name == "contact_hero" and variant.contentBlocks %}
                 <div id="contact-form" class="text-center max-w-[40rem] mx-auto text-[theme(--ma-nautic-blue)] space-y-4">
                   {% for block in variant.contentBlocks %}
@@ -213,7 +215,7 @@
         </div>
       </section>
 
-      {# Bouton de défilement entre les sections #}
+      {# Scroll button between sections #}
       {% if variant.scrollArrowButton and options.buttons %}
         {% set scrollButton = null %}
         {% for button in options.buttons.buttons %}
@@ -257,7 +259,7 @@
         {% endif %}
       {% endif %}
 
-      {# Section Hero standard pour les autres variantes #}
+      {# Standard Hero section for other variants #}
     {% else %}
       <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}" id="{{ sectionId }}">
         <div class="{{ containerStyle }}">
@@ -353,11 +355,9 @@
   {% else %}
     <span class="text-red-500">Section Hero data not found</span>
   {% endif %}
-  {# Inclusion du script pour le défilement #}
+  {# Include script for scrolling #}
 <script src="/js/organisms/section-scroll.js"></script>
 {% endmacro %}
-
-
 
 {#
 ============================
@@ -367,7 +367,7 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
-2. Call the section-hero component with a specific name
+2. Call a specific section-hero by its name
 {{ renderSectionHero({ 
     name: "bateaux_hero",
     datas: organisms["section-heros"],
@@ -377,34 +377,5 @@ Summon HAT Components Wisely
     icons: atoms.icons
 }) }}
 
-3. Using custom styles
-{{ renderSectionHero({ 
-    name: "product_hero",
-    datas: organisms["section-heros"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    icons: atoms.icons,
-    class: "my-custom-hero-class"
-}) }}
-
-4. Using MA-Nautic Hero with Logo
-{{ renderSectionHero({ 
-    name: "ma_nautic_hero",
-    datas: organisms["section-heros"],
-    headings: atoms.headings,
-    images: atoms.images
-}) }}
-
-5. Using Bateaux, Lieux or Contact Hero with waves and special structure
-{{ renderSectionHero({ 
-    name: "bateaux_hero", // or "lieux_hero" or "contact_hero"
-    datas: organisms["section-heros"],
-    headings: atoms.headings,
-    images: atoms.images,
-    icons: atoms.icons,
-    buttons: atoms.buttons
-}) }}
-
-Every journey begins with a hero section! 🏰🛡️
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

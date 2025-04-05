@@ -5,6 +5,7 @@
 #}
 
 {% macro renderLink(options) %}
+  {# Find the link configuration #}
   {% set linkData = null %}
   
   {% for link in options.datas.links %}
@@ -13,11 +14,14 @@
     {% endif %}
   {% endfor %}
 
+  {# Get global styling #}
   {% set globalStyle = options.datas.globalStyle %}
 
   {% if linkData %}
+    {# Apply variant styling #}
     {% set variantStyle = options.datas.variants[linkData.style] | default('') %}
     
+    {# Render the link with appropriate attributes #}
     <a 
       href="{{ linkData.href }}" 
       class="{{ globalStyle }} {{ variantStyle }}"
@@ -25,7 +29,7 @@
     >
       {{ linkData.text }}
     </a>
-    {# Include external JS files #}
+    {# Include JS for active link detection #}
     <script src="/js/atoms/current-link.js"></script>
   {% else %}
     <span class="text-red-500">Link not found: {{ options.name }}</span>
@@ -42,40 +46,6 @@ Summon HAT Components Wisely
 
 2. Call a specific link by its name
 {{ renderLink({ name: "tavern_quest", datas: atoms.links }) }}
-
-3. Call a navigation link with active state detection
-{{ renderLink({ name: "pigeon", datas: atoms.links, dataNavLink: true }) }}
-
-4. Call multiple links from the data
-{% for link in atoms.links.links %}
-    {{ renderLink({ 
-        name: link.name, 
-        datas: atoms.links,
-        dataNavLink: link.style == "navigation"  /* Automatically add active state to navigation links */
-    }) }}
-{% endfor %}
-
-5. Direct link creation
-{{ renderLink({
-    href: "/new-page", 
-    text: "Custom Link", 
-    style: "primary"
-}) }}
-
-6. Adding a new link to links.json
-{
-  "links": [
-    {
-      "name": "new_link_name",
-      "href": "/your-link",
-      "text": "Your Link Text",
-      "style": "primary"
-    }
-  ]
-}
-
-Note: For active state detection to work, you need to include the active-links.js script
-and add the dataNavLink: true parameter to your navigation links.
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

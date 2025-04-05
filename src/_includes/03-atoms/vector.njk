@@ -5,20 +5,25 @@
 #}
 
 {% macro renderVector(options) %}
+  {# Find vector configuration or use direct props #}
   {% set vectorData = null %}
   
   {% if options.name %}
+    {# Search vector by name in data #}
     {% for vector in options.datas.vectors %}
       {% if vector.name == options.name %}
         {% set vectorData = vector %}
       {% endif %}
     {% endfor %}
 
+    {# Get global styling #}
     {% set globalStyle = options.datas.globalStyle %}
 
     {% if vectorData %}
+      {# Apply size-based styling #}
       {% set sizeStyle = options.datas.sizes[vectorData.size] | default('') %}
       
+      {# Render vector from data #}
       <img 
         src="{{ vectorData.src }}" 
         alt="{{ vectorData.alt }}"
@@ -28,6 +33,7 @@
       <span class="text-red-500">Vector not found: {{ options.name }}</span>
     {% endif %}
   {% else %}
+    {# Direct vector rendering with inline properties #}
     {% set globalStyle = options.datas.globalStyle %}
     {% set sizeStyle = options.datas.sizes[options.size] | default('') %}
     
@@ -38,8 +44,6 @@
     />
   {% endif %}
 {% endmacro %}
-
-
 
 {#
 ============================
@@ -52,32 +56,5 @@ Summon HAT Components Wisely
 2. Call a specific vector by its name
 {{ renderVector({ name: "logo_full", datas: atoms.vectors }) }}
 
-3. Call multiple vectors from the data
-{% for vector in atoms.vectors.vectors %}
-    {{ renderVector({ 
-        name: vector.name, 
-        datas: atoms.vectors 
-    }) }}
-{% endfor %}
-
-4. Direct vector creation
-{{ renderVector({
-    src: "/assets/logos/custom-logo.svg", 
-    alt: "Custom Logo", 
-    size: "large"
-}) }}
-
-5. Adding a new vector to vectors.json
-{
-  "vectors": [
-    {
-      "name": "new_vector_name",
-      "src": "/assets/logos/your-logo.svg",
-      "alt": "Your Logo Description",
-      "size": "large"
-    }
-  ]
-}
-
-May your designs defy the sands of time. ⏳⚡
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

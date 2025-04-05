@@ -5,20 +5,22 @@
 #}
 
 {% macro renderCarousel(options) %}
+  {# Get default global styling and theme #}
   {% set globalStyle = (options.datas and options.datas.globalStyle) | default('w-full') %}
   {% set theme = options.theme | default('auto') %}
   
-  {# Déterminer si les données viennent d'un fichier Markdown ou du JSON #}
+  {# Determine if data comes from Markdown file or JSON #}
   {% set isMarkdownSource = options.markdown | default(false) %}
   
   {% set carouselData = null %}
   
-  {# Source Markdown #}
+  {# Markdown source #}
   {% if isMarkdownSource %}
+    {# Get carousel data from markdown #}
     {% set carouselData = options.carousel %}
     {% set carouselId = "carousel-" ~ carouselData.name %}
     
-    {# Chercher des paramètres globaux pour les carousel-boat dans le JSON #}
+    {# Look for global parameters for carousel-boat in JSON #}
     {% set boatDefaults = null %}
     {% if options.datas and options.datas.carousels %}
       {% for carousel in options.datas.carousels %}
@@ -28,18 +30,19 @@
       {% endfor %}
     {% endif %}
     
-    {# Valeurs par défaut pour les options non spécifiées dans le Markdown #}
+    {# Default values for options not specified in Markdown #}
     {% set autoplay = carouselData.autoplay | default((boatDefaults and boatDefaults.autoplay) | default(true)) %}
     {% set pauseOnHover = carouselData.pauseOnHover | default((boatDefaults and boatDefaults.pauseOnHover) | default(true)) %}
     {% set defaultObjectPosition = (boatDefaults and boatDefaults.objectPosition) | default('center') %}
     
-    {# Si le carousel est vide, on ajoute un tableau vide pour éviter des erreurs #}
+    {# Add empty array to avoid errors if carousel is empty #}
     {% if not carouselData.images %}
       {% set carouselData = carouselData | merge({ images: [] }) %}
     {% endif %}
     
-  {# Source JSON #}
+  {# JSON source #}
   {% else %}
+    {# Find carousel by name in data #}
     {% for carousel in options.datas.carousels %}
       {% if carousel.name == options.name %}
         {% set carouselData = carousel %}
@@ -54,13 +57,14 @@
     {% endif %}
   {% endif %}
   
-  {# Source des boutons #}
+  {# Button source #}
   {% set prevButtonId = (options.datas and options.datas.buttons.prev) | default('carousel_prev') %}
   {% set nextButtonId = (options.datas and options.datas.buttons.next) | default('carousel_next') %}
   
   {% set prevButton = null %}
   {% set nextButton = null %}
   
+  {# Find button configurations #}
   {% if options.buttons %}
     {% set buttonsArray = options.buttons.buttons | default(options.buttons) %}
     {% for button in buttonsArray %}
@@ -86,6 +90,7 @@
     "iconStyle": "text-[theme(--ma-nautic-gold)]"
   }) %}
   
+  {# Combine styles for buttons #}
   {% set carouselPrevStyle = prevButtonStyles.containerSize ~ " " ~ prevButtonStyles.default %}
   {% set carouselNextStyle = nextButtonStyles.containerSize ~ " " ~ nextButtonStyles.default %}
   
@@ -93,11 +98,11 @@
   {% set nextIconStyle = nextButtonStyles.iconStyle | default("") %}
   
   {% if carouselData %}
-    <!-- Main carousel structure with its own positioning context -->
+    {# Main carousel structure #}
     <div class="w-full">
-      <!-- Carousel container - Main positioning context for all elements -->
+      {# Carousel container - positioning context for all elements #}
       <div class="relative {{ options.class | default('') }}">
-        <!-- Carousel content with overflow hidden -->
+        {# Carousel content with overflow hidden #}
         <div 
           class="{{ globalStyle }} overflow-hidden"
           id="{{ carouselId }}"
@@ -106,15 +111,16 @@
           {% if pauseOnHover %}data-pause-on-hover="true"{% endif %}
           data-carousel-theme="{{ theme }}"
         >
-          <!-- Conteneur avec ratio carré maintenu via padding-bottom -->
+          {# Container with square ratio maintained via padding-bottom #}
           <div class="relative w-full pb-[100%]">
-            <!-- Carousel slides -->
+            {# Carousel slides #}
             <div class="absolute inset-0 w-full h-full">
               {% for image in carouselData.images %}
                 <div 
                   class="absolute inset-0 transition-opacity duration-500 ease-in-out {% if loop.first %}opacity-100{% else %}opacity-0{% endif %}"
                   data-carousel-item
                 >
+                  {# Find image in data #}
                   {% set imagesArray = options.images.images | default(options.images) %}
                   {% set foundImage = null %}
                   {% if imagesArray %}
@@ -125,6 +131,7 @@
                     {% endfor %}
                   {% endif %}
                   
+                  {# Render image or placeholder #}
                   {% if foundImage %}
                     <img 
                       src="{{ foundImage.src }}" 
@@ -144,7 +151,7 @@
           </div>
         </div>
         
-        <!-- Navigation buttons -->
+        {# Navigation buttons #}
         <button 
           class="absolute left-[-48px] top-1/2 transform -translate-y-1/2 z-10 {{ carouselPrevStyle }} {{ prevButton.class | default('') }} flex items-center justify-center cursor-pointer"
           data-carousel-prev
@@ -165,7 +172,7 @@
           </svg>
         </button>
         
-        <!-- Indicators (dots) -->
+        {# Indicators (dots) #}
         <div class="flex items-center justify-center mt-2 md:mt-4 space-x-1 md:space-x-2">
           {% for image in carouselData.images %}
             <button 
@@ -186,13 +193,13 @@
 
 {#
 ============================
-Utilisation du composant
+Summon HAT Components Wisely
 ============================
 
-1. Import du macro
+1. Import the macro at the top of your page
 {% from "01-organisms/carousel.njk" import renderCarousel %}
 
-2. Pour les carousels du JSON (ancienne méthode)
+2. Call a specific carousel by its name
 {{ renderCarousel({ 
     name: "carousel_1", 
     datas: organisms.carousels,
@@ -200,7 +207,7 @@ Utilisation du composant
     buttons: atoms.buttons
 }) }}
 
-3. Pour afficher un carousel spécifique depuis un fichier MD (section)
+3. For displaying a carousel from a Markdown file (MD source)
 {% set carousel_alba = null %}
 {% for carousel_item in collections.carousel %}
   {% if carousel_item.data.name == "carousel_alba" and not carousel_alba %}
@@ -218,7 +225,7 @@ Utilisation du composant
   }) }}
 {% endif %}
 
-4. Pour afficher le carousel correspondant au bateau sur sa page
+4. For displaying the boat carousel on its page
 {% set boat_name = page.fileSlug | replace("boat_", "") %}
 {% set carousel_name = "carousel_" + boat_name %}
 {% set boat_carousel = null %}
@@ -237,30 +244,7 @@ Utilisation du composant
       images: atoms.images,
       buttons: atoms.buttons
   }) }}
-{% else %}
-  {{ renderCarousel({ 
-      name: carousel_name, 
-      datas: organisms.carousels,
-      images: atoms.images,
-      buttons: atoms.buttons
-  }) }}
 {% endif %}
 
-5. Avec une classe personnalisée
-{{ renderCarousel({ 
-    name: "carousel_1",
-    datas: organisms.carousels,
-    images: atoms.images,
-    buttons: atoms.buttons,
-    class: "my-8"
-}) }}
-
-6. Avec un thème spécifique pour les indicateurs
-{{ renderCarousel({ 
-    name: "carousel_1",
-    datas: organisms.carousels,
-    images: atoms.images,
-    buttons: atoms.buttons,
-    theme: "dark"  // Pour fond foncé, indicateurs clairs
-}) }}
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

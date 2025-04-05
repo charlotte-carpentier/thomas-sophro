@@ -10,11 +10,12 @@
 {% from "01-organisms/carousel.njk" import renderCarousel %}
 
 {% macro renderSectionBoat(options) %}
+  {# Get styling and configuration #}
   {% set globalStyle = options.datas.globalStyle | default("boat-section-container") %}
   {% set sectionStyles = options.datas.sectionStyles | default({}) %}
   {% set reversed = options.reversed | default(false) %}
 
-  {# Définition des styles avec valeurs par défaut #}
+  {# Define styles with default values #}
   {% set containerStyle = sectionStyles.container | default("container mx-auto px-4 lg:px-8") %}
   {% set contentWrapperStyle = sectionStyles.contentWrapper | default("flex flex-col lg:flex-row lg:items-start lg:gap-2") %}
   {% set textContentStyle = sectionStyles.textContent | default("w-full lg:w-1/2 mb-6 lg:mb-0 text-center") %}
@@ -24,16 +25,17 @@
   {% set contentContainerDesktopStyle = sectionStyles.contentContainerDesktop | default("mt-4 text-center") %}
   {% set buttonWrapperStyle = sectionStyles.buttonWrapper | default("mt-6 flex justify-center") %}
 
+  {# Get boat data #}
   {% set itemData = options.boat %}
   {% set sectionId = "boat-section-" ~ (itemData.name | replace(" ", "-") | lower) %}
 
-  {# Si un carousel MD est fourni, l'utiliser au lieu de chercher par nom #}
+  {# If a MD carousel is provided, use it instead of searching by name #}
   {% set carouselItem = options.carouselItem | default(null) %}
   
   {% if itemData %}
     <section id="boat-section" class="{{ globalStyle }} {{ options.class | default('') }} pb-12 {% if not reversed %}bg-[theme(--ma-nautic-blue)]{% else %}bg-[theme(--ma-nautic-white)]{% endif %}" data-section-item="{{ itemData.name }}" data-section-id="{{ sectionId }}" data-reversed="{{ reversed | string }}">
       <div class="{{ containerStyle }}">
-        {# Mobile layout (flex column) - Éléments centrés - Visible jusqu'au breakpoint lg #}
+        {# Mobile layout (flex column) - Centered elements - Visible until lg breakpoint #}
         <div class="lg:hidden text-center px-6 pt-8">
           {# Super Heading (section title with underscore) #}
           {% if itemData.model and options.headings %}
@@ -43,7 +45,7 @@
             }) }}
           {% endif %}
 
-          {# Main Heading (name) - Nous appliquons la couleur conditionnelle #}
+          {# Main Heading (name) - Apply conditional color #}
           {% if itemData.name and options.headings %}
             <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">
               {{ renderHeading({
@@ -63,7 +65,7 @@
                 {% endif %}
               {% endfor %}
 
-              {# Récupérer les styles d'icône spécifiques si disponibles #}
+              {# Get specific icon styles if available #}
               {% set iconVariantName = "wheelIcon" %}
               {% set iconDefaultClass = options.datas.variants[iconVariantName].default | default("") if options.datas.variants[iconVariantName] else "" %}
               {% set iconStyle = options.datas.variants[iconVariantName].iconStyle | default("text-[theme(--ma-nautic-teal)]") if options.datas.variants[iconVariantName] else "text-[theme(--ma-nautic-teal)]" %}
@@ -107,12 +109,12 @@
           {% endif %}
         </div>
 
-        {# Desktop layout (two columns) - Visible à partir du breakpoint lg #}
+        {# Desktop layout (two columns) - Visible from lg breakpoint #}
         <div class="hidden lg:flex {% if reversed %}lg:flex-row-reverse{% else %}lg:flex-row{% endif %} items-center justify-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
           {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
           <div class="w-auto min-w-[400px] max-w-[550px] min-h-[450px] mx-auto border {% if not reversed %}border-[theme(--ma-nautic-white)]{% else %}border-[theme(--ma-nautic-blue)]{% endif %} p-10 flex flex-col items-center justify-center text-center my-auto relative">
             
-            {# Icône au coin de la bordure #}
+            {# Icon at corner of border #}
             <div class="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2">
               {% if options.icons %}
                 {% set iconData = null %}
@@ -122,12 +124,12 @@
                   {% endif %}
                 {% endfor %}
 
-                {# Récupérer les styles d'icône spécifiques si disponibles #}
+                {# Get specific icon styles #}
                 {% set iconStyle = "text-[theme(--ma-nautic-gold)]" %}
                 {% set iconContainerSize = "w-20 h-20" %}
                 {% set iconSize = "40" %}
                 
-                {# Adaptation des styles en fonction du mode reversed #}
+                {# Adapt styles based on reversed mode #}
                 {% if reversed %}
                   {% set bgColor = "bg-[theme(--ma-nautic-white)]" %}
                 {% else %}
@@ -154,7 +156,7 @@
               }) }}
             {% endif %}
 
-            {# Main Heading (name) - Nous appliquons la couleur conditionnelle #}
+            {# Main Heading (name) - Apply conditional color #}
             {% if itemData.name and options.headings %}
               <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">
                 {{ renderHeading({
@@ -192,7 +194,7 @@
           {# Right column: Carousel #}
           <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16">
             {% if carouselItem %}
-              {# Utiliser le carousel MD fourni directement #}
+              {# Use provided MD carousel directly #}
               <div class="w-4/5 mx-auto">
                 {{ renderCarousel({
                   markdown: true,
@@ -204,7 +206,7 @@
                 }) }}
               </div>
             {% elif itemData.carousel and options.carousels %}
-              {# Utiliser le carousel du JSON par son nom #}
+              {# Use carousel from JSON by name #}
               <div class="w-4/5 mx-auto">
                 {{ renderCarousel({
                   name: itemData.carousel,
@@ -218,7 +220,7 @@
           </div>
         </div>
 
-        {# Carousel pour mobile #}
+        {# Carousel for mobile #}
         {% if carouselItem %}
           <div class="lg:hidden mt-8">
             <div class="w-4/5 mx-auto">
@@ -254,15 +256,13 @@
 
 {#
 ============================
-Summon MA-NAUTIC Boat Section Wisely
+Summon HAT Components Wisely
 ============================
 
 1. Import the macro at the top of your page
 {% from "01-organisms/section-boat.njk" import renderSectionBoat %}
 
-2. Utilisation avec les données d'un fichier markdown et son carousel associé
-{% set boat_item = collections.boat | getCollectionItem('boat_nine') %}
-{% set carousel_item = collections.carousel | getCollectionItem('carousel_nine') %}
+2. Call a specific section-boat by its name
 {{ renderSectionBoat({ 
     boat: boat_item.data, 
     carouselItem: carousel_item,
@@ -274,4 +274,6 @@ Summon MA-NAUTIC Boat Section Wisely
     images: atoms.images,
     buttons: atoms.buttons
 }) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

@@ -5,6 +5,7 @@
 #}
 
 {% macro renderInput(options) %}
+  {# Find the appropriate input configuration #}
   {% set inputData = null %}
   
   {% for input in options.datas.inputs %}
@@ -13,20 +14,24 @@
     {% endif %}
   {% endfor %}
 
+  {# Set default styling and dimensions #}
   {% set globalStyle = options.datas.globalStyle %}
   {% set inputWidth = options.inputWidth | default('w-full md:w-64') %} 
   {% set inputHeight = options.inputHeight | default('py-3') %}
 
   {% if inputData %}
+    {# Apply variant styling #}
     {% set variantStyle = options.datas.variants[inputData.style] | default('') %}
     
     <div class="flex flex-col gap-1 {{ globalStyle }} {{ variantStyle }}">
+      {# Render label if provided #}
       {% if inputData.label %}
         <label for="{{ inputData.id }}" class="font-medium text-[--ma-nautic-white]">
           {{ inputData.label }}{% if inputData.required %} <span class="text-red-500">*</span>{% endif %}
         </label>
       {% endif %}
 
+      {# Configure base styling and state variations #}
       {% set baseClasses = "border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] " ~ inputWidth %}
       {% set stateClasses = {
         'default': options.datas.variants.default | default('border-gray-300'),
@@ -40,7 +45,9 @@
       
       {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
       
+      {# Render the appropriate input type #}
       {% if inputData.type in ["text", "tel", "email", "phone"] %}
+        {# Text-based inputs #}
         <input 
           type="{{ inputData.type }}" 
           id="{{ inputData.id }}" 
@@ -60,6 +67,7 @@
           role="alert"
         ></span>
       {% elif inputData.type == "textarea" %}
+        {# Textarea input #}
         <textarea 
           id="{{ inputData.id }}" 
           name="{{ inputData.name }}" 
@@ -78,6 +86,7 @@
           role="alert"
         ></span>
       {% elif inputData.type in ["select", "multi-select"] %}
+        {# Select dropdown #}
         <select 
           id="{{ inputData.id }}" 
           name="{{ inputData.name }}" 
@@ -100,6 +109,7 @@
         ></span>
       {% endif %}
 
+      {# Display error message if in critical state #}
       {% if inputData.state == 'critical' and inputData.errorMessage %}
         <p class="text-red-500 text-sm mt-1">{{ inputData.errorMessage }}</p>
       {% endif %}
@@ -107,6 +117,8 @@
   {% else %}
     <span class="text-red-500">Input not found: {{ options.name }}</span>
   {% endif %}
+  
+  {# Include form validation script #}
   <script src="/js/atoms/form-validation.js"></script>
 {% endmacro %}
 
@@ -118,41 +130,8 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "03-atoms/input.njk" import renderInput %}
 
-2. Call a specific input by its name (avec largeur personnalisée)
-{{ renderInput({ name: "example_input1", datas: atoms.inputs, inputWidth: "w-96" }) }}
+2. Call a specific input by its name
+{{ renderInput({ name: "example_input1", datas: atoms.inputs }) }}
 
-3. Call multiple inputs from the data (largeur par défaut w-64)
-{% for input in atoms.inputs.inputs %}
-    {{ renderInput({ 
-        name: input.name, 
-        datas: atoms.inputs 
-    }) }}
-{% endfor %}
-
-4. Direct input creation (largeur personnalisée)
-{{ renderInput({
-    id: "custom-input", 
-    name: "custom_input", 
-    label: "Custom Input", 
-    placeholder: "Enter something...", 
-    type: "text", 
-    style: "primary",
-    inputWidth: "w-80"
-}) }}
-
-5. Adding a new input to inputs.json
-{
-  "inputs": [
-    {
-      "name": "example_input1",
-      "id": "input1",
-      "label": "Example Input 1",
-      "placeholder": "Enter text...",
-      "type": "text",
-      "style": "primary"
-    }
-  ]
-}
-
-May your bugs be forever exiled to the shadow realm. ✨
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

@@ -5,9 +5,11 @@
 #}
 
 {% macro renderImage(options) %}
+  {# Find the target image or images #}
   {% if options.name %}
     {% set imageData = null %}
     
+    {# Search for the image by name #}
     {% for image in options.datas.images %}
       {% if image.name == options.name %}
         {% set imageData = image %}
@@ -17,8 +19,10 @@
     {% set globalStyle = options.datas.globalStyle %}
 
     {% if imageData %}
+      {# Apply variant styling #}
       {% set variantStyle = options.datas.variants[imageData.size] | default('') %}
       
+      {# Render single image with appropriate attributes #}
       <img 
         src="{{ imageData.src }}" 
         alt="{{ imageData.alt }}" 
@@ -33,6 +37,7 @@
   {% elseif options.group %}
     {% set groupImages = [] %}
     
+    {# Find all images in the specified group #}
     {% for image in options.datas.images %}
       {% if image.group == options.group %}
         {% set groupImages = (groupImages.push(image), groupImages) %}
@@ -40,6 +45,7 @@
     {% endfor %}
     
     {% if groupImages.length > 0 %}
+      {# Render a group of images with wrapper #}
       <div class="image-group {% if options.groupClass %}{{ options.groupClass }}{% endif %}">
         {% for image in groupImages %}
           {% set variantStyle = options.datas.variants[image.size] | default('') %}
@@ -57,6 +63,7 @@
       <span class="text-red-500">No images found in group: {{ options.group }}</span>
     {% endif %}
   {% else %}
+    {# Direct image rendering with inline properties #}
     {% set globalStyle = options.datas.globalStyle %}
     {% set variantStyle = options.datas.variants[options.size] | default('') %}
     
@@ -71,11 +78,9 @@
   {% endif %}
 {% endmacro %}
 
-
-
 {#
 ============================
-Image Component Usage Guide
+Summon HAT Components Wisely
 ============================
 
 1. Import the macro at the top of your page
@@ -84,43 +89,5 @@ Image Component Usage Guide
 2. Call a specific image by its name
 {{ renderImage({ name: "placeholder_medium", datas: atoms.images }) }}
 
-3. Render multiple images from the data
-{% for image in atoms.images.images %}
-    {{ renderImage({ 
-        name: image.name, 
-        datas: atoms.images 
-    }) }}
-{% endfor %}
-
-4. Render a group of images
-{{ renderImage({ 
-    group: "block-media-small", 
-    datas: atoms.images,
-    groupClass: "flex gap-2 flex-wrap",
-    imageClass: "m-1" 
-}) }}
-
-5. Direct image creation with custom attributes
-{{ renderImage({
-    src: "/assets/images/custom.jpg", 
-    alt: "Custom image", 
-    size: "medium",
-    loading: "lazy",
-    datas: atoms.images
-}) }}
-
-6. Adding a new image to images.json
-{
-  "images": [
-    {
-      "name": "new_image_name",
-      "src": "/path/to/image.jpg",
-      "alt": "Descriptive alt text",
-      "size": "small|medium|large|avatar",
-      "group": "block-media|block-media-small"
-    }
-  ]
-}
-
-A hero engraves alt text runes so the sages may perceive the unseen. 🔮📖
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

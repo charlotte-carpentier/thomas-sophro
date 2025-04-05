@@ -9,7 +9,9 @@
 {% from "01-organisms/navigation.njk" import renderNavigation %}
 
 {% macro renderHeader(options) %}
+  {# Check if data is provided #}
   {% if options.datas %}
+    {# Get global styling and container styles #}
     {% set globalStyle = options.datas.globalStyle %}
     {% set containerStyle = options.datas.containerStyle %}
     {% set logoContainerStyle = options.datas.logoContainerStyle | default('') %}
@@ -24,6 +26,7 @@
     {% set toggleButtonIconSize = options.datas.variants.toggleButton.iconSize | default('24') %}
     {% set dropdownMenuStyle = options.datas.variants.dropdownMenu.default %}
     
+    {# Find the header configuration #}
     {% set headerData = null %}
     {% if options.name %}
       {% for headerSet in options.datas.headers %}
@@ -33,13 +36,15 @@
       {% endfor %}
     {% endif %}
 
+    {# Fallback to first header if not found #}
     {% if not headerData %}
       {% set headerData = options.datas.headers[0] %}
     {% endif %}
     
+    {# Render header with appropriate container styles #}
     <header class="{{ globalStyle }} {{ options.class | default('') }}">
       <div class="{{ containerStyle }}">
-        {# Logo #}
+        {# Logo section #}
         <div class="{{ logoContainerStyle }}">
           <a href="/" title="Retour à l'accueil" class="inline-block {{ logoSize }}">
             {{ renderVector({ name: headerData.logo, datas: options.vectors }) }}
@@ -49,9 +54,9 @@
         {# Navigation container #}
         <div class="{{ navContainerStyle }}">
           <div class="{{ navStyle }}">
-            {# Menu Container avec hamburger et dropdown #}
+            {# Menu Container with hamburger and dropdown #}
             <div class="{{ menuContainerStyle }}">
-              {# Bouton hamburger #}
+              {# Hamburger button for mobile #}
               <div class="{{ toggleButtonStyle }}" data-container-size="{{ toggleButtonContainerSize }}" data-icon-size="{{ toggleButtonIconSize }}">
                 {% set iconData = null %}
                 {% if options.icons %}
@@ -62,6 +67,7 @@
                   {% endfor %}
                 {% endif %}
                 
+                {# Render custom icon or default hamburger #}
                 {% if iconData %}
                   <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ toggleButtonIconSize }}" data-svg-height="{{ toggleButtonIconSize }}" class="inline-flex items-center justify-center {{ toggleButtonContainerSize }} {{ toggleButtonIconStyle }}">
                     <!-- SVG will be loaded here -->
@@ -73,9 +79,9 @@
                 {% endif %}
               </div>
 
-              {# Menu déroulant qui contient la navigation #}
+              {# Dropdown menu containing navigation #}
               <div class="{{ dropdownMenuStyle }}">
-                {# Utilisation du composant Navigation #}
+                {# Use Navigation component #}
                 {{ renderNavigation({ 
                   name: headerData.navigation | default(headerData.name),
                   datas: options.navigations,
@@ -103,7 +109,7 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/header.njk" import renderHeader %}
 
-2. Call the header component with a specific name
+2. Call a specific header by its name
 {{ renderHeader({ 
     name: "main",
     datas: organisms.headers,
@@ -113,15 +119,5 @@ Summon HAT Components Wisely
     icons: atoms.icons
 }) }}
 
-3. Using custom styles
-{{ renderHeader({ 
-    name: "main",
-    datas: organisms.headers,
-    navigations: organisms.navigations,
-    vectors: atoms.vectors,
-    links: atoms.links,
-    icons: atoms.icons,
-    class: "my-custom-header-class"
-}) }}
-
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

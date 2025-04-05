@@ -10,11 +10,13 @@
 {% from "03-atoms/vector.njk" import renderVector %}
 
 {% macro renderFooter(options) %}
+  {# Check if data is provided #}
   {% if options.datas %}
+    {# Get global styling and variants #}
     {% set globalStyle = options.datas.globalStyle %}
     {% set variants = options.datas.variants %}
     
-    {# Récupération du footer spécifique #}
+    {# Find specific footer configuration #}
     {% set footerData = null %}
     {% if options.name %}
       {% for footerSet in options.datas.footers %}
@@ -24,23 +26,22 @@
       {% endfor %}
     {% endif %}
 
+    {# Fallback to first footer if not found #}
     {% if not footerData %}
       {% set footerData = options.datas.footers[0] %}
     {% endif %}
     
-    {# Debug: Afficher les données disponibles #}
-    {# <pre class="text-white text-xs">{{ options | json }}</pre> #}
-    
+    {# Render footer with appropriate container styles #}
     <footer class="{{ globalStyle }} {{ footerData.containerStyle }} {{ options.class | default('') }}">
       <div class="container mx-auto px-4 py-6">
-        {# Structure modifiée: 2 colonnes, logo, puis 1 colonne #}
+        {# Grid layout: 2 columns, logo, then 1 column #}
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {# Colonnes 1-2 #}
+          {# Columns 1-2 #}
           {% if footerData.columns %}
             {% for menuConfig in footerData.columns %}
               {% if loop.index <= 2 %}
                 <div class="footer-column text-center md:text-left">
-                  {# Titres des sections #}
+                  {# Section titles #}
                   {% if menuConfig.name == "contact_navigation" %}
                     <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">CONTACT</h4>
                   {% elif menuConfig.name == "site_navigation" %}
@@ -49,7 +50,7 @@
                     <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">SUIVEZ-NOUS</h4>
                   {% endif %}
                   
-                  {# Navigation secondaire basée directement sur les données #}
+                  {# Secondary navigation based on data #}
                   <nav class="space-y-3">
                     {% if options["navigation-secondarys"] and options["navigation-secondarys"]["navigation-secondarys"] %}
                       {% for navGroup in options["navigation-secondarys"]["navigation-secondarys"] %}
@@ -58,10 +59,10 @@
                             {% if options.links and options.links.links %}
                               {% for link in options.links.links %}
                                 {% if link.name == linkName %}
-                                  {# Contact Navigation avec icônes #}
+                                  {# Contact Navigation with icons #}
                                   {% if menuConfig.name == "contact_navigation" %}
                                     <div class="flex items-center mb-3 justify-center md:justify-start">
-                                      {# Détermination de l'icône à utiliser #}
+                                      {# Determine icon to use #}
                                       {% set iconName = "" %}
                                       {% if link.name == "adresse" %}{% set iconName = "dot" %}
                                       {% elif link.name == "telephone" %}{% set iconName = "phone" %}
@@ -69,7 +70,7 @@
                                       {% elif link.name == "horaires" %}{% set iconName = "clock" %}
                                       {% else %}{% set iconName = "dot" %}{% endif %}
                                       
-                                      {# Recherche de l'icône #}
+                                      {# Find the icon #}
                                       {% if options.icons and options.icons.icons %}
                                         {% for icon in options.icons.icons %}
                                           {% if icon.name == iconName %}
@@ -87,10 +88,10 @@
                                       </a>
                                     </div>
                                   
-                                  {# Réseaux sociaux avec icônes #}
+                                  {# Social networks with icons #}
                                   {% elif menuConfig.name == "socials" %}
                                     <div class="flex items-center mb-3 justify-center md:justify-start">
-                                      {# Recherche de l'icône sociale #}
+                                      {# Find social icon #}
                                       {% if options.icons and options.icons.icons %}
                                         {% for icon in options.icons.icons %}
                                           {% if icon.name == link.name %}
@@ -108,7 +109,7 @@
                                       </a>
                                     </div>
                                   
-                                  {# Liens de navigation standards #}
+                                  {# Standard navigation links #}
                                   {% else %}
                                     <div class="mb-3 text-center md:text-left">
                                       <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
@@ -131,7 +132,7 @@
             {% endfor %}
           {% endif %}
           
-          {# Logo maintenant au milieu (3ème position) #}
+          {# Logo in middle (3rd position) #}
           <div class="flex justify-center md:justify-start items-center">
             {% if footerData.vectors and options.vectors %}
               {% set vectorData = null %}
@@ -147,12 +148,12 @@
             {% endif %}
           </div>
           
-          {# Dernière colonne (4ème position) #}
+          {# Last column (4th position) #}
           {% if footerData.columns %}
             {% for menuConfig in footerData.columns %}
               {% if loop.index == 3 %}
                 <div class="footer-column text-center md:text-left">
-                  {# Titres des sections #}
+                  {# Section titles #}
                   {% if menuConfig.name == "contact_navigation" %}
                     <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">CONTACT</h4>
                   {% elif menuConfig.name == "site_navigation" %}
@@ -161,7 +162,7 @@
                     <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">SUIVEZ-NOUS</h4>
                   {% endif %}
                   
-                  {# Navigation secondaire basée directement sur les données #}
+                  {# Secondary navigation based on data #}
                   <nav class="space-y-3">
                     {% if options["navigation-secondarys"] and options["navigation-secondarys"]["navigation-secondarys"] %}
                       {% for navGroup in options["navigation-secondarys"]["navigation-secondarys"] %}
@@ -170,10 +171,10 @@
                             {% if options.links and options.links.links %}
                               {% for link in options.links.links %}
                                 {% if link.name == linkName %}
-                                  {# Contact Navigation avec icônes #}
+                                  {# Contact Navigation with icons #}
                                   {% if menuConfig.name == "contact_navigation" %}
                                     <div class="flex items-center mb-3 justify-center md:justify-start">
-                                      {# Détermination de l'icône à utiliser #}
+                                      {# Determine icon to use #}
                                       {% set iconName = "" %}
                                       {% if link.name == "adresse" %}{% set iconName = "dot" %}
                                       {% elif link.name == "telephone" %}{% set iconName = "phone" %}
@@ -181,7 +182,7 @@
                                       {% elif link.name == "horaires" %}{% set iconName = "clock" %}
                                       {% else %}{% set iconName = "dot" %}{% endif %}
                                       
-                                      {# Recherche de l'icône #}
+                                      {# Find the icon #}
                                       {% if options.icons and options.icons.icons %}
                                         {% for icon in options.icons.icons %}
                                           {% if icon.name == iconName %}
@@ -199,10 +200,10 @@
                                       </a>
                                     </div>
                                   
-                                  {# Réseaux sociaux avec icônes #}
+                                  {# Social networks with icons #}
                                   {% elif menuConfig.name == "socials" %}
                                     <div class="flex items-center mb-3 justify-center md:justify-start">
-                                      {# Recherche de l'icône sociale #}
+                                      {# Find social icon #}
                                       {% if options.icons and options.icons.icons %}
                                         {% for icon in options.icons.icons %}
                                           {% if icon.name == link.name %}
@@ -220,7 +221,7 @@
                                       </a>
                                     </div>
                                   
-                                  {# Liens de navigation standards #}
+                                  {# Standard navigation links #}
                                   {% else %}
                                     <div class="mb-3 text-center md:text-left">
                                       <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
@@ -244,20 +245,20 @@
           {% endif %}
         </div>
         
-        {# 5. Bottom section with copyright and links (in line) #}
+        {# Bottom section with copyright and links #}
         <div class="mt-12 border-t border-[theme(--ma-nautic-gold)] pt-4">
           <div class="flex flex-col md:flex-row md:items-center md:justify-between text-sm">
-            {# Copyright et liens légaux #}
+            {# Copyright and legal links #}
             <div class="text-[theme(--ma-nautic-white)] mb-4 md:mb-0 flex flex-wrap items-center justify-center md:justify-start gap-1">
               <span>© {% year %} {{ footerData.copyright | default('M.A Nautic tous droits réservés') }}</span>
               
-              {# Version avec séparateur #}
+              {# Version with separator #}
               {% if footerData.version %}
                 <span class="mx-2" aria-hidden="true">•</span>
                 <span>v{{ footerData.version }}</span>
               {% endif %}
               
-              {# Lien Crédits et mentions légales #}
+              {# Credits and legal notices link #}
               {% if footerData.links and footerData.links[0] and footerData.links[0].name == "credit" %}
                 {% for link in options.links.links %}
                   {% if link.name == "credits" %}
@@ -270,7 +271,7 @@
               {% endif %}
             </div>
             
-            {# Autres liens du bas #}
+            {# Other bottom links #}
             <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 items-center md:items-start">
               {% for linkConfig in footerData.links %}
                 {% if linkConfig.name == "creator" %}
@@ -304,7 +305,7 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/footer.njk" import renderFooter %}
 
-2. Call the footer component with a specific name
+2. Call a specific footer by its name
 {{ renderFooter({ 
     name: "ma_nautic_footer",
     datas: organisms.footers,
@@ -316,18 +317,5 @@ Summon HAT Components Wisely
     "navigation-secondarys": organisms["navigation-secondarys"]
 }) }}
 
-3. Usage with custom styles
-{{ renderFooter({ 
-    name: "ma_nautic_footer", 
-    datas: organisms.footers,
-    menus: organisms.menus,
-    links: atoms.links,
-    headings: atoms.headings,
-    icons: atoms.icons,
-    vectors: atoms.vectors,
-    "navigation-secondarys": organisms["navigation-secondarys"],
-    class: "my-custom-footer-class"
-}) }}
-
-Treasures often lie at the bottom 💰🔍
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

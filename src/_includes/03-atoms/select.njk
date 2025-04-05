@@ -44,8 +44,6 @@
   {% endif %}
 {% endmacro %}
 
-
-
 {#
 ============================
 Summon HAT Components Wisely
@@ -56,28 +54,6 @@ Summon HAT Components Wisely
 
 2. Call a specific select by its name
 {{ renderSelect({ name: "categories", datas: atoms.selects }) }}
-
-3. Call multiple selects from the data
-{% for select in atoms.selects.selects %}
-    {{ renderSelect({ 
-        name: select.name, 
-        datas: atoms.selects 
-    }) }}
-{% endfor %}
-
-4. Adding a new select to selects.json
-{
-  "selects": [
-    {
-      "name": "new_select_name",
-      "variant": "default",
-      "options": [
-        { "value": "option1", "label": "Option 1" },
-        { "value": "option2", "label": "Option 2", selected: true }
-      ]
-    }
-  ]
-}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}
