@@ -26,22 +26,58 @@
   },
   "headings": [
     {
+      "name": "home_h1",
+      "level": 1,
+      "text": "LOCATION DE BATEAU A SAINT-FLORENT, AVEC M.A NAUTIC",
+      "style": "ma_nautic_section_drop"
+    },
+    {
+      "name": "home_about_h2",
+      "level": 2,
+      "text": "_Une agence locale et de proximité",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "home_about_h3_team",
+      "level": 3,
+      "text": "Une équipe passionnée et disponible",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "home_about_h3_expert",
+      "level": 3,
+      "text": "Une expertise locale",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "home_services_h2",
+      "level": 2,
+      "text": "_Nos services de location de bateaux en Haute-Corse",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "home_services_h3_licence",
+      "level": 3,
+      "text": "Prenez le large, avec ou sans permis",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "home_services_h3_group",
+      "level": 3,
+      "text": "Une flotte performante, adaptée à tous les groupes",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
       "name": "location_bateaux",
       "text": "LOCATION DE BATEAUX",
-      "level": "1",
+      "level": 1,
       "style": "ma_nautic_main_title"
     },
     {
       "name": "golfe_st_florent",
       "text": "Golfe de St Florent",
-      "level": "2",
+      "level": 2,
       "style": "ma_nautic_subtitle"
-    },
-    {
-      "name": "agence_corse",
-      "level": 1,
-      "text": "AGENCE DE LOCATION DE BATEAUX À SAINT-FLORENT",
-      "style": "ma_nautic_section_drop"
     },
     {
       "name": "agence_location",
@@ -60,30 +96,6 @@
       "level": 1,
       "text": "CONTACTEZ MA NAUTIC À SAINT-FLORENT",
       "style": "ma_nautic_section_drop"
-    },
-    {
-      "name": "qui_sommes_nous",
-      "level": 2,
-      "text": "_Qui sommes-nous ?",
-      "style": "ma_nautic_section_title"
-    },
-    {
-      "name": "ma_nautic_corse",
-      "level": 2,
-      "text": "M.A Nautic en Haute-Corse",
-      "style": "ma_nautic_section_subtitle"
-    },
-    {
-      "name": "que_faisons_nous",
-      "level": 2,
-      "text": "_Que faisons-nous ?",
-      "style": "ma_nautic_section_title"
-    },
-    {
-      "name": "ma_nautic_bateaux",
-      "level": 2,
-      "text": "Notre location de bateaux près du désert des Agriates",
-      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "boat_name",
