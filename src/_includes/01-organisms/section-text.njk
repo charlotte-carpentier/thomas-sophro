@@ -43,7 +43,7 @@
     {% set hasImage = variant.image is defined and variant.image %}
     
     {# Check if section has ONLY an image without text or other content #}
-    {% set imageOnlySection = hasImage and not variant.heading and not variant.content and not variant.text and not variant.description and not variant.superHeading and not variant.primaryButton and not variant.secondaryButton and not variant.link %}
+    {% set imageOnlySection = hasImage and not variant.heading and not variant.content and not variant.text and not variant.description and not variant.superHeading and not variant.primaryButton and not variant.secondaryButton and not variant.link and not variant.heading_01 and not variant.content_01 %}
     
     {# Conditional styles based on section type #}
     {% if variant and variant.name == "ma_nautic_plus" %}
@@ -115,28 +115,33 @@
               {% endif %}
             {% endif %}
 
-            {# Subtitle under logo if needed #}
-            {% if variant.heading and options.headings and options.headings.headings %}
-              {% set subtitle = null %}
-              {% for heading in options.headings.headings %}
-                {% if heading.name == variant.heading %}
-                  {% set subtitle = heading %}
+            {# Multiple content sections - Iterate through numbered content blocks #}
+            {% for i in range(1, 4) %}
+              {% set headingKey = "heading_0" + i %}
+              {% set contentKey = "content_0" + i %}
+              
+              {% if variant[headingKey] and options.headings and options.headings.headings %}
+                {% set subtitle = null %}
+                {% for heading in options.headings.headings %}
+                  {% if heading.name == variant[headingKey] %}
+                    {% set subtitle = heading %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if subtitle %}
+                  <{{ "h" + subtitle.level }} class="{{ options.headings.globalStyle }} {{ options.headings.variants[subtitle.style] }} max-w-[40rem] mx-auto mt-6 text-[theme(--ma-nautic-white)]">
+                    {{ subtitle.text }}
+                  </{{ "h" + subtitle.level }}>
                 {% endif %}
-              {% endfor %}
-
-              {% if subtitle %}
-                <{{ "h" + subtitle.level }} class="{{ options.headings.globalStyle }} {{ options.headings.variants[subtitle.style] }} max-w-[40rem] mx-auto">
-                  {{ subtitle.text }}
-                </{{ "h" + subtitle.level }}>
               {% endif %}
-            {% endif %}
 
-            {# Descriptive content - Uses content instead of text with ma-nautic-subtitle class #}
-            {% if variant.content %}
-              <div class="text-sm sm:text-lg max-w-[40rem] my-4 md:my-6 ma-nautic-subtitle [&_p]:mb-[30px] mx-auto">
-                {{ variant.content | safe }}
-              </div>
-            {% endif %}
+              {# Descriptive content for this iteration #}
+              {% if variant[contentKey] %}
+                <div class="text-sm sm:text-lg max-w-[40rem] my-4 md:my-6 ma-nautic-subtitle [&_p]:mb-[30px] mx-auto text-[theme(--ma-nautic-white)]">
+                  {{ variant[contentKey] | safe }}
+                </div>
+              {% endif %}
+            {% endfor %}
 
             {# "Discover" link - Gets link data via its name #}
             {% if variant.link and options.links and options.links.links %}
@@ -148,7 +153,7 @@
               {% endfor %}
 
               {% if linkData %}
-                <a href="{{ linkData.href }}" class="{{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }} uppercase mt-4">
+                <a href="{{ linkData.href }}" class="{{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }} uppercase mt-4 text-[theme(--ma-nautic-white)]">
                   {{ linkData.text }}
                 </a>
               {% else %}
@@ -319,6 +324,33 @@
                   </h2>
                 {% endif %}
               {% endif %}
+
+              {# Multiple content sections - Iterate through numbered content blocks #}
+              {% for i in range(1, 4) %}
+                {% set headingKey = "heading_0" + i %}
+                {% set contentKey = "content_0" + i %}
+                
+                {% if variant[headingKey] and options.headings and options.headings.headings %}
+                  {% set sectionHeading = null %}
+                  {% for heading in options.headings.headings %}
+                    {% if heading.name == variant[headingKey] %}
+                      {% set sectionHeading = heading %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if sectionHeading %}
+                    <{{ "h" + sectionHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + sectionHeading.level] }} {{ options.headings.variants[sectionHeading.style] }} max-w-[40rem] mx-auto mt-6 text-[theme(--ma-nautic-white)]">
+                      {{ sectionHeading.text }}
+                    </{{ "h" + sectionHeading.level }}>
+                  {% endif %}
+                {% endif %}
+                
+                {% if variant[contentKey] %}
+                  <div class="my-4 [&_p]:mb-6 max-w-[40rem] mx-auto text-[theme(--ma-nautic-white)]">
+                    {{ variant[contentKey] | safe }}
+                  </div>
+                {% endif %}
+              {% endfor %}
 
               {# Description #}
               {% if variant.description %}
