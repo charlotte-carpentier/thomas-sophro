@@ -39,25 +39,21 @@ Via **Decap CMS**, le client peut modifier :
 - **Les bateaux** : titre, description, photos, tarifs (`collection-boats/*.md`)
 - **Les carrousels d’images** : directement intégrés dans chaque fiche bateau
 
+**Le CMS est accessible via /admin.**
+
 ---
 
-## 🚀 Lancer le projet en local
+## 🚀 Généralités
 
-```bash
-npm install
-npm run dev
-```
-
-Le site sera accessible sur : <http://localhost:8080>
+Le site sera accessible sur : <https://www.manautic-location-bateau.com>
 
 🌍 Déploiement
 Le site est automatiquement déployé sur Netlify à chaque mise à jour de la branche principale (main).
-Le CMS est accessible via /admin.
 
 📌 À propos
 
 - Développement : CC
-- Design : EM (PDF, SVG, textes)
+- Design : EM
 - SEO: PC
 - Technos : Eleventy, Nunjucks, Tailwind v4, Decap CMS
 - Version actuelle : v1.0.0
