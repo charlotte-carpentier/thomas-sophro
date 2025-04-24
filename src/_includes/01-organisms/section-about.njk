@@ -111,11 +111,13 @@
       {# Main title (top band) #}
       {% if sectionData.mainTitle and options.headings %}
         <div class="{{ mainTitleWrapperStyle }} ma-nautic-main" style="border-bottom: none;" data-reversed="{{ reversed | string }}">
-          {{ renderHeading({
-            name: sectionData.mainTitle,
-            datas: options.headings,
-            class: mainTitleStyle ~ " m-0 p-0 max-w-[40rem] mx-auto"
-          }) }}
+          <div class="w-[60%] mx-auto px-4">
+            {{ renderHeading({
+              name: sectionData.mainTitle,
+              datas: options.headings,
+              class: mainTitleStyle ~ " m-0 p-0"
+            }) }}
+          </div>
 
           {# Scroll button positioned at bottom of mainTitle #}
           {% if scrollButton %}
@@ -164,15 +166,6 @@
               }) }}
             {% endif %}
 
-            {# Main Heading (title) #}
-            {% if sectionData.heading and options.headings %}
-              {{ renderHeading({
-                name: sectionData.heading,
-                datas: options.headings,
-                class: "max-w-[40rem] mx-auto"
-              }) }}
-            {% endif %}
-
             {# Icon if present - Using data-svg-src for JS loading #}
             {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
               <div class="{{ iconWrapperStyle }}">
@@ -195,12 +188,25 @@
               </div>
             {% endif %}
 
-            {# Content #}
-            {% if sectionData.content %}
-              <div class="{{ contentContainerStyle }} text-center">
-                {{ sectionData.content | safe }}
-              </div>
-            {% endif %}
+            {# Multiple content sections - Iterate through numbered content blocks #}
+            {% for i in range(1, 4) %}
+              {% set headingKey = "heading_0" + i %}
+              {% set contentKey = "content_0" + i %}
+              
+              {% if sectionData[headingKey] and options.headings %}
+                {{ renderHeading({
+                  name: sectionData[headingKey],
+                  datas: options.headings,
+                  class: "mb-4 mt-6 max-w-[40rem] mx-auto"
+                }) }}
+              {% endif %}
+              
+              {% if sectionData[contentKey] %}
+                <div class="{{ contentContainerStyle }} text-center">
+                  {{ sectionData[contentKey] | safe }}
+                </div>
+              {% endif %}
+            {% endfor %}
 
             {# Primary Link #}
             {% if sectionData.primaryLink and options.links %}
@@ -215,24 +221,15 @@
 
           {# Desktop layout (two columns) - Visible from lg breakpoint #}
           {% if not reversed %}
-          <div class="hidden lg:flex lg:flex-row items-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
-            {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
-            <div class="{{ textContentStyle }} h-full flex flex-col items-center justify-center text-center px-8">
+          <div class="hidden lg:flex lg:flex-row items-start h-auto {{ contentWrapperStyle | replace('lg:flex-row', '') }} py-12">
+            {# Left column: Super Heading, Multiple Content blocks, and Button #}
+            <div class="{{ textContentStyle }} flex flex-col items-center justify-start text-center px-8">
               {# Super Heading (section title with underscore) #}
               {% if sectionData.superHeading and options.headings %}
                 {{ renderHeading({
                   name: sectionData.superHeading,
                   datas: options.headings,
                   class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
-                }) }}
-              {% endif %}
-
-              {# Main Heading (title) #}
-              {% if sectionData.heading and options.headings %}
-                {{ renderHeading({
-                  name: sectionData.heading,
-                  datas: options.headings,
-                  class: "max-w-[40rem] mx-auto"
                 }) }}
               {% endif %}
 
@@ -258,12 +255,25 @@
                 </div>
               {% endif %}
 
-              {# Content #}
-              {% if sectionData.content %}
-                <div class="{{ contentContainerDesktopStyle }}">
-                  {{ sectionData.content | safe }}
-                </div>
-              {% endif %}
+              {# Multiple content sections - Iterate through numbered content blocks #}
+              {% for i in range(1, 4) %}
+                {% set headingKey = "heading_0" + i %}
+                {% set contentKey = "content_0" + i %}
+                
+                {% if sectionData[headingKey] and options.headings %}
+                  {{ renderHeading({
+                    name: sectionData[headingKey],
+                    datas: options.headings,
+                    class: "mb-4 mt-6 max-w-[40rem] mx-auto"
+                  }) }}
+                {% endif %}
+                
+                {% if sectionData[contentKey] %}
+                  <div class="{{ contentContainerDesktopStyle }}">
+                    {{ sectionData[contentKey] | safe }}
+                  </div>
+                {% endif %}
+              {% endfor %}
 
               {# Primary Link #}
               {% if sectionData.primaryLink and options.links %}
@@ -277,7 +287,7 @@
             </div>
 
             {# Right column: Carousel - Reduced to 75% of original size #}
-            <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16" data-reversed="{{ reversed | string }}">
+            <div class="{{ mediaContentStyle }} flex items-center justify-center px-16" data-reversed="{{ reversed | string }}">
               {% if sectionData.hasCarousel and sectionData.carouselName %}
                 <div class="w-4/5 mx-auto">
                   {{ renderCarousel({
@@ -293,24 +303,15 @@
             </div>
           </div>
           {% else %}
-          <div class="hidden lg:flex lg:flex-row-reverse items-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
-            {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
-            <div class="{{ textContentStyle }} h-full flex flex-col items-center justify-center text-center px-8">
+          <div class="hidden lg:flex lg:flex-row-reverse items-start h-auto {{ contentWrapperStyle | replace('lg:flex-row', '') }} py-12">
+            {# Left column: Super Heading, Multiple Content blocks, and Button #}
+            <div class="{{ textContentStyle }} flex flex-col items-center justify-start text-center px-8">
               {# Super Heading (section title with underscore) #}
               {% if sectionData.superHeading and options.headings %}
                 {{ renderHeading({
                   name: sectionData.superHeading,
                   datas: options.headings,
                   class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
-                }) }}
-              {% endif %}
-
-              {# Main Heading (title) #}
-              {% if sectionData.heading and options.headings %}
-                {{ renderHeading({
-                  name: sectionData.heading,
-                  datas: options.headings,
-                  class: "max-w-[40rem] mx-auto"
                 }) }}
               {% endif %}
 
@@ -336,12 +337,25 @@
                 </div>
               {% endif %}
 
-              {# Content #}
-              {% if sectionData.content %}
-                <div class="{{ contentContainerDesktopStyle }}">
-                  {{ sectionData.content | safe }}
-                </div>
-              {% endif %}
+              {# Multiple content sections - Iterate through numbered content blocks #}
+              {% for i in range(1, 4) %}
+                {% set headingKey = "heading_0" + i %}
+                {% set contentKey = "content_0" + i %}
+                
+                {% if sectionData[headingKey] and options.headings %}
+                  {{ renderHeading({
+                    name: sectionData[headingKey],
+                    datas: options.headings,
+                    class: "mb-4 mt-6 max-w-[40rem] mx-auto"
+                  }) }}
+                {% endif %}
+                
+                {% if sectionData[contentKey] %}
+                  <div class="{{ contentContainerDesktopStyle }}">
+                    {{ sectionData[contentKey] | safe }}
+                  </div>
+                {% endif %}
+              {% endfor %}
 
               {# Primary Link #}
               {% if sectionData.primaryLink and options.links %}
@@ -355,7 +369,7 @@
             </div>
 
             {# Right column: Carousel - Reduced to 75% of original size #}
-            <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16" data-reversed="{{ reversed | string }}">
+            <div class="{{ mediaContentStyle }} flex items-center justify-center px-16" data-reversed="{{ reversed | string }}">
               {% if sectionData.hasCarousel and sectionData.carouselName %}
                 <div class="w-4/5 mx-auto">
                   {{ renderCarousel({

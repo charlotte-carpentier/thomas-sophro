@@ -26,22 +26,88 @@
   },
   "headings": [
     {
+      "name": "home_h1",
+      "level": 1,
+      "text": "LOCATION DE BATEAU A SAINT-FLORENT, AVEC M.A NAUTIC",
+      "style": "ma_nautic_section_drop"
+    },
+    {
+      "name": "home_about_h2",
+      "level": 2,
+      "text": "_Une agence locale et de proximité",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "home_about_h3_team",
+      "level": 3,
+      "text": "Une équipe passionnée et disponible",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "home_about_h3_expert",
+      "level": 3,
+      "text": "Une expertise locale",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "home_discover_h2",
+      "level": 2,
+      "text": "Pourquoi louer un bateau à Saint-Florent ?",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "home_discover_h3_desert",
+      "level": 3,
+      "text": "Explorer le désert des Agriates par la mer",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "home_discover_h3_cap",
+      "level": 3,
+      "text": "Découvrir le Cap Corse autrement",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "home_services_h2",
+      "level": 2,
+      "text": "_Nos services de location de bateaux en Haute-Corse",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "home_services_h3_licence",
+      "level": 3,
+      "text": "Prenez le large, avec ou sans permis",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "home_services_h3_group",
+      "level": 3,
+      "text": "Une flotte performante, adaptée à tous les groupes",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "home_custom_h2",
+      "level": 2,
+      "text": "_Activités nautiques et services personnalisés pour votre journée en mer",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "home_program_h2",
+      "level": 2,
+      "text": "_Excursions en mer depuis Saint-Florent, pour découvrir la côte autrement",
+      "style": "ma_nautic_section_title"
+    },
+    {
       "name": "location_bateaux",
       "text": "LOCATION DE BATEAUX",
-      "level": "1",
+      "level": 1,
       "style": "ma_nautic_main_title"
     },
     {
       "name": "golfe_st_florent",
       "text": "Golfe de St Florent",
-      "level": "2",
+      "level": 2,
       "style": "ma_nautic_subtitle"
-    },
-    {
-      "name": "agence_corse",
-      "level": 1,
-      "text": "AGENCE DE LOCATION DE BATEAUX À SAINT-FLORENT",
-      "style": "ma_nautic_section_drop"
     },
     {
       "name": "agence_location",
@@ -62,58 +128,10 @@
       "style": "ma_nautic_section_drop"
     },
     {
-      "name": "qui_sommes_nous",
-      "level": 2,
-      "text": "_Qui sommes-nous ?",
-      "style": "ma_nautic_section_title"
-    },
-    {
-      "name": "ma_nautic_corse",
-      "level": 2,
-      "text": "M.A Nautic en Haute-Corse",
-      "style": "ma_nautic_section_subtitle"
-    },
-    {
-      "name": "que_faisons_nous",
-      "level": 2,
-      "text": "_Que faisons-nous ?",
-      "style": "ma_nautic_section_title"
-    },
-    {
-      "name": "ma_nautic_bateaux",
-      "level": 2,
-      "text": "Notre location de bateaux près du désert des Agriates",
-      "style": "ma_nautic_section_subtitle"
-    },
-    {
       "name": "boat_name",
       "level": 3,
       "text": "Capelli Tempest 500",
       "style": "boat-title"
-    },
-    {
-      "name": "petits_plus",
-      "level": 2,
-      "text": "_Les petits plus",
-      "style": "ma_nautic_section_title"
-    },
-    {
-      "name": "ma_nautic_plus",
-      "level": 2,
-      "text": "Notre location de bateaux près de la plage du Lotu",
-      "style": "ma_nautic_subtitle_light"
-    },
-    {
-      "name": "voguez",
-      "level": 2,
-      "text": "_Voguez en Corse",
-      "style": "ma_nautic_section_title"
-    },
-    {
-      "name": "ma_nautic_merveille",
-      "level": 2,
-      "text": "Découvrez les Merveilles de Saint-Florent à bord de nos bateaux",
-      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "ma_nautic_flotte",
@@ -204,12 +222,6 @@
       "level": 2,
       "text": "OPTIONS",
       "style": "ma_nautic_subtitle_light"
-    },
-    {
-      "name": "ma_nautic_discover",
-      "level": 2,
-      "text": "Découvrez tous les lieux d’intérêt en Haute-Corse",
-      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "ma_agriates",
