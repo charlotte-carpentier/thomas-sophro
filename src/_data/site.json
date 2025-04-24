@@ -1,0 +1,36 @@
+{
+    "title": "Location de bateau à Saint-Florent (Haute-Corse) - M.A Nautic",
+    "description": "Depuis Saint-Florent, découvrez la Corse autrement : naviguez vers Saleccia, Lotu ou le Cap Corse à votre rythme, avec ou sans skipper.",
+    "url": "https://www.manautic-location-bateau.com",
+    "pages": {
+      "/": {
+        "title": "Location de bateau à Saint-Florent (Haute-Corse) - M.A Nautic",
+        "description": "Depuis Saint-Florent, découvrez la Corse autrement : naviguez vers Saleccia, Lotu ou le Cap Corse à votre rythme, avec ou sans skipper."
+      },
+      "/nos-bateaux/": {
+        "title": "Location de rigide et semi-rigide en Corse - M.A Nautic",
+        "description": "Louez un bateau semi-rigide en Corse au départ de Saint-Florent. Flotte complète avec ou sans permis, de 4 à 12 personnes. Options sportives, skipper et confort inclus."
+      },
+      "/lieux-interet/": {
+        "title": "Excursion en bateau depuis Saint-Florent",
+        "description": "Embarquez depuis Saint-Florent vers les plus beaux spots de Haute-Corse : plages de Saleccia, Lotu, Nonza ou Centuri, avec ou sans skipper."
+      },
+      "/contact/": {
+        "title": "M.A Nautic à Saint-Florent - Coordonnées et accès au port",
+        "description": "Besoin d'un renseignement ? Retrouvez ici toutes les infos utiles pour contacter M.A Nautic à Saint-Florent : téléphone, horaires, accès au port et formulaire."
+      },
+      "/faq/": {
+        "title": "Tout savoir pour louer un bateau en Corse avec M.A Nautic",
+        "description": "Vous souhaitez louer un bateau en Corse ? Découvrez notre FAQ : permis, réservation, météo, plage de Saleccia, activités nautiques, carburant, équipements, etc."
+      },
+      "/credits-mentions-legales/": {
+        "title": "Crédits et Mentions Légales - M.A Nautic",
+        "description": "Les informations légales et crédits relatifs au site M.A Nautic."
+      },
+      "/merci/": {
+        "title": "Merci pour votre inscription - M.A Nautic",
+        "description": "Merci pour votre intérêt. Nous reviendrons vers vous bientôt."
+      }
+    }
+  }
+  
