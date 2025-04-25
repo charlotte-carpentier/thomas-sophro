@@ -1,11 +1,11 @@
 [build]
-  command = "npm run build"  # Commande à exécuter lors du build
-  publish = "public"         # Dossier à publier une fois le build effectué
+  command = "npm run build"
+  publish = "public"
 
 [[plugins]]
-  package = "@netlify/plugin-image-optimization"  # Plugin pour l'optimisation des images
+  package = "@netlify/plugin-image-optimization"
 
   [plugins.inputs]
-  compress = true      # Active la compression des images
-  quality = 80         # Qualité de compression (par défaut à 80)
-  formats = ["webp", "jpeg", "png"]  # Formats d'image à générer (webp, jpeg, png)
+    compress = true
+    quality = 85
+    formats = ["webp", "jpeg", "png"]
