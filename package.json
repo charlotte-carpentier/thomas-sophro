@@ -20,14 +20,19 @@
   },
   "scripts": {
     "start": "npx concurrently \"npx @tailwindcss/cli -i ./src/input.css -o ./public/css/output.css --watch\" \"eleventy --serve --watch\"",
-    "build": "eleventy",
+    "compress-images": "node src/js/utils/compress-images.js",
+    "build": "npm run compress-images && eleventy",
     "refresh": "rm -rf .cache ./public/css/output.css",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "generate:component": "node src/js/tools/generate-component.js"
   },
   "dependencies": {
-    "@anthropic-ai/claude-code": "^0.2.29"
+    "@anthropic-ai/claude-code": "^0.2.29",
+    "imagemin": "^9.0.1",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^10.0.0",
+    "imagemin-svgo": "^11.0.1"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
@@ -46,7 +51,7 @@
     "@tailwindcss/cli": "^4.0.9",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
-    "glob": "^11.0.1",
+    "glob": "^11.0.2",
     "gray-matter": "^4.0.3",
     "json5": "^2.2.3",
     "loader-utils": "^3.3.1",
