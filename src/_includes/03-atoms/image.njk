@@ -21,19 +21,27 @@
     {% if imageData %}
       {# Apply variant styling #}
       {% set variantStyle = options.datas.variants[imageData.size] | default('') %}
-      
-      {# Render single image with appropriate attributes #}
+
+      {# Construct srcset assuming images exist with suffixes -480, -960, -1440 #}
+      {% set baseName = imageData.src | replace('.jpg', '') | replace('.png', '') | replace('.webp', '') %}
+      {% set extension = imageData.src | split('.') | last %}
+      {% set srcset = baseName ~ '-480.' ~ extension ~ ' 480w, ' ~ baseName ~ '-960.' ~ extension ~ ' 960w, ' ~ baseName ~ '-1440.' ~ extension ~ ' 1440w' %}
+
       <img 
         src="{{ imageData.src }}" 
+        srcset="{{ srcset }}"
+        sizes="(max-width: 640px) 480px, (max-width: 1024px) 960px, 1440px"
         alt="{{ imageData.alt }}" 
         class="{{ globalStyle }} {{ variantStyle }} {% if options.className %}{{ options.className }}{% endif %}"
-        {% if options.loading %}loading="{{ options.loading }}"{% endif %}
+        loading="{{ options.loading | default('lazy') }}"
+        decoding="async"
         {% if options.width %}width="{{ options.width }}"{% endif %}
         {% if options.height %}height="{{ options.height }}"{% endif %}
       />
     {% else %}
       <span class="text-red-500">Image not found: {{ options.name }}</span>
     {% endif %}
+
   {% elseif options.group %}
     {% set groupImages = [] %}
     
@@ -45,16 +53,22 @@
     {% endfor %}
     
     {% if groupImages.length > 0 %}
-      {# Render a group of images with wrapper #}
       <div class="image-group {% if options.groupClass %}{{ options.groupClass }}{% endif %}">
         {% for image in groupImages %}
           {% set variantStyle = options.datas.variants[image.size] | default('') %}
+          {% set baseName = image.src | replace('.jpg', '') | replace('.png', '') | replace('.webp', '') %}
+          {% set extension = image.src | split('.') | last %}
+          {% set srcset = baseName ~ '-480.' ~ extension ~ ' 480w, ' ~ baseName ~ '-960.' ~ extension ~ ' 960w, ' ~ baseName ~ '-1440.' ~ extension ~ ' 1440w' %}
+
           <div class="image-container">
             <img 
               src="{{ image.src }}" 
+              srcset="{{ srcset }}"
+              sizes="(max-width: 640px) 480px, (max-width: 1024px) 960px, 1440px"
               alt="{{ image.alt }}" 
               class="{{ options.datas.globalStyle }} {{ variantStyle }} {% if options.imageClass %}{{ options.imageClass }}{% endif %}"
-              {% if options.loading %}loading="{{ options.loading }}"{% endif %}
+              loading="{{ options.loading | default('lazy') }}"
+              decoding="async"
             />
           </div>
         {% endfor %}
@@ -62,16 +76,23 @@
     {% else %}
       <span class="text-red-500">No images found in group: {{ options.group }}</span>
     {% endif %}
+
   {% else %}
     {# Direct image rendering with inline properties #}
     {% set globalStyle = options.datas.globalStyle %}
     {% set variantStyle = options.datas.variants[options.size] | default('') %}
-    
+    {% set baseName = options.src | replace('.jpg', '') | replace('.png', '') | replace('.webp', '') %}
+    {% set extension = options.src | split('.') | last %}
+    {% set srcset = baseName ~ '-480.' ~ extension ~ ' 480w, ' ~ baseName ~ '-960.' ~ extension ~ ' 960w, ' ~ baseName ~ '-1440.' ~ extension ~ ' 1440w' %}
+
     <img 
       src="{{ options.src }}" 
+      srcset="{{ srcset }}"
+      sizes="(max-width: 640px) 480px, (max-width: 1024px) 960px, 1440px"
       alt="{{ options.alt }}" 
       class="{{ globalStyle }} {{ variantStyle }} {% if options.className %}{{ options.className }}{% endif %}"
-      {% if options.loading %}loading="{{ options.loading }}"{% endif %}
+      loading="{{ options.loading | default('lazy') }}"
+      decoding="async"
       {% if options.width %}width="{{ options.width }}"{% endif %}
       {% if options.height %}height="{{ options.height }}"{% endif %}
     />
