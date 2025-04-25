@@ -1,11 +1,3 @@
 [build]
   command = "npm run build"
   publish = "public"
-
-[[plugins]]
-  package = "@netlify/plugin-image-optimization"
-
-  [plugins.inputs]
-    compress = true
-    quality = 85
-    formats = ["webp", "jpeg", "png"]
