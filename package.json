@@ -2,7 +2,17 @@
   "name": "ma-nautic",
   "version": "2.1.0",
   "description": "Site vitrine pour la location de bateaux à Saint-Florent, en Corse.",
-  "keywords": ["location", "bateaux", "nautisme", "Saint-Florent", "Corse", "site web", "Eleventy", "TailwindCSS", "Decap CMS"],
+  "keywords": [
+    "location",
+    "bateaux",
+    "nautisme",
+    "Saint-Florent",
+    "Corse",
+    "site web",
+    "Eleventy",
+    "TailwindCSS",
+    "Decap CMS"
+  ],
   "homepage": "https://github.com/charlotte-carpentier/ma-nautic",
   "bugs": {
     "url": "https://github.com/charlotte-carpentier/ma-nautic/issues"
@@ -29,19 +39,8 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
-    "@11ty/eleventy-img": "^6.0.2",
     "@babel/preset-env": "^7.26.9",
     "@chromatic-com/storybook": "^3.2.5",
-    "@storybook/addon-a11y": "^8.6.8",
-    "@storybook/addon-essentials": "^8.6.8",
-    "@storybook/addon-interactions": "^8.6.8",
-    "@storybook/addon-links": "^8.6.8",
-    "@storybook/addon-viewport": "^8.6.8",
-    "@storybook/addon-webpack5-compiler-swc": "^2.1.0",
-    "@storybook/blocks": "^8.6.3",
-    "@storybook/html": "^8.6.8",
-    "@storybook/html-webpack5": "^8.6.3",
-    "@storybook/test": "^8.6.3",
     "@tailwindcss/cli": "^4.0.9",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
@@ -51,8 +50,6 @@
     "nunjucks": "^3.2.4",
     "postcss": "^8.5.3",
     "simple-nunjucks-loader": "^3.2.0",
-    "storybook": "^8.6.3",
-    "storybook-addon-pseudo-states": "^4.0.2",
     "tailwindcss": "^4.0.15"
   }
 }
