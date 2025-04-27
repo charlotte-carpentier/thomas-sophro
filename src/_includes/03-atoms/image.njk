@@ -5,7 +5,7 @@
 #}
 
 {% macro renderImage(options) %}
-  {# Find the target image or images #}
+  {# Find the target image by name #}
   {% if options.name %}
     {% set imageData = null %}
     
@@ -22,15 +22,8 @@
       {# Apply variant styling #}
       {% set variantStyle = options.datas.variants[imageData.size] | default('') %}
 
-      {# Construct srcset assuming images exist with suffixes -480, -960, -1440 #}
-      {% set baseName = imageData.src | replace('.jpg', '') | replace('.png', '') | replace('.webp', '') %}
-      {% set extension = imageData.src | split('.') | last %}
-      {% set srcset = baseName ~ '-480.' ~ extension ~ ' 480w, ' ~ baseName ~ '-960.' ~ extension ~ ' 960w, ' ~ baseName ~ '-1440.' ~ extension ~ ' 1440w' %}
-
       <img 
         src="{{ imageData.src }}" 
-        srcset="{{ srcset }}"
-        sizes="(max-width: 640px) 480px, (max-width: 1024px) 960px, 1440px"
         alt="{{ imageData.alt }}" 
         class="{{ globalStyle }} {{ variantStyle }} {% if options.className %}{{ options.className }}{% endif %}"
         loading="{{ options.loading | default('lazy') }}"
@@ -43,6 +36,7 @@
     {% endif %}
 
   {% elseif options.group %}
+    {# Handle image group rendering #}
     {% set groupImages = [] %}
     
     {# Find all images in the specified group #}
@@ -56,15 +50,10 @@
       <div class="image-group {% if options.groupClass %}{{ options.groupClass }}{% endif %}">
         {% for image in groupImages %}
           {% set variantStyle = options.datas.variants[image.size] | default('') %}
-          {% set baseName = image.src | replace('.jpg', '') | replace('.png', '') | replace('.webp', '') %}
-          {% set extension = image.src | split('.') | last %}
-          {% set srcset = baseName ~ '-480.' ~ extension ~ ' 480w, ' ~ baseName ~ '-960.' ~ extension ~ ' 960w, ' ~ baseName ~ '-1440.' ~ extension ~ ' 1440w' %}
 
           <div class="image-container">
             <img 
               src="{{ image.src }}" 
-              srcset="{{ srcset }}"
-              sizes="(max-width: 640px) 480px, (max-width: 1024px) 960px, 1440px"
               alt="{{ image.alt }}" 
               class="{{ options.datas.globalStyle }} {{ variantStyle }} {% if options.imageClass %}{{ options.imageClass }}{% endif %}"
               loading="{{ options.loading | default('lazy') }}"
@@ -81,14 +70,9 @@
     {# Direct image rendering with inline properties #}
     {% set globalStyle = options.datas.globalStyle %}
     {% set variantStyle = options.datas.variants[options.size] | default('') %}
-    {% set baseName = options.src | replace('.jpg', '') | replace('.png', '') | replace('.webp', '') %}
-    {% set extension = options.src | split('.') | last %}
-    {% set srcset = baseName ~ '-480.' ~ extension ~ ' 480w, ' ~ baseName ~ '-960.' ~ extension ~ ' 960w, ' ~ baseName ~ '-1440.' ~ extension ~ ' 1440w' %}
 
     <img 
       src="{{ options.src }}" 
-      srcset="{{ srcset }}"
-      sizes="(max-width: 640px) 480px, (max-width: 1024px) 960px, 1440px"
       alt="{{ options.alt }}" 
       class="{{ globalStyle }} {{ variantStyle }} {% if options.className %}{{ options.className }}{% endif %}"
       loading="{{ options.loading | default('lazy') }}"
@@ -98,6 +82,7 @@
     />
   {% endif %}
 {% endmacro %}
+
 
 {#
 ============================
