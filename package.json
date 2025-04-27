@@ -47,6 +47,7 @@
     "gray-matter": "^4.0.3",
     "json5": "^2.2.3",
     "loader-utils": "^3.3.1",
+    "netlify-plugin-image-optim": "^0.4.0",
     "nunjucks": "^3.2.4",
     "postcss": "^8.5.3",
     "simple-nunjucks-loader": "^3.2.0",
