@@ -1,18 +1,18 @@
 {
-  "name": "hat-dynamic-template",
-  "version": "1.0.0",
-  "description": "These are the starting files used by [HAT](https://#) to create a dynamic site.",
-  "keywords": [],
-  "homepage": "https://github.com/theHat13/dynamic-template#readme",
+  "name": "ma-nautic",
+  "version": "2.1.0",
+  "description": "Site vitrine pour la location de bateaux à Saint-Florent, en Corse.",
+  "keywords": ["location", "bateaux", "nautisme", "Saint-Florent", "Corse", "site web", "Eleventy", "TailwindCSS", "Decap CMS"],
+  "homepage": "https://github.com/charlotte-carpentier/ma-nautic",
   "bugs": {
-    "url": "https://github.com/theHat13/dynamic-template/issues"
+    "url": "https://github.com/charlotte-carpentier/ma-nautic/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://git@github.com/theHat13/dynamic-template.git"
+    "url": "git+https://github.com/charlotte-carpentier/ma-nautic.git"
   },
-  "license": "ISC",
-  "author": "",
+  "license": "MIT",
+  "author": "Charlotte Carpentier",
   "type": "module",
   "main": "index.js",
   "directories": {
@@ -20,24 +20,16 @@
   },
   "scripts": {
     "start": "npx concurrently \"npx @tailwindcss/cli -i ./src/input.css -o ./public/css/output.css --watch\" \"eleventy --serve --watch\"",
-    "compress-images": "node src/js/utils/compress-images.js",
-    "build": "npm run compress-images && eleventy",
-    "refresh": "rm -rf .cache ./public/css/output.css",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "generate:component": "node src/js/tools/generate-component.js"
+    "build": "eleventy",
+    "refresh": "rm -rf .cache ./public/css/output.css"
   },
   "dependencies": {
     "@anthropic-ai/claude-code": "^0.2.29",
-    "execa": "^9.5.2",
-    "imagemin": "^9.0.1",
-    "imagemin-mozjpeg": "^10.0.0",
-    "imagemin-pngquant": "^10.0.0",
-    "imagemin-svgo": "^11.0.1",
-    "sharp": "^0.34.1"
+    "execa": "^9.5.2"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-img": "^6.0.2",
     "@babel/preset-env": "^7.26.9",
     "@chromatic-com/storybook": "^3.2.5",
     "@storybook/addon-a11y": "^8.6.8",
@@ -53,7 +45,6 @@
     "@tailwindcss/cli": "^4.0.9",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
-    "glob": "^11.0.2",
     "gray-matter": "^4.0.3",
     "json5": "^2.2.3",
     "loader-utils": "^3.3.1",

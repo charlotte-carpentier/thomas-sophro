@@ -124,69 +124,6 @@
       "group": "block-media"
     },
     {
-      "name": "placeholder_small",
-      "src": "/assets/images/placeholder-small.png",
-      "alt": "Small placeholder image",
-      "size": "small",
-      "group": "block-media"
-    },
-    {
-      "name": "placeholder_medium",
-      "src": "/assets/images/placeholder-medium.png",
-      "alt": "Medium placeholder image",
-      "size": "medium",
-      "group": "block-media"
-    },
-    {
-      "name": "placeholder_large",
-      "src": "/assets/images/placeholder-large.png",
-      "alt": "Large placeholder image",
-      "size": "large",
-      "group": "block-media"
-    },
-    {
-      "name": "avatar_dark",
-      "src": "/assets/images/avatar-dark.png",
-      "alt": "Dark avatar",
-      "size": "avatar",
-      "group": "block-media-small"
-    },
-    {
-      "name": "avatar_blue",
-      "src": "/assets/images/avatar-blue.png",
-      "alt": "Blue avatar",
-      "size": "avatar",
-      "group": "block-media-small"
-    },
-    {
-      "name": "avatar_green",
-      "src": "/assets/images/avatar-green.png",
-      "alt": "Green avatar",
-      "size": "avatar",
-      "group": "block-media-small"
-    },
-    {
-      "name": "avatar_orange",
-      "src": "/assets/images/avatar-orange.png",
-      "alt": "Orange avatar",
-      "size": "avatar",
-      "group": "block-media-small"
-    },
-    {
-      "name": "avatar_red",
-      "src": "/assets/images/avatar-red.png",
-      "alt": "Red avatar",
-      "size": "avatar",
-      "group": "block-media-small"
-    },
-    {
-      "name": "avatar_character",
-      "src": "/assets/images/avatar-character.png",
-      "alt": "Character avatar",
-      "size": "avatar",
-      "group": "block-media-small"
-    },
-    {
       "name": "carousel_nine_slide_1",
       "src": "/assets/images/uploaded/capelli-tempest-500-proue.jpg",
       "alt": "Photos du bateau \\\"Nine\\\"",
