@@ -1,4 +1,4 @@
---- 
+---
 permalink: "/contact/" 
 layout: '00-core/base.njk' 
 ---
@@ -38,3 +38,42 @@ layout: '00-core/base.njk'
     {# Custom map initialization script #}
     <script src="/js/utils/map-contact.js"></script>
 </div>
+
+{# Adding JSON-LD structured data for LocalBusiness #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "M.A Nautic",
+  "image": "image": "https://manautic-location-bateau.com/assets/logos/ma-logo.svg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Lieu-dit schinu route Calvi",
+    "addressLocality": "Saint-Florent",
+    "addressRegion": "Haute-Corse",
+    "postalCode": "20217",
+    "addressCountry": "FR"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+33-6-25-70-47-10",
+    "contactType": "customer service",
+    "areaServed": "FR",
+    "availableLanguage": "fr"
+  },
+  "sameAs": [
+    "https://www.facebook.com/M.A.Nautic/",
+    "https://www.instagram.com/m.a.nautic/"
+  ],
+  "url": "https://manautic-location-bateau.com/",
+  "priceRange": "€€",
+  "openingHours": "Mo-Su 09:30-18:00",
+  "contentBlocks": [
+    {% for block in contentBlocks %}
+      {
+        "text": "{{ block.text | safe }}"
+      }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
