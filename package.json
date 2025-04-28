@@ -30,7 +30,8 @@
   },
   "scripts": {
     "start": "npx concurrently \"npx @tailwindcss/cli -i ./src/input.css -o ./public/css/output.css --watch\" \"eleventy --serve --watch\"",
-    "build": "eleventy",
+    "build": "npm run update-sitemap && eleventy",
+    "update-sitemap": "node src/js/utils/update-sitemap.js",
     "refresh": "rm -rf .cache ./public/css/output.css"
   },
   "dependencies": {

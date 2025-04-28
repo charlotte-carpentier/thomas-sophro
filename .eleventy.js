@@ -2,28 +2,34 @@ import { DateTime } from "luxon";
 import { sortBoatsByPrice } from './src/js/utils/price-utils.js';
 
 export default function (eleventyConfig) {
-  // Copie des fichiers statiques dans le dossier de sortie
-  eleventyConfig.addPassthroughCopy('./src/assets');
-  eleventyConfig.addPassthroughCopy('./src/admin');
-  eleventyConfig.addPassthroughCopy('./src/docs');
-  eleventyConfig.addPassthroughCopy('./src/js');
-  eleventyConfig.addPassthroughCopy('_redirects');
+  // Passthrough pour les fichiers statiques
+  eleventyConfig.addPassthroughCopy('./src/assets'); // Copier le dossier assets
+  eleventyConfig.addPassthroughCopy('./src/admin');  // Copier le dossier admin (pour Netlify CMS)
+  eleventyConfig.addPassthroughCopy('./src/docs');   // Copier le dossier docs
+  eleventyConfig.addPassthroughCopy('./src/js');     // Copier le dossier js (pour les scripts personnalisés)
+  eleventyConfig.addPassthroughCopy('_redirects');    // Copier le fichier _redirects
 
-  // Shortcode pour l'année actuelle
+  // Passthrough pour robots.txt
+  eleventyConfig.addPassthroughCopy('./src/robots.txt');  // Copier robots.txt
+
+  // Copier sitemap.xml du dossier src vers public
+  eleventyConfig.addPassthroughCopy('./src/sitemap.xml');  // Copier sitemap.xml
+
+  // Shortcode pour obtenir l'année actuelle
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
-  // Filtre pour formater la date des posts
+  // Filter pour formater les dates des posts
   eleventyConfig.addFilter("postDate", (dateObj) => {
     return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
   });
 
-  // Filtre pour vérifier si une chaîne de caractères se termine par un suffixe
+  // Filter pour vérifier si une chaîne se termine par un suffixe donné
   eleventyConfig.addFilter("endsWith", function(str, suffix) {
     if (!str || !suffix) return false;
     return str.toString().toLowerCase().endsWith(suffix.toLowerCase());
   });
 
-  // Filtre pour trier les bateaux par prix
+  // Filter pour trier les bateaux par prix
   eleventyConfig.addFilter("sortByPrice", sortBoatsByPrice);
 
   // Collection personnalisée pour les carrousels
@@ -36,13 +42,14 @@ export default function (eleventyConfig) {
     return collectionApi.getFilteredByGlob("./src/collection-boats/*.md");
   });
 
-  // Ajouter une cible de surveillance pour les modifications des collections de bateaux
+  // Watch target pour les changements dans la collection des bateaux
   eleventyConfig.addWatchTarget("./src/collection-boats/");
 
+  // Configuration de la structure des dossiers
   return {
     dir: {
       input: "src",  // Dossier des fichiers source
-      output: "public",  // Dossier de sortie (build final)
+      output: "public",  // Dossier de sortie (build)
     }
   };
 }
