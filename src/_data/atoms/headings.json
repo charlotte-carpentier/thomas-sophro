@@ -98,6 +98,108 @@
       "style": "ma_nautic_section_title"
     },
     {
+      "name": "boat_h1",
+      "level": 1,
+      "text": "LOCATION DE BATEAUX RIGIDES ET SEMI-RIGIDES EN CORSE",
+      "style": "ma_nautic_section_drop"
+    },
+    {
+      "name": "boat_hero_h2",
+      "level": 2,
+      "text": "Une flotte complète et entretenue pour explorer la Haute-Corse",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_hero_h3_free",
+      "level": 3,
+      "text": "Naviguez librement depuis Saint-Florent",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_hero_h3_licence",
+      "level": 3,
+      "text": "Avec ou sans permis bateau : choisissez votre façon de naviguer",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_info_h2",
+      "level": 2,
+      "text": "Nos bateaux à louer",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_customer_h2",
+      "level": 2,
+      "text": "À qui s’adresse la location de bateau avec M.A Nautic ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_info_h3_price",
+      "level": 3,
+      "text": "Tarifs et conditions de location",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_info_h3_option",
+      "level": 3,
+      "text": "Options disponibles pour enrichir votre sortie",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_whyus_h2",
+      "level": 2,
+      "text": "Pourquoi choisir MA-Nautic pour louer un bateau en Corse ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_whyus_h3_place",
+      "level": 3,
+      "text": "Une base idéale à Saint-Florent",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_whyus_h3_spots",
+      "level": 3,
+      "text": "À découvrir au départ de nos bateaux",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "spot_h1",
+      "level": 1,
+      "text": "EXCURSION EN BATEAU À SAINT-FLORENT",
+      "style": "ma_nautic_section_drop"
+    },
+    {
+      "name": "spot_hero_h2",
+      "level": 2,
+      "text": "Le désert des Agriates par la mer : plages secrètes et escales gourmandes",
+      "style": "ma_nautic_subtitle_light"
+    },
+    {
+      "name": "spot_capcorse_h2",
+      "level": 2,
+      "text": "Le Cap Corse : falaises, villages perchés et cuisine marine",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "spot_manautic_h2",
+      "level": 2,
+      "text": "M.A Nautic : votre embarcation vers les plus beaux sites de Haute-Corse",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "spot_manautic_h3_stflorent",
+      "level": 3,
+      "text": "Les lieux incontournables à découvrir depuis Saint-Florent",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "spot_manautic_h3_trust",
+      "level": 3,
+      "text": "M.A Nautic, pour une navigation de confiance",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
       "name": "location_bateaux",
       "text": "LOCATION DE BATEAUX",
       "level": 1,
@@ -109,18 +211,7 @@
       "level": 2,
       "style": "ma_nautic_subtitle"
     },
-    {
-      "name": "agence_location",
-      "level": 1,
-      "text": "NOS BATEAUX EN LOCATION À SAINT-FLORENT",
-      "style": "ma_nautic_section_drop"
-    },
-    {
-      "name": "agence_lieux",
-      "level": 1,
-      "text": "LIEUX D'INTÉRÊTS À SAINT-FLORENT",
-      "style": "ma_nautic_section_drop"
-    },
+
     {
       "name": "agence_contact",
       "level": 1,
@@ -132,12 +223,6 @@
       "level": 3,
       "text": "Capelli Tempest 500",
       "style": "boat-title"
-    },
-    {
-      "name": "ma_nautic_flotte",
-      "level": 2,
-      "text": "Les caractéristiques de notre flotte en Haute-Corse",
-      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "capelli_500",
@@ -222,18 +307,6 @@
       "level": 2,
       "text": "OPTIONS",
       "style": "ma_nautic_subtitle_light"
-    },
-    {
-      "name": "ma_agriates",
-      "level": 2,
-      "text": "Le désert des Agriates, ses plages et restaurants",
-      "style": "ma_nautic_subtitle_light"
-    },
-    {
-      "name": "ma_capcorse",
-      "level": 2,
-      "text": "Le Cap Corse, ses plages et restaurants...",
-      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "ma_nautic_contact",
