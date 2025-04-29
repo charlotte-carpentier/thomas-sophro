@@ -72,6 +72,17 @@
       "content_06": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Depuis <strong>Saint-Florent</strong>, les <strong>itinéraires*</strong> se dessinent entre les <strong>plages blanches</strong> de <strong>Saleccia</strong>, du <strong>Lotu</strong> ou de <strong>Ghignu</strong>, joyaux du <strong>désert des Agriates</strong>, accessibles uniquement par la mer, baignées d’<strong>eaux claires</strong> et cernées par les <strong>pins maritimes</strong>.</p><p class='mb-4'>Plus à l’est, la <strong>baie de Fiume Santu</strong> offre un <strong>refuge paisible</strong>, parfait pour un déjeuner à bord ou une baignade à l’écart du tumulte.</p><p class='mb-4'><strong>Cap au nord</strong>, les <strong>falaises de Nonza</strong> surgissent à pic dans la mer, teintes d’ardoise et couronnées par un <strong>village perché</strong>, tandis que le <strong>Cap Corse</strong> dévoile ses <strong>petits ports cachés</strong>, ses <strong>criques discrètes</strong> et ses <strong>sentiers oubliés</strong>.</p><p class='mb-4'>À chaque escale, l’atmosphère change, entre <strong>silence minéral</strong>, <strong>lumière vive</strong> et <strong>nature intacte</strong>.</p></div>",
       "image": "ma_group",
       "link": "contactez-nous_light"
+    },
+    {
+      "name": "ma_nautic_contact",
+      "variant": "ma-nautic-blue",
+      "heightVariant": "tall",
+      "superHeading_01": "contact_access_h2",
+      "content_01": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Notre agence de location de bateaux* est implantée au cœur de Saint-Florent, village côtier emblématique de Haute-Corse.</p><p class='mb-4'>Située route de Bastia, elle est facilement accessible à pied depuis le centre et dispose d’un parking privé pour notre clientèle.</p><ul class='mb-4 list-disc list-inside'><li><strong>Adresse GPS :</strong> 42.681846, 9.303704</li><li><strong>Départ des bateaux</strong> directement depuis notre quai privé.</li><li><strong>Stationnement simplifié :</strong> parking client gratuit à moins de 50 mètres.</li></ul></div>",
+      "heading_01": "contact_access_h3_details",
+      "content_02": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><ul class='mb-4 list-disc list-inside'><li><strong>Adresse :</strong> Route de Bastia, port privé – 20217 Saint-Florent*</li><li><strong>Jonathan :</strong> +33 6 26 02 63 71</li><li><strong>Florent :</strong> +33 6 25 70 47 10</li><li><strong>Email :</strong> contact@ma-nautic.com</li><li><strong>Horaires d’ouverture :</strong> tous les jours, de 9h30 à 18h (haute saison)</li></ul></div>",
+      "image": "ma_group",
+      "link": "contactez-nous_light"
     }
   ]
 }

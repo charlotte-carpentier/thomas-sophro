@@ -27,13 +27,13 @@
   "imageContainerStyle": "mt-6 md:mt-0",
   "heroes": [
     {
-      "name": "ma_nautic_hero",
+      "name": "home_hero",
       "variant": "ma-nautic",
       "image": "ma_title",
       "backgroundImage": "hero_background"
     },
     {
-      "name": "bateaux_hero",
+      "name": "boat_hero",
       "variant": "default",
       "mainTitle": "boat_h1",
       "superHeading": "boat_hero_h2",
@@ -52,7 +52,7 @@
       "iconName": "wheel"
     },
     {
-      "name": "lieux_hero",
+      "name": "spot_hero",
       "variant": "default",
       "mainTitle": "spot_h1",
       "superHeading_01": "spot_hero_h2",
@@ -69,25 +69,9 @@
     {
       "name": "contact_hero",
       "variant": "default",
-      "superHeading": "agence_contact",
-      "heading": "ma_nautic_contact",
-      "contentBlocks": [
-        {
-          "text": "Si notre <strong>F.A.Q.</strong> n'a pas su répondre à vos questions concernant notre <strong>location de bateaux</strong> à Saint-Florent (20217) en Haute-Corse, n'hésitez pas à contacter <strong>M.A Nautic</strong> !"
-        },
-        {
-          "text": "Appelez-nous au <strong>06.25.70.47.10</strong>, nous sommes disponibles du lundi au dimanche de 9h30 à 18h."
-        },
-        {
-          "text": "Vous pouvez aussi remplir le formulaire ci-dessous pour nous poser vos questions :"
-        },
-        {
-          "text": "Suivez notre actualité sur les réseaux sociaux :"
-        },
-        {
-          "text": "<strong><a href='https://www.facebook.com/M.A.Nautic/' target='_blank' class='transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]'>Facebook</a></strong> & <strong><a href='https://www.instagram.com/m.a.nautic/' target='_blank' class='transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]'>Instagram</a></strong>"
-        }
-      ],
+      "mainTitle": "contact_h1",
+      "superHeading_01": "contact_hero_h2",
+      "content_01": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Vous avez une question sur la location de bateau en Corse*, besoin de précisions sur nos services ou envie d’en savoir plus avant de réserver ? M.A Nautic Saint-Florent vous répond tous les jours, que vous soyez déjà en Haute-Corse ou en pleine préparation de votre séjour.</p><p class='mb-4'>Appelez-nous directement au +33 6 25 70 47 10. Nous sommes joignables du lundi au dimanche, de 9h30 à 18h. Vous préférez écrire ? Utilisez notre formulaire* pour nous envoyer votre demande. Réponse rapide garantie.</p><p class='mb-4'>Notre base nautique se trouve dans le port privé de Saint-Florent (20217), à proximité immédiate du centre-ville et du parking.</p><p class='mb-4'>Suivez-nous sur Facebook et Instagram pour découvrir nos bateaux, nos actualités et les plus belles images de la côte Corse !</p></div>",
       "scrollArrowButton": "arrow_scroll_up",
       "scrollArrowButtonVariant": "arrowScrollIcon",
       "image-right": "ma_wave_right",
@@ -100,8 +84,8 @@
     {
       "name": "faq_hero",
       "variant": "default",
-      "superHeading": "agence_faq",
-      "heading": "ma_nautic_faq",
+      "mainTitle": "faq_h1",
+      "content_01": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Naviguer au large de <strong>Saint-Florent</strong>, c’est emprunter un chemin maritime unique qui longe le <strong>désert des Agriates</strong>, entre reliefs arides et lignes d’horizon, caps et criques. Chez <strong>MA Nautic</strong>, chaque location de bateau soulève des <strong>questions concrètes</strong>. Faut-il un permis ? Que faire en cas de vent fort ? Peut-on accoster à Saleccia ? Où faire le plein d’essence ?</p><p class='mb-4'>Cette page rassemble toutes les <strong>réponses</strong> pour vous aider à <strong>préparer efficacement votre sortie en mer</strong>, sans mauvaise surprise. Conditions, itinéraires, équipements, météo, restauration ou activités nautiques : cette FAQ a été pensée pour vous donner toutes les <strong>informations pratiques</strong> nécessaires à la bonne préparation de votre expérience en Méditerranée.</p><p class='mb-4'><strong>Louer un bateau en Corse</strong> devient accessible et fluide, à condition d’avoir les bons repères !</p></div>",
       "image-right": "ma_wave_right",
       "image-left": "ma_wave_left",
       "icon": "wheel",
@@ -112,8 +96,8 @@
     {
       "name": "legal_hero",
       "variant": "default",
-      "superHeading": "agence_legal",
-      "heading": "ma_nautic_legal",
+      "mainTitle": "legal_h1",
+      "content_01": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Bienvenue sur la page des <strong>Crédits et Mentions Légales</strong> de <strong>M.A Nautic</strong>.</p><p class='mb-4'>Vous y trouverez toutes les <strong>informations juridiques</strong> concernant l'éditeur du site, l'hébergeur, ainsi que les <strong>conditions d'utilisation</strong>, la <strong>gestion des données personnelles</strong>, et la <strong>propriété intellectuelle</strong>.</p><p class='mb-4'>Nous nous engageons à garantir la <strong>transparence</strong> et la <strong>protection de vos données</strong> tout en vous offrant des <strong>services de qualité</strong>.</p></div>",
       "image-right": "ma_wave_right",
       "image-left": "ma_wave_left",
       "icon": "wheel",
