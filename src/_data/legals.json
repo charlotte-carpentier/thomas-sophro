@@ -1,66 +1,58 @@
 {
-  "globalStyle": "flex flex-col space-y-4 legal-container",
-  "variants": {
-      "default": "text-gray-800",
-      "hover": "text-gray-600",
-      "focus": "text-gray-800 outline-2 outline-blue-500 outline-offset-2 rounded-md",
-      "active": "text-blue-600 font-bold"
-  },
-  "legalInformation": [
-      {
-          "sectionName": "ma_legal",
-          "contentBlocks": [
+    "globalStyle": "flex flex-col space-y-4 legal-container",
+    "variants": {
+        "default": "text-gray-800",
+        "hover": "text-gray-600",
+        "focus": "text-gray-800 outline-2 outline-blue-500 outline-offset-2 rounded-md",
+        "active": "text-blue-600 font-bold"
+    },
+    "legalInformation": [
+        {
+            "sectionName": "ma_legal",
+            "contentBlocks": [
                 {
-                "title": "Informations relatives à l'hébergeur",
-                "content": "Netlify, Inc.\nAdresse du siège social : 44 Montgomery Street, Suite 300, San Francisco, California 94104, USA\nSite web : https://www.netlify.com\nLes serveurs de Netlify sont situés en dehors de l’Union Européenne. Netlify certifie respecter le cadre juridique du Data Privacy Framework (DPF) entre les États-Unis et l’Union Européenne, garantissant un niveau de protection adéquat des données personnelles.\nPolitique de confidentialité : https://www.netlify.com/privacy/"
-              }
-              ,
-              {
-                  "title": "Informations relatives à l'éditeur",
-                  "content": "Raison sociale : M.A NAUTIC\nForme juridique : SASU Société par actions simplifiée à associé unique\nCapital social : Non renseigné\nEnseigne : M.A NAUTIC\nAdresse : Lieu dit Schinu, Route de Calvi, 20217 Saint-Florent, France\nTéléphone : +33625704710\nE-mail : contact@ma-nautic.com\nDirecteur de publication : Florent MARTY\nSiren : 910893148\nSiret : 91089314800015"
-              },
-              {
-                "title": "Médiateur à la consommation",
-                "content": "Conformément à l'article L. 612-1 du Code de la consommation, en cas de litige, le consommateur a la possibilité de recourir gratuitement à un médiateur de la consommation.\n\nNom : [Nom du médiateur]\nOrganisme de médiation : [Nom de l'organisme]\nEmail : [Email du médiateur]\nTéléphone : [Numéro de téléphone]\nAdresse : [Adresse postale]\n\nSi aucun médiateur spécifique n'est désigné, le consommateur peut consulter la plateforme de résolution des litiges en ligne de la Commission européenne : https://ec.europa.eu/consumers/odr/"
-              },
-              {
-                  "title": "Conditions d'utilisation",
-                  "content": "Le site est accessible par l'url ma-nautic.com.\nSon utilisation est régie par les présentes conditions générales. En utilisant le site, vous reconnaissez avoir pris connaissance de ces conditions et les avoir acceptées. Celles-ci pourront être modifiées à tout moment et sans préavis par la société M.A NAUTIC.\nL'entreprise M.A NAUTIC ne saurait être tenue pour responsable en aucune manière d'une mauvaise utilisation du service."
-              },
-              {
-                  "title": "Limitation de la responsabilité",
-                  "content": "Les informations contenues sur ce site sont aussi précises que possible et le site est périodiquement remis à jour, mais peut toutefois contenir des inexactitudes, des omissions ou des lacunes. Si vous constatez une erreur ou ce qui peut être un dysfonctionnement, merci de bien vouloir le signaler par email en décrivant le problème de la manière la plus précise possible.\nTout contenu téléchargé se fait aux risques et périls de l'utilisateur et sous sa seule responsabilité. En conséquence, l'entreprise M.A NAUTIC ne saurait être tenue responsable d'un quelconque dommage subi par l'ordinateur de l'utilisateur ou d'une quelconque perte de données consécutives au téléchargement. Les photos sont non contractuelles.\nLes liens hypertextes mis en place sur ce site internet en direction d'autres sites internet ne sauraient engager la responsabilité de M.A NAUTIC."
-              },
-              {
-                  "title": "Litiges",
-                  "content": "Les présentes conditions sont régies par les lois françaises et toute contestation ou litige qui pourrait naître de l'interprétation ou de l'exécution de celles-ci seront de la compétence des tribunaux français. La langue de référence, pour le règlement de contentieux éventuels, est le français."
-              },
-              {
-                  "title": "Droit d'accès, de rectification et de suppression de vos données",
-                  "content": "En application de la loi informatique et libertés, les internautes disposent d'un droit d'accès, de rectification, de modification et de suppression concernant les données qui les concernent personnellement.\nLe droit d'accès : ils peuvent exercer leur droit d'accès, pour connaître les données personnelles les concernant, en écrivant à l'adresse électronique suivante. Dans ce cas, avant la mise en œuvre de ce droit, la Plateforme peut demander une preuve de l'identité de l'utilisateur afin d'en vérifier l'exactitude.\nLe droit de rectification : si les données à caractère personnel détenues par la Plateforme sont inexactes, ils peuvent demander la mise à jour des informations.\nLe droit de suppression des données : les utilisateurs peuvent demander la suppression de leurs données à caractère personnel, conformément aux lois applicables en matière de protection des données."
-              },
-              {
-                  "title": "Collecte et protection des données",
-                  "content": "Vos données sont collectées par M.A NAUTIC.\nUne donnée à caractère personnel désigne toute information concernant une personne physique identifiée ou identifiable (personne concernée); est réputée identifiable une personne qui peut être identifiée, directement ou indirectement, notamment par référence à un nom, un numéro d'identification ou à un ou plusieurs éléments spécifiques, propres à son identité physique, physiologique, génétique, psychique, économique, culturelle ou sociale.\nLes informations personnelles pouvant être recueillies sur le site sont principalement utilisées par l'éditeur pour la gestion des relations avec vous."
-              },
-              {
-                  "title": "Propriété intellectuelle",
-                  "content": "Tout le contenu du présent site, incluant, de façon non limitative, les graphismes, images, textes, vidéos, animations, sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété exclusive de la société M.A NAUTIC à l'exception des marques, logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs (ex: AdobeStock, ShutterStock, FontAwesome, Freepik).\nToute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, de ces différents éléments est strictement interdite sans l'accord express par écrit de M.A NAUTIC."
-              },
-              {
-                "title": "Gestion des « cookies »",
-                "content": "Ce site n'utilise pas de cookies. Aucun cookie n'est déposé sans votre consentement. Si des cookies sont ajoutés à l'avenir, vous serez informé et pourrez gérer vos préférences à tout moment."
-              },
-              {
-                "title": "Prestataire technique",
-                "content": "Les prestations techniques sont assurées par Charlotte Carpentier, micro-entreprise.\n\nNom de l'entreprise : Charlotte Carpentier\nStatut juridique : Micro-entreprise\nSIRET : 94076582900012\nAdresse : Disponible sur demande\nEmail : carpentier.dev@gmail.com"
-              }
-              
-              
-              
-          ]
-      }
-  ],
-  "iconName": "legal",
-  "links": "contactez-nous"
+                    "superHeading_01": "legal_info_h2",
+                    "heading_01": "legal_info_h3_host",
+                    "content_01": "Netlify, Inc.\nAdresse du siège social : 44 Montgomery Street, Suite 300, San Francisco, California 94104, USA\nSite web : https://www.netlify.com\nLes serveurs de Netlify sont situés en dehors de l’Union Européenne. Netlify certifie respecter le cadre juridique du Data Privacy Framework (DPF) entre les États-Unis et l’Union Européenne, garantissant un niveau de protection adéquat des données personnelles.\nPolitique de confidentialité : https://www.netlify.com/privacy/",
+                    "heading_02": "legal_info_h3_publisher",
+                    "content_02": "Raison sociale : M.A NAUTIC\nForme juridique : SASU Société par actions simplifiée à associé unique\nCapital social : Non renseigné\nEnseigne : M.A NAUTIC\nAdresse : Lieu dit Schinu, Route de Calvi, 20217 Saint-Florent, France\nTéléphone : +33625704710\nE-mail : contact@ma-nautic.com\nDirecteur de publication : Florent MARTY\nSiren : 910893148\nSiret : 91089314800015"
+                },
+                {
+                    "superHeading_02": "legal_mediation_h2",
+                    "heading_03": "legal_mediation_h3_consumer",
+                    "content_03": "Conformément à l'article L. 612-1 du Code de la consommation, en cas de litige, le consommateur a la possibilité de recourir gratuitement à un médiateur de la consommation.\n\nNom : [Nom du médiateur]\nOrganisme de médiation : [Nom de l'organisme]\nEmail : [Email du médiateur]\nTéléphone : [Numéro de téléphone]\nAdresse : [Adresse postale]\n\nSi aucun médiateur spécifique n'est désigné, le consommateur peut consulter la plateforme de résolution des litiges en ligne de la Commission européenne : https://ec.europa.eu/consumers/odr/",
+                    "heading_04": "legal_mediation_h3_resolution",
+                    "content_04": "Les présentes conditions sont régies par les lois françaises et toute contestation ou litige qui pourrait naître de l'interprétation ou de l'exécution de celles-ci seront de la compétence des tribunaux français. La langue de référence, pour le règlement de contentieux éventuels, est le français."
+                },
+                {
+                    "superHeading_03": "legal_use_h2",
+                    "heading_05": "legal_use_h3_access",
+                    "content_05": "Le site est accessible par l'url manautic-location-bateau.com.\nSon utilisation est régie par les présentes conditions générales. En utilisant le site, vous reconnaissez avoir pris connaissance de ces conditions et les avoir acceptées. Celles-ci pourront être modifiées à tout moment et sans préavis par la société M.A NAUTIC.\nL'entreprise M.A NAUTIC ne saurait être tenue pour responsable en aucune manière d'une mauvaise utilisation du service.",
+                    "heading_06": "legal_use_h3_liability",
+                    "content_06": "Les informations contenues sur ce site sont aussi précises que possible et le site est périodiquement remis à jour, mais peut toutefois contenir des inexactitudes, des omissions ou des lacunes. Si vous constatez une erreur ou ce qui peut être un dysfonctionnement, merci de bien vouloir le signaler par email en décrivant le problème de la manière la plus précise possible.\nTout contenu téléchargé se fait aux risques et périls de l'utilisateur et sous sa seule responsabilité. En conséquence, l'entreprise M.A NAUTIC ne saurait être tenue responsable d'un quelconque dommage subi par l'ordinateur de l'utilisateur ou d'une quelconque perte de données consécutives au téléchargement. Les photos sont non contractuelles.\nLes liens hypertextes mis en place sur ce site internet en direction d'autres sites internet ne sauraient engager la responsabilité de M.A NAUTIC."
+                },
+                {
+                    "superHeading_04": "legal_data_h2",
+                    "heading_06": "legal_data_h3_collection",
+                    "content_06": "Vos données sont collectées par M.A NAUTIC.\nUne donnée à caractère personnel désigne toute information concernant une personne physique identifiée ou identifiable (personne concernée); est réputée identifiable une personne qui peut être identifiée, directement ou indirectement, notamment par référence à un nom, un numéro d'identification ou à un ou plusieurs éléments spécifiques, propres à son identité physique, physiologique, génétique, psychique, économique, culturelle ou sociale.\nLes informations personnelles pouvant être recueillies sur le site sont principalement utilisées par l'éditeur pour la gestion des relations avec vous.",
+                    "heading_07": "legal_data_h3_rights",
+                    "content_07": "En application de la loi informatique et libertés, les internautes disposent d'un droit d'accès, de rectification, de modification et de suppression concernant les données qui les concernent personnellement.\nLe droit d'accès : ils peuvent exercer leur droit d'accès, pour connaître les données personnelles les concernant, en écrivant à l'adresse électronique suivante. Dans ce cas, avant la mise en œuvre de ce droit, la Plateforme peut demander une preuve de l'identité de l'utilisateur afin d'en vérifier l'exactitude.\nLe droit de rectification : si les données à caractère personnel détenues par la Plateforme sont inexactes, ils peuvent demander la mise à jour des informations.\nLe droit de suppression des données : les utilisateurs peuvent demander la suppression de leurs données à caractère personnel, conformément aux lois applicables en matière de protection des données.",
+                    "heading_08": "legal_data_h3_cookies",
+                    "content_08": "Ce site utilise des cookies pour améliorer votre expérience. Vous pouvez accepter ou refuser l'utilisation des cookies. Si vous acceptez, nous utiliserons des cookies pour mémoriser vos préférences et analyser le trafic. Vous pouvez à tout moment ajuster vos préférences en cliquant sur l'icône des cookies en bas de la page."
+                },
+                {
+                    "superHeading_05": "legal_property_h2",
+                    "heading_09": "legal_property_h3_copyright",
+                    "content_09": "Tout le contenu du présent site, incluant, de façon non limitative, les graphismes, images, textes, vidéos, animations, sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété exclusive de la société M.A NAUTIC à l'exception des marques, logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs (ex: AdobeStock, ShutterStock, FontAwesome, Freepik).\nToute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, de ces différents éléments est strictement interdite sans l'accord express par écrit de M.A NAUTIC."
+                },
+                {
+                    "superHeading_06": "legal_management_h2",
+                    "heading_10": "legal_management_h3_technical",
+                    "content_10": "Les prestations techniques sont assurées par Charlotte Carpentier, micro-entreprise.\n\nNom de l'entreprise : Charlotte Carpentier\nStatut juridique : Micro-entreprise\nSIRET : 94076582900012\nAdresse : Disponible sur demande\nEmail : carpentier.dev@gmail.com"
+                }
+            ]
+        }
+    ],
+    "iconName": "legal",
+    "links": "contactez-nous"
 }

@@ -98,46 +98,442 @@
       "style": "ma_nautic_section_title"
     },
     {
-      "name": "location_bateaux",
-      "text": "LOCATION DE BATEAUX",
+      "name": "boat_h1",
       "level": 1,
-      "style": "ma_nautic_main_title"
+      "text": "LOCATION DE BATEAUX RIGIDES ET SEMI-RIGIDES EN CORSE",
+      "style": "ma_nautic_section_drop"
     },
     {
-      "name": "golfe_st_florent",
-      "text": "Golfe de St Florent",
+      "name": "boat_hero_h2",
       "level": 2,
-      "style": "ma_nautic_subtitle"
+      "text": "Une flotte complète et entretenue pour explorer la Haute-Corse",
+      "style": "ma_nautic_section_subtitle"
     },
     {
-      "name": "agence_location",
+      "name": "boat_hero_h3_free",
+      "level": 3,
+      "text": "Naviguez librement depuis Saint-Florent",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_hero_h3_licence",
+      "level": 3,
+      "text": "Avec ou sans permis bateau : choisissez votre façon de naviguer",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_info_h2",
+      "level": 2,
+      "text": "Nos bateaux à louer",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_customer_h2",
+      "level": 2,
+      "text": "À qui s’adresse la location de bateau avec M.A Nautic ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_info_h3_price",
+      "level": 3,
+      "text": "Tarifs et conditions de location",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_info_h3_option",
+      "level": 3,
+      "text": "Options disponibles pour enrichir votre sortie",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_whyus_h2",
+      "level": 2,
+      "text": "Pourquoi choisir MA-Nautic pour louer un bateau en Corse ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_whyus_h3_place",
+      "level": 3,
+      "text": "Une base idéale à Saint-Florent",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "boat_whyus_h3_spots",
+      "level": 3,
+      "text": "À découvrir au départ de nos bateaux",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "spot_h1",
       "level": 1,
-      "text": "NOS BATEAUX EN LOCATION À SAINT-FLORENT",
+      "text": "EXCURSION EN BATEAU À SAINT-FLORENT",
       "style": "ma_nautic_section_drop"
     },
     {
-      "name": "agence_lieux",
+      "name": "spot_hero_h2",
+      "level": 2,
+      "text": "Le désert des Agriates par la mer : plages secrètes et escales gourmandes",
+      "style": "ma_nautic_subtitle_light"
+    },
+    {
+      "name": "spot_capcorse_h2",
+      "level": 2,
+      "text": "Le Cap Corse : falaises, villages perchés et cuisine marine",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "spot_manautic_h2",
+      "level": 2,
+      "text": "M.A Nautic : votre embarcation vers les plus beaux sites de Haute-Corse",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "spot_manautic_h3_stflorent",
+      "level": 3,
+      "text": "Les lieux incontournables à découvrir depuis Saint-Florent",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "spot_manautic_h3_trust",
+      "level": 3,
+      "text": "M.A Nautic, pour une navigation de confiance",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "contact_h1",
       "level": 1,
-      "text": "LIEUX D'INTÉRÊTS À SAINT-FLORENT",
+      "text": "INFORMATIONS ET COORDONNÉES : CONTACTEZ M.A NAUTIC",
       "style": "ma_nautic_section_drop"
     },
     {
-      "name": "agence_contact",
+      "name": "contact_hero_h2",
+      "level": 2,
+      "text": "Contactez notre agence de location de bateaux à en Haute-Corse",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "contact_access_h2",
+      "level": 2,
+      "text": "Accès à M.A Nautic à Saint Florent",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "contact_access_h3_details",
+      "level": 3,
+      "text": "Toutes nos coordonnées",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_h1",
       "level": 1,
-      "text": "CONTACTEZ MA NAUTIC À SAINT-FLORENT",
+      "text": "LOUER UN BATEAU EN CORSE AVEC MA NAUTIC : TOUTES VOS QUESTIONS",
       "style": "ma_nautic_section_drop"
+    },
+    {
+      "name": "faq_intro_h2",
+      "level": 2,
+      "text": "Louer un bateau en Corse : pourquoi choisir Saint-Florent ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_location_h2",
+      "level": 2,
+      "text": "Questions fréquentes sur la location de bateau à Saint-Florent",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_location_h3_functioning",
+      "level": 3,
+      "text": "Comment fonctionne la location de bateau chez MA Nautic ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_location_h3_steps",
+      "level": 3,
+      "text": "Quelles sont les étapes pour réserver un bateau à Saint-Florent ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_location_h3_licence",
+      "level": 3,
+      "text": "Faut-il un permis pour louer un bateau en Haute-Corse ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_location_h3_nolicence",
+      "level": 3,
+      "text": "Peut-on louer un bateau sans permis en Haute-Corse ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_location_h3_parking",
+      "level": 3,
+      "text": "Où se trouve MA Nautic et peut-on s’y garer facilement ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_location_h3_security",
+      "level": 3,
+      "text": "Les bateaux sont-ils bien armés pour la navigation ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_conditions_h2",
+      "level": 2,
+      "text": "Conditions météo, sécurité et carburant",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_conditions_h3_weather",
+      "level": 3,
+      "text": "Que se passe-t-il en cas de météo défavorable ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_conditions_h3_refund",
+      "level": 3,
+      "text": "La location est-elle remboursée en cas de mauvais temps ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_conditions_h3_gasoline",
+      "level": 3,
+      "text": "Où faire le plein d’essence à Saint-Florent ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_conditions_h3_security",
+      "level": 3,
+      "text": "Les équipements de sécurité sont-ils fournis à bord ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_explore_h2",
+      "level": 2,
+      "text": "Explorer la Méditerranée : Saleccia, Lotu et les Agriates",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_explore_h3_saleccia",
+      "level": 3,
+      "text": "Comment rejoindre la plage de Saleccia en bateau ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_explore_h3_distance",
+      "level": 3,
+      "text": "Quelle distance entre le Lotu et Saleccia ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_explore_h3_timing",
+      "level": 3,
+      "text": "Combien de temps pour naviguer jusqu’à Saleccia ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_explore_h3_swim",
+      "level": 3,
+      "text": "Peut-on se baigner dans les criques des Agriates ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_services_h2",
+      "level": 2,
+      "text": "Services sur place et à bord",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_services_h3_agriates",
+      "level": 3,
+      "text": "Y a-t-il des restaurants ou paillotes dans les Agriates ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_services_h3_saleccia",
+      "level": 3,
+      "text": "Faut-il réserver pour manger sur la plage de Saleccia ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_number_h2",
+      "level": 2,
+      "text": "Choisir son bateau selon le nombre de passagers",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_number_h3_four",
+      "level": 3,
+      "text": "Quel bateau louer pour 4 personnes ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_number_h3_six",
+      "level": 3,
+      "text": "Quel modèle choisir pour 6 personnes ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_number_h3_ten",
+      "level": 3,
+      "text": "Quelle unité pour un groupe de 10 personnes ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_number_h3_children",
+      "level": 3,
+      "text": "Les enfants peuvent-ils embarquer en toute sécurité ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_activity_h2",
+      "level": 2,
+      "text": "Activités nautiques à Saint-Florent",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_activity_h3_nautical",
+      "level": 3,
+      "text": "Quelles activités nautiques peut-on pratiquer avec MA Nautic ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_activity_h3_wakeboard",
+      "level": 3,
+      "text": "Peut-on louer une bouée tractée ou un wakeboard ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_activity_h3_children",
+      "level": 3,
+      "text": "Les activités nautiques sont-elles adaptées aux enfants ?",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_need_h2",
+      "level": 2,
+      "text": "Naviguer en Haute Corse : ce qu’il faut savoir avant de partir",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "faq_information_h2",
+      "level": 2,
+      "text": "Infos pratiques – MA Nautic",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_h1",
+      "level": 1,
+      "text": "CRÉDITS & MENTIONS LÉGALES - M.A NAUTIC",
+      "style": "ma_nautic_section_drop"
+    },
+    {
+      "name": "legal_info_h2",
+      "level": 2,
+      "text": "Informations légales et éditeur du site",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_info_h3_host",
+      "level": 3,
+      "text": "Hébergeur du site",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_info_h3_publisher",
+      "level": 3,
+      "text": "Éditeur du site",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_mediation_h2",
+      "level": 2,
+      "text": "Informations légales et éditeur du site",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_mediation_h3_consumer",
+      "level": 3,
+      "text": "Médiation à la consommation",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_mediation_h3_resolution",
+      "level": 3,
+      "text": "Règlement des litiges",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_use_h2",
+      "level": 2,
+      "text": "Conditions d'utilisation du site",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_use_h3_access",
+      "level": 3,
+      "text": "Accès et utilisation du site",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_use_h3_liability",
+      "level": 3,
+      "text": "Limitation de responsabilité",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_data_h2",
+      "level": 2,
+      "text": "Protection des données personnelles",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_data_h3_collection",
+      "level": 3,
+      "text": "Collecte et utilisation des données personnelles",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_data_h3_rights",
+      "level": 3,
+      "text": "Droits d'accès, de rectification et de suppression",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_data_h3_cookies",
+      "level": 3,
+      "text": "Cookies",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_property_h2",
+      "level": 2,
+      "text": "Propriété intellectuelle",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_property_h3_copyright",
+      "level": 3,
+      "text": "Droits d'auteur et propriété du contenu",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_management_h2",
+      "level": 2,
+      "text": "Prestataire technique et gestion des services",
+      "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "legal_management_h3_technical",
+      "level": 3,
+      "text": "Prestataire technique",
+      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "boat_name",
       "level": 3,
       "text": "Capelli Tempest 500",
       "style": "boat-title"
-    },
-    {
-      "name": "ma_nautic_flotte",
-      "level": 2,
-      "text": "Les caractéristiques de notre flotte en Haute-Corse",
-      "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "capelli_500",
@@ -212,6 +608,18 @@
       "style": "ma_nautic_subtitle_boat"
     },
     {
+      "name": "location_bateaux",
+      "text": "LOCATION DE BATEAUX",
+      "level": 1,
+      "style": "ma_nautic_main_title"
+    },
+    {
+      "name": "golfe_st_florent",
+      "text": "Golfe de St Florent",
+      "level": 2,
+      "style": "ma_nautic_subtitle"
+    },
+    {
       "name": "ma_info",
       "level": 2,
       "text": "INFORMATIONS",
@@ -222,48 +630,6 @@
       "level": 2,
       "text": "OPTIONS",
       "style": "ma_nautic_subtitle_light"
-    },
-    {
-      "name": "ma_agriates",
-      "level": 2,
-      "text": "Le désert des Agriates, ses plages et restaurants",
-      "style": "ma_nautic_subtitle_light"
-    },
-    {
-      "name": "ma_capcorse",
-      "level": 2,
-      "text": "Le Cap Corse, ses plages et restaurants...",
-      "style": "ma_nautic_section_subtitle"
-    },
-    {
-      "name": "ma_nautic_contact",
-      "level": 2,
-      "text": "Contactez notre agence de location de bateaux en Haute-Corse ",
-      "style": "ma_nautic_section_subtitle"
-    },
-    {
-      "name": "agence_faq",
-      "level": 1,
-      "text": "QUESTIONS ET RÉPONSES LES PLUS FRÉQUENTES SUR NOS LOCATIONS DE BATEAUX À SAINT-FLORENT",
-      "style": "ma_nautic_section_drop"
-    },
-    {
-      "name": "ma_nautic_faq",
-      "level": 2,
-      "text": "Réponses aux questions les plus fréquentes sur nos locations de bateaux en Haute-Corse",
-      "style": "ma_nautic_section_subtitle"
-    },
-    {
-      "name": "agence_legal",
-      "level": 1,
-      "text": "MENTIONS LEGALES",
-      "style": "ma_nautic_section_drop"
-    },
-    {
-      "name": "ma_nautic_legal",
-      "level": 2,
-      "text": "Législation & RGPD",
-      "style": "ma_nautic_section_subtitle"
     }
   ]
 }

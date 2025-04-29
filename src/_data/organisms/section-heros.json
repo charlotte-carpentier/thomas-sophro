@@ -27,17 +27,21 @@
   "imageContainerStyle": "mt-6 md:mt-0",
   "heroes": [
     {
-      "name": "ma_nautic_hero",
+      "name": "home_hero",
       "variant": "ma-nautic",
       "image": "ma_title",
       "backgroundImage": "hero_background"
     },
     {
-      "name": "bateaux_hero",
+      "name": "boat_hero",
       "variant": "default",
-      "superHeading": "agence_location",
-      "heading": "ma_nautic_flotte",
-      "description": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'><strong>M.A Nautic</strong> dispose d'une <strong>flotte de bateaux</strong> de différentes tailles et différents types, amarrés au <strong>port de Saint-Florent</strong> en Haute-Corse.</p><p class='mb-4'>Leurs gabarits vont de 5 mètres jusqu'à 8,5 mètres pouvant accueillir de 4 à 12 personnes à leur bord. <strong>Polyvalents</strong>, dotés d'une coque rigide ou semi-rigide pour répondre à vos attentes et s'adapter à vos activités, nos <strong>bateaux</strong> affichent une <strong>puissance motrice</strong> variant de 80 chevaux pour les plus petits à 300 chevaux pour le plus gros. Ils sont équipés de <strong>sondeur-GPS</strong> et sont <strong>armés</strong> pour vous offrir une <strong>sécurité</strong> totale au cours de votre balade en mer ou lorsque vous y amarrerez un <strong>wakeboard</strong> ou une <strong>bouée tractée</strong>.</p></div>",
+      "mainTitle": "boat_h1",
+      "superHeading": "boat_hero_h2",
+      "content_01": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Depuis notre <strong>ponton privé</strong>, partez à la découverte des plus beaux sites de <strong>Haute-Corse</strong> : plages sauvages du <strong>désert des Agriates</strong>, falaises du <strong>Cap Corse</strong>, criques discrètes et eaux limpides du <strong>golfe de Saint-Florent</strong>.</p><p class='mb-4'>Une <strong>sortie en mer</strong> à votre rythme, en <strong>autonomie</strong> ou avec <strong>skipper</strong>, dans un <strong>cadre préservé</strong>.</p><p class='mb-4'><strong>M.A Nautic</strong> propose la <strong>location de bateaux</strong> rigides ou semi-rigides, directement depuis le <strong>port de plaisance de Saint-Florent</strong>.</p><p class='mb-4'>Notre flotte s’adapte à tous : permis ou non, balade ou sortie sportive, en <strong>couple</strong>, en <strong>famille</strong> ou en <strong>groupe d’amis</strong>.</p></div>",
+      "heading_01": "boat_hero_h3_free",
+      "content_02": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Les <strong>embarcations disponibles</strong> varient de <strong>5 à 8,5 mètres</strong>, pouvant accueillir de <strong>4 à 12 personnes</strong>. <strong>Polyvalentes</strong>, elles sont équipées d’une <strong>coque rigide</strong> ou <strong>semi-rigide</strong> pour répondre à vos attentes et s’adapter à vos activités.</p><p class='mb-4'>La <strong>puissance motrice</strong> s’étend de <strong>80 à 300 chevaux</strong>. Chaque bateau est doté d’un <strong>sondeur-GPS</strong> et <strong>armé</strong> pour vous offrir une <strong>sécurité totale</strong> lors de vos <strong>balades en mer</strong> ou lorsque vous y amarrerez un <strong>wakeboard</strong> ou une <strong>bouée tractée</strong>.</p><p class='mb-4'>Pour plus de précisions sur les <strong>conditions de location</strong>, consultez la <strong>F.A.Q.</strong> de notre site !</p><p class='mb-4'>Notre <strong>flotte</strong> se compose de <strong>6 unités récentes</strong>, alliant <strong>confort</strong>, <strong>performance</strong> et <strong>sécurité</strong>. Tous sont <strong>entretenus avec soin</strong>, contrôlés selon la <strong>Division 240</strong>, et <strong>prêts à prendre la mer</strong>.</p><p class='mb-4'>Chaque modèle dispose d’un <strong>taud de soleil</strong>, d’une <strong>échelle de bain</strong>, d’<strong>espaces de rangement</strong> et, selon les options, d’un <strong>GPS</strong>, d’un <strong>sondeur</strong>, d’une <strong>douchette</strong>, d’une <strong>banquette</strong> ou d’une <strong>glacière</strong>.</p></div>",
+      "heading_02": "boat_hero_h3_licence",
+      "content_03": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>En mer, la <strong>réglementation</strong> impose d’être titulaire du <strong>permis côtier</strong> pour conduire un bateau à moteur. Si vous n'en disposez pas, aucun souci : chez <strong>MA Nautic</strong>, vous avez le choix entre <strong>naviguer en autonomie</strong> ou partir accompagné d’un <strong>skipper professionnel</strong>, pour une <strong>sortie sur mesure</strong>, adaptée à vos envies.</p><p class='mb-4'>Vous avez le permis bateau ? <strong>Partez en autonomie</strong> pour découvrir la côte, après un <strong>briefing complet</strong> : sécurité, réglementation, conseils météo et zones de navigation, à bord de l’un de nos <strong>semi-rigides ou rigides</strong> jusqu’à <strong>300 chevaux</strong>, tous <strong>confortablement équipés</strong> et <strong>faciles à prendre en main</strong>.</p><p class='mb-4'><strong>Pas de permis ?</strong> Faites appel à nos <strong>skippers</strong> ! Vous n’avez pas le permis ou vous préférez profiter sans vous soucier de la navigation ? Optez pour <strong>l’option skipper</strong> (<strong>200 €/jour</strong>) et embarquez <strong>l’esprit libre</strong>.</p><p class='mb-4'>Un <strong>professionnel expérimenté</strong> prend la barre, vous accompagne à votre rythme et vous fait découvrir un <strong>littoral</strong> au-delà des <strong>itinéraires classiques</strong>. Parfait pour une <strong>escapade en toute sérénité</strong>, <strong>hors des sentiers battus</strong>, avec ce qu’il faut de <strong>confort</strong> et de <strong>spontanéité</strong>.</p></div>",
       "scrollArrowButton": "arrow_scroll_up",
       "scrollArrowButtonVariant": "arrowScrollIcon",
       "image-right": "ma_wave_right",
@@ -48,11 +52,11 @@
       "iconName": "wheel"
     },
     {
-      "name": "lieux_hero",
+      "name": "spot_hero",
       "variant": "default",
-      "superHeading": "agence_lieux",
-      "heading": "ma_nautic_discover",
-      "description": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'><strong>M.A Nautic</strong> dispose d'une <strong>flotte de bateaux</strong> de différentes tailles et différents types, amarrés au <strong>port de Saint-Florent</strong> en Haute-Corse.</p><p class='mb-4'>Leurs gabarits vont de 5 mètres jusqu'à 8,5 mètres pouvant accueillir de 4 à 12 personnes à leur bord.</p><p class='mb-4'><strong>Polyvalents</strong>, dotés d'une coque rigide ou semi-rigide pour répondre à vos attentes et s'adapter à vos activités, nos <strong>bateaux</strong> affichent une <strong>puissance motrice</strong> variant de 80 chevaux pour les plus petits à 300 chevaux pour le plus gros.</p><p class='mb-4'>Ils sont équipés de <strong>sondeur-GPS</strong> et sont <strong>armés</strong> pour vous offrir une <strong>sécurité</strong> totale au cours de votre balade en mer ou lorsque vous y amarrerez un <strong>wakeboard</strong> ou une <strong>bouée tractée</strong>.</p></div>",
+      "mainTitle": "spot_h1",
+      "superHeading_01": "spot_hero_h2",
+      "content_01": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Entre les reliefs du <strong>Nebbiu</strong> et la mer <strong>Tyrrhénienne</strong>, le <strong>désert des Agriates</strong> déroule un rivage spectaculaire, accessible uniquement à pied ou par bateau. En naviguant depuis le <strong>port de plaisance de Saint-Florent</strong>, vous accédez en quelques minutes à une succession de <strong>criques</strong> et de <strong>plages sauvages</strong> aux allures caraïbéennes : <strong>sable blanc</strong>, <strong>eaux cristallines</strong>, <strong>herbiers de posidonies</strong>, <strong>parfums de maquis</strong>.</p><p class='mb-4'><strong>Fiume Santu</strong> : à <strong>10 minutes de navigation</strong>, une baie paisible, parfaite pour jeter l’ancre à l’abri du vent.</p><p class='mb-4'><strong>Lotu & La Cabane du Lotu</strong> : à <strong>15 minutes</strong>, une escale emblématique pour combiner baignade et déjeuner en bord de mer.</p><p class='mb-4'><strong>Saleccia & A Piniccia di Saleccia</strong> : à <strong>25 minutes</strong>, une étendue sauvage classée parmi les plus belles plages de Corse.</p><p class='mb-4'><strong>Travu & Ghignu</strong> : à <strong>30 et 40 minutes de navigation</strong>, des plages préservées, plus reculées, où le silence n’est troublé que par le clapotis de l’eau.</p><p class='mb-4'>Ici, chaque mouillage devient un moment suspendu. <strong>Pique-nique à bord</strong>, <strong>sieste sous le taud</strong>, <strong>paddle dans les herbiers</strong> ou simple contemplation du paysage... Vous composez votre journée* selon votre tempo, dans un cadre rare, protégé et hors du temps.</p></div>",
       "scrollArrowButton": "arrow_scroll_up",
       "scrollArrowButtonVariant": "arrowScrollIcon",
       "image-right": "ma_wave_right",
@@ -65,25 +69,9 @@
     {
       "name": "contact_hero",
       "variant": "default",
-      "superHeading": "agence_contact",
-      "heading": "ma_nautic_contact",
-      "contentBlocks": [
-        {
-          "text": "Si notre <strong>F.A.Q.</strong> n'a pas su répondre à vos questions concernant notre <strong>location de bateaux</strong> à Saint-Florent (20217) en Haute-Corse, n'hésitez pas à contacter <strong>M.A Nautic</strong> !"
-        },
-        {
-          "text": "Appelez-nous au <strong>06.25.70.47.10</strong>, nous sommes disponibles du lundi au dimanche de 9h30 à 18h."
-        },
-        {
-          "text": "Vous pouvez aussi remplir le formulaire ci-dessous pour nous poser vos questions :"
-        },
-        {
-          "text": "Suivez notre actualité sur les réseaux sociaux :"
-        },
-        {
-          "text": "<strong><a href='https://www.facebook.com/M.A.Nautic/' target='_blank' class='transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]'>Facebook</a></strong> & <strong><a href='https://www.instagram.com/m.a.nautic/' target='_blank' class='transition-all duration-300 hover:text-[theme(--ma-nautic-teal)]'>Instagram</a></strong>"
-        }
-      ],
+      "mainTitle": "contact_h1",
+      "superHeading_01": "contact_hero_h2",
+      "content_01": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Vous avez une question sur la location de bateau en Corse*, besoin de précisions sur nos services ou envie d’en savoir plus avant de réserver ? M.A Nautic Saint-Florent vous répond tous les jours, que vous soyez déjà en Haute-Corse ou en pleine préparation de votre séjour.</p><p class='mb-4'>Appelez-nous directement au +33 6 25 70 47 10. Nous sommes joignables du lundi au dimanche, de 9h30 à 18h. Vous préférez écrire ? Utilisez notre formulaire* pour nous envoyer votre demande. Réponse rapide garantie.</p><p class='mb-4'>Notre base nautique se trouve dans le port privé de Saint-Florent (20217), à proximité immédiate du centre-ville et du parking.</p><p class='mb-4'>Suivez-nous sur Facebook et Instagram pour découvrir nos bateaux, nos actualités et les plus belles images de la côte Corse !</p></div>",
       "scrollArrowButton": "arrow_scroll_up",
       "scrollArrowButtonVariant": "arrowScrollIcon",
       "image-right": "ma_wave_right",
@@ -96,8 +84,8 @@
     {
       "name": "faq_hero",
       "variant": "default",
-      "superHeading": "agence_faq",
-      "heading": "ma_nautic_faq",
+      "mainTitle": "faq_h1",
+      "content_01": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Naviguer au large de <strong>Saint-Florent</strong>, c’est emprunter un chemin maritime unique qui longe le <strong>désert des Agriates</strong>, entre reliefs arides et lignes d’horizon, caps et criques. Chez <strong>MA Nautic</strong>, chaque location de bateau soulève des <strong>questions concrètes</strong>. Faut-il un permis ? Que faire en cas de vent fort ? Peut-on accoster à Saleccia ? Où faire le plein d’essence ?</p><p class='mb-4'>Cette page rassemble toutes les <strong>réponses</strong> pour vous aider à <strong>préparer efficacement votre sortie en mer</strong>, sans mauvaise surprise. Conditions, itinéraires, équipements, météo, restauration ou activités nautiques : cette FAQ a été pensée pour vous donner toutes les <strong>informations pratiques</strong> nécessaires à la bonne préparation de votre expérience en Méditerranée.</p><p class='mb-4'><strong>Louer un bateau en Corse</strong> devient accessible et fluide, à condition d’avoir les bons repères !</p></div>",
       "image-right": "ma_wave_right",
       "image-left": "ma_wave_left",
       "icon": "wheel",
@@ -108,8 +96,8 @@
     {
       "name": "legal_hero",
       "variant": "default",
-      "superHeading": "agence_legal",
-      "heading": "ma_nautic_legal",
+      "mainTitle": "legal_h1",
+      "content_01": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Bienvenue sur la page des <strong>Crédits et Mentions Légales</strong> de <strong>M.A Nautic</strong>.</p><p class='mb-4'>Vous y trouverez toutes les <strong>informations juridiques</strong> concernant l'éditeur du site, l'hébergeur, ainsi que les <strong>conditions d'utilisation</strong>, la <strong>gestion des données personnelles</strong>, et la <strong>propriété intellectuelle</strong>.</p><p class='mb-4'>Nous nous engageons à garantir la <strong>transparence</strong> et la <strong>protection de vos données</strong> tout en vous offrant des <strong>services de qualité</strong>.</p></div>",
       "image-right": "ma_wave_right",
       "image-left": "ma_wave_left",
       "icon": "wheel",
