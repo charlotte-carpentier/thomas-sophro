@@ -41,12 +41,14 @@
                     "content_08": "Ce site utilise des cookies pour améliorer votre expérience. Vous pouvez accepter ou refuser l'utilisation des cookies. Si vous acceptez, nous utiliserons des cookies pour mémoriser vos préférences et analyser le trafic. Vous pouvez à tout moment ajuster vos préférences en cliquant sur l'icône des cookies en bas de la page."
                 },
                 {
-                    "title": "Propriété intellectuelle",
-                    "content": "Tout le contenu du présent site, incluant, de façon non limitative, les graphismes, images, textes, vidéos, animations, sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété exclusive de la société M.A NAUTIC à l'exception des marques, logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs (ex: AdobeStock, ShutterStock, FontAwesome, Freepik).\nToute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, de ces différents éléments est strictement interdite sans l'accord express par écrit de M.A NAUTIC."
+                    "superHeading_05": "legal_property_h2",
+                    "heading_09": "legal_property_h3_copyright",
+                    "content_09": "Tout le contenu du présent site, incluant, de façon non limitative, les graphismes, images, textes, vidéos, animations, sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété exclusive de la société M.A NAUTIC à l'exception des marques, logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs (ex: AdobeStock, ShutterStock, FontAwesome, Freepik).\nToute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, de ces différents éléments est strictement interdite sans l'accord express par écrit de M.A NAUTIC."
                 },
                 {
-                    "title": "Prestataire technique",
-                    "content": "Les prestations techniques sont assurées par Charlotte Carpentier, micro-entreprise.\n\nNom de l'entreprise : Charlotte Carpentier\nStatut juridique : Micro-entreprise\nSIRET : 94076582900012\nAdresse : Disponible sur demande\nEmail : carpentier.dev@gmail.com"
+                    "superHeading_06": "legal_management_h2",
+                    "heading_10": "legal_management_h3_technical",
+                    "content_10": "Les prestations techniques sont assurées par Charlotte Carpentier, micro-entreprise.\n\nNom de l'entreprise : Charlotte Carpentier\nStatut juridique : Micro-entreprise\nSIRET : 94076582900012\nAdresse : Disponible sur demande\nEmail : carpentier.dev@gmail.com"
                 }
             ]
         }

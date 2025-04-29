@@ -458,12 +458,6 @@
       "style": "ma_nautic_section_subtitle"
     },
     {
-      "name": "legal_mediation_h3_online",
-      "level": 3,
-      "text": "Plateforme de résolution des litiges en ligne",
-      "style": "ma_nautic_section_subtitle"
-    },
-    {
       "name": "legal_mediation_h3_resolution",
       "level": 3,
       "text": "Règlement des litiges",
@@ -485,12 +479,6 @@
       "name": "legal_use_h3_liability",
       "level": 3,
       "text": "Limitation de responsabilité",
-      "style": "ma_nautic_section_subtitle"
-    },
-    {
-      "name": "legal_use_h3_links",
-      "level": 3,
-      "text": "Liens externes",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -530,15 +518,15 @@
       "style": "ma_nautic_section_subtitle"
     },
     {
-      "name": "legal_data_h2",
+      "name": "legal_management_h2",
       "level": 2,
-      "text": "Droits d'auteur et propriété du contenu",
+      "text": "Prestataire technique et gestion des services",
       "style": "ma_nautic_section_subtitle"
     },
     {
-      "name": "legal_data_h3_collection",
+      "name": "legal_management_h3_technical",
       "level": 3,
-      "text": "Collecte et utilisation des données personnelles",
+      "text": "Prestataire technique",
       "style": "ma_nautic_section_subtitle"
     },
     {
