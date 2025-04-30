@@ -29,7 +29,7 @@
     {% set sectionId = "section-" ~ (variant.name | replace(" ", "-") | lower) %}
 
     {# Specific to MA-Nautic title #}
-    <section class="{{ globalStyle }} {{ variantStyle }} relative h-[75vh] overflow-hidden {{ options.class | default('') }}" id="{{ sectionId }}">
+    <section class="{{ globalStyle }} {{ variantStyle }} relative min-h-[300px] md:min-h-[500px] flex items-center justify-center py-8 md:py-16 overflow-hidden {{ options.class | default('') }}" id="{{ sectionId }}">
       {# Background image #}
       {% if variant.backgroundImage %}
         {% set bgImage = null %}

@@ -3,8 +3,8 @@
   "sizes": {
     "large": "w-72 h-auto",
     "medium": "w-48 h-auto",
-    "small": "w-24 h-auto",
-    "xsmall": "w-12 h-auto"
+    "small": "w-36 h-auto",
+    "xsmall": "w-24 h-auto"
   },
   "vectors": [
     {
@@ -18,6 +18,12 @@
       "src": "/assets/logos/ma-logo.svg",
       "alt": "Mini M.A Nautic  logo",
       "size": "small"
+    },
+    {
+      "name": "ma_logo_scroll",
+      "src": "/assets/logos/ma-logo.svg",
+      "alt": "Mini M.A Nautic  logo",
+      "size": "xsmall"
     }
   ]
 }
