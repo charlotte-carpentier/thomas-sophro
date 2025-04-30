@@ -1,54 +1,6 @@
 [build]
-  publish = "public"
-  command = "npm run build"
+  publish = "public"  # Specifies the publish folder
+  command = "npm run build"  # Specifies the build command
 
 [[plugins]]
   package = "netlify-plugin-image-optim"
-
-[[redirects]]
-  from = "/"
-  to = "https://manautic-location-bateau.com/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/nos-bateaux"
-  to = "https://manautic-location-bateau.com/nos-bateaux/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/lieux-d-interets"
-  to = "https://manautic-location-bateau.com/lieux-interet/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/contact"
-  to = "https://manautic-location-bateau.com/contact/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/f-a-q"
-  to = "https://manautic-location-bateau.com/faq/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/credits-mentions-legales"
-  to = "https://manautic-location-bateau.com/credits-mentions-legales/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/merci"
-  to = "https://manautic-location-bateau.com/merci/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
-  force = true
