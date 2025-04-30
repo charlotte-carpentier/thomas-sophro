@@ -1,49 +1,49 @@
 [build]
-  publish = "public"  # Specifies the publish folder
-  command = "npm run build"  # Specifies the build command
+  publish = "public"
+  command = "npm run build"
 
 [[plugins]]
   package = "netlify-plugin-image-optim"
 
 [[redirects]]
   from = "/"
-  to = "https://www.manautic-location-bateau.com/"
+  to = "https://manautic-location-bateau.com/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/nos-bateaux"
-  to = "https://www.manautic-location-bateau.com/nos-bateaux/"
+  to = "https://manautic-location-bateau.com/nos-bateaux/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/lieux-d-interets"
-  to = "https://www.manautic-location-bateau.com/lieux-interet/"
+  to = "https://manautic-location-bateau.com/lieux-interet/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/contact"
-  to = "https://www.manautic-location-bateau.com/contact/"
+  to = "https://manautic-location-bateau.com/contact/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/f-a-q"
-  to = "https://www.manautic-location-bateau.com/faq/"
+  to = "https://manautic-location-bateau.com/faq/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/credits-mentions-legales"
-  to = "https://www.manautic-location-bateau.com/credits-mentions-legales/"
+  to = "https://manautic-location-bateau.com/credits-mentions-legales/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/merci"
-  to = "https://www.manautic-location-bateau.com/merci/"
+  to = "https://manautic-location-bateau.com/merci/"
   status = 301
   force = true
 
@@ -52,4 +52,3 @@
   to = "/404.html"
   status = 404
   force = true
-
