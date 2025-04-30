@@ -2,8 +2,8 @@
   "globalStyle": "transition-all duration-300",
   "variants": {
     "default": "text-[--ma-nautic-blue] font-['Roboto']",
-    "navigation": "ma-nautic-nav-link font-['Vibur'] uppercase text-[25px]",
-    "navigation-secondary": "ma-nautic-nav-link font-['Roboto'] text-[25px]",
+    "navigation": "ma-nautic-nav-link font-['Vibur'] uppercase text-[18px]",
+    "navigation-secondary": "ma-nautic-nav-link font-['Roboto'] text-[18px]",
     "content": "ma-nautic-content-link font-['Vibur']",
     "content-light": "ma-content-link-light font-['Vibur']",
     "footer": "text-[--ma-nautic-white] hover:text-[--ma-nautic-teal] font-['Roboto']",

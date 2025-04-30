@@ -26,7 +26,7 @@
   "images": [
     {
       "name": "ma_title",
-      "src": "/assets/images/ma-title.png",
+      "src": "/assets/images/titre-accueil.png",
       "alt": "Titre de la page d'acceuil disant venez découvrir les plages de sable blanc de Saleccia, du Lotu et plus encore ! Un gouvernaille stylisé orange orne le titre.",
       "group": "block-media"
     },

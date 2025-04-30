@@ -59,8 +59,12 @@
             {% endfor %}
 
             {% if titleImg %}
-              <div class="mb-8 w-full max-w-xs md:max-w-sm lg:max-w-md mx-auto">
-                <img src="{{ titleImg.src }}" alt="{{ titleImg.alt }}" class="{{ options.images.globalStyle }} w-full h-auto {{ options.images.variants[titleImg.size] | default('') }}">
+              <div class="mb-8 text-center w-full">
+                <img 
+                  src="{{ titleImg.src }}" 
+                  alt="{{ titleImg.alt }}" 
+                  class="w-full min-w-[100%] md:min-w-[90%] h-auto mx-auto"
+                >
               </div>
             {% endif %}
           {% endif %}
