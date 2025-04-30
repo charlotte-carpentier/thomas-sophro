@@ -9,9 +9,6 @@ passengersNumber: 12 personnes MAX
 carousel_name: carousel_casablanca
 imageAlt: Photos du bateau "Casa Blanca"
 boat_images:
-  - /assets/images/carousel-2/carousel-slide-a.jpg
-  - /assets/images/carousel-2/carousel-slide-b.jpg
-  - /assets/images/carousel-2/carousel-slide-c.jpg
-  - /assets/images/carousel-2/carousel-slide-d.jpg
+  - /assets/images/BATEAUX/6_CASABLANCA/Lomac-850.jpeg
 ---
 

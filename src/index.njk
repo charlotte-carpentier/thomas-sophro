@@ -3,16 +3,15 @@ permalink: "/"
 layout: '00-core/base.njk'
 ---
 
-{# MA-Nautic Hero Section #}
-{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+{# MA-Nautic Title Section #}
+{% from "01-organisms/section-title.njk" import renderSectionTitle %}
 
-{{ renderSectionHero({
-    name: "ma_nautic_hero",
-    datas: organisms["section-heros"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
+{{ renderSectionTitle({ 
+    name: "home_title",
+    datas: organisms["section-titles"],
     images: atoms.images
 }) }}
+
 
 {# About Us Section #}
 {% from "01-organisms/section-about.njk" import renderSectionAbout %}

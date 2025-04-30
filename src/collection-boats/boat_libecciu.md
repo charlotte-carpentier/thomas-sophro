@@ -9,9 +9,7 @@ passengersNumber: 8-10 personnes MAX
 carousel_name: carousel_libecciu
 imageAlt: Photos du bateau "Libecciu"
 boat_images:
-  - /assets/images/carousel-2/carousel-slide-a.jpg
-  - /assets/images/carousel-2/carousel-slide-b.jpg
-  - /assets/images/carousel-2/carousel-slide-c.jpg
-  - /assets/images/carousel-2/carousel-slide-d.jpg
+  - /assets/images/BATEAUX/5_LIBECCIU/capelli-Tempest-700_1.jpg
+  - /assets/images/BATEAUX/5_LIBECCIU/capelli-Tempest-700_2.jpg
 ---
 

@@ -5,8 +5,8 @@ name: carousel_nine
 autoplay: true
 pauseOnHover: true
 images:
-  - name: carousel_nine_slide_2
+  - name: carousel_nine_slide01
     objectPosition: center
-  - name: carousel_nine_slide_1
+  - name: carousel_nine_slide02
     objectPosition: center
 ---

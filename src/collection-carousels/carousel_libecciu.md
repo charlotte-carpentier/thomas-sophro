@@ -5,12 +5,8 @@ name: carousel_libecciu
 autoplay: true
 pauseOnHover: true
 images:
-  - name: carousel_slide_A
+  - name: carousel_libecciu_slide01
     objectPosition: center
-  - name: carousel_slide_B
-    objectPosition: center
-  - name: carousel_slide_C
-    objectPosition: center
-  - name: carousel_slide_D
+  - name: carousel_libecciu_slide02
     objectPosition: center
 ---
