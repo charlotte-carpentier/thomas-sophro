@@ -15,7 +15,6 @@
     {% set globalStyle = options.datas.globalStyle %}
     {% set containerStyle = options.datas.containerStyle %}
     {% set logoContainerStyle = options.datas.logoContainerStyle | default('') %}
-    {% set logoSize = options.datas.logoSize | default('') %}
     {% set navContainerStyle = options.datas.navContainerStyle | default('') %}
     {% set navStyle = options.datas.navStyle %}
     {% set menuContainerStyle = options.datas.menuContainerStyle %}
@@ -43,50 +42,59 @@
     
     {# Render header with appropriate container styles #}
     <header class="{{ globalStyle }} {{ options.class | default('') }}">
-      <div class="{{ containerStyle }}">
-        {# Logo section #}
-        <div class="{{ logoContainerStyle }}">
-          <a href="/" title="Retour à l'accueil" class="inline-block {{ logoSize }}">
-            {{ renderVector({ name: headerData.logo, datas: options.vectors }) }}
-          </a>
-        </div>
+      <div class="container mx-auto grid grid-cols-6">
+        <div class="col-start-2 col-span-4 flex justify-between items-center h-24 px-4">
+          {# Logo section - Adapté pour être responsive #}
+          <div class="{{ logoContainerStyle }}">
+            <a href="/" title="Retour à l'accueil" class="inline-block">
+              {# Version mobile - Logo alternate #}
+              <span class="lg:hidden">
+                {{ renderVector({ name: "ma_logo_mini", datas: options.vectors }) }}
+              </span>
+              {# Version desktop - Logo main #}
+              <span class="hidden lg:inline-block">
+                {{ renderVector({ name: "ma_logo", datas: options.vectors }) }}
+              </span>
+            </a>
+          </div>
 
-        {# Navigation container #}
-        <div class="{{ navContainerStyle }}">
-          <div class="{{ navStyle }}">
-            {# Menu Container with hamburger and dropdown #}
-            <div class="{{ menuContainerStyle }}">
-              {# Hamburger button for mobile #}
-              <div class="{{ toggleButtonStyle }}" data-container-size="{{ toggleButtonContainerSize }}" data-icon-size="{{ toggleButtonIconSize }}">
-                {% set iconData = null %}
-                {% if options.icons %}
-                  {% for icon in options.icons.icons %}
-                    {% if icon.name == toggleButtonIcon %}
-                      {% set iconData = icon %}
-                    {% endif %}
-                  {% endfor %}
-                {% endif %}
-                
-                {# Render custom icon or default hamburger #}
-                {% if iconData %}
-                  <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ toggleButtonIconSize }}" data-svg-height="{{ toggleButtonIconSize }}" class="inline-flex items-center justify-center {{ toggleButtonContainerSize }} {{ toggleButtonIconStyle }}">
-                    <!-- SVG will be loaded here -->
-                  </span>
-                {% else %}
-                  <span class="inline-flex items-center justify-center {{ toggleButtonContainerSize }} {{ toggleButtonIconStyle }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="{{ toggleButtonIconSize }}" height="{{ toggleButtonIconSize }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                  </span>
-                {% endif %}
-              </div>
+          {# Navigation container #}
+          <div class="{{ navContainerStyle }}">
+            <div class="{{ navStyle }}">
+              {# Menu Container with hamburger and dropdown #}
+              <div class="{{ menuContainerStyle }}">
+                {# Hamburger button for mobile #}
+                <div class="{{ toggleButtonStyle }}" data-container-size="{{ toggleButtonContainerSize }}" data-icon-size="{{ toggleButtonIconSize }}">
+                  {% set iconData = null %}
+                  {% if options.icons %}
+                    {% for icon in options.icons.icons %}
+                      {% if icon.name == toggleButtonIcon %}
+                        {% set iconData = icon %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  
+                  {# Render custom icon or default hamburger #}
+                  {% if iconData %}
+                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ toggleButtonIconSize }}" data-svg-height="{{ toggleButtonIconSize }}" class="inline-flex items-center justify-center {{ toggleButtonContainerSize }} {{ toggleButtonIconStyle }}">
+                      <!-- SVG will be loaded here -->
+                    </span>
+                  {% else %}
+                    <span class="inline-flex items-center justify-center {{ toggleButtonContainerSize }} {{ toggleButtonIconStyle }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="{{ toggleButtonIconSize }}" height="{{ toggleButtonIconSize }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </span>
+                  {% endif %}
+                </div>
 
-              {# Dropdown menu containing navigation #}
-              <div class="{{ dropdownMenuStyle }}">
-                {# Use Navigation component #}
-                {{ renderNavigation({ 
-                  name: headerData.navigation | default(headerData.name),
-                  datas: options.navigations,
-                  links: options.links
-                }) }}
+                {# Dropdown menu containing navigation #}
+                <div class="{{ dropdownMenuStyle }}">
+                  {# Use Navigation component #}
+                  {{ renderNavigation({ 
+                    name: headerData.navigation | default(headerData.name),
+                    datas: options.navigations,
+                    links: options.links
+                  }) }}
+                </div>
               </div>
             </div>
           </div>
@@ -96,6 +104,7 @@
 
     {# Include external JS files #}
     <script src="/js/organisms/header-menu.js"></script>
+    <script src="/js/organisms/fixed-header.js"></script>
   {% else %}
     <span class="text-red-500">Header data not found</span>
   {% endif %}

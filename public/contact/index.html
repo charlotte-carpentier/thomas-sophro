@@ -88,10 +88,11 @@
     
     
     
-    
       
         
           
+        
+      
         
       
         
@@ -103,11 +104,49 @@
     
     
     <header class="bg-[theme(--ma-nautic-blue)] shadow-bottom ">
-      <div class="container mx-auto px-4 py-4 flex justify-between items-center h-24">
+      <div class="container mx-auto grid grid-cols-6">
+        <div class="col-start-2 col-span-4 flex justify-between items-center h-24 px-4">
+          
+          <div class="relative z-30 -mb-24">
+            <a href="/" title="Retour à l'accueil" class="inline-block">
+              
+              <span class="lg:hidden">
+                
+  
+  
+  
+  
+    
+    
+      
+    
+      
         
-        <div class="relative z-30 -mb-24">
-          <a href="/" title="Retour à l'accueil" class="inline-block w-32 md:w-48 h-32 md:h-48">
-            
+      
+    
+      
+    
+
+    
+    
+
+    
+      
+      
+      
+      
+      <img 
+        src="/assets/logos/ma-logo.svg" 
+        alt="Mini M.A Nautic  logo"
+        class="inline-block w-36 h-auto"
+      />
+    
+  
+
+              </span>
+              
+              <span class="hidden lg:inline-block">
+                
   
   
   
@@ -116,6 +155,8 @@
     
       
         
+      
+    
       
     
       
@@ -137,65 +178,66 @@
     
   
 
-          </a>
-        </div>
+              </span>
+            </a>
+          </div>
 
-        
-        <div class="flex-1 flex justify-end items-center h-full">
-          <div class="flex items-center gap-8 h-full">
-            
-            <div class="menu-burger h-full flex items-center">
+          
+          <div class="flex-1 flex justify-end items-center h-full">
+            <div class="flex items-center gap-8 h-full">
               
-              <div class="toggle-button lg:hidden flex items-center justify-center" data-container-size="w-8 h-8" data-icon-size="32">
+              <div class="menu-burger h-full flex items-center">
                 
-                
+                <div class="toggle-button lg:hidden flex items-center justify-center" data-container-size="w-8 h-8" data-icon-size="32">
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
                   
                     
                       
                     
-                  
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                        
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
                     
                   
-                    
                   
-                    
                   
-                    
                   
-                    
+                    <span data-svg-src="/assets/icons/wheel.svg" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center w-8 h-8 text-[theme(--ma-nautic-white)]">
+                      <!-- SVG will be loaded here -->
+                    </span>
                   
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                    
-                  
-                
-                
-                
-                
-                  <span data-svg-src="/assets/icons/wheel.svg" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center w-8 h-8 text-[theme(--ma-nautic-white)]">
-                    <!-- SVG will be loaded here -->
-                  </span>
-                
-              </div>
+                </div>
 
-              
-              <div class="dropdown-menu absolute -top-full left-0 max-lg:bg-[theme(--ma-nautic-blue)] w-full py-2 transition-all duration-500 ease-in-out font-[theme(--font-display)] lg:static lg:flex-row lg:justify-end z-20">
                 
-                
+                <div class="dropdown-menu absolute -top-full left-0 max-lg:bg-[theme(--ma-nautic-blue)] w-full py-2 transition-all duration-500 ease-in-out font-[theme(--font-display)] lg:static lg:flex-row lg:justify-end z-20">
+                  
+                  
   
   
     
@@ -524,6 +566,7 @@
     </nav>
   
 
+                </div>
               </div>
             </div>
           </div>
@@ -533,6 +576,7 @@
 
     
     <script src="/js/organisms/header-menu.js"></script>
+    <script src="/js/organisms/fixed-header.js"></script>
   
 
 
@@ -2303,6 +2347,8 @@
               
                 
                   
+                
+              
                 
               
                 

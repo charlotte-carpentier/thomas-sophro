@@ -28,6 +28,11 @@
       "name": "alternate",
       "logo": "ma_logo_mini",
       "navigation": "alternate"
+    },
+    {
+      "name": "scroll",
+      "logo": "ma_logo_scroll",
+      "navigation": "scroll"
     }
   ]
 }
