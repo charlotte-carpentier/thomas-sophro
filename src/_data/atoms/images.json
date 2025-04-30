@@ -25,6 +25,12 @@
   },
   "images": [
     {
+      "name": "ma_title",
+      "src": "/assets/images/ma-title.png",
+      "alt": "Titre de la page d'acceuil disant venez découvrir les plages de sable blanc de Saleccia, du Lotu et plus encore ! Un gouvernaille stylisé orange orne le titre.",
+      "group": "block-media"
+    },
+    {
       "name": "carousel01_slide01",
       "src": "/assets/images/CARROUSEL-1/1-Equipe.jpg",
       "alt": "Deux hommes sourient devant un grand panneau COSTA RICA recouvert de verdure, dans un lieu extérieur près de l'aéroport SJO.",
@@ -169,7 +175,7 @@
       "group": "block-media"
     },
     {
-      "name": "hero_background",
+      "name": "title_background",
       "src": "/assets/images/ma-home-01.jpg",
       "alt": "Ponton en bois s'avançant vers l'horizon bleu du Cap Corse, orné d'illustrations marines.",
       "group": "block-media"
