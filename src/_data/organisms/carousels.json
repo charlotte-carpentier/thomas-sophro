@@ -22,9 +22,18 @@
       "autoplay": true,
       "pauseOnHover": true,
       "images": [
-        { "name": "carousel01_slide01", "objectPosition": "center" },
-        { "name": "carousel01_slide02", "objectPosition": "center" },
-        { "name": "carousel01_slide03", "objectPosition": "center" }
+        {
+          "name": "carousel01_slide01",
+          "objectPosition": "center"
+        },
+        {
+          "name": "carousel01_slide02",
+          "objectPosition": "center"
+        },
+        {
+          "name": "carousel01_slide03",
+          "objectPosition": "center"
+        }
       ]
     },
     {
@@ -32,9 +41,18 @@
       "autoplay": true,
       "pauseOnHover": true,
       "images": [
-        { "name": "carousel02_slide01", "objectPosition": "center" },
-        { "name": "carousel02_slide02", "objectPosition": "center" },
-        { "name": "carousel02_slide03", "objectPosition": "center" }
+        {
+          "name": "carousel02_slide01",
+          "objectPosition": "center"
+        },
+        {
+          "name": "carousel02_slide02",
+          "objectPosition": "center"
+        },
+        {
+          "name": "carousel02_slide03",
+          "objectPosition": "center"
+        }
       ]
     },
     {
@@ -42,9 +60,18 @@
       "autoplay": true,
       "pauseOnHover": true,
       "images": [
-        { "name": "carousel03_slide01", "objectPosition": "center" },
-        { "name": "carousel03_slide02", "objectPosition": "center" },
-        { "name": "carousel03_slide03", "objectPosition": "center" }
+        {
+          "name": "carousel03_slide01",
+          "objectPosition": "center"
+        },
+        {
+          "name": "carousel03_slide02",
+          "objectPosition": "center"
+        },
+        {
+          "name": "carousel03_slide03",
+          "objectPosition": "center"
+        }
       ]
     },
     {
@@ -52,62 +79,18 @@
       "autoplay": true,
       "pauseOnHover": true,
       "images": [
-        { "name": "carousel04_slide01", "objectPosition": "center" },
-        { "name": "carousel04_slide02", "objectPosition": "center" },
-        { "name": "carousel04_slide03", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "carousel-alba",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_alba_slide01", "objectPosition": "center" },
-        { "name": "carousel_alba_slide02", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "carousel-nine",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_nine_slide01", "objectPosition": "center" },
-        { "name": "carousel_nine_slide02", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "carousel-first",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_first_slide01", "objectPosition": "center" },
-        { "name": "carousel_first_slide02", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "carousel-enzo",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_enzo_slide01", "objectPosition": "center" },
-        { "name": "carousel_enzo_slide02", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "carousel-libecciu",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_libecciu_slide01", "objectPosition": "center" },
-        { "name": "carousel_libecciu_slide02", "objectPosition": "center" }
-      ]
-    },
-    {
-      "name": "carousel-casablanca",
-      "autoplay": true,
-      "pauseOnHover": true,
-      "images": [
-        { "name": "carousel_casablanca_slide01", "objectPosition": "center" }
+        {
+          "name": "carousel04_slide01",
+          "objectPosition": "center"
+        },
+        {
+          "name": "carousel04_slide02",
+          "objectPosition": "center"
+        },
+        {
+          "name": "carousel04_slide03",
+          "objectPosition": "center"
+        }
       ]
     },
     {
@@ -115,9 +98,18 @@
       "autoplay": true,
       "pauseOnHover": true,
       "images": [
-        { "name": "carousel_slide_1", "objectPosition": "center" },
-        { "name": "carousel_slide_4", "objectPosition": "center" },
-        { "name": "carousel_slide_5", "objectPosition": "center" }
+        {
+          "name": "carousel_slide_1",
+          "objectPosition": "center"
+        },
+        {
+          "name": "carousel_slide_4",
+          "objectPosition": "center"
+        },
+        {
+          "name": "carousel_slide_5",
+          "objectPosition": "center"
+        }
       ]
     },
     {
@@ -125,8 +117,14 @@
       "autoplay": true,
       "pauseOnHover": true,
       "images": [
-        { "name": "carousel_slide_2", "objectPosition": "center" },
-        { "name": "carousel_slide_3", "objectPosition": "center" }
+        {
+          "name": "carousel_slide_2",
+          "objectPosition": "center"
+        },
+        {
+          "name": "carousel_slide_3",
+          "objectPosition": "center"
+        }
       ]
     },
     {

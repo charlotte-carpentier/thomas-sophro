@@ -8,7 +8,7 @@ engine: 80 ch YAMAHA - 5 m
 passengersNumber: 4 personnes MAX
 carousel_name: carousel_nine
 boat_images:
-  - /assets/images/uploaded/capelli-tempest-500-console.jpg
-  - /assets/images/uploaded/capelli-tempest-500-proue.jpg
+  - /assets/images/BATEAUX/2_NINE/Capelli-Tempest-500_1.JPG
+  - /assets/images/BATEAUX/2_NINE/Capelli-Tempest-500_2.jpg
 imageAlt: Photos de Nine
 ---

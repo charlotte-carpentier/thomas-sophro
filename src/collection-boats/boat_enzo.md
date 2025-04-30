@@ -9,9 +9,7 @@ passengersNumber: 10 personnes MAX
 carousel_name: carousel_enzo
 imageAlt: Photos du bateau "Enzo"
 boat_images:
-  - /assets/images/carousel-2/carousel-slide-a.jpg
-  - /assets/images/carousel-2/carousel-slide-b.jpg
-  - /assets/images/carousel-2/carousel-slide-c.jpg
-  - /assets/images/carousel-2/carousel-slide-d.jpg
+  - /assets/images/BATEAUX/4_ENZO/motonautica-vesuviana_1.jpg
+  - /assets/images/BATEAUX/4_ENZO/motonautica-vesuviana_2.jpg
 ---
 

@@ -9,9 +9,7 @@ passengersNumber: 6 personnes MAX
 carousel_name: carousel_first
 imageAlt: Photos du bateau "First"
 boat_images:
-  - /assets/images/carousel-2/carousel-slide-a.jpg
-  - /assets/images/carousel-2/carousel-slide-b.jpg
-  - /assets/images/carousel-2/carousel-slide-c.jpg
-  - /assets/images/carousel-2/carousel-slide-d.jpg
+  - /assets/images/BATEAUX/3_FIRST/capelli-tempest-630_1.jpg
+  - /assets/images/BATEAUX/3_FIRST/capelli-tempest-630_2.jpg
 ---
 
