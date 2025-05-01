@@ -14,22 +14,6 @@
   },
   "spots": [
     {
-      "name": "spot_capcorse",
-      "variant": "ma-nautic-blue",
-      "heightVariant": "tall",
-      "superHeading_01": "spot_capcorse_h2",
-      "content_01": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Cap au nord de <strong>Saint-Florent</strong> : le <strong>Cap Corse</strong> révèle une autre facette de l’île. Plus <strong>minéral</strong>, plus <strong>escarpé</strong>, il offre une navigation pleine de surprises. En longeant les <strong>falaises</strong> et les <strong>anses rocheuses</strong>, vous découvrez des <strong>villages perchés</strong>, des <strong>plages discrètes</strong>, et quelques <strong>perles gastronomiques</strong> accessibles uniquement par la mer :</p><ul class='list-disc list-inside space-y-2 mb-4'><li><strong>Farinole & Le Bo’s Plage</strong> – à <strong>15 minutes</strong> : une grande plage bordée de galets et un restaurant de plage (à confirmer selon ouverture).</li><li><strong>Nonza</strong> – à <strong>25 minutes</strong> : un village accroché à la falaise, dominé par sa célèbre tour paoline, avec une vue imprenable sur la mer noire et les galets polis.</li><li><strong>Cannelle & U Scogliu</strong> – à <strong>35 minutes</strong> : un hameau tranquille niché dans la roche, avec une petite paillote locale.</li><li><strong>Centuri & Le Langoustier</strong> – à <strong>55 minutes</strong> : un port de pêche authentique réputé pour ses langoustes (selon saison).</li></ul><p class='mb-4'>Loin des routes touristiques, cette <strong>excursion en bateau depuis Saint-Florent</strong> permet de vivre la Corse comme peu la voient. Une Corse <strong>verticale</strong> et <strong>secrète</strong>, entre <strong>nature brute</strong>, <strong>villages figés dans le temps</strong> et <strong>haltes gourmandes</strong>.</p></div>",
-      "image": "ma_group",
-      "link": "contactez-nous_light",
-      "carousel": "carousel_agriates",
-      "imageAlt": "Photos du désert des Agriates",
-      "tags": ["post"],
-      "iconName": "wheel",
-      "ctaLinks": [
-        { "name": "contactez-nous_light" }
-      ]
-    },
-    {
       "name": "agriates_desert",
       "heading": "ma_agriates",
       "contentBlocks": [

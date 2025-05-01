@@ -30,8 +30,6 @@
       "name": "ma_nautic_plus",
       "variant": "ma-nautic-blue",
       "heightVariant": "tall",
-      "superHeading": "home_custom_h2",
-      "text": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Outre le confort de ses bateaux, <strong>l’équipe de M.A NAUTIC</strong> vous apporte ses conseils pour organiser au mieux votre <strong>journée d’excursion maritime</strong> en famille ou entre amis.</p> <p class='text-[theme(--ma-nautic-white)] mb-4'>Nous vous guidons ainsi dans votre navigation, à moins que vous n’optiez pour les <strong>services de notre skipper</strong>. Celui-ci pilotera le bateau et vous n’aurez pas à vous soucier des aspects techniques. Il vous indiquera également les meilleurs spots pour votre sortie en mer.</p> <p class='text-[theme(--ma-nautic-white)] mb-4'>À votre écoute, il vous conduira où vous le désirez dans le respect du code maritime et de l’environnement bien entendu.</p> <p class='text-[theme(--ma-nautic-white)] mb-6'>N’hésitez pas à nous contacter par <strong>mail</strong> ou par <strong>téléphone</strong> pour de plus amples renseignements !</p> <p class='text-[theme(--ma-nautic-white)] mb-6'>Ou bien, passez nous voir sur <strong>le port de Saint-Florent</strong>, un parking est à la disposition de nos clients.</p>",
       "image": "ma_group",
       "link": "contactez-nous_light"
     },
