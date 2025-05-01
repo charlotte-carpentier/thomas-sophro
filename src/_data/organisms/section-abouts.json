@@ -38,12 +38,8 @@
     {
       "name": "ma_nautic_about",
       "variant": "ma-nautic",
-      "mainTitle": "home_h1",
       "scrollArrowButton": "arrow_scroll",
       "scrollArrowButtonVariant": "icon",
-      "superHeading": "home_about_h2",
-      "heading_01": "",
-      "content_01": "<p class='text-[theme(--ma-nautic-blue)] mb-4'><strong>M.A Nautic</strong> est spécialisé dans la location de bateaux à Saint-Florent, depuis presque dix ans. Société de service locale et à taille humaine, ici, tout commence par votre envie de prendre le large.</p> <p class='text-[theme(--ma-nautic-blue)] mb-4'>Plages sauvages, criques secrètes, falaises vertigineuses, sites historiques, géologie singulière… Depuis notre point d'ancrage entre le Cap Corse et la Balagne, partez à la découverte d'un littoral spectaculaire, à votre rythme, par la mer.</p> <p class='text-[theme(--ma-nautic-blue)] mb-4'>Rencontrez la Haute-Corse comme vous l'imaginez, à l'écart des espaces surpeuplés et des circuits balisés.</p> <p class='text-[theme(--ma-nautic-blue)] mb-4'>Vous nous trouverez au cœur du port de plaisance de Saint-Florent. Le départ s'effectue depuis notre ponton privé, avec un parking gratuit juste devant les bateaux.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'>Présents sur place tous les jours, nous vous accueillons de 9h30 à 18h, prêts à vous équiper et à répondre à toutes vos questions.</p>",
       "heading_02": "home_about_h3_team",
       "content_02": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>L'équipe de <strong>MA Nautic</strong> accompagne chaque jour vos envies avec la même attention, vers les plus beaux itinéraires du golfe et ce que l'île a de plus intact : sa nature, son silence, sa lumière et son authenticité.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'><strong>Jonathan et Florent</strong> vous guident là où les sentiers ne vont pas, vers ce que seules les voies de la mer peuvent révéler. Disponibles et à l'écoute de vos attentes, ils veillent à ce que chaque virée en mer se déroule dans les meilleures conditions, en tenant compte de la météo du jour, de votre rythme, et de la dynamique que vous souhaitez lui donner : sportive ou plus contemplative.</p>",
       "heading_03": "home_about_h3_expert",
@@ -54,23 +50,6 @@
       "iconVariant": "wheelIcon",
       "hasCarousel": true,
       "carouselName": "carousel_1"
-    },
-    {
-      "name": "ma_nautic_services",
-      "variant": "ma-nautic",
-      "superHeading": "home_services_h2",
-      "heading_01": "",
-      "content_01": "<p class='text-[theme(--ma-nautic-blue)] mb-4'><strong>M.A Nautic</strong> propose une flotte de bateaux à moteur au départ de Saint-Florent, adaptée à toutes les envies d'escapade en mer.</p> <p class='text-[theme(--ma-nautic-blue)] mb-4'>Que vous soyez en couple pour une journée détente, entre amis pour une sortie nautique ou bien en famille pour un instant convivial, nous vous accompagnons dans l'organisation d'une expérience qui vous ressemble.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'>Pas de formule figée : chaque location est pensée selon votre niveau, vos envies et votre programme du jour.</p>",
-      "heading_02": "home_services_h3_licence",
-      "content_02": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>Vous êtes titulaire du permis bateau ? Prenez la barre en toute autonomie, après un rapide point sécurité.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'>Vous préférez naviguer l'esprit libre ? Optez pour l'option skipper : un professionnel expérimenté prend en charge la manœuvre, vous accompagne durant votre trajet et votre découverte.</p>",
-      "heading_03": "home_services_h3_group",
-      "content_03": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>Notre flotte de 6 bateaux se compose de modèles à coque rigide ou semi-rigide, alliant sécurité, confort et maniabilité.</p> <p class='text-[theme(--ma-nautic-blue)] mb-4'>Capacité d'accueil de 4 à 12 personnes, puissance moteur jusqu'à 300 chevaux, équipements à bord pour la promenade comme pour l'activité nautique : chaque bateau a ses spécificités.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'>Nos bateaux* respectent les normes de sécurité en vigueur avec un armement complet, sont entretenus avec soin et contrôlés régulièrement conformément à la Division 240 en vigueur.</p>",
-      "primaryLink": "voir-bateaux",
-      "hasIcon": true,
-      "iconName": "wheel",
-      "iconVariant": "wheelIcon",
-      "hasCarousel": true,
-      "carouselName": "carousel_2"
     }
   ]
 }
