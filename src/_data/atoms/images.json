@@ -1,6 +1,7 @@
 {
   "globalStyle": "max-w-full h-auto",
   "variants": {
+    "xsmall": "w-36 md:w-48 lg:w-56",
     "small": "w-64 md:w-72 lg:w-80",
     "medium": "w-80 md:w-96 lg:w-[28rem]",
     "large": "w-96 md:w-[28rem] lg:w-[32rem]",
@@ -196,14 +197,14 @@
       "name": "ma_wave_left",
       "src": "/assets/images/ma-wave-left.svg",
       "alt": "Illustration marine d'une vague à gauche",
-      "size": "medium",
+      "size": "xsmall",
       "group": "block-media"
     },
     {
       "name": "ma_wave_right",
       "src": "/assets/images/ma-wave-right.svg",
       "alt": "Illustration marine d'une vague à droite",
-      "size": "medium",
+      "size": "xsmall",
       "group": "block-media"
     }
   ]

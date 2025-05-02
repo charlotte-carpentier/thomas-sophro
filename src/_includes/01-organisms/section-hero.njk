@@ -23,7 +23,16 @@
     {# Get global styling and variants #}
     {% set globalStyle = options.datas.globalStyle %}
     {% set variantStyle = options.datas.variants[variant.variant] | default(options.datas.variants.default) %}
-    {% set containerStyle = options.datas.containerStyle %}
+    
+    {# If arrow_scroll is present, remove all padding from styles #}
+    {% if variant.scrollArrowButton == "arrow_scroll" %}
+      {% set globalStyle = globalStyle | replace('py-10', '') | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('py-0', '') %}
+      {% set variantStyle = variantStyle | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('pb-0', '') | replace('pt-12', '') %}
+    {% else %}
+      {% set globalStyle = globalStyle | replace('py-10', '') | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('py-0', '') %}
+      {% set variantStyle = variantStyle | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('pb-0', '') | replace('pt-12', '') %}
+    {% endif %}
+    
     {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
     {% set textContainerStyle = options.datas.textContainerStyle %}
     {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center md:justify-start" %}
@@ -36,187 +45,175 @@
     {% set scrollArrowWrapperStyle = "absolute left-1/2 transform -translate-x-1/2 z-20" %}
     {% set arrowStyle = "mx-auto" %}
     {% set arrowButtonStyle = "text-[theme(--ma-nautic-blue)]" %}
+    {% set arrowButtonStyleBeige = "text-[theme(--ma-nautic-beige)]" %}
     {% set arrowContainerSize = "w-16 h-16" %}
 
-    {# Specific to MA-Nautic hero #}
-    {% if variant.name == "ma_nautic_hero" %}
-      <section class="{{ globalStyle }} {{ variantStyle }} relative h-[75vh] overflow-hidden {{ options.class | default('') }}" id="{{ sectionId }}">
-        {# Background image #}
-        {% if variant.backgroundImage %}
-          {% set bgImage = null %}
-          {% for image in options.images.images %}
-            {% if image.name == variant.backgroundImage %}
-              {% set bgImage = image %}
+    {# Pages with beige band (with or without waves) #}
+    {% if variant.name == "home_hero" or variant.name == "lieux_hero" or variant.name == "contact_hero" or variant.name == "faq_hero" or variant.name == "legal_hero" or variant.hasBeigeBand == true %}
+      {# Wrapper with relative positioning for the whole section #}
+      <div class="relative">
+        {# Top beige band for main title #}
+        <div class="bg-[theme(--ma-nautic-beige)] pt-16 md:pt-20 lg:pt-24 pb-12 w-full">
+          <div class="container mx-auto grid grid-cols-6">
+            <div class="col-start-2 col-span-4">
+              {# MainTitle #}
+              {% if variant.mainTitle and options.headings %}
+                {% set mainTitle = null %}
+                {% for heading in options.headings.headings %}
+                  {% if heading.name == variant.mainTitle %}
+                    {% set mainTitle = heading %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if mainTitle %}
+                  <{{ "h" + mainTitle.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[mainTitle.style] }}">
+                    {{ mainTitle.text }}
+                  </{{ "h" + mainTitle.level }}>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        {# Bouton scroll arrow à cheval entre le beige et le blanc si arrow_scroll #}
+        {% if variant.scrollArrowButton == "arrow_scroll" and options.buttons %}
+          {% set scrollButton = null %}
+          {% for button in options.buttons.buttons %}
+            {% if button.name == variant.scrollArrowButton %}
+              {% set scrollButton = button %}
             {% endif %}
           {% endfor %}
 
-          {% if bgImage %}
-            <div class="absolute inset-0 z-0 ma-nautic-bg-fixed" style="background-image: url('{{ bgImage.src }}');">
-              <div class="absolute inset-0 bg-ma-nautic-blue/30"></div>
+          {% if scrollButton %}
+            {% set scrollTarget = variant.scrollTarget | default("#") %}
+            
+            <div class="w-full relative h-8 z-20" style="margin-top: -1.5rem;">
+              <a href="{{ scrollTarget }}" class="ma-nautic-scroll-arrow {{ arrowStyle }} {{ scrollArrowWrapperStyle }}" aria-label="Défiler vers le contenu">
+                {% if scrollButton.icon and options.icons %}
+                  {% set arrowIconData = null %}
+                  {% for icon in options.icons.icons %}
+                    {% if icon.name == scrollButton.icon %}
+                      {% set arrowIconData = icon %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% if arrowIconData %}
+                    <span data-svg-src="{{ arrowIconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center {{ arrowContainerSize }} {{ arrowButtonStyleBeige }}">
+                      <!-- SVG will be loaded here -->
+                    </span>
+                  {% else %}
+                    <span class="inline-flex items-center justify-center {{ arrowContainerSize }} {{ arrowButtonStyleBeige }}">↓</span>
+                  {% endif %}
+                {% else %}
+                  <span class="inline-flex items-center justify-center {{ arrowContainerSize }} {{ arrowButtonStyleBeige }}">↓</span>
+                {% endif %}
+              </a>
             </div>
           {% endif %}
         {% endif %}
 
-        {# Content container #}
-        <div class="{{ containerStyle }} relative z-10 h-full flex items-center justify-center">
-          <div class="flex flex-col items-center justify-center">
-            {# Logo image instead of headings #}
-            {% if variant.image %}
-              {% set logoImg = null %}
-              {% for image in options.images.images %}
-                {% if image.name == variant.image %}
-                  {% set logoImg = image %}
-                {% endif %}
-              {% endfor %}
-
-              {% if logoImg %}
-                <div class="mb-8">
-                  <img src="{{ logoImg.src }}" alt="{{ logoImg.alt }}" class="{{ options.images.globalStyle }} {{ options.images.variants[logoImg.size] }}">
-                </div>
-              {% endif %}
-            {% endif %}
-
-            {# Subtitle under logo if needed #}
-            {% if variant.heading and options.headings %}
-              {% set subtitle = null %}
-              {% for heading in options.headings.headings %}
-                {% if heading.name == variant.heading %}
-                  {% set subtitle = heading %}
-                {% endif %}
-              {% endfor %}
-
-              {% if subtitle %}
-                <{{ "h" + subtitle.level }} class="{{ options.headings.variants[subtitle.style] }} max-w-[40rem] mx-auto">
-                  {{ subtitle.text }}
-                </{{ "h" + subtitle.level }}>
-              {% endif %}
-            {% endif %}
-          </div>
-        </div>
-      </section>
-
-    {# Specific to boat, location and contact pages - structure with beige band and waves #}
-    {% elseif variant.name == "bateaux_hero" or variant.name == "lieux_hero" or variant.name == "contact_hero" or variant.name == "faq_hero" or variant.name == "legal_hero" %}
-      {# Top beige band for super heading #}
-      <div class="bg-[theme(--ma-nautic-beige)] pt-16 md:pt-20 lg:pt-24 pb-12 w-full">
-        <div class="{{ containerStyle }}">
-          {# SuperHeading #}
-          {% if variant.superHeading and options.headings %}
-            {% set superHeading = null %}
-            {% for heading in options.headings.headings %}
-              {% if heading.name == variant.superHeading %}
-                {% set superHeading = heading %}
-              {% endif %}
-            {% endfor %}
-
-            {% if superHeading %}
-              <{{ "h" + superHeading.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[superHeading.style] }} max-w-[40rem] mx-auto">
-                {{ superHeading.text }}
-              </{{ "h" + superHeading.level }}>
-            {% endif %}
-          {% endif %}
-        </div>
-      </div>
-
-      {# Main section with waves and content #}
-      <section class="{{ globalStyle | replace('py-12', 'pt-12 pb-0') }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible pt-0" id="{{ sectionId }}">
-        {# Left wave with conditional transparency #}
-        <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
+        {# Main section with waves and content #}
+        <section class="{{ globalStyle | replace('py-12', 'pt-0 pb-0') | replace('py-8', 'pt-0 pb-0') | replace('py-10', 'pt-0 pb-0') | replace('py-16', 'pt-0 pb-0') | replace('py-0', '') | replace('pt-4', 'pt-0') | replace('pt-6', 'pt-0') }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible" id="{{ sectionId }}">
+          {# Left wave #}
           {% if variant["image-left"] and options.images %}
-            {% set leftWave = null %}
-            {% for image in options.images.images %}
-              {% if image.name == variant["image-left"] %}
-                {% set leftWave = image %}
-              {% endif %}
-            {% endfor %}
-
-            {% if leftWave %}
-              {# Use size variant defined in images.json #}
-              {% set imageVariantLeft = options.images.variants[leftWave.size] | default('w-auto h-auto') %}
-              <img src="{{ leftWave.src }}" alt="{{ leftWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantLeft }} max-w-none wave-image">
-            {% endif %}
-          {% endif %}
-        </div>
-
-        {# Right wave with conditional transparency #}
-        <div class="absolute right-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
-          {% if variant["image-right"] and options.images %}
-            {% set rightWave = null %}
-            {% for image in options.images.images %}
-              {% if image.name == variant["image-right"] %}
-                {% set rightWave = image %}
-              {% endif %}
-            {% endfor %}
-
-            {% if rightWave %}
-              {# Use size variant defined in images.json #}
-              {% set imageVariantRight = options.images.variants[rightWave.size] | default('w-auto h-auto') %}
-              <img src="{{ rightWave.src }}" alt="{{ rightWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantRight }} max-w-none wave-image">
-            {% endif %}
-          {% endif %}
-        </div>
-        
-        {# White background for main content #}
-        <div class="bg-white pt-4 md:pt-6 relative z-10">
-          <div class="{{ containerStyle }} relative z-10">
-            <div class="flex flex-col items-center">
-              {# Main Heading #}
-              {% if variant.heading and options.headings %}
-                {% set mainHeading = null %}
-                {% for heading in options.headings.headings %}
-                  {% if heading.name == variant.heading %}
-                    {% set mainHeading = heading %}
-                  {% endif %}
-                {% endfor %}
-
-                {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="text-center mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[mainHeading.style] }} max-w-[40rem] mx-auto">
-                    {{ mainHeading.text }}
-                  </{{ "h" + mainHeading.level }}>
+            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden min-[900px]:block z-20 pointer-events-none">
+              {% set leftWave = null %}
+              {% for image in options.images.images %}
+                {% if image.name == variant["image-left"] %}
+                  {% set leftWave = image %}
                 {% endif %}
-              {% endif %}
+              {% endfor %}
 
-              {# Icon if present - Using data-svg-src for JS loading #}
-              {% if variant.hasIcon and variant.iconName and options.icons %}
-                <div class="flex justify-center my-0 mb-6">
-                  {% set iconData = null %}
-                  {% for icon in options.icons.icons %}
-                    {% if icon.name == variant.iconName %}
-                      {% set iconData = icon %}
-                    {% endif %}
-                  {% endfor %}
-
-                  {% if iconData %}
-                    <span data-svg-src="{{ iconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center w-12 h-12 text-[theme(--ma-nautic-teal)]">
-                      <!-- SVG will be loaded here -->
-                    </span>
-                  {% else %}
-                    <span class="inline-flex items-center justify-center w-12 h-12 text-[theme(--ma-nautic-teal)]">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="32" height="32" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-                    </span>
-                  {% endif %}
-                </div>
-              {% endif %}
-
-              {# Description or ContentBlocks depending on variant #}
-              {% if variant.name == "contact_hero" and variant.contentBlocks %}
-                <div id="contact-form" class="text-center max-w-[40rem] mx-auto text-[theme(--ma-nautic-blue)] space-y-4">
-                  {% for block in variant.contentBlocks %}
-                    <p class="mb-4">{{ block.text | safe }}</p>
-                  {% endfor %}
-                </div>
-              {% elseif variant.description %}
-                <div class="text-center max-w-[40rem] mx-auto">
-                  {{ variant.description | safe }}
-                </div>
+              {% if leftWave %}
+                {# Use size variant defined in images.json #}
+                {% set imageVariantLeft = options.images.variants[leftWave.size] | default('w-auto h-auto') %}
+                <img src="{{ leftWave.src }}" alt="{{ leftWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantLeft }} max-w-none wave-image">
               {% endif %}
             </div>
-          </div>
-        </div>
-      </section>
+          {% endif %}
 
-      {# Scroll button between sections #}
-      {% if variant.scrollArrowButton and options.buttons %}
+          {# Right wave #}
+          {% if variant["image-right"] and options.images %}
+            <div class="absolute right-0 top-1/2 transform -translate-y-1/2 hidden min-[900px]:block z-20 pointer-events-none">
+              {% set rightWave = null %}
+              {% for image in options.images.images %}
+                {% if image.name == variant["image-right"] %}
+                  {% set rightWave = image %}
+                {% endif %}
+              {% endfor %}
+
+              {% if rightWave %}
+                {# Use size variant defined in images.json #}
+                {% set imageVariantRight = options.images.variants[rightWave.size] | default('w-auto h-auto') %}
+                <img src="{{ rightWave.src }}" alt="{{ rightWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantRight }} max-w-none wave-image">
+              {% endif %}
+            </div>
+          {% endif %}
+          
+          {# White background for main content #}
+          <div class="bg-white pt-4 md:pt-6 relative z-10">
+            <div class="container mx-auto grid grid-cols-6">
+              <div class="col-start-2 col-span-4 relative z-10">
+                <div class="flex flex-col items-center pt-8 md:pt-12 pb-8 md:pb-12">
+                  {# SuperHeading #}
+                  {% if variant.superHeading and options.headings %}
+                    {% set mainSuperHeading = null %}
+                    {% for heading in options.headings.headings %}
+                      {% if heading.name == variant.superHeading %}
+                        {% set mainSuperHeading = heading %}
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if mainSuperHeading %}
+                      <{{ "h" + mainSuperHeading.level }} class="text-center mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[mainSuperHeading.style] }}">
+                        {{ mainSuperHeading.text }}
+                      </{{ "h" + mainSuperHeading.level }}>
+                    {% endif %}
+                  {% endif %}
+
+                  {# Icon if present - Using data-svg-src for JS loading #}
+                  {% if variant.hasIcon and variant.iconName and options.icons %}
+                    <div class="flex justify-center my-0 mb-6">
+                      {% set iconData = null %}
+                      {% for icon in options.icons.icons %}
+                        {% if icon.name == variant.iconName %}
+                          {% set iconData = icon %}
+                        {% endif %}
+                      {% endfor %}
+
+                      {% if iconData %}
+                        <span data-svg-src="{{ iconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center w-12 h-12 text-[theme(--ma-nautic-teal)]">
+                          <!-- SVG will be loaded here -->
+                        </span>
+                      {% else %}
+                        <span class="inline-flex items-center justify-center w-12 h-12 text-[theme(--ma-nautic-teal)]">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="32" height="32" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        </span>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+
+                  {# Content or ContentBlocks depending on variant #}
+                  {% if variant.name == "contact_hero" and variant.contentBlocks %}
+                    <div id="contact-form" class="text-center text-[theme(--ma-nautic-blue)] space-y-4">
+                      {% for block in variant.contentBlocks %}
+                        <p class="mb-4">{{ block.text | safe }}</p>
+                      {% endfor %}
+                    </div>
+                  {% elseif variant.content %}
+                    <div class="text-center">
+                      {{ variant.content | safe }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {# Bouton scroll arrow en bas de la section si arrow_scroll_up #}
+      {% if variant.scrollArrowButton == "arrow_scroll_up" and options.buttons %}
         {% set scrollButton = null %}
         {% for button in options.buttons.buttons %}
           {% if button.name == variant.scrollArrowButton %}
@@ -225,16 +222,9 @@
         {% endfor %}
 
         {% if scrollButton %}
+          {% set scrollTarget = variant.scrollTarget | default("#") %}
+          
           <div class="w-full bg-white relative h-8 -mt-1">
-            {% set scrollTarget = "" %}
-            {% if variant.name == "bateaux_hero" %}
-              {% set scrollTarget = "#boat-list" %}
-            {% elif variant.name == "lieux_hero" %}
-              {% set scrollTarget = "#spot-list" %}
-            {% elif variant.name == "contact_hero" %}
-              {% set scrollTarget = "#contact-form" %}
-            {% endif %}
-            
             <a href="{{ scrollTarget }}" class="ma-nautic-scroll-arrow {{ arrowStyle }} {{ scrollArrowWrapperStyle }}" aria-label="Défiler vers le contenu">
               {% if scrollButton.icon and options.icons %}
                 {% set arrowIconData = null %}
@@ -258,99 +248,9 @@
           </div>
         {% endif %}
       {% endif %}
-
-      {# Standard Hero section for other variants #}
     {% else %}
-      <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}" id="{{ sectionId }}">
-        <div class="{{ containerStyle }}">
-          <div class="{{ contentLayoutStyle.mobile }} {{ contentLayoutStyle.desktop }}">
-            {# Text Content Column #}
-            <div class="{{ textContainerStyle }}">
-              {# SuperHeading #}
-              {% if variant.superHeading and options.headings %}
-                {% set superHeading = null %}
-                {% for heading in options.headings.headings %}
-                  {% if heading.name == variant.superHeading %}
-                    {% set superHeading = heading %}
-                  {% endif %}
-                {% endfor %}
-
-                {% if superHeading %}
-                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }} max-w-[40rem] mx-auto text-center">
-                    {{ superHeading.text }}
-                  </{{ "h" + superHeading.level }}>
-                {% endif %}
-              {% endif %}
-
-              {# Main Heading #}
-              {% if variant.heading and options.headings %}
-                {% set mainHeading = null %}
-                {% for heading in options.headings.headings %}
-                  {% if heading.name == variant.heading %}
-                    {% set mainHeading = heading %}
-                  {% endif %}
-                {% endfor %}
-
-                {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }} max-w-[40rem] mx-auto text-center">
-                    {{ mainHeading.text }}
-                  </{{ "h" + mainHeading.level }}>
-                {% else %}
-                  <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }} max-w-[40rem] mx-auto text-center">
-                    {{ variant.heading }}
-                  </h2>
-                {% endif %}
-              {% endif %}
-
-              {# Description #}
-              {% if variant.description %}
-                <p class="{{ variant.descriptionStyle }} max-w-[40rem] mx-auto text-center">
-                  {{ variant.description }}
-                </p>
-              {% endif %}
-
-              {# Buttons Container #}
-              <div class="{{ buttonsContainerStyle }}">
-                {# Import button rendering macro #}
-                {% from "03-atoms/button.njk" import renderButton %}
-
-                {# Primary Button #}
-                {% if variant.primaryButton %}
-                  {{ renderButton({ 
-                      name: variant.primaryButton,
-                      datas: options.buttons
-                  }) }}
-                {% endif %}
-
-                {# Secondary Button #}
-                {% if variant.secondaryButton %}
-                  {{ renderButton({ 
-                      name: variant.secondaryButton,
-                      datas: options.buttons
-                  }) }}
-                {% endif %}
-              </div>
-            </div>
-
-            {# Image Column #}
-            <div class="{{ imageContainerStyle }}">
-              {% if variant.image and options.images %}
-                {% set heroImage = null %}
-                {% for image in options.images.images %}
-                  {% if image.name == variant.image %}
-                    {% set heroImage = image %}
-                  {% endif %}
-                {% endfor %}
-
-                {% if heroImage %}
-                  {% set imageVariant = options.images.variants[heroImage.size] %}
-                  <img src="{{ heroImage.src }}" alt="{{ heroImage.alt }}" class="{{ options.images.globalStyle }} {{ imageVariant }}">
-                {% endif %}
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </section>
+      {# If variant doesn't match the conditions above, show error #}
+      <span class="text-red-500">No matching variant for {{ variant.name }}</span>
     {% endif %}
   {% else %}
     <span class="text-red-500">Section Hero data not found</span>

@@ -35,15 +35,51 @@
       "style": "navigation"
     },
     {
-      "name": "contactez-nous",
+      "name": "contact-blue",
       "href": "/contact",
       "text": "CONTACTEZ-NOUS",
       "style": "content"
     },
     {
-      "name": "contactez-nous_light",
+      "name": "contact-white",
       "href": "/contact",
       "text": "CONTACTEZ-NOUS",
+      "style": "content-light"
+    },
+    {
+      "name": "reservation-blue",
+      "href": "/contact",
+      "text": "RESERVEZ",
+      "style": "content"
+    },
+    {
+      "name": "reservation-white",
+      "href": "/contact",
+      "text": "RESERVEZ",
+      "style": "content-light"
+    },
+    {
+      "name": "spots-blue",
+      "href": "/lieux-interet",
+      "text": "VOIR LES LIEUX D'INTERÊT",
+      "style": "content"
+    },
+    {
+      "name": "spots-white",
+      "href": "/lieux-interet",
+      "text": "VOIR LES LIEUX D'INTERÊT",
+      "style": "content-light"
+    },
+    {
+      "name": "faq-blue",
+      "href": "/lieux-interet",
+      "text": "LIRE NOTRE FAQ",
+      "style": "content"
+    },
+    {
+      "name": "faq-white",
+      "href": "/lieux-interet",
+      "text": "LIRE NOTRE FAQ",
       "style": "content-light"
     },
     {
@@ -51,12 +87,6 @@
       "href": "/lieux-interet",
       "text": "découvrir",
       "style": "content-light"
-    },
-    {
-      "name": "voir-bateaux",
-      "href": "/nos-bateaux",
-      "text": "VOIR NOS BATEAUX",
-      "style": "content"
     },
     {
       "name": "adresse",
@@ -117,18 +147,6 @@
       "href": "/credits-mentions-legales",
       "text": "Crédits & mentions légales",
       "style": "footer"
-    },
-    {
-      "name": "reservez",
-      "href": "/contact",
-      "text": "RESERVEZ",
-      "style": "content"
-    },
-    {
-      "name": "reservez_light",
-      "href": "/contact",
-      "text": "RESERVEZ",
-      "style": "content-light"
     },
     {
       "name": "cabane_lotu",

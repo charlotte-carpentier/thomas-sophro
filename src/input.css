@@ -17,8 +17,8 @@
   /* Tailles de police */
   --ma-nautic-font-size-subtitle: 20px;  /* vibur, pour petits titres de section */
   --ma-nautic-font-size-body: 18px;     /* roboto Regular */
-  --ma-nautic-font-size-title: 38px;    /* roboto Bold */
-  --ma-nautic-font-size-heading: 40px;  /* vibur */
+  --ma-nautic-font-size-title: 24px;    /* roboto Bold */
+  --ma-nautic-font-size-heading: 35px;  /* vibur */
   --ma-nautic-font-size-nav: 18px;      /* vibur */
   --ma-nautic-font-size-section: 24px;  /* vibur */
 
@@ -266,6 +266,6 @@
 
 @media (max-width: 1630px) {
   .wave-image {
-    opacity: 0.3;
+    opacity: 1;
   }
 }

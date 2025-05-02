@@ -13,18 +13,16 @@ layout: '00-core/base.njk'
 }) }}
 
 
-{# About Us Section #}
-{% from "01-organisms/section-about.njk" import renderSectionAbout %}
+{# Hero Section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
-{{ renderSectionAbout({ 
-    name: "ma_nautic_about", 
-    datas: organisms["section-abouts"], 
-    headings: atoms.headings, 
-    links: atoms.links,
-    icons: atoms.icons,
-    carousels: organisms.carousels,
+{{ renderSectionHero({ 
+    name: "home_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
     buttons: atoms.buttons,
-    images: atoms.images
+    images: atoms.images,
+    icons: atoms.icons
 }) }}
 
 {# Discover Section #}
