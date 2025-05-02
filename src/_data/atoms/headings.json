@@ -10,13 +10,13 @@
   },
   "variants": {
     "default": "text-[theme(--ma-nautic-blue)]",
+    "ma_nautic_section_drop": "font-['Vibur'] text-[theme(--ma-nautic-gold)] text-ma-heading",
     "ma_nautic_main_title": "font-[theme(--ma-nautic-font-display)] text-[theme(--ma-nautic-beige)] text-5xl md:text-6xl lg:text-7xl mb-4 tracking-wide",
     "ma_nautic_subtitle": "font-script text-white text-3xl md:text-4xl lg:text-5xl italic",
-    "ma_nautic_section_title": "font-['Roboto'] font-ma-black text-[theme(--ma-nautic-gold)] text-ma-subtitle mb-4 tracking-wide",
-    "ma_nautic_section_subtitle": "font-['Roboto'] font-ma-bold text-[theme(--ma-nautic-blue)] text-ma-title",
+    "ma_nautic_section_subtitle": "font-['Roboto'] font-ma-black text-[theme(--ma-nautic-gold)] text-ma-subtitle mb-4 tracking-wide",
+    "ma_nautic_section_title": "font-['Roboto'] font-ma-bold text-[theme(--ma-nautic-blue)] text-ma-title",
     "ma_nautic_subtitle_light": "font-['Roboto'] font-ma-bold text-[theme(--ma-nautic-white)] text-ma-title",
     "ma_nautic_subtitle_boat": "font-['Roboto'] font-ma-bold text-ma-title",
-    "ma_nautic_section_drop": "font-['Vibur'] text-[theme(--ma-nautic-gold)] text-ma-heading",
     "section_title": "ma-nautic-section-title",
     "boat-title": "ma-nautic-boat-title",
     "hero": "ma-nautic-hero-heading"
@@ -34,19 +34,19 @@
     {
       "name": "home_about_h2",
       "level": 2,
-      "text": "_Une agence locale et de proximité",
+      "text": "Une agence locale et de proximité",
       "style": "ma_nautic_section_title"
     },
     {
       "name": "home_about_h3_team",
       "level": 3,
-      "text": "Une équipe passionnée et disponible",
+      "text": "_Une équipe passionnée et disponible",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "home_about_h3_expert",
       "level": 3,
-      "text": "Une expertise locale",
+      "text": "_Une expertise locale",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -58,43 +58,43 @@
     {
       "name": "home_discover_h3_desert",
       "level": 3,
-      "text": "Explorer le désert des Agriates par la mer",
+      "text": "_Explorer le désert des Agriates par la mer",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "home_discover_h3_cap",
       "level": 3,
-      "text": "Découvrir le Cap Corse autrement",
+      "text": "_Découvrir le Cap Corse autrement",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "home_services_h2",
       "level": 2,
-      "text": "_Nos services de location de bateaux en Haute-Corse",
+      "text": "Nos services de location de bateaux en Haute-Corse",
       "style": "ma_nautic_section_title"
     },
     {
       "name": "home_services_h3_licence",
       "level": 3,
-      "text": "Prenez le large, avec ou sans permis",
+      "text": "_Prenez le large, avec ou sans permis",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "home_services_h3_group",
       "level": 3,
-      "text": "Une flotte performante, adaptée à tous les groupes",
+      "text": "_Une flotte performante, adaptée à tous les groupes",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "home_custom_h2",
       "level": 2,
-      "text": "_Activités nautiques et services personnalisés pour votre journée en mer",
+      "text": "Activités nautiques et services personnalisés pour votre journée en mer",
       "style": "ma_nautic_section_title"
     },
     {
       "name": "home_program_h2",
       "level": 2,
-      "text": "_Excursions en mer depuis Saint-Florent, pour découvrir la côte autrement",
+      "text": "Excursions en mer depuis Saint-Florent, pour découvrir la côte autrement",
       "style": "ma_nautic_section_title"
     },
     {
@@ -112,13 +112,13 @@
     {
       "name": "boat_hero_h3_free",
       "level": 3,
-      "text": "Naviguez librement depuis Saint-Florent",
+      "text": "_Naviguez librement depuis Saint-Florent",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "boat_hero_h3_licence",
       "level": 3,
-      "text": "Avec ou sans permis bateau : choisissez votre façon de naviguer",
+      "text": "_Avec ou sans permis bateau : choisissez votre façon de naviguer",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -136,13 +136,13 @@
     {
       "name": "boat_info_h3_price",
       "level": 3,
-      "text": "Tarifs et conditions de location",
+      "text": "_Tarifs et conditions de location",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "boat_info_h3_option",
       "level": 3,
-      "text": "Options disponibles pour enrichir votre sortie",
+      "text": "_Options disponibles pour enrichir votre sortie",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -154,13 +154,13 @@
     {
       "name": "boat_whyus_h3_place",
       "level": 3,
-      "text": "Une base idéale à Saint-Florent",
+      "text": "_Une base idéale à Saint-Florent",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "boat_whyus_h3_spots",
       "level": 3,
-      "text": "À découvrir au départ de nos bateaux",
+      "text": "_À découvrir au départ de nos bateaux",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -190,13 +190,13 @@
     {
       "name": "spot_manautic_h3_stflorent",
       "level": 3,
-      "text": "Les lieux incontournables à découvrir depuis Saint-Florent",
+      "text": "_Les lieux incontournables à découvrir depuis Saint-Florent",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "spot_manautic_h3_trust",
       "level": 3,
-      "text": "M.A Nautic, pour une navigation de confiance",
+      "text": "_M.A Nautic, pour une navigation de confiance",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -220,7 +220,7 @@
     {
       "name": "contact_access_h3_details",
       "level": 3,
-      "text": "Toutes nos coordonnées",
+      "text": "_Toutes nos coordonnées",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -244,19 +244,19 @@
     {
       "name": "faq_location_h3_functioning",
       "level": 3,
-      "text": "Comment fonctionne la location de bateau chez MA Nautic ?",
+      "text": "_Comment fonctionne la location de bateau chez MA Nautic ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_location_h3_steps",
       "level": 3,
-      "text": "Quelles sont les étapes pour réserver un bateau à Saint-Florent ?",
+      "text": "_Quelles sont les étapes pour réserver un bateau à Saint-Florent ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_location_h3_licence",
       "level": 3,
-      "text": "Faut-il un permis pour louer un bateau en Haute-Corse ?",
+      "text": "_Faut-il un permis pour louer un bateau en Haute-Corse ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -268,13 +268,13 @@
     {
       "name": "faq_location_h3_parking",
       "level": 3,
-      "text": "Où se trouve MA Nautic et peut-on s’y garer facilement ?",
+      "text": "_Où se trouve MA Nautic et peut-on s’y garer facilement ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_location_h3_security",
       "level": 3,
-      "text": "Les bateaux sont-ils bien armés pour la navigation ?",
+      "text": "_Les bateaux sont-ils bien armés pour la navigation ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -286,25 +286,25 @@
     {
       "name": "faq_conditions_h3_weather",
       "level": 3,
-      "text": "Que se passe-t-il en cas de météo défavorable ?",
+      "text": "_Que se passe-t-il en cas de météo défavorable ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_conditions_h3_refund",
       "level": 3,
-      "text": "La location est-elle remboursée en cas de mauvais temps ?",
+      "text": "_La location est-elle remboursée en cas de mauvais temps ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_conditions_h3_gasoline",
       "level": 3,
-      "text": "Où faire le plein d’essence à Saint-Florent ?",
+      "text": "_Où faire le plein d’essence à Saint-Florent ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_conditions_h3_security",
       "level": 3,
-      "text": "Les équipements de sécurité sont-ils fournis à bord ?",
+      "text": "_Les équipements de sécurité sont-ils fournis à bord ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -316,25 +316,25 @@
     {
       "name": "faq_explore_h3_saleccia",
       "level": 3,
-      "text": "Comment rejoindre la plage de Saleccia en bateau ?",
+      "text": "_Comment rejoindre la plage de Saleccia en bateau ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_explore_h3_distance",
       "level": 3,
-      "text": "Quelle distance entre le Lotu et Saleccia ?",
+      "text": "_Quelle distance entre le Lotu et Saleccia ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_explore_h3_timing",
       "level": 3,
-      "text": "Combien de temps pour naviguer jusqu’à Saleccia ?",
+      "text": "_Combien de temps pour naviguer jusqu’à Saleccia ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_explore_h3_swim",
       "level": 3,
-      "text": "Peut-on se baigner dans les criques des Agriates ?",
+      "text": "_Peut-on se baigner dans les criques des Agriates ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -346,13 +346,13 @@
     {
       "name": "faq_services_h3_agriates",
       "level": 3,
-      "text": "Y a-t-il des restaurants ou paillotes dans les Agriates ?",
+      "text": "_Y a-t-il des restaurants ou paillotes dans les Agriates ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_services_h3_saleccia",
       "level": 3,
-      "text": "Faut-il réserver pour manger sur la plage de Saleccia ?",
+      "text": "_Faut-il réserver pour manger sur la plage de Saleccia ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -364,25 +364,25 @@
     {
       "name": "faq_number_h3_four",
       "level": 3,
-      "text": "Quel bateau louer pour 4 personnes ?",
+      "text": "_Quel bateau louer pour 4 personnes ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_number_h3_six",
       "level": 3,
-      "text": "Quel modèle choisir pour 6 personnes ?",
+      "text": "_Quel modèle choisir pour 6 personnes ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_number_h3_ten",
       "level": 3,
-      "text": "Quelle unité pour un groupe de 10 personnes ?",
+      "text": "_Quelle unité pour un groupe de 10 personnes ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "faq_number_h3_children",
       "level": 3,
-      "text": "Les enfants peuvent-ils embarquer en toute sécurité ?",
+      "text": "_Les enfants peuvent-ils embarquer en toute sécurité ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -394,7 +394,7 @@
     {
       "name": "faq_activity_h3_nautical",
       "level": 3,
-      "text": "Quelles activités nautiques peut-on pratiquer avec MA Nautic ?",
+      "text": "_Quelles activités nautiques peut-on pratiquer avec MA Nautic ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -406,7 +406,7 @@
     {
       "name": "faq_activity_h3_children",
       "level": 3,
-      "text": "Les activités nautiques sont-elles adaptées aux enfants ?",
+      "text": "_Les activités nautiques sont-elles adaptées aux enfants ?",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -436,13 +436,13 @@
     {
       "name": "legal_info_h3_host",
       "level": 3,
-      "text": "Hébergeur du site",
+      "text": "_Hébergeur du site",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "legal_info_h3_publisher",
       "level": 3,
-      "text": "Éditeur du site",
+      "text": "_Éditeur du site",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -454,13 +454,13 @@
     {
       "name": "legal_mediation_h3_consumer",
       "level": 3,
-      "text": "Médiation à la consommation",
+      "text": "_Médiation à la consommation",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "legal_mediation_h3_resolution",
       "level": 3,
-      "text": "Règlement des litiges",
+      "text": "_Règlement des litiges",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -472,13 +472,13 @@
     {
       "name": "legal_use_h3_access",
       "level": 3,
-      "text": "Accès et utilisation du site",
+      "text": "_Accès et utilisation du site",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "legal_use_h3_liability",
       "level": 3,
-      "text": "Limitation de responsabilité",
+      "text": "_Limitation de responsabilité",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -490,19 +490,19 @@
     {
       "name": "legal_data_h3_collection",
       "level": 3,
-      "text": "Collecte et utilisation des données personnelles",
+      "text": "_Collecte et utilisation des données personnelles",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "legal_data_h3_rights",
       "level": 3,
-      "text": "Droits d'accès, de rectification et de suppression",
+      "text": "_Droits d'accès, de rectification et de suppression",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "legal_data_h3_cookies",
       "level": 3,
-      "text": "Cookies",
+      "text": "_Cookies",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -514,7 +514,7 @@
     {
       "name": "legal_property_h3_copyright",
       "level": 3,
-      "text": "Droits d'auteur et propriété du contenu",
+      "text": "_Droits d'auteur et propriété du contenu",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -526,85 +526,79 @@
     {
       "name": "legal_management_h3_technical",
       "level": 3,
-      "text": "Prestataire technique",
+      "text": "_Prestataire technique",
       "style": "ma_nautic_section_subtitle"
-    },
-    {
-      "name": "boat_name",
-      "level": 3,
-      "text": "Capelli Tempest 500",
-      "style": "boat-title"
-    },
-    {
-      "name": "capelli_500",
-      "level": 2,
-      "text": "_Capelli Tempest 500",
-      "style": "ma_nautic_section_title"
-    },
-    {
-      "name": "boat_nine",
-      "level": 2,
-      "text": "Nine",
-      "style": "ma_nautic_subtitle_boat"
-    },
-    {
-      "name": "camarat_cc",
-      "level": 2,
-      "text": "_Cap Camarat 5.5 cc",
-      "style": "ma_nautic_section_title"
     },
     {
       "name": "boat_alba",
       "level": 2,
-      "text": "Alba",
+      "text": "_Alba",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "camarat_cc",
+      "level": 2,
+      "text": "Cap Camarat 5.5 style",
       "style": "ma_nautic_subtitle_boat"
+    },
+    {
+      "name": "boat_nine",
+      "level": 3,
+      "text": "_Nine",
+      "style": "ma_nautic_section_title"
+    },
+    {
+      "name": "capelli_500",
+      "level": 2,
+      "text": "Capelli Tempest 500",
+      "style": "ma_nautic_subtitle_boat"
+    },
+    {
+      "name": "boat_first",
+      "level": 3,
+      "text": "_First",
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "capelli_630",
       "level": 2,
-      "text": "_Capelli 630 S",
-      "style": "ma_nautic_section_title"
-    },
-    {
-      "name": "boat_first",
-      "level": 2,
-      "text": "First",
+      "text": "Capelli Tempest 630",
       "style": "ma_nautic_subtitle_boat"
     },
     {
-      "name": "capelli_700",
-      "level": 2,
-      "text": "_Capelli Tempest 700",
+      "name": "boat_enzo",
+      "level": 3,
+      "text": "_Enzo",
       "style": "ma_nautic_section_title"
-    },
-    {
-      "name": "boat_libecciu",
-      "level": 2,
-      "text": "Libecciu",
-      "style": "ma_nautic_subtitle_boat"
     },
     {
       "name": "motonautica_780",
       "level": 2,
-      "text": "_Motonautica 780 confort",
+      "text": "Motonautica Vesuviana 780 confort",
+      "style": "ma_nautic_subtitle_boat"
+    },
+    {
+      "name": "boat_libecciu",
+      "level": 3,
+      "text": "_Libecciu",
       "style": "ma_nautic_section_title"
     },
     {
-      "name": "boat_enzo",
+      "name": "capelli_700",
       "level": 2,
-      "text": "Enzo",
+      "text": "Capelli Tempest 700",
       "style": "ma_nautic_subtitle_boat"
+    },
+    {
+      "name": "boat_casablanca",
+      "level": 3,
+      "text": "_Casa Blanca",
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "lomac_850",
       "level": 2,
-      "text": "_Lomac 850 in",
-      "style": "ma_nautic_section_title"
-    },
-    {
-      "name": "boat_casablanca",
-      "level": 2,
-      "text": "Casa Blanca",
+      "text": "Lomac 850",
       "style": "ma_nautic_subtitle_boat"
     },
     {

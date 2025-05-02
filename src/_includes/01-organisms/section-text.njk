@@ -354,7 +354,7 @@
 
               {# Description #}
               {% if variant.description %}
-                <p class="{{ variant.descriptionStyle | default('') }} max-w-[40rem] mx-auto">
+                <p class="{{ variant.contentStyle | default('') }} max-w-[40rem] mx-auto">
                   {{ variant.description }}
                 </p>
               {% endif %}

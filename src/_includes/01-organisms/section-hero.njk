@@ -38,81 +38,24 @@
     {% set arrowButtonStyle = "text-[theme(--ma-nautic-blue)]" %}
     {% set arrowContainerSize = "w-16 h-16" %}
 
-    {# Specific to MA-Nautic hero #}
-    {% if variant.name == "ma_nautic_hero" %}
-      <section class="{{ globalStyle }} {{ variantStyle }} relative h-[75vh] overflow-hidden {{ options.class | default('') }}" id="{{ sectionId }}">
-        {# Background image #}
-        {% if variant.backgroundImage %}
-          {% set bgImage = null %}
-          {% for image in options.images.images %}
-            {% if image.name == variant.backgroundImage %}
-              {% set bgImage = image %}
-            {% endif %}
-          {% endfor %}
-
-          {% if bgImage %}
-            <div class="absolute inset-0 z-0 ma-nautic-bg-fixed" style="background-image: url('{{ bgImage.src }}');">
-              <div class="absolute inset-0 bg-ma-nautic-blue/30"></div>
-            </div>
-          {% endif %}
-        {% endif %}
-
-        {# Content container #}
-        <div class="{{ containerStyle }} relative z-10 h-full flex items-center justify-center">
-          <div class="flex flex-col items-center justify-center">
-            {# Logo image instead of headings #}
-            {% if variant.image %}
-              {% set logoImg = null %}
-              {% for image in options.images.images %}
-                {% if image.name == variant.image %}
-                  {% set logoImg = image %}
-                {% endif %}
-              {% endfor %}
-
-              {% if logoImg %}
-                <div class="mb-8">
-                  <img src="{{ logoImg.src }}" alt="{{ logoImg.alt }}" class="{{ options.images.globalStyle }} {{ options.images.variants[logoImg.size] }}">
-                </div>
-              {% endif %}
-            {% endif %}
-
-            {# Subtitle under logo if needed #}
-            {% if variant.heading and options.headings %}
-              {% set subtitle = null %}
-              {% for heading in options.headings.headings %}
-                {% if heading.name == variant.heading %}
-                  {% set subtitle = heading %}
-                {% endif %}
-              {% endfor %}
-
-              {% if subtitle %}
-                <{{ "h" + subtitle.level }} class="{{ options.headings.variants[subtitle.style] }} max-w-[40rem] mx-auto">
-                  {{ subtitle.text }}
-                </{{ "h" + subtitle.level }}>
-              {% endif %}
-            {% endif %}
-          </div>
-        </div>
-      </section>
-
     {# Specific to boat, location and contact pages - structure with beige band and waves #}
-    {% elseif variant.name == "bateaux_hero" or variant.name == "lieux_hero" or variant.name == "contact_hero" or variant.name == "faq_hero" or variant.name == "legal_hero" %}
-      {# Top beige band for super heading #}
+    {% if variant.name == "bateaux_hero" or variant.name == "lieux_hero" or variant.name == "contact_hero" or variant.name == "faq_hero" or variant.name == "legal_hero" %}
+      {# Top beige band for main title #}
       <div class="bg-[theme(--ma-nautic-beige)] pt-16 md:pt-20 lg:pt-24 pb-12 w-full">
         <div class="{{ containerStyle }}">
-          {# SuperHeading #}
-          {% if variant.superHeading and options.headings %}
-            {% set superHeading = null %}
+          {# MainTitle #}
+          {% if variant.mainTitle and options.headings %}
+            {% set mainTitle = null %}
             {% for heading in options.headings.headings %}
-              {% if heading.name == variant.superHeading %}
-                {% set superHeading = heading %}
+              {% if heading.name == variant.mainTitle %}
+                {% set mainTitle = heading %}
               {% endif %}
             {% endfor %}
 
-            {% if superHeading %}
-              <{{ "h" + superHeading.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[superHeading.style] }} max-w-[40rem] mx-auto">
-                {{ superHeading.text }}
-              </{{ "h" + superHeading.level }}>
+            {% if mainTitle %}
+              <{{ "h" + mainTitle.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[mainTitle.style] }} max-w-[40rem] mx-auto">
+                {{ mainTitle.text }}
+              </{{ "h" + mainTitle.level }}>
             {% endif %}
           {% endif %}
         </div>
@@ -120,9 +63,9 @@
 
       {# Main section with waves and content #}
       <section class="{{ globalStyle | replace('py-12', 'pt-12 pb-0') }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible pt-0" id="{{ sectionId }}">
-        {# Left wave with conditional transparency #}
-        <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
-          {% if variant["image-left"] and options.images %}
+        {# Left wave with conditional transparency - only if hasWaves is not false #}
+        {% if variant.hasWaves != false and variant["image-left"] and options.images %}
+          <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
             {% set leftWave = null %}
             {% for image in options.images.images %}
               {% if image.name == variant["image-left"] %}
@@ -135,12 +78,12 @@
               {% set imageVariantLeft = options.images.variants[leftWave.size] | default('w-auto h-auto') %}
               <img src="{{ leftWave.src }}" alt="{{ leftWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantLeft }} max-w-none wave-image">
             {% endif %}
-          {% endif %}
-        </div>
+          </div>
+        {% endif %}
 
-        {# Right wave with conditional transparency #}
-        <div class="absolute right-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
-          {% if variant["image-right"] and options.images %}
+        {# Right wave with conditional transparency - only if hasWaves is not false #}
+        {% if variant.hasWaves != false and variant["image-right"] and options.images %}
+          <div class="absolute right-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
             {% set rightWave = null %}
             {% for image in options.images.images %}
               {% if image.name == variant["image-right"] %}
@@ -153,26 +96,26 @@
               {% set imageVariantRight = options.images.variants[rightWave.size] | default('w-auto h-auto') %}
               <img src="{{ rightWave.src }}" alt="{{ rightWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantRight }} max-w-none wave-image">
             {% endif %}
-          {% endif %}
-        </div>
+          </div>
+        {% endif %}
         
         {# White background for main content #}
         <div class="bg-white pt-4 md:pt-6 relative z-10">
           <div class="{{ containerStyle }} relative z-10">
             <div class="flex flex-col items-center">
-              {# Main Heading #}
-              {% if variant.heading and options.headings %}
-                {% set mainHeading = null %}
+              {# SuperHeading #}
+              {% if variant.superHeading and options.headings %}
+                {% set mainSuperHeading = null %}
                 {% for heading in options.headings.headings %}
-                  {% if heading.name == variant.heading %}
-                    {% set mainHeading = heading %}
+                  {% if heading.name == variant.superHeading %}
+                    {% set mainSuperHeading = heading %}
                   {% endif %}
                 {% endfor %}
 
-                {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="text-center mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[mainHeading.style] }} max-w-[40rem] mx-auto">
-                    {{ mainHeading.text }}
-                  </{{ "h" + mainHeading.level }}>
+                {% if mainSuperHeading %}
+                  <{{ "h" + mainSuperHeading.level }} class="text-center mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[mainSuperHeading.style] }} max-w-[40rem] mx-auto">
+                    {{ mainSuperHeading.text }}
+                  </{{ "h" + mainSuperHeading.level }}>
                 {% endif %}
               {% endif %}
 
@@ -198,16 +141,16 @@
                 </div>
               {% endif %}
 
-              {# Description or ContentBlocks depending on variant #}
+              {# Content or ContentBlocks depending on variant #}
               {% if variant.name == "contact_hero" and variant.contentBlocks %}
                 <div id="contact-form" class="text-center max-w-[40rem] mx-auto text-[theme(--ma-nautic-blue)] space-y-4">
                   {% for block in variant.contentBlocks %}
                     <p class="mb-4">{{ block.text | safe }}</p>
                   {% endfor %}
                 </div>
-              {% elseif variant.description %}
+              {% elseif variant.content %}
                 <div class="text-center max-w-[40rem] mx-auto">
-                  {{ variant.description | safe }}
+                  {{ variant.content | safe }}
                 </div>
               {% endif %}
             </div>
@@ -259,53 +202,53 @@
         {% endif %}
       {% endif %}
 
-      {# Standard Hero section for other variants #}
+    {# Standard Hero section for other variants #}
     {% else %}
       <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}" id="{{ sectionId }}">
         <div class="{{ containerStyle }}">
           <div class="{{ contentLayoutStyle.mobile }} {{ contentLayoutStyle.desktop }}">
             {# Text Content Column #}
             <div class="{{ textContainerStyle }}">
-              {# SuperHeading #}
-              {% if variant.superHeading and options.headings %}
-                {% set superHeading = null %}
+              {# MainTitle #}
+              {% if variant.mainTitle and options.headings %}
+                {% set mainTitle = null %}
                 {% for heading in options.headings.headings %}
-                  {% if heading.name == variant.superHeading %}
-                    {% set superHeading = heading %}
+                  {% if heading.name == variant.mainTitle %}
+                    {% set mainTitle = heading %}
                   {% endif %}
                 {% endfor %}
 
-                {% if superHeading %}
-                  <{{ "h" + superHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + superHeading.level] }} {{ options.headings.variants[superHeading.style] }} max-w-[40rem] mx-auto text-center">
-                    {{ superHeading.text }}
-                  </{{ "h" + superHeading.level }}>
+                {% if mainTitle %}
+                  <{{ "h" + mainTitle.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainTitle.level] }} {{ options.headings.variants[mainTitle.style] }} max-w-[40rem] mx-auto text-center">
+                    {{ mainTitle.text }}
+                  </{{ "h" + mainTitle.level }}>
                 {% endif %}
               {% endif %}
 
-              {# Main Heading #}
-              {% if variant.heading and options.headings %}
-                {% set mainHeading = null %}
+              {# SuperHeading #}
+              {% if variant.superHeading and options.headings %}
+                {% set mainSuperHeading = null %}
                 {% for heading in options.headings.headings %}
-                  {% if heading.name == variant.heading %}
-                    {% set mainHeading = heading %}
+                  {% if heading.name == variant.superHeading %}
+                    {% set mainSuperHeading = heading %}
                   {% endif %}
                 {% endfor %}
 
-                {% if mainHeading %}
-                  <{{ "h" + mainHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainHeading.level] }} {{ options.headings.variants[mainHeading.style] }} max-w-[40rem] mx-auto text-center">
-                    {{ mainHeading.text }}
-                  </{{ "h" + mainHeading.level }}>
+                {% if mainSuperHeading %}
+                  <{{ "h" + mainSuperHeading.level }} class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles["h" + mainSuperHeading.level] }} {{ options.headings.variants[mainSuperHeading.style] }} max-w-[40rem] mx-auto text-center">
+                    {{ mainSuperHeading.text }}
+                  </{{ "h" + mainSuperHeading.level }}>
                 {% else %}
                   <h2 class="{{ options.headings.globalStyle }} {{ options.headings.sizeStyles.h2 }} {{ options.headings.variants.default }} max-w-[40rem] mx-auto text-center">
-                    {{ variant.heading }}
+                    {{ variant.superHeading }}
                   </h2>
                 {% endif %}
               {% endif %}
 
-              {# Description #}
-              {% if variant.description %}
-                <p class="{{ variant.descriptionStyle }} max-w-[40rem] mx-auto text-center">
-                  {{ variant.description }}
+              {# Content #}
+              {% if variant.content %}
+                <p class="{{ variant.contentStyle }} max-w-[40rem] mx-auto text-center">
+                  {{ variant.content }}
                 </p>
               {% endif %}
 
