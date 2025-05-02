@@ -277,6 +277,9 @@
   .z-30 {
     z-index: 30;
   }
+  .z-40 {
+    z-index: 40;
+  }
   .col-span-4 {
     grid-column: span 4 / span 4;
   }
@@ -345,6 +348,12 @@
   }
   .-mb-24 {
     margin-bottom: calc(var(--spacing) * -24);
+  }
+  .-mb-px {
+    margin-bottom: -1px;
+  }
+  .mb-0 {
+    margin-bottom: calc(var(--spacing) * 0);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
@@ -423,9 +432,6 @@
   }
   .h-\[6rem\] {
     height: 6rem;
-  }
-  .h-\[75vh\] {
-    height: 75vh;
   }
   .h-\[500px\] {
     height: 500px;
@@ -851,6 +857,9 @@
   }
   .px-16 {
     padding-inline: calc(var(--spacing) * 16);
+  }
+  .py-0 {
+    padding-block: calc(var(--spacing) * 0);
   }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
@@ -1580,6 +1589,11 @@
       width: calc(var(--spacing) * 16);
     }
   }
+  .lg\:w-56 {
+    @media (width >= 64rem) {
+      width: calc(var(--spacing) * 56);
+    }
+  }
   .lg\:w-80 {
     @media (width >= 64rem) {
       width: calc(var(--spacing) * 80);
@@ -1880,7 +1894,7 @@
 }
 @media (max-width: 1630px) {
   .wave-image {
-    opacity: 0.3;
+    opacity: 1;
   }
 }
 @property --tw-translate-x {
