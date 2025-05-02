@@ -22,6 +22,20 @@ layout: '00-core/base.njk'
     headings: atoms.headings,
     buttons: atoms.buttons,
     images: atoms.images,
+    links: atoms.links,
+    icons: atoms.icons
+}) }}
+
+{# Why Section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "home_why",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links,
     icons: atoms.icons
 }) }}
 
