@@ -28,6 +28,9 @@
     {% if variant.scrollArrowButton == "arrow_scroll" %}
       {% set globalStyle = globalStyle | replace('py-10', '') | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('py-0', '') %}
       {% set variantStyle = variantStyle | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('pb-0', '') | replace('pt-12', '') %}
+    {% else %}
+      {% set globalStyle = globalStyle | replace('py-10', '') | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('py-0', '') %}
+      {% set variantStyle = variantStyle | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('pb-0', '') | replace('pt-12', '') %}
     {% endif %}
     
     {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
@@ -84,7 +87,7 @@
           {% if scrollButton %}
             {% set scrollTarget = variant.scrollTarget | default("#") %}
             
-            <div class="w-full relative h-8 z-40" style="margin-top: -1.5rem;">
+            <div class="w-full relative h-8 z-20" style="margin-top: -1.5rem;">
               <a href="{{ scrollTarget }}" class="ma-nautic-scroll-arrow {{ arrowStyle }} {{ scrollArrowWrapperStyle }}" aria-label="Défiler vers le contenu">
                 {% if scrollButton.icon and options.icons %}
                   {% set arrowIconData = null %}
@@ -110,10 +113,10 @@
         {% endif %}
 
         {# Main section with waves and content #}
-        <section class="{{ globalStyle | replace('py-12', 'pt-4 md:pt-6 pb-0') | replace('py-8', 'pt-4 md:pt-6 pb-0') | replace('py-10', 'pt-4 md:pt-6 pb-0') | replace('py-16', 'pt-4 md:pt-6 pb-0') | replace('py-0', '') }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible" id="{{ sectionId }}">
+        <section class="{{ globalStyle | replace('py-12', 'pt-0 pb-0') | replace('py-8', 'pt-0 pb-0') | replace('py-10', 'pt-0 pb-0') | replace('py-16', 'pt-0 pb-0') | replace('py-0', '') | replace('pt-4', 'pt-0') | replace('pt-6', 'pt-0') }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible" id="{{ sectionId }}">
           {# Left wave #}
           {% if variant["image-left"] and options.images %}
-            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
+            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden min-[900px]:block z-20 pointer-events-none">
               {% set leftWave = null %}
               {% for image in options.images.images %}
                 {% if image.name == variant["image-left"] %}
@@ -131,7 +134,7 @@
 
           {# Right wave #}
           {% if variant["image-right"] and options.images %}
-            <div class="absolute right-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20 pointer-events-none">
+            <div class="absolute right-0 top-1/2 transform -translate-y-1/2 hidden min-[900px]:block z-20 pointer-events-none">
               {% set rightWave = null %}
               {% for image in options.images.images %}
                 {% if image.name == variant["image-right"] %}
@@ -151,7 +154,7 @@
           <div class="bg-white pt-4 md:pt-6 relative z-10">
             <div class="container mx-auto grid grid-cols-6">
               <div class="col-start-2 col-span-4 relative z-10">
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center pt-8 md:pt-12 pb-8 md:pb-12">
                   {# SuperHeading #}
                   {% if variant.superHeading and options.headings %}
                     {% set mainSuperHeading = null %}

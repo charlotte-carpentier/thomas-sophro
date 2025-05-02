@@ -1,5 +1,5 @@
 {
-  "globalStyle": "section-hero py-10 px-4 md:px-8 relative",
+  "globalStyle": "section-hero py-12 px-4 md:px-8 relative",
   "variants": {
     "default": "py-8 md:py-12 lg:py-16",
     "compact": "py-6 md:py-8 lg:py-10",
