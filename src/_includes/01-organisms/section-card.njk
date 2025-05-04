@@ -1,0 +1,220 @@
+{#
+=========================
+      SECTION CARD        
+=========================
+#}
+
+{% macro renderSectionCard(options) %}
+  {# Check if data is provided #}
+  {% if options.datas %}
+    {# Get global styling #}
+    {% set globalStyle = options.datas.globalStyle %}
+
+    {# Find section by name #}
+    {% set section = null %}
+    {% if options.name and options.datas.sections %}
+      {% for item in options.datas.sections %}
+        {% if item.name == options.name %}
+          {% set section = item %}
+        {% endif %}
+      {% endfor %}
+
+      {# If no section found, use first as default #}
+      {% if not section and options.datas.sections[0] %}
+        {% set section = options.datas.sections[0] %}
+      {% endif %}
+    {% elif options.datas.sections and options.datas.sections[0] %}
+      {% set section = options.datas.sections[0] %}
+    {% else %}
+      {% set section = {} %}
+    {% endif %}
+
+    {# Get variant style #}
+    {% set variantStyle = options.datas.variants.default %}
+    {% if section.variant and options.datas.variants[section.variant] %}
+      {% set variantStyle = options.datas.variants[section.variant] %}
+    {% endif %}
+
+    {# Get height styling #}
+    {% set heightStyle = options.datas.heights.default %}
+    {% if section.heightVariant and options.datas.heights[section.heightVariant] %}
+      {% set heightStyle = options.datas.heights[section.heightVariant] %}
+    {% endif %}
+    
+    {# Get background color if defined #}
+    {% set bgColorStyle = "" %}
+    {% if section.bgColor %}
+      {% if section.bgColor == "blue" %}
+        {% set bgColorStyle = "bg-[theme(--ma-nautic-blue)]" %}
+      {% elif section.bgColor == "beige" %}
+        {% set bgColorStyle = "bg-[theme(--ma-nautic-beige)]" %}
+      {% elif section.bgColor == "white" %}
+        {% set bgColorStyle = "bg-white" %}
+      {% endif %}
+    {% else %}
+      {# Default to blue if no bgColor specified #}
+      {% set bgColorStyle = "bg-[theme(--ma-nautic-blue)]" %}
+    {% endif %}
+    
+    {# Set text color based on background #}
+    {% set textColorStyle = "" %}
+    {% if section.bgColor == "white" or section.bgColor == "beige" %}
+      {% set textColorStyle = "text-[theme(--ma-nautic-blue)]" %}
+    {% else %}
+      {% set textColorStyle = "text-[theme(--ma-nautic-white)]" %}
+    {% endif %}
+    
+    {# Two columns content section #}
+    <section class="{{ globalStyle }} {{ variantStyle }} {{ heightStyle }} {{ bgColorStyle }} {{ options.class | default('') }}">
+      <div class="container mx-auto grid grid-cols-6">
+        <div class="col-start-2 col-span-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 lg:gap-24">
+          
+            {# Left Column #}
+            <div class="flex flex-col">
+              {# First heading-content block #}
+              {% if section.heading_01 and options.headings and options.headings.headings %}
+                {% set heading1 = null %}
+                {% for heading in options.headings.headings %}
+                  {% if heading.name == section.heading_01 %}
+                    {% set heading1 = heading %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if heading1 %}
+                  <{{ "h" + heading1.level }} class="{{ options.headings.globalStyle }} {{ options.headings.variants[heading1.style] }} mb-4">
+                    {{ heading1.text }}
+                  </{{ "h" + heading1.level }}>
+                {% endif %}
+              {% endif %}
+              
+              {% if section.content_01 %}
+                <div class="highlight-content {{ textColorStyle }} text-justify [&_strong]:font-normal [&_p]:mb-0 [&_ul_li]:mb-0 [&_ol_li]:mb-0 [&_ul]:space-y-0 [&_ol]:space-y-0">
+                  {{ section.content_01 | safe }}
+                </div>
+              {% endif %}
+
+              {# Primary link for left column if provided #}
+              {% if section.link_01 and options.links and options.links.links %}
+                {% set linkData = null %}
+                {% for link in options.links.links %}
+                  {% if link.name | lower == section.link_01 | lower %}
+                    {% set linkData = link %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if linkData %}
+                  <div class="mt-6 flex justify-center">
+                    <a href="{{ linkData.href }}" class="{{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                      {{ linkData.text }}
+                    </a>
+                  </div>
+                {% else %}
+                  {# Fallback if link not found in collection #}
+                  <div class="mt-6 flex justify-center">
+                    <a href="#" class="ma-nautic-button">
+                      {{ section.link_01 }}
+                    </a>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+            
+            {# Right Column #}
+            <div class="flex flex-col">
+              {# Second heading-content block #}
+              {% if section.heading_02 and options.headings and options.headings.headings %}
+                {% set heading2 = null %}
+                {% for heading in options.headings.headings %}
+                  {% if heading.name == section.heading_02 %}
+                    {% set heading2 = heading %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if heading2 %}
+                  <{{ "h" + heading2.level }} class="{{ options.headings.globalStyle }} {{ options.headings.variants[heading2.style] }} mb-4">
+                    {{ heading2.text }}
+                  </{{ "h" + heading2.level }}>
+                {% endif %}
+              {% endif %}
+              
+              {% if section.content_02 %}
+                <div class="highlight-content {{ textColorStyle }} text-justify [&_strong]:font-normal [&_p]:mb-0 [&_ul_li]:mb-0 [&_ol_li]:mb-0 [&_ul]:space-y-0 [&_ol]:space-y-0">
+                  {{ section.content_02 | safe }}
+                </div>
+              {% endif %}
+
+              {# Optional third heading-content block #}
+              {% if section.heading_03 and options.headings and options.headings.headings %}
+                {% set heading3 = null %}
+                {% for heading in options.headings.headings %}
+                  {% if heading.name == section.heading_03 %}
+                    {% set heading3 = heading %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if heading3 %}
+                  <{{ "h" + heading3.level }} class="{{ options.headings.globalStyle }} {{ options.headings.variants[heading3.style] }} mb-4 mt-2">
+                    {{ heading3.text }}
+                  </{{ "h" + heading3.level }}>
+                {% endif %}
+              {% endif %}
+              
+              {% if section.content_03 %}
+                <div class="highlight-content {{ textColorStyle }} text-justify [&_strong]:font-normal [&_p]:mb-0 [&_ul_li]:mb-0 [&_ol_li]:mb-0 [&_ul]:space-y-0 [&_ol]:space-y-0">
+                  {{ section.content_03 | safe }}
+                </div>
+              {% endif %}
+
+              {# Link for right column if provided #}
+              {% if section.link_02 and options.links and options.links.links %}
+                {% set linkData = null %}
+                {% for link in options.links.links %}
+                  {% if link.name | lower == section.link_02 | lower %}
+                    {% set linkData = link %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if linkData %}
+                  <div class="mt-6 flex justify-center">
+                    <a href="{{ linkData.href }}" class="{{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                      {{ linkData.text }}
+                    </a>
+                  </div>
+                {% else %}
+                  {# Fallback if link not found in collection #}
+                  <div class="mt-6 flex justify-center">
+                    <a href="#" class="ma-nautic-button">
+                      {{ section.link_02 }}
+                    </a>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <span class="text-red-500">Section Card data not found</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/section-card.njk" import renderSectionCard %}
+
+2. Call a specific section-card by its name
+{{ renderSectionCard({ 
+    name: "boat_navigate",
+    datas: organisms["section-cards"],
+    headings: atoms.headings,
+    links: atoms.links
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

@@ -113,13 +113,13 @@
     {
       "name": "boat_hero_h3_free",
       "level": 3,
-      "text": "_Naviguez librement depuis Saint-Florent",
+      "text": "Naviguez librement depuis Saint-Florent",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "boat_hero_h3_licence",
       "level": 3,
-      "text": "_Avec ou sans permis bateau : choisissez votre façon de naviguer",
+      "text": "Avec ou sans permis bateau : choisissez votre façon de naviguer",
       "style": "ma_nautic_section_subtitle"
     },
     {
