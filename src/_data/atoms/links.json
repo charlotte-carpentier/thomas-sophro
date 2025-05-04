@@ -59,6 +59,12 @@
       "style": "content-light"
     },
     {
+      "name": "boats-white",
+      "href": "/nos-bateaux",
+      "text": "VOIR NOS BATEAUX",
+      "style": "content-light"
+    },
+    {
       "name": "spots-blue",
       "href": "/lieux-interet",
       "text": "VOIR LES LIEUX D'INTERÊT",

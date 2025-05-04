@@ -36,6 +36,16 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Map Highlight Section #}
+{% from "01-organisms/section-highlight.njk" import renderSectionHighlight %}
+
+{{ renderSectionHighlight({ 
+    name: "ma_nautic_map",
+    datas: organisms["section-highlights"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links
+}) }}
 
 {# Site Hero Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}

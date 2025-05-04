@@ -56,6 +56,16 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Infos Highlight Section #}
+{% from "01-organisms/section-highlight.njk" import renderSectionHighlight %}
+
+{{ renderSectionHighlight({ 
+    name: "ma_nautic_services",
+    datas: organisms["section-highlights"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links
+}) }}
 
 {# Activities Carousel Section #}
 
