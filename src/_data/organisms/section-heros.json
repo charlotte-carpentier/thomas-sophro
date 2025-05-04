@@ -62,6 +62,8 @@
       "variant": "default",
       "superHeading": "home_services_h2",
       "content": "<p class='text-[theme(--ma-nautic-blue)] mb-4'><strong>M.A Nautic</strong> propose une flotte de bateaux à moteur au départ de Saint-Florent, adaptée à toutes les envies d'escapade en mer.</p> <p class='text-[theme(--ma-nautic-blue)] mb-4'>Que vous soyez en couple pour une journée détente, entre amis pour une sortie nautique ou bien en famille pour un instant convivial, nous vous accompagnons dans l'organisation d'une expérience qui vous ressemble.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'>Pas de formule figée : chaque location est pensée selon votre niveau, vos envies et votre programme du jour.</p>",
+      "scrollArrowButton": "arrow_scroll_up",
+      "scrollArrowButtonVariant": "arrowScrollIcon",
       "icon": "wheel",
       "iconVariant": "wheelIcon",
       "hasIcon": true,
