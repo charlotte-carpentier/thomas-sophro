@@ -1239,13 +1239,6 @@
       }
     }
   }
-  .hover\:underline {
-    &:hover {
-      @media (hover: hover) {
-        text-decoration-line: underline;
-      }
-    }
-  }
   .focus\:outline-none {
     &:focus {
       --tw-outline-style: none;
@@ -1525,11 +1518,6 @@
       padding-top: calc(var(--spacing) * 12);
     }
   }
-  .md\:pt-16 {
-    @media (width >= 48rem) {
-      padding-top: calc(var(--spacing) * 16);
-    }
-  }
   .md\:pt-20 {
     @media (width >= 48rem) {
       padding-top: calc(var(--spacing) * 20);
@@ -1538,11 +1526,6 @@
   .md\:pb-12 {
     @media (width >= 48rem) {
       padding-bottom: calc(var(--spacing) * 12);
-    }
-  }
-  .md\:pb-16 {
-    @media (width >= 48rem) {
-      padding-bottom: calc(var(--spacing) * 16);
     }
   }
   .md\:text-left {
