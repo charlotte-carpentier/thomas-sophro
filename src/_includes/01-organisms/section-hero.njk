@@ -166,8 +166,8 @@
             </div>
           {% endif %}
           
-          {# Content container #}
-          <div class="{{ 'pt-8 md:pt-12' if variant.scrollArrowButton == 'arrow_scroll' else 'pt-12 md:pt-16' }} pb-12 md:pb-16 relative z-10">
+          {# Content container - or beige if hasBeigeBg is true #}
+          <div class="{% if variant.hasBeigeBg %}bg-[theme(--ma-nautic-beige)]{% else %}bg-white{% endif %} {{ 'pt-0' if variant.scrollArrowButton == 'arrow_scroll' else 'pt-4 md:pt-6' }} relative z-10">
             <div class="container mx-auto grid grid-cols-6">
               <div class="col-start-2 col-span-4 relative z-10">
                 <div class="flex flex-col items-center pt-8 md:pt-12 pb-8 md:pb-12">
@@ -209,7 +209,6 @@
                     </div>
                   {% endif %}
 
-                  {# Handle multiple content blocks #}
                   {# Content 01 #}
                   {% if variant.content_01 %}
                     <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
@@ -224,7 +223,7 @@
                       {% endfor %}
                       
                       {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
                           {{ linkData.text }}
                         </a>
                       {% endif %}
@@ -260,7 +259,7 @@
                       {% endfor %}
                       
                       {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
                           {{ linkData.text }}
                         </a>
                       {% endif %}
@@ -295,14 +294,14 @@
                       {% endfor %}
                       
                       {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
                           {{ linkData.text }}
                         </a>
                       {% endif %}
                     {% endif %}
                   {% endif %}
 
-                  {# Contact form special case #}
+                  {# Contact form special case and regular content #}
                   {% if variant.name == "contact_hero" and variant.contentBlocks %}
                     <div id="contact-form" class="text-center text-[theme(--ma-nautic-blue)] space-y-4">
                       {% for block in variant.contentBlocks %}
@@ -322,8 +321,8 @@
                       {% endfor %}
                       
                       {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} hover:underline mt-4 mb-6 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
-                          {{ linkData.text }} →
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                          {{ linkData.text }}
                         </a>
                       {% endif %}
                     {% endif %}
@@ -376,7 +375,7 @@
       <span class="text-red-500">No matching variant for {{ variant.name }}</span>
     {% endif %}
   {% else %}
-    <span class="text-red-source">Section Hero data not found</span>
+    <span class="text-red-500">Section Hero data not found</span>
   {% endif %}
   {# Include script for scrolling #}
 <script src="/js/organisms/section-scroll.js"></script>
@@ -390,7 +389,7 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
-2. Call a specific section-hero by its name (make sure to pass links in options)
+2. Call a specific section-hero by its name
 {{ renderSectionHero({ 
     name: "bateaux_hero",
     datas: organisms["section-heros"],
