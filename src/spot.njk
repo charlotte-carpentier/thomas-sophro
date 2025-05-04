@@ -61,3 +61,11 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Divers Cards Section #}
+{% from "01-organisms/section-card.njk" import renderSectionCard %}
+
+{{ renderSectionCard({ 
+    name: "spot_divers",
+    datas: organisms["section-cards"],
+    headings: atoms.headings,
+    links: atoms.links
+}) }}

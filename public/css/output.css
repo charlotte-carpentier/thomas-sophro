@@ -1792,6 +1792,11 @@
       line-height: var(--tw-leading, var(--text-7xl--line-height));
     }
   }
+  .\[\&_ol\]\:list-outside {
+    & ol {
+      list-style-position: outside;
+    }
+  }
   .\[\&_ol\]\:space-y-0 {
     & ol {
       :where(& > :not(:last-child)) {
@@ -1801,9 +1806,19 @@
       }
     }
   }
+  .\[\&_ol\]\:pl-4 {
+    & ol {
+      padding-left: calc(var(--spacing) * 4);
+    }
+  }
   .\[\&_ol_li\]\:mb-0 {
     & ol li {
       margin-bottom: calc(var(--spacing) * 0);
+    }
+  }
+  .\[\&_ol_li\]\:pl-0 {
+    & ol li {
+      padding-left: calc(var(--spacing) * 0);
     }
   }
   .\[\&_p\]\:mb-0 {
@@ -1827,6 +1842,11 @@
       font-weight: var(--font-weight-normal);
     }
   }
+  .\[\&_ul\]\:list-outside {
+    & ul {
+      list-style-position: outside;
+    }
+  }
   .\[\&_ul\]\:space-y-0 {
     & ul {
       :where(& > :not(:last-child)) {
@@ -1836,9 +1856,19 @@
       }
     }
   }
+  .\[\&_ul\]\:pl-4 {
+    & ul {
+      padding-left: calc(var(--spacing) * 4);
+    }
+  }
   .\[\&_ul_li\]\:mb-0 {
     & ul li {
       margin-bottom: calc(var(--spacing) * 0);
+    }
+  }
+  .\[\&_ul_li\]\:pl-0 {
+    & ul li {
+      padding-left: calc(var(--spacing) * 0);
     }
   }
   .\[\&amp\;_strong\]\:font-normal {
