@@ -17,6 +17,14 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Navigate Cards Section #}
+{% from "01-organisms/section-card.njk" import renderSectionCard %}
+
+{{ renderSectionCard({ 
+    name: "boat_navigate",
+    datas: organisms["section-cards"],
+    headings: atoms.headings,
+    links: atoms.links
+}) }}
 
 {# Boat Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
@@ -83,6 +91,14 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Price Cards Section #}
+{% from "01-organisms/section-card.njk" import renderSectionCard %}
+
+{{ renderSectionCard({ 
+    name: "boat_price",
+    datas: organisms["section-cards"],
+    headings: atoms.headings,
+    links: atoms.links
+}) }}
 
 {# Why Hero Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
@@ -98,3 +114,11 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Base Cards Section #}
+{% from "01-organisms/section-card.njk" import renderSectionCard %}
+
+{{ renderSectionCard({ 
+    name: "boat_base",
+    datas: organisms["section-cards"],
+    headings: atoms.headings,
+    links: atoms.links
+}) }}
