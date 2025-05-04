@@ -4,6 +4,17 @@ layout: '00-core/base.njk'
 ---
 
 {# Spot Hero Section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "spot_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links,
+    icons: atoms.icons
+}) }}
 
 {# CapCorse Carousel Section #}
 
@@ -25,7 +36,28 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Map Highlight Section #}
+{% from "01-organisms/section-highlight.njk" import renderSectionHighlight %}
+
+{{ renderSectionHighlight({ 
+    name: "ma_nautic_map",
+    datas: organisms["section-highlights"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links
+}) }}
 
 {# Site Hero Section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "spot_site",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links,
+    icons: atoms.icons
+}) }}
 
 {# Divers Cards Section #}

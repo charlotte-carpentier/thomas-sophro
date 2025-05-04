@@ -26,11 +26,11 @@
         "variant": "ma-nautic-blue",
         "heightVariant": "tall",
         "heading_01": "home_services_h3_licence",
-        "content_01": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>Vous êtes titulaire du permis bateau ? Prenez la barre en toute autonomie, après un rapide point sécurité.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'>Vous préférez naviguer l'esprit libre ? Optez pour l'option skipper : un professionnel expérimenté prend en charge la manœuvre, vous accompagne durant votre trajet et votre découverte.</p>",
+        "content_01": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Vous êtes titulaire du permis bateau ? Prenez la barre en toute autonomie, après un rapide point sécurité.</p> <p class='text-[theme(--ma-nautic-white)] mb-6'>Vous préférez naviguer l'esprit libre ? Optez pour l'option skipper : un professionnel expérimenté prend en charge la manœuvre, vous accompagne durant votre trajet et votre découverte.</p>",
         "heading_02": "home_services_h3_group",
-        "content_02": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>Notre flotte de 6 bateaux se compose de modèles à coque rigide ou semi-rigide, alliant sécurité, confort et maniabilité.</p> <p class='text-[theme(--ma-nautic-blue)] mb-4'>Capacité d'accueil de 4 à 12 personnes, puissance moteur jusqu'à 300 chevaux, équipements à bord pour la promenade comme pour l'activité nautique : chaque bateau a ses spécificités.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'>Nos bateaux* respectent les normes de sécurité en vigueur avec un armement complet, sont entretenus avec soin et contrôlés régulièrement conformément à la Division 240 en vigueur.</p>",
-        "primaryLink": "voir-bateaux",
-        "image": "ma_group"
+        "content_02": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Notre flotte de 6 bateaux se compose de modèles à coque rigide ou semi-rigide, alliant sécurité, confort et maniabilité.</p> <p class='text-[theme(--ma-nautic-white)] mb-4'>Capacité d'accueil de 4 à 12 personnes, puissance moteur jusqu'à 300 chevaux, équipements à bord pour la promenade comme pour l'activité nautique : chaque bateau a ses spécificités.</p> <p class='text-[theme(--ma-nautic-white)] mb-6'>Nos bateaux* respectent les normes de sécurité en vigueur avec un armement complet, sont entretenus avec soin et contrôlés régulièrement conformément à la Division 240 en vigueur.</p>",
+        "primaryLink": "boats-white",
+        "image": "ma_boat"
       },
       {
         "name": "ma_nautic_map",

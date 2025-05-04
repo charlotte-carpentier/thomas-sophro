@@ -194,6 +194,12 @@
       "group": "block-media"
     },
     {
+      "name": "ma_boat",
+      "src": "/assets/images/bateauMaNautic.jpg",
+      "alt": "Carte simplifiée du littoral corse avec indication des plages et rappel pour réserver votre table.",
+      "group": "block-media"
+    },
+    {
       "name": "ma_wave_left",
       "src": "/assets/images/ma-wave-left.svg",
       "alt": "Illustration marine d'une vague à gauche",

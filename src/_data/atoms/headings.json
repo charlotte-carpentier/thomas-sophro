@@ -77,13 +77,13 @@
     {
       "name": "home_services_h3_licence",
       "level": 3,
-      "text": "_Prenez le large, avec ou sans permis",
+      "text": "Prenez le large, avec ou sans permis",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "home_services_h3_group",
       "level": 3,
-      "text": "_Une flotte performante, adaptée à tous les groupes",
+      "text": "Une flotte performante, adaptée à tous les groupes",
       "style": "ma_nautic_section_subtitle"
     },
     {
@@ -174,7 +174,7 @@
       "name": "spot_hero_h2",
       "level": 2,
       "text": "Le désert des Agriates par la mer : plages secrètes et escales gourmandes",
-      "style": "ma_nautic_title"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "spot_capcorse_h2",

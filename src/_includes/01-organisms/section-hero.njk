@@ -166,8 +166,8 @@
             </div>
           {% endif %}
           
-          {# Content container - or beige if hasBeigeBg is true #}
-          <div class="{% if variant.hasBeigeBg %}bg-[theme(--ma-nautic-beige)]{% else %}bg-white{% endif %} {{ 'pt-0' if variant.scrollArrowButton == 'arrow_scroll' else 'pt-4 md:pt-6' }} relative z-10">
+          {# Content container - ne pas appliquer de fond si image de fond #}
+          <div class="{% if not backgroundImage %}{% if variant.hasBeigeBg %}bg-[theme(--ma-nautic-beige)]{% else %}bg-white{% endif %}{% endif %} {{ 'pt-0' if variant.scrollArrowButton == 'arrow_scroll' else 'pt-4 md:pt-6' }} relative z-10">
             <div class="container mx-auto grid grid-cols-6">
               <div class="col-start-2 col-span-4 relative z-10">
                 <div class="flex flex-col items-center pt-8 md:pt-12 pb-8 md:pb-12">
