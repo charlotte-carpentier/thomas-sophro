@@ -3,17 +3,9 @@ permalink: "/lieux-interet/"
 layout: '00-core/base.njk'
 ---
 
-{# Location Hero Section #}
-{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+{# Spot Hero Section #}
 
-{{ renderSectionHero({ 
-    name: "lieux_hero",
-    datas: organisms["section-heros"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    icons: atoms.icons
-}) }}
+{# CapCorse Carousel Section #}
 
 {# Container for location list with spot-list ID for scrolling #}
 <div id="spot-list">
@@ -32,17 +24,8 @@ layout: '00-core/base.njk'
     buttons: atoms.buttons
 }) }}
 
-{# Location section "Cap Corse" #}
-{% from "01-organisms/section-spot.njk" import renderSectionSpot %}
+{# Map Highlight Section #}
 
-{{ renderSectionSpot({ 
-    name: "cap_corse", 
-    datas: spots, 
-    headings: atoms.headings, 
-    links: atoms.links,
-    icons: atoms.icons,
-    carousels: organisms.carousels,
-    images: atoms.images,
-    buttons: atoms.buttons,
-    reversed: true
-}) }}
+{# Site Hero Section #}
+
+{# Divers Cards Section #}

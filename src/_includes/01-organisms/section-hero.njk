@@ -24,14 +24,9 @@
     {% set globalStyle = options.datas.globalStyle %}
     {% set variantStyle = options.datas.variants[variant.variant] | default(options.datas.variants.default) %}
     
-    {# If arrow_scroll is present, remove all padding from styles #}
-    {% if variant.scrollArrowButton == "arrow_scroll" %}
-      {% set globalStyle = globalStyle | replace('py-10', '') | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('py-0', '') %}
-      {% set variantStyle = variantStyle | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('pb-0', '') | replace('pt-12', '') %}
-    {% else %}
-      {% set globalStyle = globalStyle | replace('py-10', '') | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('py-0', '') %}
-      {% set variantStyle = variantStyle | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('pb-0', '') | replace('pt-12', '') %}
-    {% endif %}
+    {# Remove all padding from styles #}
+    {% set globalStyle = globalStyle | replace('py-10', '') | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('py-0', '') %}
+    {% set variantStyle = variantStyle | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('pb-0', '') | replace('pt-12', '') %}
     
     {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
     {% set textContainerStyle = options.datas.textContainerStyle %}
@@ -48,34 +43,55 @@
     {% set arrowButtonStyleBeige = "text-[theme(--ma-nautic-beige)]" %}
     {% set arrowContainerSize = "w-16 h-16" %}
 
-    {# Pages with beige band (with or without waves) #}
-    {% if variant.name == "home_hero" or variant.name == "lieux_hero" or variant.name == "contact_hero" or variant.name == "faq_hero" or variant.name == "legal_hero" or variant.hasBeigeBand == true %}
+    {# Check if background image exists #}
+    {% set backgroundImage = null %}
+    {% if variant.backgroundImage and options.images %}
+      {% for image in options.images.images %}
+        {% if image.name == variant.backgroundImage %}
+          {% set backgroundImage = image %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <style>
+      #{{ sectionId }}.has-background {
+        background-image: url('{{ backgroundImage.src }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    </style>
+
+    {# All variants are handled by default #}
+    {% if variant %}
       {# Wrapper with relative positioning for the whole section #}
       <div class="relative">
-        {# Top beige band for main title #}
-        <div class="bg-[theme(--ma-nautic-beige)] pt-16 md:pt-20 lg:pt-24 pb-12 w-full">
-          <div class="container mx-auto grid grid-cols-6">
-            <div class="col-start-2 col-span-4">
-              {# MainTitle #}
-              {% if variant.mainTitle and options.headings %}
-                {% set mainTitle = null %}
-                {% for heading in options.headings.headings %}
-                  {% if heading.name == variant.mainTitle %}
-                    {% set mainTitle = heading %}
-                  {% endif %}
-                {% endfor %}
+        {# Top beige band for main title - only if mainTitle exists #}
+        {% if variant.mainTitle %}
+          <div class="bg-[theme(--ma-nautic-beige)] pt-16 md:pt-20 lg:pt-24 pb-12 w-full">
+            <div class="container mx-auto grid grid-cols-6">
+              <div class="col-start-2 col-span-4">
+                {# MainTitle #}
+                {% if variant.mainTitle and options.headings %}
+                  {% set mainTitle = null %}
+                  {% for heading in options.headings.headings %}
+                    {% if heading.name == variant.mainTitle %}
+                      {% set mainTitle = heading %}
+                    {% endif %}
+                  {% endfor %}
 
-                {% if mainTitle %}
-                  <{{ "h" + mainTitle.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[mainTitle.style] }}">
-                    {{ mainTitle.text }}
-                  </{{ "h" + mainTitle.level }}>
+                  {% if mainTitle %}
+                    <{{ "h" + mainTitle.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[mainTitle.style] }}">
+                      {{ mainTitle.text }}
+                    </{{ "h" + mainTitle.level }}>
+                  {% endif %}
                 {% endif %}
-              {% endif %}
+              </div>
             </div>
           </div>
-        </div>
+        {% endif %}
 
-        {# Bouton scroll arrow à cheval entre le beige et le blanc si arrow_scroll #}
+        {# Scroll arrow button between sections if arrow_scroll #}
         {% if variant.scrollArrowButton == "arrow_scroll" and options.buttons %}
           {% set scrollButton = null %}
           {% for button in options.buttons.buttons %}
@@ -113,7 +129,7 @@
         {% endif %}
 
         {# Main section with waves and content #}
-        <section class="{{ globalStyle | replace('py-12', 'pt-0 pb-0') | replace('py-8', 'pt-0 pb-0') | replace('py-10', 'pt-0 pb-0') | replace('py-16', 'pt-0 pb-0') | replace('py-0', '') | replace('pt-4', 'pt-0') | replace('pt-6', 'pt-0') }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible" id="{{ sectionId }}">
+        <section class="{{ globalStyle | replace('py-12', 'pt-0 pb-0') | replace('py-8', 'pt-0 pb-0') | replace('py-10', 'pt-0 pb-0') | replace('py-16', 'pt-0 pb-0') | replace('py-0', '') | replace('pt-4', 'pt-0') | replace('pt-6', 'pt-0') }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible {% if backgroundImage %}has-background{% elif variant.hasBeigeBg %}bg-[theme(--ma-nautic-beige)]{% else %}bg-white{% endif %}" id="{{ sectionId }}">
           {# Left wave #}
           {% if variant["image-left"] and options.images %}
             <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden min-[900px]:block z-20 pointer-events-none">
@@ -150,8 +166,8 @@
             </div>
           {% endif %}
           
-          {# White background for main content #}
-          <div class="bg-white pt-4 md:pt-6 relative z-10">
+          {# Content container - or beige if hasBeigeBg is true #}
+          <div class="{% if variant.hasBeigeBg %}bg-[theme(--ma-nautic-beige)]{% else %}bg-white{% endif %} {{ 'pt-0' if variant.scrollArrowButton == 'arrow_scroll' else 'pt-4 md:pt-6' }} relative z-10">
             <div class="container mx-auto grid grid-cols-6">
               <div class="col-start-2 col-span-4 relative z-10">
                 <div class="flex flex-col items-center pt-8 md:pt-12 pb-8 md:pb-12">
@@ -193,7 +209,99 @@
                     </div>
                   {% endif %}
 
-                  {# Content or ContentBlocks depending on variant #}
+                  {# Content 01 #}
+                  {% if variant.content_01 %}
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
+                      {{ variant.content_01 | safe }}
+                    </div>
+                    {% if variant.link_01 and options.links %}
+                      {% set linkData = null %}
+                      {% for link in options.links.links %}
+                        {% if link.name == variant.link_01 %}
+                          {% set linkData = link %}
+                        {% endif %}
+                      {% endfor %}
+                      
+                      {% if linkData %}
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                          {{ linkData.text }}
+                        </a>
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+
+                  {# Additional headings and content blocks #}
+                  {% if variant.heading_02 and options.headings %}
+                    {% set heading02 = null %}
+                    {% for heading in options.headings.headings %}
+                      {% if heading.name == variant.heading_02 %}
+                        {% set heading02 = heading %}
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if heading02 %}
+                      <{{ "h" + heading02.level }} class="text-center mt-8 mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[heading02.style] }}">
+                        {{ heading02.text }}
+                      </{{ "h" + heading02.level }}>
+                    {% endif %}
+                  {% endif %}
+
+                  {% if variant.content_02 %}
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
+                      {{ variant.content_02 | safe }}
+                    </div>
+                    {% if variant.link_02 and options.links %}
+                      {% set linkData = null %}
+                      {% for link in options.links.links %}
+                        {% if link.name == variant.link_02 %}
+                          {% set linkData = link %}
+                        {% endif %}
+                      {% endfor %}
+                      
+                      {% if linkData %}
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                          {{ linkData.text }}
+                        </a>
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+
+                  {% if variant.heading_03 and options.headings %}
+                    {% set heading03 = null %}
+                    {% for heading in options.headings.headings %}
+                      {% if heading.name == variant.heading_03 %}
+                        {% set heading03 = heading %}
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if heading03 %}
+                      <{{ "h" + heading03.level }} class="text-center mt-8 mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[heading03.style] }}">
+                        {{ heading03.text }}
+                      </{{ "h" + heading03.level }}>
+                    {% endif %}
+                  {% endif %}
+
+                  {% if variant.content_03 %}
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
+                      {{ variant.content_03 | safe }}
+                    </div>
+                    {% if variant.link_03 and options.links %}
+                      {% set linkData = null %}
+                      {% for link in options.links.links %}
+                        {% if link.name == variant.link_03 %}
+                          {% set linkData = link %}
+                        {% endif %}
+                      {% endfor %}
+                      
+                      {% if linkData %}
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                          {{ linkData.text }}
+                        </a>
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+
+                  {# Contact form special case and regular content #}
                   {% if variant.name == "contact_hero" and variant.contentBlocks %}
                     <div id="contact-form" class="text-center text-[theme(--ma-nautic-blue)] space-y-4">
                       {% for block in variant.contentBlocks %}
@@ -201,9 +309,23 @@
                       {% endfor %}
                     </div>
                   {% elseif variant.content %}
-                    <div class="text-center">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
                       {{ variant.content | safe }}
                     </div>
+                    {% if variant.link and options.links %}
+                      {% set linkData = null %}
+                      {% for link in options.links.links %}
+                        {% if link.name == variant.link %}
+                          {% set linkData = link %}
+                        {% endif %}
+                      {% endfor %}
+                      
+                      {% if linkData %}
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                          {{ linkData.text }}
+                        </a>
+                      {% endif %}
+                    {% endif %}
                   {% endif %}
                 </div>
               </div>
@@ -212,7 +334,7 @@
         </section>
       </div>
 
-      {# Bouton scroll arrow en bas de la section si arrow_scroll_up #}
+      {# Scroll arrow button at bottom if arrow_scroll_up #}
       {% if variant.scrollArrowButton == "arrow_scroll_up" and options.buttons %}
         {% set scrollButton = null %}
         {% for button in options.buttons.buttons %}
@@ -274,6 +396,7 @@ Summon HAT Components Wisely
     headings: atoms.headings,
     buttons: atoms.buttons,
     images: atoms.images,
+    links: atoms.links,
     icons: atoms.icons
 }) }}
 
