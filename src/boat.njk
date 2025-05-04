@@ -4,10 +4,32 @@ layout: '00-core/base.njk'
 ---
 
 {# Boat Hero Section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "boat_hero",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links,
+    icons: atoms.icons
+}) }}
 
 {# Navigate Cards Section #}
 
 {# Boat Section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "boat_boat",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links,
+    icons: atoms.icons
+}) }}
 
 {# Container for boat list with boat-list ID for scrolling #}
 <div id="boat-list">
@@ -48,9 +70,31 @@ layout: '00-core/base.njk'
 </div>
 
 {# Who Hero Section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "boat_who",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links,
+    icons: atoms.icons
+}) }}
 
 {# Price Cards Section #}
 
 {# Why Hero Section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "boat_why",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links,
+    icons: atoms.icons
+}) }}
 
 {# Base Cards Section #}

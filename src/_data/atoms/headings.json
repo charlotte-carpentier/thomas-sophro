@@ -108,7 +108,7 @@
       "name": "boat_hero_h2",
       "level": 2,
       "text": "Une flotte complète et entretenue pour explorer la Haute-Corse",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "boat_hero_h3_free",
@@ -126,13 +126,13 @@
       "name": "boat_info_h2",
       "level": 2,
       "text": "Nos bateaux à louer",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "boat_customer_h2",
       "level": 2,
       "text": "À qui s’adresse la location de bateau avec M.A Nautic ?",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "boat_info_h3_price",
@@ -150,7 +150,7 @@
       "name": "boat_whyus_h2",
       "level": 2,
       "text": "Pourquoi choisir MA-Nautic pour louer un bateau en Corse ?",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "boat_whyus_h3_place",
@@ -174,19 +174,19 @@
       "name": "spot_hero_h2",
       "level": 2,
       "text": "Le désert des Agriates par la mer : plages secrètes et escales gourmandes",
-      "style": "ma_nautic_subtitle_light"
+      "style": "ma_nautic_title"
     },
     {
       "name": "spot_capcorse_h2",
       "level": 2,
       "text": "Le Cap Corse : falaises, villages perchés et cuisine marine",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "spot_manautic_h2",
       "level": 2,
       "text": "M.A Nautic : votre embarcation vers les plus beaux sites de Haute-Corse",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "spot_manautic_h3_stflorent",
@@ -210,13 +210,13 @@
       "name": "contact_hero_h2",
       "level": 2,
       "text": "Contactez notre agence de location de bateaux à en Haute-Corse",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "contact_access_h2",
       "level": 2,
       "text": "Accès à M.A Nautic à Saint Florent",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "contact_access_h3_details",
@@ -234,13 +234,13 @@
       "name": "faq_intro_h2",
       "level": 2,
       "text": "Louer un bateau en Corse : pourquoi choisir Saint-Florent ?",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "faq_location_h2",
       "level": 2,
       "text": "Questions fréquentes sur la location de bateau à Saint-Florent",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "faq_location_h3_functioning",
@@ -282,7 +282,7 @@
       "name": "faq_conditions_h2",
       "level": 2,
       "text": "Conditions météo, sécurité et carburant",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "faq_conditions_h3_weather",
@@ -312,7 +312,7 @@
       "name": "faq_explore_h2",
       "level": 2,
       "text": "Explorer la Méditerranée : Saleccia, Lotu et les Agriates",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "faq_explore_h3_saleccia",
@@ -342,7 +342,7 @@
       "name": "faq_services_h2",
       "level": 2,
       "text": "Services sur place et à bord",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "faq_services_h3_agriates",
@@ -360,7 +360,7 @@
       "name": "faq_number_h2",
       "level": 2,
       "text": "Choisir son bateau selon le nombre de passagers",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "faq_number_h3_four",
@@ -390,7 +390,7 @@
       "name": "faq_activity_h2",
       "level": 2,
       "text": "Activités nautiques à Saint-Florent",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "faq_activity_h3_nautical",
@@ -414,13 +414,13 @@
       "name": "faq_need_h2",
       "level": 2,
       "text": "Naviguer en Haute Corse : ce qu’il faut savoir avant de partir",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "faq_information_h2",
       "level": 2,
       "text": "Infos pratiques – MA Nautic",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "legal_h1",
@@ -432,7 +432,7 @@
       "name": "legal_info_h2",
       "level": 2,
       "text": "Informations légales et éditeur du site",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "legal_info_h3_host",
@@ -450,7 +450,7 @@
       "name": "legal_mediation_h2",
       "level": 2,
       "text": "Informations légales et éditeur du site",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "legal_mediation_h3_consumer",
@@ -468,7 +468,7 @@
       "name": "legal_use_h2",
       "level": 2,
       "text": "Conditions d'utilisation du site",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "legal_use_h3_access",
@@ -486,7 +486,7 @@
       "name": "legal_data_h2",
       "level": 2,
       "text": "Protection des données personnelles",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "legal_data_h3_collection",
@@ -510,7 +510,7 @@
       "name": "legal_property_h2",
       "level": 2,
       "text": "Propriété intellectuelle",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "legal_property_h3_copyright",
@@ -522,7 +522,7 @@
       "name": "legal_management_h2",
       "level": 2,
       "text": "Prestataire technique et gestion des services",
-      "style": "ma_nautic_section_subtitle"
+      "style": "ma_nautic_section_title"
     },
     {
       "name": "legal_management_h3_technical",

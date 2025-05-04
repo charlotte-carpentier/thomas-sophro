@@ -212,7 +212,7 @@
                   {# Handle multiple content blocks #}
                   {# Content 01 #}
                   {% if variant.content_01 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
                       {{ variant.content_01 | safe }}
                     </div>
                     {% if variant.link_01 and options.links %}
@@ -248,7 +248,7 @@
                   {% endif %}
 
                   {% if variant.content_02 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
                       {{ variant.content_02 | safe }}
                     </div>
                     {% if variant.link_02 and options.links %}
@@ -283,7 +283,7 @@
                   {% endif %}
 
                   {% if variant.content_03 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
                       {{ variant.content_03 | safe }}
                     </div>
                     {% if variant.link_03 and options.links %}
@@ -310,7 +310,7 @@
                       {% endfor %}
                     </div>
                   {% elseif variant.content %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
                       {{ variant.content | safe }}
                     </div>
                     {% if variant.link and options.links %}
