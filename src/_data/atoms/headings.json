@@ -15,6 +15,7 @@
     "ma_nautic_subtitle": "font-script text-white text-3xl md:text-4xl lg:text-5xl italic",
     "ma_nautic_section_subtitle": "font-['Roboto'] font-ma-black text-[theme(--ma-nautic-gold)] text-ma-subtitle mb-4 tracking-wide",
     "ma_nautic_section_title": "font-['Roboto'] font-ma-bold text-[theme(--ma-nautic-blue)] text-ma-title",
+    "ma_nautic_section_title_white": "font-['Roboto'] font-ma-bold text-[theme(--ma-nautic-white)] text-ma-title",
     "ma_nautic_subtitle_light": "font-['Roboto'] font-ma-bold text-[theme(--ma-nautic-white)] text-ma-title",
     "ma_nautic_subtitle_boat": "font-['Roboto'] font-ma-bold text-ma-title",
     "section_title": "ma-nautic-section-title",
@@ -53,18 +54,18 @@
       "name": "home_discover_h2",
       "level": 2,
       "text": "Pourquoi louer un bateau à Saint-Florent ?",
-      "style": "ma_nautic_section_title"
+      "style": "ma_nautic_section_title_white"
     },
     {
       "name": "home_discover_h3_desert",
       "level": 3,
-      "text": "_Explorer le désert des Agriates par la mer",
+      "text": "Explorer le désert des Agriates par la mer",
       "style": "ma_nautic_section_subtitle"
     },
     {
       "name": "home_discover_h3_cap",
       "level": 3,
-      "text": "_Découvrir le Cap Corse autrement",
+      "text": "Découvrir le Cap Corse autrement",
       "style": "ma_nautic_section_subtitle"
     },
     {

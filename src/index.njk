@@ -3,7 +3,7 @@ permalink: "/"
 layout: '00-core/base.njk'
 ---
 
-{# MA-Nautic Title Section #}
+{# Home Title Section #}
 {% from "01-organisms/section-title.njk" import renderSectionTitle %}
 
 {{ renderSectionTitle({ 
@@ -12,8 +12,7 @@ layout: '00-core/base.njk'
     images: atoms.images
 }) }}
 
-
-{# Hero Section #}
+{# Home Hero Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
 {{ renderSectionHero({ 
@@ -26,7 +25,11 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
-{# Why Section #}
+{# Team Carousel Section #}
+
+{# Local Carousel Section #}
+
+{# Why Hero Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
 {{ renderSectionHero({ 
@@ -39,65 +42,32 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
-{# Discover Section #}
-{% from "01-organisms/section-text.njk" import renderSectionText %}
+{# Services Hero Section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
-{{ renderSectionText({ 
-    name: "ma_nautic_discover",
-    datas: organisms["section-texts"],
+{{ renderSectionHero({ 
+    name: "home_services",
+    datas: organisms["section-heros"],
     headings: atoms.headings,
     buttons: atoms.buttons,
     images: atoms.images,
-    links: atoms.links
-}) }}
-
-{# Map Section #}
-{% from "01-organisms/section-text.njk" import renderSectionText %}
-
-{{ renderSectionText({ 
-    name: "ma_nautic_map",
-    datas: organisms["section-texts"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    links: atoms.links
-}) }}
-
-{# What We Do Section #}
-{% from "01-organisms/section-about.njk" import renderSectionAbout %}
-
-{{ renderSectionAbout({ 
-    name: "ma_nautic_services", 
-    datas: organisms["section-abouts"], 
-    headings: atoms.headings, 
     links: atoms.links,
-    icons: atoms.icons,
-    carousels: organisms.carousels,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    reversed: true 
+    icons: atoms.icons
 }) }}
 
-{# The Little Extras Section #}
-{% from "01-organisms/section-text.njk" import renderSectionText %}
+{# Infos Highlight Section #}
 
-{{ renderSectionText({ 
-    name: "ma_nautic_plus",
-    datas: organisms["section-texts"],
+{# Activities Carousel Section #}
+
+{# Excursion Hero Section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "home_excursions",
+    datas: organisms["section-heros"],
     headings: atoms.headings,
     buttons: atoms.buttons,
     images: atoms.images,
-    links: atoms.links
-}) }}
-
-{# The Wonders Section #}
-{% from "01-organisms/section-text.njk" import renderSectionText %}
-
-{{ renderSectionText({ 
-    name: "ma_nautic_marvelous",
-    datas: organisms["section-texts"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    links: atoms.links
+    links: atoms.links,
+    icons: atoms.icons
 }) }}

@@ -4,16 +4,10 @@ layout: '00-core/base.njk'
 ---
 
 {# Boat Hero Section #}
-{% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
-{{ renderSectionHero({ 
-    name: "bateaux_hero",
-    datas: organisms["section-heros"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    icons: atoms.icons
-}) }}
+{# Navigate Cards Section #}
+
+{# Boat Section #}
 
 {# Container for boat list with boat-list ID for scrolling #}
 <div id="boat-list">
@@ -53,14 +47,10 @@ layout: '00-core/base.njk'
 
 </div>
 
-{# Info & options Section #}
-{% from "01-organisms/section-text.njk" import renderSectionText %}
+{# Who Hero Section #}
 
-{{ renderSectionText({ 
-    name: "ma_nautic_info",
-    datas: organisms["section-texts"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    links: atoms.links
-}) }}
+{# Price Cards Section #}
+
+{# Why Hero Section #}
+
+{# Base Cards Section #}

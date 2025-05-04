@@ -129,7 +129,7 @@
         {% endif %}
 
         {# Main section with waves and content #}
-        <section class="{{ globalStyle | replace('py-12', 'pt-0 pb-0') | replace('py-8', 'pt-0 pb-0') | replace('py-10', 'pt-0 pb-0') | replace('py-16', 'pt-0 pb-0') | replace('py-0', '') | replace('pt-4', 'pt-0') | replace('pt-6', 'pt-0') }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible {{ 'has-background' if backgroundImage else 'bg-white' }}" id="{{ sectionId }}">
+        <section class="{{ globalStyle | replace('py-12', 'pt-0 pb-0') | replace('py-8', 'pt-0 pb-0') | replace('py-10', 'pt-0 pb-0') | replace('py-16', 'pt-0 pb-0') | replace('py-0', '') | replace('pt-4', 'pt-0') | replace('pt-6', 'pt-0') }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible {% if backgroundImage %}has-background{% elif variant.hasBeigeBg %}bg-[theme(--ma-nautic-beige)]{% else %}bg-white{% endif %}" id="{{ sectionId }}">
           {# Left wave #}
           {% if variant["image-left"] and options.images %}
             <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden min-[900px]:block z-20 pointer-events-none">
@@ -212,7 +212,7 @@
                   {# Handle multiple content blocks #}
                   {# Content 01 #}
                   {% if variant.content_01 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
                       {{ variant.content_01 | safe }}
                     </div>
                     {% if variant.link_01 and options.links %}
@@ -224,15 +224,15 @@
                       {% endfor %}
                       
                       {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} hover:underline mt-4 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
-                          {{ linkData.text }} →
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                          {{ linkData.text }}
                         </a>
                       {% endif %}
                     {% endif %}
                   {% endif %}
 
                   {# Additional headings and content blocks #}
-                  {% if variant.heading_02 %}
+                  {% if variant.heading_02 and options.headings %}
                     {% set heading02 = null %}
                     {% for heading in options.headings.headings %}
                       {% if heading.name == variant.heading_02 %}
@@ -241,14 +241,14 @@
                     {% endfor %}
 
                     {% if heading02 %}
-                      <{{ "h" + heading02.level }} class="text-center mt-8 mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[heading02.style] }} {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
+                      <{{ "h" + heading02.level }} class="text-center mt-8 mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[heading02.style] }}">
                         {{ heading02.text }}
                       </{{ "h" + heading02.level }}>
                     {% endif %}
                   {% endif %}
 
                   {% if variant.content_02 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
                       {{ variant.content_02 | safe }}
                     </div>
                     {% if variant.link_02 and options.links %}
@@ -260,14 +260,14 @@
                       {% endfor %}
                       
                       {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} hover:underline mt-4 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
-                          {{ linkData.text }} →
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                          {{ linkData.text }}
                         </a>
                       {% endif %}
                     {% endif %}
                   {% endif %}
 
-                  {% if variant.heading_03 %}
+                  {% if variant.heading_03 and options.headings %}
                     {% set heading03 = null %}
                     {% for heading in options.headings.headings %}
                       {% if heading.name == variant.heading_03 %}
@@ -276,14 +276,14 @@
                     {% endfor %}
 
                     {% if heading03 %}
-                      <{{ "h" + heading03.level }} class="text-center mt-8 mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[heading03.style] }} {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
+                      <{{ "h" + heading03.level }} class="text-center mt-8 mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[heading03.style] }}">
                         {{ heading03.text }}
                       </{{ "h" + heading03.level }}>
                     {% endif %}
                   {% endif %}
 
                   {% if variant.content_03 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
                       {{ variant.content_03 | safe }}
                     </div>
                     {% if variant.link_03 and options.links %}
@@ -295,8 +295,8 @@
                       {% endfor %}
                       
                       {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} hover:underline mt-4 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
-                          {{ linkData.text }} →
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                          {{ linkData.text }}
                         </a>
                       {% endif %}
                     {% endif %}
@@ -310,7 +310,7 @@
                       {% endfor %}
                     </div>
                   {% elseif variant.content %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }}">
                       {{ variant.content | safe }}
                     </div>
                     {% if variant.link and options.links %}
@@ -322,7 +322,7 @@
                       {% endfor %}
                       
                       {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} hover:underline mt-4 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
+                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)]' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} hover:underline mt-4 mb-6 block {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
                           {{ linkData.text }} →
                         </a>
                       {% endif %}

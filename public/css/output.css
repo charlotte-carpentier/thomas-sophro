@@ -810,15 +810,6 @@
   .bg-white {
     background-color: var(--color-white);
   }
-  .bg-cover {
-    background-size: cover;
-  }
-  .bg-center {
-    background-position: center;
-  }
-  .bg-no-repeat {
-    background-repeat: no-repeat;
-  }
   .fill-current {
     fill: currentColor;
   }
@@ -1747,11 +1738,6 @@
   .\[\&_p\]\:mb-\[30px\] {
     & p {
       margin-bottom: 30px;
-    }
-  }
-  .\[\&amp\;_p\]\:mb-6 {
-    &amp; p {
-      margin-bottom: calc(var(--spacing) * 6);
     }
   }
 }
