@@ -31,6 +31,19 @@ layout: '00-core/base.njk'
 }) }}
 </div>
 
+{# Contact Infos Section #}
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "contact_infos",
+    datas: organisms["section-heros"],
+    headings: atoms.headings,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    links: atoms.links,
+    icons: atoms.icons
+}) }}
+
 {# Leaflet.js Map with marker on M.A Nautic #}
 <div id="map" style="width: 100%; height: 500px;"></div>
 
