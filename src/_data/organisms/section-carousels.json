@@ -41,7 +41,8 @@
         "heading": "home_about_h3_team",
         "content": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>L'équipe de <strong>MA Nautic</strong> accompagne chaque jour vos envies avec la même attention, vers les plus beaux itinéraires du golfe et ce que l'île a de plus intact : sa nature, son silence, sa lumière et son authenticité.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'><strong>Jonathan et Florent</strong> vous guident là où les sentiers ne vont pas, vers ce que seules les voies de la mer peuvent révéler. Disponibles et à l'écoute de vos attentes, ils veillent à ce que chaque virée en mer se déroule dans les meilleures conditions, en tenant compte de la météo du jour, de votre rythme, et de la dynamique que vous souhaitez lui donner : sportive ou plus contemplative.</p>",
         "hasCarousel": true,
-        "carouselName": "carousel01"
+        "carouselName": "carousel01",
+        "hasBeigeBg": true
       },
       {
         "name": "home_local",
@@ -57,6 +58,8 @@
         "variant": "ma-nautic",
         "superHeading": "home_custom_h2",
         "content": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>Outre le confort de ses bateaux, <strong>l’équipe de M.A NAUTIC</strong> vous apporte ses conseils pour organiser au mieux votre <strong>journée d’excursion maritime</strong> en famille ou entre amis.</p> <p class='text-[theme(--ma-nautic-blue)] mb-4'>Nous vous guidons ainsi dans votre navigation, à moins que vous n’optiez pour les <strong>services de notre skipper</strong>. Celui-ci pilotera le bateau et vous n’aurez pas à vous soucier des aspects techniques. Il vous indiquera également les meilleurs spots pour votre sortie en mer.</p> <p class='text-[theme(--ma-nautic-blue)] mb-4'>À votre écoute, il vous conduira où vous le désirez dans le respect du code maritime et de l’environnement bien entendu.</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'>N’hésitez pas à nous contacter par <strong>mail</strong> ou par <strong>téléphone</strong> pour de plus amples renseignements !</p> <p class='text-[theme(--ma-nautic-blue)] mb-6'>Ou bien, passez nous voir sur <strong>le port de Saint-Florent</strong>, un parking est à la disposition de nos clients.</p>",
+        "image-right": "ma_wave_right",
+        "image-left": "ma_wave_left",
         "hasIcon": true,
         "iconName": "wheel",
         "iconVariant": "wheelIcon",
@@ -68,13 +71,14 @@
         "variant": "ma-nautic",
         "scrollArrowButton": "arrow_scroll",
         "scrollArrowButtonVariant": "icon",
-        "superHeading_01": "spot_capcorse_h2",
-        "content_01": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Cap au nord de <strong>Saint-Florent</strong> : le <strong>Cap Corse</strong> révèle une autre facette de l’île. Plus <strong>minéral</strong>, plus <strong>escarpé</strong>, il offre une navigation pleine de surprises. En longeant les <strong>falaises</strong> et les <strong>anses rocheuses</strong>, vous découvrez des <strong>villages perchés</strong>, des <strong>plages discrètes</strong>, et quelques <strong>perles gastronomiques</strong> accessibles uniquement par la mer :</p><ul class='list-disc list-inside space-y-2 mb-4'><li><strong>Farinole & Le Bo’s Plage</strong> – à <strong>15 minutes</strong> : une grande plage bordée de galets et un restaurant de plage (à confirmer selon ouverture).</li><li><strong>Nonza</strong> – à <strong>25 minutes</strong> : un village accroché à la falaise, dominé par sa célèbre tour paoline, avec une vue imprenable sur la mer noire et les galets polis.</li><li><strong>Cannelle & U Scogliu</strong> – à <strong>35 minutes</strong> : un hameau tranquille niché dans la roche, avec une petite paillote locale.</li><li><strong>Centuri & Le Langoustier</strong> – à <strong>55 minutes</strong> : un port de pêche authentique réputé pour ses langoustes (selon saison).</li></ul><p class='mb-4'>Loin des routes touristiques, cette <strong>excursion en bateau depuis Saint-Florent</strong> permet de vivre la Corse comme peu la voient. Une Corse <strong>verticale</strong> et <strong>secrète</strong>, entre <strong>nature brute</strong>, <strong>villages figés dans le temps</strong> et <strong>haltes gourmandes</strong>.</p></div>",
+        "superHeading": "spot_capcorse_h2",
+        "content": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto'><p class='mb-4'>Cap au nord de <strong>Saint-Florent</strong> : le <strong>Cap Corse</strong> révèle une autre facette de l’île. Plus <strong>minéral</strong>, plus <strong>escarpé</strong>, il offre une navigation pleine de surprises. En longeant les <strong>falaises</strong> et les <strong>anses rocheuses</strong>, vous découvrez des <strong>villages perchés</strong>, des <strong>plages discrètes</strong>, et quelques <strong>perles gastronomiques</strong> accessibles uniquement par la mer :</p><ul class='list-disc list-inside space-y-2 mb-4'><li><strong>Farinole & Le Bo’s Plage</strong> – à <strong>15 minutes</strong> : une grande plage bordée de galets et un restaurant de plage (à confirmer selon ouverture).</li><li><strong>Nonza</strong> – à <strong>25 minutes</strong> : un village accroché à la falaise, dominé par sa célèbre tour paoline, avec une vue imprenable sur la mer noire et les galets polis.</li><li><strong>Cannelle & U Scogliu</strong> – à <strong>35 minutes</strong> : un hameau tranquille niché dans la roche, avec une petite paillote locale.</li><li><strong>Centuri & Le Langoustier</strong> – à <strong>55 minutes</strong> : un port de pêche authentique réputé pour ses langoustes (selon saison).</li></ul><p class='mb-4'>Loin des routes touristiques, cette <strong>excursion en bateau depuis Saint-Florent</strong> permet de vivre la Corse comme peu la voient. Une Corse <strong>verticale</strong> et <strong>secrète</strong>, entre <strong>nature brute</strong>, <strong>villages figés dans le temps</strong> et <strong>haltes gourmandes</strong>.</p></div>",
         "hasIcon": true,
         "iconName": "wheel",
         "iconVariant": "wheelIcon",
         "hasCarousel": true,
-        "carouselName": "carousel04"
+        "carouselName": "carousel04",
+        "hasBeigeBg": true
       }
     ]
   }
