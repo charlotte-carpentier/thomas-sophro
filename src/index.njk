@@ -26,8 +26,33 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Team Carousel Section #}
+{% from "01-organisms/section-carousel.njk" import renderSectionCarousel %}
+
+{{ renderSectionCarousel({ 
+    name: "home_team", 
+    datas: organisms["section-carousels"], 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    buttons: atoms.buttons,
+    images: atoms.images,
+    reversed: true
+}) }}
 
 {# Local Carousel Section #}
+{% from "01-organisms/section-carousel.njk" import renderSectionCarousel %}
+
+{{ renderSectionCarousel({ 
+    name: "home_local", 
+    datas: organisms["section-carousels"], 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    buttons: atoms.buttons,
+    images: atoms.images
+}) }}
 
 {# Why Hero Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
@@ -68,6 +93,18 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Activities Carousel Section #}
+{% from "01-organisms/section-carousel.njk" import renderSectionCarousel %}
+
+{{ renderSectionCarousel({ 
+    name: "home_activities", 
+    datas: organisms["section-carousels"], 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    buttons: atoms.buttons,
+    images: atoms.images
+}) }}
 
 {# Excursion Hero Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}

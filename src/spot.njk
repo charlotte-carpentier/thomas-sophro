@@ -17,6 +17,18 @@ layout: '00-core/base.njk'
 }) }}
 
 {# CapCorse Carousel Section #}
+{% from "01-organisms/section-carousel.njk" import renderSectionCarousel %}
+
+{{ renderSectionCarousel({ 
+    name: "spot_capcorse", 
+    datas: organisms["section-carousels"], 
+    headings: atoms.headings, 
+    links: atoms.links,
+    icons: atoms.icons,
+    carousels: organisms.carousels,
+    buttons: atoms.buttons,
+    images: atoms.images
+}) }}
 
 {# Container for location list with spot-list ID for scrolling #}
 <div id="spot-list">
