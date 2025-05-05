@@ -7,403 +7,289 @@
 {% from "03-atoms/heading.njk" import renderHeading %}
 {% from "03-atoms/link.njk" import renderLink %}
 {% from "03-atoms/icon.njk" import renderIcon %}
-{% from "03-atoms/button.njk" import renderButton %}
 {% from "01-organisms/carousel.njk" import renderCarousel %}
 
 {% macro renderSectionCarousel(options) %}
-  {# Check if data is provided #}
-  {% if options.datas %}
-    {# Get styles and configuration #}
-    {% set globalStyle = options.datas.globalStyle | default("section-carousel") %}
-    {% set sectionStyles = options.datas.sectionStyles | default({}) %}
-    {% set reversed = options.reversed | default(false) %}
-    
-    {# Determine carousel theme based on section name #}
-    {% if options.name == "ma_nautic_about" %}
-      {% set carouselTheme = "light" %}
-    {% else %}
-      {% if reversed %}
+    {# Check if data is provided #}
+    {% if options.datas %}
+        {# Get styles and configuration #}
+        {% set globalStyle = options.datas.globalStyle | default("section-carousel") %}
+        {% set sectionStyles = options.datas.sectionStyles | default({}) %}
+        {% set reversed = options.reversed | default(false) %}
         {% set carouselTheme = "light" %}
-      {% else %}
-        {% set carouselTheme = "dark" %}
-      {% endif %}
-    {% endif %}
 
-    {# Find specific section configuration #}
-    {% set sectionData = null %}
-    {% if options.name %}
-      {% for section in options.datas.sections %}
-        {% if section.name == options.name %}
-          {% set sectionData = section %}
+        {# Find specific section configuration #}
+        {% set sectionData = null %}
+        {% if options.name %}
+            {% for section in options.datas.sections %}
+                {% if section.name == options.name %}
+                    {% set sectionData = section %}
+                {% endif %}
+            {% endfor %}
         {% endif %}
-      {% endfor %}
-    {% endif %}
 
-    {# Fallback to first section if not found #}
-    {% if not sectionData %}
-      {% set sectionData = options.datas.sections[0] %}
-    {% endif %}
+        {# Fallback to first section if not found #}
+        {% if not sectionData %}
+            {% set sectionData = options.datas.sections[0] %}
+        {% endif %}
 
-    {# Validation: Check if this section has a carousel #}
-    {% if not sectionData.hasCarousel or not sectionData.carouselName %}
-      <span class="text-red-500">Section Carousel Error: This component requires a carousel configuration.</span>
-    {% else %}
-      {# Get variant styling #}
-      {% set variant = options.datas.variants[sectionData.variant] | default(options.datas.variants.default) %}
-
-      {# Extract icon styles with default values #}
-      {% set iconStyle = "" %}
-      {% set iconContainerSize = "" %}
-      {% set iconDefault = "" %}
-      {% set iconSize = "32" %}
-      {% if sectionData.iconVariant and options.datas.variants[sectionData.iconVariant] %}
-        {% set iconDefault = options.datas.variants[sectionData.iconVariant].default | default('mx-auto') %}
-        {% set iconStyle = options.datas.variants[sectionData.iconVariant].iconStyle | default('text-[theme(--ma-nautic-teal)]') %}
-        {% set iconContainerSize = options.datas.variants[sectionData.iconVariant].containerSize | default('w-12 h-12 lg:w-16 lg:h-16') %}
-        {% set iconSize = options.datas.variants[sectionData.iconVariant].iconSize | default('32') %}
-      {% else %}
-        {% set iconDefault = 'mx-auto' %}
-        {% set iconStyle = 'text-[theme(--ma-nautic-teal)]' %}
-        {% set iconContainerSize = 'w-12 h-12 lg:w-16 lg:h-16' %}
-      {% endif %}
-
-      {# Define section styles with default values #}
-      {% set containerStyle = sectionStyles.container | default("container mx-auto px-4 lg:px-8") %}
-      {% set contentWrapperStyle = sectionStyles.contentWrapper | default("flex flex-col lg:flex-row lg:items-start lg:gap-8") %}
-      {% set textContentStyle = sectionStyles.textContent | default("w-full lg:w-1/2 mb-6 lg:mb-0 text-center") %}
-      {% set mediaContentStyle = sectionStyles.mediaContent | default("w-full lg:w-1/2") %}
-      {% set iconWrapperStyle = sectionStyles.iconWrapper | default("flex justify-center my-0") %}
-      {% set contentContainerStyle = sectionStyles.contentContainer | default("mt-4 max-w-[40rem] mx-auto") %}
-      {% set contentContainerDesktopStyle = sectionStyles.contentContainerDesktop | default("mt-4 text-center max-w-[40rem] mx-auto") %}
-      {% set buttonWrapperStyle = sectionStyles.buttonWrapper | default("mt-6 flex justify-center") %}
-
-      {# Create unique ID for the section from name #}
-      {% set sectionId = "section-" ~ (sectionData.name | replace(" ", "-") | lower) %}
-
-      <section class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }} py-12" data-section-carousel="{{ sectionData.name }}" id="{{ sectionId }}" data-reversed="{{ reversed | string }}">
-        <div class="{{ containerStyle }}">
-          {# Mobile layout (flex column) - Centered elements - Visible until lg breakpoint #}
-          <div class="lg:hidden text-center px-6 pt-8">
-            {# Super Heading (section title with underscore) #}
-            {% if sectionData.superHeading and options.headings %}
-              {{ renderHeading({
-                name: sectionData.superHeading,
-                datas: options.headings,
-                class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
-              }) }}
-            {% endif %}
-
-            {# Icon if present - Using data-svg-src for JS loading #}
-            {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
-              <div class="{{ iconWrapperStyle }}">
-                {% set iconData = null %}
-                {% for icon in options.icons.icons %}
-                  {% if icon.name == sectionData.iconName %}
-                    {% set iconData = icon %}
-                  {% endif %}
-                {% endfor %}
-
-                {% if iconData %}
-                  <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                    <!-- SVG will be loaded here -->
-                  </span>
-                {% else %}
-                  <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
-                  </span>
-                {% endif %}
-              </div>
-            {% endif %}
-
-            {# Check for simple heading/content or multiple content sections #}
-            {% if sectionData.heading and options.headings %}
-              {{ renderHeading({
-                name: sectionData.heading,
-                datas: options.headings,
-                class: "mb-4 mt-6 max-w-[40rem] mx-auto"
-              }) }}
-            {% endif %}
+        {# Validation: Check if this section has a carousel #}
+        {% if not sectionData.hasCarousel or not sectionData.carouselName %}
+            <span class="text-red-500">Section Carousel Error: This component requires a carousel configuration.</span>
+        {% else %}
+            {# Get variant styling #}
+            {% set variant = options.datas.variants[sectionData.variant] | default(options.datas.variants.default) %}
             
-            {% if sectionData.content %}
-              <div class="{{ contentContainerStyle }} text-justify">
-                {{ sectionData.content | safe }}
-              </div>
-            {% else %}
-              {# Multiple content sections - Iterate through numbered content blocks #}
-              {% for i in range(1, 4) %}
-                {% set headingKey = "heading_0" + i %}
-                {% set contentKey = "content_0" + i %}
-                {% set superHeadingKey = "superHeading_0" + i %}
-                
-                {% if sectionData[superHeadingKey] and options.headings %}
-                  {{ renderHeading({
-                    name: sectionData[superHeadingKey],
-                    datas: options.headings,
-                    class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
-                  }) }}
-                {% endif %}
-                
-                {% if sectionData[headingKey] and options.headings %}
-                  {{ renderHeading({
-                    name: sectionData[headingKey],
-                    datas: options.headings,
-                    class: "mb-4 mt-6 max-w-[40rem] mx-auto"
-                  }) }}
-                {% endif %}
-                
-                {% if sectionData[contentKey] %}
-                  <div class="{{ contentContainerStyle }} text-justify">
-                    {{ sectionData[contentKey] | safe }}
-                  </div>
-                {% endif %}
-              {% endfor %}
+            {# Extract icon styles with default values #}
+            {% set iconStyle = "text-[theme(--ma-nautic-teal)]" %}
+            {% set iconContainerSize = "w-12 h-12 lg:w-16 lg:h-16" %}
+            {% set iconDefault = "mx-auto" %}
+            {% set iconSize = "32" %}
+            {% if sectionData.iconVariant and options.datas.variants[sectionData.iconVariant] %}
+                {% set iconDefault = options.datas.variants[sectionData.iconVariant].default | default('mx-auto') %}
+                {% set iconStyle = options.datas.variants[sectionData.iconVariant].iconStyle | default('text-[theme(--ma-nautic-teal)]') %}
+                {% set iconContainerSize = options.datas.variants[sectionData.iconVariant].containerSize | default('w-12 h-12 lg:w-16 lg:h-16') %}
+                {% set iconSize = options.datas.variants[sectionData.iconVariant].iconSize | default('32') %}
             {% endif %}
 
-            {# Primary Link #}
-            {% if sectionData.primaryLink and options.links %}
-              <div class="{{ buttonWrapperStyle }}">
-                {{ renderLink({
-                  name: sectionData.primaryLink,
-                  datas: options.links
-                }) }}
-              </div>
-            {% endif %}
-          </div>
+            {# Define section styles with default values #}
+            {% set containerStyle = sectionStyles.container | default("container mx-auto px-4 lg:px-8") %}
+            {% set contentWrapperStyle = sectionStyles.contentWrapper | default("flex flex-col lg:flex-row lg:items-start lg:gap-8") %}
+            {% set textContentStyle = sectionStyles.textContent | default("w-full lg:w-1/2 mb-6 lg:mb-0 text-center") %}
+            {% set mediaContentStyle = sectionStyles.mediaContent | default("w-full lg:w-1/2") %}
+            {% set iconWrapperStyle = sectionStyles.iconWrapper | default("flex justify-center my-0") %}
+            {% set contentContainerStyle = sectionStyles.contentContainer | default("mt-0 max-w-[40rem] mx-auto") %}
+            {% set buttonWrapperStyle = sectionStyles.buttonWrapper | default("mt-6 flex justify-center") %}
 
-          {# Desktop layout (two columns) - Visible from lg breakpoint #}
-          {% if not reversed %}
-          <div class="hidden lg:flex lg:flex-row items-start h-auto {{ contentWrapperStyle | replace('lg:flex-row', '') }} py-12">
-            {# Left column: Super Heading, Content blocks, and Button #}
-            <div class="{{ textContentStyle }} flex flex-col items-center justify-start text-center px-8">
-              {# Super Heading (section title with underscore) #}
-              {% if sectionData.superHeading and options.headings %}
-                {{ renderHeading({
-                  name: sectionData.superHeading,
-                  datas: options.headings,
-                  class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
-                }) }}
-              {% endif %}
+            {# Create unique ID for the section from name #}
+            {% set sectionId = "section-" ~ (sectionData.name | replace(" ", "-") | lower) %}
 
-              {# Icon if present - Using data-svg-src for JS loading #}
-              {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
-                <div class="{{ iconWrapperStyle }}">
-                  {% set iconData = null %}
-                  {% for icon in options.icons.icons %}
-                    {% if icon.name == sectionData.iconName %}
-                      {% set iconData = icon %}
-                    {% endif %}
-                  {% endfor %}
+            <section 
+                class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }} py-12 relative overflow-visible" 
+                data-section-carousel="{{ sectionData.name }}" 
+                id="{{ sectionId }}" 
+                data-reversed="{{ reversed | string }}" 
+                style="{% if sectionData.hasBeigeBg %}background-color: var(--ma-nautic-beige);{% endif %}"
+            >
+                {# Left wave - Même que section-hero #}
+                {% if sectionData["image-left"] and options.images %}
+                    <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden min-[900px]:block z-20 pointer-events-none">
+                        {% set leftWave = null %}
+                        {% for image in options.images.images %}
+                            {% if image.name == sectionData["image-left"] %}
+                                {% set leftWave = image %}
+                            {% endif %}
+                        {% endfor %}
 
-                  {% if iconData %}
-                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                      <!-- SVG will be loaded here -->
-                    </span>
-                  {% else %}
-                    <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
-                    </span>
-                  {% endif %}
-                </div>
-              {% endif %}
-
-              {# Check for simple heading/content or multiple content sections #}
-              {% if sectionData.heading and options.headings %}
-                {{ renderHeading({
-                  name: sectionData.heading,
-                  datas: options.headings,
-                  class: "mb-4 mt-6 max-w-[40rem] mx-auto"
-                }) }}
-              {% endif %}
-              
-              {% if sectionData.content %}
-                <div class="{{ contentContainerDesktopStyle }} text-justify">
-                  {{ sectionData.content | safe }}
-                </div>
-              {% else %}
-                {# Multiple content sections - Iterate through numbered content blocks #}
-                {% for i in range(1, 4) %}
-                  {% set headingKey = "heading_0" + i %}
-                  {% set contentKey = "content_0" + i %}
-                  {% set superHeadingKey = "superHeading_0" + i %}
-                  
-                  {% if sectionData[superHeadingKey] and options.headings %}
-                    {{ renderHeading({
-                      name: sectionData[superHeadingKey],
-                      datas: options.headings,
-                      class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
-                    }) }}
-                  {% endif %}
-                  
-                  {% if sectionData[headingKey] and options.headings %}
-                    {{ renderHeading({
-                      name: sectionData[headingKey],
-                      datas: options.headings,
-                      class: "mb-4 mt-6 max-w-[40rem] mx-auto"
-                    }) }}
-                  {% endif %}
-                  
-                  {% if sectionData[contentKey] %}
-                    <div class="{{ contentContainerDesktopStyle }} text-justify">
-                      {{ sectionData[contentKey] | safe }}
+                        {% if leftWave %}
+                            {# Use size variant defined in images.json #}
+                            {% set imageVariantLeft = options.images.variants[leftWave.size] | default('w-auto h-auto') %}
+                            <img src="{{ leftWave.src }}" alt="{{ leftWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantLeft }} max-w-none wave-image">
+                        {% endif %}
                     </div>
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
+                {% endif %}
 
-              {# Primary Link #}
-              {% if sectionData.primaryLink and options.links %}
-                <div class="{{ buttonWrapperStyle }}">
-                  {{ renderLink({
-                    name: sectionData.primaryLink,
-                    datas: options.links
-                  }) }}
-                </div>
-              {% endif %}
-            </div>
+                {# Right wave - Même que section-hero #}
+                {% if sectionData["image-right"] and options.images %}
+                    <div class="absolute right-0 top-1/2 transform -translate-y-1/2 hidden min-[900px]:block z-20 pointer-events-none">
+                        {% set rightWave = null %}
+                        {% for image in options.images.images %}
+                            {% if image.name == sectionData["image-right"] %}
+                                {% set rightWave = image %}
+                            {% endif %}
+                        {% endfor %}
 
-            {# Right column: Carousel #}
-            <div class="{{ mediaContentStyle }} flex items-center justify-center px-16" data-reversed="{{ reversed | string }}">
-              <div class="w-4/5 mx-auto">
-                {{ renderCarousel({
-                  name: sectionData.carouselName,
-                  datas: options.carousels,
-                  images: options.images,
-                  buttons: options.buttons,
-                  class: "ma-nautic-carousel w-full",
-                  theme: carouselTheme
-                }) }}
-              </div>
-            </div>
-          </div>
-          {% else %}
-          <div class="hidden lg:flex lg:flex-row-reverse items-start h-auto {{ contentWrapperStyle | replace('lg:flex-row', '') }} py-12">
-            {# Left column: Super Heading, Content blocks, and Button #}
-            <div class="{{ textContentStyle }} flex flex-col items-center justify-start text-center px-8">
-              {# Super Heading (section title with underscore) #}
-              {% if sectionData.superHeading and options.headings %}
-                {{ renderHeading({
-                  name: sectionData.superHeading,
-                  datas: options.headings,
-                  class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
-                }) }}
-              {% endif %}
-
-              {# Icon if present - Using data-svg-src for JS loading #}
-              {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
-                <div class="{{ iconWrapperStyle }}">
-                  {% set iconData = null %}
-                  {% for icon in options.icons.icons %}
-                    {% if icon.name == sectionData.iconName %}
-                      {% set iconData = icon %}
-                    {% endif %}
-                  {% endfor %}
-
-                  {% if iconData %}
-                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                      <!-- SVG will be loaded here -->
-                    </span>
-                  {% else %}
-                    <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
-                    </span>
-                  {% endif %}
-                </div>
-              {% endif %}
-
-              {# Check for simple heading/content or multiple content sections #}
-              {% if sectionData.heading and options.headings %}
-                {{ renderHeading({
-                  name: sectionData.heading,
-                  datas: options.headings,
-                  class: "mb-4 mt-6 max-w-[40rem] mx-auto"
-                }) }}
-              {% endif %}
-              
-              {% if sectionData.content %}
-                <div class="{{ contentContainerDesktopStyle }} text-justify">
-                  {{ sectionData.content | safe }}
-                </div>
-              {% else %}
-                {# Multiple content sections - Iterate through numbered content blocks #}
-                {% for i in range(1, 4) %}
-                  {% set headingKey = "heading_0" + i %}
-                  {% set contentKey = "content_0" + i %}
-                  {% set superHeadingKey = "superHeading_0" + i %}
-                  
-                  {% if sectionData[superHeadingKey] and options.headings %}
-                    {{ renderHeading({
-                      name: sectionData[superHeadingKey],
-                      datas: options.headings,
-                      class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
-                    }) }}
-                  {% endif %}
-                  
-                  {% if sectionData[headingKey] and options.headings %}
-                    {{ renderHeading({
-                      name: sectionData[headingKey],
-                      datas: options.headings,
-                      class: "mb-4 mt-6 max-w-[40rem] mx-auto"
-                    }) }}
-                  {% endif %}
-                  
-                  {% if sectionData[contentKey] %}
-                    <div class="{{ contentContainerDesktopStyle }} text-justify">
-                      {{ sectionData[contentKey] | safe }}
+                        {% if rightWave %}
+                            {# Use size variant defined in images.json #}
+                            {% set imageVariantRight = options.images.variants[rightWave.size] | default('w-auto h-auto') %}
+                            <img src="{{ rightWave.src }}" alt="{{ rightWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantRight }} max-w-none wave-image">
+                        {% endif %}
                     </div>
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
+                {% endif %}
 
-              {# Primary Link #}
-              {% if sectionData.primaryLink and options.links %}
-                <div class="{{ buttonWrapperStyle }}">
-                  {{ renderLink({
-                    name: sectionData.primaryLink,
-                    datas: options.links
-                  }) }}
+                <div class="{{ containerStyle }} relative z-10">
+                    {# Mobile layout (flex column) - Centered elements #}
+                    <div class="lg:hidden pt-8">
+                        {# Super Heading (section title with underscore) #}
+                        {% if sectionData.superHeading and options.headings %}
+                            <div class="text-center mb-6">
+                                {{ renderHeading({
+                                    name: sectionData.superHeading,
+                                    datas: options.headings,
+                                    class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
+                                }) }}
+                            </div>
+                        {% endif %}
+
+                        {# Icon if present - Using data-svg-src for JS loading #}
+                        {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
+                            <div class="{{ iconWrapperStyle }} mb-6">
+                                {% set iconData = null %}
+                                {% for icon in options.icons.icons %}
+                                    {% if icon.name == sectionData.iconName %}
+                                        {% set iconData = icon %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if iconData %}
+                                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
+                                        <!-- SVG will be loaded here -->
+                                    </span>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                        {% if not sectionData.heading and sectionData.content %}
+                            <div style="text-align: left; width: 100%; margin-top: 0; padding-top: 0;">
+                                <div class="text-justify mt-0 pt-0 [&_strong]:font-normal">
+                                    {{ sectionData.content | safe }}
+                                </div>
+                            </div>
+                        {% else %}
+                            {# Heading - Aligned left with style #}
+                            {% if sectionData.heading and options.headings %}
+                                <div style="text-align: left;">
+                                    {{ renderHeading({
+                                        name: sectionData.heading,
+                                        datas: options.headings,
+                                        class: "mb-4 mt-0 max-w-[40rem]"
+                                    }) }}
+                                </div>
+                            {% endif %}
+                      
+                            {# Content with normal margins #}
+                            {% if sectionData.content %}
+                                <div class="{{ contentContainerStyle }} text-justify">
+                                    {{ sectionData.content | safe }}
+                                </div>
+                            {% endif %}
+                        {% endif %}
+
+                        {# Primary Link #}
+                        {% if sectionData.primaryLink and options.links %}
+                            <div class="{{ buttonWrapperStyle }}">
+                                {{ renderLink({
+                                    name: sectionData.primaryLink,
+                                    datas: options.links
+                                }) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    {# Desktop layout #}
+                    <div class="hidden lg:block">
+                        {# Centered top elements (superHeading and icon) #}
+                        <div class="text-center mb-8">
+                            {# Super Heading #}
+                            {% if sectionData.superHeading and options.headings %}
+                                {{ renderHeading({
+                                    name: sectionData.superHeading,
+                                    datas: options.headings,
+                                    class: "mb-6 ma-nautic-section-title max-w-[40rem] mx-auto"
+                                }) }}
+                            {% endif %}
+
+                            {# Icon if present #}
+                            {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
+                                <div class="{{ iconWrapperStyle }} mt-4">
+                                    {% set iconData = null %}
+                                    {% for icon in options.icons.icons %}
+                                        {% if icon.name == sectionData.iconName %}
+                                            {% set iconData = icon %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if iconData %}
+                                        <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
+                                            <!-- SVG will be loaded here -->
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        {# Two columns layout #}
+                        <div class="container mx-auto grid grid-cols-6">
+                            <div class="col-start-2 col-span-4">
+                                <div class="flex {% if reversed %}flex-row-reverse{% else %}flex-row{% endif %} items-start h-auto">
+                                    {# Content column #}
+                                    <div class="{{ textContentStyle }} flex flex-col w-1/2">
+                                        {% if not sectionData.heading and sectionData.content %}
+                                            <div style="text-align: left; width: 100%; margin-top: 0; padding-top: 0;">
+                                                <div class="text-justify mt-0 pt-0 [&_strong]:font-normal">
+                                                    {{ sectionData.content | safe }}
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            {# Heading - Aligned left with style #}
+                                            {% if sectionData.heading and options.headings %}
+                                                <div style="text-align: left; width: 100%;">
+                                                    {{ renderHeading({
+                                                        name: sectionData.heading,
+                                                        datas: options.headings,
+                                                        class: "mb-4 mt-0 max-w-[40rem]"
+                                                    }) }}
+                                                </div>
+                                            {% endif %}
+                                      
+                                            {# Content with normal margins #}
+                                            {% if sectionData.content %}
+                                                <div class="{{ contentContainerStyle }} text-justify [&_strong]:font-normal">
+                                                    {{ sectionData.content | safe }}
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+
+                                        {# Primary Link #}
+                                        {% if sectionData.primaryLink and options.links %}
+                                            <div class="{{ buttonWrapperStyle }}">
+                                                {{ renderLink({
+                                                    name: sectionData.primaryLink,
+                                                    datas: options.links
+                                                }) }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    {# Carousel column #}
+                                    <div class="{{ mediaContentStyle }} flex items-start w-1/2 pt-0" data-reversed="{{ reversed | string }}">
+                                        <div class="w-4/5 mx-auto mt-0">
+                                            {{ renderCarousel({
+                                                name: sectionData.carouselName,
+                                                datas: options.carousels,
+                                                images: options.images,
+                                                buttons: options.buttons,
+                                                class: "ma-nautic-carousel w-full",
+                                                theme: carouselTheme,
+                                                reversed: reversed
+                                            }) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# Carousel for mobile #}
+                    <div class="lg:hidden mt-8">
+                        <div class="w-4/5 mx-auto">
+                            {{ renderCarousel({
+                                name: sectionData.carouselName,
+                                datas: options.carousels,
+                                images: options.images,
+                                buttons: options.buttons,
+                                class: "ma-nautic-carousel",
+                                theme: carouselTheme,
+                                reversed: reversed
+                            }) }}
+                        </div>
+                    </div>
                 </div>
-              {% endif %}
-            </div>
-
-            {# Right column: Carousel #}
-            <div class="{{ mediaContentStyle }} flex items-center justify-center px-16" data-reversed="{{ reversed | string }}">
-              <div class="w-4/5 mx-auto">
-                {{ renderCarousel({
-                  name: sectionData.carouselName,
-                  datas: options.carousels,
-                  images: options.images,
-                  buttons: options.buttons,
-                  class: "ma-nautic-carousel w-full",
-                  theme: carouselTheme
-                }) }}
-              </div>
-            </div>
-          </div>
-          {% endif %}
-
-          {# Carousel for mobile #}
-          <div class="lg:hidden mt-8" data-reversed="{{ reversed | string }}">
-            <div class="w-4/5 mx-auto">
-              {{ renderCarousel({
-                name: sectionData.carouselName,
-                datas: options.carousels,
-                images: options.images,
-                buttons: options.buttons,
-                class: "ma-nautic-carousel",
-                theme: carouselTheme
-              }) }}
-            </div>
-          </div>
-        </div>
-      </section>
-    
-      {# Include external JS files #}
-      <script src="/js/organisms/section-scroll.js"></script>
-      <script src="/js/organisms/carousel.js" defer></script>
+            </section>
+        {% endif %}
+    {% else %}
+        <span class="text-red-500">Section Carousel data not found</span>
     {% endif %}
-  {% else %}
-    <span class="text-red-500">Section Carousel data not found</span>
-  {% endif %}
 {% endmacro %}
 
 {#
@@ -423,7 +309,8 @@ Summon HAT Components Wisely
     icons: atoms.icons,
     carousels: organisms.carousels,
     buttons: atoms.buttons,
-    images: atoms.images
+    images: atoms.images,
+    reversed: false
 }) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
