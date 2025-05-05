@@ -30,23 +30,6 @@ layout: '00-core/base.njk'
     images: atoms.images
 }) }}
 
-{# Container for location list with spot-list ID for scrolling #}
-<div id="spot-list">
-
-{# Location section "Agriates" #}
-{% from "01-organisms/section-spot.njk" import renderSectionSpot %}
-
-{{ renderSectionSpot({ 
-    name: "agriates_desert", 
-    datas: spots, 
-    headings: atoms.headings, 
-    links: atoms.links,
-    icons: atoms.icons,
-    carousels: organisms.carousels,
-    images: atoms.images,
-    buttons: atoms.buttons
-}) }}
-
 {# Map Highlight Section #}
 {% from "01-organisms/section-highlight.njk" import renderSectionHighlight %}
 
@@ -72,7 +55,8 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
-{# Divers Cards Section #}
+{# Divers Cards Section with ID for scrolling #}
+<div id="spot-divers">
 {% from "01-organisms/section-card.njk" import renderSectionCard %}
 
 {{ renderSectionCard({ 
@@ -81,3 +65,4 @@ layout: '00-core/base.njk'
     headings: atoms.headings,
     links: atoms.links
 }) }}
+</div>

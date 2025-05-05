@@ -12,7 +12,8 @@ layout: '00-core/base.njk'
     images: atoms.images
 }) }}
 
-{# Home Hero Section #}
+{# Home Hero Section with ID for scrolling #}
+<div id="home-hero">
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
 {{ renderSectionHero({ 
@@ -24,6 +25,7 @@ layout: '00-core/base.njk'
     links: atoms.links,
     icons: atoms.icons
 }) }}
+</div>
 
 {# Team Carousel Section #}
 {% from "01-organisms/section-carousel.njk" import renderSectionCarousel %}
@@ -80,7 +82,8 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
-{# Infos Highlight Section #}
+{# Infos Highlight Section with ID for scrolling #}
+<div id="home-infos">
 {% from "01-organisms/section-highlight.njk" import renderSectionHighlight %}
 
 {{ renderSectionHighlight({ 
@@ -91,6 +94,7 @@ layout: '00-core/base.njk'
     images: atoms.images,
     links: atoms.links
 }) }}
+</div>
 
 {# Activities Carousel Section #}
 {% from "01-organisms/section-carousel.njk" import renderSectionCarousel %}
