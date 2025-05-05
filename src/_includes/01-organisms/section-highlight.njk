@@ -80,6 +80,11 @@
               
               {# Render the form #}
               <div class="w-full max-w-4xl">
+                {# Honeypot field for spam protection #}
+                <div aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px;">
+                  <input type="text" name="website" tabindex="-1" autocomplete="off">
+                </div>
+                
                 {{ renderListForm({ 
                   name: section.formName,
                   datas: options.forms,
