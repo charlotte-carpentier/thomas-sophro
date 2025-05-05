@@ -1,15 +1,14 @@
 ---
 layout: 01-organisms/section-boat.njk
 tags: boat
-name: boat_first
+name: boat_First
 model: capelli_630
 price: À partir de 300 €/jour
-engine: '150 ch YAMAHA - 6,3 m'
+engine: 150 ch YAMAHA - 6,3 m
 passengersNumber: 6 personnes MAX
 carousel_name: carousel_first
-imageAlt: Photos du bateau "First"
 boat_images:
   - /assets/images/BATEAUX/3_FIRST/capelli-tempest-630_1.jpg
   - /assets/images/BATEAUX/3_FIRST/capelli-tempest-630_2.jpg
+imageAlt: Photos du bateau "First"
 ---
-
