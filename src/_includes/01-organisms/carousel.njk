@@ -12,6 +12,9 @@
   {# Determine if data comes from Markdown file or JSON #}
   {% set isMarkdownSource = options.markdown | default(false) %}
   
+  {# Get aspect ratio option with default to square (100%) #}
+  {% set aspectRatio = options.aspectRatio | default('100%') %}
+  
   {% set carouselData = null %}
   
   {# Markdown source #}
@@ -111,8 +114,8 @@
           {% if pauseOnHover %}data-pause-on-hover="true"{% endif %}
           data-carousel-theme="{{ theme }}"
         >
-          {# Container with square ratio maintained via padding-bottom #}
-          <div class="relative w-full pb-[100%]">
+          {# Container with aspect ratio maintained via padding-bottom - MODIFIED HERE #}
+          <div class="relative w-full" style="padding-bottom: {{ aspectRatio }};">
             {# Carousel slides #}
             <div class="absolute inset-0 w-full h-full">
               {% for image in carouselData.images %}
