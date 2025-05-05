@@ -1,74 +1,93 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  {# Primary Meta Tags #}
-  <title>{{ title | default(site.pages[page.url].title | default(site.title)) }}</title>
-  <meta name="title" content="{{ title | default(site.pages[page.url].title | default(site.title)) }}">
-  <meta name="description" content="{{ description | default(site.pages[page.url].description | default(site.description)) }}">
+    {# Primary Meta Tags #}
+    <title>{{ title | default(site.pages[page.url].title | default(site.title)) }}</title>
+    <meta name="title" content="{{ title | default(site.pages[page.url].title | default(site.title)) }}">
+    <meta name="description" content="{{ description | default(site.pages[page.url].description | default(site.description)) }}">
 
-  {# Canonical URL pour SEO #}
-  <link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
+    {# Canonical URL pour SEO #}
+    <link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
 
-  {# Favicon #}
-  <link rel="icon" type="image/png" href="/assets/logos/ma-favicon.png">
+    {# Favicon #}
+    <link rel="icon" type="image/png" href="/assets/logos/ma-favicon.png">
 
-  {# Google Fonts #}
-  <link href="https://fonts.googleapis.com/css2?family=Vibur&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {# Google Fonts #}
+    <link href="https://fonts.googleapis.com/css2?family=Vibur&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
 
-  {# Preload images #}
-  <link rel="preload" as="image" href="/assets/images/ma-home-01.jpg">
-  <link rel="preload" as="image" href="/assets/images/ma-home-02.jpg">
+    {# Preload images #}
+    <link rel="preload" as="image" href="/assets/images/ma-home-01.jpg">
+    <link rel="preload" as="image" href="/assets/images/ma-home-02.jpg">
 
-  {# Stylesheets #}
-  <link href="/css/output.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {# Stylesheets #}
+    <link href="/css/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-  {# Decap CMS Identity Widget #}
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
+    {# Decap CMS Identity Widget #}
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer="defer"></script>
 
-  {# Open Graph / Facebook #}
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-  <meta property="og:title" content="{{ title | default(site.pages[page.url].title | default(site.title)) }}">
-  <meta property="og:description" content="{{ description | default(site.pages[page.url].description | default(site.description)) }}">
-  <meta property="og:image" content="{{ site.url }}/assets/social-share.jpg">
+    {# Open Graph / Facebook #}
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:title" content="{{ title | default(site.pages[page.url].title | default(site.title)) }}">
+    <meta property="og:description" content="{{ description | default(site.pages[page.url].description | default(site.description)) }}">
+    <meta property="og:image" content="{{ site.url }}/assets/social-share.jpg">
 
-  {# Twitter #}
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
-  <meta property="twitter:title" content="{{ title | default(site.pages[page.url].title | default(site.title)) }}">
-  <meta property="twitter:description" content="{{ description | default(site.pages[page.url].description | default(site.description)) }}">
-  <meta property="twitter:image" content="{{ site.url }}/assets/social-share.jpg">
+    {# Twitter #}
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="twitter:title" content="{{ title | default(site.pages[page.url].title | default(site.title)) }}">
+    <meta property="twitter:description" content="{{ description | default(site.pages[page.url].description | default(site.description)) }}">
+    <meta property="twitter:image" content="{{ site.url }}/assets/social-share.jpg">
 
-  {# Favicons for different devices #}
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
+    {# Favicons for different devices #}
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 
-  {# Theme Color #}
-  <meta name="theme-color" content="#ffffff">
+    {# Theme Color #}
+    <meta name="theme-color" content="#ffffff">
 
-  {# Axeptio Settings #}
-  <script>
-    window.axeptioSettings = {
-      clientId: "680f9baab2a4942b9e73ec22",
-      cookiesVersion: "ma-nautic-fr-EU"
-    };
-  </script>
-</head>
+    {# Axeptio Settings #}
+    <script>
+      window.axeptioSettings = {
+        clientId: "680f9baab2a4942b9e73ec22",
+        cookiesVersion: "ma-nautic-fr-EU",
+        googleConsentMode: {
+          default: {
+            analytics_storage: "denied",
+            ad_storage: "denied",
+            ad_user_data: "denied",
+            ad_personalization: "denied",
+            wait_for_update: 500
+          }
+        }
+      };
 
-<body class="min-h-screen flex flex-col">
+      (function (d, s) {
+        var t = d.getElementsByTagName(s)[0],
+          e = d.createElement(s);
+        e.async = true;
+        e.src = "//static.axept.io/sdk.js";
+        t
+          .parentNode
+          .insertBefore(e, t);
+      })(document, "script");
+    </script>
+  </head>
 
-  {# Header organism call #}
-  {% from "01-organisms/header.njk" import renderHeader %}
-  {{ renderHeader({ 
+  <body class="min-h-screen flex flex-col">
+
+    {# Header organism call #}
+    {% from "01-organisms/header.njk" import renderHeader %}
+    {{ renderHeader({ 
     name: "main",
     datas: organisms.headers,
     navigations: organisms.navigations,
@@ -77,13 +96,13 @@
     icons: atoms.icons
   }) }}
 
-  <main class="flex-grow">
-    {{ content | safe }}
-  </main>
+    <main class="flex-grow">
+      {{ content | safe }}
+    </main>
 
-  {# Footer organism call #}
-  {% from "01-organisms/footer.njk" import renderFooter %}
-  {{ renderFooter({ 
+    {# Footer organism call #}
+    {% from "01-organisms/footer.njk" import renderFooter %}
+    {{ renderFooter({ 
     name: "ma_nautic_footer",
     datas: organisms.footers,
     menus: organisms.menus,
@@ -94,32 +113,38 @@
     "navigation-secondarys": organisms["navigation-secondarys"]
   }) }}
 
-  {# Decap CMS redirect script #}
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", (user) => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
+    {# Decap CMS redirect script #}
+    <script>
+      if (window.netlifyIdentity) {
+        window
+          .netlifyIdentity
+          .on("init", (user) => {
+            if (!user) {
+              window
+                .netlifyIdentity
+                .on("login", () => {
+                  document.location.href = "/admin/";
+                });
+            }
           });
+      }
+    </script>
+
+    {# Custom Scripts #}
+    <script src="/js/main.js" defer="defer"></script>
+    <script src="/js/atoms/svg-loader.js" defer="defer"></script>
+
+    {# Axeptio SDK - chargé en dernier pour éviter les conflits #}
+    <script async="async" src="https://static.axept.io/sdk.js"></script>
+    {# <script>
+      window.addEventListener("axeptio_sdk_loaded", function () {
+        if (window._axeptioSDK) {
+          window
+            ._axeptioSDK
+            .run();
         }
       });
-    }
-  </script>
+    </script> #}
 
-  {# Custom Scripts #}
-  <script src="/js/main.js" defer></script>
-  <script src="/js/atoms/svg-loader.js" defer></script>
-
-  {# Axeptio SDK - chargé en dernier pour éviter les conflits #}
-  <script async src="https://static.axept.io/sdk.js"></script>
-  <script>
-    window.addEventListener("axeptio_sdk_loaded", function () {
-      if (window._axeptioSDK) {
-        window._axeptioSDK.run();
-      }
-    });
-  </script>
-
-</body>
+  </body>
 </html>
