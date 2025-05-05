@@ -211,7 +211,7 @@
 
                   {# Content 01 - MODIFICATION: Added font-bold when backgroundImage exists #}
                   {% if variant.content_01 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }} [&_ul]:list-disc [&_ul]:list-outside [&_ul]:pl-6 [&_ul]:text-left [&_ul]:mx-auto [&_ul]:max-w-md">
                       {{ variant.content_01 | safe }}
                     </div>
                     {% if variant.link_01 and options.links %}
@@ -227,6 +227,22 @@
                           {{ linkData.text }}
                         </a>
                       {% endif %}
+                    {% endif %}
+                  {% endif %}
+
+                  {# NEW BLOCK: Generic heading support #}
+                  {% if variant.heading and options.headings %}
+                    {% set genericHeading = null %}
+                    {% for heading in options.headings.headings %}
+                      {% if heading.name == variant.heading %}
+                        {% set genericHeading = heading %}
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if genericHeading %}
+                      <{{ "h" + genericHeading.level }} class="text-center mt-8 mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[genericHeading.style] }}">
+                        {{ genericHeading.text }}
+                      </{{ "h" + genericHeading.level }}>
                     {% endif %}
                   {% endif %}
 
@@ -247,7 +263,7 @@
                   {% endif %}
 
                   {% if variant.content_02 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }} [&_ul]:list-disc [&_ul]:list-outside [&_ul]:pl-6 [&_ul]:text-left [&_ul]:mx-auto [&_ul]:max-w-md">
                       {{ variant.content_02 | safe }}
                     </div>
                     {% if variant.link_02 and options.links %}
@@ -282,7 +298,7 @@
                   {% endif %}
 
                   {% if variant.content_03 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }} [&_ul]:list-disc [&_ul]:list-outside [&_ul]:pl-6 [&_ul]:text-left [&_ul]:mx-auto [&_ul]:max-w-md">
                       {{ variant.content_03 | safe }}
                     </div>
                     {% if variant.link_03 and options.links %}
@@ -303,13 +319,13 @@
 
                   {# Contact form special case and regular content - MODIFIED for bold text with backgroundImage #}
                   {% if variant.name == "contact_hero" and variant.contentBlocks %}
-                    <div id="contact-form" class="text-center text-[theme(--ma-nautic-blue)] space-y-4">
+                    <div id="contact-form" class="text-center text-[theme(--ma-nautic-blue)] space-y-4 [&_ul]:list-disc [&_ul]:list-outside [&_ul]:pl-6 [&_ul]:text-left [&_ul]:mx-auto [&_ul]:max-w-md">
                       {% for block in variant.contentBlocks %}
                         <p class="mb-4">{{ block.text | safe }}</p>
                       {% endfor %}
                     </div>
                   {% elseif variant.content %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }}">
+                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }} [&_ul]:list-disc [&_ul]:list-outside [&_ul]:pl-6 [&_ul]:text-left [&_ul]:mx-auto [&_ul]:max-w-md">
                       {{ variant.content | safe }}
                     </div>
                     {% if variant.link and options.links %}
