@@ -1,8 +1,8 @@
 ---
 layout: 01-organisms/section-boat.njk
 tags: boat
-name: boat_Libecciu
-model: Capelli_700
+name: boat_libecciu
+model: capelli_700
 price: À partir de 360 €/jour
 engine: 225 ch YAMAHA - 7 m
 passengersNumber: 8-10 personnes MAX
