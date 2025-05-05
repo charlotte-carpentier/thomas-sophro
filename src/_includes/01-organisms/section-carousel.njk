@@ -108,72 +108,87 @@
                 {% endif %}
 
                 <div class="{{ containerStyle }} relative z-10">
-                    {# Mobile layout (flex column) - Centered elements #}
-                    <div class="lg:hidden pt-8">
-                        {# Super Heading (section title with underscore) #}
-                        {% if sectionData.superHeading and options.headings %}
-                            <div class="text-center mb-6">
-                                {{ renderHeading({
-                                    name: sectionData.superHeading,
-                                    datas: options.headings,
-                                    class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
-                                }) }}
-                            </div>
-                        {% endif %}
-
-                        {# Icon if present - Using data-svg-src for JS loading #}
-                        {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
-                            <div class="{{ iconWrapperStyle }} mb-6">
-                                {% set iconData = null %}
-                                {% for icon in options.icons.icons %}
-                                    {% if icon.name == sectionData.iconName %}
-                                        {% set iconData = icon %}
-                                    {% endif %}
-                                {% endfor %}
-
-                                {% if iconData %}
-                                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
-                                        <!-- SVG will be loaded here -->
-                                    </span>
-                                {% endif %}
-                            </div>
-                        {% endif %}
-
-                        {% if not sectionData.heading and sectionData.content %}
-                            <div style="text-align: left; width: 100%; margin-top: 0; padding-top: 0;">
-                                <div class="text-justify mt-0 pt-0 [&_strong]:font-normal">
-                                    {{ sectionData.content | safe }}
-                                </div>
-                            </div>
-                        {% else %}
-                            {# Heading - Aligned left with style #}
-                            {% if sectionData.heading and options.headings %}
-                                <div style="text-align: left;">
+                    {# Mobile layout - Utilisation de la même structure de grille que section-card #}
+                    <div class="lg:hidden pt-8 grid grid-cols-6">
+                        <div class="col-start-2 col-span-4">
+                            {# Super Heading (section title with underscore) #}
+                            {% if sectionData.superHeading and options.headings %}
+                                <div class="text-center mb-6">
                                     {{ renderHeading({
-                                        name: sectionData.heading,
+                                        name: sectionData.superHeading,
                                         datas: options.headings,
-                                        class: "mb-4 mt-0 max-w-[40rem]"
+                                        class: "mb-6 mt-8 ma-nautic-section-title max-w-[40rem] mx-auto"
                                     }) }}
                                 </div>
                             {% endif %}
-                      
-                            {# Content with normal margins #}
-                            {% if sectionData.content %}
-                                <div class="{{ contentContainerStyle }} text-justify">
-                                    {{ sectionData.content | safe }}
+
+                            {# Icon if present - Using data-svg-src for JS loading #}
+                            {% if sectionData.hasIcon and sectionData.iconName and options.icons %}
+                                <div class="{{ iconWrapperStyle }} mb-6">
+                                    {% set iconData = null %}
+                                    {% for icon in options.icons.icons %}
+                                        {% if icon.name == sectionData.iconName %}
+                                            {% set iconData = icon %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if iconData %}
+                                        <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }}">
+                                            <!-- SVG will be loaded here -->
+                                        </span>
+                                    {% endif %}
                                 </div>
                             {% endif %}
-                        {% endif %}
 
-                        {# Primary Link #}
-                        {% if sectionData.primaryLink and options.links %}
-                            <div class="{{ buttonWrapperStyle }}">
-                                {{ renderLink({
-                                    name: sectionData.primaryLink,
-                                    datas: options.links
+                            {% if not sectionData.heading and sectionData.content %}
+                                <div style="text-align: left; width: 100%; margin-top: 0; padding-top: 0;">
+                                    <div class="text-justify mt-0 pt-0 [&_strong]:font-normal">
+                                        {{ sectionData.content | safe }}
+                                    </div>
+                                </div>
+                            {% else %}
+                                {# Heading - Aligned left with style #}
+                                {% if sectionData.heading and options.headings %}
+                                    <div style="text-align: left;">
+                                        {{ renderHeading({
+                                            name: sectionData.heading,
+                                            datas: options.headings,
+                                            class: "mb-4 mt-0 max-w-[40rem]"
+                                        }) }}
+                                    </div>
+                                {% endif %}
+                          
+                                {# Content with normal margins #}
+                                {% if sectionData.content %}
+                                    <div class="{{ contentContainerStyle }} text-justify">
+                                        {{ sectionData.content | safe }}
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+
+                            {# Primary Link #}
+                            {% if sectionData.primaryLink and options.links %}
+                                <div class="{{ buttonWrapperStyle }}">
+                                    {{ renderLink({
+                                        name: sectionData.primaryLink,
+                                        datas: options.links
+                                    }) }}
+                                </div>
+                            {% endif %}
+                            
+                            {# Carousel pour mobile avec des marges similaires à section-card #}
+                            <div class="mt-8">
+                                {{ renderCarousel({
+                                    name: sectionData.carouselName,
+                                    datas: options.carousels,
+                                    images: options.images,
+                                    buttons: options.buttons,
+                                    class: "ma-nautic-carousel w-full",
+                                    theme: carouselTheme,
+                                    reversed: reversed
                                 }) }}
                             </div>
-                        {% endif %}
+                        </div>
                     </div>
 
                     {# Desktop layout #}
@@ -267,21 +282,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    {# Carousel for mobile #}
-                    <div class="lg:hidden mt-8">
-                        <div class="w-4/5 mx-auto">
-                            {{ renderCarousel({
-                                name: sectionData.carouselName,
-                                datas: options.carousels,
-                                images: options.images,
-                                buttons: options.buttons,
-                                class: "ma-nautic-carousel",
-                                theme: carouselTheme,
-                                reversed: reversed
-                            }) }}
                         </div>
                     </div>
                 </div>
