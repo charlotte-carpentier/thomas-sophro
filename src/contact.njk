@@ -16,6 +16,19 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
+{# Contact Highlight Section #}
+{% from "01-organisms/section-highlight.njk" import renderSectionHighlight %}
+
+{{ renderSectionHighlight({ 
+    name: "ma_nautic_contact",
+    datas: organisms["section-highlights"],
+    headings: atoms.headings,
+    images: atoms.images,
+    links: atoms.links,
+    forms: molecules["list-forms"],
+    atoms: atoms
+}) }}
+
 {# Container for form with contact-form ID for scrolling #}
 <div id="contact-form">
 
