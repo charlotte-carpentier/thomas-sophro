@@ -2,7 +2,7 @@
 layout: 01-organisms/section-boat.njk
 tags: boat
 name: boat_Nine
-model: capelli_500
+model: Capelli_500
 price: À partir de 230 €/jour
 engine: 80 ch YAMAHA - 5 m
 passengersNumber: 4 personnes MAX
