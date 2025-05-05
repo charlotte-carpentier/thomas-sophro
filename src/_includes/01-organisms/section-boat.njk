@@ -16,10 +16,10 @@
   {% set reversed = options.reversed | default(false) %}
 
   {# Define styles with default values #}
-  {% set containerStyle = sectionStyles.container | default("container mx-auto px-4 lg:px-8") %}
-  {% set contentWrapperStyle = sectionStyles.contentWrapper | default("flex flex-col lg:flex-row lg:items-start lg:gap-2") %}
-  {% set textContentStyle = sectionStyles.textContent | default("w-full lg:w-1/2 mb-6 lg:mb-0 text-center") %}
-  {% set mediaContentStyle = sectionStyles.mediaContent | default("w-full lg:w-1/2") %}
+  {% set containerStyle = sectionStyles.container | default("container mx-auto") %}
+  {% set contentWrapperStyle = sectionStyles.contentWrapper | default("flex flex-col lg:flex-row lg:items-stretch lg:gap-2") %}
+  {% set textContentStyle = sectionStyles.textContent | default("w-full mb-6 lg:mb-0 text-center") %}
+  {% set mediaContentStyle = sectionStyles.mediaContent | default("w-full") %}
   {% set iconWrapperStyle = sectionStyles.iconWrapper | default("flex justify-center my-0") %}
   {% set contentContainerStyle = sectionStyles.contentContainer | default("mt-4") %}
   {% set contentContainerDesktopStyle = sectionStyles.contentContainerDesktop | default("mt-4 text-center") %}
@@ -35,218 +35,222 @@
   {% if itemData %}
     <section id="boat-section" class="{{ globalStyle }} {{ options.class | default('') }} pb-12 {% if not reversed %}bg-[theme(--ma-nautic-blue)]{% else %}bg-[theme(--ma-nautic-white)]{% endif %}" data-section-item="{{ itemData.name }}" data-section-id="{{ sectionId }}" data-reversed="{{ reversed | string }}">
       <div class="{{ containerStyle }}">
-        {# Mobile layout (flex column) - Centered elements - Visible until lg breakpoint #}
-        <div class="lg:hidden text-center px-6 pt-8">
-          {# Super Heading (section title with underscore) #}
-          {% if itemData.model and options.headings %}
-            {{ renderHeading({
-              name: itemData.model,
-              datas: options.headings
-            }) }}
-          {% endif %}
-
-          {# Main Heading (name) - Apply conditional color #}
-          {% if itemData.name and options.headings %}
-            <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">
-              {{ renderHeading({
-                name: itemData.name,
-                datas: options.headings
-              }) }}
-            </div>
-          {% endif %}
-
-          {# Icon #}
-          {% if options.icons %}
-            <div class="{{ iconWrapperStyle }}">
-              {% set iconData = null %}
-              {% for icon in options.icons.icons %}
-                {% if icon.name == "wheel" %}
-                  {% set iconData = icon %}
-                {% endif %}
-              {% endfor %}
-
-              {# Get specific icon styles if available #}
-              {% set iconVariantName = "wheelIcon" %}
-              {% set iconDefaultClass = options.datas.variants[iconVariantName].default | default("") if options.datas.variants[iconVariantName] else "" %}
-              {% set iconStyle = options.datas.variants[iconVariantName].iconStyle | default("text-[theme(--ma-nautic-teal)]") if options.datas.variants[iconVariantName] else "text-[theme(--ma-nautic-teal)]" %}
-              {% set iconContainerSize = options.datas.variants[iconVariantName].containerSize | default("w-12 h-12 lg:w-16 lg:h-16") if options.datas.variants[iconVariantName] else "w-12 h-12 lg:w-16 lg:h-16" %}
-              {% set iconSize = options.datas.variants[iconVariantName].iconSize | default("32") if options.datas.variants[iconVariantName] else "32" %}
-
-              {% if iconData %}
-                <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
-                  <!-- SVG will be loaded here -->
-                </span>
-              {% else %}
-                <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
-                </span>
-              {% endif %}
-            </div>
-          {% endif %}
-
-          {# Content - price, engine, passengersNumber #}
-          <div class="{{ contentContainerStyle }} text-center">
-            <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} font-bold text-xl mb-2">{{ itemData.price }}</p>
-            <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} mb-2">{{ itemData.engine }}</p>
-            <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">{{ itemData.passengersNumber }}</p>
-          </div>
-
-          {# Link - "reservez" #}
-          {% if options.links %}
-            <div class="{{ buttonWrapperStyle }}">
-              {% if reversed %}
-                {{ renderLink({
-                  name: "reservez",
-                  datas: options.links
-                }) }}
-              {% else %}
-                {{ renderLink({
-                  name: "reservez_light",
-                  datas: options.links
-                }) }}
-              {% endif %}
-            </div>
-          {% endif %}
-        </div>
-
-        {# Desktop layout (two columns) - Visible from lg breakpoint #}
-        <div class="hidden lg:flex {% if reversed %}lg:flex-row-reverse{% else %}lg:flex-row{% endif %} items-center justify-center h-[600px] {{ contentWrapperStyle | replace('lg:flex-row', '') }}">
-          {# Left column: Super Heading, Main Heading, Icon, Content and Button #}
-          <div class="w-auto min-w-[400px] max-w-[550px] min-h-[450px] mx-auto border {% if not reversed %}border-[theme(--ma-nautic-white)]{% else %}border-[theme(--ma-nautic-blue)]{% endif %} p-10 flex flex-col items-center justify-center text-center my-auto relative">
-            
-            {# Icon at corner of border #}
-            <div class="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2">
-              {% if options.icons %}
-                {% set iconData = null %}
-                {% for icon in options.icons.icons %}
-                  {% if icon.name == "wheel" %}
-                    {% set iconData = icon %}
-                  {% endif %}
-                {% endfor %}
-
-                {# Get specific icon styles #}
-                {% set iconStyle = "text-[theme(--ma-nautic-gold)]" %}
-                {% set iconContainerSize = "w-20 h-20" %}
-                {% set iconSize = "40" %}
-                
-                {# Adapt styles based on reversed mode #}
-                {% if reversed %}
-                  {% set bgColor = "bg-[theme(--ma-nautic-white)]" %}
-                {% else %}
-                  {% set bgColor = "bg-[theme(--ma-nautic-blue)]" %}
-                {% endif %}
-
-                {% if iconData %}
-                  <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ bgColor }} rounded-full p-3">
-                    <!-- SVG will be loaded here -->
-                  </span>
-                {% else %}
-                  <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ bgColor }} rounded-full p-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
-                  </span>
-                {% endif %}
-              {% endif %}
-            </div>
-            
-            {# Super Heading (section title with underscore) #}
-            {% if itemData.model and options.headings %}
-              {{ renderHeading({
-                name: itemData.model,
-                datas: options.headings
-              }) }}
-            {% endif %}
-
-            {# Main Heading (name) - Apply conditional color #}
-            {% if itemData.name and options.headings %}
-              <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">
+        <div class="grid grid-cols-6">
+          <div class="col-start-2 col-span-4">
+            {# Mobile layout (flex column) - Centered elements - Visible until lg breakpoint #}
+            <div class="lg:hidden text-center px-6 pt-8">
+              {# Name (primary heading) #}
+              {% if itemData.name and options.headings %}
                 {{ renderHeading({
                   name: itemData.name,
                   datas: options.headings
                 }) }}
-              </div>
-            {% endif %}
+              {% endif %}
 
-            {# Content - price, engine, passengersNumber #}
-            <div class="{{ contentContainerDesktopStyle }}">
-              <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} font-bold text-xl mb-2">{{ itemData.price }}</p>
-              <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} mb-2">{{ itemData.engine }}</p>
-              <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">{{ itemData.passengersNumber }}</p>
+              {# Model (displayed after name) - Use renderHeading but override the style with a wrapper div #}
+              {% if itemData.model and options.headings %}
+                <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">
+                  {{ renderHeading({
+                    name: itemData.model,
+                    datas: options.headings
+                  }) }}
+                </div>
+              {% endif %}
+
+              {# Icon #}
+              {% if options.icons %}
+                <div class="{{ iconWrapperStyle }}">
+                  {% set iconData = null %}
+                  {% for icon in options.icons.icons %}
+                    {% if icon.name == "wheel" %}
+                      {% set iconData = icon %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {# Get specific icon styles if available #}
+                  {% set iconVariantName = "wheelIcon" %}
+                  {% set iconDefaultClass = options.datas.variants[iconVariantName].default | default("") if options.datas.variants[iconVariantName] else "" %}
+                  {% set iconStyle = options.datas.variants[iconVariantName].iconStyle | default("text-[theme(--ma-nautic-teal)]") if options.datas.variants[iconVariantName] else "text-[theme(--ma-nautic-teal)]" %}
+                  {% set iconContainerSize = options.datas.variants[iconVariantName].containerSize | default("w-12 h-12 lg:w-16 lg:h-16") if options.datas.variants[iconVariantName] else "w-12 h-12 lg:w-16 lg:h-16" %}
+                  {% set iconSize = options.datas.variants[iconVariantName].iconSize | default("32") if options.datas.variants[iconVariantName] else "32" %}
+
+                  {% if iconData %}
+                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
+                      <!-- SVG will be loaded here -->
+                    </span>
+                  {% else %}
+                    <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ iconDefaultClass }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {# Content - price, engine, passengersNumber #}
+              <div class="{{ contentContainerStyle }} text-center">
+                <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} font-bold text-xl mb-2">{{ itemData.price }}</p>
+                <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} mb-2">{{ itemData.engine }}</p>
+                <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">{{ itemData.passengersNumber }}</p>
+              </div>
+
+              {# Link - "reservez" #}
+              {% if options.links %}
+                <div class="{{ buttonWrapperStyle }}">
+                  {% if reversed %}
+                    {{ renderLink({
+                      name: "reservation-blue",
+                      datas: options.links
+                    }) }}
+                  {% else %}
+                    {{ renderLink({
+                      name: "reservation-white",
+                      datas: options.links
+                    }) }}
+                  {% endif %}
+                </div>
+              {% endif %}
             </div>
 
-            {# Link - "reservez" #}
-            {% if options.links %}
-              <div class="{{ buttonWrapperStyle }}">
-                {% if reversed %}
-                  {{ renderLink({
-                    name: "reservez",
-                    datas: options.links
+            {# Desktop layout (two columns) - Visible from lg breakpoint #}
+            <div class="hidden lg:flex {% if reversed %}lg:flex-row-reverse{% else %}lg:flex-row{% endif %} items-stretch justify-center py-12 {{ contentWrapperStyle | replace('lg:flex-row', '') | replace('lg:items-start', '') }}">
+              {# Left/Right column with info (1/3 width): Name, Model, Icon, Content and Button #}
+              <div class="w-1/3 flex flex-col items-center justify-center">
+                <div class="h-full border {% if not reversed %}border-[theme(--ma-nautic-white)]{% else %}border-[theme(--ma-nautic-blue)]{% endif %} p-10 flex flex-col items-center justify-center text-center relative">
+                  
+                  {# Icon at corner of border #}
+                  <div class="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2">
+                    {% if options.icons %}
+                      {% set iconData = null %}
+                      {% for icon in options.icons.icons %}
+                        {% if icon.name == "wheel" %}
+                          {% set iconData = icon %}
+                        {% endif %}
+                      {% endfor %}
+
+                      {# Get specific icon styles #}
+                      {% set iconStyle = "text-[theme(--ma-nautic-gold)]" %}
+                      {% set iconContainerSize = "w-20 h-20" %}
+                      {% set iconSize = "40" %}
+                      
+                      {# Adapt styles based on reversed mode #}
+                      {% if reversed %}
+                        {% set bgColor = "bg-[theme(--ma-nautic-white)]" %}
+                      {% else %}
+                        {% set bgColor = "bg-[theme(--ma-nautic-blue)]" %}
+                      {% endif %}
+
+                      {% if iconData %}
+                        <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ iconSize }}" data-svg-height="{{ iconSize }}" class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ bgColor }} rounded-full p-3">
+                          <!-- SVG will be loaded here -->
+                        </span>
+                      {% else %}
+                        <span class="inline-flex items-center justify-center {{ iconContainerSize }} {{ iconStyle }} {{ bgColor }} rounded-full p-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="{{ iconSize }}" height="{{ iconSize }}" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
+                        </span>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                  
+                  {# Name (primary heading) #}
+                  {% if itemData.name and options.headings %}
+                    {{ renderHeading({
+                      name: itemData.name,
+                      datas: options.headings
+                    }) }}
+                  {% endif %}
+
+                  {# Model (displayed after name) - Use renderHeading but override the style with a wrapper div #}
+                  {% if itemData.model and options.headings %}
+                    <div class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">
+                      {{ renderHeading({
+                        name: itemData.model,
+                        datas: options.headings
+                      }) }}
+                    </div>
+                  {% endif %}
+
+                  {# Content - price, engine, passengersNumber #}
+                  <div class="{{ contentContainerDesktopStyle }}">
+                    <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} font-bold text-xl mb-2">{{ itemData.price }}</p>
+                    <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %} mb-2">{{ itemData.engine }}</p>
+                    <p class="{% if not reversed %}text-[theme(--ma-nautic-white)]{% else %}text-[theme(--ma-nautic-blue)]{% endif %}">{{ itemData.passengersNumber }}</p>
+                  </div>
+
+                  {# Link - "reservez" #}
+                  {% if options.links %}
+                    <div class="{{ buttonWrapperStyle }}">
+                      {% if reversed %}
+                        {{ renderLink({
+                          name: "reservation-blue",
+                          datas: options.links
+                        }) }}
+                      {% else %}
+                        {{ renderLink({
+                          name: "reservation-white",
+                          datas: options.links
+                        }) }}
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+
+              {# Right/Left column (2/3 width): Carousel #}
+              <div class="w-2/3 flex items-center justify-center px-8">
+                {% if carouselItem %}
+                  {# Use provided MD carousel directly with landscape aspect ratio #}
+                  {{ renderCarousel({
+                    markdown: true,
+                    carousel: carouselItem.data,
+                    datas: options.carousels,
+                    images: options.images,
+                    buttons: options.buttons,
+                    class: "ma-nautic-carousel w-full",
+                    aspectRatio: "56.25%"
                   }) }}
-                {% else %}
-                  {{ renderLink({
-                    name: "reservez_light",
-                    datas: options.links
+                {% elif itemData.carousel and options.carousels %}
+                  {# Use carousel from JSON by name with landscape aspect ratio #}
+                  {{ renderCarousel({
+                    name: itemData.carousel,
+                    datas: options.carousels,
+                    images: options.images,
+                    buttons: options.buttons,
+                    class: "ma-nautic-carousel w-full",
+                    aspectRatio: "56.25%"
                   }) }}
                 {% endif %}
               </div>
-            {% endif %}
-          </div>
+            </div>
 
-          {# Right column: Carousel #}
-          <div class="{{ mediaContentStyle }} h-full flex items-center justify-center px-16">
+            {# Carousel for mobile #}
             {% if carouselItem %}
-              {# Use provided MD carousel directly #}
-              <div class="w-4/5 mx-auto">
+              <div class="lg:hidden mt-8">
+                {# Mobile carousel with landscape aspect ratio #}
                 {{ renderCarousel({
                   markdown: true,
                   carousel: carouselItem.data,
                   datas: options.carousels,
                   images: options.images,
                   buttons: options.buttons,
-                  class: "ma-nautic-carousel w-full"
+                  class: "ma-nautic-carousel",
+                  aspectRatio: "56.25%"
                 }) }}
               </div>
             {% elif itemData.carousel and options.carousels %}
-              {# Use carousel from JSON by name #}
-              <div class="w-4/5 mx-auto">
+              <div class="lg:hidden mt-8">
+                {# Mobile carousel with landscape aspect ratio #}
                 {{ renderCarousel({
                   name: itemData.carousel,
                   datas: options.carousels,
                   images: options.images,
                   buttons: options.buttons,
-                  class: "ma-nautic-carousel w-full"
+                  class: "ma-nautic-carousel",
+                  aspectRatio: "56.25%"
                 }) }}
               </div>
             {% endif %}
           </div>
         </div>
-
-        {# Carousel for mobile #}
-        {% if carouselItem %}
-          <div class="lg:hidden mt-8">
-            <div class="w-4/5 mx-auto">
-              {{ renderCarousel({
-                markdown: true,
-                carousel: carouselItem.data,
-                datas: options.carousels,
-                images: options.images,
-                buttons: options.buttons,
-                class: "ma-nautic-carousel"
-              }) }}
-            </div>
-          </div>
-        {% elif itemData.carousel and options.carousels %}
-          <div class="lg:hidden mt-8">
-            <div class="w-4/5 mx-auto">
-              {{ renderCarousel({
-                name: itemData.carousel,
-                datas: options.carousels,
-                images: options.images,
-                buttons: options.buttons,
-                class: "ma-nautic-carousel"
-              }) }}
-            </div>
-          </div>
-        {% endif %}
       </div>
     </section>
   {% else %}

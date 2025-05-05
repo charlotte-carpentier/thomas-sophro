@@ -15,7 +15,7 @@
   "boats": [
     {
       "iconName": "wheel",
-      "link": "reservez_light"
+      "link": "reservation-white"
     }
   ]
 }
