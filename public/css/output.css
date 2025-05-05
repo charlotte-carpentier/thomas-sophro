@@ -402,9 +402,6 @@
   .table {
     display: table;
   }
-  .aspect-\[16\/9\] {
-    aspect-ratio: 16/9;
-  }
   .aspect-square {
     aspect-ratio: 1 / 1;
   }
@@ -446,6 +443,9 @@
   }
   .h-\[6rem\] {
     height: 6rem;
+  }
+  .h-\[350px\] {
+    height: 350px;
   }
   .h-\[500px\] {
     height: 500px;
@@ -644,6 +644,9 @@
   .flex-row {
     flex-direction: row;
   }
+  .flex-row-reverse {
+    flex-direction: row-reverse;
+  }
   .flex-wrap {
     flex-wrap: wrap;
   }
@@ -682,6 +685,9 @@
   }
   .gap-8 {
     gap: calc(var(--spacing) * 8);
+  }
+  .gap-16 {
+    gap: calc(var(--spacing) * 16);
   }
   .space-y-1 {
     :where(& > :not(:last-child)) {
@@ -737,6 +743,9 @@
     :where(& > :not(:last-child)) {
       border-color: #63a595;
     }
+  }
+  .self-start {
+    align-self: flex-start;
   }
   .overflow-hidden {
     overflow: hidden;
@@ -963,9 +972,6 @@
   }
   .pb-12 {
     padding-bottom: calc(var(--spacing) * 12);
-  }
-  .pb-\[100\%\] {
-    padding-bottom: 100%;
   }
   .pl-5 {
     padding-left: calc(var(--spacing) * 5);
