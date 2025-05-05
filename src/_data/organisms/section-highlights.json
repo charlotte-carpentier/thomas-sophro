@@ -1,41 +1,49 @@
 {
-    "globalStyle": "section-hero py-12 px-4 md:px-8 relative",
-    "variants": {
-      "default": "py-8 md:py-12 lg:py-16",
-      "compact": "py-6 md:py-8 lg:py-10",
-      "expanded": "py-10 md:py-16 lg:py-20",
-      "ma-nautic-blue": "bg-[theme(--ma-nautic-blue)]",
-      "ma-nautic-beige": "bg-[theme(--ma-nautic-beige)]"
+  "globalStyle": "section-hero py-12 px-4 md:px-8 relative",
+  "variants": {
+    "default": "py-8 md:py-12 lg:py-16",
+    "compact": "py-6 md:py-8 lg:py-10",
+    "expanded": "py-10 md:py-16 lg:py-20",
+    "ma-nautic-blue": "bg-[theme(--ma-nautic-blue)]",
+    "ma-nautic-beige": "bg-[theme(--ma-nautic-beige)]"
+  },
+  "containerStyle": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+  "contentLayoutStyle": {
+    "mobile": "flex flex-col gap-6",
+    "desktop": "grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center"
+  },
+  "heights": {
+    "default": "py-16 md:py-20 lg:py-24",
+    "tall": "py-20 md:py-28 lg:py-32",
+    "short": "py-12 md:py-16 lg:py-20"
+  },
+  "textContainerStyle": "flex flex-col gap-4",
+  "buttonsContainerStyle": "flex flex-wrap gap-4 mt-2 md:mt-4",
+  "imageContainerStyle": "mt-6 md:mt-0",
+  "sections": [
+    {
+      "name": "ma_nautic_services",
+      "variant": "ma-nautic-blue",
+      "heightVariant": "tall",
+      "heading_01": "home_services_h3_licence",
+      "content_01": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Vous êtes titulaire du permis bateau ? Prenez la barre en toute autonomie, après un rapide point sécurité.</p> <p class='text-[theme(--ma-nautic-white)] mb-6'>Vous préférez naviguer l'esprit libre ? Optez pour l'option skipper : un professionnel expérimenté prend en charge la manœuvre, vous accompagne durant votre trajet et votre découverte.</p>",
+      "heading_02": "home_services_h3_group",
+      "content_02": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Notre flotte de 6 bateaux se compose de modèles à coque rigide ou semi-rigide, alliant sécurité, confort et maniabilité.</p> <p class='text-[theme(--ma-nautic-white)] mb-4'>Capacité d'accueil de 4 à 12 personnes, puissance moteur jusqu'à 300 chevaux, équipements à bord pour la promenade comme pour l'activité nautique : chaque bateau a ses spécificités.</p> <p class='text-[theme(--ma-nautic-white)] mb-6'>Nos bateaux* respectent les normes de sécurité en vigueur avec un armement complet, sont entretenus avec soin et contrôlés régulièrement conformément à la Division 240 en vigueur.</p>",
+      "primaryLink": "boats-white",
+      "image": "ma_boat"
     },
-    "containerStyle": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
-    "contentLayoutStyle": {
-      "mobile": "flex flex-col gap-6",
-      "desktop": "grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center"
+    {
+      "name": "ma_nautic_map",
+      "variant": "ma-nautic-blue",
+      "image": "ma_map"
     },
-    "heights": {
-      "default": "py-16 md:py-20 lg:py-24",
-      "tall": "py-20 md:py-28 lg:py-32",
-      "short": "py-12 md:py-16 lg:py-20"
-    },
-    "textContainerStyle": "flex flex-col gap-4",
-    "buttonsContainerStyle": "flex flex-wrap gap-4 mt-2 md:mt-4",
-    "imageContainerStyle": "mt-6 md:mt-0",
-    "sections": [
-      {
-        "name": "ma_nautic_services",
-        "variant": "ma-nautic-blue",
-        "heightVariant": "tall",
-        "heading_01": "home_services_h3_licence",
-        "content_01": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Vous êtes titulaire du permis bateau ? Prenez la barre en toute autonomie, après un rapide point sécurité.</p> <p class='text-[theme(--ma-nautic-white)] mb-6'>Vous préférez naviguer l'esprit libre ? Optez pour l'option skipper : un professionnel expérimenté prend en charge la manœuvre, vous accompagne durant votre trajet et votre découverte.</p>",
-        "heading_02": "home_services_h3_group",
-        "content_02": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Notre flotte de 6 bateaux se compose de modèles à coque rigide ou semi-rigide, alliant sécurité, confort et maniabilité.</p> <p class='text-[theme(--ma-nautic-white)] mb-4'>Capacité d'accueil de 4 à 12 personnes, puissance moteur jusqu'à 300 chevaux, équipements à bord pour la promenade comme pour l'activité nautique : chaque bateau a ses spécificités.</p> <p class='text-[theme(--ma-nautic-white)] mb-6'>Nos bateaux* respectent les normes de sécurité en vigueur avec un armement complet, sont entretenus avec soin et contrôlés régulièrement conformément à la Division 240 en vigueur.</p>",
-        "primaryLink": "boats-white",
-        "image": "ma_boat"
-      },
-      {
-        "name": "ma_nautic_map",
-        "variant": "ma-nautic-blue",
-        "image": "ma_map"
-      }
-    ]
-  }
+    {
+      "name": "ma_nautic_contact",
+      "variant": "ma-nautic-blue",
+      "heightVariant": "tall",
+      "content": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Vous souhaitez obtenir plus d'informations sur nos bateaux ou réserver votre prochaine sortie en mer ? N'hésitez pas à nous contacter en remplissant le formulaire ci-dessous.</p>",
+      "formName": "ma_registration",
+      "formClass": "bg-[#2b3947] p-8 rounded-lg"
+    }
+  ]
+}

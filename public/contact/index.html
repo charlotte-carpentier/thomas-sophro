@@ -1453,6 +1453,572 @@
 
 
 
+
+
+
+  
+  
+    
+    
+
+    
+    
+    
+      
+        
+      
+        
+      
+        
+          
+        
+      
+
+      
+      
+    
+
+    
+    
+    
+      
+    
+
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+      
+      <section class="section-hero py-12 px-4 md:px-8 relative bg-[theme(--ma-nautic-blue)] py-20 md:py-28 lg:py-32 ">
+        <div class="container mx-auto grid grid-cols-6">
+          <div class="col-start-2 col-span-4">
+            <div class="flex flex-col items-center">
+              
+              
+              
+              
+              
+                <div class="highlight-content mb-8 text-[theme(--ma-nautic-white)] text-center max-w-3xl">
+                  <p class='text-[theme(--ma-nautic-white)] mb-4'>Vous souhaitez obtenir plus d'informations sur nos bateaux ou réserver votre prochaine sortie en mer ? N'hésitez pas à nous contacter en remplissant le formulaire ci-dessous.</p>
+                </div>
+              
+              
+              
+              <div class="w-full max-w-4xl">
+                
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    
+    
+    
+    
+    
+    
+      
+        
+          
+        
+      
+    
+
+    
+    
+    
+    
+    <form id="form-ma_registration" 
+      class="w-full bg-[#2b3947] p-8 rounded-lg"  
+      method="POST" 
+      data-netlify="true"
+      action="/merci"
+      netlify-honeypot="bot-field">
+
+    
+    <p style="display: none;">
+      <label>Ne remplissez pas ce champ si vous êtes humain :  
+        <input name="bot-field">
+      </label>
+    </p>
+
+      
+      <div class="flex flex-col md:flex-row justify-center md:space-x-8 space-y-4 md:space-y-0 mb-4">
+        
+          
+              <div class="flex justify-center">
+              
+  
+  
+  
+  
+    
+      
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+  
+   
+  
+
+  
+    
+    
+    
+    <div class="flex flex-col gap-1 typography-label-l input ">
+      
+      
+        <label for="clientName" class="font-medium text-white">
+          Votre nom ou société <span class="text-red-500">*</span>
+        </label>
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+        
+        <input 
+          type="text" 
+          id="clientName" 
+          name="input_name" 
+          placeholder="Tapez votre nom..." 
+          class="border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-300 text-gray-800 bg-white"
+          pattern="^[a-zA-ZÀ-ÿ&#92;s&#39;-]{2,50}$"
+          maxlength="50"
+          required
+          aria-required="true"
+          aria-invalid="false"
+        />
+        <span 
+          id="clientName-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
+      
+
+      
+      
+    </div>
+  
+  
+  
+  <script src="/js/atoms/form-validation.js"></script>
+
+            </div>
+          
+        
+          
+              <div class="flex justify-center">
+              
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+  
+   
+  
+
+  
+    
+    
+    
+    <div class="flex flex-col gap-1 typography-label-l input ">
+      
+      
+        <label for="clientEmail" class="font-medium text-white">
+          Votre adresse email <span class="text-red-500">*</span>
+        </label>
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+        
+        <input 
+          type="email" 
+          id="clientEmail" 
+          name="input_email" 
+          placeholder="Tapez votre adresse email..." 
+          class="border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-300 text-gray-800 bg-white"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+&#92;.[a-zA-Z]{2,}$"
+          maxlength="100"
+          required
+          aria-required="true"
+          aria-invalid="false"
+        />
+        <span 
+          id="clientEmail-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
+      
+
+      
+      
+    </div>
+  
+  
+  
+  <script src="/js/atoms/form-validation.js"></script>
+
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+      
+      
+      <div class="flex flex-col md:flex-row justify-center md:space-x-8 space-y-4 md:space-y-0 mb-4">
+        
+          
+        
+          
+        
+          
+            <div class="flex justify-center">
+              
+  
+  
+  
+  
+    
+  
+    
+  
+    
+      
+    
+  
+    
+  
+    
+  
+
+  
+  
+   
+  
+
+  
+    
+    
+    
+    <div class="flex flex-col gap-1 typography-label-l input ">
+      
+      
+        <label for="clientPhone" class="font-medium text-white">
+          Votre numéro de téléphone <span class="text-red-500">*</span>
+        </label>
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+        
+        <input 
+          type="tel" 
+          id="clientPhone" 
+          name="input_phone" 
+          placeholder="Tapez votre numéro de téléphone..." 
+          class="border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-300 text-gray-800 bg-white"
+          pattern="^&#92;+?[0-9&#92;s()-]{10,20}$"
+          maxlength="20"
+          required
+          aria-required="true"
+          aria-invalid="false"
+        />
+        <span 
+          id="clientPhone-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
+      
+
+      
+      
+    </div>
+  
+  
+  
+  <script src="/js/atoms/form-validation.js"></script>
+
+            </div>
+          
+        
+          
+            <div class="flex justify-center">
+              
+  
+  
+  
+  
+    
+  
+    
+  
+    
+  
+    
+      
+    
+  
+    
+  
+
+  
+  
+   
+  
+
+  
+    
+    
+    
+    <div class="flex flex-col gap-1 typography-label-l input ">
+      
+      
+        <label for="clientChoice" class="font-medium text-white">
+          Choisissez votre bateau
+        </label>
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+        
+        <select 
+          id="clientChoice" 
+          name="input_boat" 
+           
+          class="border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 border-gray-300 text-gray-800 bg-white"
+          
+          aria-required="false"
+          aria-invalid="false"
+        >
+          <option value="">Sélectionnez une option...</option>
+          
+            <option value="nine">Capelli Tempest 500 Nine</option>
+          
+            <option value="alba">Cap Camarat 5.5 cc Alba</option>
+          
+            <option value="first">Capelli 630 S First</option>
+          
+            <option value="libecciu">Capelli Tempest 700 Libecciu</option>
+          
+            <option value="enzo">Motonautica 780 confort Enzo</option>
+          
+            <option value="casablanca">Lomac 850 in Casa Blanca</option>
+          
+        </select>
+        <span 
+          id="clientChoice-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
+      
+
+      
+      
+    </div>
+  
+  
+  
+  <script src="/js/atoms/form-validation.js"></script>
+
+            </div>
+          
+        
+          
+        
+      </div>
+      
+      
+      <div class="flex justify-center mb-6 w-full">
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <div class="flex justify-center">
+              
+  
+  
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      
+    
+  
+
+  
+  
+   
+  
+
+  
+    
+    
+    
+    <div class="flex flex-col gap-1 typography-label-l input ">
+      
+      
+        <label for="clientMessage" class="font-medium text-white">
+          Votre message (facultatif)
+        </label>
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+        
+        <textarea 
+          id="clientMessage" 
+          name="input_message" 
+          placeholder="Ecrivez-nous ici..." 
+          class="border rounded-md px-3 py-2 focus:outline-none text-[#2b3947] w-80 md:min-w-[calc(2*20rem+2rem)] border-gray-300 text-gray-800 bg-white h-[6rem]"
+          rows="6"
+          maxlength="500"
+          
+          aria-required="false"
+          aria-invalid="false"
+        ></textarea>
+        <span 
+          id="clientMessage-error" 
+          class="text-red-500 text-sm mt-1" 
+          style="display: none;"
+          role="alert"
+        ></span>
+      
+
+      
+      
+    </div>
+  
+  
+  
+  <script src="/js/atoms/form-validation.js"></script>
+
+            </div>
+          
+        
+      </div>
+      
+      
+      <div class="w-full flex justify-center mb-6">
+        <div class="g-recaptcha" data-sitekey="VOTRE_RECAPTCHA_SITE_KEY"></div>
+      </div>
+      
+      
+      <div class="w-full flex justify-center mb-6">
+        <button type="submit" class="bg-[#63a595] hover:bg-[#e8ab55] text-white px-6 py-3 transition-colors duration-300 rounded-full cursor-pointer">
+          Envoyer
+        </button>
+      </div>
+      
+      
+      <div class="w-full mx-auto text-xs text-white opacity-80 leading-relaxed text-justify [hyphens:auto]">
+        <p>Pour traiter votre demande, nous utiliserons et conserverons vos données personnelles pendant 2 ans après notre dernier contact. Elles resteront confidentielles et ne seront pas partagées avec des tiers.</p>
+        <p class="mt-2">Conformément à la loi Informatique et Libertés du 6 janvier 1978 modifiée, vous bénéficiez d'un droit d'accès et de rectification des données vous concernant, d'un droit d'opposition pour motifs légitimes, d'un droit à l'effacement des données. Vous disposez également d'un droit à la réception et à la portabilité des données dans certains cas spécifiquement prévus par la loi.</p>
+      </div>
+    </form>
+  
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+    
+  
+
+
+
 <div id="contact-form">
 
     
@@ -1560,7 +2126,7 @@
     <div class="flex flex-col gap-1 typography-label-l input ">
       
       
-        <label for="clientName" class="font-medium text-[--ma-nautic-white]">
+        <label for="clientName" class="font-medium text-white">
           Votre nom ou société <span class="text-red-500">*</span>
         </label>
       
@@ -1637,7 +2203,7 @@
     <div class="flex flex-col gap-1 typography-label-l input ">
       
       
-        <label for="clientEmail" class="font-medium text-[--ma-nautic-white]">
+        <label for="clientEmail" class="font-medium text-white">
           Votre adresse email <span class="text-red-500">*</span>
         </label>
       
@@ -1729,7 +2295,7 @@
     <div class="flex flex-col gap-1 typography-label-l input ">
       
       
-        <label for="clientPhone" class="font-medium text-[--ma-nautic-white]">
+        <label for="clientPhone" class="font-medium text-white">
           Votre numéro de téléphone <span class="text-red-500">*</span>
         </label>
       
@@ -1806,7 +2372,7 @@
     <div class="flex flex-col gap-1 typography-label-l input ">
       
       
-        <label for="clientChoice" class="font-medium text-[--ma-nautic-white]">
+        <label for="clientChoice" class="font-medium text-white">
           Choisissez votre bateau
         </label>
       
@@ -1910,7 +2476,7 @@
     <div class="flex flex-col gap-1 typography-label-l input ">
       
       
-        <label for="clientMessage" class="font-medium text-[--ma-nautic-white]">
+        <label for="clientMessage" class="font-medium text-white">
           Votre message (facultatif)
         </label>
       
@@ -1969,7 +2535,7 @@
       </div>
       
       
-      <div class="w-full max-w-[65ch] mx-auto text-xs text-white opacity-80 leading-relaxed text-justify [hyphens:auto]">
+      <div class="w-full mx-auto text-xs text-white opacity-80 leading-relaxed text-justify [hyphens:auto]">
         <p>Pour traiter votre demande, nous utiliserons et conserverons vos données personnelles pendant 2 ans après notre dernier contact. Elles resteront confidentielles et ne seront pas partagées avec des tiers.</p>
         <p class="mt-2">Conformément à la loi Informatique et Libertés du 6 janvier 1978 modifiée, vous bénéficiez d'un droit d'accès et de rectification des données vous concernant, d'un droit d'opposition pour motifs légitimes, d'un droit à l'effacement des données. Vous disposez également d'un droit à la réception et à la portabilité des données dans certains cas spécifiquement prévus par la loi.</p>
       </div>

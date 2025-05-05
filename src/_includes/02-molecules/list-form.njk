@@ -4,7 +4,6 @@
 =========================
 #}
 
-{# Import the input component #}
 {% from "03-atoms/input.njk" import renderInput as renderAtomInput %}
 
 {% macro renderListForm(options) %}
@@ -110,8 +109,8 @@
         </button>
       </div>
       
-      {# Legal notices #}
-      <div class="w-full max-w-[65ch] mx-auto text-xs text-white opacity-80 leading-relaxed text-justify [hyphens:auto]">
+      {# Legal notices - Changed to use full width instead of max-width #}
+      <div class="w-full mx-auto text-xs text-white opacity-80 leading-relaxed text-justify [hyphens:auto]">
         <p>Pour traiter votre demande, nous utiliserons et conserverons vos données personnelles pendant 2 ans après notre dernier contact. Elles resteront confidentielles et ne seront pas partagées avec des tiers.</p>
         <p class="mt-2">Conformément à la loi Informatique et Libertés du 6 janvier 1978 modifiée, vous bénéficiez d'un droit d'accès et de rectification des données vous concernant, d'un droit d'opposition pour motifs légitimes, d'un droit à l'effacement des données. Vous disposez également d'un droit à la réception et à la portabilité des données dans certains cas spécifiquement prévus par la loi.</p>
       </div>
