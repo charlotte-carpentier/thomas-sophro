@@ -57,13 +57,13 @@
       "name": "facebook",
       "path": "/assets/icons/facebook.svg", 
       "alt": "Facebook Icon",
-      "defaultSize": "sm"
+      "defaultSize": "md"
     },
     {
       "name": "instagram",
       "path": "/assets/icons/instagram.svg", 
       "alt": "Instagram Icon",
-      "defaultSize": "sm"
+      "defaultSize": "md"
     },
     {
       "name": "linkedin",
@@ -81,7 +81,7 @@
       "name": "dot",
       "path": "/assets/icons/dot.svg", 
       "alt": "Dot Icon",
-      "defaultSize": "md"
+      "defaultSize": "xs"
     },
     {
       "name": "phone",
