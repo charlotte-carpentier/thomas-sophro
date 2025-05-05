@@ -8,7 +8,7 @@ engine: 300 ch MERCURY - 8,50m
 passengersNumber: 12 personnes MAX
 carousel_name: carousel_casablanca
 boat_images:
-  - /assets/images/BATEAUX/6_CASABLANCA/Lomac-850.jpeg
   - /assets/images/uploaded/img_1588.jpeg
+  - /assets/images/uploaded/img_1586.jpeg
 imageAlt: Photos du bateau "Casa Blanca"
 ---
