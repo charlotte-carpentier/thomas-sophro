@@ -10,6 +10,13 @@
       "default": "rounded-full p-2 md:p-3 transition-colors duration-300",
       "iconStyle": "text-[theme(--ma-nautic-gold)]",
       "containerSize": "w-10 h-10 md:w-12 md:h-12"
+    },
+    "carouselImage": {
+      "default": "w-full h-full object-cover",
+      "styles": {
+        "imageOrientation": "from-image",
+        "transform": "rotate(0deg)"
+      }
     }
   },
   "buttons": {

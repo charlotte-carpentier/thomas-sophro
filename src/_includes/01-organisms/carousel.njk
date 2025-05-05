@@ -93,6 +93,15 @@
     "iconStyle": "text-[theme(--ma-nautic-gold)]"
   }) %}
   
+  {# Extract image styles #}
+  {% set imageStyles = (options.datas and options.datas.variants and options.datas.variants.carouselImage) | default({
+    "default": "w-full h-full object-cover",
+    "styles": {
+      "imageOrientation": "from-image",
+      "transform": "rotate(0deg)"
+    }
+  }) %}
+  
   {# Combine styles for buttons #}
   {% set carouselPrevStyle = prevButtonStyles.containerSize ~ " " ~ prevButtonStyles.default %}
   {% set carouselNextStyle = nextButtonStyles.containerSize ~ " " ~ nextButtonStyles.default %}
@@ -114,7 +123,7 @@
           {% if pauseOnHover %}data-pause-on-hover="true"{% endif %}
           data-carousel-theme="{{ theme }}"
         >
-          {# Container with aspect ratio maintained via padding-bottom - MODIFIED HERE #}
+          {# Container with aspect ratio maintained via padding-bottom #}
           <div class="relative w-full" style="padding-bottom: {{ aspectRatio }};">
             {# Carousel slides #}
             <div class="absolute inset-0 w-full h-full">
@@ -134,13 +143,13 @@
                     {% endfor %}
                   {% endif %}
                   
-                  {# Render image or placeholder #}
+                  {# Render image or placeholder - Utilise les styles du JSON #}
                   {% if foundImage %}
                     <img 
                       src="{{ foundImage.src }}" 
                       alt="{{ foundImage.alt | default(image.name) }}" 
-                      class="w-full h-full object-cover"
-                      style="object-position: {{ image.objectPosition | default(defaultObjectPosition) }};"
+                      class="{{ imageStyles.default }}"
+                      style="object-position: {{ image.objectPosition | default(defaultObjectPosition) }}; {% if imageStyles.styles %}image-orientation: {{ imageStyles.styles.imageOrientation }}; transform: {{ imageStyles.styles.transform }};{% endif %}"
                       loading="lazy"
                     />
                   {% else %}
