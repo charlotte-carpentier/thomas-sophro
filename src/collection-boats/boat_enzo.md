@@ -1,7 +1,7 @@
 ---
 layout: 01-organisms/section-boat.njk
 tags: boat
-name: boat_"Enzo"
+name: boat_Enzo
 model: Motonautica_780
 price: À partir de 380 €/jour
 engine: 250 ch MERCURY - 7,8 m
