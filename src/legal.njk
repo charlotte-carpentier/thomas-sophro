@@ -17,12 +17,11 @@ layout: '00-core/base.njk'
 }) }}
 
 {# Legal & GDPR Section #}
-{% from "01-organisms/section-page.njk" import renderSectionPage %}
+{% from "01-organisms/section-accordion.njk" import renderSectionAccordion %}
 
-{{ renderSectionPage({ 
+{{ renderSectionAccordion({ 
     name: "ma_legal",
     datas: legals,
-    headings: atoms.headings,
-    links: atoms.links,
-    icons: atoms.icons
+    icons: atoms.icons,
+    links: atoms.links
 }) }}
