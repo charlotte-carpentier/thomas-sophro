@@ -1,0 +1,183 @@
+{#
+=========================
+   SECTION ACCORDION    
+=========================
+#}
+
+{% macro renderSectionAccordion(options) %}
+  {# Check if data is provided #}
+  {% if options.datas %}
+    {# Automatically detect data type #}
+    {% set hasFaqs = options.datas.faqs is defined %}
+    {% set hasLegal = options.datas.legalInformation is defined %}
+    
+    {# Select the right data array #}
+    {% if hasFaqs %}
+      {% set dataItems = options.datas.faqs %}
+      {% set dataType = "faqs" %}
+    {% elif hasLegal %}
+      {% set dataItems = options.datas.legalInformation %}
+      {% set dataType = "legal" %}
+    {% else %}
+      {% set dataItems = [] %}
+      {% set dataType = "unknown" %}
+    {% endif %}
+    
+    {# Find the corresponding section #}
+    {% set variant = null %}
+    {% for item in dataItems %}
+      {% if item.name == options.name %}
+        {% set variant = item %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback to first item if section not found #}
+    {% if not variant and dataItems[0] %}
+      {% set variant = dataItems[0] %}
+    {% endif %}
+
+    {% if variant %}
+      <section class="py-16 md:py-20 lg:py-24 bg-[theme(--ma-nautic-beige)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {# Section title #}
+          <h2 class="text-center font-black text-[20px] text-[theme(--ma-nautic-gold)] max-w-[40rem] mx-auto" style="margin-bottom: 40px;">_{% if options.title %}{{ options.title }}{% else %}{% if dataType == "faqs" %}Questions fréquentes{% else %}Mentions légales{% endif %}{% endif %}</h2>
+
+          {# Icon if defined #}
+          {% if variant.iconName and options.icons and options.icons.icons %}
+            {% set iconFound = false %}
+            {% for icon in options.icons.icons %}
+              {% if icon.name == variant.iconName and icon.src and not iconFound %}
+                <div class="flex justify-center mb-8">
+                  <div class="{{ options.datas.variants.wheelIcon.containerSize }} flex items-center justify-center">
+                    <div class="{{ options.datas.variants.wheelIcon.iconStyle }}">
+                      {% include icon.src %}
+                    </div>
+                  </div>
+                </div>
+                {% set iconFound = true %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+
+          {# Main content #}
+          <div class="max-w-[40rem] mx-auto">
+            {% if variant.contentBlocks %}
+              <div class="divide-y divide-[theme(--ma-nautic-teal)]">
+                {% for item in variant.contentBlocks %}
+                  {% if item.superHeading_01 is defined or item.superHeading_02 is defined or item.superHeading_03 is defined or item.superHeading_04 is defined or item.superHeading_05 is defined or item.superHeading_06 is defined or item.superHeading_07 is defined or item.superHeading_08 is defined or item.superHeading_09 is defined %}
+                    {# Rendre les super-headings comme sections principales #}
+                    {% set superHeadingKey = null %}
+                    {% set contentKey = null %}
+                    
+                    {% for key, value in item %}
+                      {% if key.startsWith('superHeading_') %}
+                        {% set superHeadingKey = key %}
+                      {% endif %}
+                      {% if key.startsWith('content_') and superHeadingKey %}
+                        {% if key.split('_')[1] == superHeadingKey.split('_')[1] %}
+                          {% set contentKey = key %}
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                    
+                    {% if superHeadingKey %}
+                      <div class="py-8 first:pt-0">
+                        <h3 class="font-vibur text-2xl text-[theme(--ma-nautic-blue)] mb-6">{{ item[superHeadingKey] }}</h3>
+                        {% if contentKey %}
+                          <div class="text-[theme(--ma-nautic-blue)]">
+                            {{ item[contentKey] | safe }}
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  {% endif %}
+                  
+                  {# Rendre les headings normaux comme accordions #}
+                  {% for key, value in item %}
+                    {% if key.startsWith('heading_') %}
+                      {% set contentKey = 'content_' + key.split('_')[1] %}
+                      {% if item[contentKey] %}
+                        <div class="py-4 accordion-item">
+                          <details class="group">
+                            <summary class="flex justify-between items-center font-bold cursor-pointer text-[theme(--ma-nautic-blue)] py-2 list-none">
+                              <span>{{ item[key] }}</span>
+                              <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                  <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                              </span>
+                            </summary>
+                            <div class="text-[theme(--ma-nautic-blue)] mt-3 group-open:animate-fadeIn">
+                              {{ item[contentKey] | safe }}
+                            </div>
+                          </details>
+                        </div>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                  
+                  {# Format spécial pour les paires question/réponse directes #}
+                  {% if item.question is defined and item.answer is defined %}
+                    <div class="py-4 accordion-item">
+                      <details class="group">
+                        <summary class="flex justify-between items-center font-bold cursor-pointer text-[theme(--ma-nautic-blue)] py-2 list-none">
+                          <span>{{ item.question }}</span>
+                          <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                              <path d="M6 9l6 6 6-6"></path>
+                            </svg>
+                          </span>
+                        </summary>
+                        <div class="text-[theme(--ma-nautic-blue)] mt-3 group-open:animate-fadeIn">
+                          {{ item.answer }}
+                        </div>
+                      </details>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {# Navigation link if defined #}
+            {% if variant.links and options.links and options.links.links %}
+              {% set linkFound = false %}
+              {% for link in options.links.links %}
+                {% if link.name | lower == variant.links | lower and not linkFound %}
+                  <div class="flex justify-center mt-12">
+                    <a href="{{ link.href }}" class="{{ options.links.globalStyle }} {{ options.links.variants[link.style] }}">
+                      {{ link.text }}
+                    </a>
+                  </div>
+                  {% set linkFound = true %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    {% else %}
+      <span class="text-red-500">Section '{{ options.name }}' not found</span>
+    {% endif %}
+  {% else %}
+    <span class="text-red-500">Section Accordion data not found</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/section-accordion.njk" import renderSectionAccordion %}
+
+2. Call a specific section-accordion by its name
+{{ renderSectionAccordion({ 
+    name: "ma_faq",
+    datas: faqs,
+    icons: atoms.icons,
+    links: atoms.links
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

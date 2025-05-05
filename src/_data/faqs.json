@@ -91,10 +91,6 @@
                 {
                     "superHeading_09": "faq_information_h2",
                     "content_27": "<div class='text-[theme(--ma-nautic-blue)] max-w-3xl mx-auto space-y-4'><p><strong>Adresse :</strong> Route de Bastia, port privé, 20217 Saint-Florent, Haute-Corse</p><p><strong>Téléphone :</strong> +33 (0)6 xx xx xx xx</p><p><strong>Email :</strong> <a href='mailto:contact@ma-nautic.com' class='text-[theme(--ma-nautic-blue)] hover:text-[theme(--ma-nautic-hover)]'>contact@ma-nautic.com</a></p><p><strong>Horaires :</strong> Tous les jours de 8h à 19h (saison)</p><p><strong>Parking :</strong> Parking privé client à deux pas du quai</p><p><strong>Accès :</strong> Nous sommes situés à 30 minutes de Bastia et 2h d’Ajaccio. Pensez à réserver à l’avance en juillet-août.</p><p><strong>Météo :</strong> La météo change vite en mer : un point complet est fait le jour du départ.</p><p><strong>Contact :</strong> Pour toute demande spécifique (groupe, skipper, matériel supplémentaire), contactez-nous directement. Nous répondons sous 24h.</p></div>"
-                },
-                {
-                    "question": "PEUT-ON SE RESTAURER DANS LES AGRIATES ?",
-                    "answer": "Deux paillotes existent dans les Agriates, une sur la plage du Lotu (La cabane du Lotu) et l’autre sur la plage de Saleccia (A Piniccia). En pleine saison, il sera nécessaire de réserver."
                 }
             ],
             "iconName": "wheel",

@@ -18,12 +18,12 @@ layout: '00-core/base.njk'
 
 
 {# FAQ Section #}
-{% from "01-organisms/section-page.njk" import renderSectionPage %}
 
-{{ renderSectionPage({ 
+{% from "01-organisms/section-accordion.njk" import renderSectionAccordion %}
+
+{{ renderSectionAccordion({ 
     name: "ma_faq",
     datas: faqs,
-    headings: atoms.headings,
-    links: atoms.links,
-    icons: atoms.icons
+    icons: atoms.icons,
+    links: atoms.links
 }) }}
