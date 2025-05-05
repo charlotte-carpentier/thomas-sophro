@@ -38,7 +38,7 @@
       "iconVariant": "wheelIcon",
       "hasIcon": true,
       "iconName": "wheel",
-      "scrollTarget": "home_team"
+      "scrollTarget": "#home-hero"
     },
     {
       "name": "home_why",
@@ -67,7 +67,8 @@
       "icon": "wheel",
       "iconVariant": "wheelIcon",
       "hasIcon": true,
-      "iconName": "wheel"
+      "iconName": "wheel",
+      "scrollTarget": "#home-infos"
     },
     {
       "name": "home_excursions",
@@ -93,7 +94,8 @@
       "icon": "wheel",
       "iconVariant": "wheelIcon",
       "hasIcon": true,
-      "iconName": "wheel"
+      "iconName": "wheel",
+      "scrollTarget": "#boat-navigate"
     },
     {
       "name": "boat_boat",
@@ -117,7 +119,8 @@
       "icon": "wheel",
       "iconVariant": "wheelIcon",
       "hasIcon": true,
-      "iconName": "wheel"
+      "iconName": "wheel",
+      "scrollTarget": "#boat-price"
     },
     {
       "name": "boat_why",
@@ -156,7 +159,8 @@
       "icon": "wheel",
       "iconVariant": "wheelIcon",
       "hasIcon": true,
-      "iconName": "wheel"
+      "iconName": "wheel",
+      "scrollTarget": "#spot-divers"
     },
     {
       "name": "contact_hero",
@@ -171,7 +175,8 @@
       "icon": "wheel",
       "iconVariant": "wheelIcon",
       "hasIcon": true,
-      "iconName": "wheel"
+      "iconName": "wheel",
+      "scrollTarget": "#contact-form"
     },
     {
       "name": "faq_hero",

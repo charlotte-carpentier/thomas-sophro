@@ -1,6 +1,6 @@
----
+--- 
 permalink: "/nos-bateaux/" 
-layout: '00-core/base.njk'
+layout: '00-core/base.njk' 
 ---
 
 {# Boat Hero Section #}
@@ -16,15 +16,17 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
-{# Navigate Cards Section #}
-{% from "01-organisms/section-card.njk" import renderSectionCard %}
+{# Navigate Cards Section with ID for scrolling #}
+<div id="boat-navigate">
+    {% from "01-organisms/section-card.njk" import renderSectionCard %}
 
-{{ renderSectionCard({ 
+    {{ renderSectionCard({ 
     name: "boat_navigate",
     datas: organisms["section-cards"],
     headings: atoms.headings,
     links: atoms.links
 }) }}
+</div>
 
 {# Boat Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
@@ -39,14 +41,14 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
-{# Container for boat list with boat-list ID for scrolling #}
-<div id="boat-list">
-    {% from "01-organisms/section-boat.njk" import renderSectionBoat %}
+{# Section boat #}
+{% from "01-organisms/section-boat.njk" import renderSectionBoat %}
 
-    {# Using sortByPrice filter to sort boats by increasing price #}
-    {% set sortedBoats = collections.boat | sortByPrice %}
-    
-    {% set isReversed = false %} {# Starts in normal mode #}
+{# Using sortByPrice filter to sort boats by increasing price #}
+{% set sortedBoats = collections.boat | sortByPrice %}
+
+{% set isReversed = false %}
+{# Starts in normal mode #}
 
 {% for boat in sortedBoats %}
     {% set carousel = null %}
@@ -72,10 +74,9 @@ layout: '00-core/base.njk'
         reversed: isReversed
     }) }}
 
-    {% set isReversed = not isReversed %} {# Invert value for next loop #}
+    {% set isReversed = not isReversed %}
+    {# Invert value for next loop #}
 {% endfor %}
-
-</div>
 
 {# Who Hero Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
@@ -89,8 +90,10 @@ layout: '00-core/base.njk'
     links: atoms.links,
     icons: atoms.icons
 }) }}
+</div>
 
-{# Price Cards Section #}
+{# Price Cards Section with ID for scrolling #}
+<div id="boat-price">
 {% from "01-organisms/section-card.njk" import renderSectionCard %}
 
 {{ renderSectionCard({ 
@@ -99,6 +102,7 @@ layout: '00-core/base.njk'
     headings: atoms.headings,
     links: atoms.links
 }) }}
+</div>
 
 {# Why Hero Section #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}

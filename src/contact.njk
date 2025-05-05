@@ -1,4 +1,4 @@
----
+--- 
 permalink: "/contact/" 
 layout: '00-core/base.njk' 
 ---
@@ -16,10 +16,11 @@ layout: '00-core/base.njk'
     icons: atoms.icons
 }) }}
 
-{# Contact Highlight Section #}
-{% from "01-organisms/section-highlight.njk" import renderSectionHighlight %}
+{# Contact Highlight Section with ID for scrolling  #}
+<div id="contact-form">
+  {% from "01-organisms/section-highlight.njk" import renderSectionHighlight %}
 
-{{ renderSectionHighlight({ 
+  {{ renderSectionHighlight({ 
     name: "ma_nautic_contact",
     datas: organisms["section-highlights"],
     headings: atoms.headings,
@@ -28,29 +29,17 @@ layout: '00-core/base.njk'
     forms: molecules["list-forms"],
     atoms: atoms
 }) }}
+</div>
 
-{# Container for form with contact-form ID for scrolling #}
-<div id="contact-form">
+{# Leaflet.js Map with marker on M.A Nautic #}
+<div id="map" style="width: 100%; height: 500px;"></div>
 
-    {# Form Section #}
-    {% from "01-organisms/section-contact.njk" import renderSectionContact %}
+{# External CSS and JS for Leaflet #}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    {{ renderSectionContact({ 
-    name: "ma_registration",
-    datas: organisms["section-contacts"],
-    listForms: molecules["list-forms"],
-    atoms: atoms
-}) }}
-
-    {# Leaflet.js Map with marker on M.A Nautic #}
-    <div id="map" style="width: 100%; height: 500px;"></div>
-
-    {# External CSS and JS for Leaflet #}
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    {# Custom map initialization script #}
-    <script src="/js/utils/map-contact.js"></script>
+{# Custom map initialization script #}
+<script src="/js/utils/map-contact.js"></script>
 </div>
 
 {# Adding JSON-LD structured data for LocalBusiness #}
@@ -76,8 +65,7 @@ layout: '00-core/base.njk'
     "availableLanguage": "fr"
   },
   "sameAs": [
-    "https://www.facebook.com/M.A.Nautic/",
-    "https://www.instagram.com/m.a.nautic/"
+    "https://www.facebook.com/M.A.Nautic/", "https://www.instagram.com/m.a.nautic/"
   ],
   "url": "https://manautic-location-bateau.com/",
   "priceRange": "€€",
