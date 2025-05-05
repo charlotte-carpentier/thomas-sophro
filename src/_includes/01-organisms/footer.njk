@@ -33,13 +33,14 @@
     
     {# Render footer with appropriate container styles #}
     <footer class="{{ globalStyle }} {{ footerData.containerStyle }} {{ options.class | default('') }}">
-      <div class="container mx-auto px-4 py-6">
-        {# Grid layout: 2 columns, logo, then 1 column #}
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {# Columns 1-2 #}
-          {% if footerData.columns %}
-            {% for menuConfig in footerData.columns %}
-              {% if loop.index <= 2 %}
+      {# Container with adjusted width - 4/6 with 1/6 margins on each side #}
+      <div class="mx-auto w-full px-4 py-6">
+        <div class="mx-auto w-4/6">
+          {# Updated grid layout: 3 equal columns #}
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {# Loop through all three columns #}
+            {% if footerData.columns %}
+              {% for menuConfig in footerData.columns %}
                 <div class="footer-column text-center md:text-left">
                   {# Section titles #}
                   {% if menuConfig.name == "contact_navigation" %}
@@ -50,8 +51,8 @@
                     <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">SUIVEZ-NOUS</h4>
                   {% endif %}
                   
-                  {# Secondary navigation based on data #}
-                  <nav class="space-y-3">
+                  {# Secondary navigation based on data - Reduced spacing between links #}
+                  <nav class="space-y-1.5"> <!-- Decreased spacing here -->
                     {% if options["navigation-secondarys"] and options["navigation-secondarys"]["navigation-secondarys"] %}
                       {% for navGroup in options["navigation-secondarys"]["navigation-secondarys"] %}
                         {% if navGroup.name == menuConfig.name and navGroup.links %}
@@ -61,7 +62,7 @@
                                 {% if link.name == linkName %}
                                   {# Contact Navigation with icons #}
                                   {% if menuConfig.name == "contact_navigation" %}
-                                    <div class="flex items-center mb-3 justify-center md:justify-start">
+                                    <div class="flex items-center mb-1.5 justify-center md:justify-start"> <!-- Decreased spacing here -->
                                       {# Determine icon to use #}
                                       {% set iconName = "" %}
                                       {% if link.name == "adresse" %}{% set iconName = "dot" %}
@@ -90,7 +91,7 @@
                                   
                                   {# Social networks with icons #}
                                   {% elif menuConfig.name == "socials" %}
-                                    <div class="flex items-center mb-3 justify-center md:justify-start">
+                                    <div class="flex items-center mb-1.5 justify-center md:justify-start"> <!-- Decreased spacing here -->
                                       {# Find social icon #}
                                       {% if options.icons and options.icons.icons %}
                                         {% for icon in options.icons.icons %}
@@ -111,7 +112,7 @@
                                   
                                   {# Standard navigation links #}
                                   {% else %}
-                                    <div class="mb-3 text-center md:text-left">
+                                    <div class="mb-1.5 text-center md:text-left"> <!-- Decreased spacing here -->
                                       <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
                                         {{ link.text }}
                                       </a>
@@ -128,164 +129,52 @@
                     {% endif %}
                   </nav>
                 </div>
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-          
-          {# Logo in middle (3rd position) #}
-          <div class="flex justify-center md:justify-start items-center">
-            {% if footerData.vectors and options.vectors %}
-              {% set vectorData = null %}
-              {% for vector in options.vectors.vectors %}
-                {% if vector.name == footerData.vectors %}
-                  {% set vectorData = vector %}
-                {% endif %}
               {% endfor %}
-
-              {% if vectorData %}
-                <img src="{{ vectorData.src }}" alt="{{ vectorData.alt }}" class="{{ options.vectors.globalStyle }} {{ options.vectors.sizes[vectorData.size] }} md:max-w-[150px]">
-              {% endif %}
             {% endif %}
           </div>
           
-          {# Last column (4th position) #}
-          {% if footerData.columns %}
-            {% for menuConfig in footerData.columns %}
-              {% if loop.index == 3 %}
-                <div class="footer-column text-center md:text-left">
-                  {# Section titles #}
-                  {% if menuConfig.name == "contact_navigation" %}
-                    <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">CONTACT</h4>
-                  {% elif menuConfig.name == "site_navigation" %}
-                    <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">NAVIGATION</h4>
-                  {% elif menuConfig.name == "socials" %}
-                    <h4 class="text-[theme(--ma-nautic-white)] font-bold mb-4 font-['Vibur']">SUIVEZ-NOUS</h4>
-                  {% endif %}
-                  
-                  {# Secondary navigation based on data #}
-                  <nav class="space-y-3">
-                    {% if options["navigation-secondarys"] and options["navigation-secondarys"]["navigation-secondarys"] %}
-                      {% for navGroup in options["navigation-secondarys"]["navigation-secondarys"] %}
-                        {% if navGroup.name == menuConfig.name and navGroup.links %}
-                          {% for linkName in navGroup.links %}
-                            {% if options.links and options.links.links %}
-                              {% for link in options.links.links %}
-                                {% if link.name == linkName %}
-                                  {# Contact Navigation with icons #}
-                                  {% if menuConfig.name == "contact_navigation" %}
-                                    <div class="flex items-center mb-3 justify-center md:justify-start">
-                                      {# Determine icon to use #}
-                                      {% set iconName = "" %}
-                                      {% if link.name == "adresse" %}{% set iconName = "dot" %}
-                                      {% elif link.name == "telephone" %}{% set iconName = "phone" %}
-                                      {% elif link.name == "formulaire" %}{% set iconName = "mail" %}
-                                      {% elif link.name == "horaires" %}{% set iconName = "clock" %}
-                                      {% else %}{% set iconName = "dot" %}{% endif %}
-                                      
-                                      {# Find the icon #}
-                                      {% if options.icons and options.icons.icons %}
-                                        {% for icon in options.icons.icons %}
-                                          {% if icon.name == iconName %}
-                                            <span 
-                                              data-svg-src="{{ icon.path }}" 
-                                              class="icon w-4 h-4 text-[theme(--ma-nautic-teal)] mr-2"
-                                              aria-hidden="true"
-                                            ></span>
-                                          {% endif %}
-                                        {% endfor %}
-                                      {% endif %}
-                                      
-                                      <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)]">
-                                        {{ link.text | safe }}
-                                      </a>
-                                    </div>
-                                  
-                                  {# Social networks with icons #}
-                                  {% elif menuConfig.name == "socials" %}
-                                    <div class="flex items-center mb-3 justify-center md:justify-start">
-                                      {# Find social icon #}
-                                      {% if options.icons and options.icons.icons %}
-                                        {% for icon in options.icons.icons %}
-                                          {% if icon.name == link.name %}
-                                            <span 
-                                              data-svg-src="{{ icon.path }}" 
-                                              class="icon w-4 h-4 text-[theme(--ma-nautic-teal)] mr-2"
-                                              aria-hidden="true"
-                                            ></span>
-                                          {% endif %}
-                                        {% endfor %}
-                                      {% endif %}
-                                      
-                                      <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)]">
-                                        {{ link.text }}
-                                      </a>
-                                    </div>
-                                  
-                                  {# Standard navigation links #}
-                                  {% else %}
-                                    <div class="mb-3 text-center md:text-left">
-                                      <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
-                                        {{ link.text }}
-                                      </a>
-                                    </div>
-                                  {% endif %}
-                                {% endif %}
-                              {% endfor %}
-                            {% endif %}
-                          {% endfor %}
+          {# Bottom section with copyright and links #}
+          <div class="mt-8 border-t border-[theme(--ma-nautic-gold)] pt-4">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between text-sm">
+              {# Copyright and legal links #}
+              <div class="text-[theme(--ma-nautic-white)] mb-4 md:mb-0 flex flex-wrap items-center justify-center md:justify-start gap-1">
+                <span>© {% year %} {{ footerData.copyright | default('M.A Nautic tous droits réservés') }}</span>
+                
+                {# Version with separator #}
+                {% if footerData.version %}
+                  <span class="mx-2" aria-hidden="true">•</span>
+                  <span>v{{ footerData.version }}</span>
+                {% endif %}
+                
+                {# Credits and legal notices link #}
+                {% if footerData.links and footerData.links[0] and footerData.links[0].name == "credit" %}
+                  {% for link in options.links.links %}
+                    {% if link.name == "credits" %}
+                      <span class="mx-2" aria-hidden="true">•</span>
+                      <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
+                        {{ link.text }}
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              </div>
+              
+              {# Other bottom links #}
+              <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 items-center md:items-start">
+                {% for linkConfig in footerData.links %}
+                  {% if linkConfig.name == "creator" %}
+                    {% if options.links and options.links.links %}
+                      {% for link in options.links.links %}
+                        {% if link.name == linkConfig.name %}
+                          <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
+                            {{ link.text }}
+                          </a>
                         {% endif %}
                       {% endfor %}
-                    {% else %}
-                      <div class="text-[theme(--ma-nautic-teal)] text-sm">Navigation non configurée</div>
                     {% endif %}
-                  </nav>
-                </div>
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-        </div>
-        
-        {# Bottom section with copyright and links #}
-        <div class="mt-12 border-t border-[theme(--ma-nautic-gold)] pt-4">
-          <div class="flex flex-col md:flex-row md:items-center md:justify-between text-sm">
-            {# Copyright and legal links #}
-            <div class="text-[theme(--ma-nautic-white)] mb-4 md:mb-0 flex flex-wrap items-center justify-center md:justify-start gap-1">
-              <span>© {% year %} {{ footerData.copyright | default('M.A Nautic tous droits réservés') }}</span>
-              
-              {# Version with separator #}
-              {% if footerData.version %}
-                <span class="mx-2" aria-hidden="true">•</span>
-                <span>v{{ footerData.version }}</span>
-              {% endif %}
-              
-              {# Credits and legal notices link #}
-              {% if footerData.links and footerData.links[0] and footerData.links[0].name == "credit" %}
-                {% for link in options.links.links %}
-                  {% if link.name == "credits" %}
-                    <span class="mx-2" aria-hidden="true">•</span>
-                    <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
-                      {{ link.text }}
-                    </a>
                   {% endif %}
                 {% endfor %}
-              {% endif %}
-            </div>
-            
-            {# Other bottom links #}
-            <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 items-center md:items-start">
-              {% for linkConfig in footerData.links %}
-                {% if linkConfig.name == "creator" %}
-                  {% if options.links and options.links.links %}
-                    {% for link in options.links.links %}
-                      {% if link.name == linkConfig.name %}
-                        <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300">
-                          {{ link.text }}
-                        </a>
-                      {% endif %}
-                    {% endfor %}
-                  {% endif %}
-                {% endif %}
-              {% endfor %}
+              </div>
             </div>
           </div>
         </div>
