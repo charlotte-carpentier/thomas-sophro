@@ -1,7 +1,7 @@
 ---
 layout: 01-organisms/section-boat.njk
 tags: boat
-name: boat_Alba
+name: boat_alba
 model: Camarat_cc
 price: À partir de 250 €/jour
 engine: 100 ch YAMAHA - 5,5 m
