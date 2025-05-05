@@ -10,5 +10,6 @@ carousel_name: carousel_nine
 boat_images:
   - /assets/images/BATEAUX/2_NINE/Capelli-Tempest-500_1.JPG
   - /assets/images/BATEAUX/2_NINE/Capelli-Tempest-500_2.jpg
+  - /assets/images/uploaded/capelli-tempest-500-face.jpg
 imageAlt: Photos de Nine
 ---
