@@ -1,9 +1,9 @@
 {
   "globalStyle": "inline-block",
   "sizes": {
-    "large": "w-72 h-auto",
-    "medium": "w-48 h-auto",
-    "small": "w-36 h-auto",
+    "large": "w-48 h-auto",
+    "medium": "w-40 h-auto",
+    "small": "w-32 h-auto",
     "xsmall": "w-24 h-auto"
   },
   "vectors": [
