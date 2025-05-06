@@ -65,7 +65,7 @@
               {% if variant.contentBlocks %}
                 <div class="divide-y divide-[theme(--ma-nautic-teal)]">
                   {% for block in variant.contentBlocks %}
-                    {# Traitement des superHeadings - Recherche dans la collection headings #}
+                    {# Processing superHeadings - Search in headings collection #}
                     {% for key, value in block %}
                       {% if key.startsWith('superHeading_') %}
                         {% set superHeadingData = null %}
@@ -86,10 +86,10 @@
                             {% endif %}
                           </h3>
                           
-                          {# Récupérer le contenu associé au superHeading #}
+                          {# Get content associated with superHeading #}
                           {% set contentKey = 'content_' + key.split('_')[1] %}
                           {% if block[contentKey] %}
-                            {# Transformation des contenus - remplacer les strong, corriger la largeur et justifier le texte #}
+                            {# Transform content - replace strong tags, fix width and justify text #}
                             {% set contentWithoutBold = block[contentKey] | replace("<strong>", "<span>") | replace("</strong>", "</span>") %}
                             {% set contentWithFullWidth = contentWithoutBold | replace("max-w-3xl", "w-full") | replace("mx-auto", "") %}
                             {% set contentJustified = contentWithFullWidth | replace("text-[theme(--ma-nautic-blue)]", "text-[theme(--ma-nautic-blue)] text-justify") %}
@@ -98,7 +98,7 @@
                             </div>
                           {% endif %}
 
-                          {# Traitement des headings associés à ce superHeading #}
+                          {# Process headings associated with this superHeading #}
                           {% for headingKey, headingValue in block %}
                             {% if headingKey.startsWith('heading_') %}
                               {% set headingData = null %}
@@ -143,7 +143,7 @@
                       {% endif %}
                     {% endfor %}
                     
-                    {# Format spécial pour les paires question/réponse directes #}
+                    {# Special format for direct question/answer pairs #}
                     {% set hasProcessedSuperHeading = false %}
                     {% for key, value in block %}
                       {% if key.startsWith('superHeading_') %}

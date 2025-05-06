@@ -1974,6 +1974,47 @@
   font-size: 24px;
   color: #2b3947;
 }
+.ma-nautic-hero-heading {
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 24px;
+}
+.ma-nautic-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+@media (max-width: 640px) {
+  .ma-nautic-subtitle {
+    font-size: 20px;
+  }
+}
+@media (max-width: 640px) {
+  .ma-nautic-main {
+    font-size: 20px;
+  }
+}
+.text-ma-title {
+  font-size: 24px;
+}
+.text-ma-subtitle {
+  font-size: 20px;
+}
+.text-ma-section {
+  font-size: 24px;
+}
+.text-ma-heading {
+  font-size: 35px;
+}
+.font-ma-black {
+  font-weight: 900;
+}
+.font-ma-bold {
+  font-weight: 700;
+}
+.font-ma-regular {
+  font-weight: 400;
+}
 .ma-nautic-btn-primary {
   background-color: #63a595;
   color: #ffffff;
@@ -1995,26 +2036,6 @@
 }
 .ma-nautic-btn-reserve:hover {
   background-color: #2b3947;
-}
-.ma-nautic-hero-heading {
-  font-weight: 700;
-  font-size: 24px;
-  letter-spacing: 24px;
-}
-.ma-nautic-subtitle {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-}
-@media (max-width: 640px) {
-  .ma-nautic-subtitle {
-    font-size: 20px;
-  }
-}
-@media (max-width: 640px) {
-  .ma-nautic-main {
-    font-size: 20px;
-  }
 }
 .ma-nautic-boat-card {
   border: 1px solid #2b3947;
@@ -2087,27 +2108,6 @@
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-}
-.text-ma-title {
-  font-size: 24px;
-}
-.text-ma-subtitle {
-  font-size: 20px;
-}
-.text-ma-section {
-  font-size: 24px;
-}
-.text-ma-heading {
-  font-size: 35px;
-}
-.font-ma-black {
-  font-weight: 900;
-}
-.font-ma-bold {
-  font-weight: 700;
-}
-.font-ma-regular {
-  font-weight: 400;
 }
 .shadow-bottom {
   box-shadow: 0 15px 20px -3px rgba(0, 0, 0, 0.5);

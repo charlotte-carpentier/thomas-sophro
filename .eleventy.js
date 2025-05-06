@@ -1,55 +1,49 @@
-import { DateTime } from "luxon";
 import { sortBoatsByPrice } from './src/js/utils/price-utils.js';
 
 export default function (eleventyConfig) {
-  // Passthrough pour les fichiers statiques
-  eleventyConfig.addPassthroughCopy('./src/assets'); // Copier le dossier assets
-  eleventyConfig.addPassthroughCopy('./src/admin');  // Copier le dossier admin (pour Netlify CMS)
-  eleventyConfig.addPassthroughCopy('./src/docs');   // Copier le dossier docs
-  eleventyConfig.addPassthroughCopy('./src/js');     // Copier le dossier js (pour les scripts personnalisés)
-  eleventyConfig.addPassthroughCopy('_redirects');    // Copier le fichier _redirects
+  // Static files passthrough
+  eleventyConfig.addPassthroughCopy('./src/assets'); // Copy assets folder
+  eleventyConfig.addPassthroughCopy('./src/admin');  // Copy admin folder (for Netlify CMS)
+  eleventyConfig.addPassthroughCopy('./src/docs');   // Copy docs folder
+  eleventyConfig.addPassthroughCopy('./src/js');     // Copy js folder (for custom scripts)
+  eleventyConfig.addPassthroughCopy('_redirects');   // Copy _redirects file
 
-  // Passthrough pour robots.txt
-  eleventyConfig.addPassthroughCopy('./src/robots.txt');  // Copier robots.txt
+  // Passthrough for robots.txt
+  eleventyConfig.addPassthroughCopy('./src/robots.txt');  // Copy robots.txt
 
-  // Copier sitemap.xml du dossier src vers public
-  eleventyConfig.addPassthroughCopy('./src/sitemap.xml');  // Copier sitemap.xml
+  // Copy sitemap.xml from src folder to public
+  eleventyConfig.addPassthroughCopy('./src/sitemap.xml');  // Copy sitemap.xml
 
-  // Shortcode pour obtenir l'année actuelle
+  // Shortcode to get current year
   eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
-  // Filter pour formater les dates des posts
-  eleventyConfig.addFilter("postDate", (dateObj) => {
-    return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
-  });
-
-  // Filter pour vérifier si une chaîne se termine par un suffixe donné
+  // Filter to check if a string ends with a given suffix
   eleventyConfig.addFilter("endsWith", function(str, suffix) {
     if (!str || !suffix) return false;
     return str.toString().toLowerCase().endsWith(suffix.toLowerCase());
   });
 
-  // Filter pour trier les bateaux par prix
+  // Filter to sort boats by price
   eleventyConfig.addFilter("sortByPrice", sortBoatsByPrice);
 
-  // Collection personnalisée pour les carrousels
+  // Custom collection for carousels
   eleventyConfig.addCollection('carousel', function(collection) {
     return collection.getFilteredByGlob('./src/collection-carousels/*.md');
   });
 
-  // Collection personnalisée pour les bateaux
+  // Custom collection for boats
   eleventyConfig.addCollection("boat", function(collectionApi) {
     return collectionApi.getFilteredByGlob("./src/collection-boats/*.md");
   });
 
-  // Watch target pour les changements dans la collection des bateaux
+  // Watch target for changes in boat collection
   eleventyConfig.addWatchTarget("./src/collection-boats/");
 
-  // Configuration de la structure des dossiers
+  // Folder structure configuration
   return {
     dir: {
-      input: "src",  // Dossier des fichiers source
-      output: "public",  // Dossier de sortie (build)
+      input: "src",  // Source files folder
+      output: "public",  // Output (build) folder
     }
   };
 }
