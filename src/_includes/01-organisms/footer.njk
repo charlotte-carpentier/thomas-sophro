@@ -34,7 +34,7 @@
             {% if footerData.columns %}
               {% for menuConfig in footerData.columns %}
                 <div class="footer-column text-center md:text-left pl-2 md:pl-4 pr-2 md:pr-4 {% if menuConfig.name == 'socials' %}flex flex-col justify-center items-center md:items-center{% endif %} {% if loop.index < footerData.columns|length %}md:border-r md:border-white md:pr-10 pb-4 md:pb-0 {% if loop.index < footerData.columns|length %}border-b border-white md:border-b-0{% endif %}{% endif %}">
-                  {# Titres des sections en gold - Inverser pour la colonne 3 (socials) #}
+                  {# Section titles in gold - Reverse for column 3 (socials) #}
                   {% if menuConfig.name != "socials" %}
                     {% if menuConfig.name == "contact_navigation" %}
                       <h4 class="text-[theme(--ma-nautic-gold)] font-bold mb-4 font-['Vibur']">CONTACT</h4>
@@ -43,7 +43,7 @@
                     {% endif %}
                   {% endif %}
                   
-                  {# Ajouter le logo pour la colonne 3 (socials) #}
+                  {# Add logo for column 3 (socials) #}
                   {% if menuConfig.name == "socials" %}
                     <div class="flex justify-center">
                       {{ renderVector({ 
@@ -71,7 +71,7 @@
                                         {% elif link.name == "horaires" %}{% set iconName = "clock" %}
                                         {% else %}{% set iconName = "dot" %}{% endif %}
                                         
-                                        {# Utiliser le composant renderIcon pour les icônes #}
+                                        {# Use renderIcon component for icons #}
                                         {{ renderIcon({ 
                                           name: iconName, 
                                           datas: options.icons,
@@ -100,7 +100,7 @@
                       {% endif %}
                     </nav>
                   {% else %}
-                    {# Icônes de réseaux sociaux côte à côte pour la colonne 3 #}
+                    {# Social icons side by side for column 3 #}
                     <div class="flex justify-center gap-4 mt-2">
                       {% if options["navigation-secondarys"] and options["navigation-secondarys"]["navigation-secondarys"] %}
                         {% for navGroup in options["navigation-secondarys"]["navigation-secondarys"] %}
@@ -126,7 +126,7 @@
                     </div>
                   {% endif %}
                   
-                  {# Titre pour la colonne 3 (socials) placé sous les liens #}
+                  {# Title for column 3 (socials) placed under links #}
                   {% if menuConfig.name == "socials" %}
                     <h4 class="text-[theme(--ma-nautic-gold)] font-bold font-['Vibur'] mt-2 text-center">SUIVEZ-NOUS</h4>
                   {% endif %}

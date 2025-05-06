@@ -1,37 +1,55 @@
+/**
+ * Sitemap Update Utilities
+ * 
+ * Automatically updates the sitemap.xml file with current dates:
+ * - Locates the sitemap.xml file in the src directory
+ * - Updates all <lastmod> tags with the current date
+ * - Saves the updated sitemap back to the original location
+ * 
+ * @version 1.0
+ */
+
 import fs from 'fs';
 import path from 'path';
 
-// Spécifie le chemin vers le fichier sitemap.xml dans le dossier src
+/**
+ * Updates all lastmod dates in the sitemap.xml file to current date
+ * Reads the existing sitemap, modifies dates, and writes it back
+ * Provides console logging for verification and debugging
+ * 
+ * @returns {void}
+ */
+// Specify path to sitemap.xml file in src folder
 const sitemapPath = path.resolve(process.cwd(), 'src/sitemap.xml');
 
-// Affiche le chemin du fichier pour confirmer qu'il est correct
-console.log(`Chemin vers le fichier sitemap.xml : ${sitemapPath}`);
+// Log file path to confirm it's correct
+console.log(`Path to sitemap.xml file: ${sitemapPath}`);
 
-// La nouvelle date à insérer dans le sitemap (au format "YYYY-MM-DD")
+// Get current date in "YYYY-MM-DD" format for sitemap
 const currentDate = new Date().toISOString().split('T')[0]; // Format: "2025-04-28"
 
-// Lire le fichier sitemap.xml
+// Read sitemap.xml file
 fs.readFile(sitemapPath, 'utf8', (err, data) => {
   if (err) {
-    console.error('Erreur de lecture du fichier sitemap.xml', err);
+    console.error('Error reading sitemap.xml file', err);
     return;
   }
 
-  // Vérification de la lecture du fichier
-  console.log('Contenu du sitemap.xml avant mise à jour :', data);
+  // Verify file was read correctly
+  console.log('Sitemap.xml content before update:', data);
 
-  // Remplacer toutes les occurrences de <lastmod> avec la date actuelle
+  // Replace all <lastmod> occurrences with current date
   const updatedData = data.replace(/<lastmod>.*?<\/lastmod>/g, `<lastmod>${currentDate}</lastmod>`);
 
-  // Vérification des modifications avant d'écrire
-  console.log('Contenu mis à jour du sitemap.xml :', updatedData);
+  // Verify changes before writing
+  console.log('Updated sitemap.xml content:', updatedData);
 
-  // Écrire le contenu modifié dans le fichier sitemap.xml
+  // Write modified content back to sitemap.xml
   fs.writeFile(sitemapPath, updatedData, 'utf8', (err) => {
     if (err) {
-      console.error('Erreur de sauvegarde du fichier sitemap.xml', err);
+      console.error('Error saving sitemap.xml file', err);
       return;
     }
-    console.log(`Sitemap mis à jour avec la date : ${currentDate}`);
+    console.log(`Sitemap updated with date: ${currentDate}`);
   });
 });

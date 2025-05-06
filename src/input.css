@@ -1,37 +1,39 @@
 @import "tailwindcss";
 
 @source "./src/**/*.njk";
+
+/* THEME VARIABLES */
 @theme {
-  /* Couleurs principales */
-  --ma-nautic-blue: #2b3947;       /* bleu foncé */
-  --ma-nautic-teal: #63a595;       /* vert/turquoise */
-  --ma-nautic-beige: #eae7dc;      /* beige clair */
-  --ma-nautic-gold: #e8ab55;       /* orange/ocre */
+  /* Main colors */
+  --ma-nautic-blue: #2b3947;       /* dark blue */
+  --ma-nautic-teal: #63a595;       /* green/turquoise */
+  --ma-nautic-beige: #eae7dc;      /* light beige */
+  --ma-nautic-gold: #e8ab55;       /* orange/ochre */
   --ma-nautic-white: #ffffff;
   --ma-nautic-black: #000000;
 
-  /* Polices */
+  /* Fonts */
   --ma-nautic-font-display: 'Vibur', cursive;
   --ma-nautic-font-body: 'Roboto', sans-serif;
 
-  /* Tailles de police */
-  --ma-nautic-font-size-subtitle: 20px;  /* vibur, pour petits titres de section */
-  --ma-nautic-font-size-body: 18px;     /* roboto Regular */
-  --ma-nautic-font-size-title: 24px;    /* roboto Bold */
-  --ma-nautic-font-size-heading: 35px;  /* vibur */
-  --ma-nautic-font-size-nav: 18px;      /* vibur */
-  --ma-nautic-font-size-section: 24px;  /* vibur */
+  /* Font sizes */
+  --ma-nautic-font-size-subtitle: 20px;  /* vibur, for small section titles */
+  --ma-nautic-font-size-body: 18px;      /* roboto Regular */
+  --ma-nautic-font-size-title: 24px;     /* roboto Bold */
+  --ma-nautic-font-size-heading: 35px;   /* vibur */
+  --ma-nautic-font-size-nav: 18px;       /* vibur */
+  --ma-nautic-font-size-section: 24px;   /* vibur */
 
-  /* Espacements de lettres */
+  /* Letter spacing */
   --ma-nautic-letter-spacing-title: 24px;
   --ma-nautic-letter-spacing-subtitle: 30px;
 
-  /* Poids des polices */
+  /* Font weights */
   --ma-nautic-font-weight-regular: 400;
   --ma-nautic-font-weight-bold: 700;
   --ma-nautic-font-weight-black: 900;
 
-  /* Espacement */
+  /* Spacing */
   --ma-nautic-spacing-xs: 0.25rem;
   --ma-nautic-spacing-sm: 0.5rem;
   --ma-nautic-spacing-md: 1rem;
@@ -39,16 +41,17 @@
   --ma-nautic-spacing-xl: 2rem;
   --ma-nautic-spacing-2xl: 3rem;
 
-  /* Boutons */
+  /* Buttons */
   --ma-nautic-btn-padding-x: 1.5rem;
   --ma-nautic-btn-padding-y: 0.75rem;
   --ma-nautic-btn-border-radius: 0.7rem;
 
-  /* Bordures */
+  /* Borders */
   --ma-nautic-border-width-default: 1px;
   --ma-nautic-border-width-large: 2px;
 }
 
+/* NAVIGATION */
 /* Navigation links with custom hover effect */
 .ma-nautic-nav-link {
   position: relative;
@@ -72,6 +75,7 @@
   width: 100%;
 }
 
+/* TYPOGRAPHY & HEADINGS */
 /* Section headers with underscore prefix */
 .ma-nautic-section-title {
   font-family: theme(--ma-nautic-font-display);
@@ -79,6 +83,63 @@
   color: theme(--ma-nautic-blue);
 }
 
+/* Hero section text */
+.ma-nautic-hero-heading {
+  font-weight: theme(--ma-nautic-font-weight-bold);
+  font-size: theme(--ma-nautic-font-size-title);
+  letter-spacing: theme(--ma-nautic-letter-spacing-title);
+}
+
+.ma-nautic-subtitle {
+  font-family: theme(--ma-nautic-font-body);
+  font-weight: theme(--ma-nautic-font-weight-bold);
+  font-size: theme(--ma-nautic-font-size-nav);
+}
+
+/* Responsive font adjustments */
+@media (max-width: 640px) {
+  .ma-nautic-subtitle {
+    font-size: theme(--ma-nautic-font-size-subtitle);
+  }
+}
+
+@media (max-width: 640px) {
+  .ma-nautic-main {
+    font-size: theme(--ma-nautic-font-size-subtitle);
+  }
+}
+
+/* Heading size classes */
+.text-ma-title {
+  font-size: theme(--ma-nautic-font-size-title);
+}
+
+.text-ma-subtitle {
+  font-size: theme(--ma-nautic-font-size-subtitle);
+}
+
+.text-ma-section {
+  font-size: theme(--ma-nautic-font-size-section);
+}
+
+.text-ma-heading {
+  font-size: theme(--ma-nautic-font-size-heading);
+}
+
+/* Font weight classes */
+.font-ma-black {
+  font-weight: theme(--ma-nautic-font-weight-black);
+}
+
+.font-ma-bold {
+  font-weight: theme(--ma-nautic-font-weight-bold);
+}
+
+.font-ma-regular {
+  font-weight: theme(--ma-nautic-font-weight-regular);
+}
+
+/* BUTTONS */
 /* CTA Buttons */
 .ma-nautic-btn-primary {
   background-color: theme(--ma-nautic-teal);
@@ -106,31 +167,7 @@
   background-color: theme(--ma-nautic-blue);
 }
 
-/* Hero section text */
-.ma-nautic-hero-heading {
-  font-weight: theme(--ma-nautic-font-weight-bold);
-  font-size: theme(--ma-nautic-font-size-title);
-  letter-spacing: theme(--ma-nautic-letter-spacing-title);
-}
-
-.ma-nautic-subtitle {
-  font-family: theme(--ma-nautic-font-body);
-  font-weight: theme(--ma-nautic-font-weight-bold);
-  font-size: theme(--ma-nautic-font-size-nav);
-}
-
-@media (max-width: 640px) {
-  .ma-nautic-subtitle {
-    font-size: theme(--ma-nautic-font-size-subtitle);
-  }
-}
-
-@media (max-width: 640px) {
-  .ma-nautic-main {
-    font-size: theme(--ma-nautic-font-size-subtitle);
-  }
-}
-
+/* CARDS & COMPONENTS */
 /* Boat card */
 .ma-nautic-boat-card {
   border: theme(--ma-nautic-border-width-default) solid theme(--ma-nautic-blue);
@@ -142,6 +179,7 @@
   font-size: theme(--ma-nautic-font-size-section);
 }
 
+/* LINKS & INTERACTIONS */
 /* Content links dark */
 .ma-nautic-content-link {
   position: relative;
@@ -216,42 +254,13 @@
   width: 100%;
 }
 
+/* BACKGROUNDS & EFFECTS */
 /* Background image with fixed parallax effect */
 .ma-nautic-bg-fixed {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-}
-
-/* Heading size classes */
-.text-ma-title {
-  font-size: theme(--ma-nautic-font-size-title);
-}
-
-.text-ma-subtitle {
-  font-size: theme(--ma-nautic-font-size-subtitle);
-}
-
-.text-ma-section {
-  font-size: theme(--ma-nautic-font-size-section);
-}
-
-.text-ma-heading {
-  font-size: theme(--ma-nautic-font-size-heading);
-}
-
-/* Font weight classes */
-.font-ma-black {
-  font-weight: theme(--ma-nautic-font-weight-black);
-}
-
-.font-ma-bold {
-  font-weight: theme(--ma-nautic-font-weight-bold);
-}
-
-.font-ma-regular {
-  font-weight: theme(--ma-nautic-font-weight-regular);
 }
 
 /* Header shadow */
