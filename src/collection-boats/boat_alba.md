@@ -9,6 +9,6 @@ passengersNumber: 4 personnes MAX
 carousel_name: carousel_alba
 boat_images:
   - /assets/images/BATEAUX/1_ALBA/cap-camarat_1.jpg
-  - /assets/images/BATEAUX/1_ALBA/cap-camarat_2.jpg
+  - /assets/images/uploaded/photo-2022-03-28-11-02-46.jpg
 imageAlt: Photos du bateau "Alba"
 ---
