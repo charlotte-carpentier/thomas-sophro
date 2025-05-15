@@ -11,5 +11,7 @@ boat_images:
   - /assets/images/uploaded/img_1586.jpeg
   - /assets/images/uploaded/img_1588.jpeg
   - /assets/images/uploaded/img_1582.jpeg
+  - /assets/images/uploaded/20230915_125611-1-.jpeg
+  - /assets/images/uploaded/lomac-850.jpeg
 imageAlt: Photos du bateau "Casa Blanca"
 ---
