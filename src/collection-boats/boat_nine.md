@@ -10,6 +10,5 @@ carousel_name: carousel_nine
 boat_images:
   - /assets/images/uploaded/capelli-tempest-500-tribord.jpg
   - /assets/images/uploaded/capelli-tempest-500-babord.jpg
-  - /assets/images/uploaded/capelli-tempest-500-face.jpg
 imageAlt: Photos de Nine
 ---
