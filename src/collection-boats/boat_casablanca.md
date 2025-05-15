@@ -4,7 +4,7 @@ tags: boat
 name: boat_casablanca
 model: lomac_850
 price: À partir de 550€/jour
-engine: 300 ch MERCURY - 8,5m
+engine: 300 ch MERCURY - 8,50 m
 passengersNumber: 12 personnes MAX
 carousel_name: carousel_casablanca
 boat_images:
