@@ -1,7 +1,7 @@
 ---
 layout: 01-organisms/section-boat.njk
 tags: boat
-name: boat_jane
+name: boat_Jane
 model: camarat_cc
 price: À partir de 500 €/jour
 engine: 350 ch EVINRUDE - 8,5 m
