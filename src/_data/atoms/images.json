@@ -236,6 +236,84 @@
       "src": "/assets/images/uploaded/capelli-tempest-500-face.jpg",
       "alt": "Photos de Nine",
       "group": "block-media"
+    },
+    {
+      "name": "carousel_alba_slide_3",
+      "src": "/assets/images/uploaded/photo-2022-03-28-11-02-45-2.jpg",
+      "alt": "Photos du bateau \"Alba\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_casablanca_slide_3",
+      "src": "/assets/images/uploaded/img_1582.jpeg",
+      "alt": "Photos du bateau \"Casa Blanca\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_casablanca_slide_4",
+      "src": "/assets/images/uploaded/20230915_125611-1-.jpeg",
+      "alt": "Photos du bateau \"Casa Blanca\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_casablanca_slide_5",
+      "src": "/assets/images/uploaded/lomac-850.jpeg",
+      "alt": "Photos du bateau \"Casa Blanca\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_enzo_slide_2",
+      "src": "/assets/images/uploaded/img_20220224_081602_594.jpg",
+      "alt": "Photos du bateau \"Enzo\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_enzo_slide_3",
+      "src": "/assets/images/uploaded/mv-moteur.jpg",
+      "alt": "Photos du bateau \"Enzo\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_first_slide_1",
+      "src": "/assets/images/uploaded/photo-2025-04-01-11-25-17.jpg",
+      "alt": "Photos du bateau \"First\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_first_slide_3",
+      "src": "/assets/images/uploaded/photo-2025-04-01-11-25-18.jpg",
+      "alt": "Photos du bateau \"First\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_libecciu_slide_1",
+      "src": "/assets/images/uploaded/capelli-tempest-libecciu.jpg",
+      "alt": "Photos du bateau \"Libecciu\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_libecciu_slide_2",
+      "src": "/assets/images/uploaded/capelli-tempest-libecciu-moteur.jpg",
+      "alt": "Photos du bateau \"Libecciu\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_libecciu_slide_3",
+      "src": "/assets/images/uploaded/photo-2022-06-05-18-05-12-3.jpg",
+      "alt": "Photos du bateau \"Libecciu\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_nine_slide_1",
+      "src": "/assets/images/uploaded/capelli-tempest-500-tribord.jpg",
+      "alt": "Photos de Nine",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_nine_slide_2",
+      "src": "/assets/images/uploaded/capelli-tempest-500-babord.jpg",
+      "alt": "Photos de Nine",
+      "group": "block-media"
     }
   ]
 }
