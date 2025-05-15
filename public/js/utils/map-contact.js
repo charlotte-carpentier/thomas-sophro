@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     // Initialize map coordinates and settings
-    const mapCenter = [42.681846, 9.303704];
+    const mapCenter = [42.6757649, 9.3008672];
     const zoomLevel = 15;
     
     // Create map with center position and zoom level
@@ -47,6 +47,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add marker with custom icon and popup
     L.marker(mapCenter, {icon: customIcon})
       .addTo(map)
-      .bindPopup("<b>M.A Nautic</b><br>Saint-Florent, Corse")
+      .bindPopup("<b>M.A Nautic</b><br>Lieu dit Schinu, Route de Calvi<br>20217 Saint-Florent, France")
       .openPopup();
   });
