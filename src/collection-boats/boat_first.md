@@ -10,5 +10,6 @@ carousel_name: carousel_first
 boat_images:
   - /assets/images/BATEAUX/3_FIRST/capelli-tempest-630_1.jpg
   - /assets/images/BATEAUX/3_FIRST/capelli-tempest-630_2.jpg
+  - /assets/images/uploaded/photo-2025-04-01-11-25-18.jpg
 imageAlt: Photos du bateau "First"
 ---
