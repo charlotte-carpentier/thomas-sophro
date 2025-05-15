@@ -1,6 +1,14 @@
 import { sortBoatsByPrice } from './src/js/utils/price-utils.js';
+// Correct import path for sync-boat-images.js
+import { syncBoatImages } from './src/js/utils/sync-boat-images.js';
 
 export default function (eleventyConfig) {
+  // Run image synchronization before each build
+  eleventyConfig.on('beforeBuild', () => {
+    console.log('Synchronizing boat images before build...');
+    syncBoatImages();
+  });
+
   // Static files passthrough
   eleventyConfig.addPassthroughCopy('./src/assets'); // Copy assets folder
   eleventyConfig.addPassthroughCopy('./src/admin');  // Copy admin folder (for Netlify CMS)
