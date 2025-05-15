@@ -9,4 +9,6 @@ images:
     objectPosition: center
   - name: carousel_nine_slide02
     objectPosition: center
+  - name: carousel_nine_slide_3
+    objectPosition: center
 ---

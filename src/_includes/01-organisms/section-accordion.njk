@@ -41,7 +41,7 @@
         <div class="container mx-auto grid grid-cols-6">
           <div class="col-start-2 col-span-4">
             {# Section title #}
-            <h2 class="text-center font-black text-[20px] text-[theme(--ma-nautic-gold)] mx-auto" style="margin-bottom: 40px;">_{% if options.title %}{{ options.title }}{% else %}{% if dataType == "faqs" %}Questions fréquentes{% else %}Mentions légales{% endif %}{% endif %}</h2>
+            <h2 class="text-center font-black text-[20px] text-[theme(--ma-nautic-gold)] mx-auto" style="margin-bottom: 40px;">{% if options.title %}{{ options.title }}{% else %}{% if dataType == "faqs" %}Questions fréquentes{% else %}Mentions légales{% endif %}{% endif %}</h2>
 
             {# Icon if defined #}
             {% if variant.iconName and options.icons and options.icons.icons %}
