@@ -63,27 +63,33 @@
             <div class="{{ navStyle }}">
               {# Menu Container with hamburger and dropdown #}
               <div class="{{ menuContainerStyle }}">
-                {# Hamburger button for mobile #}
-                <div class="{{ toggleButtonStyle }}" data-container-size="{{ toggleButtonContainerSize }}" data-icon-size="{{ toggleButtonIconSize }}">
-                  {% set iconData = null %}
-                  {% if options.icons %}
-                    {% for icon in options.icons.icons %}
-                      {% if icon.name == toggleButtonIcon %}
-                        {% set iconData = icon %}
-                      {% endif %}
-                    {% endfor %}
-                  {% endif %}
+                {# Wrapper div to contain both button and label - mobile only #}
+                <div class="max-lg:flex max-lg:flex-col max-lg:items-center max-lg:relative max-lg:z-50">
+                  {# Original toggle button #}
+                  <div class="{{ toggleButtonStyle }}" data-container-size="{{ toggleButtonContainerSize }}" data-icon-size="{{ toggleButtonIconSize }}">
+                    {% set iconData = null %}
+                    {% if options.icons %}
+                      {% for icon in options.icons.icons %}
+                        {% if icon.name == toggleButtonIcon %}
+                          {% set iconData = icon %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                    
+                    {# Render custom icon or default hamburger #}
+                    {% if iconData %}
+                      <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ toggleButtonIconSize }}" data-svg-height="{{ toggleButtonIconSize }}" class="inline-flex items-center justify-center {{ toggleButtonIconStyle }}">
+                        <!-- SVG will be loaded here -->
+                      </span>
+                    {% else %}
+                      <span class="inline-flex items-center justify-center {{ toggleButtonIconStyle }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="{{ toggleButtonIconSize }}" height="{{ toggleButtonIconSize }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                      </span>
+                    {% endif %}
+                  </div>
                   
-                  {# Render custom icon or default hamburger #}
-                  {% if iconData %}
-                    <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ toggleButtonIconSize }}" data-svg-height="{{ toggleButtonIconSize }}" class="inline-flex items-center justify-center {{ toggleButtonContainerSize }} {{ toggleButtonIconStyle }}">
-                      <!-- SVG will be loaded here -->
-                    </span>
-                  {% else %}
-                    <span class="inline-flex items-center justify-center {{ toggleButtonContainerSize }} {{ toggleButtonIconStyle }}">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="{{ toggleButtonIconSize }}" height="{{ toggleButtonIconSize }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                    </span>
-                  {% endif %}
+                  {# Text "Menu" below - outside the button, only visible on mobile, with high z-index #}
+                  <span class="text-xs mt-1 font-[theme(--font-display)] text-[theme(--ma-nautic-white)] max-lg:block hidden relative z-50">Menu</span>
                 </div>
 
                 {# Dropdown menu containing navigation #}
