@@ -9,4 +9,6 @@ images:
     objectPosition: center
   - name: carousel_casablanca_slide_2
     objectPosition: center
+  - name: carousel_casablanca_slide_5
+    objectPosition: center
 ---

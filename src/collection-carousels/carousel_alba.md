@@ -9,4 +9,6 @@ images:
     objectPosition: center
   - name: carousel_alba_slide_2
     objectPosition: center
+  - name: carousel_alba_slide_3
+    objectPosition: center
 ---

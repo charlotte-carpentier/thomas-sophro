@@ -105,12 +105,12 @@ export function syncBoatImages() {
           
           // Check if model already exists in headings.json
           if (!existingHeadingNames.has(modelName)) {
-            // Add new model with appropriate formatting
+            // Add new model with correct style (MODIFIED)
             headingsJson.headings.push({
               name: modelName,
-              text: `_${modelName}`,
+              text: modelName, // No underscore prefix
               level: 2,
-              style: "ma_nautic_section_title"
+              style: "ma_nautic_subtitle_boat" // Modified style for model
             });
             existingHeadingNames.add(modelName);
             console.log(`New model added to headings.json: ${modelName}`);
@@ -122,12 +122,12 @@ export function syncBoatImages() {
           
           // Check if technical name already exists in headings.json
           if (!existingHeadingNames.has(technicalName)) {
-            // Add new technical name with appropriate formatting
+            // Add new technical name with correct level and style (MODIFIED)
             headingsJson.headings.push({
               name: technicalName,
               text: technicalName.replace('boat_', ''),
-              level: 2,
-              style: "ma_nautic_subtitle_boat"
+              level: 3, // Changed to level 3
+              style: "ma_nautic_section_subtitle" // Modified style for boat name
             });
             existingHeadingNames.add(technicalName);
             console.log(`New technical name added to headings.json: ${technicalName}`);

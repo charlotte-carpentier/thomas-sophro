@@ -7,6 +7,8 @@ pauseOnHover: true
 images:
   - name: carousel_enzo_slide01
     objectPosition: center
-  - name: carousel_enzo_slide02
+  - name: carousel_enzo_slide_2
+    objectPosition: center
+  - name: carousel_enzo_slide_3
     objectPosition: center
 ---
