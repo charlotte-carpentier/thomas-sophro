@@ -5,6 +5,8 @@ name: carousel_casablanca
 autoplay: true
 pauseOnHover: true
 images:
-  - name: carousel_casablanca_slide01
+  - name: carousel_casablanca_slide_1
+    objectPosition: center
+  - name: carousel_casablanca_slide_2
     objectPosition: center
 ---

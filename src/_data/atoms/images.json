@@ -212,6 +212,30 @@
       "alt": "Illustration marine d'une vague à droite",
       "size": "xsmall",
       "group": "block-media"
+    },
+    {
+      "name": "carousel_alba_slide_2",
+      "src": "/assets/images/uploaded/2f451f71-4cf8-4e02-b552-92523f58eb85.jpeg",
+      "alt": "Photos du bateau \"Alba\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_casablanca_slide_1",
+      "src": "/assets/images/uploaded/img_1586.jpeg",
+      "alt": "Photos du bateau \"Casa Blanca\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_casablanca_slide_2",
+      "src": "/assets/images/uploaded/img_1588.jpeg",
+      "alt": "Photos du bateau \"Casa Blanca\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_nine_slide_3",
+      "src": "/assets/images/uploaded/capelli-tempest-500-face.jpg",
+      "alt": "Photos de Nine",
+      "group": "block-media"
     }
   ]
 }

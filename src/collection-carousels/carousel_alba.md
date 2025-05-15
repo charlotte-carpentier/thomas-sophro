@@ -7,6 +7,6 @@ pauseOnHover: true
 images:
   - name: carousel_alba_slide01
     objectPosition: center
-  - name: carousel_alba_slide02
+  - name: carousel_alba_slide_2
     objectPosition: center
 ---
