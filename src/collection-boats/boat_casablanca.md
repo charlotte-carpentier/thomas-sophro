@@ -10,6 +10,5 @@ carousel_name: carousel_casablanca
 boat_images:
   - /assets/images/uploaded/img_1586.jpeg
   - /assets/images/uploaded/img_1588.jpeg
-  - /assets/images/uploaded/img_1582.jpeg
 imageAlt: Photos du bateau "Casa Blanca"
 ---
