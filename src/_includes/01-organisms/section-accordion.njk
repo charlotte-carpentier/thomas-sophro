@@ -86,16 +86,18 @@
                             {% endif %}
                           </h3>
                           
-                          {# Get content associated with superHeading #}
-                          {% set contentKey = 'content_' + key.split('_')[1] %}
-                          {% if block[contentKey] %}
-                            {# Transform content - replace strong tags, fix width and justify text #}
-                            {% set contentWithoutBold = block[contentKey] | replace("<strong>", "<span>") | replace("</strong>", "</span>") %}
-                            {% set contentWithFullWidth = contentWithoutBold | replace("max-w-3xl", "w-full") | replace("mx-auto", "") %}
-                            {% set contentJustified = contentWithFullWidth | replace("text-[theme(--ma-nautic-blue)]", "text-[theme(--ma-nautic-blue)] text-justify") %}
-                            <div class="text-[theme(--ma-nautic-blue)] text-justify">
-                              {{ contentJustified | safe }}
-                            </div>
+                          {# Get content associated with superHeading - Only include for FAQs, not for legal #}
+                          {% if options.name != "ma_legal" %}
+                            {% set contentKey = 'content_' + key.split('_')[1] %}
+                            {% if block[contentKey] %}
+                              {# Transform content - replace strong tags, fix width and justify text #}
+                              {% set contentWithoutBold = block[contentKey] | replace("<strong>", "<span>") | replace("</strong>", "</span>") %}
+                              {% set contentWithFullWidth = contentWithoutBold | replace("max-w-3xl", "w-full") | replace("mx-auto", "") %}
+                              {% set contentJustified = contentWithFullWidth | replace("text-[theme(--ma-nautic-blue)]", "text-[theme(--ma-nautic-blue)] text-justify") %}
+                              <div class="text-[theme(--ma-nautic-blue)] text-justify">
+                                {{ contentJustified | safe }}
+                              </div>
+                            {% endif %}
                           {% endif %}
 
                           {# Process headings associated with this superHeading #}
