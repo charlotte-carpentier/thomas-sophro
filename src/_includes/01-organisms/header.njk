@@ -42,10 +42,10 @@
     
     {# Render header with appropriate container styles #}
     <header class="{{ globalStyle }} {{ options.class | default('') }}">
-      <div class="container mx-auto grid grid-cols-6">
-        <div class="col-start-2 col-span-4 flex justify-between items-center h-24 px-4">
-          {# Logo section - Adapté pour être responsive #}
-          <div class="{{ logoContainerStyle }}">
+      <div class="container mx-auto grid grid-cols-6 lg:grid-cols-6">
+        <div class="col-span-6 lg:col-start-2 lg:col-span-4 flex justify-between items-center h-24 px-4">
+          {# Logo section - Adapté pour être responsive avec marge ajustée #}
+          <div class="{{ logoContainerStyle }} max-lg:ml-2">
             <a href="/" title="Retour à l'accueil" class="inline-block">
               {# Version mobile - Logo alternate #}
               <span class="lg:hidden">
@@ -58,8 +58,8 @@
             </a>
           </div>
 
-          {# Navigation container #}
-          <div class="{{ navContainerStyle }}">
+          {# Navigation container avec marge ajustée en mobile #}
+          <div class="{{ navContainerStyle }} max-lg:mr-2">
             <div class="{{ navStyle }}">
               {# Menu Container with hamburger and dropdown #}
               <div class="{{ menuContainerStyle }}">
