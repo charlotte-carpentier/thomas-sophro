@@ -4,7 +4,7 @@ tags: boat
 name: boat_Jane
 model: Cap Camarat 850 WA
 price: À partir de 550€
-engine: 350 ch EVINRUDE - 8,5 m
+engine: 350 ch MERCURY - 8,5 m
 passengersNumber: 9 personnes MAX
 carousel_name: carousel_Jane
 boat_images:
