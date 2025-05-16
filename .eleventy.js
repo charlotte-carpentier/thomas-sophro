@@ -1,8 +1,16 @@
 import { sortBoatsByPrice } from './src/js/utils/price-utils.js';
 // Correct import path for sync-boat-images.js
 import { syncBoatImages } from './src/js/utils/sync-boat-images.js';
+import weatherData from './src/js/utils/weather.js';
+import dotenv from 'dotenv';
+
+// Initialize dotenv for environment variables
+dotenv.config();
 
 export default function (eleventyConfig) {
+  // Add weather data as global data
+  eleventyConfig.addGlobalData("weather", weatherData);
+
   // Run image synchronization before each build
   eleventyConfig.on('beforeBuild', () => {
     console.log('Synchronizing boat images before build...');
@@ -46,6 +54,9 @@ export default function (eleventyConfig) {
 
   // Watch target for changes in boat collection
   eleventyConfig.addWatchTarget("./src/collection-boats/");
+  
+  // Watch for changes in weather data file
+  eleventyConfig.addWatchTarget("./src/js/utils/weather.js");
 
   // Folder structure configuration
   return {

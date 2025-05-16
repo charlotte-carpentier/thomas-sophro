@@ -35,7 +35,9 @@
     "refresh": "rm -rf .cache ./public/css/output.css"
   },
   "dependencies": {
+    "@11ty/eleventy-fetch": "^5.1.0",
     "@anthropic-ai/claude-code": "^0.2.29",
+    "dotenv": "^16.5.0",
     "execa": "^9.5.2"
   },
   "devDependencies": {
