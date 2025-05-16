@@ -44,7 +44,7 @@
       "heading_01": "contact_heading",
       "content": "<p class='text-[theme(--ma-nautic-white)] mb-4'>Vous souhaitez obtenir plus d'informations sur nos bateaux ou réserver votre prochaine sortie en mer ? N'hésitez pas à nous contacter en remplissant le formulaire ci-dessous.</p>",
       "formName": "ma_registration",
-      "formClass": "bg-[#2b3947] p-8 rounded-lg",
+      "formClass": "bg-[#2b3947] rounded-lg",
       "form": {
         "name": "ma_registration",
         "wrapperStyle": "form-wrapper w-full"

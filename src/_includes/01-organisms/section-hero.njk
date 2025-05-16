@@ -70,7 +70,7 @@
         {% if variant.mainTitle %}
           <div class="bg-[theme(--ma-nautic-beige)] pt-16 md:pt-20 lg:pt-24 pb-12 w-full">
             <div class="container mx-auto grid grid-cols-6">
-              <div class="col-start-2 col-span-4">
+              <div class="col-span-6 px-4 sm:px-0 sm:col-start-2 sm:col-span-4">
                 {# MainTitle #}
                 {% if variant.mainTitle and options.headings %}
                   {% set mainTitle = null %}
@@ -169,7 +169,7 @@
           {# Content container - ne pas appliquer de fond si image de fond #}
           <div class="{% if not backgroundImage %}{% if variant.hasBeigeBg %}bg-[theme(--ma-nautic-beige)]{% else %}bg-white{% endif %}{% endif %} {{ 'pt-0' if variant.scrollArrowButton == 'arrow_scroll' else 'pt-4 md:pt-6' }} relative z-10">
             <div class="container mx-auto grid grid-cols-6">
-              <div class="col-start-2 col-span-4 relative z-10">
+              <div class="col-span-6 px-4 sm:px-0 sm:col-start-2 sm:col-span-4 relative z-10">
                 <div class="flex flex-col items-center pt-8 md:pt-12 pb-8 md:pb-12">
                   {# SuperHeading #}
                   {% if variant.superHeading and options.headings %}

@@ -36,9 +36,9 @@
     <section id="boat-section" class="{{ globalStyle }} {{ options.class | default('') }} pb-12 {% if not reversed %}bg-[theme(--ma-nautic-blue)]{% else %}bg-[theme(--ma-nautic-white)]{% endif %}" data-section-item="{{ itemData.name }}" data-section-id="{{ sectionId }}" data-reversed="{{ reversed | string }}">
       <div class="{{ containerStyle }}">
         <div class="grid grid-cols-6">
-          <div class="col-start-2 col-span-4">
+          <div class="col-span-6 px-4 sm:px-0 sm:col-start-2 sm:col-span-4">
             {# Mobile layout (flex column) - Centered elements - Visible until lg breakpoint #}
-            <div class="lg:hidden text-center px-6 pt-8">
+            <div class="lg:hidden text-center pt-8">
               {# Name (primary heading) #}
               {% if itemData.name and options.headings %}
                 {{ renderHeading({
