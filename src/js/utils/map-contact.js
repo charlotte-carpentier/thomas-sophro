@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Initialize map coordinates and settings
     const mapCenter = [42.6757649, 9.3008672];
-    const zoomLevel = 15;
+    const zoomLevel = 16;
     
     // Create map with center position and zoom level
     var map = L.map('map').setView(mapCenter, zoomLevel);

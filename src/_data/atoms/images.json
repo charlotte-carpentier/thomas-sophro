@@ -27,7 +27,7 @@
   "images": [
     {
       "name": "ma_title",
-      "src": "/assets/images/titre-accueil.png",
+      "src": "/assets/images/titre-accueil-OK.png",
       "alt": "Titre de la page d'acceuil disant venez découvrir les plages de sable blanc de Saleccia, du Lotu et plus encore ! Un gouvernaille stylisé orange orne le titre.",
       "group": "block-media"
     },
@@ -293,7 +293,7 @@
     },
     {
       "name": "carousel_libecciu_slide_2",
-      "src": "/assets/images/uploaded/capelli-tempest-libecciu-moteur.jpg",
+      "src": "/assets/images/uploaded/4ee27b86-2422-42a1-ac6d-3569273da057.jpg",
       "alt": "Photos du bateau \"Libecciu\"",
       "group": "block-media"
     },
@@ -313,6 +313,18 @@
       "name": "carousel_nine_slide_2",
       "src": "/assets/images/uploaded/capelli-tempest-500-babord.jpg",
       "alt": "Photos de Nine",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_Jane_slide_1",
+      "src": "/assets/images/uploaded/6d3bdcc0-c244-4d45-b823-44b18b1e51e5.jpg",
+      "alt": "Photos du bateau \"Jane\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_Jane_slide_2",
+      "src": "/assets/images/uploaded/5db1aeef-7509-407a-abba-282600876efb.jpg",
+      "alt": "Photos du bateau \"Jane\"",
       "group": "block-media"
     }
   ]
