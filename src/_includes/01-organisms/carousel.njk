@@ -184,11 +184,11 @@
           </svg>
         </button>
         
-        {# Indicators (dots) #}
-        <div class="flex items-center justify-center mt-2 md:mt-4 space-x-1 md:space-x-2">
+        {# Indicators (dots) - cachés sur mobile, visibles sur tablet et desktop #}
+        <div class="hidden md:flex items-center justify-center mt-4 space-x-2">
           {% for image in carouselData.images %}
             <button 
-              class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator {% if loop.first %}carousel-indicator-active{% endif %} cursor-pointer"
+              class="w-3 h-3 rounded-full bg-[theme(--ma-nautic-beige)] carousel-indicator {% if loop.first %}carousel-indicator-active{% endif %} cursor-pointer"
               data-carousel-indicator="{{ loop.index0 }}"
               data-carousel-target="{{ carouselId }}"
               aria-label="Go to image {{ loop.index }}"
