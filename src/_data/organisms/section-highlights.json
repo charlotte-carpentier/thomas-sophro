@@ -5,7 +5,8 @@
     "compact": "py-6 md:py-8 lg:py-10",
     "expanded": "py-10 md:py-16 lg:py-20",
     "ma-nautic-blue": "bg-[theme(--ma-nautic-blue)]",
-    "ma-nautic-beige": "bg-[theme(--ma-nautic-beige)]"
+    "ma-nautic-beige": "bg-[theme(--ma-nautic-beige)]",
+    "ma-nautic-white": "bg-white pt-8"
   },
   "containerStyle": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
   "contentLayoutStyle": {
@@ -53,6 +54,13 @@
         "name": "submit",
         "style": "primary"
       }
+    },
+    {
+      "name": "ma_nautic_weather",
+      "variant": "ma-nautic-beige",
+      "heightVariant": "short",
+      "heading_01": "weather_heading",
+      "content": "<p class='text-[theme(--ma-nautic-blue)] mb-4'>Consultez les conditions météorologiques actuelles à Saint-Florent pour planifier votre sortie en mer dans les meilleures conditions.</p>"
     }
   ]
 }

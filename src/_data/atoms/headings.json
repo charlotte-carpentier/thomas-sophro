@@ -643,6 +643,12 @@
       "text": "Cap Camarat 850 WA",
       "level": 2,
       "style": "ma_nautic_subtitle_boat"
+    },
+    {
+      "name": "weather_heading",
+      "text": "Météo à Saint-Florent",
+      "level": 3,
+      "style": "ma_nautic_section_subtitle"
     }
   ]
 }
