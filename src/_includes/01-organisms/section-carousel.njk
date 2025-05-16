@@ -110,7 +110,7 @@
                 <div class="{{ containerStyle }} relative z-10">
                     {# Mobile layout - Utilisation de la même structure de grille que section-card #}
                     <div class="lg:hidden pt-8 grid grid-cols-6">
-                        <div class="col-start-2 col-span-4">
+                        <div class="col-span-6 px-4 sm:px-0 sm:col-start-2 sm:col-span-4">
                             {# Super Heading (section title with underscore) #}
                             {% if sectionData.superHeading and options.headings %}
                                 <div class="text-center mb-6">
@@ -225,7 +225,7 @@
 
                         {# Two columns layout #}
                         <div class="container mx-auto grid grid-cols-6">
-                            <div class="col-start-2 col-span-4">
+                            <div class="col-span-6 px-4 sm:px-0 sm:col-start-2 sm:col-span-4">
                                 <div class="flex {% if reversed %}flex-row-reverse{% else %}flex-row{% endif %} items-start h-auto">
                                     {# Content column #}
                                     <div class="{{ textContentStyle }} flex flex-col w-1/2">

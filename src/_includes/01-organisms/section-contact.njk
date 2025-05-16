@@ -11,7 +11,7 @@
   {% if options.datas %}
     {# Get global styling and container styles #}
     {% set globalStyle = options.datas.globalStyle %}
-    {% set containerStyle = options.datas.containerStyle | default('container mx-auto px-4') %}
+    {% set containerStyle = options.datas.containerStyle | default('container mx-auto') %}
     
     {# Find specific section configuration #}
     {% set sectionData = null %}
@@ -30,20 +30,22 @@
     
     {# Render contact section with form #}
     <section class="{{ globalStyle }} bg-[#2b3947] text-white py-8 {{ options.class | default('') }}">
-      <div class="{{ containerStyle }}">
-        <div class="flex justify-center">
-          <div class="w-full lg:w-1/2 {{ sectionData.form.wrapperStyle }}">
-            {# Honeypot field for spam protection #}
-            <div aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px;">
-              <input type="text" name="website" tabindex="-1" autocomplete="off">
+      <div class="{{ containerStyle }} grid grid-cols-6">
+        <div class="col-span-6 px-4 sm:px-0 sm:col-start-2 sm:col-span-4">
+          <div class="flex justify-center">
+            <div class="w-full lg:w-1/2 {{ sectionData.form.wrapperStyle }}">
+              {# Honeypot field for spam protection #}
+              <div aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px;">
+                <input type="text" name="website" tabindex="-1" autocomplete="off">
+              </div>
+              
+              {# Call list-form component with simplified version #}
+              {{ renderListForm({
+                name: sectionData.form.name,
+                datas: options.listForms,
+                atoms: options.atoms
+              }) }}
             </div>
-            
-            {# Call list-form component with simplified version #}
-            {{ renderListForm({
-              name: sectionData.form.name,
-              datas: options.listForms,
-              atoms: options.atoms
-            }) }}
           </div>
         </div>
       </div>
