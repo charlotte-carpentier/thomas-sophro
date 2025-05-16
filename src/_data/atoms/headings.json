@@ -637,6 +637,12 @@
       "text": "Jane",
       "level": 3,
       "style": "ma_nautic_section_subtitle"
+    },
+    {
+      "name": "Cap Camarat 850 WA",
+      "text": "Cap Camarat 850 WA",
+      "level": 2,
+      "style": "ma_nautic_subtitle_boat"
     }
   ]
 }
