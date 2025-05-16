@@ -163,9 +163,9 @@
           </div>
         </div>
         
-        {# Navigation buttons #}
+        {# Navigation buttons - Modifiés pour être masqués sur mobile #}
         <button 
-          class="absolute left-[-48px] top-1/2 transform -translate-y-1/2 z-10 {{ carouselPrevStyle }} {{ prevButton.class | default('') }} flex items-center justify-center cursor-pointer"
+          class="absolute left-[-48px] top-1/2 transform -translate-y-1/2 z-10 {{ carouselPrevStyle }} {{ prevButton.class | default('') }} hidden md:flex items-center justify-center cursor-pointer"
           data-carousel-prev
           aria-label="Previous image"
         >
@@ -175,7 +175,7 @@
         </button>
         
         <button 
-          class="absolute right-[-48px] top-1/2 transform -translate-y-1/2 z-10 {{ carouselNextStyle }} {{ nextButton.class | default('') }} flex items-center justify-center cursor-pointer"
+          class="absolute right-[-48px] top-1/2 transform -translate-y-1/2 z-10 {{ carouselNextStyle }} {{ nextButton.class | default('') }} hidden md:flex items-center justify-center cursor-pointer"
           data-carousel-next
           aria-label="Next image"
         >

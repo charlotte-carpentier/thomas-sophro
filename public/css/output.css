@@ -482,9 +482,6 @@
   .w-4\/5 {
     width: calc(4/5 * 100%);
   }
-  .w-4\/6 {
-    width: calc(4/6 * 100%);
-  }
   .w-5 {
     width: calc(var(--spacing) * 5);
   }
@@ -1382,6 +1379,11 @@
   .md\:mb-0 {
     @media (width >= 48rem) {
       margin-bottom: calc(var(--spacing) * 0);
+    }
+  }
+  .md\:flex {
+    @media (width >= 48rem) {
+      display: flex;
     }
   }
   .md\:h-3 {
