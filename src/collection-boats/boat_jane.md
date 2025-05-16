@@ -2,7 +2,7 @@
 layout: 01-organisms/section-boat.njk
 tags: boat
 name: boat_Jane
-model: cap camarat
+model: cap camarat 850 WA
 price: À partir de 550€/jour
 engine: 350 ch EVINRUDE - 8,5 m
 passengersNumber: 9 personnes MAX
