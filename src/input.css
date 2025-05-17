@@ -278,3 +278,30 @@
     opacity: 1;
   }
 }
+
+/* Media queries pour les titres et liens en version mobile */
+@media (max-width: 768px) {
+  /* Réduction de la taille pour les grands titres dorés */
+  .text-ma-heading {
+    font-size: 28px; /* Réduit de 35px à 28px */
+  }
+  
+  /* Réduction de la taille pour les liens content et content-light */
+  .ma-nautic-content-link,
+  .ma-content-link-light {
+    font-size: 20px; /* Réduit de 24px à 20px */
+  }
+}
+
+/* Version très petit écran */
+@media (max-width: 480px) {
+  /* Réduction plus importante pour les smartphones */
+  .text-ma-heading {
+    font-size: 24px; /* Encore plus petit sur téléphone */
+  }
+  
+  .ma-nautic-content-link,
+  .ma-content-link-light {
+    font-size: 18px; /* Encore plus petit sur téléphone */
+  }
+}
