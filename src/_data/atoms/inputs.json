@@ -52,12 +52,34 @@
       "label": "Choisissez votre bateau",
       "id": "clientChoice",
       "options": [
-        { "value": "nine", "label": "Capelli Tempest 500 Nine" },
-        { "value": "alba", "label": "Cap Camarat 5.5 cc Alba" },
-        { "value": "first", "label": "Capelli 630 S First" },
-        { "value": "libecciu", "label": "Capelli Tempest 700 Libecciu" },
-        { "value": "enzo", "label": "Motonautica 780 confort Enzo" },
-        { "value": "casablanca", "label": "Lomac 850 in Casa Blanca" }
+        {
+          "value": "alba",
+          "label": "Cap Camarat 5.5 style \"Alba\""
+        },
+        {
+          "value": "Jane",
+          "label": "Cap Camarat 850 WA \"Jane\""
+        },
+        {
+          "value": "nine",
+          "label": "Capelli Tempest 500 \"Nine\""
+        },
+        {
+          "value": "first",
+          "label": "Capelli Tempest 630 \"First\""
+        },
+        {
+          "value": "libecciu",
+          "label": "Capelli Tempest 700 \"Libecciu\""
+        },
+        {
+          "value": "casablanca",
+          "label": "Lomac 850 \"Casablanca\""
+        },
+        {
+          "value": "enzo",
+          "label": "Motonautica Vesuviana 780 confort \"Enzo\""
+        }
       ],
       "required": false
     },
