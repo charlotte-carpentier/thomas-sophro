@@ -176,6 +176,12 @@
       "group": "block-media"
     },
     {
+      "name": "ma_items",
+      "src": "/assets/images/photo-items.jpg",
+      "alt": "Un bateau avec un gilet de sauvetage, des skis nautiques et divers objets pour profiter des activités sur l'eau.",
+      "group": "block-media"
+    },
+    {
       "name": "title_background",
       "src": "/assets/images/ma-home-01.jpg",
       "alt": "Ponton en bois s'avançant vers l'horizon bleu du Cap Corse, orné d'illustrations marines.",

@@ -5,6 +5,8 @@
 #}
 
 {% macro renderSectionCard(options) %}
+  {% from "03-atoms/image.njk" import renderImage %}
+  
   {# Check if data is provided #}
   {% if options.datas %}
     {# Get global styling #}
@@ -139,9 +141,24 @@
               {% endif %}
               
               {% if section.content_02 %}
-                <div class="highlight-content {{ textColorStyle }} text-justify [&_strong]:font-normal [&_p]:mb-0 [&_ul_li]:mb-0 [&_ol_li]:mb-0 [&_ul]:space-y-0 [&_ol]:space-y-0 [&_ul]:pl-4 [&_ol]:pl-4 [&_ul]:list-outside [&_ol]:list-outside">
-                  {{ section.content_02 | safe }}
-                </div>
+                {% if section.name == "boat_price" and section.image and options.images %}
+                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+                    <div class="highlight-content {{ textColorStyle }} text-justify [&_strong]:font-normal [&_p]:mb-0 [&_ul_li]:mb-0 [&_ol_li]:mb-0 [&_ul]:space-y-0 [&_ol]:space-y-0 [&_ul]:pl-4 [&_ol]:pl-4 [&_ul]:list-outside [&_ol]:list-outside">
+                      {{ section.content_02 | safe }}
+                    </div>
+                    <div class="flex items-center justify-center">
+                      {{ renderImage({ 
+                        name: section.image, 
+                        datas: options.images,
+                        className: "shadow-lg max-w-full h-auto" 
+                      }) }}
+                    </div>
+                  </div>
+                {% else %}
+                  <div class="highlight-content {{ textColorStyle }} text-justify [&_strong]:font-normal [&_p]:mb-0 [&_ul_li]:mb-0 [&_ol_li]:mb-0 [&_ul]:space-y-0 [&_ol]:space-y-0 [&_ul]:pl-4 [&_ol]:pl-4 [&_ul]:list-outside [&_ol]:list-outside">
+                    {{ section.content_02 | safe }}
+                  </div>
+                {% endif %}
               {% endif %}
 
               {# Optional third heading-content block #}
@@ -192,6 +209,19 @@
               {% endif %}
             </div>
           </div>
+          
+          {# Image section if specified (for sections other than boat_price) #}
+          {% if section.image and options.images and section.name != "boat_price" %}
+            <div class="mt-8 grid grid-cols-6">
+              <div class="col-start-3 col-span-2 flex justify-center">
+                {{ renderImage({ 
+                  name: section.image, 
+                  datas: options.images,
+                  className: "shadow-lg" 
+                }) }}
+              </div>
+            </div>
+          {% endif %}
         </div>
       </div>
     </section>
