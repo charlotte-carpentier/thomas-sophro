@@ -39,7 +39,8 @@
         "heading_01": "boat_info_h3_price",
         "content_01": "<div class='text-[theme(--ma-nautic-white)] max-w-3xl mx-auto'><ul class='list-disc pl-6 space-y-2'><li><strong>Location à la journée uniquement</strong> : de 9h30 à 18h</li><li><strong>Bateaux livrés avec le plein</strong> d’essence</li><li><strong>Carburant non inclus</strong> : à votre charge (plein à faire avant retour)</li><li><strong>Caution obligatoire</strong></li><li><strong>Permis bateau obligatoire</strong></li></ul></div>",
         "heading_02": "boat_info_h3_option",
-        "content_02": "<div class='text-[theme(--ma-nautic-white)] max-w-3xl mx-auto'><p class='mb-4'>Ajoutez à votre réservation, <strong>à la journée</strong>, les <strong>équipements suivants</strong> :</p><ul class='list-disc pl-6 space-y-2'><li><strong>Wakeboard</strong> : 30 €/jour</li><li><strong>Bouée tractée</strong> : 30 €/jour</li><li><strong>Paddle</strong> : 40 €/jour</li><li><strong>Glacière</strong> : 15 €/jour</li><li><strong>Skipper (optionnel)</strong> : 200 €/jour</li></ul></div>"
+        "content_02": "<div class='text-[theme(--ma-nautic-white)] max-w-3xl mx-auto'><p class='mb-4'>Ajoutez à votre réservation, <strong>à la journée</strong>, les <strong>équipements suivants</strong> :</p><ul class='list-disc pl-6 space-y-2'><li><strong>Wakeboard</strong> : 30 €/jour</li><li><strong>Bouée tractée</strong> : 30 €/jour</li><li><strong>Paddle</strong> : 40 €/jour</li><li><strong>Glacière</strong> : 15 €/jour</li><li><strong>Skipper (optionnel)</strong> : 200 €/jour</li></ul></div>",
+        "image": "ma_items"
     },
     {
       "name": "boat_base",
