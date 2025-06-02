@@ -9,7 +9,8 @@ passengersNumber: 9 personnes MAX
 carousel_name: carousel_Jane
 boat_images:
   - /assets/images/uploaded/1000031221.jpg
-  - /assets/images/uploaded/1000031202.jpg
   - /assets/images/uploaded/1000031222.jpg
+  - /assets/images/uploaded/1000031202.jpg
+  - /assets/images/uploaded/1000031201.jpg
 imageAlt: Photos du bateau "Jane"
 ---
