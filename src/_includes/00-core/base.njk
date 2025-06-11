@@ -13,10 +13,18 @@
     {# Canonical URL pour SEO #}
     <link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
 
-    {# Favicon - Multiple formats for better compatibility #}
-    <link rel="icon" type="image/png" href="/assets/logos/ma-favicon.png">
-    <link rel="icon" href="/assets/logos/ma-favicon.png" sizes="any">
-    <link rel="apple-touch-icon" href="/assets/logos/ma-favicon.png">
+    {# Google Search Console verification #}
+    <meta name="google-site-verification" content="zUvwSZ5QyR_NT2mHKf7e0QKODDbX8-q2BBuKgRPyl_k" />
+
+    {# PNG favicon for browser tab #}
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/logos/ma-favicon.png">
+
+    {# SVG logo for Google and external services #}
+    <link rel="icon" href="/assets/logos/ma-logo.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/assets/logos/ma-logo.svg">
+
+    {# Meta for social networks (uses SVG) #}
+    <meta property="og:image" content="/assets/logos/ma-logo.svg">
 
     {# Google Fonts #}
     <link href="https://fonts.googleapis.com/css2?family=Vibur&display=swap" rel="stylesheet">
