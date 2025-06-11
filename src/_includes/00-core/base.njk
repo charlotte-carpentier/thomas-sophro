@@ -13,8 +13,10 @@
     {# Canonical URL pour SEO #}
     <link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
 
-    {# Favicon #}
+    {# Favicon - Multiple formats for better compatibility #}
     <link rel="icon" type="image/png" href="/assets/logos/ma-favicon.png">
+    <link rel="icon" href="/assets/logos/ma-favicon.png" sizes="any">
+    <link rel="apple-touch-icon" href="/assets/logos/ma-favicon.png">
 
     {# Google Fonts #}
     <link href="https://fonts.googleapis.com/css2?family=Vibur&display=swap" rel="stylesheet">
