@@ -1,4 +1,11 @@
 User-agent: *
-Disallow: /admin/  # Exclude admin panel from being crawled
-Disallow: /assets/  # Exclude assets folder from being crawled
-Allow: /  # Allow the rest of the site to be crawled
+Allow: /
+
+# Sitemap declaration
+Sitemap: https://manautic-location-bateau.com/sitemap.xml
+
+# Block admin panel only
+Disallow: /admin/
+
+# Allow assets (images, CSS needed for SEO)
+Allow: /assets/
