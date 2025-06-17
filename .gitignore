@@ -1,11 +1,19 @@
+# Node modules
 node_modules/
 
-# Secrets and logs
+# Secrets and credentials
 .env
+auth
+*.key
+*.pem
+*.pub
+dev
+dev.pub
+dev.*
+
+# Logs
 *.log  # Ignore tous les fichiers logs
+storybook.log
 
 # macOS related files
 .DS_Store
-
-# Storybook logs
-storybook.log
