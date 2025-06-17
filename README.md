@@ -1,59 +1,77 @@
-# 🚤 Ma Nautic
+# Thomas Sophro — thomascarpentier-sophrologue.fr
 
-**Ma Nautic** est un site vitrine pour un service de location de bateaux en Corse. Développé avec Eleventy, TailwindCSS et Decap CMS, il offre une navigation fluide, un design moderne et permet une gestion simple du contenu pour le client.
+> A clean, one-page website presenting Thomas Carpentier’s professional profile, services, and contact information —  
+> built as a performant static site with Decap CMS for easy content management.
 
----
-
-## 🛠️ Stack technique
-
-- [Eleventy (11ty)](https://www.11ty.dev/) — générateur de site statique
-- [Nunjucks](https://mozilla.github.io/nunjucks/) — moteur de templates
-- [TailwindCSS v4](https://tailwindcss.com/) — framework CSS utilitaire
-- [Decap CMS](https://decapcms.org/) — CMS headless intégré
-- Hébergement : [Netlify](https://www.netlify.com/)
+![Site preview](./public/assets/preview.png)
 
 ---
 
-## 🧑‍💻 Structure (extrait)
+## ✨ Overview
 
-Le projet est structuré selon l’architecture **OMA** (Organism / Molecule / Atom) et les composants sont alimentés par des fichiers de données JSON et Markdown.
+This one-page site showcases Thomas Sophro’s expertise and offerings with sections for biography, services, testimonials, and contact details. The design focuses on clarity, responsiveness, and smooth user experience, with dynamic tab navigation and modular content components.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Eleventy (11ty)** — static site generator  
+- **Nunjucks** — templating engine  
+- **Tailwind CSS v4** — single `input.css` for styling  
+- **Decap CMS** — headless CMS without database  
+- **Netlify** — hosting and deployment
+
+---
+
+## ⚙️ NPM Scripts
+
+```json
+"scripts": {
+  "start": "npx concurrently \"npx @tailwindcss/cli -i ./src/input.css -o ./public/css/output.css --watch\" \"eleventy --serve --watch\"",
+  "build": "npm run update-sitemap && eleventy",
+  "update-sitemap": "node src/js/utils/update-sitemap.js",
+  "refresh": "rm -rf .cache ./public/css/output.css"
+}
+````
+
+---
+
+## 📁 Project Structure
+
+* `src/` contains the source files
+
+  * `_data/`, `_includes/`, `js/` follow the **OMA** (Organism, Molecule, Atom) structure
+  * `input.css` holds the Tailwind CSS configuration
+  * `admin/` includes Decap CMS configuration
+* `public/` is the output folder for the built site
+* `.eleventy.js` is the Eleventy configuration file
+* Root files: `robots.txt`, `sitemap.xml`, `LICENSE`, and `README.md`
+
+---
+
+## 🚀 Getting Started
+
+Run the following commands to install dependencies and start the development server:
 
 ```bash
-src/
-├── _includes/             # Composants Nunjucks classés par OMA (atoms, molecules, organisms)
-├── _data/                 # Fichiers JSON pour les contenus dynamiques
-├── collection-boats/      # Fichiers Markdown pour chaque bateau
-├── collection-carousels/  # Fichiers Markdown pour les carrousels d’images
-├── assets/                # Images, icônes, polices
-├── js/                    # Scripts JavaScript
-├── pages (.njk)           # Pages du site (index, contact, etc.)
-└── input.css              # Fichier Tailwind CSS v4
+npm install
+npm run start
 ```
 
----
-
-## ✍️ Contenu modifiable par le client
-
-Via **Decap CMS**, le client peut modifier :
-
-- **Les bateaux** : titre, description, photos, tarifs (`collection-boats/*.md`)
-- **Les carrousels d’images** : directement intégrés dans chaque fiche bateau
-
-**Le CMS est accessible via /admin.**
+Open your browser at [http://localhost:8080](http://localhost:8080) to view the site locally.
 
 ---
 
-## 🚀 Généralités
+## 📝 Content Management
 
-Le site sera accessible sur : <https://www.manautic-location-bateau.com>
+Content can be edited easily via **Decap CMS** at the `/admin` route, enabling updates without needing a database and tracking changes automatically with Git.
 
-🌍 Déploiement
-Le site est automatiquement déployé sur Netlify à chaque mise à jour de la branche principale (main).
+---
 
-📌 À propos
+## 📬 Contact & License
 
-- Développement : CC
-- Design : EM
-- SEO: PC
-- Technos : Eleventy, Nunjucks, Tailwind v4, Decap CMS
-- Version actuelle : v1.0.0
+* Developed by Charlotte Carpentier — [carpentier.dev@gmail.com](mailto:carpentier.dev@gmail.com)
+* Licensed under MIT
+  ![MIT License](https://img.shields.io/badge/License-MIT-green.svg)
+
+---
