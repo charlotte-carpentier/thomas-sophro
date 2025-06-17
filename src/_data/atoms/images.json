@@ -323,13 +323,25 @@
     },
     {
       "name": "carousel_Jane_slide_1",
-      "src": "/assets/images/uploaded/6d3bdcc0-c244-4d45-b823-44b18b1e51e5.jpg",
+      "src": "/assets/images/uploaded/1000031221.jpg",
       "alt": "Photos du bateau \"Jane\"",
       "group": "block-media"
     },
     {
       "name": "carousel_Jane_slide_2",
-      "src": "/assets/images/uploaded/5db1aeef-7509-407a-abba-282600876efb.jpg",
+      "src": "/assets/images/uploaded/1000031222.jpg",
+      "alt": "Photos du bateau \"Jane\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_Jane_slide_3",
+      "src": "/assets/images/uploaded/1000031202.jpg",
+      "alt": "Photos du bateau \"Jane\"",
+      "group": "block-media"
+    },
+    {
+      "name": "carousel_Jane_slide_4",
+      "src": "/assets/images/uploaded/1000031201.jpg",
       "alt": "Photos du bateau \"Jane\"",
       "group": "block-media"
     }

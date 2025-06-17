@@ -9,4 +9,8 @@ images:
     objectPosition: center
   - name: carousel_Jane_slide_2
     objectPosition: center
+  - name: carousel_Jane_slide_3
+    objectPosition: center
+  - name: carousel_Jane_slide_4
+    objectPosition: center
 ---
