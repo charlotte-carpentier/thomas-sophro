@@ -1,28 +1,7 @@
---- 
-permalink: "/credits-mentions-legales/" 
-layout: '00-core/base.njk' 
+---
+permalink: "/mentions-legales/"
+layout: '00-core/base.njk'
 ---
 
-{# Legal Hero Section #}
-{% from "01-organisms/section-hero.njk" import renderSectionHero %}
-
-{{ renderSectionHero({ 
-    name: "legal_hero",
-    datas: organisms["section-heros"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    links: atoms.links,
-    icons: atoms.icons
-}) }}
-
-{# Legal & GDPR Section #}
-{% from "01-organisms/section-accordion.njk" import renderSectionAccordion %}
-
-{{ renderSectionAccordion({ 
-    name: "ma_legal",
-    datas: legals,
-    headings: atoms.headings,
-    icons: atoms.icons,
-    links: atoms.links
-}) }}
+<h1>Legal Notice & Credits</h1>
+<p>Legal information and credits related to Thomas's website.</p>

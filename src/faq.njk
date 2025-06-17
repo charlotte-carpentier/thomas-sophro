@@ -1,29 +1,7 @@
---- 
-permalink: "/faq/" 
-layout: '00-core/base.njk' 
+---
+permalink: "/faq/"
+layout: '00-core/base.njk'
 ---
 
-{# FAQ Hero Section #}
-{% from "01-organisms/section-hero.njk" import renderSectionHero %}
-
-{{ renderSectionHero({ 
-    name: "faq_hero",
-    datas: organisms["section-heros"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    links: atoms.links,
-    icons: atoms.icons
-}) }}
-
-
-{# FAQ Section #}
-{% from "01-organisms/section-accordion.njk" import renderSectionAccordion %}
-
-{{ renderSectionAccordion({ 
-    name: "ma_faq",
-    datas: faqs,
-    headings: atoms.headings,
-    icons: atoms.icons,
-    links: atoms.links
-}) }}
+<h1>FAQ - Sophrology</h1>
+<p>Answers to frequently asked questions about sophrology and sessions.</p>
