@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Groupe principal centré dans le viewBox -->
-  <g transform="translate(256, 256) scale(20) translate(-51.815, -54.665)">
-    <line stroke="currentColor" stroke-width="3.5624" stroke-linecap="round" stroke-miterlimit="10" fill="none" x1="47.51" y1="45.92" x2="56.27" y2="54.67"/>
-    <line stroke="currentColor" stroke-width="3.5624" stroke-linecap="round" stroke-miterlimit="10" fill="none" x1="47.51" y1="63.42" x2="56.27" y2="54.66"/>
-  </g>
-</svg>
