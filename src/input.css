@@ -2,306 +2,254 @@
 
 @source "./src/**/*.njk";
 
-/* THEME VARIABLES */
-@theme {
-  /* Main colors */
-  --ma-nautic-blue: #2b3947;       /* dark blue */
-  --ma-nautic-teal: #63a595;       /* green/turquoise */
-  --ma-nautic-beige: #eae7dc;      /* light beige */
-  --ma-nautic-gold: #e8ab55;       /* orange/ochre */
-  --ma-nautic-white: #ffffff;
-  --ma-nautic-black: #000000;
+/* -------------------------------------------------- */
+/* 00 – DESIGN SYSTEM                                 */
+/* -------------------------------------------------- */
 
-  /* Fonts */
-  --ma-nautic-font-display: 'Vibur', cursive;
-  --ma-nautic-font-body: 'Roboto', sans-serif;
+@theme {
+  /* Color styles */
+  --th-black: #000000;
+  --th-white: #ffffff;
+  --th-blue-dark: #2a4d69;
+  --th-blue-light: #d9e8f5;
+  --th-green: #63a69f;
+
+  /* Font families */
+  --font-title: 'Space Grotesk', sans-serif;
+  --font-text: 'Inter', sans-serif;
 
   /* Font sizes */
-  --ma-nautic-font-size-subtitle: 20px;  /* vibur, for small section titles */
-  --ma-nautic-font-size-body: 18px;      /* roboto Regular */
-  --ma-nautic-font-size-title: 24px;     /* roboto Bold */
-  --ma-nautic-font-size-heading: 35px;   /* vibur */
-  --ma-nautic-font-size-nav: 18px;       /* vibur */
-  --ma-nautic-font-size-section: 24px;   /* vibur */
+  --text-h1: 40px;
+  --text-h2: 32px;
+  --text-h3: 24px;
+  --text-h1-mobile: 32px;
+  --text-h2-mobile: 28px;
+  --text-h3-mobile: 20px;
+  --text-body: 16px;
+  --text-small: 14px;
+  --text-body-mobile: 16px;
+  --text-small-mobile: 14px;
 
   /* Letter spacing */
-  --ma-nautic-letter-spacing-title: 24px;
-  --ma-nautic-letter-spacing-subtitle: 30px;
-
-  /* Font weights */
-  --ma-nautic-font-weight-regular: 400;
-  --ma-nautic-font-weight-bold: 700;
-  --ma-nautic-font-weight-black: 900;
-
-  /* Spacing */
-  --ma-nautic-spacing-xs: 0.25rem;
-  --ma-nautic-spacing-sm: 0.5rem;
-  --ma-nautic-spacing-md: 1rem;
-  --ma-nautic-spacing-lg: 1.5rem;
-  --ma-nautic-spacing-xl: 2rem;
-  --ma-nautic-spacing-2xl: 3rem;
-
-  /* Buttons */
-  --ma-nautic-btn-padding-x: 1.5rem;
-  --ma-nautic-btn-padding-y: 0.75rem;
-  --ma-nautic-btn-border-radius: 0.7rem;
-
-  /* Borders */
-  --ma-nautic-border-width-default: 1px;
-  --ma-nautic-border-width-large: 2px;
+  --ls-h1: 3%;
+  --ls-h1-mobile: 3%;
 }
 
-/* NAVIGATION */
-/* Navigation links with custom hover effect */
-.ma-nautic-nav-link {
-  position: relative;
-  color: theme(--ma-nautic-white);
-  font-family: theme(--ma-nautic-font-display);
-  font-size: theme(--ma-nautic-font-size-nav);
+/* -------------------------------------------------- */
+/* 02 – UI COMPONENTS                                 */
+/* -------------------------------------------------- */
+
+/* ------------------------- */
+/* ATOMS                    */
+/* ------------------------- */
+
+/* Logo */
+.logo-desktop { width: 160px; }
+.logo-mobile { width: 100px; }
+
+/* Photo */
+.photo-desktop { width: 200px; height: auto; }
+.photo-mobile { width: 120px; height: auto; }
+
+/* Background */
+.bg-desktop { background-size: cover; background-position: center; }
+.bg-mobile { background-size: cover; background-position: center; }
+
+/* Icone */
+.icon-desktop { width: 32px; height: 32px; }
+.icon-mobile { width: 24px; height: 24px; }
+
+/* Illustrations */
+.illu-service-desktop,
+.illu-article-desktop { width: 100%; max-width: 400px; }
+
+.illu-service-mobile,
+.illu-article-mobile { width: 100%; max-width: 240px; }
+
+/* Button primary */
+.button-primary {
+  font-family: theme(--font-title);
+  font-weight: bold;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  background-color: theme(--th-blue-dark);
+  color: theme(--th-white);
+  transition: background-color 0.2s;
+}
+.button-primary:hover { background-color: theme(--th-green); }
+.button-primary:focus { outline: 2px solid theme(--th-blue-light); }
+.button-primary:active { background-color: theme(--th-black); }
+.button-primary:disabled {
+  background-color: theme(--th-blue-light);
+  color: theme(--th-black);
+  cursor: not-allowed;
 }
 
-.ma-nautic-nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: theme(--ma-nautic-border-width-large);
-  background-color: theme(--ma-nautic-gold);
-  transition: all 600ms;
+/* Button secondary */
+.button-secondary {
+  font-family: theme(--font-title);
+  font-weight: bold;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  border: 2px solid theme(--th-blue-dark);
+  color: theme(--th-blue-dark);
+  transition: all 0.2s;
+}
+.button-secondary:hover {
+  background-color: theme(--th-blue-dark);
+  color: theme(--th-white);
+}
+.button-secondary:focus {
+  outline: 2px solid theme(--th-blue-light);
+}
+.button-secondary:active {
+  background-color: theme(--th-black);
+  color: theme(--th-white);
+}
+.button-secondary:disabled {
+  border-color: theme(--th-blue-light);
+  color: theme(--th-blue-light);
+  cursor: not-allowed;
 }
 
-.ma-nautic-nav-link:hover::after {
-  width: 100%;
+/* Scroll to top */
+.scroll-top {
+  background-color: theme(--th-blue-dark);
+  color: theme(--th-white);
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+.scroll-top:hover { background-color: theme(--th-green); }
+.scroll-top:focus { outline: 2px solid theme(--th-blue-light); }
+
+/* Link inline */
+.link-inline {
+  font-family: theme(--font-text);
+  font-size: theme(--text-body);
+  text-decoration: underline;
+  color: theme(--th-blue-dark);
+  transition: color 0.2s;
+}
+.link-inline:hover { color: theme(--th-green); }
+.link-inline:focus { outline: 2px solid theme(--th-blue-light); }
+.link-inline:disabled {
+  color: theme(--th-blue-light);
+  pointer-events: none;
 }
 
-/* TYPOGRAPHY & HEADINGS */
-/* Section headers with underscore prefix */
-.ma-nautic-section-title {
-  font-family: theme(--ma-nautic-font-display);
-  font-size: theme(--ma-nautic-font-size-section);
-  color: theme(--ma-nautic-blue);
+/* Header navigation & footer navigation */
+.nav-link {
+  font-family: theme(--font-title);
+  font-size: theme(--text-body);
+  transition: color 0.2s;
+}
+.nav-link:hover { color: theme(--th-green); }
+.nav-link:focus { outline: 2px solid theme(--th-blue-light); }
+.nav-link:disabled {
+  color: theme(--th-blue-light);
+  pointer-events: none;
 }
 
-/* Hero section text */
-.ma-nautic-hero-heading {
-  font-weight: theme(--ma-nautic-font-weight-bold);
-  font-size: theme(--ma-nautic-font-size-title);
-  letter-spacing: theme(--ma-nautic-letter-spacing-title);
+/* Burger menu */
+.burger-menu {
+  width: 24px;
+  height: 24px;
+  background-color: theme(--th-blue-dark);
+  transition: background-color 0.2s;
+}
+.burger-menu:hover { background-color: theme(--th-green); }
+.burger-menu:focus { outline: 2px solid theme(--th-blue-light); }
+.burger-menu:disabled {
+  background-color: theme(--th-blue-light);
+  cursor: not-allowed;
 }
 
-.ma-nautic-subtitle {
-  font-family: theme(--ma-nautic-font-body);
-  font-weight: theme(--ma-nautic-font-weight-bold);
-  font-size: theme(--ma-nautic-font-size-nav);
+
+/* ------------------------- */
+/* MOLECULES                */
+/* ------------------------- */
+
+.cta-block {}
+.contact-info-desktop {}
+.contact-info-mobile {}
+.cta-button {}
+.article-card-desktop {}
+.article-card-mobile {}
+.accompaniment-card-desktop {}
+.accompaniment-card-mobile {}
+.recommendation-card-desktop {}
+.recommendation-card-mobile {}
+.tab-menu-desktop {}
+.tab-menu-mobile {}
+
+
+/* ------------------------- */
+/* ORGANISMS                */
+/* ------------------------- */
+
+.header-desktop {}
+.header-mobile {}
+.footer-desktop {}
+.footer-mobile {}
+.hero-section-desktop {}
+.hero-section-mobile {}
+.approche-section-desktop {}
+.approche-section-mobile {}
+.accompagnements-section-desktop {}
+.accompagnements-section-mobile {}
+.contact-section {}
+.reco-section-desktop {}
+.reco-section-mobile {}
+.articles-section-desktop {}
+.articles-section-mobile {}
+
+
+/* -------------------------------------------------- */
+/* 03 – UTILITAIRES / TYPOGRAPHIE                     */
+/* -------------------------------------------------- */
+
+.text-h1 {
+  font-family: theme(--font-title);
+  font-size: theme(--text-h1);
+  font-weight: bold;
+  letter-spacing: theme(--ls-h1);
+}
+.text-h2 {
+  font-family: theme(--font-title);
+  font-size: theme(--text-h2);
+  font-weight: bold;
+}
+.text-h3 {
+  font-family: theme(--font-title);
+  font-size: theme(--text-h3);
+  font-weight: 500;
+}
+.text-body {
+  font-family: theme(--font-text);
+  font-size: theme(--text-body);
+}
+.text-small {
+  font-family: theme(--font-text);
+  font-size: theme(--text-small);
 }
 
-/* Responsive font adjustments */
-@media (max-width: 640px) {
-  .ma-nautic-subtitle {
-    font-size: theme(--ma-nautic-font-size-subtitle);
-  }
-}
-
-@media (max-width: 640px) {
-  .ma-nautic-main {
-    font-size: theme(--ma-nautic-font-size-subtitle);
-  }
-}
-
-/* Heading size classes */
-.text-ma-title {
-  font-size: theme(--ma-nautic-font-size-title);
-}
-
-.text-ma-subtitle {
-  font-size: theme(--ma-nautic-font-size-subtitle);
-}
-
-.text-ma-section {
-  font-size: theme(--ma-nautic-font-size-section);
-}
-
-.text-ma-heading {
-  font-size: theme(--ma-nautic-font-size-heading);
-}
-
-/* Font weight classes */
-.font-ma-black {
-  font-weight: theme(--ma-nautic-font-weight-black);
-}
-
-.font-ma-bold {
-  font-weight: theme(--ma-nautic-font-weight-bold);
-}
-
-.font-ma-regular {
-  font-weight: theme(--ma-nautic-font-weight-regular);
-}
-
-/* BUTTONS */
-/* CTA Buttons */
-.ma-nautic-btn-primary {
-  background-color: theme(--ma-nautic-teal);
-  color: theme(--ma-nautic-white);
-  padding: theme(--ma-nautic-btn-padding-y) theme(--ma-nautic-btn-padding-x);
-  font-weight: theme(--ma-nautic-font-weight-bold);
-  transition: all 300ms;
-  border-radius: theme(--ma-nautic-btn-border-radius);
-}
-
-.ma-nautic-btn-primary:hover {
-  background-color: theme(--ma-nautic-blue);
-}
-
-.ma-nautic-btn-reserve {
-  background-color: theme(--ma-nautic-gold);
-  color: theme(--ma-nautic-white);
-  padding: theme(--ma-nautic-btn-padding-y) theme(--ma-nautic-btn-padding-x);
-  font-weight: theme(--ma-nautic-font-weight-bold);
-  transition: all 300ms;
-  border-radius: theme(--ma-nautic-btn-border-radius);
-}
-
-.ma-nautic-btn-reserve:hover {
-  background-color: theme(--ma-nautic-blue);
-}
-
-/* CARDS & COMPONENTS */
-/* Boat card */
-.ma-nautic-boat-card {
-  border: theme(--ma-nautic-border-width-default) solid theme(--ma-nautic-blue);
-  padding: theme(--ma-nautic-spacing-lg);
-}
-
-.ma-nautic-boat-title {
-  font-family: theme(--ma-nautic-font-display);
-  font-size: theme(--ma-nautic-font-size-section);
-}
-
-/* LINKS & INTERACTIONS */
-/* Content links dark */
-.ma-nautic-content-link {
-  position: relative;
-  color: theme(--ma-nautic-blue);
-  font-family: theme(--ma-nautic-font-display);
-  font-size: theme(--ma-nautic-font-size-section);
-}
-
-.ma-nautic-content-link::before,
-.ma-nautic-content-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: theme(--ma-nautic-border-width-large);
-  transition: all 600ms;
-}
-
-.ma-nautic-content-link::before {
-  background-color: theme(--ma-nautic-gold);
-}
-
-.ma-nautic-content-link::after {
-  background-color: theme(--ma-nautic-teal);
-  width: 0;
-}
-
-.ma-nautic-content-link:hover::before {
-  width: 0;
-  left: 100%;
-}
-
-.ma-nautic-content-link:hover::after {
-  width: 100%;
-}
-
-/* Content links light */
-.ma-content-link-light {
-  position: relative;
-  color: theme(--ma-nautic-white);
-  font-family: theme(--ma-nautic-font-display);
-  font-size: theme(--ma-nautic-font-size-section);
-}
-
-.ma-content-link-light::before,
-.ma-content-link-light::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: theme(--ma-nautic-border-width-large);
-  transition: all 600ms;
-}
-
-.ma-content-link-light::before {
-  background-color: theme(--ma-nautic-gold);
-}
-
-.ma-content-link-light::after {
-  background-color: theme(--ma-nautic-teal);
-  width: 0;
-}
-
-.ma-content-link-light:hover::before {
-  width: 0;
-  left: 100%;
-}
-
-.ma-content-link-light:hover::after {
-  width: 100%;
-}
-
-/* BACKGROUNDS & EFFECTS */
-/* Background image with fixed parallax effect */
-.ma-nautic-bg-fixed {
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-
-/* Header shadow */
-.shadow-bottom {
-  box-shadow: 0 15px 20px -3px rgba(0, 0, 0, 0.5);
-}
-
-/* Wave image */
-.wave-image {
-  opacity: 1;
-}
-
-@media (max-width: 1630px) {
-  .wave-image {
-    opacity: 1;
-  }
-}
-
-/* Media queries pour les titres et liens en version mobile */
 @media (max-width: 768px) {
-  /* Réduction de la taille pour les grands titres dorés */
-  .text-ma-heading {
-    font-size: 28px; /* Réduit de 35px à 28px */
+  .text-h1 {
+    font-size: theme(--text-h1-mobile);
+    letter-spacing: theme(--ls-h1-mobile);
   }
-  
-  /* Réduction de la taille pour les liens content et content-light */
-  .ma-nautic-content-link,
-  .ma-content-link-light {
-    font-size: 20px; /* Réduit de 24px à 20px */
+  .text-h2 {
+    font-size: theme(--text-h2-mobile);
   }
-}
-
-/* Version très petit écran */
-@media (max-width: 480px) {
-  /* Réduction plus importante pour les smartphones */
-  .text-ma-heading {
-    font-size: 24px; /* Encore plus petit sur téléphone */
+  .text-h3 {
+    font-size: theme(--text-h3-mobile);
   }
-  
-  .ma-nautic-content-link,
-  .ma-content-link-light {
-    font-size: 18px; /* Encore plus petit sur téléphone */
+  .text-body {
+    font-size: theme(--text-body-mobile);
+  }
+  .text-small {
+    font-size: theme(--text-small-mobile);
   }
 }
