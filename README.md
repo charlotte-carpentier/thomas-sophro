@@ -3,7 +3,7 @@
 > A clean, one-page website presenting Thomas Carpentier’s professional profile, services, and contact information —  
 > built as a performant static site with Decap CMS for easy content management.
 
-![Site preview](./public/assets/preview.png)
+![Site preview](./public/assets/ui/preview.png)
 
 ---
 
