@@ -5,146 +5,107 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {# Primary Meta Tags #}
+    {# ----- Basic SEO ----- #}
     <title>{{ title | default(site.pages[page.url].title | default(site.title)) }}</title>
     <meta name="title" content="{{ title | default(site.pages[page.url].title | default(site.title)) }}">
     <meta name="description" content="{{ description | default(site.pages[page.url].description | default(site.description)) }}">
 
-    {# Canonical URL pour SEO #}
-    <link rel="canonical" href="https://manautic-location-bateau.com{{ page.url | url }}">
+    <link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
 
-    {# Google Search Console verification #}
-    <meta name="google-site-verification" content="zUvwSZ5QyR_NT2mHKf7e0QKODDbX8-q2BBuKgRPyl_k" />
+    {# Google Search Console #}
+    {# <meta name="google-site-verification" content="..." /> #}
 
-    {# PNG favicon priority for browser tab (more readable) #}
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/logos/ma-favicon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/logos/ma-favicon.png">
+    {# ----- Favicons ----- #}
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ favicon.png16 | default('/assets/images/ui/favicon/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ favicon.png32 | default('/assets/images/ui/favicon/favicon-32x32.png') }}">
+    {% if favicon.svg %}
+      <link rel="icon" href="{{ favicon.svg }}" type="image/svg+xml">
+    {% endif %}
+    {% if favicon.ico %}
+      <link rel="shortcut icon" href="{{ favicon.ico }}">
+    {% endif %}
+    {% if favicon.appleTouch %}
+      <link rel="apple-touch-icon" href="{{ favicon.appleTouch }}">
+    {% endif %}
 
-    {# SVG logo for Google and external services (vectorial) #}
-    <link rel="icon" href="/assets/logos/ma-logo.svg" type="image/svg+xml" media="(min-width: 0px)">
-    <link rel="apple-touch-icon" href="/assets/logos/ma-logo.svg">
-
-    {# Meta for social networks (uses SVG) #}
-    <meta property="og:image" content="/assets/logos/ma-logo.svg">
-
-    {# Google Fonts #}
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-
-
-    {# Preload images #}
-    <link rel="preload" as="image" href="/assets/images/ma-home-01.jpg">
-    <link rel="preload" as="image" href="/assets/images/ma-home-02.jpg">
-
-    {# Stylesheets #}
-    <link href="/css/output.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-
-    {# Decap CMS Identity Widget #}
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer="defer"></script>
-
-    {# Open Graph / Facebook #}
+    {# ----- Social Metadata (Open Graph) ----- #}
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
     <meta property="og:title" content="{{ title | default(site.pages[page.url].title | default(site.title)) }}">
     <meta property="og:description" content="{{ description | default(site.pages[page.url].description | default(site.description)) }}">
     <meta property="og:image" content="{{ site.url }}/assets/social-share.jpg">
 
-    {# Twitter #}
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ site.url }}{{ page.url }}">
-    <meta property="twitter:title" content="{{ title | default(site.pages[page.url].title | default(site.title)) }}">
-    <meta property="twitter:description" content="{{ description | default(site.pages[page.url].description | default(site.description)) }}">
-    <meta property="twitter:image" content="{{ site.url }}/assets/social-share.jpg">
+    {# ----- Twitter Card ----- #}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+    <meta name="twitter:title" content="{{ title | default(site.pages[page.url].title | default(site.title)) }}">
+    <meta name="twitter:description" content="{{ description | default(site.pages[page.url].description | default(site.description)) }}">
+    <meta name="twitter:image" content="{{ site.url }}/assets/social-share.jpg">
 
-    {# Favicons for different devices #}
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    {# ----- Fonts ----- #}
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Manjari&display=swap" rel="stylesheet" />
+
+    {# ----- Image preload (optional) ----- #}
+    <link rel="preload" as="image" href="/assets/images/TODO">
+
+    {# ----- Stylesheets ----- #}
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    {# ----- Manifest and theme color ----- #}
     <link rel="manifest" href="/site.webmanifest">
-
-    {# Theme Color #}
     <meta name="theme-color" content="#ffffff">
-
-    {# Axeptio Settings #}
-    <script>
-      window.axeptioSettings = {
-        clientId: "680f9baab2a4942b9e73ec22",
-        cookiesVersion: "ma-nautic-fr-EU",
-        googleConsentMode: {
-          default: {
-            analytics_storage: "denied",
-            ad_storage: "denied",
-            ad_user_data: "denied",
-            ad_personalization: "denied",
-            wait_for_update: 500
-          }
-        }
-      };
-
-      (function (d, s) {
-        var t = d.getElementsByTagName(s)[0],
-          e = d.createElement(s);
-        e.async = true;
-        e.src = "//static.axept.io/sdk.js";
-        t
-          .parentNode
-          .insertBefore(e, t);
-      })(document, "script");
-    </script>
   </head>
 
   <body class="min-h-screen flex flex-col">
 
-    {# Header organism call #}
+    {# ----- Header Organism ----- #}
     {% from "01-organisms/header.njk" import renderHeader %}
     {{ renderHeader({ 
-    name: "main",
-    datas: organisms.headers,
-    navigations: organisms.navigations,
-    vectors: atoms.vectors,
-    links: atoms.links,
-    icons: atoms.icons
-  }) }}
+      name: "main",
+      datas: organisms.headers,
+      navigations: organisms.navigations,
+      vectors: atoms.vectors,
+      links: atoms.links,
+      icons: atoms.icons
+    }) }}
 
+    {# ----- Main content ----- #}
     <main class="flex-grow">
       {{ content | safe }}
     </main>
 
-    {# Footer organism call #}
+    {# ----- Footer Organism ----- #}
     {% from "01-organisms/footer.njk" import renderFooter %}
     {{ renderFooter({ 
-    name: "ma_nautic_footer",
-    datas: organisms.footers,
-    menus: organisms.menus,
-    links: atoms.links,
-    headings: atoms.headings,
-    icons: atoms.icons,
-    vectors: atoms.vectors,
-    "navigation-secondarys": organisms["navigation-secondarys"]
-  }) }}
+      name: "footer",
+      datas: organisms.footers,
+      menus: organisms.menus,
+      links: atoms.links,
+      headings: atoms.headings,
+      icons: atoms.icons,
+      vectors: atoms.vectors,
+      "navigation-secondarys": organisms["navigation-secondarys"]
+    }) }}
 
-    {# Decap CMS redirect script #}
+    {# ----- JavaScript scripts ----- #}
+    <script src="/js/main.js" defer></script>
+    <script src="/js/atoms/svg-loader.js" defer></script>
+
+    {# ----- Netlify CMS redirect (optional) ----- #}
     <script>
       if (window.netlifyIdentity) {
-        window
-          .netlifyIdentity
-          .on("init", (user) => {
-            if (!user) {
-              window
-                .netlifyIdentity
-                .on("login", () => {
-                  document.location.href = "/admin/";
-                });
-            }
-          });
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
       }
     </script>
-
-    {# Custom Scripts #}
-    <script src="/js/main.js" defer="defer"></script>
-    <script src="/js/atoms/svg-loader.js" defer="defer"></script>
 
   </body>
 </html>

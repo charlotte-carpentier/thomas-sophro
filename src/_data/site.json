@@ -1,36 +1,44 @@
 {
-    "title": "Location de bateau à Saint-Florent (Haute-Corse) - M.A Nautic",
-    "description": "Depuis Saint-Florent, découvrez la Corse autrement : naviguez vers Saleccia, Lotu ou le Cap Corse à votre rythme, avec ou sans skipper.",
-    "url": "https://www.manautic-location-bateau.com",
-    "pages": {
-      "/": {
-        "title": "Location de bateau à Saint-Florent (Haute-Corse) - M.A Nautic",
-        "description": "Depuis Saint-Florent, découvrez la Corse autrement : naviguez vers Saleccia, Lotu ou le Cap Corse à votre rythme, avec ou sans skipper."
-      },
-      "/nos-bateaux/": {
-        "title": "Location de rigide et semi-rigide en Corse - M.A Nautic",
-        "description": "Louez un bateau semi-rigide en Corse au départ de Saint-Florent. Flotte complète avec ou sans permis, de 4 à 12 personnes. Options sportives, skipper et confort inclus."
-      },
-      "/lieux-interet/": {
-        "title": "Excursion en bateau depuis Saint-Florent",
-        "description": "Embarquez depuis Saint-Florent vers les plus beaux spots de Haute-Corse : plages de Saleccia, Lotu, Nonza ou Centuri, avec ou sans skipper."
-      },
-      "/contact/": {
-        "title": "M.A Nautic à Saint-Florent - Coordonnées et accès au port",
-        "description": "Besoin d'un renseignement ? Retrouvez ici toutes les infos utiles pour contacter M.A Nautic à Saint-Florent : téléphone, horaires, accès au port et formulaire."
-      },
-      "/faq/": {
-        "title": "Tout savoir pour louer un bateau en Corse avec M.A Nautic",
-        "description": "Vous souhaitez louer un bateau en Corse ? Découvrez notre FAQ : permis, réservation, météo, plage de Saleccia, activités nautiques, carburant, équipements, etc."
-      },
-      "/credits-mentions-legales/": {
-        "title": "Crédits et Mentions Légales - M.A Nautic",
-        "description": "Les informations légales et crédits relatifs au site M.A Nautic."
-      },
-      "/merci/": {
-        "title": "Merci pour votre inscription - M.A Nautic",
-        "description": "Merci pour votre intérêt. Nous reviendrons vers vous bientôt."
-      }
+  "title": "Thomas Carpentier – Sophrologue certifié",
+  "description": "Accompagnateur bienveillant, je vous guide vers plus de sérénité et d’équilibre grâce à la sophrologie. Mon approche allie écoute, douceur et techniques adaptées pour vous aider à mieux vivre le quotidien.",
+  "url": "https://thomascarpentier-sophrologue.fr",
+  "pages": {
+    "/": {
+      "title": "Thomas Carpentier – Sophrologue à votre écoute",
+      "description": "Bienvenue sur mon site dédié à une sophrologie à l’écoute de chaque parcours de vie : Découvrez mes accompagnements personnalisés pour retrouver calme et confiance en soi."
+    },
+    "/faq/": {
+      "title": "FAQ – Questions fréquentes sur la sophrologie",
+      "description": "Réponses claires aux questions courantes sur la sophrologie, ses bienfaits, et mon approche thérapeutique."
+    },
+    "/mentions-legales/": {
+      "title": "Mentions légales – Thomas Carpentier",
+      "description": "Informations légales du site thomascarpentier-sophrologue.fr : éditeur, hébergeur et conditions d’utilisation."
+    },
+    "/merci/": {
+      "title": "Message bien reçu – Merci !",
+      "description": "Votre message a bien été transmis. Je vous recontacte très vite pour commencer ensemble ce chemin vers le mieux-être."
     }
-  }
-  
+  },
+  "favicon": {
+    "png16": "/assets/images/ui/favicon/favicon-16x16.png",
+    "png32": "/assets/images/ui/favicon/favicon-32x32.png",
+    "ico": "/assets/images/ui/favicon/favicon.ico",
+    "appleTouch": "/assets/images/ui/favicon/apple-touch-icon.png"
+  },
+  "socialImage": "/assets/images/TODO",
+  "fonts": {
+    "primary": "Space Grotesk",
+    "secondary": "Inter"
+  },
+  "axeptio": {
+    "clientId": "TODO",
+    "cookiesVersion": "TODO"
+  },
+  "preloadImages": [
+    "/assets/images/ui/favicon/favicon-16x16.png",
+    "/assets/images/ui/favicon/favicon-32x32.png",
+    "/assets/images/ui/favicon/apple-touch-icon.png",
+    "/assets/images/TODO"
+  ]
+}
