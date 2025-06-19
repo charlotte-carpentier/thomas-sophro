@@ -1,0 +1,39 @@
+{
+  "buttons": [
+    {
+      "name": "btn_primary",
+      "text": "Prendre Rendez-vous",
+      "variant": "primary"
+    },
+    {
+      "name": "btn_secondary_hero01", 
+      "text": "Accompagnements",
+      "variant": "secondary"
+    },
+    {
+      "name": "btn_secondary_hero02", 
+      "text": "Mon approche",
+      "variant": "secondary"
+    },
+    {
+      "name": "btn_secondary_contact01", 
+      "text": "Appeler maintenant",
+      "variant": "secondary"
+    },
+    {
+      "name": "btn_secondary_contact02", 
+      "text": "Envoyer un mail",
+      "variant": "secondary"
+    },
+    {
+      "name": "btn_secondary_contact03", 
+      "text": "Voir l'itinéraire",
+      "variant": "secondary"
+    },
+    {
+      "name": "btn_scroll_top",
+      "variant": "scroll-to-top",
+      "iconBefore": "/assets/icons/interface/caret-circle-up.svg"
+    }
+  ]
+}
