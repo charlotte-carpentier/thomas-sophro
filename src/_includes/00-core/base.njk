@@ -62,15 +62,9 @@
   <body class="min-h-screen flex flex-col">
 
     {# ----- Header Organism ----- #}
-    {% from "01-organisms/header.njk" import renderHeader %}
-    {{ renderHeader({ 
-      name: "main",
-      datas: organisms.headers,
-      navigations: organisms.navigations,
-      vectors: atoms.vectors,
-      links: atoms.links,
-      icons: atoms.icons
-    }) }}
+    {# 🚧 TODO: Add new header #}
+    {# {% from "01-organisms/header.njk" import renderHeader %}
+    {{ renderHeader({ ... }) }} #}
 
     {# ----- Main content ----- #}
     <main class="flex-grow">
@@ -78,17 +72,9 @@
     </main>
 
     {# ----- Footer Organism ----- #}
-    {% from "01-organisms/footer.njk" import renderFooter %}
-    {{ renderFooter({ 
-      name: "footer",
-      datas: organisms.footers,
-      menus: organisms.menus,
-      links: atoms.links,
-      headings: atoms.headings,
-      icons: atoms.icons,
-      vectors: atoms.vectors,
-      "navigation-secondarys": organisms["navigation-secondarys"]
-    }) }}
+    {# 🚧 TODO: Add new footer #}
+    {# {% from "01-organisms/footer.njk" import renderFooter %}
+    {{ renderFooter({ ... }) }} #}
 
     {# ----- JavaScript scripts ----- #}
     <script src="/js/main.js" defer></script>
