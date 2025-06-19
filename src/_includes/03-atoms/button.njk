@@ -1,6 +1,7 @@
 {# 
 =========================
-         BUTTON           
+      BUTTON ATOM
+      v1.0 - Thomas       
 =========================
 #}
 
@@ -13,9 +14,9 @@
     {% set buttonsConfig = option.datas %}
     {% set buttonName = option.name %}
     
-    {# Find the specific button by name #}
+    {# Find the specific button by name - buttonsConfig is already the array #}
     {% set buttonData = null %}
-    {% for button in buttonsConfig.buttons %}
+    {% for button in buttonsConfig %}
       {% if button.name == buttonName %}
         {% set buttonData = button %}
       {% endif %}
@@ -25,118 +26,55 @@
     {% if not buttonData %}
       <span class="text-red-500">Button not found: {{ buttonName }}</span>
     {% else %}
-      {# Determine variant configuration #}
-      {% set variant = option.style | default(buttonData.style) %}
-      {% set variantConfig = buttonsConfig.variants[variant] %}
+      {# Build CSS classes - Using variant from JSON data #}
+      {% set variant = buttonData.variant | default('primary') %}
+      {% set cssClasses = 'button button--' ~ variant %}
       
-      {# Determine all classes #}
-      {% set globalClasses = buttonsConfig.globalStyle %}
-      {% set sizeClasses = buttonsConfig.sizes[buttonData.size | default('button')] %}
-      
-      {# Set base classes and state classes #}
-      {% set baseClasses = globalClasses ~ ' ' ~ sizeClasses %}
-      {% set stateClasses = {
-        'default': variantConfig.default,
-        'hover': variantConfig.hover,
-        'focus': variantConfig.focus,
-        'active': variantConfig.active,
-        'disabled': variantConfig.disabled
-      } %}
-      
-      {# Combine all default classes for initial state #}
-      {% set combinedClasses = baseClasses ~ ' ' ~ stateClasses.default %}
+      {# Add disabled class if needed #}
+      {% if option.disabled or buttonData.disabled %}
+        {% set cssClasses = cssClasses ~ ' button--disabled' %}
+      {% endif %}
       
       {# Render the button #}
       <button 
-        type="{{ option.type | default('button') }}"
-        class="{{ combinedClasses }} flex items-center justify-center"
-        onfocus="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center'; this.setAttribute('data-focused', 'true'); }" 
-        onblur="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.default }} flex items-center justify-center'; this.removeAttribute('data-focused'); }"
-        onmouseover="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.hover }} flex items-center justify-center'; }" 
-        onmouseout="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.default }} flex items-center justify-center'; }" 
-        onmousedown="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.active }} flex items-center justify-center'; }" 
-        onmouseup="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.hover }} flex items-center justify-center'; }"
-        {% if option.disabled or buttonData.disabled %}
-          disabled 
-          class="{{ baseClasses }} {{ stateClasses.disabled }} flex items-center justify-center"
-        {% endif %}
+        type="{{ option.type | default(buttonData.type) | default('button') }}"
+        class="{{ cssClasses }}"
+        {% if option.disabled or buttonData.disabled %}disabled{% endif %}
+        {% if option.onclick %}onclick="{{ option.onclick }}"{% endif %}
+        {% if option.id %}id="{{ option.id }}"{% endif %}
       >
-        {% if variant == 'icon' %}
-          {# Icon-only button #}
-          {% if buttonData.iconBefore %}
-            {% if buttonData.iconBefore.endsWith('.svg') %}
-              <span data-svg-src="{{ buttonData.iconBefore }}" class="inline-flex items-center justify-center w-5 h-5">
-                <!-- SVG will be loaded here -->
-              </span>
-            {% else %}
-              <img 
-                src="{{ buttonData.iconBefore }}" 
-                alt="{{ option.text | default(buttonData.text) }}" 
-                class="w-5 h-5"
-              />
-            {% endif %}
-          {% elif buttonData.icon %}
-            {% if buttonData.icon.endsWith('.svg') %}
-              <span data-svg-src="{{ buttonData.icon }}" class="inline-flex items-center justify-center w-5 h-5">
-                <!-- SVG will be loaded here -->
-              </span>
-            {% else %}
-              <img 
-                src="{{ buttonData.icon }}" 
-                alt="{{ option.text | default(buttonData.text) }}" 
-                class="w-5 h-5"
-              />
-            {% endif %}
+        {# Before icon #}
+        {% if buttonData.iconBefore %}
+          {% if buttonData.iconBefore.endsWith('.svg') %}
+            <span data-svg-src="{{ buttonData.iconBefore }}" class="button__icon button__icon--before">
+              <!-- SVG will be loaded here -->
+            </span>
+          {% else %}
+            <img 
+              src="{{ buttonData.iconBefore }}" 
+              alt="Icon" 
+              class="button__icon button__icon--before"
+            />
           {% endif %}
-        {% elif variant == 'fixed' %}
-          {# Fixed button - display only number #}
-          <span>{{ option.number | default(buttonData.number) }}</span>
-        {% else %}
-          {# Standard button with optional icons + text #}
-          
-          {# Before icon #}
-          {% if buttonData.iconBefore %}
-            {% if buttonData.iconBefore.endsWith('.svg') %}
-              <span data-svg-src="{{ buttonData.iconBefore }}" class="inline-flex items-center justify-center mr-2 w-4 h-4">
-                <!-- SVG will be loaded here -->
-              </span>
-            {% else %}
-              <img 
-                src="{{ buttonData.iconBefore }}" 
-                alt="Icon" 
-                class="mr-2 w-4 h-4"
-              />
-            {% endif %}
-          {% elif buttonData.icon %}
-            {% if buttonData.icon.endsWith('.svg') %}
-              <span data-svg-src="{{ buttonData.icon }}" class="inline-flex items-center justify-center mr-2 w-4 h-4">
-                <!-- SVG will be loaded here -->
-              </span>
-            {% else %}
-              <img 
-                src="{{ buttonData.icon }}" 
-                alt="Icon" 
-                class="mr-2 w-4 h-4"
-              />
-            {% endif %}
-          {% endif %}
-          
-          {# Button text with override capability #}
-          <span>{{ option.text | default(buttonData.text) }}</span>
-          
-          {# After icon #}
-          {% if buttonData.iconAfter %}
-            {% if buttonData.iconAfter.endsWith('.svg') %}
-              <span data-svg-src="{{ buttonData.iconAfter }}" class="inline-flex items-center justify-center ml-2 w-4 h-4">
-                <!-- SVG will be loaded here -->
-              </span>
-            {% else %}
-              <img 
-                src="{{ buttonData.iconAfter }}" 
-                alt="Icon" 
-                class="ml-2 w-4 h-4"
-              />
-            {% endif %}
+        {% endif %}
+        
+      {# Button text #}
+        {% if buttonData.text %}
+          <span class="button__text">{{ buttonData.text }}</span>
+        {% endif %}
+        
+        {# After icon #}
+        {% if buttonData.iconAfter %}
+          {% if buttonData.iconAfter.endsWith('.svg') %}
+            <span data-svg-src="{{ buttonData.iconAfter }}" class="button__icon button__icon--after">
+              <!-- SVG will be loaded here -->
+            </span>
+          {% else %}
+            <img 
+              src="{{ buttonData.iconAfter }}" 
+              alt="Icon" 
+              class="button__icon button__icon--after"
+            />
           {% endif %}
         {% endif %}
       </button>
@@ -154,8 +92,8 @@ Summon HAT Components Wisely
 
 2. Call a specific button by its name
 {{ renderButton({ 
-    name: "submit_quest",
-    datas: atoms.buttons 
+    name: "button_default",
+    datas: atoms.button.buttons
 }) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨

@@ -66,63 +66,107 @@
 .illu-service-mobile,
 .illu-article-mobile { width: 100%; max-width: 240px; }
 
-/* Button primary */
-.button-primary {
-  font-family: theme(--font-title);
-  font-weight: bold;
-  padding: 0.5rem 1.25rem;
+/* Button */
+.button {
+  font-family: theme(--font-text);
+  padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
-  background-color: theme(--th-blue-dark);
-  color: theme(--th-white);
-  transition: background-color 0.2s;
-}
-.button-primary:hover { background-color: theme(--th-green); }
-.button-primary:focus { outline: 2px solid theme(--th-blue-light); }
-.button-primary:active { background-color: theme(--th-black); }
-.button-primary:disabled {
-  background-color: theme(--th-blue-light);
-  color: theme(--th-black);
-  cursor: not-allowed;
+  font-weight: bold;
+  font-size: theme(--text-body);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Button secondary */
-.button-secondary {
-  font-family: theme(--font-title);
-  font-weight: bold;
-  padding: 0.5rem 1.25rem;
-  border-radius: 0.5rem;
-  background-color: transparent;
-  border: 2px solid theme(--th-blue-dark);
+/* Primary variant - Default state */
+.button--primary {
+  background-color: theme(--th-blue-dark);
+  color: theme(--th-white);
+}
+
+.button--primary:hover {
+  background-color: theme(--th-green);
+  color: theme(--th-white);
+}
+
+.button--primary:focus {
+  background-color: theme(--th-blue-dark);
+  color: theme(--th-white);
+  border-color: theme(--th-green);
+  border: 2px solid;
+  outline: none;
+}
+
+.button--primary:active {
+  background-color: theme(--th-green);
   color: theme(--th-blue-dark);
-  transition: all 0.2s;
-}
-.button-secondary:hover {
-  background-color: theme(--th-blue-dark);
-  color: theme(--th-white);
-}
-.button-secondary:focus {
-  outline: 2px solid theme(--th-blue-light);
-}
-.button-secondary:active {
-  background-color: theme(--th-black);
-  color: theme(--th-white);
-}
-.button-secondary:disabled {
-  border-color: theme(--th-blue-light);
-  color: theme(--th-blue-light);
-  cursor: not-allowed;
 }
 
-/* Scroll to top */
-.scroll-top {
-  background-color: theme(--th-blue-dark);
+/* Secondary variant */
+.button--secondary {
+  background-color: transparent;
   color: theme(--th-white);
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: background-color 0.2s;
+  border-color: theme(--th-white);
+  border: 2px solid;
 }
-.scroll-top:hover { background-color: theme(--th-green); }
-.scroll-top:focus { outline: 2px solid theme(--th-blue-light); }
+
+.button--secondary:hover {
+  background-color: theme(--th-white);
+  color: theme(--th-blue-dark);
+}
+
+.button--secondary:focus {
+  background-color: transparent;
+  border-color: theme(--th-green);
+  border: 2px solid;
+}
+
+.button--secondary:active {
+  background-color: transparent;
+  color: theme(--th-blue-dark);
+  border-color: theme(--th-green);
+  border: 2px solid;
+}
+
+/* Scroll-to-top */
+.button--scroll-to-top {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  padding: 0;
+  background-color: theme(--th-green);
+  color: theme(--th-white);
+}
+
+/* Icon size */
+.button--scroll-to-top svg {
+  width: 2.875rem;
+  height: 2.875rem;
+}
+
+.button--scroll-to-top:hover {
+  background-color: theme(--th-blue-dark);
+}
+
+.button--scroll-to-top:focus {
+  background-color: theme(--th-green);
+  border-color: theme(--th-blue-dark);
+  border: 2px solid;
+}
+
+/* Disabled state for all */
+.button:disabled,
+.button--disabled {
+  background-color: transparent;
+  color: theme(--th-blue-light);
+  border-color: theme(--th-blue-light);
+  border: 2px solid;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 
 /* Link inline */
 .link-inline {

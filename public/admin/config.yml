@@ -5,23 +5,21 @@ backend:
 media_folder: "public/assets/images/uploaded"
 public_folder: "/assets/images/uploaded"
 
-collections: 
-  - name: "bateaux"
-    label: "Bateaux"
-    folder: "src/collection-boats"
+collections:
+  - name: "articles"
+    label: "Articles"
+    folder: "src/collection-articles"
     create: true
     delete: true
     slug: "{{fields.name}}"
     identifier_field: "name"
     summary: "{{name}}"
     fields:
-      - { label: "Layout", name: "layout", widget: "hidden", default: "01-organisms/section-boat.njk" }
-      - { label: "Tags", name: "tags", widget: "hidden", default: "boat" }
-      - { label: "Nom technique", name: "name", widget: "string", pattern: ["^boat_.*", "Doit commencer par boat_"] }
-      - { label: "Modèle", name: "model", widget: "string" }
-      - { label: "Prix", name: "price", widget: "string" }
-      - { label: "Moteur", name: "engine", widget: "string" }
-      - { label: "Nombre de passagers", name: "passengersNumber", widget: "string" }
-      - { label: "Carousel", name: "carousel_name", widget: "string", pattern: ["^carousel_.*", "Doit commencer par carousel_"] }
-      - { label: "Images du bateau", name: "boat_images", widget: "list", allow_add: true, allow_delete: true, field: { label: "Image", name: "image", widget: "image" } }
-      - { label: "Alt de l'image principale", name: "imageAlt", widget: "string" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "01-organisms/section-article.njk" }
+      - { label: "Tags", name: "tags", widget: "hidden", default: "article" }
+      - { label: "Nom technique", name: "name", widget: "string", pattern: ["^article_.*", "Doit commencer par article_"] }
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Résumé", name: "summary", widget: "text" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Image principale", name: "mainImage", widget: "image" }
+      - { label: "Alt de l'image", name: "imageAlt", widget: "string" }
