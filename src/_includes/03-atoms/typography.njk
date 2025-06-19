@@ -1,0 +1,71 @@
+{# 
+=========================
+    TYPOGRAPHY ATOM
+      v1.0 - Thomas
+=========================
+#}
+
+{% macro renderTypography(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No typography configuration provided</span>
+  {% else %}
+    {# Retrieve typography configuration #}
+    {% set typographyConfig = option.datas %}
+    {% set typographyName = option.name %}
+    
+    {# Find the specific typography by name - typographyConfig is already the array #}
+    {% set typographyData = null %}
+    {% for typography in typographyConfig %}
+      {% if typography.name == typographyName %}
+        {% set typographyData = typography %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if typography not found #}
+    {% if not typographyData %}
+      <span class="text-red-500">Typography not found: {{ typographyName }}</span>
+    {% else %}
+      {# Build CSS classes - Using existing text classes from input.css #}
+      {% set tag = option.tag | default(typographyData.tag) | default('p') %}
+      {% set variant = typographyData.variant | default('p') %}
+      {% set cssClasses = 'text-' ~ variant %}
+      
+      {# Render the typography with specified tag #}
+      {% if tag == 'h1' %}
+        <h1 class="{{ cssClasses }}">{{ typographyData.text | safe }}</h1>
+      {% elif tag == 'h2' %}
+        <h2 class="{{ cssClasses }}">{{ typographyData.text | safe }}</h2>
+      {% elif tag == 'h3' %}
+        <h3 class="{{ cssClasses }}">{{ typographyData.text | safe }}</h3>
+      {% elif tag == 'h4' %}
+        <h4 class="{{ cssClasses }}">{{ typographyData.text | safe }}</h4>
+      {% elif tag == 'h5' %}
+        <h5 class="{{ cssClasses }}">{{ typographyData.text | safe }}</h5>
+      {% elif tag == 'h6' %}
+        <h6 class="{{ cssClasses }}">{{ typographyData.text | safe }}</h6>
+      {% elif tag == 'span' %}
+        <span class="{{ cssClasses }}">{{ typographyData.text | safe }}</span>
+      {% else %}
+        <p class="{{ cssClasses }}">{{ typographyData.text | safe }}</p>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# 
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/typography.njk" import renderTypography %}
+
+2. Call a specific typography by its name
+{{ renderTypography({ 
+    name: "page_title",
+    datas: atoms.typography.texts
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

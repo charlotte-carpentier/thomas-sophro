@@ -210,50 +210,7 @@
   cursor: not-allowed;
 }
 
-
-/* ------------------------- */
-/* MOLECULES                */
-/* ------------------------- */
-
-.cta-block {}
-.contact-info-desktop {}
-.contact-info-mobile {}
-.cta-button {}
-.article-card-desktop {}
-.article-card-mobile {}
-.accompaniment-card-desktop {}
-.accompaniment-card-mobile {}
-.recommendation-card-desktop {}
-.recommendation-card-mobile {}
-.tab-menu-desktop {}
-.tab-menu-mobile {}
-
-
-/* ------------------------- */
-/* ORGANISMS                */
-/* ------------------------- */
-
-.header-desktop {}
-.header-mobile {}
-.footer-desktop {}
-.footer-mobile {}
-.hero-section-desktop {}
-.hero-section-mobile {}
-.approche-section-desktop {}
-.approche-section-mobile {}
-.accompagnements-section-desktop {}
-.accompagnements-section-mobile {}
-.contact-section {}
-.reco-section-desktop {}
-.reco-section-mobile {}
-.articles-section-desktop {}
-.articles-section-mobile {}
-
-
-/* -------------------------------------------------- */
-/* 03 – UTILITAIRES / TYPOGRAPHIE                     */
-/* -------------------------------------------------- */
-
+/* Typography */
 .text-h1 {
   font-family: theme(--font-title);
   font-size: theme(--text-h1);
@@ -297,3 +254,41 @@
     font-size: theme(--text-small-mobile);
   }
 }
+
+/* ------------------------- */
+/* MOLECULES                */
+/* ------------------------- */
+
+.cta-block {}
+.contact-info-desktop {}
+.contact-info-mobile {}
+.cta-button {}
+.article-card-desktop {}
+.article-card-mobile {}
+.accompaniment-card-desktop {}
+.accompaniment-card-mobile {}
+.recommendation-card-desktop {}
+.recommendation-card-mobile {}
+.tab-menu-desktop {}
+.tab-menu-mobile {}
+
+
+/* ------------------------- */
+/* ORGANISMS                */
+/* ------------------------- */
+
+.header-desktop {}
+.header-mobile {}
+.footer-desktop {}
+.footer-mobile {}
+.hero-section-desktop {}
+.hero-section-mobile {}
+.approche-section-desktop {}
+.approche-section-mobile {}
+.accompagnements-section-desktop {}
+.accompagnements-section-mobile {}
+.contact-section {}
+.reco-section-desktop {}
+.reco-section-mobile {}
+.articles-section-desktop {}
+.articles-section-mobile {}

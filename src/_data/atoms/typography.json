@@ -1,0 +1,274 @@
+{
+  "texts": [
+    {
+      "name": "site_logo",
+      "text": "Thomas Carpentier Sophrologue",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "hero_title",
+      "text": "Une sophrologie à l’écoute de chaque parcours de vie",
+      "tag": "h1",
+      "variant": "h1"
+    },
+    {
+      "name": "hero_text",
+      "text": "À la croisée du sport, de la neuropsychologie et des réalités sociales, mon parcours s’est construit dans le mouvement, avec rigueur et un réel souci de compréhension de l’autre. J’ai progressivement développé une approche intégrative de l’accompagnement, attentive aux liens entre le corps, les émotions et les représentations. Ma pratique de la sophrologie se veut inclusive, individualisée et centrée sur le renforcement de l’autonomie, dans un cadre sécurisé et toujours en complémentarité avec la médecine.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "accompaniements_title",
+      "text": "Accompagnements",
+      "tag": "h2",
+      "variant": "h2"
+    },
+    {
+      "name": "accompaniements_paragraph_1",
+      "text": "Aujourd’hui, c’est en m’appuyant sur mon parcours et les enseignements qu’il m’a transmis que j’accompagne celles et ceux qui souhaitent retrouver un mieux-être pour mieux vivre chaque jour.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "accompaniements_paragraph_2",
+      "text": "Mon approche repose sur une compréhension fine du fonctionnement psychologique et physiologique, une écoute attentive et un profond respect des singularités de chacun. J’ai à cœur d’adapter mon accompagnement à chaque personne, afin d’aider toutes celles et ceux qui souhaitent avancer sur leur chemin avec plus de sérénité.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "accompaniements_subtitle_1",
+      "text": "Équilibre au quotidien",
+      "tag": "h3",
+      "variant": "h3"
+    },
+    {
+      "name": "accompaniements_1_paragraph_1",
+      "text": "Stress, sommeil perturbé, trop-plein émotionnel… La sophrologie propose des outils simples et concrets, à s'approprier à son rythme, selon ce que l'on vit et ce dont on a besoin.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "accompaniements_1_paragraph_2",
+      "text": "Respiration guidée, relaxation dynamique, visualisation mentale : ces techniques permettent d’installer un mieux-être durable en agissant sur les plans mental, émotionnel et physique.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "accompaniements_1_paragraph_3",
+      "text": "Mon objectif est de vous aider à vous reconnecter à vos ressentis, à mieux gérer les émotions et à retrouver votre propre espace d’équilibre dans le tumulte du quotidien.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "accompaniements_subtitle_2",
+      "text": "Optimisation de l’activité physique",
+      "tag": "h3",
+      "variant": "h3"
+    },
+    {
+      "name": "accompaniements_2_paragraph_1",
+      "text": "Le lien corps-esprit est central dans mon parcours, comme dans ma pratique. J’accompagne toutes les personnes engagées dans une activité physique, qu’elles soient débutantes, régulières ou sportives de haut niveau.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "accompaniements_2_paragraph_2",
+      "text": "Grâce à la préparation mentale, à la respiration maîtrisée et à la concentration en mouvement, la sophrologie permet d’optimiser la pratique sportive, d’améliorer la récupération, de renforcer la motivation et de mieux vivre les phases de progression ou d’arrêt.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "accompaniements_2_paragraph_3",
+      "text": "Avec mon expérience intensive du sport et ma future formation BPJEPS AF, j’intègre des outils de coaching et des techniques de sophrologie appliquées au sport, dans une approche complémentaire, non intrusive et ajustée à vos besoins.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "accompaniements_subtitle_3",
+      "text": "Soutien dans la diversité des handicaps",
+      "tag": "h3",
+      "variant": "h3"
+    },
+    {
+      "name": "accompaniements_3_paragraph_1",
+      "text": "Travailler aux côtés d’enfants en situation de handicap a profondément marqué mon engagement : j’y ai découvert combien l’écoute, la souplesse d’adaptation, la confiance mutuelle, ainsi qu'une réelle exigence d’inclusion sont non négligeables. Aujourd’hui, je poursuis cette démarche à travers la sophrologie, en proposant un accompagnement individualisé, respectueux de chaque parcours.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "accompaniements_3_paragraph_2",
+      "text": "Que le handicap soit visible ou invisible, moteur, sensoriel ou psychique, chaque personne mérite un espace d’expression, de calme et de reconnexion à soi. La sophrologie vient ici comme un soutien complémentaire, sans jamais se substituer au suivi médical ou thérapeutique nécessaire.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "about_title",
+      "text": "À propos :",
+      "tag": "h2",
+      "variant": "h2"
+    },
+    {
+      "name": "about_paragraph_1",
+      "text": "Trouver ma voie n’a pas été un chemin tout tracé. Les langues, la nature, le fonctionnement du corps et de l'esprit humain, la relation d’aide, le lien à l’autre : depuis toujours, j’ai besoin d’explorer, de me confronter à la diversité des réalités, d’apprendre autant en théorie que sur le terrain, et d’avancer au rythme de ma curiosité.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "about_paragraph_2",
+      "text": "Le sport, en revanche, a toujours été mon point d'ancrage. Escrime, rugby, baseball, escalade, danse, équitation, natation, musculation, randonnée… au fil des années, ces pratiques m’ont transmis la rigueur, la persévérance, l’écoute de soi et le sens du collectif. Au sein des équipes de rugby à VII et de baseball universitaire que j’ai co-créées et entraînées, j’ai aussi compris que le coaching allait bien au-delà de la transmission : il crée du lien, engage une attention fine aux besoins de chacun, la capacité à s'adapter, à encourager pour aller plus loin, à prendre confiance en soi.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "about_paragraph_3",
+      "text": "Chaque trajectoire porte ses singularités. Et c’est dans la traversée de nos expériences, dans ce qu’elles éveillent et transforment en nous, que se révèle peu à peu une place juste : un espace où l’on se sent en accord avec soi-même, légitime et prêt à accompagner à son tour.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "about_1_subtitle_1",
+      "text": "Comprendre l’humain pour mieux accompagner",
+      "tag": "h3",
+      "variant": "h3"
+    },
+    {
+      "name": "about_1_paragraph_1",
+      "text": "Après l'obtention de mon baccalauréat général, et un PVT d'un an en Nouvelle-Zélande, j'ai d'abord choisi d’étudier la psychologie, convaincu que cette discipline me permettrait d’explorer plus en profondeur les mécanismes du comportement, des émotions et de la pensée. Au fil de cet apprentissage, j’ai découvert différentes approches : psychologie cognitive, clinique, sociale et du développement, qui m’ont permis d’affiner ma compréhension de l’humain dans son entièreté et d’obtenir une licence en neuropsychologie.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "about_1_paragraph_2",
+      "text": "La crise sanitaire du COVID-19 est venue bouleverser la continuité de mes études. Et, face à l’incertitude et à l’impossibilité de rester les bras croisés, je suis alors entré dans la vie active.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "about_2_subtitle_1",
+      "text": "Mon expérience en tant qu’AED",
+      "tag": "h3",
+      "variant": "h3"
+    },
+    {
+      "name": "about_2_paragraph_1",
+      "text": "J’ai commencé à travailler en tant qu'assistant d’éducation auprès d’enfants en situation de handicap (physique, moteur et/ou mental). Cette expérience m’a profondément marqué : elle m’a appris à adapter mon accompagnement, à cultiver une écoute attentive, une posture bienveillante et à mesurer l’importance d’un soutien individualisé, de surcroît dans les parcours confrontés à la difficulté. Mais après près de deux ans, une dissonance s’est installée entre mes valeurs et certaines réalités du système éducatif. Ce constat m’a poussé à reprendre mon chemin personnel vers un second PVT, cette fois-ci en Corée du Sud, dont j’avais étudié la langue durant mes années lycée.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "about_2_paragraph_2",
+      "text": "Là-bas, en parallèle d’un travail en pâtisserie, j’ai parfait mon coréen tout en découvrant au quotidien une société où la discipline du corps, la méditation et le bien-être occupent une place prépondérante. Un accident de sport m’a cependant contraint à l’immobilisation. Un temps de douleur, d’incertitude et de rééducation propice à l’introspection : c’est à ce moment-là que j’ai véritablement découvert la sophrologie et pris conscience des liens profonds entre le corps et l’esprit. Cette approche a immédiatement fait écho à toutes mes expériences passées et à mon désir d’accompagner, toujours présent, autrement.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "about_3_subtitle_1",
+      "text": "La sophrologie : mieux s’appréhender et s’autonomiser",
+      "tag": "h3",
+      "variant": "h3"
+    },
+    {
+      "name": "about_3_paragraph_1",
+      "text": "Convaincu par l’utilité et l’importance de cette discipline, j’ai choisi de m’y former afin d’en maîtriser la pratique et d’en comprendre les applications. Respiration, relaxation dynamique, méditation, visualisation… je voulais aider chacune et chacun à renforcer son équilibre mental et physique, à mieux gérer son stress et ses émotions, à mobiliser ses ressources internes pour se sentir plus apaisé.e au quotidien, grâce à des techniques à portée de main.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "reco_title",
+      "text": "Recommandations",
+      "tag": "h2",
+      "variant": "h2"
+    },
+    {
+      "name": "reco_paragraph_1",
+      "text": "Chaque accompagnement est propre à chacun. Merci à celles et ceux qui m’ont fait confiance et ont accepté de partager un bout de leur chemin.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "reco_paragraph_2",
+      "text": "Vos retours nourrissent ma pratique et me permettent de continuer d’apprendre, toujours.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "blog_title",
+      "text": "À lire sur le blog",
+      "tag": "h2",
+      "variant": "h2"
+    },
+    {
+      "name": "blog_paragraph_1",
+      "text": "Pour mieux comprendre la sophrologie, ses bienfaits, ses différentes applications et ses limites, découvrez mes articles de blog ! Des contenus sourcés, accessibles et rigoureux, pour intégrer cette pratique dans votre quotidien.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "contact_title",
+      "text": "Contact",
+      "tag": "h2",
+      "variant": "h2"
+    },
+    {
+      "name": "contact_paragraph_1",
+      "text": "Vous souhaitez en savoir plus, poser une question ou prendre rendez-vous ?",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "contact_paragraph_2",
+      "text": "Je vous propose un premier échange pour discuter de vos besoins, de vos attentes. Les séances sont proposées en cabinet, à domicile ou en visio, selon vos disponibilités et préférences. J’interviens dans un cadre professionnel, respectueux et confidentiel, en complémentarité avec la médecine.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "contact_paragraph_3",
+      "text": "Chaque demande est traitée avec attention. Je vous réponds dans les plus brefs délais.",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "contact_phone_label",
+      "text": "Téléphone",
+      "tag": "small",
+      "variant": "small"
+    },
+    {
+      "name": "contact_phone_info",
+      "text": "07 63 87 87 05",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "contact_mail_label",
+      "text": "Email",
+      "tag": "small",
+      "variant": "small"
+    },
+    {
+      "name": "contact_mail_info",
+      "text": "carpentier.sophro@gmail.com",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "contact_address_label",
+      "text": "Cabinet",
+      "tag": "small",
+      "variant": "small"
+    },
+    {
+      "name": "contact_address_info",
+      "text": "La Garenne-Colombes",
+      "tag": "p",
+      "variant": "body"
+    },
+    {
+      "name": "footer_title",
+      "text": "© 2025 Thomas Carpentier • <a href=\"https://thomascarpentier-sophrologue.fr/mentions-legales/\">Mentions légales</a>",
+      "tag": "small",
+      "variant": "small"
+    }
+  ]
+}
