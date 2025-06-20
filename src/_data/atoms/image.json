@@ -1,0 +1,34 @@
+{
+  "images": [
+    {
+      "name": "hero_bg",
+      "src": "/assets/images/background/background.png", 
+      "alt": "Paysage montagneux paisible avec forêt verdoyante et ciel dégagé, évoquant la sérénité",
+      "variant": "bg"
+    },
+    {
+      "name": "accompaniement_1",
+      "src": "/assets/images/illu/accompaniements/anxiete.jpg",
+      "alt": "Femme exprimant de l'anxiété avec des éclairs et un tourbillon symbolisant le stress mental",
+      "variant": "illu-acc"
+    },
+    {
+      "name": "accompaniement_2",
+      "src": "/assets/images/illu/accompaniements/sport.jpg",
+      "alt": "Homme effectuant un squat avec une barre de musculation",
+      "variant": "illu-acc"
+    },
+    {
+      "name": "accompaniement_3",
+      "src": "/assets/images/illu/accompaniements/enfant-et-ado.jpg",
+      "alt": "Illustration de deux personnes se félicitant par un high-five lors d'un travail collaboratif",
+      "variant": "illu-acc"
+    },
+        {
+      "name": "about_photo",
+      "src": "/assets/images/photo/photo_thomas.jpg",
+      "alt": "Thomas Carpentier, sophrologue professionnel, portrait en noir et blanc inspirant confiance et sérénité",
+      "variant": "photo"
+    }
+  ]
+}

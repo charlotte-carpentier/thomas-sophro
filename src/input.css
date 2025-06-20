@@ -43,28 +43,61 @@
 /* ATOMS                    */
 /* ------------------------- */
 
-/* Logo */
-.logo-desktop { width: 160px; }
-.logo-mobile { width: 100px; }
+/* Image - Photo variant (responsive) */
+.image-photo {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
-/* Photo */
-.photo-desktop { width: 200px; height: auto; }
-.photo-mobile { width: 120px; height: auto; }
+@media (max-width: 768px) {
+  .image-photo {
+    width: 200px;
+    height: 200px;
+  }
+}
 
-/* Background */
-.bg-desktop { background-size: cover; background-position: center; }
-.bg-mobile { background-size: cover; background-position: center; }
+/* Image - Background variant (responsive) */
+.image-bg {
+  background-size: cover;
+  background-position: center;
+}
+
+/* Image - Illustration accompaniement variant (responsive) */
+.image-illu-acc {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .image-illu-acc {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Image - Illustration article variant (responsive) */
+.image-illu-article {
+  width: 100%;
+  max-width: 400px;
+}
+
+@media (max-width: 768px) {
+  .image-illu-article {
+    max-width: 240px;
+  }
+}
 
 /* Icone */
 .icon-desktop { width: 32px; height: 32px; }
 .icon-mobile { width: 24px; height: 24px; }
 
-/* Illustrations */
-.illu-service-desktop,
-.illu-article-desktop { width: 100%; max-width: 400px; }
-
-.illu-service-mobile,
-.illu-article-mobile { width: 100%; max-width: 240px; }
+/* Logo */
+.logo-desktop { width: 160px; }
+.logo-mobile { width: 100px; }
 
 /* Button */
 .button {
