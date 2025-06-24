@@ -91,9 +91,28 @@
   }
 }
 
-/* Icone */
-.icon-desktop { width: 32px; height: 32px; }
-.icon-mobile { width: 24px; height: 24px; }
+/* Icon */
+
+/* Icons interface - White color */
+.icon-interface { 
+  width: 32px; 
+  height: 32px;
+  color: theme(--th-white);
+}
+
+/* Icons contact - Blue dark color */
+.icon-contact { 
+  width: 32px; 
+  height: 32px;
+  color: theme(--th-blue-dark);
+}
+
+/* Icons CTA - Blue dark color */
+.icon-cta { 
+  width: 32px; 
+  height: 32px;
+  color: theme(--th-blue-dark);
+}
 
 /* Logo */
 .logo-desktop { width: 160px; }

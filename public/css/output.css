@@ -1069,6 +1069,13 @@
       }
     }
   }
+  .hover\:opacity-75 {
+    &:hover {
+      @media (hover: hover) {
+        opacity: 75%;
+      }
+    }
+  }
   .focus\:outline-none {
     &:focus {
       --tw-outline-style: none;
@@ -1659,13 +1666,20 @@
     max-width: 240px;
   }
 }
-.icon-desktop {
+.icon-interface {
   width: 32px;
   height: 32px;
+  color: #ffffff;
 }
-.icon-mobile {
-  width: 24px;
-  height: 24px;
+.icon-contact {
+  width: 32px;
+  height: 32px;
+  color: #2a4d69;
+}
+.icon-cta {
+  width: 32px;
+  height: 32px;
+  color: #2a4d69;
 }
 .logo-desktop {
   width: 160px;
