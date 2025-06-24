@@ -6,3 +6,9 @@ layout: '00-core/base.njk'
 <h1>Thomas Sophro - Professional Site</h1>
 <p>Welcome! This is the starting point of your sophrology services website.</p>
 
+{% from "03-atoms/link.njk" import renderLink %}
+
+{{ renderLink({ 
+    name: "accompaniement_plus",
+    datas: atoms.link.links
+}) }}

@@ -1,0 +1,142 @@
+{
+  "links": [
+    {
+      "name": "header_home",
+      "href": "#home",
+      "text": "Accueil",
+      "variant": "header"
+    },
+    {
+      "name": "header_about",
+      "href": "#about",
+      "text": "Mon approche",
+      "variant": "header"
+    },
+    {
+      "name": "header_accompaniements",
+      "href": "#accompaniements",
+      "text": "Accompagnements",
+      "variant": "header"
+    },
+    {
+      "name": "header_contact",
+      "href": "#contact",
+      "text": "Contact",
+      "variant": "header"
+    },
+    {
+      "name": "header_reco",
+      "href": "#reco",
+      "text": "Recommandations",
+      "variant": "header"
+    },
+    {
+      "name": "burger_home",
+      "href": "#home",
+      "text": "Accueil",
+      "variant": "burger"
+    },
+    {
+      "name": "burger_about",
+      "href": "#about",
+      "text": "Mon approche",
+      "variant": "burger"
+    },
+    {
+      "name": "burger_accompaniements",
+      "href": "#accompaniements",
+      "text": "Accompagnements",
+      "variant": "burger"
+    },
+    {
+      "name": "burger_contact",
+      "href": "#contact",
+      "text": "Contact",
+      "variant": "burger"
+    },
+    {
+      "name": "burger_reco",
+      "href": "#reco",
+      "text": "Recommandations",
+      "variant": "burger"
+    },
+    {
+      "name": "accompaniement_plus",
+      "href": "#",
+      "text": "En savoir plus",
+      "variant": "inline"
+    },
+    {
+      "name": "reco_plus",
+      "href": "#",
+      "text": "Lire l'avis complet",
+      "variant": "inline"
+    },
+    {
+      "name": "article_plus",
+      "href": "#",
+      "text": "Voir l'article",
+      "variant": "inline"
+    },
+    {
+      "name": "footer_home",
+      "href": "#home",
+      "text": "Accueil",
+      "variant": "footer"
+    },
+    {
+      "name": "footer_about",
+      "href": "#about",
+      "text": "Mon approche",
+      "variant": "footer"
+    },
+    {
+      "name": "footer_accompaniements",
+      "href": "#accompaniements",
+      "text": "Accompagnements",
+      "variant": "footer"
+    },
+    {
+      "name": "footer_contact",
+      "href": "#contact",
+      "text": "Contact",
+      "variant": "footer"
+    },
+    {
+      "name": "footer_reco",
+      "href": "#reco",
+      "text": "Recommandations",
+      "variant": "footer"
+    },
+    {
+      "name": "footer_facebook",
+      "href": "TODO: account pro",
+      "text": "Facebook",
+      "variant": "footer",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    },
+    {
+      "name": "footer_instagram",
+      "href": "https://www.instagram.com/thomascarpentier_sophrologue?igsh=ajB5MTgwOHAwbTRv",
+      "text": "Instagram", 
+      "variant": "footer",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    },
+    {
+      "name": "footer_linkedin",
+      "href": "TODO: account pro",
+      "text": "LinkedIn", 
+      "variant": "footer",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    },
+    {
+      "name": "footer_legal",
+      "href": "#legal",
+      "text": "Mentions légales",
+      "variant": "footer"
+    }
+  ]
+}

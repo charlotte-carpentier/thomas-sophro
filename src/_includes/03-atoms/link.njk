@@ -1,42 +1,66 @@
-{#
+{# 
 =========================
-         LINK           
+      LINK ATOM          
+      v1.0 - Thomas      
 =========================
 #}
 
-{% macro renderLink(options) %}
-  {# Find the link configuration #}
-  {% set linkData = null %}
-  
-  {% for link in options.datas.links %}
-    {% if link.name == options.name %}
-      {% set linkData = link %}
-    {% endif %}
-  {% endfor %}
-
-  {# Get global styling #}
-  {% set globalStyle = options.datas.globalStyle %}
-
-  {% if linkData %}
-    {# Apply variant styling #}
-    {% set variantStyle = options.datas.variants[linkData.style] | default('') %}
-    
-    {# Render the link with appropriate attributes #}
-    <a 
-      href="{{ linkData.href }}" 
-      class="{{ globalStyle }} {{ variantStyle }}"
-      {% if options.dataNavLink %}data-nav-link="true"{% endif %}
-    >
-      {{ linkData.text }}
-    </a>
-    {# Include JS for active link detection #}
-    <script src="/js/atoms/current-link.js"></script>
+{% macro renderLink(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No link configuration provided</span>
   {% else %}
-    <span class="text-red-500">Link not found: {{ options.name }}</span>
+    {# Retrieve link configuration #}
+    {% set linksConfig = option.datas %}
+    {% set linkName = option.name %}
+    
+    {# Find the specific link by name - linksConfig is already the array #}
+    {% set linkData = null %}
+    {% for link in linksConfig %}
+      {% if link.name == linkName %}
+        {% set linkData = link %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if link not found #}
+    {% if not linkData %}
+      <span class="text-red-500">Link not found: {{ linkName }}</span>
+    {% else %}
+      {# Build CSS classes - Using base + variant classes from input.css #}
+      {% set variant = linkData.variant | default('external') %}
+      {% set cssClasses = 'link link--' ~ variant %}
+      
+      {# Check if current page/section - add current state #}
+      {% set isCurrentPage = false %}
+      {% if linkData.href == page.url %}
+        {% set isCurrentPage = true %}
+      {% elif linkData.href.startsWith('#') and page.fileSlug %}
+        {% set sectionId = linkData.href | replace('#', '') %}
+        {% if sectionId == page.fileSlug %}
+          {% set isCurrentPage = true %}
+        {% endif %}
+      {% endif %}
+      
+      {% if isCurrentPage %}
+        {% set cssClasses = cssClasses ~ ' current' %}
+      {% endif %}
+      
+      {# Render the link #}
+      <a 
+        href="{{ linkData.href }}" 
+        class="{{ cssClasses }}"
+        {% if isCurrentPage %}aria-current="page"{% endif %}
+        {% if linkData.target %}target="{{ linkData.target }}"{% endif %}
+        {% if linkData.download %}download{% endif %}
+        {% if linkData.rel %}rel="{{ linkData.rel }}"{% endif %}
+      >
+        {{ linkData.text | safe }}
+      </a>
+    {% endif %}
   {% endif %}
 {% endmacro %}
 
-{#
+{# 
 ============================
 Summon HAT Components Wisely
 ============================
@@ -45,7 +69,10 @@ Summon HAT Components Wisely
 {% from "03-atoms/link.njk" import renderLink %}
 
 2. Call a specific link by its name
-{{ renderLink({ name: "tavern_quest", datas: atoms.links }) }}
+{{ renderLink({ 
+    name: "portfolio_link",
+    datas: atoms.link.links
+}) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}
