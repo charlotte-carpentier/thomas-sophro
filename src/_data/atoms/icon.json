@@ -1,0 +1,70 @@
+{
+  "icons": [
+    {
+      "name": "cta_calendar",
+      "path": "/assets/icons/cta/calendar-dots.svg",
+      "alt": "Icône de calendrier",
+      "variant": "cta"
+    },
+    {
+      "name": "cta_calendarcheck",
+      "path": "/assets/icons/cta/calendar-check.svg",
+      "alt": "Icône de calendrier avec validation",
+      "variant": "cta"
+    },
+    {
+      "name": "button_scroll",
+      "path": "src/assets/icons/interface/caret-circle-up.svg",
+      "alt": "Flèche vers le haut dans un cercle",
+      "variant": "interface"
+    },
+    {
+      "name": "burger_list",
+      "path": "/assets/icons/interface/list.svg",
+      "alt": "Icône de liste",
+      "variant": "interface"
+    },
+    {
+      "name": "burger_x",
+      "path": "/assets/icons/interface/x.svg",
+      "alt": "Icône de croix",
+      "variant": "interface"
+    },
+    {
+      "name": "contact_phone",
+      "path": "/assets/icons/contact/device-mobile.svg",
+      "alt": "Icône de téléphone mobile",
+      "variant": "contact"
+    },
+    {
+      "name": "contact_mail",
+      "path": "/assets/icons/contact/envelope-simple.svg",
+      "alt": "Icône d'enveloppe",
+      "variant": "contact"
+    },
+    {
+      "name": "contact_city",
+      "path": "/assets/icons/contact/map-pin.svg",
+      "alt": "Icône de point de géolocalisation",
+      "variant": "contact"
+    },
+    {
+      "name": "social_facebook",
+      "path": "/assets/icons/contact/facebook-logo.svg",
+      "alt": "Icône de facebook",
+      "variant": "contact"
+    },
+    {
+      "name": "social_instagram",
+      "path": "/assets/icons/contact/instagram-logo.svg",
+      "alt": "Icône d'instagram",
+      "variant": "contact"
+    },
+    {
+      "name": "social_linkedin",
+      "path": "/assets/icons/contact/linkedin-logo.svg",
+      "alt": "Icône de lnkedin",
+      "variant": "contact"
+    }
+  ]
+}

@@ -1,41 +1,54 @@
-{#
+{# 
 =========================
-         ICON           
+      ICON ATOM          
+      v1.0 - Thomas     
 =========================
 #}
 
-{% macro renderIcon(options) %}
-  {# Find the icon in the data #}
-  {% set iconData = null %}
-  {% for icon in options.datas.icons %}
-    {% if icon.name == options.name %}
-      {% set iconData = icon %}
-    {% endif %}
-  {% endfor %}
-
-  {% if iconData %}
-    {# Get size dimensions #}
-    {% set size = options.size | default(iconData.defaultSize) %}
-    {% set dimensions = options.datas.sizes[size] | default(options.datas.sizes.md) %}
-    {% set width = dimensions.split('x')[0] %}
-    {% set height = dimensions.split('x')[1] %}
-
-    {# Render icon with appropriate classes #}
-    <img
-      src="{{ iconData.path }}"
-      alt="{{ iconData.alt }}"
-      width="{{ width }}"
-      height="{{ height }}"
-      class="{{ options.datas.globalClass }} {{ options.class | default('') }}"
-    >
+{% macro renderIcon(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No icon configuration provided</span>
   {% else %}
-    <span class="text-red-500">Icon not found: {{ options.name }}</span>
+    {# Retrieve icon configuration #}
+    {% set iconsConfig = option.datas %}
+    {% set iconName = option.name %}
+    
+    {# Find the specific icon by name - iconsConfig is already the array #}
+    {% set iconData = null %}
+    {% for icon in iconsConfig %}
+      {% if icon.name == iconName %}
+        {% set iconData = icon %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if icon not found #}
+    {% if not iconData %}
+      <span class="text-red-500">Icon not found: {{ iconName }}</span>
+    {% else %}
+      {# Build CSS classes - Using base + variant classes from input.css #}
+      {% set variant = iconData.variant | default('interface') %}
+      {% set cssClasses = 'icon-' ~ variant %}
+      
+      {# Add any additional classes #}
+      {% if option.class %}
+        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
+      {% endif %}
+      
+      {# Render the icon #}
+      <img 
+        src="{{ iconData.path }}" 
+        alt="{{ iconData.alt }}"
+        class="{{ cssClasses }}"
+        {% if iconData.loading %}loading="{{ iconData.loading }}"{% endif %}
+      >
+    {% endif %}
   {% endif %}
 {% endmacro %}
 
-{#
+{# 
 ============================
-Summon Hat Components Wisely
+Summon HAT Components Wisely
 ============================
 
 1. Import the macro at the top of your page
@@ -43,8 +56,15 @@ Summon Hat Components Wisely
 
 2. Call a specific icon by its name
 {{ renderIcon({ 
-    name: "brand", 
-    datas: atoms.icons 
+    name: "home_navigation",
+    datas: atoms.icon.icons
+}) }}
+
+3. Add custom classes if needed
+{{ renderIcon({ 
+    name: "social_linkedin",
+    datas: atoms.icon.icons,
+    class: "hover:opacity-75"
 }) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
