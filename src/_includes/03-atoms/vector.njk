@@ -1,51 +1,56 @@
-{#
+{# 
 =========================
-         VECTOR           
+      VECTOR ATOM          
+      v1.0 - Thomas      
 =========================
 #}
 
-{% macro renderVector(options) %}
-  {# Find vector configuration or use direct props #}
-  {% set vectorData = null %}
-  
-  {% if options.name %}
-    {# Search vector by name in data #}
-    {% for vector in options.datas.vectors %}
-      {% if vector.name == options.name %}
+{% macro renderVector(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No vector configuration provided</span>
+  {% else %}
+    {# Retrieve vector configuration #}
+    {% set vectorsConfig = option.datas %}
+    {% set vectorName = option.name %}
+    
+    {# Find the specific vector by name - vectorsConfig is already the array #}
+    {% set vectorData = null %}
+    {% for vector in vectorsConfig %}
+      {% if vector.name == vectorName %}
         {% set vectorData = vector %}
       {% endif %}
     {% endfor %}
 
-    {# Get global styling #}
-    {% set globalStyle = options.datas.globalStyle %}
-
-    {% if vectorData %}
-      {# Apply size-based styling #}
-      {% set sizeStyle = options.datas.sizes[vectorData.size] | default('') %}
-      
-      {# Render vector from data #}
-      <img 
-        src="{{ vectorData.src }}" 
-        alt="{{ vectorData.alt }}"
-        class="{{ globalStyle }} {{ sizeStyle }}"
-      />
+    {# Fallback if vector not found #}
+    {% if not vectorData %}
+      <span class="text-red-500">Vector not found: {{ vectorName }}</span>
     {% else %}
-      <span class="text-red-500">Vector not found: {{ options.name }}</span>
+      {# Build CSS classes - Using base + variant classes from input.css #}
+      {% set variant = vectorData.variant | default('desktop') %}
+      {% set cssClasses = 'vector-' ~ variant %}
+      
+      {# Add any additional classes #}
+      {% if option.class %}
+        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
+      {% endif %}
+      
+      {# Render the vector container with logo + text #}
+      <div class="{{ cssClasses }}">
+        <span 
+          data-svg-src="{{ vectorData.logoPath }}" 
+          class="vector-logo"
+          aria-label="{{ vectorData.logoAlt }}"
+        >
+          <!-- SVG will be loaded here -->
+        </span>
+        <span class="vector-text">{{ vectorData.text | safe }}</span>
+      </div>
     {% endif %}
-  {% else %}
-    {# Direct vector rendering with inline properties #}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set sizeStyle = options.datas.sizes[options.size] | default('') %}
-    
-    <img 
-      src="{{ options.src }}" 
-      alt="{{ options.alt | default('Logo') }}"
-      class="{{ globalStyle }} {{ sizeStyle }}"
-    />
   {% endif %}
 {% endmacro %}
 
-{#
+{# 
 ============================
 Summon HAT Components Wisely
 ============================
@@ -54,7 +59,17 @@ Summon HAT Components Wisely
 {% from "03-atoms/vector.njk" import renderVector %}
 
 2. Call a specific vector by its name
-{{ renderVector({ name: "logo_full", datas: atoms.vectors }) }}
+{{ renderVector({ 
+    name: "brand_desktop",
+    datas: atoms.vector.vectors
+}) }}
+
+3. Add custom classes if needed
+{{ renderVector({ 
+    name: "brand_mobile",
+    datas: atoms.vector.vectors,
+    class: "my-custom-class"
+}) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

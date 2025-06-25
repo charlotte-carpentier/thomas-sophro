@@ -1,0 +1,18 @@
+{
+  "vectors": [
+    {
+      "name": "brand_desktop",
+      "logoPath": "/assets/images/logo/logo_thomas.svg",
+      "logoAlt": "Logo Thomas Carpentier, représente une chouette apaisée dans un cercle",
+      "text": "Thomas Carpentier Sophrologue",
+      "variant": "desktop"
+    },
+    {
+      "name": "brand_mobile",
+      "logoPath": "/assets/images/logo/logo_thomas.svg", 
+      "logoAlt": "Logo Thomas Carpentier, représente une chouette apaisée dans un cercle",
+      "text": "Thomas Carpentier<br>Sophrologue",
+      "variant": "mobile"
+    }
+  ]
+}
