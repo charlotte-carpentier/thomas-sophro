@@ -1,7 +1,7 @@
 {# 
 =========================
       ICON ATOM          
-      v1.0 - Thomas     
+      v1.0 - Charlotte      
 =========================
 #}
 
@@ -35,13 +35,15 @@
         {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
       {% endif %}
       
-      {# Render the icon #}
-      <img 
-        src="{{ iconData.path }}" 
-        alt="{{ iconData.alt }}"
+      {# Render the icon using span with data-svg-src like button component #}
+      <span 
+        data-svg-src="{{ iconData.path }}" 
         class="{{ cssClasses }}"
-        {% if iconData.loading %}loading="{{ iconData.loading }}"{% endif %}
+        aria-label="{{ iconData.alt }}"
+        {% if iconData.loading %}data-loading="{{ iconData.loading }}"{% endif %}
       >
+        <!-- SVG will be loaded here -->
+      </span>
     {% endif %}
   {% endif %}
 {% endmacro %}
