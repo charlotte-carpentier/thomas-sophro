@@ -6,12 +6,11 @@ layout: '00-core/base.njk'
 <h1>Thomas Sophro - Professional Site</h1>
 <p>Welcome! This is the starting point of your sophrology services website.</p>
 
-{% from "02-molecules/contact-block.njk" import renderContactBlock %}
+{% from "02-molecules/tab-menu.njk" import renderTabMenu %}
 
-{{ renderContactBlock({ 
-    name: "main_contact",
-    datas: molecules["contact-block"].contact_blocks,
-    iconDatas: atoms.icon.icons,
-    typographyDatas: atoms.typography.texts,
-    buttonDatas: atoms.button.buttons
+{{ renderTabMenu({ 
+    name: "main_navigation",
+    datas: molecules["tab-menu"].tab_menus,
+    linkDatas: atoms.link.links,
+    iconDatas: atoms.icon.icons
 }) }}

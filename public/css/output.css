@@ -46,8 +46,6 @@
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    --text-body: 16px;
-    --text-small: 14px;
   }
 }
 @layer base {
@@ -812,12 +810,6 @@
   }
   .text-\[20px\] {
     font-size: 20px;
-  }
-  .text-body {
-    font-size: var(--text-body);
-  }
-  .text-small {
-    font-size: var(--text-small);
   }
   .font-black {
     --tw-font-weight: var(--font-weight-black);
@@ -1863,6 +1855,56 @@
   }
   .contact-header {
     gap: 0.25rem;
+  }
+}
+.tab-menu {
+  position: relative;
+}
+.tab-menu-desktop {
+  display: block;
+  background-color: #2a4d69;
+  padding: 1rem 0;
+}
+.tab-menu-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tab-menu-item {
+  margin: 0;
+}
+.tab-menu-mobile {
+  display: none;
+}
+.mobile-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+.mobile-menu-item {
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .tab-menu-desktop {
+    display: none;
+  }
+  .tab-menu-mobile {
+    display: block;
+    background-color: #2a4d69;
+    padding: 2rem;
+  }
+  .tab-menu-list {
+    flex-direction: column;
+    gap: 1.5rem;
   }
 }
 @property --tw-translate-x {

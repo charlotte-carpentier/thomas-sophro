@@ -1,0 +1,21 @@
+{
+    "tab_menus": [
+      {
+        "name": "main_navigation",
+        "desktop_links": [
+          "header_home",
+          "header_about", 
+          "header_accompaniements",
+          "header_contact"
+        ],
+        "mobile_links": [
+          "burger_home",
+          "burger_about",
+          "burger_accompaniements", 
+          "burger_contact"
+        ],
+        "burger_icon_open": "burger_list",
+        "burger_icon_close": "burger_x"
+      }
+    ]
+  }
