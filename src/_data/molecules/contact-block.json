@@ -1,0 +1,30 @@
+{
+    "contact_blocks": [
+      {
+        "name": "main_contact",
+        "items": [
+          {
+            "icon": "contact_phone",
+            "label": "contact_phone_label",
+            "text": "contact_phone_info",
+            "button": "btn_secondary_contact01",
+            "type": "phone"
+          },
+          {
+            "icon": "contact_mail", 
+            "label": "contact_mail_label",
+            "text": "contact_mail_info",
+            "button": "btn_secondary_contact02",
+            "type": "email"
+          },
+          {
+            "icon": "contact_city",
+            "label": "contact_address_label",
+            "text": "contact_address_info", 
+            "button": "btn_secondary_contact03",
+            "type": "location"
+          }
+        ]
+      }
+    ]
+  }

@@ -6,16 +6,12 @@ layout: '00-core/base.njk'
 <h1>Thomas Sophro - Professional Site</h1>
 <p>Welcome! This is the starting point of your sophrology services website.</p>
 
-{% from "03-atoms/vector.njk" import renderVector %}
+{% from "02-molecules/contact-block.njk" import renderContactBlock %}
 
-{{ renderVector({ 
-    name: "brand_desktop",
-    datas: atoms.vector.vectors
-}) }}
-
-{% from "03-atoms/icon.njk" import renderIcon %}
-
-{{ renderIcon({ 
-    name: "cta_calendarcheck",
-    datas: atoms.icon.icons
+{{ renderContactBlock({ 
+    name: "main_contact",
+    datas: molecules["contact-block"].contact_blocks,
+    iconDatas: atoms.icon.icons,
+    typographyDatas: atoms.typography.texts,
+    buttonDatas: atoms.button.buttons
 }) }}

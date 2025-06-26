@@ -1,0 +1,104 @@
+{# 
+=========================
+   CONTACT-BLOCK MOLECULE
+      v1.0 - Thomas       
+=========================
+#}
+
+{% macro renderContactBlock(option) %}
+  {# Import required atoms #}
+  {% from "03-atoms/icon.njk" import renderIcon %}
+  {% from "03-atoms/typography.njk" import renderTypography %}
+  {% from "03-atoms/button.njk" import renderButton %}
+
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No contact-block configuration provided</span>
+  {% else %}
+    {# Retrieve contact-block configuration #}
+    {% set contactBlocksConfig = option.datas %}
+    {% set contactBlockName = option.name %}
+    
+    {# Find the specific contact-block by name #}
+    {% set contactBlockData = null %}
+    {% for contactBlock in contactBlocksConfig %}
+      {% if contactBlock.name == contactBlockName %}
+        {% set contactBlockData = contactBlock %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if contact-block not found #}
+    {% if not contactBlockData %}
+      <span class="text-red-500">Contact-block not found: {{ contactBlockName }}</span>
+    {% else %}
+      {# Contact block container #}
+      <div class="contact-block">
+        {% for item in contactBlockData.items %}
+          <div class="contact-item">
+            {# Content (icon+label group, then text, then button) #}
+            <div class="contact-content">
+              {# Icon + Label group #}
+              <div class="contact-header">
+                {# Icon #}
+                <div class="contact-icon">
+                  {{ renderIcon({ 
+                      name: item.icon,
+                      datas: option.iconDatas
+                  }) }}
+                </div>
+                
+                {# Label #}
+                {% if item.label %}
+                  <div class="contact-label">
+                    {{ renderTypography({ 
+                        name: item.label,
+                        datas: option.typographyDatas
+                    }) }}
+                  </div>
+                {% endif %}
+              </div>
+              
+              {# Text #}
+              <div class="contact-text">
+                {{ renderTypography({ 
+                    name: item.text,
+                    datas: option.typographyDatas
+                }) }}
+              </div>
+              
+              {# Button #}
+              {% if item.button %}
+                <div class="contact-button">
+                  {{ renderButton({ 
+                      name: item.button,
+                      datas: option.buttonDatas
+                  }) }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# 
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/contact-block.njk" import renderContactBlock %}
+
+2. Call the contact block
+{{ renderContactBlock({ 
+    name: "main_contact",
+    datas: molecules["contact-block"].contact_blocks,
+    iconDatas: atoms.icon.icons,
+    typographyDatas: atoms.typography.texts,
+    buttonDatas: atoms.button.buttons
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}
