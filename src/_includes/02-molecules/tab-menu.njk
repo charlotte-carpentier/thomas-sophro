@@ -1,0 +1,88 @@
+{# 
+=========================
+    TAB-MENU MOLECULE
+      v1.0 - Thomas       
+=========================
+#}
+
+{% macro renderTabMenu(option) %}
+  {# Import required atoms #}
+  {% from "03-atoms/link.njk" import renderLink %}
+  {% from "03-atoms/icon.njk" import renderIcon %}
+
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No tab-menu configuration provided</span>
+  {% else %}
+    {# Retrieve tab-menu configuration #}
+    {% set tabMenusConfig = option.datas %}
+    {% set tabMenuName = option.name %}
+    
+    {# Find the specific tab-menu by name #}
+    {% set tabMenuData = null %}
+    {% for tabMenu in tabMenusConfig %}
+      {% if tabMenu.name == tabMenuName %}
+        {% set tabMenuData = tabMenu %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if tab-menu not found #}
+    {% if not tabMenuData %}
+      <span class="text-red-500">Tab-menu not found: {{ tabMenuName }}</span>
+    {% else %}
+      {# Tab menu container #}
+      <nav class="tab-menu" aria-label="Navigation principale">
+        
+        {# Desktop Navigation #}
+        <div class="tab-menu-desktop">
+          <ul class="tab-menu-list">
+            {% for linkName in tabMenuData.desktop_links %}
+              <li class="tab-menu-item">
+                {{ renderLink({ 
+                    name: linkName,
+                    datas: option.linkDatas
+                }) }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        
+        {# Mobile Navigation #}
+        <div class="tab-menu-mobile">
+          <ul class="mobile-menu-list">
+            {% for linkName in tabMenuData.mobile_links %}
+              <li class="mobile-menu-item">
+                {{ renderLink({ 
+                    name: linkName,
+                    datas: option.linkDatas
+                }) }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        
+      </nav>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# 
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/tab-menu.njk" import renderTabMenu %}
+
+2. Call the tab menu
+{{ renderTabMenu({ 
+    name: "main_navigation",
+    datas: molecules["tab-menu"].tab_menus,
+    linkDatas: atoms.link.links,
+    iconDatas: atoms.icon.icons
+}) }}
+
+Note: Include the JavaScript in your header organism, not here.
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}
