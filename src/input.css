@@ -426,9 +426,85 @@
 /* MOLECULES                */
 /* ------------------------- */
 
+/* Contact Block */
+.contact-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.contact-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+/* Icon + Label horizontal group */
+.contact-header {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.contact-icon {
+  flex-shrink: 0;
+}
+
+/* Force icon size for contact-block - 32px always */
+.contact-block .contact-icon .icon-contact {
+  width: 32px;
+  height: 32px;
+}
+
+.contact-label {
+  flex: 1;
+}
+
+/* Text and button aligned left */
+.contact-text,
+.contact-button {
+  align-self: flex-start;
+}
+
+.contact-block .button--secondary {
+  color: theme(--th-blue-dark);        
+  border-color: theme(--th-blue-dark); 
+}
+
+.contact-block .button--secondary:hover {
+  color: theme(--th-green);          
+  border-color: theme(--th-green);   
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .contact-block {
+    gap: 1rem;
+  }
+  
+  .contact-item {
+    gap: 0.25rem;
+  }
+  
+  .contact-content {
+    gap: 0.25rem;
+  }
+  
+  .contact-header {
+    gap: 0.25rem;
+  }
+}
+
 .cta-block {}
-.contact-info-desktop {}
-.contact-info-mobile {}
 .cta-button {}
 .article-card-desktop {}
 .article-card-mobile {}
