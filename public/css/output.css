@@ -1559,7 +1559,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 212px;
+  width: 199px;
   height: 52px;
   letter-spacing: -0.17px;
 }
@@ -1922,6 +1922,21 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+}
+.cta-button {
+  width: 492px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+@media (max-width: 768px) {
+  .cta-button {
+    width: 199px;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 @property --tw-translate-x {
   syntax: "*";

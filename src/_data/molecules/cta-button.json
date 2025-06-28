@@ -1,0 +1,9 @@
+{
+  "cta-buttons": [
+    {
+      "name": "cta_hero_navigation",
+      "button1Name": "btn_secondary_hero01",
+      "button2Name": "btn_secondary_hero02"
+    }
+  ]
+}

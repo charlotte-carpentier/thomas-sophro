@@ -1,0 +1,72 @@
+{# 
+=========================
+    CTA-BUTTON MOLECULE
+    v1.0 - Thomas       
+=========================
+#}
+
+{# Import required atoms #}
+{% from "03-atoms/button.njk" import renderButton %}
+
+{% macro renderCtaButton(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No cta-button configuration provided</span>
+  {% else %}
+    {# Retrieve cta-button configuration #}
+    {% set ctaButtonsConfig = option.datas %}
+    {% set ctaButtonName = option.name %}
+    
+    {# Find the specific cta-button by name #}
+    {% set ctaButtonData = null %}
+    {% for ctaButton in ctaButtonsConfig %}
+      {% if ctaButton.name == ctaButtonName %}
+        {% set ctaButtonData = ctaButton %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if cta-button not found #}
+    {% if not ctaButtonData %}
+      <span class="text-red-500">CTA Button not found: {{ ctaButtonName }}</span>
+    {% else %}
+      {# Render the cta-button container #}
+      <div class="cta-button">
+        
+        {# First button atom #}
+        {% if ctaButtonData.button1Name %}
+          {{ renderButton({ 
+            name: ctaButtonData.button1Name,
+            datas: option.buttonDatas
+          }) }}
+        {% endif %}
+        
+        {# Second button atom #}
+        {% if ctaButtonData.button2Name %}
+          {{ renderButton({ 
+            name: ctaButtonData.button2Name,
+            datas: option.buttonDatas
+          }) }}
+        {% endif %}
+        
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# 
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/cta-button.njk" import renderCtaButton %}
+
+2. Call a specific cta-button by its name
+{{ renderCtaButton({ 
+    name: "cta_hero_navigation",
+    datas: molecules["cta-button"]["cta-buttons"],
+    buttonDatas: atoms.button.buttons
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}
