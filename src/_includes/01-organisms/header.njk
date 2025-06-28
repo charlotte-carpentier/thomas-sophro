@@ -1,122 +1,117 @@
-{#
+{# 
 =========================
-         HEADER          
+    HEADER ORGANISM
+      v1.0 - Thomas       
 =========================
 #}
 
-{% from "03-atoms/vector.njk" import renderVector %}
-{% from "03-atoms/icon.njk" import renderIcon %}
-{% from "01-organisms/navigation.njk" import renderNavigation %}
+{% macro renderHeader(option) %}
+  {# Import required molecules and atoms #}
+  {% from "02-molecules/tab-menu.njk" import renderTabMenu %}
+  {% from "03-atoms/vector.njk" import renderVector %}
+  {% from "03-atoms/icon.njk" import renderIcon %}
 
-{% macro renderHeader(options) %}
-  {# Check if data is provided #}
-  {% if options.datas %}
-    {# Get global styling and container styles #}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set containerStyle = options.datas.containerStyle %}
-    {% set logoContainerStyle = options.datas.logoContainerStyle | default('') %}
-    {% set navContainerStyle = options.datas.navContainerStyle | default('') %}
-    {% set navStyle = options.datas.navStyle %}
-    {% set menuContainerStyle = options.datas.menuContainerStyle %}
-    {% set toggleButtonStyle = options.datas.variants.toggleButton.default %}
-    {% set toggleButtonIcon = options.datas.variants.toggleButton.icon %}
-    {% set toggleButtonIconStyle = options.datas.variants.toggleButton.iconStyle | default('') %}
-    {% set toggleButtonContainerSize = options.datas.variants.toggleButton.containerSize | default('w-6 h-6') %}
-    {% set toggleButtonIconSize = options.datas.variants.toggleButton.iconSize | default('24') %}
-    {% set dropdownMenuStyle = options.datas.variants.dropdownMenu.default %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No header configuration provided</span>
+  {% else %}
+    {# Retrieve header configuration #}
+    {% set headersConfig = option.datas %}
+    {% set headerName = option.name %}
     
-    {# Find the header configuration #}
+    {# Find the specific header by name #}
     {% set headerData = null %}
-    {% if options.name %}
-      {% for headerSet in options.datas.headers %}
-        {% if headerSet.name == options.name %}
-          {% set headerData = headerSet %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+    {% for header in headersConfig %}
+      {% if header.name == headerName %}
+        {% set headerData = header %}
+      {% endif %}
+    {% endfor %}
 
-    {# Fallback to first header if not found #}
+    {# Fallback if header not found #}
     {% if not headerData %}
-      {% set headerData = options.datas.headers[0] %}
-    {% endif %}
-    
-    {# Render header with appropriate container styles #}
-    <header class="{{ globalStyle }} {{ options.class | default('') }}">
-      <div class="container mx-auto grid grid-cols-6 lg:grid-cols-6">
-        <div class="col-span-6 lg:col-start-2 lg:col-span-4 flex justify-between items-center h-24 px-4">
-          {# Logo section - Adapté pour être responsive avec marge ajustée #}
-          <div class="{{ logoContainerStyle }} max-lg:ml-2">
-            <a href="/" title="Retour à l'accueil" class="inline-block">
-              {# Version mobile - Logo alternate #}
-              <span class="lg:hidden">
-                {{ renderVector({ name: "ma_logo_mini", datas: options.vectors }) }}
-              </span>
-              {# Version desktop - Logo main #}
-              <span class="hidden lg:inline-block">
-                {{ renderVector({ name: "ma_logo", datas: options.vectors }) }}
-              </span>
-            </a>
+      <span class="text-red-500">Header not found: {{ headerName }}</span>
+    {% else %}
+      {# Build CSS classes #}
+      {% set variant = headerData.variant | default('default') %}
+      {% set cssClasses = 'header-' ~ variant %}
+      
+      {# Add any additional classes #}
+      {% if option.class %}
+        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
+      {% endif %}
+      
+      {# Header container #}
+      <header class="{{ cssClasses }}" id="main-header">
+        <div class="header-container">
+          
+          {# Brand section (desktop) - Logo à gauche #}
+          <div class="header-brand header-brand-desktop">
+            {{ renderVector({ 
+                name: headerData.brand.desktop,
+                datas: option.vectorDatas
+            }) }}
           </div>
-
-          {# Navigation container avec marge ajustée en mobile #}
-          <div class="{{ navContainerStyle }} max-lg:mr-2">
-            <div class="{{ navStyle }}">
-              {# Menu Container with hamburger and dropdown #}
-              <div class="{{ menuContainerStyle }}">
-                {# Wrapper div to contain both button and label - mobile only #}
-                <div class="max-lg:flex max-lg:flex-col max-lg:items-center max-lg:relative max-lg:z-50">
-                  {# Original toggle button #}
-                  <div class="{{ toggleButtonStyle }}" data-container-size="{{ toggleButtonContainerSize }}" data-icon-size="{{ toggleButtonIconSize }}">
-                    {% set iconData = null %}
-                    {% if options.icons %}
-                      {% for icon in options.icons.icons %}
-                        {% if icon.name == toggleButtonIcon %}
-                          {% set iconData = icon %}
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                    
-                    {# Render custom icon or default hamburger #}
-                    {% if iconData %}
-                      <span data-svg-src="{{ iconData.path }}" data-svg-width="{{ toggleButtonIconSize }}" data-svg-height="{{ toggleButtonIconSize }}" class="inline-flex items-center justify-center {{ toggleButtonIconStyle }}">
-                        <!-- SVG will be loaded here -->
-                      </span>
-                    {% else %}
-                      <span class="inline-flex items-center justify-center {{ toggleButtonIconStyle }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="{{ toggleButtonIconSize }}" height="{{ toggleButtonIconSize }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                      </span>
-                    {% endif %}
-                  </div>
-                  
-                  {# Text "Menu" below - outside the button, only visible on mobile, with high z-index #}
-                  <span class="text-xs mt-1 font-[theme(--font-display)] text-[theme(--ma-nautic-white)] max-lg:block hidden relative z-50">Menu</span>
-                </div>
-
-                {# Dropdown menu containing navigation #}
-                <div class="{{ dropdownMenuStyle }}">
-                  {# Use Navigation component #}
-                  {{ renderNavigation({ 
-                    name: headerData.navigation | default(headerData.name),
-                    datas: options.navigations,
-                    links: options.links
-                  }) }}
-                </div>
-              </div>
-            </div>
+          
+          {# Brand section (mobile) #}
+          <div class="header-brand header-brand-mobile">
+            {{ renderVector({ 
+                name: headerData.brand.mobile,
+                datas: option.vectorDatas
+            }) }}
+          </div>
+          
+          {# Navigation section - Menu à droite #}
+          <div class="header-navigation">
+            {{ renderTabMenu({ 
+                name: headerData.navigation.tab_menu,
+                datas: option.tabMenuDatas,
+                linkDatas: option.linkDatas
+            }) }}
+          </div>
+          
+          {# Mobile burger button #}
+          <button 
+            class="header-burger" 
+            id="burger-toggle"
+            aria-label="Toggle mobile menu"
+            aria-expanded="false"
+          >
+            <span class="burger-icon burger-icon-open">
+              {{ renderIcon({ 
+                  name: headerData.mobile.burger_open_icon,
+                  datas: option.iconDatas
+              }) }}
+            </span>
+            <span class="burger-icon burger-icon-close">
+              {{ renderIcon({ 
+                  name: headerData.mobile.burger_close_icon,
+                  datas: option.iconDatas
+              }) }}
+            </span>
+          </button>
+          
+        </div>
+        
+        {# Mobile overlay menu #}
+        {% if headerData.mobile.overlay %}
+        <div class="header-mobile-overlay" id="mobile-overlay">
+          <div class="mobile-overlay-content">
+            {# Render the tab-menu mobile version inside overlay #}
+            {{ renderTabMenu({ 
+                name: headerData.navigation.tab_menu,
+                datas: option.tabMenuDatas,
+                linkDatas: option.linkDatas
+            }) }}
           </div>
         </div>
-      </div>
-    </header>
-
-    {# Include external JS files #}
-    <script src="/js/organisms/header-menu.js"></script>
-    <script src="/js/organisms/fixed-header.js"></script>
-  {% else %}
-    <span class="text-red-500">Header data not found</span>
+        {% endif %}
+        
+      </header>
+    {% endif %}
   {% endif %}
 {% endmacro %}
 
-{#
+{# 
 ============================
 Summon HAT Components Wisely
 ============================
@@ -124,15 +119,18 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/header.njk" import renderHeader %}
 
-2. Call a specific header by its name
+2. Call the header
 {{ renderHeader({ 
-    name: "main",
-    datas: organisms.headers,
-    navigations: organisms.navigations,
-    vectors: atoms.vectors,
-    links: atoms.links,
-    icons: atoms.icons
+    name: "thomas_header",
+    datas: organisms.header.headers,
+    vectorDatas: atoms.vector.vectors,
+    tabMenuDatas: molecules["tab-menu"].tab_menus,
+    linkDatas: atoms.link.links,
+    iconDatas: atoms.icon.icons
 }) }}
+
+3. Include the JavaScript for mobile menu functionality
+<script src="/js/organisms/header.js"></script>
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
 #}

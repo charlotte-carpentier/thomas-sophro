@@ -1,0 +1,20 @@
+{
+  "headers": [
+    {
+      "name": "thomas_header",
+      "brand": {
+        "desktop": "brand_desktop",
+        "mobile": "brand_mobile"
+      },
+      "navigation": {
+        "tab_menu": "main_navigation"
+      },
+      "mobile": {
+        "burger_open_icon": "burger_list",
+        "burger_close_icon": "burger_x",
+        "overlay": true
+      },
+      "variant": "thomas"
+    }
+  ]
+}
