@@ -62,10 +62,17 @@
   <body class="min-h-screen flex flex-col">
 
     {# ----- Header Organism ----- #}
-    {# 🚧 TODO: Add new header #}
-    {# {% from "01-organisms/header.njk" import renderHeader %}
-    {{ renderHeader({ ... }) }} #}
+    {% from "01-organisms/header.njk" import renderHeader %}
 
+    {{ renderHeader({ 
+        name: "thomas_header",
+        datas: organisms.header.headers,
+        vectorDatas: atoms.vector.vectors,
+        tabMenuDatas: molecules["tab-menu"].tab_menus,
+        linkDatas: atoms.link.links,
+        iconDatas: atoms.icon.icons
+    }) }}
+    
     {# ----- Main content ----- #}
     <main class="flex-grow">
       {{ content | safe }}
@@ -82,6 +89,9 @@
     <script src="/js/molecules/tab-menu.js" defer></script>
     <script src="/js/molecules/acc-card.js" defer></script>
     <script src="/js/molecules/reco-card.js" defer></script>
+    
+    {# Organisms scripts #}
+    <script src="/js/organisms/header.js" defer></script>
 
     {# ----- Netlify CMS redirect (optional) ----- #}
     <script>

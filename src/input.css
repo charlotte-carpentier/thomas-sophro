@@ -517,6 +517,8 @@
   display: block;
   background-color: theme(--th-blue-dark);
   padding: 1rem 0;
+  width: 548px;
+  height: 45px;
 }
 
 .tab-menu-list {
@@ -818,9 +820,187 @@
 /* ORGANISMS                */
 /* ------------------------- */
 
-/* === HEADER === */
-.header-desktop {}
-.header-mobile {}
+/* 
+=========================
+    HEADER ORGANISM
+      v1.0 - Thomas       
+=========================
+*/
+
+.header-thomas {
+  background-color: theme(--th-blue-dark);
+  color: theme(--th-white);
+  width: 100%;
+}
+
+.header-container {
+  width: 100%;
+  padding: 0 2rem;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* Override vector pour qu'il s'adapte au header */
+.header-brand .vector-desktop,
+.header-brand .vector-mobile {
+  width: auto;
+  height: auto;
+  padding: 0;
+  background-color: transparent;
+}
+
+/* Navigation - le tab-menu normal */
+.header-navigation .tab-menu-desktop {
+  background-color: transparent;
+  padding: 0;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.header-navigation .tab-menu-list {
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+
+/* IMPORTANT - Cache le mobile dans la navigation normale */
+.header-navigation .tab-menu-mobile {
+  display: none;
+}
+
+/* Mobile burger button */
+.header-burger {
+  display: none;
+  background: none;
+  border: none;
+  color: theme(--th-white);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+/* Icons burger - Animation entre les deux */
+.burger-icon {
+  width: 24px;
+  height: 24px;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: theme(--th-white);
+}
+
+.burger-icon svg {
+  color: theme(--th-white);
+  fill: theme(--th-white);
+}
+
+.burger-icon-close {
+  opacity: 0;
+  color: theme(--th-white);
+}
+
+.header-burger[aria-expanded="true"] .burger-icon-open {
+  opacity: 0;
+}
+
+.header-burger[aria-expanded="true"] .burger-icon-close {
+  opacity: 1;
+}
+
+/* Force couleur sur les icônes interface */
+.header-burger .icon-interface {
+  color: theme(--th-white);
+  width: 24px;
+  height: 24px;
+}
+
+/* Mobile overlay - CACHÉ PAR DÉFAUT ET ANIMATION VERTICALE */
+.header-mobile-overlay {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background-color: theme(--th-blue-dark);
+  z-index: 40;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+.header-mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.mobile-overlay-content {
+  padding: 0;
+}
+
+/* DANS L'OVERLAY - Inverse la logique ET supprime le padding du tab-menu */
+.header-mobile-overlay .tab-menu-desktop {
+  display: none;
+}
+
+.header-mobile-overlay .tab-menu-mobile {
+  display: block;
+  padding: 0;
+}
+
+.header-mobile-overlay .mobile-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 2rem;
+}
+
+.header-mobile-overlay .link--burger {
+  color: theme(--th-white);
+  font-size: theme(--text-h3-mobile);
+  text-decoration: none;
+}
+
+.header-mobile-overlay .link--burger:hover {
+  color: theme(--th-green);
+}
+
+@media (max-width: 1023px) {
+  .header-container {
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+  
+  .header-brand {
+    flex: 0 0 auto;
+  }
+  
+  .header-navigation {
+    margin-left: auto;
+  }
+  
+  .header-burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* FORCE - Cache complètement le desktop */
+  .header-navigation .tab-menu-desktop {
+    display: none;
+  }
+}
 
 /* === FOOTER === */
 .footer-desktop {}
