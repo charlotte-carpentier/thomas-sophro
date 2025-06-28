@@ -11,4 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initAccCards();
     console.log('ACC-Card components initialized');
   }
+  
+  // Initialize Reco-Card functionality if function exists
+  if (typeof initRecoCards === 'function') {
+    initRecoCards();
+    console.log('Reco-Card components initialized');
+  }
 });

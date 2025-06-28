@@ -68,394 +68,41 @@
 
 
 
-  
-  
+  <div class="reco-card">
+    
+    <div class="reco-card__header">
+      <div class="reco-card__avatar">😊</div>
+      <small>- En attente d'avis clients</small>
+    </div>
     
     
-    
-    
-    
-    
-    
+    <div class="reco-card__content">
       
+      
+      <div class="reco-card__text-container">
         
-      
-    
-
-    
-    
-      
-      <div class="article-card">
-        
-        
-        
-          <div class="article-card__image">
-            
-  
-  
-    
-    
-    
-    
-    
-    
-    
-      
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-
-    
-    
-      
-      
-      
-      
-      
-      <img 
-        src="/assets/images/illu/accompaniements/anxiete.jpg" 
-        alt="Femme exprimant de l&#39;anxiété avec des éclairs et un tourbillon symbolisant le stress mental" 
-        class="image-illu-acc"
-        loading="lazy"
-        decoding="async"
-        
-        
-      />
-    
-  
-
-          </div>
-        
-        
-        
-        <div class="article-card__content">
-          
-          
-            
-  
-  
-    
-    
-    
-    
-    
-    
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-
-    
-    
-      
-      
-      
-      
-      
-      
-      
-        <h3 class="text-h3">Les bienfaits de la respiration consciente au quotidien</h3>
-      
-    
-  
-
-          
-          
-          
-          
-            
-  
-  
-    
-    
-    
-    
-    
-    
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-
-    
-    
-      
-      
-      
-      
-      
-      
-      
-        <p class="text-body">Pour mieux comprendre la sophrologie, ses bienfaits, ses différentes applications et ses limites, découvrez mes articles de blog ! Des contenus sourcés, accessibles et rigoureux, pour intégrer cette pratique dans votre quotidien.</p>
-      
-    
-  
-
-          
-          
-          
-          
-            
-              
-              
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-                  
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-              
-              
-              
-                <a 
-                  href="/articles/respiration-consciente/" 
-                  class="link link--inline"
-                  
-                  
-                >
-                  Voir l'article
-                </a>
-              
-            
-          
+        <div class="reco-card__text-truncated" id="truncated-reco_placeholder">
+          <p>« Les premiers avis clients apparaîtront ici automatiquement une fois l'activité lancée. Cette section montrera les témoignages complets mais sera tronquée à 5 lignes par défaut pour un affichage optimal. Les utilisateurs pourront cliquer pour voir l'avis complet si celui-ci est plus long. »</p>
         </div>
         
+        
+        <div class="reco-card__text-full" id="full-reco_placeholder">
+          <p>« Les premiers avis clients apparaîtront ici automatiquement une fois l'activité lancée. Cette section montrera les témoignages complets mais sera tronquée à 5 lignes par défaut pour un affichage optimal. Les utilisateurs pourront cliquer pour voir l'avis complet si celui-ci est plus long. »</p>
+          <p>Les futurs avis Google Reviews seront intégrés automatiquement avec leurs avatars, noms d'utilisateurs, notes et dates. Le système de troncature fonctionnera parfaitement pour tous les types d'avis, qu'ils soient courts ou très détaillés.</p>
+        </div>
       </div>
-    
-  
+      
+      
+      <div class="reco-card__link-more" id="link-more-reco_placeholder" onclick="toggleRecoCardText('reco_placeholder')">
+        <a href="#" class="link link--inline">Lire l'avis complet</a>
+      </div>
+      
+      <div class="reco-card__link-less" id="link-less-reco_placeholder" onclick="toggleRecoCardText('reco_placeholder')" style="display: none;">
+        <a href="#" class="link link--inline">Réduire</a>
+      </div>
+      
+    </div>
+  </div>
 
     </main>
 
@@ -468,6 +115,7 @@
     <script src="/js/atoms/svg-loader.js" defer></script>
     <script src="/js/molecules/tab-menu.js" defer></script>
     <script src="/js/molecules/acc-card.js" defer></script>
+    <script src="/js/molecules/reco-card.js" defer></script>
 
     
     <script>

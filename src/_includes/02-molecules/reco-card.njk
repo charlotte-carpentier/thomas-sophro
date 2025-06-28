@@ -1,0 +1,79 @@
+{# 
+=========================
+    RECO-CARD MOLECULE
+    v1.0 - Thomas       
+    Ready for Google API
+=========================
+#}
+
+{% macro renderRecoCard(option) %}
+  <div class="reco-card">
+    {# Header section with placeholder avatar #}
+    <div class="reco-card__header">
+      <div class="reco-card__avatar">😊</div>
+      <small>- En attente d'avis clients</small>
+    </div>
+    
+    {# Content section #}
+    <div class="reco-card__content">
+      
+      {# Text container with truncation (ready for Google reviews) #}
+      <div class="reco-card__text-container">
+        {# Truncated text version (5 lines max for reviews) #}
+        <div class="reco-card__text-truncated" id="truncated-reco_placeholder">
+          <p>« Les premiers avis clients apparaîtront ici automatiquement une fois l'activité lancée. Cette section montrera les témoignages complets mais sera tronquée à 5 lignes par défaut pour un affichage optimal. Les utilisateurs pourront cliquer pour voir l'avis complet si celui-ci est plus long. »</p>
+        </div>
+        
+        {# Full text version (hidden by default) #}
+        <div class="reco-card__text-full" id="full-reco_placeholder">
+          <p>« Les premiers avis clients apparaîtront ici automatiquement une fois l'activité lancée. Cette section montrera les témoignages complets mais sera tronquée à 5 lignes par défaut pour un affichage optimal. Les utilisateurs pourront cliquer pour voir l'avis complet si celui-ci est plus long. »</p>
+          <p>Les futurs avis Google Reviews seront intégrés automatiquement avec leurs avatars, noms d'utilisateurs, notes et dates. Le système de troncature fonctionnera parfaitement pour tous les types d'avis, qu'ils soient courts ou très détaillés.</p>
+        </div>
+      </div>
+      
+      {# Link toggle functionality #}
+      <div class="reco-card__link-more" id="link-more-reco_placeholder" onclick="toggleRecoCardText('reco_placeholder')">
+        <a href="#" class="link link--inline">Lire l'avis complet</a>
+      </div>
+      
+      <div class="reco-card__link-less" id="link-less-reco_placeholder" onclick="toggleRecoCardText('reco_placeholder')" style="display: none;">
+        <a href="#" class="link link--inline">Réduire</a>
+      </div>
+      
+    </div>
+  </div>
+{% endmacro %}
+
+{# 
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/reco-card.njk" import renderRecoCard %}
+
+2. Call the placeholder component
+{{ renderRecoCard() }}
+
+3. Make sure reco-card.js is loaded in your base template:
+<script src="/js/molecules/reco-card.js" defer></script>
+
+============================
+Future Google API Structure
+============================
+
+Expected data structure from Google Places API:
+{
+  "reviews": [
+    {
+      "author_name": "Marie L.",
+      "profile_photo_url": "https://lh3.googleusercontent.com/...",
+      "rating": 5,
+      "text": "Accompagnement excellent pour gérer mon stress...",
+      "relative_time_description": "il y a 2 mois"
+    }
+  ]
+}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}
