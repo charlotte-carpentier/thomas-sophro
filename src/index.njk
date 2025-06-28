@@ -6,10 +6,12 @@ layout: '00-core/base.njk'
 <h1>Thomas Sophro - Professional Site</h1>
 <p>Welcome! This is the starting point of your sophrology services website.</p>
 
-{% from "02-molecules/cta-button.njk" import renderCtaButton %}
+{% from "02-molecules/acc-card.njk" import renderAccCard %}
 
-{{ renderCtaButton({ 
-    name: "cta_hero_navigation",
-    datas: molecules["cta-button"]["cta-buttons"],
-    buttonDatas: atoms.button.buttons
+{{ renderAccCard({ 
+    name: "acc_equilibre",
+    datas: molecules["acc-card"]["acc-cards"],
+    imageDatas: atoms.image.images,
+    typographyDatas: atoms.typography.texts,
+    linkDatas: atoms.link.links
 }) }}

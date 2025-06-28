@@ -1,0 +1,34 @@
+{
+  "acc-cards": [
+    {
+      "name": "acc_equilibre",
+      "imageName": "accompaniement_1",
+      "titleName": "accompaniements_subtitle_1",
+      "paragraph1Name": "accompaniements_1_paragraph_1",
+      "paragraph2Name": "accompaniements_1_paragraph_2",
+      "paragraph3Name": "accompaniements_1_paragraph_3",
+      "linkMoreName": "accompaniement_plus",
+      "linkLessName": "accompaniement_less"
+    },
+    {
+      "name": "acc_sport",
+      "imageName": "accompaniement_2",
+      "titleName": "accompaniements_subtitle_2",
+      "paragraph1Name": "accompaniements_2_paragraph_1",
+      "paragraph2Name": "accompaniements_2_paragraph_2",
+      "paragraph3Name": "accompaniements_2_paragraph_3",
+      "linkMoreName": "accompaniement_plus",
+      "linkLessName": "accompaniement_less"
+    },
+    {
+      "name": "acc_handicap",
+      "imageName": "accompaniement_3",
+      "titleName": "accompaniements_subtitle_3",
+      "paragraph1Name": "accompaniements_3_paragraph_1",
+      "paragraph2Name": "accompaniements_3_paragraph_2",
+      "paragraph3Name": "",
+      "linkMoreName": "accompaniement_plus",
+      "linkLessName": "accompaniement_less"
+    }
+  ]
+}

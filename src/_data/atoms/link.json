@@ -67,6 +67,12 @@
       "variant": "inline"
     },
     {
+      "name": "accompaniement_less",
+      "href": "#",
+      "text": "Réduire",
+      "variant": "inline"
+    },
+    {
       "name": "reco_plus",
       "href": "#",
       "text": "Lire l'avis complet",
