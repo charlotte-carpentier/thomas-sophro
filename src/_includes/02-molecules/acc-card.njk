@@ -1,0 +1,153 @@
+{# 
+=========================
+    ACC-CARD MOLECULE
+    v1.0 - Thomas       
+=========================
+#}
+
+{# Import required atoms #}
+{% from "03-atoms/image.njk" import renderImage %}
+{% from "03-atoms/typography.njk" import renderTypography %}
+{% from "03-atoms/link.njk" import renderLink %}
+
+{% macro renderAccCard(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No acc-card configuration provided</span>
+  {% else %}
+    {# Retrieve acc-card configuration #}
+    {% set accCardsConfig = option.datas %}
+    {% set accCardName = option.name %}
+    
+    {# Find the specific acc-card by name #}
+    {% set accCardData = null %}
+    {% for accCard in accCardsConfig %}
+      {% if accCard.name == accCardName %}
+        {% set accCardData = accCard %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if acc-card not found #}
+    {% if not accCardData %}
+      <span class="text-red-500">ACC Card not found: {{ accCardName }}</span>
+    {% else %}
+      {# Render the acc-card container #}
+      <div class="acc-card">
+        
+        {# Header section with image and title #}
+        <div class="acc-card__header">
+          {# Image atom #}
+          {% if accCardData.imageName %}
+            {{ renderImage({ 
+              name: accCardData.imageName,
+              datas: option.imageDatas
+            }) }}
+          {% endif %}
+          
+          {# Title typography atom #}
+          {% if accCardData.titleName %}
+            {{ renderTypography({ 
+              name: accCardData.titleName,
+              datas: option.typographyDatas
+            }) }}
+          {% endif %}
+        </div>
+        
+        {# Content section #}
+        <div class="acc-card__content">
+          
+          {# Text container with truncation #}
+          <div class="acc-card__text-container">
+            {# Truncated text version (9 lines max) #}
+            <div class="acc-card__text-truncated" id="truncated-{{ accCardData.name }}">
+              {% if accCardData.paragraph1Name %}
+                {{ renderTypography({ 
+                  name: accCardData.paragraph1Name,
+                  datas: option.typographyDatas
+                }) }}
+              {% endif %}
+              
+              {% if accCardData.paragraph2Name %}
+                {{ renderTypography({ 
+                  name: accCardData.paragraph2Name,
+                  datas: option.typographyDatas
+                }) }}
+              {% endif %}
+              
+              {% if accCardData.paragraph3Name %}
+                {{ renderTypography({ 
+                  name: accCardData.paragraph3Name,
+                  datas: option.typographyDatas
+                }) }}
+              {% endif %}
+            </div>
+            
+            {# Full text version (hidden by default) #}
+            <div class="acc-card__text-full" id="full-{{ accCardData.name }}">
+              {% if accCardData.paragraph1Name %}
+                {{ renderTypography({ 
+                  name: accCardData.paragraph1Name,
+                  datas: option.typographyDatas
+                }) }}
+              {% endif %}
+              
+              {% if accCardData.paragraph2Name %}
+                {{ renderTypography({ 
+                  name: accCardData.paragraph2Name,
+                  datas: option.typographyDatas
+                }) }}
+              {% endif %}
+              
+              {% if accCardData.paragraph3Name %}
+                {{ renderTypography({ 
+                  name: accCardData.paragraph3Name,
+                  datas: option.typographyDatas
+                }) }}
+              {% endif %}
+            </div>
+          </div>
+          
+          {# Link atoms with click handlers - conditional display #}
+          {% if accCardData.linkMoreName and accCardData.linkLessName %}
+            {# "En savoir plus" link - shown by default #}
+            <div class="acc-card__link-more" id="link-more-{{ accCardData.name }}" onclick="toggleAccCardText('{{ accCardData.name }}')">
+              {{ renderLink({ 
+                name: accCardData.linkMoreName,
+                datas: option.linkDatas
+              }) }}
+            </div>
+            
+            {# "Fermer" link - hidden by default #}
+            <div class="acc-card__link-less" id="link-less-{{ accCardData.name }}" onclick="toggleAccCardText('{{ accCardData.name }}')" style="display: none;">
+              {{ renderLink({ 
+                name: accCardData.linkLessName,
+                datas: option.linkDatas
+              }) }}
+            </div>
+          {% endif %}
+        </div>
+        
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# 
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/acc-card.njk" import renderAccCard %}
+
+2. Call a specific acc-card by its name
+{{ renderAccCard({ 
+    name: "acc_equilibre",
+    datas: molecules["acc-card"]["acc-cards"],
+    imageDatas: atoms.image.images,
+    typographyDatas: atoms.typography.texts,
+    linkDatas: atoms.link.links
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

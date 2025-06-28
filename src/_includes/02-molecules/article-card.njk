@@ -1,0 +1,129 @@
+{# 
+=========================
+   ARTICLE-CARD MOLECULE
+    v1.0 - Thomas       
+=========================
+#}
+
+{# Import required atoms #}
+{% from "03-atoms/image.njk" import renderImage %}
+{% from "03-atoms/typography.njk" import renderTypography %}
+{% from "03-atoms/link.njk" import renderLink %}
+
+{% macro renderArticleCard(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No article-card configuration provided</span>
+  {% else %}
+    {# Retrieve article-card configuration #}
+    {% set articleCardsConfig = option.datas %}
+    {% set articleCardName = option.name %}
+    
+    {# Find the specific article-card by name #}
+    {% set articleCardData = null %}
+    {% for articleCard in articleCardsConfig %}
+      {% if articleCard.name == articleCardName %}
+        {% set articleCardData = articleCard %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if article-card not found #}
+    {% if not articleCardData %}
+      <span class="text-red-500">Article Card not found: {{ articleCardName }}</span>
+    {% else %}
+      {# Render the article-card container #}
+      <div class="article-card">
+        
+        {# Image atom #}
+        {% if articleCardData.imageName %}
+          <div class="article-card__image">
+            {{ renderImage({ 
+              name: articleCardData.imageName,
+              datas: option.imageDatas
+            }) }}
+          </div>
+        {% endif %}
+        
+        {# Content section #}
+        <div class="article-card__content">
+          {# Title typography atom #}
+          {% if articleCardData.titleName %}
+            {{ renderTypography({ 
+              name: articleCardData.titleName,
+              datas: option.typographyDatas
+            }) }}
+          {% endif %}
+          
+          {# Description typography atom #}
+          {% if articleCardData.descriptionName %}
+            {{ renderTypography({ 
+              name: articleCardData.descriptionName,
+              datas: option.typographyDatas
+            }) }}
+          {% endif %}
+          
+          {# Link atom with custom URL #}
+          {% if articleCardData.linkName %}
+            {% if articleCardData.articleUrl %}
+              {# Create a custom link data with the article URL #}
+              {% set customLinkData = null %}
+              {% for link in option.linkDatas %}
+                {% if link.name == articleCardData.linkName %}
+                  {% set customLinkData = {
+                    name: link.name,
+                    href: articleCardData.articleUrl,
+                    text: link.text,
+                    variant: link.variant,
+                    target: link.target,
+                    rel: link.rel
+                  } %}
+                {% endif %}
+              {% endfor %}
+              
+              {# Render link with custom href #}
+              {% if customLinkData %}
+                <a 
+                  href="{{ customLinkData.href }}" 
+                  class="link link--{{ customLinkData.variant }}"
+                  {% if customLinkData.target %}target="{{ customLinkData.target }}"{% endif %}
+                  {% if customLinkData.rel %}rel="{{ customLinkData.rel }}"{% endif %}
+                >
+                  {{ customLinkData.text | safe }}
+                </a>
+              {% endif %}
+            {% else %}
+              {# Fallback to normal link rendering #}
+              {{ renderLink({ 
+                name: articleCardData.linkName,
+                datas: option.linkDatas
+              }) }}
+            {% endif %}
+          {% endif %}
+        </div>
+        
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# 
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/article-card.njk" import renderArticleCard %}
+
+2. Call a specific article-card by its name
+{{ renderArticleCard({ 
+    name: "article_example",
+    datas: molecules["article-card"]["article-cards"],
+    imageDatas: atoms.image.images,
+    typographyDatas: atoms.typography.texts,
+    linkDatas: atoms.link.links
+}) }}
+
+3. Each article-card can have its own articleUrl that overrides the default link href
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

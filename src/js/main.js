@@ -5,4 +5,10 @@
 // Main initialization code
 document.addEventListener('DOMContentLoaded', () => {
   console.log('HAT Dynamic Template initialized');
+  
+  // Initialize ACC-Card functionality if function exists
+  if (typeof initAccCards === 'function') {
+    initAccCards();
+    console.log('ACC-Card components initialized');
+  }
 });
