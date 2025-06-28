@@ -1,0 +1,12 @@
+{
+  "article-cards": [
+    {
+      "name": "article_example",
+      "imageName": "accompaniement_1",
+      "titleName": "article_example_title",
+      "descriptionName": "blog_paragraph_1",
+      "linkName": "article_plus",
+      "articleUrl": "/articles/respiration-consciente/"
+    }
+  ]
+}

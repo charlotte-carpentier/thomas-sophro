@@ -5,13 +5,3 @@ layout: '00-core/base.njk'
 
 <h1>Thomas Sophro - Professional Site</h1>
 <p>Welcome! This is the starting point of your sophrology services website.</p>
-
-{% from "02-molecules/acc-card.njk" import renderAccCard %}
-
-{{ renderAccCard({ 
-    name: "acc_equilibre",
-    datas: molecules["acc-card"]["acc-cards"],
-    imageDatas: atoms.image.images,
-    typographyDatas: atoms.typography.texts,
-    linkDatas: atoms.link.links
-}) }}
