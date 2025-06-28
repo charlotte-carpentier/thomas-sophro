@@ -1,0 +1,74 @@
+{# 
+=========================
+    CTA-BLOCK MOLECULE
+    v1.0 - Thomas       
+=========================
+#}
+
+{# Import required atoms #}
+{% from "03-atoms/icon.njk" import renderIcon %}
+{% from "03-atoms/button.njk" import renderButton %}
+
+{% macro renderCtaBlock(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No cta-block configuration provided</span>
+  {% else %}
+    {# Retrieve cta-block configuration #}
+    {% set ctaBlocksConfig = option.datas %}
+    {% set ctaBlockName = option.name %}
+    
+    {# Find the specific cta-block by name #}
+    {% set ctaBlockData = null %}
+    {% for ctaBlock in ctaBlocksConfig %}
+      {% if ctaBlock.name == ctaBlockName %}
+        {% set ctaBlockData = ctaBlock %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if cta-block not found #}
+    {% if not ctaBlockData %}
+      <span class="text-red-500">CTA Block not found: {{ ctaBlockName }}</span>
+    {% else %}
+      {# Render the cta-block container #}
+      <div class="cta-block">
+        
+        {# Icon atom #}
+        {% if ctaBlockData.iconName %}
+          {{ renderIcon({ 
+            name: ctaBlockData.iconName,
+            datas: option.iconDatas
+          }) }}
+        {% endif %}
+        
+        {# Button atom #}
+        {% if ctaBlockData.buttonName %}
+          {{ renderButton({ 
+            name: ctaBlockData.buttonName,
+            datas: option.buttonDatas
+          }) }}
+        {% endif %}
+        
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# 
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "02-molecules/cta-block.njk" import renderCtaBlock %}
+
+2. Call a specific cta-block by its name
+{{ renderCtaBlock({ 
+    name: "cta_appointment",
+    datas: molecules["cta-block"]["cta-blocks"],
+    iconDatas: atoms.icon.icons,
+    buttonDatas: atoms.button.buttons
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

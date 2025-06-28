@@ -1549,7 +1549,7 @@
 }
 .button {
   font-family: 'Inter', sans-serif;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   font-weight: bold;
   font-size: 16px;
@@ -1559,6 +1559,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 212px;
+  height: 52px;
+  letter-spacing: -0.17px;
 }
 .button--primary {
   background-color: #2a4d69;
@@ -1906,6 +1909,19 @@
     flex-direction: column;
     gap: 1.5rem;
   }
+}
+.cta-block {
+  width: 257px;
+  height: 144px;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 @property --tw-translate-x {
   syntax: "*";

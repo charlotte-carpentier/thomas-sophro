@@ -1,0 +1,9 @@
+{
+  "cta-blocks": [
+    {
+      "name": "cta_appointment",
+      "iconName": "cta_calendar",
+      "buttonName": "btn_primary"
+    }
+  ]
+}

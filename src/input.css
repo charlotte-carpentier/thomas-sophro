@@ -43,6 +43,7 @@
 /* ATOMS                    */
 /* ------------------------- */
 
+/* === IMAGE === */
 /* Image - Photo variant (responsive) */
 .image-photo {
   width: 300px;
@@ -91,8 +92,7 @@
   }
 }
 
-/* Icon */
-
+/* === ICON === */
 /* Icons interface - White color */
 .icon-interface { 
   width: 32px; 
@@ -114,10 +114,10 @@
   color: theme(--th-blue-dark);
 }
 
-/* Button */
+/* === BUTTON === */
 .button {
   font-family: theme(--font-text);
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   font-weight: bold;
   font-size: theme(--text-body);
@@ -127,6 +127,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 212px;
+  height: 52px;
+  letter-spacing: -0.17px;
 }
 
 /* Primary variant - Default state */
@@ -216,6 +219,7 @@
   opacity: 0.6;
 }
 
+/* === LINK === */
 /* Link - Base commune */
 .link {
   font-family: theme(--font-text);
@@ -309,7 +313,7 @@
   }
 }
 
-/* Typography */
+/* === TYPOGRAPHY === */
 .text-h1 {
   font-family: theme(--font-title);
   font-size: theme(--text-h1);
@@ -354,8 +358,7 @@
   }
 }
 
-/* Vector */
-
+/* === VECTOR === */
 /* Vector desktop - Default */
 .vector-desktop {
   display: flex;
@@ -426,7 +429,7 @@
 /* MOLECULES                */
 /* ------------------------- */
 
-/* Contact Block */
+/* === CONTACT-BLOCK === */
 .contact-block {
   display: flex;
   flex-direction: column;
@@ -504,7 +507,7 @@
   }
 }
 
-/* Tab Menu */
+/* === TAB-MENU === */
 .tab-menu {
   position: relative;
 }
@@ -568,32 +571,67 @@
   }
 }
 
-.cta-block {}
+/* === CTA-BLOCK === */
+.cta-block {
+  width: 257px;
+  height: 144px;
+  padding: 24px;
+  background-color: theme(--th-white);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* 16px */
+}
+
+/* === CTA-BUTTON === */
 .cta-button {}
+
+/* === ARTICLE-CARD === */
 .article-card-desktop {}
 .article-card-mobile {}
+
+/* === ACCOMPANIMENT-CARD === */
 .accompaniment-card-desktop {}
 .accompaniment-card-mobile {}
+
+/* === RECOMMENDATION-CARD === */
 .recommendation-card-desktop {}
 .recommendation-card-mobile {}
-
 
 /* ------------------------- */
 /* ORGANISMS                */
 /* ------------------------- */
 
+/* === HEADER === */
 .header-desktop {}
 .header-mobile {}
+
+/* === FOOTER === */
 .footer-desktop {}
 .footer-mobile {}
+
+/* === HERO-SECTION === */
 .hero-section-desktop {}
 .hero-section-mobile {}
+
+/* === APPROCHE-SECTION === */
 .approche-section-desktop {}
 .approche-section-mobile {}
+
+/* === ACCOMPAGNEMENTS-SECTION === */
 .accompagnements-section-desktop {}
 .accompagnements-section-mobile {}
+
+/* === CONTACT-SECTION === */
 .contact-section {}
+
+/* === RECO-SECTION === */
 .reco-section-desktop {}
 .reco-section-mobile {}
+
+/* === ARTICLES-SECTION === */
 .articles-section-desktop {}
 .articles-section-mobile {}
