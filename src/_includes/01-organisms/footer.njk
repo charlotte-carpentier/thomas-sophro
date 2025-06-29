@@ -1,186 +1,203 @@
 {# 
-=======================
-        FOOTER        
-=======================
+=========================
+    FOOTER ORGANISM
+      v1.0 - Thomas       
+=========================
 #}
 
-{% from "03-atoms/link.njk" import renderLink %}
-{% from "03-atoms/heading.njk" import renderHeading %}
-{% from "03-atoms/icon.njk" import renderIcon %}
+{# Import des atoms nécessaires #}
 {% from "03-atoms/vector.njk" import renderVector %}
+{% from "03-atoms/typography.njk" import renderTypography %}
+{% from "03-atoms/link.njk" import renderLink %}
+{% from "03-atoms/icon.njk" import renderIcon %}
 
-{% macro renderFooter(options) %}
-  {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set variants = options.datas.variants %}
+{% macro renderFooter(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No footer configuration provided</span>
+  {% else %}
+    {# Retrieve footer configuration #}
+    {% set footersConfig = option.datas %}
+    {% set footerName = option.name %}
     
+    {# Find the specific footer by name #}
     {% set footerData = null %}
-    {% if options.name %}
-      {% for footerSet in options.datas.footers %}
-        {% if footerSet.name == options.name %}
-          {% set footerData = footerSet %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+    {% for footer in footersConfig %}
+      {% if footer.name == footerName %}
+        {% set footerData = footer %}
+      {% endif %}
+    {% endfor %}
 
+    {# Fallback if footer not found #}
     {% if not footerData %}
-      {% set footerData = options.datas.footers[0] %}
-    {% endif %}
-    
-    <footer class="{{ globalStyle }} {{ footerData.containerStyle }} {{ options.class | default('') }}">
-      <div class="mx-auto w-full px-4 py-6">
-        <div class="mx-auto grid grid-cols-6">
-          <div class="col-span-6 px-4 sm:px-0 sm:col-start-2 sm:col-span-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {% if footerData.columns %}
-                {% for menuConfig in footerData.columns %}
-                  <div class="footer-column text-center md:text-left pl-2 md:pl-4 pr-2 md:pr-4 {% if menuConfig.name == 'socials' %}flex flex-col justify-center items-center md:items-center{% endif %} {% if loop.index < footerData.columns|length %}md:border-r md:border-white md:pr-10 pb-4 md:pb-0 {% if loop.index < footerData.columns|length %}border-b border-white md:border-b-0{% endif %}{% endif %}">
-                    {# Section titles in gold - Reverse for column 3 (socials) #}
-                    {% if menuConfig.name != "socials" %}
-                      {% if menuConfig.name == "contact_navigation" %}
-                        <h4 class="text-[theme(--ma-nautic-gold)] font-bold mb-4 font-['Vibur']">CONTACT</h4>
-                      {% elif menuConfig.name == "site_navigation" %}
-                        <h4 class="text-[theme(--ma-nautic-gold)] font-bold mb-4 font-['Vibur']">NAVIGATION</h4>
-                      {% endif %}
-                    {% endif %}
-                    
-                    {# Add logo for column 3 (socials) #}
-                    {% if menuConfig.name == "socials" %}
-                      <div class="flex justify-center">
-                        {{ renderVector({ 
-                          name: "ma_logo_mini", 
-                          datas: options.vectors
-                        }) }}
-                      </div>
-                    {% endif %}
-                    
-                    {% if menuConfig.name != "socials" %}
-                      <nav class="space-y-1.5">
-                        {% if options["navigation-secondarys"] and options["navigation-secondarys"]["navigation-secondarys"] %}
-                          {% for navGroup in options["navigation-secondarys"]["navigation-secondarys"] %}
-                            {% if navGroup.name == menuConfig.name and navGroup.links %}
-                              {% for linkName in navGroup.links %}
-                                {% if options.links and options.links.links %}
-                                  {% for link in options.links.links %}
-                                    {% if link.name == linkName %}
-                                      {% if menuConfig.name == "contact_navigation" %}
-                                        <div class="flex items-center mb-1.5 justify-center md:justify-start">
-                                          {% set iconName = "" %}
-                                          {% if link.name == "adresse" %}{% set iconName = "dot" %}
-                                          {% elif link.name == "telephone" %}{% set iconName = "phone" %}
-                                          {% elif link.name == "formulaire" %}{% set iconName = "mail" %}
-                                          {% elif link.name == "horaires" %}{% set iconName = "clock" %}
-                                          {% else %}{% set iconName = "dot" %}{% endif %}
-                                          
-                                          {# Use renderIcon component for icons #}
-                                          {{ renderIcon({ 
-                                            name: iconName, 
-                                            datas: options.icons,
-                                            class: "text-[theme(--ma-nautic-gold)] mr-2 filter-gold"
-                                          }) }}
-                                          
-                                          <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)]" data-nav-link>
-                                            {{ link.text | safe }}
-                                          </a>
-                                        </div>
-                                      {% else %}
-                                        <div class="mb-1.5 text-center md:text-left">
-                                          <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300" data-nav-link>
-                                            {{ link.text }}
-                                          </a>
-                                        </div>
-                                      {% endif %}
-                                    {% endif %}
-                                  {% endfor %}
-                                {% endif %}
-                              {% endfor %}
-                            {% endif %}
-                          {% endfor %}
-                        {% else %}
-                          <div class="text-[theme(--ma-nautic-teal)] text-sm">Navigation non configurée</div>
-                        {% endif %}
-                      </nav>
-                    {% else %}
-                      {# Social icons side by side for column 3 #}
-                      <div class="flex justify-center gap-4 mt-2">
-                        {% if options["navigation-secondarys"] and options["navigation-secondarys"]["navigation-secondarys"] %}
-                          {% for navGroup in options["navigation-secondarys"]["navigation-secondarys"] %}
-                            {% if navGroup.name == "socials" and navGroup.links %}
-                              {% for linkName in navGroup.links %}
-                                {% if options.links and options.links.links %}
-                                  {% for link in options.links.links %}
-                                    {% if link.name == linkName and (link.name == "facebook" or link.name == "instagram") %}
-                                      <a href="{{ link.href }}" class="text-[theme(--ma-nautic-gold)] hover:text-[theme(--ma-nautic-teal)]">
-                                        {{ renderIcon({ 
-                                          name: link.name, 
-                                          datas: options.icons,
-                                          class: "w-8 h-8 filter-gold"
-                                        }) }}
-                                      </a>
-                                    {% endif %}
-                                  {% endfor %}
-                                {% endif %}
-                              {% endfor %}
-                            {% endif %}
-                          {% endfor %}
-                        {% endif %}
-                      </div>
-                    {% endif %}
-                    
-                    {# Title for column 3 (socials) placed under links #}
-                    {% if menuConfig.name == "socials" %}
-                      <h4 class="text-[theme(--ma-nautic-gold)] font-bold font-['Vibur'] mt-2 text-center">SUIVEZ-NOUS</h4>
-                    {% endif %}
+      <span class="text-red-500">Footer not found: {{ footerName }}</span>
+    {% else %}
+      {# Build CSS classes #}
+      {% set variant = footerData.variant | default('thomas') %}
+      {% set cssClasses = 'footer' %}
+      
+      {# Add any additional classes #}
+      {% if option.class %}
+        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
+      {% endif %}
+      
+      {# Desktop Footer #}
+      <footer class="{{ cssClasses }} footer-desktop">
+        <div class="footer-container">
+          {# Content Grid - 4 columns: Logo + 3 content columns #}
+          <div class="footer-content">
+            {# Brand Column with copyright at bottom #}
+            <div class="footer-column">
+              {{ renderVector({ 
+                name: footerData.brand.desktop,
+                datas: option.vectorDatas
+              }) }}
+              
+              {# Copyright in first column #}
+              <div class="footer-copyright">
+                <span>© {{ footerData.copyright.year }} {{ footerData.copyright.name }}</span>
+                <span class="footer-separator">•</span>
+                {{ renderLink({ 
+                  name: footerData.copyright.links[0],
+                  datas: option.linkDatas
+                }) }}
+                <span class="footer-separator">•</span>
+                <span>{{ footerData.copyright.additional_text }}</span>
+              </div>
+            </div>
+            
+            {# Navigation Column #}
+            <div class="footer-column">
+              <h3 class="footer-column-title">{{ footerData.navigation.title }}</h3>
+              <nav class="footer-nav">
+                {% for linkName in footerData.navigation.links %}
+                  {{ renderLink({ 
+                    name: linkName,
+                    datas: option.linkDatas
+                  }) }}
+                {% endfor %}
+              </nav>
+            </div>
+            
+            {# Contact Column #}
+            <div class="footer-column">
+              <h3 class="footer-column-title">{{ footerData.contact.title }}</h3>
+              <div class="footer-contact">
+                {% for item in footerData.contact.items %}
+                  <div class="footer-contact-item">
+                    {{ renderIcon({ 
+                      name: item.icon,
+                      datas: option.iconDatas
+                    }) }}
+                    <span class="footer-contact-text">{{ item.text | safe }}</span>
                   </div>
                 {% endfor %}
-              {% endif %}
+              </div>
             </div>
-
-            <div class="mt-4">
-              <div class="flex flex-col md:flex-row md:items-center md:justify-between text-sm">
-                <div class="text-[theme(--ma-nautic-white)] mb-4 md:mb-0 flex flex-wrap items-center justify-center md:justify-start gap-1">
-                  {% if footerData.version %}
-                    <span>v{{ footerData.version }}</span>
-                  {% endif %}
-                  
-                  {% if footerData.links and footerData.links[0] and footerData.links[0].name == "credit" %}
-                    {% for link in options.links.links %}
-                      {% if link.name == "credits" %}
-                        <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300" data-nav-link>
-                          {{ link.text }}
-                        </a>
-                      {% endif %}
-                    {% endfor %}
-                  {% endif %}
-                </div>
-                
-                <div class="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 items-center md:items-start">
-                  {% for linkConfig in footerData.links %}
-                    {% if linkConfig.name == "creator" %}
-                      {% if options.links and options.links.links %}
-                        {% for link in options.links.links %}
-                          {% if link.name == linkConfig.name %}
-                            <a href="{{ link.href }}" class="text-[theme(--ma-nautic-white)] hover:text-[theme(--ma-nautic-teal)] transition-all duration-300" data-nav-link>
-                              {{ link.text }}
-                            </a>
-                          {% endif %}
-                        {% endfor %}
-                      {% endif %}
-                    {% endif %}
-                  {% endfor %}
-                </div>
+            
+            {# Social Column #}
+            <div class="footer-column">
+              <h3 class="footer-column-title">{{ footerData.social.title }}</h3>
+              <div class="footer-social">
+                {% for social in footerData.social.links %}
+                  <div class="footer-social-item">
+                    <span class="footer-social-icon">
+                      {{ renderIcon({ 
+                        name: social.icon,
+                        datas: option.iconDatas
+                      }) }}
+                    </span>
+                    {{ renderLink({ 
+                      name: social.link_name,
+                      datas: option.linkDatas
+                    }) }}
+                  </div>
+                {% endfor %}
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </footer>
-  {% else %}
-    <span class="text-red-500">Footer data not found</span>
+      </footer>
+      
+      {# Mobile Footer #}
+      <footer class="{{ cssClasses }} footer-mobile">
+        <div class="footer-container-mobile">
+          {# Brand Section #}
+          <div class="footer-brand-mobile">
+            {{ renderVector({ 
+              name: footerData.brand.mobile,
+              datas: option.vectorDatas
+            }) }}
+          </div>
+          
+          {# Navigation Section #}
+          <div class="footer-section-mobile">
+            <h3 class="footer-section-title">{{ footerData.navigation.title }}</h3>
+            <nav class="footer-nav-mobile">
+              {% for linkName in footerData.navigation.links %}
+                {{ renderLink({ 
+                  name: linkName,
+                  datas: option.linkDatas
+                }) }}
+              {% endfor %}
+            </nav>
+          </div>
+          
+          {# Contact Section #}
+          <div class="footer-section-mobile">
+            <h3 class="footer-section-title">{{ footerData.contact.title }}</h3>
+            <div class="footer-contact-mobile">
+              {% for item in footerData.contact.items %}
+                <div class="footer-contact-item-mobile">
+                  {{ renderIcon({ 
+                    name: item.icon,
+                    datas: option.iconDatas
+                  }) }}
+                  <span class="footer-contact-text">{{ item.text | safe }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          
+          {# Social Section #}
+          <div class="footer-section-mobile">
+            <h3 class="footer-section-title">{{ footerData.social.title }}</h3>
+            <div class="footer-social-mobile">
+              {% for social in footerData.social.links %}
+                <div class="footer-social-link-mobile">
+                  {{ renderIcon({ 
+                    name: social.icon,
+                    datas: option.iconDatas
+                  }) }}
+                  <span class="sr-only">
+                    {{ renderLink({ 
+                      name: social.link_name,
+                      datas: option.linkDatas
+                    }) }}
+                  </span>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          
+          {# Copyright Section #}
+          <div class="footer-copyright-mobile">
+            <span>© {{ footerData.copyright.year }}</span>
+            <span class="footer-separator">•</span>
+            {{ renderLink({ 
+              name: footerData.copyright.links[0],
+              datas: option.linkDatas
+            }) }}
+            <span class="footer-separator">•</span>
+            <span>{{ footerData.copyright.additional_text }}</span>
+          </div>
+        </div>
+      </footer>
+    {% endif %}
   {% endif %}
 {% endmacro %}
 
-{#
+{# 
 ============================
 Summon HAT Components Wisely
 ============================
@@ -188,16 +205,13 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/footer.njk" import renderFooter %}
 
-2. Call a specific footer by its name
+2. Call the footer organism
 {{ renderFooter({ 
-    name: "ma_nautic_footer",
-    datas: organisms.footers,
-    menus: organisms.menus,
-    links: atoms.links,
-    headings: atoms.headings,
-    icons: atoms.icons,
-    vectors: atoms.vectors,
-    "navigation-secondarys": organisms["navigation-secondarys"]
+    name: "thomas_footer",
+    datas: organisms.footer.footers,
+    vectorDatas: atoms.vector.vectors,
+    linkDatas: atoms.link.links,
+    iconDatas: atoms.icon.icons
 }) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨

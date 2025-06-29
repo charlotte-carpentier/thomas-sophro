@@ -1,0 +1,64 @@
+{
+  "footers": [
+    {
+      "name": "thomas_footer",
+      "brand": {
+        "desktop": "brand_desktop",
+        "mobile": "brand_mobile"
+      },
+      "navigation": {
+        "title": "Navigation",
+        "links": [
+          "footer_home",
+          "footer_about", 
+          "footer_accompaniements",
+          "footer_contact",
+          "footer_reco"
+        ]
+      },
+      "contact": {
+        "title": "Contact",
+        "items": [
+          {
+            "icon": "contact_phone",
+            "text": "07 63 87 87 05"
+          },
+          {
+            "icon": "contact_mail", 
+            "text": "carpentier.sophro@gmail.com"
+          },
+          {
+            "icon": "contact_city",
+            "text": "La Garenne-Colombes,<br>Hauts-de-Seine"
+          }
+        ]
+      },
+      "social": {
+        "title": "Me suivre",
+        "links": [
+          {
+            "link_name": "footer_facebook",
+            "icon": "social_facebook"
+          },
+          {
+            "link_name": "footer_instagram", 
+            "icon": "social_instagram"
+          },
+          {
+            "link_name": "footer_linkedin",
+            "icon": "social_linkedin"
+          }
+        ]
+      },
+      "copyright": {
+        "year": "2025",
+        "name": "Thomas Carpentier",
+        "links": [
+          "footer_legal"
+        ],
+        "additional_text": "CGV"
+      },
+      "variant": "thomas"
+    }
+  ]
+}
