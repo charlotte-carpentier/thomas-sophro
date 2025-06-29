@@ -1,0 +1,23 @@
+{
+  "section_contacts": [
+    {
+      "name": "thomas_section_contact",
+      "title": "contact_title",
+      "intro": {
+        "paragraph_1": "contact_paragraph_1",
+        "paragraph_2": "contact_paragraph_2",
+        "paragraph_3": "contact_paragraph_3"
+      },
+      "contact_block": "main_contact",
+      "map": {
+        "city": "La Garenne-Colombes",
+        "coordinates": {
+          "lat": 48.9067,
+          "lng": 2.2436
+        },
+        "zoom": 14
+      },
+      "variant": "thomas"
+    }
+  ]
+}
