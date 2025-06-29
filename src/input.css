@@ -835,7 +835,7 @@
 
 .header-container {
   width: 100%;
-  padding: 0 2rem;
+  padding: 0 5.625rem; /* 90px = 5.625rem en desktop */
   height: 80px;
   display: flex;
   align-items: center;
@@ -978,6 +978,7 @@
 
 @media (max-width: 1023px) {
   .header-container {
+    padding: 0 1.5rem; /* 24px = 1.5rem en mobile */
     justify-content: flex-start;
     gap: 1rem;
   }
@@ -1003,6 +1004,7 @@
 }
 
 /* === FOOTER === */
+
 /* 
 =========================
     FOOTER ORGANISM
@@ -1024,7 +1026,7 @@
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 3rem 5.625rem; /* 90px = 5.625rem en desktop */
 }
 
 /* Content Grid - 4 columns: Logo + 3 content columns */
@@ -1171,7 +1173,7 @@
 }
 
 .footer-container-mobile {
-  padding: 2rem 1.5rem;
+  padding: 2rem 1.5rem; /* 24px = 1.5rem en mobile */
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -1314,7 +1316,167 @@
 .accompagnements-section-mobile {}
 
 /* === CONTACT-SECTION === */
-.contact-section {}
+
+/* 
+=========================
+   SECTION-CONTACT ORGANISM
+      v1.0 - Thomas       
+=========================
+*/
+
+.section-contact {
+  width: 100%;
+  background-color: theme(--th-white);
+  color: theme(--th-blue-dark);
+}
+
+/* === DESKTOP SECTION-CONTACT === */
+.section-contact-desktop {
+  display: block;
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 5.625rem; /* 90px = 5.625rem en desktop */
+}
+
+/* Header - Title and intro above columns */
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  margin: 0;
+  text-align: center; /* Titre centré en desktop */
+}
+
+.section-title h2 {
+  margin: 0;
+  color: theme(--th-blue-dark);
+}
+
+.section-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center; /* Texte centré en desktop */
+}
+
+.section-intro p {
+  margin: 0;
+  color: theme(--th-blue-dark);
+  line-height: 1.6;
+}
+
+/* Content Grid - 2 columns: Contact block + Map */
+.section-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: flex-start;
+}
+
+/* Contact Column */
+.section-contact-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre le contact-block dans la colonne */
+  justify-content: flex-start;
+}
+
+.section-contact-block-wrapper {
+  margin: 0;
+  /* Le contact-block garde son alignement interne à gauche */
+}
+
+/* Map Column */
+.section-map-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-map {
+  width: 100%;
+  height: 400px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* === MOBILE SECTION-CONTACT === */
+.section-contact-mobile {
+  display: none;
+}
+
+.section-container-mobile {
+  padding: 3rem 1.5rem; /* 24px = 1.5rem en mobile */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section-title-mobile {
+  margin: 0;
+  text-align: center; /* Titre centré en mobile aussi */
+}
+
+.section-title-mobile h2 {
+  margin: 0;
+  color: theme(--th-blue-dark);
+}
+
+.section-intro-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left; /* Texte aligné à gauche en mobile */
+}
+
+.section-intro-mobile p {
+  margin: 0;
+  color: theme(--th-blue-dark);
+  line-height: 1.6;
+}
+
+.section-contact-block-wrapper-mobile {
+  display: flex;
+  justify-content: center;
+}
+
+.section-map-mobile {
+  width: 100%;
+  height: 250px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .section-contact-desktop {
+    display: none;
+  }
+  
+  .section-contact-mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .section-contact-desktop {
+    display: block;
+  }
+  
+  .section-contact-mobile {
+    display: none;
+  }
+}
 
 /* === RECO-SECTION === */
 .reco-section-desktop {}

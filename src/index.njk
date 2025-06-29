@@ -6,3 +6,13 @@ layout: '00-core/base.njk'
 <h1>Thomas Sophro - Professional Site</h1>
 <p>Welcome! This is the starting point of your sophrology services website.</p>
 
+{% from "01-organisms/section-contact.njk" import renderSectionContact %}
+
+{{ renderSectionContact({ 
+    name: "thomas_section_contact",
+    datas: organisms["section-contact"].section_contacts,
+    contactBlockDatas: molecules["contact-block"].contact_blocks,
+    typographyDatas: atoms.typography.texts,
+    iconDatas: atoms.icon.icons,
+    buttonDatas: atoms.button.buttons
+}) }}

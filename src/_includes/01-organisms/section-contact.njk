@@ -1,62 +1,180 @@
-{#
+{# 
 =========================
-     SECTION-CONTACT        
+   SECTION-CONTACT ORGANISM
+      v1.0 - Thomas       
 =========================
 #}
 
-{% from "02-molecules/list-form.njk" import renderListForm %}
+{% macro renderSectionContact(option) %}
+  {# Import required molecules and atoms #}
+  {% from "02-molecules/contact-block.njk" import renderContactBlock %}
+  {% from "03-atoms/typography.njk" import renderTypography %}
 
-{% macro renderSectionContact(options) %}
-  {# Check if data is provided #}
-  {% if options.datas %}
-    {# Get global styling and container styles #}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set containerStyle = options.datas.containerStyle | default('container mx-auto') %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No section-contact configuration provided</span>
+  {% else %}
+    {# Retrieve section-contact configuration #}
+    {% set sectionContactsConfig = option.datas %}
+    {% set sectionContactName = option.name %}
     
-    {# Find specific section configuration #}
-    {% set sectionData = null %}
-    {% if options.name %}
-      {% for section in options.datas.sections %}
-        {% if section.name == options.name %}
-          {% set sectionData = section %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+    {# Find the specific section-contact by name #}
+    {% set sectionContactData = null %}
+    {% for sectionContact in sectionContactsConfig %}
+      {% if sectionContact.name == sectionContactName %}
+        {% set sectionContactData = sectionContact %}
+      {% endif %}
+    {% endfor %}
 
-    {# Fallback to first section if not found #}
-    {% if not sectionData %}
-      {% set sectionData = options.datas.sections[0] %}
-    {% endif %}
-    
-    {# Render contact section with form #}
-    <section class="{{ globalStyle }} bg-[#2b3947] text-white py-8 {{ options.class | default('') }}">
-      <div class="{{ containerStyle }} grid grid-cols-6">
-        <div class="col-span-6 px-4 sm:px-0 sm:col-start-2 sm:col-span-4">
-          <div class="flex justify-center">
-            <div class="w-full lg:w-1/2 {{ sectionData.form.wrapperStyle }}">
-              {# Honeypot field for spam protection #}
-              <div aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px;">
-                <input type="text" name="website" tabindex="-1" autocomplete="off">
+    {# Fallback if section-contact not found #}
+    {% if not sectionContactData %}
+      <span class="text-red-500">Section-contact not found: {{ sectionContactName }}</span>
+    {% else %}
+      {# Build CSS classes #}
+      {% set variant = sectionContactData.variant | default('default') %}
+      {% set cssClasses = 'section-contact section-contact-' ~ variant %}
+      
+      {# Add any additional classes #}
+      {% if option.class %}
+        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
+      {% endif %}
+      
+      {# Contact Section container #}
+      <section class="{{ cssClasses }}" id="contact">
+        
+        {# Desktop version #}
+        <div class="section-contact-desktop">
+          <div class="section-container">
+            
+            {# Header - Title and intro above columns #}
+            <div class="section-header">
+              {# Title #}
+              <div class="section-title">
+                {{ renderTypography({ 
+                    name: sectionContactData.title,
+                    datas: option.typographyDatas,
+                    tag: "h2"
+                }) }}
               </div>
               
-              {# Call list-form component with simplified version #}
-              {{ renderListForm({
-                name: sectionData.form.name,
-                datas: options.listForms,
-                atoms: options.atoms
-              }) }}
+              {# Introduction paragraphs #}
+              <div class="section-intro">
+                {{ renderTypography({ 
+                    name: sectionContactData.intro.paragraph_1,
+                    datas: option.typographyDatas
+                }) }}
+                {{ renderTypography({ 
+                    name: sectionContactData.intro.paragraph_2,
+                    datas: option.typographyDatas
+                }) }}
+                {{ renderTypography({ 
+                    name: sectionContactData.intro.paragraph_3,
+                    datas: option.typographyDatas
+                }) }}
+              </div>
+            </div>
+            
+            {# Content wrapper - 2 columns #}
+            <div class="section-content">
+              
+              {# Left column - Contact block only #}
+              <div class="section-contact-column">
+                <div class="section-contact-block-wrapper">
+                  {{ renderContactBlock({ 
+                      name: sectionContactData.contact_block,
+                      datas: option.contactBlockDatas,
+                      iconDatas: option.iconDatas,
+                      typographyDatas: option.typographyDatas,
+                      buttonDatas: option.buttonDatas
+                  }) }}
+                </div>
+              </div>
+              
+              {# Right column - Map #}
+              <div class="section-map-column">
+                <div class="section-map">
+                  {# Google Maps Embed - La Garenne-Colombes #}
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d41997.38267068636!2d2.2089!3d48.9067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fc0c1b26d4d%3A0x40b82c3688c9460!2sLa%20Garenne-Colombes!5e0!3m2!1sfr!2sfr!4v1638360000000!5m2!1sfr!2sfr"
+                    width="100%" 
+                    height="400" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Localisation du cabinet - {{ sectionContactData.map.city }}">
+                  </iframe>
+                </div>
+              </div>
+              
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  {% else %}
-    <span class="text-red-500">Section contact data not found</span>
+        
+        {# Mobile version #}
+        <div class="section-contact-mobile">
+          <div class="section-container-mobile">
+            
+            {# Title #}
+            <div class="section-title-mobile">
+              {{ renderTypography({ 
+                  name: sectionContactData.title,
+                  datas: option.typographyDatas,
+                  tag: "h2"
+              }) }}
+            </div>
+            
+            {# Introduction paragraphs #}
+            <div class="section-intro-mobile">
+              {{ renderTypography({ 
+                  name: sectionContactData.intro.paragraph_1,
+                  datas: option.typographyDatas
+              }) }}
+              {{ renderTypography({ 
+                  name: sectionContactData.intro.paragraph_2,
+                  datas: option.typographyDatas
+              }) }}
+              {{ renderTypography({ 
+                  name: sectionContactData.intro.paragraph_3,
+                  datas: option.typographyDatas
+              }) }}
+            </div>
+            
+            {# Contact block #}
+            <div class="section-contact-block-wrapper-mobile">
+              {{ renderContactBlock({ 
+                  name: sectionContactData.contact_block,
+                  datas: option.contactBlockDatas,
+                  iconDatas: option.iconDatas,
+                  typographyDatas: option.typographyDatas,
+                  buttonDatas: option.buttonDatas
+              }) }}
+            </div>
+            
+            {# Map #}
+            <div class="section-map-mobile">
+              {# Google Maps Embed - La Garenne-Colombes #}
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d41997.38267068636!2d2.2089!3d48.9067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fc0c1b26d4d%3A0x40b82c3688c9460!2sLa%20Garenne-Colombes!5e0!3m2!1sfr!2sfr!4v1638360000000!5m2!1sfr!2sfr"
+                width="100%" 
+                height="250" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Localisation du cabinet - {{ sectionContactData.map.city }}">
+              </iframe>
+            </div>
+            
+          </div>
+        </div>
+        
+      </section>
+    {% endif %}
   {% endif %}
 {% endmacro %}
 
-
-{#
+{# 
 ============================
 Summon HAT Components Wisely
 ============================
@@ -64,12 +182,14 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/section-contact.njk" import renderSectionContact %}
 
-2. Call a specific section-contact by its name
+2. Call the contact section
 {{ renderSectionContact({ 
-    name: "default",
-    datas: organisms["section-contacts"],
-    listForms: molecules["list-forms"],
-    atoms: atoms
+    name: "thomas_section_contact",
+    datas: organisms["section-contact"].section_contacts,
+    contactBlockDatas: molecules["contact-block"].contact_blocks,
+    typographyDatas: atoms.typography.texts,
+    iconDatas: atoms.icon.icons,
+    buttonDatas: atoms.button.buttons
 }) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
