@@ -720,12 +720,169 @@
 /* Title color in header */
 .acc-card__header h3 {
   color: theme(--th-blue-dark);
+  line-height: 1; /* Interligne réduit mais pas trop serré */
 }
 
 /* Ensure link styling in card context */
 .acc-card__content .link--inline {
   align-self: flex-start;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .acc-card {
+    width: 100%;
+    max-width: 330px;
+  }
+  
+  /* Reduce line clamp on mobile for better UX */
+  .acc-card__text-truncated {
+    -webkit-line-clamp: 6; /* Moins de lignes en mobile */
+  }
+}
+
+/* === ACC-SECTION === */
+
+/* 
+=========================
+   SECTION-ACC ORGANISM
+      v1.0 - Thomas       
+=========================
+*/
+
+.section-acc {
+  width: 100%;
+  background-color: theme(--th-white);
+  color: theme(--th-blue-dark);
+}
+
+/* === DESKTOP SECTION-ACC === */
+.section-acc-desktop {
+  display: block;
+}
+
+.section-acc .section-container {
+  padding: 4rem 5.625rem; /* 4rem vertical + 90px (5.625rem) latéral desktop */
+}
+
+/* Header - Title and intro above cards */
+.section-acc .section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* S = 1.5rem - Titre → Intro */
+  margin-bottom: 2.5rem; /* M = 2.5rem - Intro → Cards */
+}
+
+.section-acc .section-title {
+  margin: 0;
+  text-align: center; /* Titre centré en desktop */
+}
+
+.section-acc .section-title h2 {
+  margin: 0;
+  color: theme(--th-blue-dark);
+  line-height: 1.2;
+}
+
+.section-acc .section-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* XS = 0.75rem entre paragraphes intro */
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center; /* Texte centré en desktop */
+}
+
+.section-acc .section-intro p {
+  margin: 0;
+  color: theme(--th-blue-dark);
+  line-height: 1.5;
+}
+
+/* Content Grid - 3 columns: 3 ACC cards horizontal */
+.section-acc .section-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3.5rem; /* L = 3.5rem entre colonnes */
+  align-items: flex-start;
+}
+
+/* Card columns */
+.section-acc .section-card-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre les acc-cards dans les colonnes */
+  justify-content: flex-start;
+}
+
+/* === MOBILE SECTION-ACC === */
+.section-acc-mobile {
+  display: none;
+}
+
+.section-acc .section-container-mobile {
+  padding: 3rem 1.5rem; /* 3rem vertical + 24px (1.5rem) latéral mobile */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* M = 2rem gap général mobile */
+}
+
+.section-acc .section-title-mobile {
+  margin: 0;
+  text-align: center; /* Titre centré en mobile aussi */
+}
+
+.section-acc .section-title-mobile h2 {
+  margin: 0;
+  color: theme(--th-blue-dark);
+  line-height: 1.2;
+}
+
+.section-acc .section-intro-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* XS réduit = 0.5rem entre paragraphes intro mobile */
+  text-align: left; /* Texte aligné à gauche en mobile */
+}
+
+.section-acc .section-intro-mobile p {
+  margin: 0;
+  color: theme(--th-blue-dark);
+  line-height: 1.5;
+}
+
+/* Cards stack vertical mobile */
+.section-acc .section-cards-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* M = 2rem gap général mobile entre cartes */
+  align-items: center;
+}
+
+.section-acc .section-card-mobile {
+  display: flex;
+  justify-content: center;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .section-acc-desktop {
+    display: none;
+  }
+  
+  .section-acc-mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .section-acc-desktop {
+    display: block;
+  }
+  
+  .section-acc-mobile {
+    display: none;
+  }
 }
 
 /* === RECOMMENDATION-CARD === */
@@ -1485,8 +1642,152 @@
 .approche-section-mobile {}
 
 /* === ACCOMPAGNEMENTS-SECTION === */
-.accompagnements-section-desktop {}
-.accompagnements-section-mobile {}
+
+/* === ACC-SECTION === */
+
+/* 
+=========================
+   SECTION-ACC ORGANISM
+      v1.0 - Thomas       
+=========================
+*/
+
+.section-acc {
+  width: 100%;
+  background-color: theme(--th-white);
+  color: theme(--th-blue-dark);
+}
+
+/* === DESKTOP SECTION-ACC === */
+.section-acc-desktop {
+  display: block;
+}
+
+.section-acc .section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 5.625rem; /* 90px = 5.625rem en desktop */
+}
+
+/* Header - Title and intro above cards */
+.section-acc .section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* S = 1.5rem - Titre → Intro */
+  margin-bottom: 2.5rem; /* M = 2.5rem - Intro → Cards */
+}
+
+.section-acc .section-title {
+  margin: 0;
+  text-align: center; /* Titre centré en desktop */
+}
+
+.section-acc .section-title h2 {
+  margin: 0;
+  color: theme(--th-blue-dark);
+  line-height: 1.2;
+}
+
+.section-acc .section-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* XS = 0.75rem entre paragraphes intro */
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center; /* Texte centré en desktop */
+}
+
+.section-acc .section-intro p {
+  margin: 0;
+  color: theme(--th-blue-dark);
+  line-height: 1.5;
+}
+
+/* Content Grid - 3 columns: 3 ACC cards horizontal */
+.section-acc .section-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3.5rem; /* L = 3.5rem entre colonnes */
+  align-items: flex-start;
+}
+
+/* Card columns */
+.section-acc .section-card-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre les acc-cards dans les colonnes */
+  justify-content: flex-start;
+}
+
+/* === MOBILE SECTION-ACC === */
+.section-acc-mobile {
+  display: none;
+}
+
+.section-acc .section-container-mobile {
+  padding: 3rem 1.5rem; /* 24px = 1.5rem en mobile */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* M = 2rem gap général mobile */
+}
+
+.section-acc .section-title-mobile {
+  margin: 0;
+  text-align: center; /* Titre centré en mobile aussi */
+}
+
+.section-acc .section-title-mobile h2 {
+  margin: 0;
+  color: theme(--th-blue-dark);
+  line-height: 1.2;
+}
+
+.section-acc .section-intro-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* XS réduit = 0.5rem entre paragraphes intro mobile */
+  text-align: left; /* Texte aligné à gauche en mobile */
+}
+
+.section-acc .section-intro-mobile p {
+  margin: 0;
+  color: theme(--th-blue-dark);
+  line-height: 1.5;
+}
+
+/* Cards stack vertical mobile */
+.section-acc .section-cards-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* M = 2rem gap général mobile entre cartes */
+  align-items: center;
+}
+
+.section-acc .section-card-mobile {
+  display: flex;
+  justify-content: center;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .section-acc-desktop {
+    display: none;
+  }
+  
+  .section-acc-mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .section-acc-desktop {
+    display: block;
+  }
+  
+  .section-acc-mobile {
+    display: none;
+  }
+}
 
 /* === CONTACT-SECTION === */
 
