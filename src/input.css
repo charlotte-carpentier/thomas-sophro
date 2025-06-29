@@ -1304,8 +1304,181 @@
 }
 
 /* === HERO-SECTION === */
-.hero-section-desktop {}
-.hero-section-mobile {}
+
+/* 
+=========================
+   SECTION-HERO ORGANISM
+      v1.0 - Thomas       
+=========================
+*/
+
+.section-hero {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* === BACKGROUND IMAGE SYSTEM === */
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7; /* 70% opacity for image */
+}
+
+/* Color overlay - #63A69F at 80% opacity for better contrast */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(99, 166, 159, 0.8); /* #63A69F at 80% for accessibility */
+  z-index: 2;
+}
+
+/* === DESKTOP SECTION-HERO === */
+.section-hero-desktop {
+  display: block;
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 5.625rem; /* 4rem vertical + 90px (5.625rem) latéral desktop */
+  height: 527px;
+  display: flex;
+  align-items: center;
+}
+
+/* Content Grid - 2 columns: Text content (left) + CTA Block (right) */
+.hero-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Text takes more space than CTA */
+  gap: 3.5rem; /* L = 3.5rem gap between columns */
+  align-items: center;
+  width: 100%;
+}
+
+/* === LEFT COLUMN - Text Content === */
+.hero-text-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* S = 1.5rem - Titre → Intro → Boutons */
+  color: theme(--th-white);
+}
+
+.hero-title h1,
+.hero-text p {
+  margin: 0;
+  color: theme(--th-white);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+}
+
+.hero-title {
+  line-height: 1.2;
+}
+
+.hero-text {
+  line-height: 1.5;
+}
+
+.hero-buttons {
+  align-self: flex-start;
+}
+
+/* === RIGHT COLUMN - CTA Block === */
+.hero-cta-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === MOBILE SECTION-HERO === */
+.section-hero-mobile {
+  display: none;
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+.hero-container-mobile {
+  padding: 3rem 1.5rem; /* 3rem vertical + 24px (1.5rem) latéral mobile */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem; /* M = 2rem gap général mobile */
+}
+
+/* Mobile Typography */
+.hero-title-mobile h1,
+.hero-text-mobile p {
+  margin: 0;
+  color: theme(--th-white);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+}
+
+.hero-title-mobile {
+  text-align: center;
+  line-height: 1.2;
+}
+
+.hero-text-mobile {
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* Mobile CTA sections */
+.hero-buttons-mobile {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-cta-mobile {
+  display: flex;
+  justify-content: center;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .section-hero-desktop {
+    display: none;
+  }
+  
+  .section-hero-mobile {
+    display: block;
+  }
+  
+  /* Mobile : aucune contrainte de hauteur - s'adapte au contenu */
+}
+
+@media (min-width: 769px) {
+  .section-hero-desktop {
+    display: block;
+  }
+  
+  .section-hero-mobile {
+    display: none;
+  }
+  
+  .section-hero {
+    height: 527px; /* Desktop : hauteur fixe de 527px */
+  }
+}
 
 /* === APPROCHE-SECTION === */
 .approche-section-desktop {}

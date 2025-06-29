@@ -1,0 +1,13 @@
+{
+  "sections": [
+    {
+      "name": "hero_thomas",
+      "title": "hero_title",
+      "text": "hero_text",
+      "background_image": "hero_bg",
+      "cta_button": "cta_hero_navigation",
+      "cta_block": "cta_appointment",
+      "variant": "thomas"
+    }
+  ]
+}

@@ -1,403 +1,161 @@
-{#
+{# 
 =========================
-      SECTION HERO        
+    SECTION-HERO ORGANISM
+      v1.0 - Thomas       
 =========================
 #}
 
-{% macro renderSectionHero(options) %}
-  {# Check if data is provided #}
-  {% if options.datas %}
-    {# Find variant without using selectattr #}
-    {% set variant = null %}
-    {% for hero in options.datas.heroes %}
-      {% if hero.name == options.name %}
-        {% set variant = hero %}
+{% macro renderSectionHero(option) %}
+  {# Import required molecules and atoms #}
+  {% from "02-molecules/cta-button.njk" import renderCtaButton %}
+  {% from "02-molecules/cta-block.njk" import renderCtaBlock %}
+  {% from "03-atoms/typography.njk" import renderTypography %}
+  {% from "03-atoms/image.njk" import renderImage %}
+
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No section-hero configuration provided</span>
+  {% else %}
+    {# Retrieve section-hero configuration #}
+    {% set sectionsConfig = option.datas %}
+    {% set sectionName = option.name %}
+    
+    {# Find the specific section by name #}
+    {% set sectionData = null %}
+    {% for section in sectionsConfig %}
+      {% if section.name == sectionName %}
+        {% set sectionData = section %}
       {% endif %}
     {% endfor %}
-    
-    {# Fallback to first hero if not found #}
-    {% if variant == null %}
-      {% set variant = options.datas.heroes[0] %}
-    {% endif %}
 
-    {# Get global styling and variants #}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set variantStyle = options.datas.variants[variant.variant] | default(options.datas.variants.default) %}
-    
-    {# Remove all padding from styles #}
-    {% set globalStyle = globalStyle | replace('py-10', '') | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('py-0', '') %}
-    {% set variantStyle = variantStyle | replace('py-8', '') | replace('py-12', '') | replace('py-16', '') | replace('pb-0', '') | replace('pt-12', '') %}
-    
-    {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
-    {% set textContainerStyle = options.datas.textContainerStyle %}
-    {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center md:justify-start" %}
-    {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
-
-    {# Create unique ID for the section from name #}
-    {% set sectionId = "section-" ~ (variant.name | replace(" ", "-") | lower) %}
-
-    {# Specific styles for scroll button #}
-    {% set scrollArrowWrapperStyle = "absolute left-1/2 transform -translate-x-1/2 z-20" %}
-    {% set arrowStyle = "mx-auto" %}
-    {% set arrowButtonStyle = "text-[theme(--ma-nautic-blue)]" %}
-    {% set arrowButtonStyleBeige = "text-[theme(--ma-nautic-beige)]" %}
-    {% set arrowContainerSize = "w-16 h-16" %}
-
-    {# Check if background image exists #}
-    {% set backgroundImage = null %}
-    {% if variant.backgroundImage and options.images %}
-      {% for image in options.images.images %}
-        {% if image.name == variant.backgroundImage %}
-          {% set backgroundImage = image %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-
-    <style>
-      #{{ sectionId }}.has-background {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{{ backgroundImage.src }}');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-    </style>
-
-    {# All variants are handled by default #}
-    {% if variant %}
-      {# Wrapper with relative positioning for the whole section #}
-      <div class="relative">
-        {# Top beige band for main title - only if mainTitle exists #}
-        {% if variant.mainTitle %}
-          <div class="bg-[theme(--ma-nautic-beige)] pt-16 md:pt-20 lg:pt-24 pb-12 w-full">
-            <div class="container mx-auto grid grid-cols-6">
-              <div class="col-span-6 px-4 sm:px-0 sm:col-start-2 sm:col-span-4">
-                {# MainTitle #}
-                {% if variant.mainTitle and options.headings %}
-                  {% set mainTitle = null %}
-                  {% for heading in options.headings.headings %}
-                    {% if heading.name == variant.mainTitle %}
-                      {% set mainTitle = heading %}
-                    {% endif %}
-                  {% endfor %}
-
-                  {% if mainTitle %}
-                    <{{ "h" + mainTitle.level }} class="text-center {{ options.headings.globalStyle }} {{ options.headings.variants[mainTitle.style] }}">
-                      {{ mainTitle.text }}
-                    </{{ "h" + mainTitle.level }}>
-                  {% endif %}
-                {% endif %}
-              </div>
-            </div>
-          </div>
-        {% endif %}
-
-        {# Scroll arrow button between sections if arrow_scroll #}
-        {% if variant.scrollArrowButton == "arrow_scroll" and options.buttons %}
-          {% set scrollButton = null %}
-          {% for button in options.buttons.buttons %}
-            {% if button.name == variant.scrollArrowButton %}
-              {% set scrollButton = button %}
-            {% endif %}
-          {% endfor %}
-
-          {% if scrollButton %}
-            {% set scrollTarget = variant.scrollTarget | default("#") %}
-            
-            <div class="w-full relative h-8 z-20" style="margin-top: -1.5rem;">
-              <a href="{{ scrollTarget }}" class="ma-nautic-scroll-arrow {{ arrowStyle }} {{ scrollArrowWrapperStyle }}" aria-label="Défiler vers le contenu">
-                {% if scrollButton.icon and options.icons %}
-                  {% set arrowIconData = null %}
-                  {% for icon in options.icons.icons %}
-                    {% if icon.name == scrollButton.icon %}
-                      {% set arrowIconData = icon %}
-                    {% endif %}
-                  {% endfor %}
-
-                  {% if arrowIconData %}
-                    <span data-svg-src="{{ arrowIconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center {{ arrowContainerSize }} {{ arrowButtonStyleBeige }}">
-                      <!-- SVG will be loaded here -->
-                    </span>
-                  {% else %}
-                    <span class="inline-flex items-center justify-center {{ arrowContainerSize }} {{ arrowButtonStyleBeige }}">↓</span>
-                  {% endif %}
-                {% else %}
-                  <span class="inline-flex items-center justify-center {{ arrowContainerSize }} {{ arrowButtonStyleBeige }}">↓</span>
-                {% endif %}
-              </a>
-            </div>
-          {% endif %}
-        {% endif %}
-
-        {# Main section with waves and content #}
-        <section class="{{ globalStyle | replace('py-12', 'pt-0 pb-0') | replace('py-8', 'pt-0 pb-0') | replace('py-10', 'pt-0 pb-0') | replace('py-16', 'pt-0 pb-0') | replace('py-0', '') | replace('pt-4', 'pt-0') | replace('pt-6', 'pt-0') }} {{ variantStyle }} {{ options.class | default('') }} relative overflow-visible {% if backgroundImage %}has-background{% elif variant.hasBeigeBg %}bg-[theme(--ma-nautic-beige)]{% else %}bg-white{% endif %}" id="{{ sectionId }}">
-          {# Left wave #}
-          {% if variant["image-left"] and options.images %}
-            <div class="absolute left-0 top-1/2 transform -translate-y-1/2 hidden min-[900px]:block z-20 pointer-events-none">
-              {% set leftWave = null %}
-              {% for image in options.images.images %}
-                {% if image.name == variant["image-left"] %}
-                  {% set leftWave = image %}
-                {% endif %}
-              {% endfor %}
-
-              {% if leftWave %}
-                {# Use size variant defined in images.json #}
-                {% set imageVariantLeft = options.images.variants[leftWave.size] | default('w-auto h-auto') %}
-                <img src="{{ leftWave.src }}" alt="{{ leftWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantLeft }} max-w-none wave-image">
-              {% endif %}
-            </div>
-          {% endif %}
-
-          {# Right wave #}
-          {% if variant["image-right"] and options.images %}
-            <div class="absolute right-0 top-1/2 transform -translate-y-1/2 hidden min-[900px]:block z-20 pointer-events-none">
-              {% set rightWave = null %}
-              {% for image in options.images.images %}
-                {% if image.name == variant["image-right"] %}
-                  {% set rightWave = image %}
-                {% endif %}
-              {% endfor %}
-
-              {% if rightWave %}
-                {# Use size variant defined in images.json #}
-                {% set imageVariantRight = options.images.variants[rightWave.size] | default('w-auto h-auto') %}
-                <img src="{{ rightWave.src }}" alt="{{ rightWave.alt }}" class="{{ options.images.globalStyle }} {{ imageVariantRight }} max-w-none wave-image">
-              {% endif %}
-            </div>
-          {% endif %}
-          
-          {# Content container - ne pas appliquer de fond si image de fond #}
-          <div class="{% if not backgroundImage %}{% if variant.hasBeigeBg %}bg-[theme(--ma-nautic-beige)]{% else %}bg-white{% endif %}{% endif %} {{ 'pt-0' if variant.scrollArrowButton == 'arrow_scroll' else 'pt-4 md:pt-6' }} relative z-10">
-            <div class="container mx-auto grid grid-cols-6">
-              <div class="col-span-6 px-4 sm:px-0 sm:col-start-2 sm:col-span-4 relative z-10">
-                <div class="flex flex-col items-center pt-8 md:pt-12 pb-8 md:pb-12">
-                  {# SuperHeading #}
-                  {% if variant.superHeading and options.headings %}
-                    {% set mainSuperHeading = null %}
-                    {% for heading in options.headings.headings %}
-                      {% if heading.name == variant.superHeading %}
-                        {% set mainSuperHeading = heading %}
-                      {% endif %}
-                    {% endfor %}
-
-                    {% if mainSuperHeading %}
-                      <{{ "h" + mainSuperHeading.level }} class="text-center mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[mainSuperHeading.style] }}">
-                        {{ mainSuperHeading.text }}
-                      </{{ "h" + mainSuperHeading.level }}>
-                    {% endif %}
-                  {% endif %}
-
-                  {# Icon if present - Using data-svg-src for JS loading #}
-                  {% if variant.hasIcon and variant.iconName and options.icons %}
-                    <div class="flex justify-center my-0 mb-6">
-                      {% set iconData = null %}
-                      {% for icon in options.icons.icons %}
-                        {% if icon.name == variant.iconName %}
-                          {% set iconData = icon %}
-                        {% endif %}
-                      {% endfor %}
-
-                      {% if iconData %}
-                        <span data-svg-src="{{ iconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center w-12 h-12 text-[theme(--ma-nautic-teal)]">
-                          <!-- SVG will be loaded here -->
-                        </span>
-                      {% else %}
-                        <span class="inline-flex items-center justify-center w-12 h-12 text-[theme(--ma-nautic-teal)]">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="32" height="32" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-                        </span>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-
-                  {# Content 01 - MODIFICATION: Added font-bold when backgroundImage exists #}
-                  {% if variant.content_01 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }} [&_ul]:list-disc [&_ul]:list-outside [&_ul]:pl-6 [&_ul]:text-left [&_ul]:mx-auto [&_ul]:max-w-md">
-                      {{ variant.content_01 | safe }}
-                    </div>
-                    {% if variant.link_01 and options.links %}
-                      {% set linkData = null %}
-                      {% for link in options.links.links %}
-                        {% if link.name == variant.link_01 %}
-                          {% set linkData = link %}
-                        {% endif %}
-                      {% endfor %}
-                      
-                      {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
-                          {{ linkData.text }}
-                        </a>
-                      {% endif %}
-                    {% endif %}
-                  {% endif %}
-
-                  {# NEW BLOCK: Generic heading support #}
-                  {% if variant.heading and options.headings %}
-                    {% set genericHeading = null %}
-                    {% for heading in options.headings.headings %}
-                      {% if heading.name == variant.heading %}
-                        {% set genericHeading = heading %}
-                      {% endif %}
-                    {% endfor %}
-
-                    {% if genericHeading %}
-                      <{{ "h" + genericHeading.level }} class="text-center mt-8 mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[genericHeading.style] }}">
-                        {{ genericHeading.text }}
-                      </{{ "h" + genericHeading.level }}>
-                    {% endif %}
-                  {% endif %}
-
-                  {# Additional headings and content blocks - MODIFIED for bold text with backgroundImage #}
-                  {% if variant.heading_02 and options.headings %}
-                    {% set heading02 = null %}
-                    {% for heading in options.headings.headings %}
-                      {% if heading.name == variant.heading_02 %}
-                        {% set heading02 = heading %}
-                      {% endif %}
-                    {% endfor %}
-
-                    {% if heading02 %}
-                      <{{ "h" + heading02.level }} class="text-center mt-8 mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[heading02.style] }}">
-                        {{ heading02.text }}
-                      </{{ "h" + heading02.level }}>
-                    {% endif %}
-                  {% endif %}
-
-                  {% if variant.content_02 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }} [&_ul]:list-disc [&_ul]:list-outside [&_ul]:pl-6 [&_ul]:text-left [&_ul]:mx-auto [&_ul]:max-w-md">
-                      {{ variant.content_02 | safe }}
-                    </div>
-                    {% if variant.link_02 and options.links %}
-                      {% set linkData = null %}
-                      {% for link in options.links.links %}
-                        {% if link.name == variant.link_02 %}
-                          {% set linkData = link %}
-                        {% endif %}
-                      {% endfor %}
-                      
-                      {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
-                          {{ linkData.text }}
-                        </a>
-                      {% endif %}
-                    {% endif %}
-                  {% endif %}
-
-                  {% if variant.heading_03 and options.headings %}
-                    {% set heading03 = null %}
-                    {% for heading in options.headings.headings %}
-                      {% if heading.name == variant.heading_03 %}
-                        {% set heading03 = heading %}
-                      {% endif %}
-                    {% endfor %}
-
-                    {% if heading03 %}
-                      <{{ "h" + heading03.level }} class="text-center mt-8 mb-6 {{ options.headings.globalStyle }} {{ options.headings.variants[heading03.style] }}">
-                        {{ heading03.text }}
-                      </{{ "h" + heading03.level }}>
-                    {% endif %}
-                  {% endif %}
-
-                  {% if variant.content_03 %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }} [&_ul]:list-disc [&_ul]:list-outside [&_ul]:pl-6 [&_ul]:text-left [&_ul]:mx-auto [&_ul]:max-w-md">
-                      {{ variant.content_03 | safe }}
-                    </div>
-                    {% if variant.link_03 and options.links %}
-                      {% set linkData = null %}
-                      {% for link in options.links.links %}
-                        {% if link.name == variant.link_03 %}
-                          {% set linkData = link %}
-                        {% endif %}
-                      {% endfor %}
-                      
-                      {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
-                          {{ linkData.text }}
-                        </a>
-                      {% endif %}
-                    {% endif %}
-                  {% endif %}
-
-                  {# Contact form special case and regular content - MODIFIED for bold text with backgroundImage #}
-                  {% if variant.name == "contact_hero" and variant.contentBlocks %}
-                    <div id="contact-form" class="text-center text-[theme(--ma-nautic-blue)] space-y-4 [&_ul]:list-disc [&_ul]:list-outside [&_ul]:pl-6 [&_ul]:text-left [&_ul]:mx-auto [&_ul]:max-w-md">
-                      {% for block in variant.contentBlocks %}
-                        <p class="mb-4">{{ block.text | safe }}</p>
-                      {% endfor %}
-                    </div>
-                  {% elseif variant.content %}
-                    <div class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)] [&_strong]:font-normal' }} [&_ul]:list-disc [&_ul]:list-outside [&_ul]:pl-6 [&_ul]:text-left [&_ul]:mx-auto [&_ul]:max-w-md">
-                      {{ variant.content | safe }}
-                    </div>
-                    {% if variant.link and options.links %}
-                      {% set linkData = null %}
-                      {% for link in options.links.links %}
-                        {% if link.name == variant.link %}
-                          {% set linkData = link %}
-                        {% endif %}
-                      {% endfor %}
-                      
-                      {% if linkData %}
-                        <a href="{{ linkData.href }}" class="text-center {{ 'text-[theme(--ma-nautic-white)] font-bold' if backgroundImage else 'text-[theme(--ma-nautic-blue)]' }} mt-4 mb-6 block no-underline {{ options.links.globalStyle }} {{ options.links.variants[linkData.style] }}">
-                          {{ linkData.text }}
-                        </a>
-                      {% endif %}
-                    {% endif %}
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      {# Scroll arrow button at bottom if arrow_scroll_up #}
-      {% if variant.scrollArrowButton == "arrow_scroll_up" and options.buttons %}
-        {% set scrollButton = null %}
-        {% for button in options.buttons.buttons %}
-          {% if button.name == variant.scrollArrowButton %}
-            {% set scrollButton = button %}
-          {% endif %}
-        {% endfor %}
-
-        {% if scrollButton %}
-          {% set scrollTarget = variant.scrollTarget | default("#") %}
-          
-          <div class="w-full bg-white relative h-8 -mt-1">
-            <a href="{{ scrollTarget }}" class="ma-nautic-scroll-arrow {{ arrowStyle }} {{ scrollArrowWrapperStyle }}" aria-label="Défiler vers le contenu">
-              {% if scrollButton.icon and options.icons %}
-                {% set arrowIconData = null %}
-                {% for icon in options.icons.icons %}
-                  {% if icon.name == scrollButton.icon %}
-                    {% set arrowIconData = icon %}
-                  {% endif %}
-                {% endfor %}
-
-                {% if arrowIconData %}
-                  <span data-svg-src="{{ arrowIconData.path }}" data-svg-width="32" data-svg-height="32" class="inline-flex items-center justify-center {{ arrowContainerSize }} {{ arrowButtonStyle }}">
-                    <!-- SVG will be loaded here -->
-                  </span>
-                {% else %}
-                  <span class="inline-flex items-center justify-center {{ arrowContainerSize }} {{ arrowButtonStyle }}">↓</span>
-                {% endif %}
-              {% else %}
-                <span class="inline-flex items-center justify-center {{ arrowContainerSize }} {{ arrowButtonStyle }}">↓</span>
-              {% endif %}
-            </a>
-          </div>
-        {% endif %}
-      {% endif %}
+    {# Fallback if section not found #}
+    {% if not sectionData %}
+      <span class="text-red-500">Section Hero not found: {{ sectionName }}</span>
     {% else %}
-      {# If variant doesn't match the conditions above, show error #}
-      <span class="text-red-500">No matching variant for {{ variant.name }}</span>
+      {# Build CSS classes #}
+      {% set variant = sectionData.variant | default('default') %}
+      {% set cssClasses = 'section-hero section-hero-' ~ variant %}
+      
+      {# Add any additional classes #}
+      {% if option.class %}
+        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
+      {% endif %}
+      
+      {# Section container with background image #}
+      <section class="{{ cssClasses }}">
+        
+        {# Background image container #}
+        <div class="hero-background">
+          {{ renderImage({ 
+              name: sectionData.background_image,
+              datas: option.imageDatas
+          }) }}
+          <div class="hero-overlay"></div>
+        </div>
+        
+        {# === DESKTOP VERSION === #}
+        <div class="section-hero-desktop">
+          <div class="hero-container">
+            
+            {# Content Grid - 2 columns: Text content + CTA Block #}
+            <div class="hero-content">
+              
+              {# Left Column - Text Content #}
+              <div class="hero-text-column">
+                
+                {# Title #}
+                <div class="hero-title">
+                  {{ renderTypography({ 
+                      name: sectionData.title,
+                      datas: option.typographyDatas,
+                      tag: "h1"
+                  }) }}
+                </div>
+                
+                {# Description Text #}
+                <div class="hero-text">
+                  {{ renderTypography({ 
+                      name: sectionData.text,
+                      datas: option.typographyDatas,
+                      tag: "p"
+                  }) }}
+                </div>
+                
+                {# CTA Buttons #}
+                <div class="hero-buttons">
+                  {{ renderCtaButton({ 
+                      name: sectionData.cta_button,
+                      datas: option.ctaButtonDatas,
+                      buttonDatas: option.buttonDatas
+                  }) }}
+                </div>
+                
+              </div>
+              
+              {# Right Column - CTA Block #}
+              <div class="hero-cta-column">
+                {{ renderCtaBlock({ 
+                    name: sectionData.cta_block,
+                    datas: option.ctaBlockDatas,
+                    iconDatas: option.iconDatas,
+                    buttonDatas: option.buttonDatas
+                }) }}
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
+        {# === MOBILE VERSION === #}
+        <div class="section-hero-mobile">
+          <div class="hero-container-mobile">
+            
+            {# Title #}
+            <div class="hero-title-mobile">
+              {{ renderTypography({ 
+                  name: sectionData.title,
+                  datas: option.typographyDatas,
+                  tag: "h1"
+              }) }}
+            </div>
+            
+            {# Description Text #}
+            <div class="hero-text-mobile">
+              {{ renderTypography({ 
+                  name: sectionData.text,
+                  datas: option.typographyDatas,
+                  tag: "p"
+              }) }}
+            </div>
+            
+            {# CTA Buttons #}
+            <div class="hero-buttons-mobile">
+              {{ renderCtaButton({ 
+                  name: sectionData.cta_button,
+                  datas: option.ctaButtonDatas,
+                  buttonDatas: option.buttonDatas
+              }) }}
+            </div>
+            
+            {# CTA Block #}
+            <div class="hero-cta-mobile">
+              {{ renderCtaBlock({ 
+                  name: sectionData.cta_block,
+                  datas: option.ctaBlockDatas,
+                  iconDatas: option.iconDatas,
+                  buttonDatas: option.buttonDatas
+              }) }}
+            </div>
+            
+          </div>
+        </div>
+        
+      </section>
     {% endif %}
-  {% else %}
-    <span class="text-red-500">Section Hero data not found</span>
   {% endif %}
-  {# Include script for scrolling #}
-<script src="/js/organisms/section-scroll.js"></script>
 {% endmacro %}
 
-{#
+{# 
 ============================
 Summon HAT Components Wisely
 ============================
@@ -405,15 +163,16 @@ Summon HAT Components Wisely
 1. Import the macro at the top of your page
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 
-2. Call a specific section-hero by its name
+2. Call the section-hero
 {{ renderSectionHero({ 
-    name: "bateaux_hero",
-    datas: organisms["section-heros"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    links: atoms.links,
-    icons: atoms.icons
+    name: "hero_thomas",
+    datas: organisms["section-hero"].sections,
+    typographyDatas: atoms.typography.texts,
+    imageDatas: atoms.image.images,
+    ctaButtonDatas: molecules["cta-button"]["cta-buttons"],
+    ctaBlockDatas: molecules["cta-block"]["cta-blocks"],
+    buttonDatas: atoms.button.buttons,
+    iconDatas: atoms.icon.icons
 }) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
