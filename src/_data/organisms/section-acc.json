@@ -1,0 +1,18 @@
+{
+  "sections": [
+    {
+      "name": "thomas_acc_section",
+      "titleName": "accompaniements_title",
+      "introName": {
+        "paragraph1": "accompaniements_paragraph_1",
+        "paragraph2": "accompaniements_paragraph_2"
+      },
+      "cards": [
+        "acc_equilibre",
+        "acc_sport", 
+        "acc_handicap"
+      ],
+      "variant": "thomas"
+    }
+  ]
+}

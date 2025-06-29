@@ -3,8 +3,12 @@ permalink: "/"
 layout: '00-core/base.njk'
 ---
 
+{# ========== IMPORTS ========== #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
+{% from "01-organisms/section-acc.njk" import renderSectionAcc %}
+{% from "01-organisms/section-contact.njk" import renderSectionContact %}
 
+{# ========== HERO SECTION ========== #}
 {{ renderSectionHero({ 
     name: "hero_thomas",
     datas: organisms["section-hero"].sections,
@@ -16,8 +20,18 @@ layout: '00-core/base.njk'
     iconDatas: atoms.icon.icons
 }) }}
 
-{% from "01-organisms/section-contact.njk" import renderSectionContact %}
 
+{# ========== ACCOMPANIEMENT SECTION ========== #}
+{{ renderSectionAcc({ 
+    name: "thomas_acc_section",
+    datas: organisms["section-acc"].sections,
+    accCardDatas: molecules["acc-card"]["acc-cards"],
+    imageDatas: atoms.image.images,
+    typographyDatas: atoms.typography.texts,
+    linkDatas: atoms.link.links
+}) }}
+
+{# ========== CONTACT SECTION ========== #}
 {{ renderSectionContact({ 
     name: "thomas_section_contact",
     datas: organisms["section-contact"].section_contacts,

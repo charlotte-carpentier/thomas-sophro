@@ -1,0 +1,178 @@
+{# 
+=========================
+   SECTION-ACC ORGANISM
+      v1.0 - Thomas       
+=========================
+#}
+
+{# Import required molecules and atoms #}
+{% from "02-molecules/acc-card.njk" import renderAccCard %}
+{% from "03-atoms/typography.njk" import renderTypography %}
+
+{% macro renderSectionAcc(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No section-acc configuration provided</span>
+  {% else %}
+    {# Retrieve section configuration #}
+    {% set sectionsConfig = option.datas %}
+    {% set sectionName = option.name %}
+    
+    {# Find the specific section by name #}
+    {% set sectionData = null %}
+    {% for section in sectionsConfig %}
+      {% if section.name == sectionName %}
+        {% set sectionData = section %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if section not found #}
+    {% if not sectionData %}
+      <span class="text-red-500">Section ACC not found: {{ sectionName }}</span>
+    {% else %}
+      {# Build CSS classes #}
+      {% set variant = sectionData.variant | default('default') %}
+      {% set cssClasses = 'section-acc section-acc-' ~ variant %}
+      
+      {# Add any additional classes #}
+      {% if option.class %}
+        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
+      {% endif %}
+      
+      {# Section container #}
+      <section class="{{ cssClasses }}">
+        
+        {# === DESKTOP SECTION === #}
+        <div class="section-acc-desktop">
+          <div class="section-container">
+            
+            {# Header - Title and intro above columns #}
+            <div class="section-header">
+              {# Section title #}
+              {% if sectionData.titleName %}
+                <div class="section-title">
+                  {{ renderTypography({ 
+                    name: sectionData.titleName,
+                    datas: option.typographyDatas
+                  }) }}
+                </div>
+              {% endif %}
+              
+              {# Section intro paragraphs #}
+              {% if sectionData.introName %}
+                <div class="section-intro">
+                  {% if sectionData.introName.paragraph1 %}
+                    {{ renderTypography({ 
+                      name: sectionData.introName.paragraph1,
+                      datas: option.typographyDatas
+                    }) }}
+                  {% endif %}
+                  
+                  {% if sectionData.introName.paragraph2 %}
+                    {{ renderTypography({ 
+                      name: sectionData.introName.paragraph2,
+                      datas: option.typographyDatas
+                    }) }}
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+            
+            {# Content Grid - 3 ACC cards horizontal #}
+            <div class="section-content">
+              {% if sectionData.cards %}
+                {% for cardName in sectionData.cards %}
+                  <div class="section-card-column">
+                    {{ renderAccCard({ 
+                      name: cardName,
+                      datas: option.accCardDatas,
+                      imageDatas: option.imageDatas,
+                      typographyDatas: option.typographyDatas,
+                      linkDatas: option.linkDatas
+                    }) }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+            
+          </div>
+        </div>
+        
+        {# === MOBILE SECTION === #}
+        <div class="section-acc-mobile">
+          <div class="section-container-mobile">
+            
+            {# Title mobile #}
+            {% if sectionData.titleName %}
+              <div class="section-title-mobile">
+                {{ renderTypography({ 
+                  name: sectionData.titleName,
+                  datas: option.typographyDatas
+                }) }}
+              </div>
+            {% endif %}
+            
+            {# Intro mobile #}
+            {% if sectionData.introName %}
+              <div class="section-intro-mobile">
+                {% if sectionData.introName.paragraph1 %}
+                  {{ renderTypography({ 
+                    name: sectionData.introName.paragraph1,
+                    datas: option.typographyDatas
+                  }) }}
+                {% endif %}
+                
+                {% if sectionData.introName.paragraph2 %}
+                  {{ renderTypography({ 
+                    name: sectionData.introName.paragraph2,
+                    datas: option.typographyDatas
+                  }) }}
+                {% endif %}
+              </div>
+            {% endif %}
+            
+            {# Cards stack vertical mobile #}
+            <div class="section-cards-mobile">
+              {% if sectionData.cards %}
+                {% for cardName in sectionData.cards %}
+                  <div class="section-card-mobile">
+                    {{ renderAccCard({ 
+                      name: cardName,
+                      datas: option.accCardDatas,
+                      imageDatas: option.imageDatas,
+                      typographyDatas: option.typographyDatas,
+                      linkDatas: option.linkDatas
+                    }) }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+            
+          </div>
+        </div>
+        
+      </section>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# 
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/section-acc.njk" import renderSectionAcc %}
+
+2. Call the section
+{{ renderSectionAcc({ 
+    name: "thomas_acc_section",
+    datas: organisms["section-acc"].sections,
+    accCardDatas: molecules["acc-card"]["acc-cards"],
+    imageDatas: atoms.image.images,
+    typographyDatas: atoms.typography.texts,
+    linkDatas: atoms.link.links
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}
