@@ -79,9 +79,15 @@
     </main>
 
     {# ----- Footer Organism ----- #}
-    {# 🚧 TODO: Add new footer #}
-    {# {% from "01-organisms/footer.njk" import renderFooter %}
-    {{ renderFooter({ ... }) }} #}
+    {% from "01-organisms/footer.njk" import renderFooter %}
+
+    {{ renderFooter({ 
+        name: "thomas_footer",
+        datas: organisms.footer.footers,
+        vectorDatas: atoms.vector.vectors,
+        linkDatas: atoms.link.links,
+        iconDatas: atoms.icon.icons
+    }) }}
 
     {# ----- JavaScript scripts ----- #}
     <script src="/js/main.js" defer></script>
