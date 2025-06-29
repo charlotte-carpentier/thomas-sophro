@@ -3,8 +3,18 @@ permalink: "/"
 layout: '00-core/base.njk'
 ---
 
-<h1>Thomas Sophro - Professional Site</h1>
-<p>Welcome! This is the starting point of your sophrology services website.</p>
+{% from "01-organisms/section-hero.njk" import renderSectionHero %}
+
+{{ renderSectionHero({ 
+    name: "hero_thomas",
+    datas: organisms["section-hero"].sections,
+    typographyDatas: atoms.typography.texts,
+    imageDatas: atoms.image.images,
+    ctaButtonDatas: molecules["cta-button"]["cta-buttons"],
+    ctaBlockDatas: molecules["cta-block"]["cta-blocks"],
+    buttonDatas: atoms.button.buttons,
+    iconDatas: atoms.icon.icons
+}) }}
 
 {% from "01-organisms/section-contact.njk" import renderSectionContact %}
 
