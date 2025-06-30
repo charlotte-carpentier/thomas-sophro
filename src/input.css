@@ -743,12 +743,15 @@
 
 /* === ACC-SECTION === */
 
-/* 
-=========================
-   SECTION-ACC ORGANISM
-      v1.0 - Thomas       
-=========================
-*/
+/* === ACC-SECTION === */
+
+.section-acc {
+  width: 100%;
+  background-color: theme(--th-white);
+  color: theme(--th-blue-dark);
+}
+
+/* === ACC-SECTION === */
 
 .section-acc {
   width: 100%;
@@ -762,20 +765,20 @@
 }
 
 .section-acc .section-container {
-  padding: 4rem 5.625rem; /* 4rem vertical + 90px (5.625rem) latéral desktop */
+  padding: 4rem 5.625rem;
 }
 
 /* Header - Title and intro above cards */
 .section-acc .section-header {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* S = 1.5rem - Titre → Intro */
-  margin-bottom: 2.5rem; /* M = 2.5rem - Intro → Cards */
+  gap: 1.5rem; /* M = 1.5rem - Titre H2 → Intro */
+  margin-bottom: 3rem; /* L = 3rem - Header + intro → content */
 }
 
 .section-acc .section-title {
   margin: 0;
-  text-align: center; /* Titre centré en desktop */
+  text-align: center;
 }
 
 .section-acc .section-title h2 {
@@ -787,10 +790,10 @@
 .section-acc .section-intro {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem; /* XS = 0.75rem entre paragraphes intro */
-  max-width: 800px;
+  gap: 1rem; /* S = 1rem entre paragraphes */
+  max-width: 75ch; /* Lisibilité optimale */
   margin: 0 auto;
-  text-align: center; /* Texte centré en desktop */
+  text-align: center;
 }
 
 .section-acc .section-intro p {
@@ -801,17 +804,26 @@
 
 /* Content Grid - 3 columns: 3 ACC cards horizontal */
 .section-acc .section-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 3.5rem; /* L = 3.5rem entre colonnes */
+  display: flex;
+  justify-content: center;
   align-items: flex-start;
+  gap: 1.5rem; /* M = 1.5rem (24px) gap exact entre cards */
+  flex-wrap: wrap;
+}
+
+/* Responsive - Passage en colonne quand pas assez de place */
+@media (max-width: 1100px) {
+  .section-acc .section-content {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 /* Card columns */
 .section-acc .section-card-column {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centre les acc-cards dans les colonnes */
+  align-items: center;
   justify-content: flex-start;
 }
 
@@ -821,15 +833,15 @@
 }
 
 .section-acc .section-container-mobile {
-  padding: 3rem 1.5rem; /* 3rem vertical + 24px (1.5rem) latéral mobile */
+  padding: 3rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem; /* M = 2rem gap général mobile */
+  gap: 1rem; /* S = 1rem gap général mobile */
 }
 
 .section-acc .section-title-mobile {
   margin: 0;
-  text-align: center; /* Titre centré en mobile aussi */
+  text-align: center;
 }
 
 .section-acc .section-title-mobile h2 {
@@ -841,8 +853,10 @@
 .section-acc .section-intro-mobile {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* XS réduit = 0.5rem entre paragraphes intro mobile */
-  text-align: left; /* Texte aligné à gauche en mobile */
+  gap: 1rem; /* S = 1rem entre paragraphes mobile */
+  max-width: 75ch; /* Lisibilité optimale */
+  text-align: left;
+  margin-bottom: 2rem; /* Espace avant les cartes */
 }
 
 .section-acc .section-intro-mobile p {
@@ -855,7 +869,7 @@
 .section-acc .section-cards-mobile {
   display: flex;
   flex-direction: column;
-  gap: 2rem; /* M = 2rem gap général mobile entre cartes */
+  gap: 1rem; /* S = 1rem entre cartes en mobile */
   align-items: center;
 }
 
@@ -1907,47 +1921,48 @@
 .section-contact .section-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 4rem 5.625rem; /* 90px = 5.625rem en desktop */
+  padding: 4rem 5.625rem;
 }
 
 /* Header - Title and intro above columns */
 .section-contact .section-header {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 1.5rem; /* M = 1.5rem - Titre H2 → Intro */
+  margin-bottom: 3rem; /* L = 3rem - Header + intro → content */
 }
 
 .section-contact .section-title {
   margin: 0;
-  text-align: center; /* Titre centré en desktop */
+  text-align: center;
 }
 
 .section-contact .section-title h2 {
   margin: 0;
   color: theme(--th-blue-dark);
+  line-height: 1.2;
 }
 
 .section-contact .section-intro {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 800px;
+  gap: 1rem; /* S = 1rem entre paragraphes */
+  max-width: 75ch; /* Lisibilité optimale */
   margin: 0 auto;
-  text-align: center; /* Texte centré en desktop */
+  text-align: center;
 }
 
 .section-contact .section-intro p {
   margin: 0;
   color: theme(--th-blue-dark);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Content Grid - 2 columns: Contact block + Map */
 .section-contact .section-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 1.5rem; /* M = 1.5rem (24px) entre colonnes */
   align-items: flex-start;
 }
 
@@ -1955,13 +1970,12 @@
 .section-contact .section-contact-column {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centre le contact-block dans la colonne */
+  align-items: center;
   justify-content: flex-start;
 }
 
 .section-contact .section-contact-block-wrapper {
   margin: 0;
-  /* Le contact-block garde son alignement interne à gauche */
 }
 
 /* Map Column */
@@ -1984,38 +1998,42 @@
 }
 
 .section-contact .section-container-mobile {
-  padding: 3rem 1.5rem; /* 24px = 1.5rem en mobile */
+  padding: 3rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem; /* S = 1rem gap général mobile */
 }
 
 .section-contact .section-title-mobile {
   margin: 0;
-  text-align: center; /* Titre centré en mobile aussi */
+  text-align: center;
 }
 
 .section-contact .section-title-mobile h2 {
   margin: 0;
   color: theme(--th-blue-dark);
+  line-height: 1.2;
 }
 
 .section-contact .section-intro-mobile {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  text-align: left; /* Texte aligné à gauche en mobile */
+  gap: 1rem; /* S = 1rem entre paragraphes mobile */
+  max-width: 75ch; /* Lisibilité optimale */
+  text-align: left;
+  margin-bottom: 2rem; /* Espace avant le contenu */
 }
 
 .section-contact .section-intro-mobile p {
   margin: 0;
   color: theme(--th-blue-dark);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .section-contact .section-contact-block-wrapper-mobile {
   display: flex;
   justify-content: center;
+  margin-bottom: 1rem; /* S = 1rem avant la map */
 }
 
 .section-contact .section-map-mobile {
@@ -2024,6 +2042,14 @@
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Responsive - Passage en colonne quand pas assez de place */
+@media (max-width: 900px) {
+  .section-contact .section-content {
+    grid-template-columns: 1fr;
+    gap: 1rem; /* S = 1rem entre contact et map en responsive */
+  }
 }
 
 /* === RESPONSIVE === */

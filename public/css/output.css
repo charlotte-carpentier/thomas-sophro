@@ -946,6 +946,11 @@
   background-color: #ffffff;
   color: #2a4d69;
 }
+.section-acc {
+  width: 100%;
+  background-color: #ffffff;
+  color: #2a4d69;
+}
 .section-acc-desktop {
   display: block;
 }
@@ -956,7 +961,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 .section-acc .section-title {
   margin: 0;
@@ -970,8 +975,8 @@
 .section-acc .section-intro {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  max-width: 800px;
+  gap: 1rem;
+  max-width: 75ch;
   margin: 0 auto;
   text-align: center;
 }
@@ -981,10 +986,17 @@
   line-height: 1.5;
 }
 .section-acc .section-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 3.5rem;
+  display: flex;
+  justify-content: center;
   align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 1100px) {
+  .section-acc .section-content {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .section-acc .section-card-column {
   display: flex;
@@ -999,7 +1011,7 @@
   padding: 3rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 .section-acc .section-title-mobile {
   margin: 0;
@@ -1013,8 +1025,10 @@
 .section-acc .section-intro-mobile {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
+  max-width: 75ch;
   text-align: left;
+  margin-bottom: 2rem;
 }
 .section-acc .section-intro-mobile p {
   margin: 0;
@@ -1024,7 +1038,7 @@
 .section-acc .section-cards-mobile {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
 }
 .section-acc .section-card-mobile {
@@ -1831,7 +1845,7 @@
 .section-contact .section-header {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   margin-bottom: 3rem;
 }
 .section-contact .section-title {
@@ -1841,24 +1855,25 @@
 .section-contact .section-title h2 {
   margin: 0;
   color: #2a4d69;
+  line-height: 1.2;
 }
 .section-contact .section-intro {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 800px;
+  max-width: 75ch;
   margin: 0 auto;
   text-align: center;
 }
 .section-contact .section-intro p {
   margin: 0;
   color: #2a4d69;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 .section-contact .section-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 1.5rem;
   align-items: flex-start;
 }
 .section-contact .section-contact-column {
@@ -1888,7 +1903,7 @@
   padding: 3rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 .section-contact .section-title-mobile {
   margin: 0;
@@ -1897,21 +1912,25 @@
 .section-contact .section-title-mobile h2 {
   margin: 0;
   color: #2a4d69;
+  line-height: 1.2;
 }
 .section-contact .section-intro-mobile {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  max-width: 75ch;
   text-align: left;
+  margin-bottom: 2rem;
 }
 .section-contact .section-intro-mobile p {
   margin: 0;
   color: #2a4d69;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 .section-contact .section-contact-block-wrapper-mobile {
   display: flex;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 .section-contact .section-map-mobile {
   width: 100%;
@@ -1919,6 +1938,12 @@
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+@media (max-width: 900px) {
+  .section-contact .section-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 @media (max-width: 768px) {
   .section-contact-desktop {
