@@ -8,6 +8,7 @@ layout: '00-core/base.njk'
 {% from "01-organisms/section-acc.njk" import renderSectionAcc %}
 {% from "01-organisms/section-approach.njk" import renderSectionApproach %}
 {% from "01-organisms/section-contact.njk" import renderSectionContact %}
+{% from "03-atoms/button.njk" import renderButton %}
 
 {# ========== HERO SECTION ========== #}
 {{ renderSectionHero({ 
@@ -53,3 +54,11 @@ layout: '00-core/base.njk'
     iconDatas: atoms.icon.icons,
     buttonDatas: atoms.button.buttons
 }) }}
+
+{# ========== SCROLL TO TOP BUTTON ========== #}
+<div id="scroll-to-top-btn" class="scroll-to-top">
+  {{ renderButton({ 
+    name: "btn_scroll_top",
+    datas: atoms.button.buttons
+  }) }}
+</div>
