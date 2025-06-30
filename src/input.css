@@ -219,6 +219,56 @@
   opacity: 0.6;
 }
 
+/* === SCROLL-TO-TOP BUTTON === */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Ensure button styling is applied */
+.scroll-to-top .button--scroll-to-top {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Responsive positioning */
+@media (max-width: 768px) {
+  .scroll-to-top {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .scroll-to-top .button--scroll-to-top {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .scroll-to-top .button--scroll-to-top svg {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-to-top {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
 /* === LINK === */
 /* Link - Base commune */
 .link {
