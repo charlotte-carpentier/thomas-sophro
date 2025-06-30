@@ -3,37 +3,52 @@
     {
       "name": "btn_primary",
       "text": "Prendre Rendez-vous",
-      "variant": "primary"
+      "variant": "primary",
+      "href": "#contact",
+      "aria-label": "Aller à la section contact pour prendre rendez-vous"
     },
     {
       "name": "btn_secondary_hero01", 
       "text": "Accompagnements",
-      "variant": "secondary"
+      "variant": "secondary",
+      "href": "#accompaniements",
+      "aria-label": "Découvrir les accompagnements proposés"
     },
     {
       "name": "btn_secondary_hero02", 
       "text": "Mon approche",
-      "variant": "secondary"
+      "variant": "secondary",
+      "href": "#about",
+      "aria-label": "En savoir plus sur mon approche de la sophrologie"
     },
     {
       "name": "btn_secondary_contact01", 
       "text": "Appeler maintenant",
-      "variant": "secondary"
+      "variant": "secondary",
+      "href": "tel:+33763878705",
+      "aria-label": "Appeler Thomas Carpentier au 07 63 87 87 05"
     },
     {
       "name": "btn_secondary_contact02", 
       "text": "Envoyer un mail",
-      "variant": "secondary"
+      "variant": "secondary",
+      "href": "mailto:carpentier-sophrologue@gmail.com",
+      "aria-label": "Envoyer un email à carpentier-sophrologue@gmail.com"
     },
     {
       "name": "btn_secondary_contact03", 
       "text": "Voir l'itinéraire",
-      "variant": "secondary"
+      "variant": "secondary",
+      "href": "https://maps.google.com/maps/dir//La+Garenne-Colombes,+France",
+      "target": "_blank",
+      "rel": "noopener noreferrer",
+      "aria-label": "Ouvrir l'itinéraire vers La Garenne-Colombes dans Google Maps"
     },
     {
       "name": "btn_scroll_top",
       "variant": "scroll-to-top",
-      "iconBefore": "/assets/icons/interface/caret-circle-up.svg"
+      "iconBefore": "/assets/icons/interface/caret-circle-up.svg",
+      "aria-label": "Retourner en haut de la page"
     }
   ]
 }

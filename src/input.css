@@ -265,8 +265,12 @@
 }
 .link--header.current,
 .link--header[aria-current="page"] {
-  color: theme(--th-green);
-  font-weight: 600;
+  color: theme(--th-white);
+}
+
+/* Remove cursor pointer for home link on home page only */
+.link--header[href="#home"] {
+  cursor: default;
 }
 
 /* Link - Footer variant */
@@ -279,8 +283,7 @@
 }
 .link--footer.current,
 .link--footer[aria-current="page"] {
-  color: theme(--th-green);
-  font-weight: 600;
+  color: theme(--th-white);
 }
 
 /* Link - Burger/Mobile variant */
@@ -294,8 +297,17 @@
 }
 .link--burger.current,
 .link--burger[aria-current="page"] {
-  color: theme(--th-green);
-  font-weight: 600;
+  color: theme(--th-white);
+}
+
+/* Remove cursor pointer for home link in burger menu on home page only */
+.link--burger[href="#home"] {
+  cursor: default;
+}
+
+/* Remove cursor pointer for home link in footer on home page only */
+.link--footer[href="#home"] {
+  cursor: default;
 }
 
 /* Responsive */

@@ -569,8 +569,10 @@
   color: #63a69f;
 }
 .link--header.current, .link--header[aria-current="page"] {
-  color: #63a69f;
-  font-weight: 600;
+  color: #ffffff;
+}
+.link--header[href="#home"] {
+  cursor: default;
 }
 .link--footer {
   font-size: 14px;
@@ -580,8 +582,7 @@
   color: #63a69f;
 }
 .link--footer.current, .link--footer[aria-current="page"] {
-  color: #63a69f;
-  font-weight: 600;
+  color: #ffffff;
 }
 .link--burger {
   font-family: 'Space Grotesk', sans-serif;
@@ -592,8 +593,13 @@
   color: #63a69f;
 }
 .link--burger.current, .link--burger[aria-current="page"] {
-  color: #63a69f;
-  font-weight: 600;
+  color: #ffffff;
+}
+.link--burger[href="#home"] {
+  cursor: default;
+}
+.link--footer[href="#home"] {
+  cursor: default;
 }
 @media (max-width: 768px) {
   .link--header {
