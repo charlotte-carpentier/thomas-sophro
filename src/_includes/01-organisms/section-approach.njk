@@ -1,0 +1,222 @@
+{# 
+=========================
+ SECTION-APPROACH ORGANISM
+      v1.0 - Thomas       
+=========================
+#}
+
+{# Import required atoms #}
+{% from "03-atoms/typography.njk" import renderTypography %}
+{% from "03-atoms/image.njk" import renderImage %}
+{% from "03-atoms/link.njk" import renderLink %}
+
+{% macro renderSectionApproach(option) %}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No section-approach configuration provided</span>
+  {% else %}
+    {% set sectionsConfig = option.datas %}
+    {% set sectionName = option.name %}
+    
+    {% set sectionData = null %}
+    {% for section in sectionsConfig %}
+      {% if section.name == sectionName %}
+        {% set sectionData = section %}
+      {% endif %}
+    {% endfor %}
+
+    {% if not sectionData %}
+      <span class="text-red-500">Section not found: {{ sectionName }}</span>
+    {% else %}
+      
+      <section class="section-approach" id="approach">
+        
+        {# Desktop Version #}
+        <div class="section-approach-desktop">
+          
+          {# Background light blue #}
+          <div class="approach-bg-light">
+            
+            {# Header - Title and intro #}
+            <div class="approach-header">
+              <div class="approach-title">
+                {{ renderTypography({ 
+                  name: sectionData.titleName,
+                  datas: option.typographyDatas
+                }) }}
+              </div>
+              <div class="approach-intro">
+                {{ renderTypography({ 
+                  name: sectionData.introName,
+                  datas: option.typographyDatas
+                }) }}
+              </div>
+            </div>
+            
+            {# Text on light background #}
+            <div class="approach-text-light">
+              {{ renderTypography({ 
+                name: sectionData.textLightName,
+                datas: option.typographyDatas
+              }) }}
+            </div>
+            
+            {# Photo positioned absolutely #}
+            <div class="approach-photo">
+              {{ renderImage({ 
+                name: sectionData.imageName,
+                datas: option.imageDatas
+              }) }}
+            </div>
+            
+          </div>
+          
+          {# Background dark blue #}
+          <div class="approach-bg-dark">
+            <div class="approach-text-dark">
+              
+              {# Text container with truncation #}
+              <div class="approach-text-container">
+                
+                {# Truncated text version #}
+                <div class="approach-text-truncated-desktop" id="truncated-approach-desktop">
+                  {{ renderTypography({ name: sectionData.paragraph1Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph2Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph3Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph4Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph5Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph6Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph7Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph8Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph9Name, datas: option.typographyDatas }) }}
+                </div>
+                
+                {# Full text version #}
+                <div class="approach-text-full" id="full-approach-desktop">
+                  {{ renderTypography({ name: sectionData.paragraph1Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph2Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph3Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph4Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph5Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph6Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph7Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph8Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph9Name, datas: option.typographyDatas }) }}
+                </div>
+                
+              </div>
+              
+              {# Links for truncation toggle #}
+              <div class="approach-link-more" id="link-more-approach-desktop" onclick="toggleApproachText('desktop')">
+                {{ renderLink({ name: sectionData.linkMoreName, datas: option.linkDatas }) }}
+              </div>
+              
+              <div class="approach-link-less" id="link-less-approach-desktop" onclick="toggleApproachText('desktop')" style="display: none;">
+                {{ renderLink({ name: sectionData.linkLessName, datas: option.linkDatas }) }}
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+        
+        {# Mobile Version #}
+        <div class="section-approach-mobile">
+          
+          {# Background light blue #}
+          <div class="approach-bg-light-mobile">
+            
+            {# Header #}
+            <div class="approach-header-mobile">
+              <div class="approach-title-mobile">
+                {{ renderTypography({ name: sectionData.titleName, datas: option.typographyDatas }) }}
+              </div>
+              <div class="approach-intro-mobile">
+                {{ renderTypography({ name: sectionData.introName, datas: option.typographyDatas }) }}
+              </div>
+            </div>
+            
+            {# Photo at transition #}
+            <div class="approach-photo-mobile">
+              {{ renderImage({ name: sectionData.imageName, datas: option.imageDatas }) }}
+            </div>
+            
+          </div>
+          
+          {# Background dark blue #}
+          <div class="approach-bg-dark-mobile">
+            <div class="approach-text-dark-mobile">
+              
+              {# All text with truncation #}
+              <div class="approach-text-container">
+                
+                <div class="approach-text-truncated-mobile" id="truncated-approach-mobile">
+                  {{ renderTypography({ name: sectionData.textLightName, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph1Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph2Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph3Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph4Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph5Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph6Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph7Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph8Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph9Name, datas: option.typographyDatas }) }}
+                </div>
+                
+                <div class="approach-text-full" id="full-approach-mobile">
+                  {{ renderTypography({ name: sectionData.textLightName, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph1Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph2Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph3Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph4Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph5Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph6Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph7Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph8Name, datas: option.typographyDatas }) }}
+                  {{ renderTypography({ name: sectionData.paragraph9Name, datas: option.typographyDatas }) }}
+                </div>
+                
+              </div>
+              
+              {# Links centered #}
+              <div class="approach-links-mobile">
+                <div class="approach-link-more" id="link-more-approach-mobile" onclick="toggleApproachText('mobile')">
+                  {{ renderLink({ name: sectionData.linkMoreName, datas: option.linkDatas }) }}
+                </div>
+                
+                <div class="approach-link-less" id="link-less-approach-mobile" onclick="toggleApproachText('mobile')" style="display: none;">
+                  {{ renderLink({ name: sectionData.linkLessName, datas: option.linkDatas }) }}
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+        
+      </section>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# 
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "01-organisms/section-approach.njk" import renderSectionApproach %}
+
+2. Call the section
+{{ renderSectionApproach({ 
+    name: "thomas_approach",
+    datas: organisms["section-approach"]["section-approachs"],
+    typographyDatas: atoms.typography.texts,
+    imageDatas: atoms.image.images,
+    linkDatas: atoms.link.links
+}) }}
+
+3. Include the JavaScript for truncation functionality
+<script src="/js/organisms/section-approach.js"></script>
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

@@ -1637,166 +1637,261 @@
   }
 }
 
-/* === APPROCHE-SECTION === */
-.approche-section-desktop {}
-.approche-section-mobile {}
+/* === APPROACH-SECTION === */
 
-/* === ACCOMPAGNEMENTS-SECTION === */
-
-/* === ACC-SECTION === */
-
-/* 
-=========================
-   SECTION-ACC ORGANISM
-      v1.0 - Thomas       
-=========================
-*/
-
-.section-acc {
+.section-approach {
   width: 100%;
-  background-color: theme(--th-white);
-  color: theme(--th-blue-dark);
+  position: relative;
 }
 
-/* === DESKTOP SECTION-ACC === */
-.section-acc-desktop {
+.section-approach-desktop {
   display: block;
 }
 
-.section-acc .section-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 4rem 5.625rem; /* 90px = 5.625rem en desktop */
+.approach-bg-light {
+  width: 100%;
+  background-color: theme(--th-blue-light);
+  padding: 4rem 5.625rem 2rem 5.625rem;
+  position: relative;
 }
 
-/* Header - Title and intro above cards */
-.section-acc .section-header {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem; /* S = 1.5rem - Titre → Intro */
-  margin-bottom: 2.5rem; /* M = 2.5rem - Intro → Cards */
+.approach-header {
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
-.section-acc .section-title {
-  margin: 0;
-  text-align: center; /* Titre centré en desktop */
-}
-
-.section-acc .section-title h2 {
+.approach-title h2 {
   margin: 0;
   color: theme(--th-blue-dark);
   line-height: 1.2;
 }
 
-.section-acc .section-intro {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem; /* XS = 0.75rem entre paragraphes intro */
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center; /* Texte centré en desktop */
+.approach-intro {
+  margin: 1.5rem auto 0 auto;
+  max-width: 75ch;
+  text-align: center;
 }
 
-.section-acc .section-intro p {
+.approach-intro p {
   margin: 0;
   color: theme(--th-blue-dark);
   line-height: 1.5;
 }
 
-/* Content Grid - 3 columns: 3 ACC cards horizontal */
-.section-acc .section-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 3.5rem; /* L = 3.5rem entre colonnes */
-  align-items: flex-start;
+.approach-text-light {
+  text-align: left;
+  padding-left: 350px;
 }
 
-/* Card columns */
-.section-acc .section-card-column {
+.approach-text-light p {
+  margin: 0;
+  color: theme(--th-blue-dark);
+  line-height: 1.5;
+  max-width: 75ch;
+}
+
+.approach-photo {
+  position: absolute;
+  left: 5.625rem;
+  bottom: -150px;
+  z-index: 10;
+}
+
+.approach-photo .image-photo {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.approach-bg-dark {
+  width: 100%;
+  background-color: theme(--th-blue-dark);
+  padding: 2rem 5.625rem 4rem 5.625rem;
+  position: relative;
+}
+
+.approach-text-dark {
+  padding-left: 350px;
+}
+
+.approach-text-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centre les acc-cards dans les colonnes */
-  justify-content: flex-start;
+  gap: 1rem;
 }
 
-/* === MOBILE SECTION-ACC === */
-.section-acc-mobile {
+.approach-text-truncated-desktop {
+  display: -webkit-box;
+  -webkit-line-clamp: 12;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+}
+
+.approach-text-truncated-desktop > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.approach-text-truncated-desktop h2,
+.approach-text-truncated-desktop h3,
+.approach-text-truncated-desktop p {
+  margin: 0;
+  color: theme(--th-white);
+  line-height: 1.5;
+  max-width: 75ch;
+}
+
+.approach-text-full {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.approach-text-full.show {
+  display: flex;
+}
+
+.approach-text-full h2,
+.approach-text-full h3,
+.approach-text-full p {
+  margin: 0;
+  color: theme(--th-white);
+  line-height: 1.5;
+  max-width: 75ch;
+}
+
+.approach-text-truncated-desktop.hide {
   display: none;
 }
 
-.section-acc .section-container-mobile {
-  padding: 3rem 1.5rem; /* 24px = 1.5rem en mobile */
-  display: flex;
-  flex-direction: column;
-  gap: 2rem; /* M = 2rem gap général mobile */
+.approach-link-more,
+.approach-link-less {
+  margin-top: 1rem;
+  cursor: pointer;
 }
 
-.section-acc .section-title-mobile {
-  margin: 0;
-  text-align: center; /* Titre centré en mobile aussi */
+.approach-text-dark .link--inline:hover,
+.approach-text-dark-mobile .link--inline:hover {
+  color: theme(--th-white);
+  text-decoration: underline;
 }
 
-.section-acc .section-title-mobile h2 {
+.section-approach-mobile {
+  display: none;
+}
+
+.approach-bg-light-mobile {
+  width: 100%;
+  background-color: theme(--th-blue-light);
+  padding: 3rem 1.5rem 7.5rem 1.5rem;
+  position: relative;
+}
+
+.approach-header-mobile {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.approach-title-mobile h2 {
   margin: 0;
   color: theme(--th-blue-dark);
   line-height: 1.2;
 }
 
-.section-acc .section-intro-mobile {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem; /* XS réduit = 0.5rem entre paragraphes intro mobile */
-  text-align: left; /* Texte aligné à gauche en mobile */
+.approach-intro-mobile {
+  margin: 1.5rem 0 1rem 0;
+  text-align: left;
 }
 
-.section-acc .section-intro-mobile p {
+.approach-intro-mobile p {
   margin: 0;
   color: theme(--th-blue-dark);
   line-height: 1.5;
+  max-width: 75ch;
 }
 
-/* Cards stack vertical mobile */
-.section-acc .section-cards-mobile {
+.approach-photo-mobile {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -100px;
+  z-index: 10;
+}
+
+.approach-photo-mobile .image-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.approach-bg-dark-mobile {
+  width: 100%;
+  background-color: theme(--th-blue-dark);
+  padding: 3rem 1.5rem;
+  padding-top: 120px;
+}
+
+.approach-text-dark-mobile {
   display: flex;
   flex-direction: column;
-  gap: 2rem; /* M = 2rem gap général mobile entre cartes */
-  align-items: center;
+  gap: 1rem;
 }
 
-.section-acc .section-card-mobile {
+.approach-text-truncated-mobile {
+  display: -webkit-box;
+  -webkit-line-clamp: 14;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+}
+
+.approach-text-truncated-mobile > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.approach-text-truncated-mobile > p:last-child {
+  margin-bottom: 0;
+}
+
+.approach-text-truncated-mobile h2,
+.approach-text-truncated-mobile h3,
+.approach-text-truncated-mobile p {
+  margin: 0;
+  color: theme(--th-white);
+  line-height: 1.5;
+  max-width: 75ch;
+}
+
+.approach-links-mobile {
   display: flex;
   justify-content: center;
 }
 
-/* === RESPONSIVE === */
 @media (max-width: 768px) {
-  .section-acc-desktop {
+  .section-approach-desktop {
     display: none;
   }
   
-  .section-acc-mobile {
+  .section-approach-mobile {
     display: block;
   }
 }
 
 @media (min-width: 769px) {
-  .section-acc-desktop {
+  .section-approach-desktop {
     display: block;
   }
   
-  .section-acc-mobile {
+  .section-approach-mobile {
     display: none;
   }
 }
 
 /* === CONTACT-SECTION === */
-
-/* 
-=========================
-   SECTION-CONTACT ORGANISM
-      v1.0 - Thomas       
-=========================
-*/
 
 .section-contact {
   width: 100%;
@@ -1809,31 +1904,31 @@
   display: block;
 }
 
-.section-container {
+.section-contact .section-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 4rem 5.625rem; /* 90px = 5.625rem en desktop */
 }
 
 /* Header - Title and intro above columns */
-.section-header {
+.section-contact .section-header {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   margin-bottom: 3rem;
 }
 
-.section-title {
+.section-contact .section-title {
   margin: 0;
   text-align: center; /* Titre centré en desktop */
 }
 
-.section-title h2 {
+.section-contact .section-title h2 {
   margin: 0;
   color: theme(--th-blue-dark);
 }
 
-.section-intro {
+.section-contact .section-intro {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -1842,14 +1937,14 @@
   text-align: center; /* Texte centré en desktop */
 }
 
-.section-intro p {
+.section-contact .section-intro p {
   margin: 0;
   color: theme(--th-blue-dark);
   line-height: 1.6;
 }
 
 /* Content Grid - 2 columns: Contact block + Map */
-.section-content {
+.section-contact .section-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
@@ -1857,25 +1952,25 @@
 }
 
 /* Contact Column */
-.section-contact-column {
+.section-contact .section-contact-column {
   display: flex;
   flex-direction: column;
   align-items: center; /* Centre le contact-block dans la colonne */
   justify-content: flex-start;
 }
 
-.section-contact-block-wrapper {
+.section-contact .section-contact-block-wrapper {
   margin: 0;
   /* Le contact-block garde son alignement interne à gauche */
 }
 
 /* Map Column */
-.section-map-column {
+.section-contact .section-map-column {
   display: flex;
   flex-direction: column;
 }
 
-.section-map {
+.section-contact .section-map {
   width: 100%;
   height: 400px;
   border-radius: 0.5rem;
@@ -1888,42 +1983,42 @@
   display: none;
 }
 
-.section-container-mobile {
+.section-contact .section-container-mobile {
   padding: 3rem 1.5rem; /* 24px = 1.5rem en mobile */
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.section-title-mobile {
+.section-contact .section-title-mobile {
   margin: 0;
   text-align: center; /* Titre centré en mobile aussi */
 }
 
-.section-title-mobile h2 {
+.section-contact .section-title-mobile h2 {
   margin: 0;
   color: theme(--th-blue-dark);
 }
 
-.section-intro-mobile {
+.section-contact .section-intro-mobile {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   text-align: left; /* Texte aligné à gauche en mobile */
 }
 
-.section-intro-mobile p {
+.section-contact .section-intro-mobile p {
   margin: 0;
   color: theme(--th-blue-dark);
   line-height: 1.6;
 }
 
-.section-contact-block-wrapper-mobile {
+.section-contact .section-contact-block-wrapper-mobile {
   display: flex;
   justify-content: center;
 }
 
-.section-map-mobile {
+.section-contact .section-map-mobile {
   width: 100%;
   height: 250px;
   border-radius: 0.5rem;

@@ -1,0 +1,23 @@
+{
+  "section-approachs": [
+    {
+      "name": "thomas_approach",
+      "variant": "thomas",
+      "titleName": "about_title",
+      "introName": "about_paragraph_1",
+      "imageName": "about_photo",
+      "textLightName": "about_paragraph_2",
+      "paragraph1Name": "about_paragraph_3",
+      "paragraph2Name": "about_1_subtitle_1",
+      "paragraph3Name": "about_1_paragraph_1",
+      "paragraph4Name": "about_1_paragraph_2",
+      "paragraph5Name": "about_2_subtitle_1",
+      "paragraph6Name": "about_2_paragraph_1",
+      "paragraph7Name": "about_2_paragraph_2",
+      "paragraph8Name": "about_3_subtitle_1",
+      "paragraph9Name": "about_3_paragraph_1",
+      "linkMoreName": "about_more",
+      "linkLessName": "about_less"
+    }
+  ]
+}
