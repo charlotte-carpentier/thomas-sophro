@@ -1623,12 +1623,12 @@
 .approach-bg-light {
   width: 100%;
   background-color: #d9e8f5;
-  padding: 4rem 5.625rem;
+  padding: 4rem 5.625rem 2rem 5.625rem;
   position: relative;
 }
 .approach-header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 .approach-title h2 {
   margin: 0;
@@ -1636,10 +1636,8 @@
   line-height: 1.2;
 }
 .approach-intro {
-  margin: 1.5rem 0 2.5rem 0;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1.5rem auto 0 auto;
+  max-width: 75ch;
   text-align: center;
 }
 .approach-intro p {
@@ -1655,6 +1653,7 @@
   margin: 0;
   color: #2a4d69;
   line-height: 1.5;
+  max-width: 75ch;
 }
 .approach-photo {
   position: absolute;
@@ -1671,7 +1670,7 @@
 .approach-bg-dark {
   width: 100%;
   background-color: #2a4d69;
-  padding: 4rem 5.625rem;
+  padding: 2rem 5.625rem 4rem 5.625rem;
   position: relative;
 }
 .approach-text-dark {
@@ -1697,6 +1696,7 @@
   margin: 0;
   color: #ffffff;
   line-height: 1.5;
+  max-width: 75ch;
 }
 .approach-text-full {
   display: none;
@@ -1710,6 +1710,7 @@
   margin: 0;
   color: #ffffff;
   line-height: 1.5;
+  max-width: 75ch;
 }
 .approach-text-truncated-desktop.hide {
   display: none;
@@ -1718,17 +1719,22 @@
   margin-top: 1rem;
   cursor: pointer;
 }
+.approach-text-dark .link--inline:hover, .approach-text-dark-mobile .link--inline:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
 .section-approach-mobile {
   display: none;
 }
 .approach-bg-light-mobile {
   width: 100%;
   background-color: #d9e8f5;
-  padding: 3rem 1.5rem;
+  padding: 3rem 1.5rem 7.5rem 1.5rem;
+  position: relative;
 }
 .approach-header-mobile {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .approach-title-mobile h2 {
   margin: 0;
@@ -1736,20 +1742,21 @@
   line-height: 1.2;
 }
 .approach-intro-mobile {
-  margin: 1.5rem 0 2rem 0;
+  margin: 1.5rem 0 1rem 0;
   text-align: left;
 }
 .approach-intro-mobile p {
   margin: 0;
   color: #2a4d69;
   line-height: 1.5;
+  max-width: 75ch;
 }
 .approach-photo-mobile {
-  display: flex;
-  justify-content: center;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -100px;
   z-index: 10;
-  margin-bottom: -100px;
 }
 .approach-photo-mobile .image-photo {
   width: 200px;
@@ -1779,15 +1786,18 @@
 .approach-text-truncated-mobile > *:not(:last-child) {
   margin-bottom: 1rem;
 }
+.approach-text-truncated-mobile > p:last-child {
+  margin-bottom: 0;
+}
 .approach-text-truncated-mobile h2, .approach-text-truncated-mobile h3, .approach-text-truncated-mobile p {
   margin: 0;
   color: #ffffff;
   line-height: 1.5;
+  max-width: 75ch;
 }
 .approach-links-mobile {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
 }
 @media (max-width: 768px) {
   .section-approach-desktop {

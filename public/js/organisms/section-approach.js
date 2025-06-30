@@ -1,6 +1,6 @@
 /**
  * SECTION-APPROACH JavaScript functionality
- * Handles text truncation toggle for approach section
+ * Handles text truncation toggle for approach section with improved UX
  */
 
 function toggleApproachText(device) {
@@ -40,6 +40,15 @@ function toggleApproachText(device) {
       full.classList.remove('show');
       linkMore.style.display = 'block';
       linkLess.style.display = 'none';
+      
+      // UX improvement: Scroll back to section top when reducing
+      const approachSection = document.getElementById('approach');
+      if (approachSection) {
+        approachSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     }
   } else {
     console.error('Some elements not found in section for device:', device);
@@ -52,7 +61,7 @@ function toggleApproachText(device) {
 
 // Initialize section-approach functionality
 function initSectionApproach() {
-  console.log('Section-approach component initialized');
+  console.log('Section-approach component initialized with improved UX');
   
   // Additional initialization if needed
   // Could add intersection observers, smooth scrolling, etc.
