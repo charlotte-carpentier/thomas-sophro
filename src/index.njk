@@ -6,6 +6,7 @@ layout: '00-core/base.njk'
 {# ========== IMPORTS ========== #}
 {% from "01-organisms/section-hero.njk" import renderSectionHero %}
 {% from "01-organisms/section-acc.njk" import renderSectionAcc %}
+{% from "01-organisms/section-approach.njk" import renderSectionApproach %}
 {% from "01-organisms/section-contact.njk" import renderSectionContact %}
 
 {# ========== HERO SECTION ========== #}
@@ -20,7 +21,6 @@ layout: '00-core/base.njk'
     iconDatas: atoms.icon.icons
 }) }}
 
-
 {# ========== ACCOMPANIEMENT SECTION ========== #}
 {{ renderSectionAcc({ 
     name: "thomas_acc_section",
@@ -30,6 +30,19 @@ layout: '00-core/base.njk'
     typographyDatas: atoms.typography.texts,
     linkDatas: atoms.link.links
 }) }}
+
+{# ========== APPROACH SECTION ========== #}
+{{ renderSectionApproach({ 
+    name: "thomas_approach",
+    datas: organisms["section-approach"]["section-approachs"],
+    typographyDatas: atoms.typography.texts,
+    imageDatas: atoms.image.images,
+    linkDatas: atoms.link.links
+}) }}
+
+{# ========== RECO SECTION ========== #}
+
+{# ========== ARTICLE SECTION ========== #}
 
 {# ========== CONTACT SECTION ========== #}
 {{ renderSectionContact({ 

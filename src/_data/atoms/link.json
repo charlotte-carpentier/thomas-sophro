@@ -61,6 +61,18 @@
       "variant": "burger"
     },
     {
+      "name": "about_more",
+      "text": "Découvrir mon parcours complet",
+      "href": "#",
+      "variant": "inline"
+    },
+    {
+      "name": "about_less",
+      "href": "#",
+      "text": "Réduire", 
+      "variant": "inline"
+    },
+    {
       "name": "accompaniement_plus",
       "href": "#",
       "text": "En savoir plus",
