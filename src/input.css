@@ -6,6 +6,10 @@
 /* 00 – DESIGN SYSTEM                                 */
 /* -------------------------------------------------- */
 
+html {
+  scroll-behavior: smooth;
+}
+
 @theme {
   /* Color styles */
   --th-black: #000000;
