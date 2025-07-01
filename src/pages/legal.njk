@@ -1,7 +1,62 @@
 ---
 permalink: "/mentions-legales/"
 layout: '00-core/base.njk'
+title: "Mentions légales"
+description: "Mentions légales et informations juridiques du cabinet de sophrologie de Thomas Carpentier"
 ---
 
-<h1>Legal Notice & Credits</h1>
-<p>Legal information and credits related to Thomas's website.</p>
+{# Section principale des mentions légales #}
+<section class="legal-section">
+  <div class="legal-container">
+    
+    {# En-tête de la page #}
+    <header class="legal-header">
+      <h1 class="text-h1 legal-title">Mentions légales</h1>
+    </header>
+
+    {# Contenu des sections #}
+    <div class="legal-content">
+      {% for section in pages.legal.sections %}
+        <article class="legal-article" id="{{ section.id }}">
+          
+          {# Titre de section #}
+          <h2 class="text-h2 legal-section-title">{{ section.title }}</h2>
+          
+          {# Contenu de la section #}
+          <div class="legal-section-content">
+            {% for content in section.content %}
+              
+              {# Paragraphe #}
+              {% if content.type == "paragraph" %}
+                <p class="text-body legal-paragraph">{{ content.text }}</p>
+              {% endif %}
+              
+              {# Liste #}
+              {% if content.type == "list" %}
+                <ul class="legal-list">
+                  {% for item in content.items %}
+                    <li class="legal-list-item">
+                      <span class="text-body">{{ item }}</span>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              
+            {% endfor %}
+          </div>
+          
+        </article>
+      {% endfor %}
+    </div>
+    
+    {# Navigation retour #}
+    <footer class="legal-footer">
+      {% from "03-atoms/link.njk" import renderLink %}
+      {{ renderLink({
+        name: "legal_back_home",
+        datas: atoms.link.links
+      }) }}
+    </footer>
+    
+  </div>
+</section>

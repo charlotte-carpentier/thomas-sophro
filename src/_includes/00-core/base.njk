@@ -54,6 +54,15 @@
     {# ----- Manifest and theme color ----- #}
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#ffffff">
+
+    {# ----- Axeptio Cookie Consent ----- #}
+    <script>
+      window.axeptioSettings = {
+        clientId: "YOUR_CLIENT_ID_HERE",
+        cookiesVersion: "thomas-carpentier-sophrologue",
+      };
+    </script>
+    <script async src="https://static.axept.io/sdk.js"></script>
   </head>
 
   <body class="min-h-screen flex flex-col">

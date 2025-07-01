@@ -1,0 +1,126 @@
+{
+  "page": {
+    "title": "Mentions légales",
+    "description": "Mentions légales et informations juridiques du cabinet de sophrologie de Thomas Carpentier"
+  },
+  "sections": [
+    {
+      "id": "editeur",
+      "title": "Éditeur du site",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Le présent site internet est édité par :"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Thomas Carpentier",
+            "Sophrologue certifié RNCP",
+            "Adresse : La Garenne-Colombes, Hauts-de-Seine (92)",
+            "Téléphone : 07 63 87 87 05",
+            "Email : carpentier.sophro@gmail.com",
+            "SIRET : 94355458400012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hebergeur",
+      "title": "Hébergement",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Le site est hébergé par :"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Netlify, Inc.",
+            "2325 3rd Street, Suite 296",
+            "San Francisco, California 94107",
+            "États-Unis",
+            "Site web : https://www.netlify.com"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "propriete",
+      "title": "Propriété intellectuelle",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés, y compris pour les documents téléchargeables et les représentations iconographiques et photographiques."
+        },
+        {
+          "type": "paragraph",
+          "text": "La reproduction de tout ou partie de ce site sur un support électronique quel qu'il soit est formellement interdite sauf autorisation expresse du directeur de la publication."
+        }
+      ]
+    },
+    {
+      "id": "donnees",
+      "title": "Protection des données personnelles et cookies",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Ce site utilise des cookies pour améliorer votre expérience de navigation et analyser le trafic via Google Analytics."
+        },
+        {
+          "type": "paragraph",
+          "text": "Conformément au RGPD, nous utilisons Axeptio pour recueillir votre consentement avant l'activation de ces cookies. Vous pouvez modifier vos préférences à tout moment."
+        },
+        {
+          "type": "paragraph",
+          "text": "Les données collectées sont anonymisées et utilisées uniquement à des fins d'amélioration du site. Aucun formulaire de contact n'est présent - les liens redirigent vers vos applications natives."
+        },
+        {
+          "type": "paragraph",
+          "text": "Pour toute question concernant vos données : carpentier.sophro@gmail.com"
+        }
+      ]
+    },
+    {
+      "id": "responsabilite",
+      "title": "Limitation de responsabilité",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Les informations contenues sur ce site le sont à titre indicatif et ne sauraient en aucun cas remplacer une consultation médicale."
+        },
+        {
+          "type": "paragraph",
+          "text": "Thomas Carpentier s'efforce de fournir sur le site des informations aussi précises que possible. Toutefois, il ne pourra être tenu responsable des omissions, des inexactitudes et des carences dans la mise à jour, qu'elles soient de son fait ou du fait des tiers partenaires qui lui fournissent ces informations."
+        }
+      ]
+    },
+    {
+      "id": "credits",
+      "title": "Crédits",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Conception et développement du site :"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Développement : Charlotte [Nom de famille]",
+            "Technologies : Eleventy, TailwindCSS, Nunjucks",
+            "Hébergement : Netlify",
+            "Gestion de contenu : Decap CMS"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Icônes : Phosphor Icons (https://phosphoricons.com/)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Polices : Google Fonts - Space Grotesk et Inter"
+        }
+      ]
+    }
+  ]
+}
