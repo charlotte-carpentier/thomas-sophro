@@ -21,15 +21,18 @@
         "items": [
           {
             "icon": "contact_phone",
-            "text": "07 63 87 87 05"
+            "text": "07 63 87 87 05",
+            "link": "tel:+33763878705"
           },
           {
             "icon": "contact_mail", 
-            "text": "carpentier.sophro@gmail.com"
+            "text": "carpentier.sophro@gmail.com",
+            "link": "mailto:carpentier.sophro@gmail.com"
           },
           {
             "icon": "contact_city",
-            "text": "La Garenne-Colombes,<br>Hauts-de-Seine"
+            "text": "La Garenne-Colombes,<br>Hauts-de-Seine",
+            "link": "https://maps.google.com/?q=La+Garenne-Colombes,+Hauts-de-Seine"
           }
         ]
       },

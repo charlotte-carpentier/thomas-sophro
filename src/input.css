@@ -1515,6 +1515,10 @@
   text-align: left;
 }
 
+.footer-contact-link:hover {
+  color: theme(--th-green);
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
   .footer-desktop {

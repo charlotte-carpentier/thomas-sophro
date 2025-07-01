@@ -79,7 +79,7 @@
               </nav>
             </div>
             
-            {# Contact Column #}
+            {# Contact Column - Avec liens d'action #}
             <div class="footer-column">
               <h3 class="footer-column-title">{{ footerData.contact.title }}</h3>
               <div class="footer-contact">
@@ -89,7 +89,13 @@
                       name: item.icon,
                       datas: option.iconDatas
                     }) }}
-                    <span class="footer-contact-text">{{ item.text | safe }}</span>
+                    {% if item.link %}
+                      <a href="{{ item.link }}" class="footer-contact-text footer-contact-link">
+                        {{ item.text | safe }}
+                      </a>
+                    {% else %}
+                      <span class="footer-contact-text">{{ item.text | safe }}</span>
+                    {% endif %}
                   </div>
                 {% endfor %}
               </div>
@@ -160,7 +166,7 @@
             </nav>
           </div>
           
-          {# Contact Section #}
+          {# Contact Section - Avec liens d'action #}
           <div class="footer-section-mobile">
             <h3 class="footer-section-title">{{ footerData.contact.title }}</h3>
             <div class="footer-contact-mobile">
@@ -170,13 +176,19 @@
                     name: item.icon,
                     datas: option.iconDatas
                   }) }}
-                  <span class="footer-contact-text">{{ item.text | safe }}</span>
+                  {% if item.link %}
+                    <a href="{{ item.link }}" class="footer-contact-text footer-contact-link">
+                      {{ item.text | safe }}
+                    </a>
+                  {% else %}
+                    <span class="footer-contact-text">{{ item.text | safe }}</span>
+                  {% endif %}
                 </div>
               {% endfor %}
             </div>
           </div>
           
-          {# Social Section Mobile - FIX SIMPLE : dynamique depuis JSON #}
+          {# Social Section Mobile - Dynamique depuis JSON #}
           <div class="footer-section-mobile">
             <h3 class="footer-section-title">{{ footerData.social.title }}</h3>
             <div class="footer-social-mobile">

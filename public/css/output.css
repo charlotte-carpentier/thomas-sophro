@@ -1496,6 +1496,9 @@
   color: #ffffff;
   text-align: left;
 }
+.footer-contact-link:hover {
+  color: #63a69f;
+}
 @media (max-width: 768px) {
   .footer-desktop {
     display: none;
