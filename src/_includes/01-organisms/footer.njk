@@ -46,24 +46,12 @@
         <div class="footer-container">
           {# Content Grid - 4 columns: Logo + 3 content columns #}
           <div class="footer-content">
-            {# Brand Column with copyright at bottom #}
+            {# Brand Column #}
             <div class="footer-column">
               {{ renderVector({ 
                 name: footerData.brand.desktop,
                 datas: option.vectorDatas
               }) }}
-              
-              {# Copyright in first column #}
-              <div class="footer-copyright">
-                <span>© {{ footerData.copyright.year }} {{ footerData.copyright.name }}</span>
-                <span class="footer-separator">•</span>
-                {{ renderLink({ 
-                  name: footerData.copyright.links[0],
-                  datas: option.linkDatas
-                }) }}
-                <span class="footer-separator">•</span>
-                <span>{{ footerData.copyright.additional_text }}</span>
-              </div>
             </div>
             
             {# Navigation Column #}
@@ -219,18 +207,6 @@
                 {% endif %}
               {% endfor %}
             </div>
-          </div>
-          
-          {# Copyright Section #}
-          <div class="footer-copyright-mobile">
-            <span>© {{ footerData.copyright.year }}</span>
-            <span class="footer-separator">•</span>
-            {{ renderLink({ 
-              name: footerData.copyright.links[0],
-              datas: option.linkDatas
-            }) }}
-            <span class="footer-separator">•</span>
-            <span>{{ footerData.copyright.additional_text }}</span>
           </div>
         </div>
       </footer>

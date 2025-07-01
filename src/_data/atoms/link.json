@@ -25,12 +25,6 @@
       "variant": "header"
     },
     {
-      "name": "header_reco",
-      "href": "#reco",
-      "text": "Recommandations",
-      "variant": "header"
-    },
-    {
       "name": "burger_home",
       "href": "#home",
       "text": "Accueil",
@@ -52,12 +46,6 @@
       "name": "burger_contact",
       "href": "#contact",
       "text": "Contact",
-      "variant": "burger"
-    },
-    {
-      "name": "burger_reco",
-      "href": "#reco",
-      "text": "Recommandations",
       "variant": "burger"
     },
     {
@@ -121,20 +109,6 @@
       "variant": "footer"
     },
     {
-      "name": "footer_reco",
-      "href": "#reco",
-      "text": "Recommandations",
-      "variant": "footer"
-    },
-    {
-      "name": "footer_facebook",
-      "href": "TODO: account pro",
-      "text": "Facebook",
-      "variant": "footer",
-      "target": "_blank",
-      "rel": "noopener noreferrer"
-    },
-    {
       "name": "footer_instagram",
       "href": "https://www.instagram.com/thomascarpentier_sophrologue?igsh=ajB5MTgwOHAwbTRv",
       "text": "Instagram", 
@@ -144,7 +118,7 @@
     },
     {
       "name": "footer_linkedin",
-      "href": "linkedin.com/in/thomas-carpentier-a8a567350",
+      "href": "https://linkedin.com/in/thomas-carpentier-a8a567350",
       "text": "LinkedIn", 
       "variant": "footer",
       "target": "_blank",
@@ -158,7 +132,7 @@
     },
     {
       "name": "legal_back_home",
-      "href": "/#home",
+      "href": "/",
       "text": "Retour à l'accueil",
       "variant": "inline"
     }

@@ -102,8 +102,8 @@
 
 /* Icons contact - Blue dark color */
 .icon-contact { 
-  width: 32px; 
-  height: 32px;
+  width: 24px; 
+  height: 24px;
   color: theme(--th-blue-dark);
 }
 
@@ -526,8 +526,8 @@
 
 /* Force icon size for contact-block - 32px always */
 .contact-block .contact-icon .icon-contact {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
 }
 
 .contact-label {
@@ -1492,8 +1492,8 @@
 
 .footer-social-link-mobile .icon-contact {
   color: theme(--th-white);
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   transition: color 0.2s ease;
 }
 
