@@ -1758,6 +1758,13 @@
   line-height: 1.5;
 }
 
+/* Container centré pour le contenu */
+.approach-content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
 .approach-text-light {
   text-align: left;
   padding-left: 350px;
@@ -1772,7 +1779,7 @@
 
 .approach-photo {
   position: absolute;
-  left: 5.625rem;
+  left: 0;
   bottom: -150px;
   z-index: 10;
 }
@@ -1789,6 +1796,12 @@
   background-color: theme(--th-blue-dark);
   padding: 2rem 5.625rem 4rem 5.625rem;
   position: relative;
+}
+
+/* Container centré pour le contenu dark */
+.approach-content-wrapper-dark {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .approach-text-dark {
@@ -1898,6 +1911,8 @@
   transform: translateX(-50%);
   bottom: -100px;
   z-index: 10;
+  width: 200px;
+  height: 200px;
 }
 
 .approach-photo-mobile .image-photo {

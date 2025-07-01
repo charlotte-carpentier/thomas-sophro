@@ -52,69 +52,81 @@
               </div>
             </div>
             
-            {# Text on light background #}
-            <div class="approach-text-light">
-              {{ renderTypography({ 
-                name: sectionData.textLightName,
-                datas: option.typographyDatas
-              }) }}
-            </div>
-            
-            {# Photo positioned absolutely #}
-            <div class="approach-photo">
-              {{ renderImage({ 
-                name: sectionData.imageName,
-                datas: option.imageDatas
-              }) }}
+            {# Content wrapper centré #}
+            <div class="approach-content-wrapper">
+              
+              {# Text on light background #}
+              <div class="approach-text-light">
+                {{ renderTypography({ 
+                  name: sectionData.textLightName,
+                  datas: option.typographyDatas
+                }) }}
+              </div>
+              
+              {# Photo positioned absolutely #}
+              <div class="approach-photo">
+                {{ renderImage({ 
+                  name: sectionData.imageName,
+                  datas: option.imageDatas
+                }) }}
+              </div>
+              
             </div>
             
           </div>
           
           {# Background dark blue #}
           <div class="approach-bg-dark">
-            <div class="approach-text-dark">
+            
+            {# Content wrapper dark centré #}
+            <div class="approach-content-wrapper-dark">
               
-              {# Text container with truncation #}
-              <div class="approach-text-container">
+              <div class="approach-text-dark">
                 
-                {# Truncated text version #}
-                <div class="approach-text-truncated-desktop" id="truncated-approach-desktop">
-                  {{ renderTypography({ name: sectionData.paragraph1Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph2Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph3Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph4Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph5Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph6Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph7Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph8Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph9Name, datas: option.typographyDatas }) }}
+                {# Text container with truncation #}
+                <div class="approach-text-container">
+                  
+                  {# Truncated text version #}
+                  <div class="approach-text-truncated-desktop" id="truncated-approach-desktop">
+                    {{ renderTypography({ name: sectionData.paragraph1Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph2Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph3Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph4Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph5Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph6Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph7Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph8Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph9Name, datas: option.typographyDatas }) }}
+                  </div>
+                  
+                  {# Full text version #}
+                  <div class="approach-text-full" id="full-approach-desktop">
+                    {{ renderTypography({ name: sectionData.paragraph1Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph2Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph3Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph4Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph5Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph6Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph7Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph8Name, datas: option.typographyDatas }) }}
+                    {{ renderTypography({ name: sectionData.paragraph9Name, datas: option.typographyDatas }) }}
+                  </div>
+                  
                 </div>
                 
-                {# Full text version #}
-                <div class="approach-text-full" id="full-approach-desktop">
-                  {{ renderTypography({ name: sectionData.paragraph1Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph2Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph3Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph4Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph5Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph6Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph7Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph8Name, datas: option.typographyDatas }) }}
-                  {{ renderTypography({ name: sectionData.paragraph9Name, datas: option.typographyDatas }) }}
+                {# Links for truncation toggle #}
+                <div class="approach-link-more" id="link-more-approach-desktop" onclick="toggleApproachText('desktop')">
+                  {{ renderLink({ name: sectionData.linkMoreName, datas: option.linkDatas }) }}
                 </div>
                 
-              </div>
-              
-              {# Links for truncation toggle #}
-              <div class="approach-link-more" id="link-more-approach-desktop" onclick="toggleApproachText('desktop')">
-                {{ renderLink({ name: sectionData.linkMoreName, datas: option.linkDatas }) }}
-              </div>
-              
-              <div class="approach-link-less" id="link-less-approach-desktop" onclick="toggleApproachText('desktop')" style="display: none;">
-                {{ renderLink({ name: sectionData.linkLessName, datas: option.linkDatas }) }}
+                <div class="approach-link-less" id="link-less-approach-desktop" onclick="toggleApproachText('desktop')" style="display: none;">
+                  {{ renderLink({ name: sectionData.linkLessName, datas: option.linkDatas }) }}
+                </div>
+                
               </div>
               
             </div>
+            
           </div>
           
         </div>
