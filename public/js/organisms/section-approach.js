@@ -42,7 +42,7 @@ function toggleApproachText(device) {
       linkLess.style.display = 'none';
       
       // UX improvement: Scroll back to section top when reducing
-      const approachSection = document.getElementById('approach');
+      const approachSection = document.getElementById('about'); // CHANGÉ: 'approach' -> 'about'
       if (approachSection) {
         approachSection.scrollIntoView({ 
           behavior: 'smooth',
