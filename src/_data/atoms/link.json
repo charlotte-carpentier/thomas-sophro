@@ -2,7 +2,7 @@
   "links": [
     {
       "name": "header_home",
-      "href": "#home",
+      "href": "/",
       "text": "Accueil",
       "variant": "header"
     },
@@ -144,7 +144,7 @@
     },
     {
       "name": "footer_linkedin",
-      "href": "TODO: account pro",
+      "href": "linkedin.com/in/thomas-carpentier-a8a567350",
       "text": "LinkedIn", 
       "variant": "footer",
       "target": "_blank",
@@ -152,9 +152,15 @@
     },
     {
       "name": "footer_legal",
-      "href": "#legal",
+      "href": "/mentions-legales/",
       "text": "Mentions légales",
       "variant": "footer"
+    },
+    {
+      "name": "legal_back_home",
+      "href": "/#home",
+      "text": "Retour à l'accueil",
+      "variant": "inline"
     }
   ]
 }
