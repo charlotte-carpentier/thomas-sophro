@@ -49,12 +49,6 @@
       "variant": "contact"
     },
     {
-      "name": "social_facebook",
-      "path": "/assets/icons/contact/facebook-logo.svg",
-      "alt": "Icône de facebook",
-      "variant": "contact"
-    },
-    {
       "name": "social_instagram",
       "path": "/assets/icons/contact/instagram-logo.svg",
       "alt": "Icône d'instagram",

@@ -407,8 +407,8 @@
   color: #ffffff;
 }
 .icon-contact {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   color: #2a4d69;
 }
 .icon-cta {
@@ -744,8 +744,8 @@
   flex-shrink: 0;
 }
 .contact-block .contact-icon .icon-contact {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
 }
 .contact-label {
   flex: 1;
@@ -1477,8 +1477,8 @@
 }
 .footer-social-link-mobile .icon-contact {
   color: #ffffff;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   transition: color 0.2s ease;
 }
 .footer-social-link-mobile:hover .icon-contact {
@@ -1676,6 +1676,11 @@
   color: #2a4d69;
   line-height: 1.5;
 }
+.approach-content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
 .approach-text-light {
   text-align: left;
   padding-left: 350px;
@@ -1688,7 +1693,7 @@
 }
 .approach-photo {
   position: absolute;
-  left: 5.625rem;
+  left: 0;
   bottom: -150px;
   z-index: 10;
 }
@@ -1703,6 +1708,10 @@
   background-color: #2a4d69;
   padding: 2rem 5.625rem 4rem 5.625rem;
   position: relative;
+}
+.approach-content-wrapper-dark {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .approach-text-dark {
   padding-left: 350px;
@@ -1788,6 +1797,8 @@
   transform: translateX(-50%);
   bottom: -100px;
   z-index: 10;
+  width: 200px;
+  height: 200px;
 }
 .approach-photo-mobile .image-photo {
   width: 200px;

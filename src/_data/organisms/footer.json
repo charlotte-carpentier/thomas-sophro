@@ -13,7 +13,7 @@
           "footer_about", 
           "footer_accompaniements",
           "footer_contact",
-          "footer_reco"
+          "footer_legal"
         ]
       },
       "contact": {
@@ -40,10 +40,6 @@
         "title": "Me suivre",
         "links": [
           {
-            "link_name": "footer_facebook",
-            "icon": "social_facebook"
-          },
-          {
             "link_name": "footer_instagram", 
             "icon": "social_instagram"
           },
@@ -52,14 +48,6 @@
             "icon": "social_linkedin"
           }
         ]
-      },
-      "copyright": {
-        "year": "2025",
-        "name": "Thomas Carpentier",
-        "links": [
-          "footer_legal"
-        ],
-        "additional_text": "CGV"
       },
       "variant": "thomas"
     }

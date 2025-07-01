@@ -272,7 +272,7 @@
     },
     {
       "name": "footer_title",
-      "text": "© 2025 Thomas Carpentier • <a href=\"https://thomascarpentier-sophrologue.fr/mentions-legales/\">Mentions légales</a>",
+      "text": "<a href=\"https://thomascarpentier-sophrologue.fr/mentions-legales/\">Mentions légales</a>",
       "tag": "small",
       "variant": "small"
     }
