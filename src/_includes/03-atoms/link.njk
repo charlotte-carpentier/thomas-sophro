@@ -5,6 +5,8 @@
 =========================
 #}
 
+{% from "03-atoms/icon.njk" import renderIcon %}
+
 {% macro renderLink(option) %}
   {# Check if datas is provided #}
   {% if not option.datas %}
@@ -30,6 +32,11 @@
       {% set variant = linkData.variant | default('external') %}
       {% set cssClasses = 'link link--' ~ variant %}
       
+      {# Override class for footer-social variant #}
+      {% if variant == 'footer-social' %}
+        {% set cssClasses = 'footer-social-link-mobile' %}
+      {% endif %}
+      
       {# Check if current page/section - add current state #}
       {% set isCurrentPage = false %}
       {% if linkData.href == page.url %}
@@ -54,7 +61,16 @@
         {% if linkData.download %}download{% endif %}
         {% if linkData.rel %}rel="{{ linkData.rel }}"{% endif %}
       >
-        {{ linkData.text | safe }}
+        {# Si le lien a une icône ET que iconDatas est fourni, l'afficher #}
+        {% if linkData.icon and option.iconDatas %}
+          {{ renderIcon({ 
+            name: linkData.icon,
+            datas: option.iconDatas
+          }) }}
+          <span class="sr-only">{{ linkData.text | safe }}</span>
+        {% else %}
+          {{ linkData.text | safe }}
+        {% endif %}
       </a>
     {% endif %}
   {% endif %}
@@ -71,7 +87,8 @@ Summon HAT Components Wisely
 2. Call a specific link by its name
 {{ renderLink({ 
     name: "portfolio_link",
-    datas: atoms.link.links
+    datas: atoms.link.links,
+    iconDatas: atoms.icon.icons
 }) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
