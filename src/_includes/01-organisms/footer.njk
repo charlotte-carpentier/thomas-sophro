@@ -100,13 +100,30 @@
               <h3 class="footer-column-title">{{ footerData.social.title }}</h3>
               <div class="footer-social">
                 {% for social in footerData.social.links %}
+                  {# Récupérer l'URL du lien depuis les données #}
+                  {% set linkUrl = null %}
+                  {% set linkTarget = null %}
+                  {% set linkRel = null %}
+                  {% for link in option.linkDatas %}
+                    {% if link.name == social.link_name %}
+                      {% set linkUrl = link.href %}
+                      {% set linkTarget = link.target %}
+                      {% set linkRel = link.rel %}
+                    {% endif %}
+                  {% endfor %}
+                  
                   <div class="footer-social-item">
-                    <span class="footer-social-icon">
-                      {{ renderIcon({ 
-                        name: social.icon,
-                        datas: option.iconDatas
-                      }) }}
-                    </span>
+                    {% if linkUrl %}
+                      <a href="{{ linkUrl }}" 
+                         class="footer-social-link-mobile"
+                         {% if linkTarget %}target="{{ linkTarget }}"{% endif %}
+                         {% if linkRel %}rel="{{ linkRel }}"{% endif %}>
+                        {{ renderIcon({ 
+                          name: social.icon,
+                          datas: option.iconDatas
+                        }) }}
+                      </a>
+                    {% endif %}
                     {{ renderLink({ 
                       name: social.link_name,
                       datas: option.linkDatas
@@ -159,23 +176,35 @@
             </div>
           </div>
           
-          {# Social Section #}
+          {# Social Section Mobile - FIX SIMPLE : dynamique depuis JSON #}
           <div class="footer-section-mobile">
             <h3 class="footer-section-title">{{ footerData.social.title }}</h3>
             <div class="footer-social-mobile">
               {% for social in footerData.social.links %}
-                <div class="footer-social-link-mobile">
-                  {{ renderIcon({ 
-                    name: social.icon,
-                    datas: option.iconDatas
-                  }) }}
-                  <span class="sr-only">
-                    {{ renderLink({ 
-                      name: social.link_name,
-                      datas: option.linkDatas
+                {# Récupérer l'URL du lien depuis les données #}
+                {% set linkUrl = null %}
+                {% set linkTarget = null %}
+                {% set linkRel = null %}
+                {% for link in option.linkDatas %}
+                  {% if link.name == social.link_name %}
+                    {% set linkUrl = link.href %}
+                    {% set linkTarget = link.target %}
+                    {% set linkRel = link.rel %}
+                  {% endif %}
+                {% endfor %}
+                
+                {% if linkUrl %}
+                  <a href="{{ linkUrl }}" 
+                     class="footer-social-link-mobile"
+                     {% if linkTarget %}target="{{ linkTarget }}"{% endif %}
+                     {% if linkRel %}rel="{{ linkRel }}"{% endif %}>
+                    {{ renderIcon({ 
+                      name: social.icon,
+                      datas: option.iconDatas
                     }) }}
-                  </span>
-                </div>
+                    <span class="sr-only">{{ social.link_name }}</span>
+                  </a>
+                {% endif %}
               {% endfor %}
             </div>
           </div>
