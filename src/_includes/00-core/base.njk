@@ -81,6 +81,15 @@
           .insertBefore(e, t);
       })(document, "script");
     </script>
+
+    {# ----- Google Analytics ----- #}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5N0C7ZYHZQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5N0C7ZYHZQ');
+    </script>
   </head>
 
   <body class="min-h-screen flex flex-col">
