@@ -106,7 +106,7 @@
         {
           "type": "list",
           "items": [
-            "Développement : Charlotte [Nom de famille]",
+            "Développement : Charlotte Carpentier",
             "Technologies : Eleventy, TailwindCSS, Nunjucks",
             "Hébergement : Netlify",
             "Gestion de contenu : Decap CMS"
@@ -114,7 +114,15 @@
         },
         {
           "type": "paragraph",
-          "text": "Icônes : Phosphor Icons (https://phosphoricons.com/)"
+          "text": "Contact développeuse : <a href=\"mailto:carpentier.dev@gmail.com\" class=\"link--inline\">carpentier.dev@gmail.com</a>"
+        },
+        {
+          "type": "paragraph",
+          "text": "Site web : <a href=\"https://charlottecarpentier.com\" class=\"link--inline\" target=\"_blank\" rel=\"noopener noreferrer\">charlottecarpentier.com</a>"
+        },
+        {
+          "type": "paragraph",
+          "text": "Icônes : <a href=\"https://phosphoricons.com/\" class=\"link--inline\" target=\"_blank\" rel=\"noopener noreferrer\">Phosphor Icons</a>"
         },
         {
           "type": "paragraph",

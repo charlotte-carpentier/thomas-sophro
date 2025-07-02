@@ -39,10 +39,10 @@
     <meta name="twitter:image" content="{{ site.url }}/assets/social-share.jpg">
 
     {# ----- Fonts ----- #}
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
     {# ----- Image preload (optional) ----- #}
     <link rel="preload" as="image" href="/assets/images/background/background.png">
     <link rel="preload" as="image" href="/assets/images/logo/logo_thomas.svg">
@@ -58,11 +58,29 @@
     {# ----- Axeptio Cookie Consent ----- #}
     <script>
       window.axeptioSettings = {
-        clientId: "YOUR_CLIENT_ID_HERE",
-        cookiesVersion: "thomas-carpentier-sophrologue",
+        clientId: "686581c83edde4d30d571754",
+        cookiesVersion: "thomascarpentier-sophrologue-fr-EU",
+        googleConsentMode: {
+          default: {
+            analytics_storage: "denied",
+            ad_storage: "denied",
+            ad_user_data: "denied",
+            ad_personalization: "denied",
+            wait_for_update: 500
+          }
+        }
       };
+
+      (function (d, s) {
+        var t = d.getElementsByTagName(s)[0],
+          e = d.createElement(s);
+        e.async = true;
+        e.src = "//static.axept.io/sdk.js";
+        t
+          .parentNode
+          .insertBefore(e, t);
+      })(document, "script");
     </script>
-    <script async src="https://static.axept.io/sdk.js"></script>
   </head>
 
   <body class="min-h-screen flex flex-col">
@@ -78,7 +96,7 @@
         linkDatas: atoms.link.links,
         iconDatas: atoms.icon.icons
     }) }}
-    
+
     {# ----- Main content ----- #}
     <main class="flex-grow">
       {{ content | safe }}
@@ -96,27 +114,31 @@
     }) }}
 
     {# ----- JavaScript scripts ----- #}
-    <script src="/js/main.js" defer></script>
-    <script src="/js/atoms/svg-loader.js" defer></script>
-    <script src="/js/atoms/scroll-to-top.js" defer></script>
-    <script src="/js/molecules/tab-menu.js" defer></script>
-    <script src="/js/molecules/acc-card.js" defer></script>
-    <script src="/js/molecules/reco-card.js" defer></script>
+    <script src="/js/main.js" defer="defer"></script>
+    <script src="/js/atoms/svg-loader.js" defer="defer"></script>
+    <script src="/js/atoms/scroll-to-top.js" defer="defer"></script>
+    <script src="/js/molecules/tab-menu.js" defer="defer"></script>
+    <script src="/js/molecules/acc-card.js" defer="defer"></script>
+    <script src="/js/molecules/reco-card.js" defer="defer"></script>
 
     {# Organisms scripts #}
-    <script src="/js/organisms/header.js" defer></script>
+    <script src="/js/organisms/header.js" defer="defer"></script>
     <script src="/js/organisms/section-approach.js"></script>
 
     {# ----- Netlify CMS redirect (optional) ----- #}
     <script>
       if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", (user) => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
+        window
+          .netlifyIdentity
+          .on("init", (user) => {
+            if (!user) {
+              window
+                .netlifyIdentity
+                .on("login", () => {
+                  document.location.href = "/admin/";
+                });
+            }
+          });
       }
     </script>
 
