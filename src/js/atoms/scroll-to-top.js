@@ -4,7 +4,7 @@
  * Shows/hides scroll-to-top button based on header visibility
  * Provides smooth scroll to top functionality
  * 
- * @version 1.0
+ * @version 1.1 - Fixed speed
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn('Scroll-to-top: Button or header not found');
     return;
   }
-
-  let isScrolling = false;
 
   /**
    * Check if header is visible in viewport
@@ -31,8 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
    * Toggle scroll-to-top button visibility
    */
   function toggleScrollButton() {
-    if (isScrolling) return; // Prevent toggle during smooth scroll
-    
     if (isHeaderVisible()) {
       scrollToTopButton.classList.remove('visible');
     } else {
@@ -41,34 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /**
-   * Smooth scroll to top of page
+   * INSTANT scroll to top - no animation
    */
   function scrollToTop() {
-    isScrolling = true;
-    scrollToTopButton.classList.remove('visible'); // Hide immediately when clicked
-    
-    // Custom smooth scroll with slower duration
-    const startPosition = window.pageYOffset;
-    const startTime = performance.now();
-    const duration = 1500; // 1.5 seconds instead of default ~500ms
-    
-    function animateScroll(currentTime) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      // Easing function for smoother animation (ease-out)
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      
-      window.scrollTo(0, startPosition * (1 - easeOut));
-      
-      if (progress < 1) {
-        requestAnimationFrame(animateScroll);
-      } else {
-        isScrolling = false;
-      }
-    }
-    
-    requestAnimationFrame(animateScroll);
+    window.scrollTo(0, 0);
   }
 
   // Event listeners
