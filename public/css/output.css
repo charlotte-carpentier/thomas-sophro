@@ -565,7 +565,7 @@ html {
 }
 .link--inline {
   font-size: 16px;
-  color: #63a69f;
+  color: #A8FFF2;
 }
 .link--inline:hover {
   color: #2a4d69;
@@ -573,14 +573,14 @@ html {
 }
 .link--inline:focus {
   outline-color: #2a4d69;
-  color: #63a69f;
+  color: #A8FFF2;
 }
 .link--header {
   font-size: 16px;
   color: #ffffff;
 }
 .link--header:hover {
-  color: #63a69f;
+  color: #A8FFF2;
 }
 .link--header.current, .link--header[aria-current="page"] {
   color: #ffffff;
@@ -593,7 +593,7 @@ html {
   color: #ffffff;
 }
 .link--footer:hover {
-  color: #63a69f;
+  color: #A8FFF2;
 }
 .link--footer.current, .link--footer[aria-current="page"] {
   color: #ffffff;
@@ -604,7 +604,7 @@ html {
   color: #ffffff;
 }
 .link--burger:hover {
-  color: #63a69f;
+  color: #A8FFF2;
 }
 .link--burger.current, .link--burger[aria-current="page"] {
   color: #ffffff;
@@ -676,19 +676,30 @@ html {
   height: 96.75px;
   padding: 1rem;
   background-color: #2a4d69;
-  color: #ffffff;
 }
 .vector-desktop .vector-logo {
   width: 48px;
   height: 48.75px;
-  color: #ffffff;
   flex-shrink: 0;
 }
+.vector-desktop .vector-logo svg {
+  font-weight: bold;
+}
+.vector-desktop .vector-logo svg path, .vector-desktop .vector-logo svg circle, .vector-desktop .vector-logo svg rect {
+  stroke-width: 2;
+  font-weight: bold;
+}
 .vector-desktop .vector-text {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 16px;
-  color: #ffffff;
   line-height: 1.4;
+  font-weight: bold;
+}
+.vector-desktop .vector-name {
+  color: #d9e8f5;
+}
+.vector-desktop .vector-job {
+  color: #A8FFF2;
 }
 .vector-mobile {
   display: flex;
@@ -698,20 +709,31 @@ html {
   height: 76px;
   padding: 0.75rem;
   background-color: #2a4d69;
-  color: #ffffff;
   border-radius: 0.5rem;
 }
 .vector-mobile .vector-logo {
   width: 40px;
   height: 40.63px;
-  color: #ffffff;
   flex-shrink: 0;
 }
+.vector-mobile .vector-logo svg {
+  font-weight: bold;
+}
+.vector-mobile .vector-logo svg path, .vector-mobile .vector-logo svg circle, .vector-mobile .vector-logo svg rect {
+  stroke-width: 2;
+  font-weight: bold;
+}
 .vector-mobile .vector-text {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 16px;
-  color: #ffffff;
   line-height: 1.4;
+  font-weight: bold;
+}
+.vector-mobile .vector-name {
+  color: #d9e8f5;
+}
+.vector-mobile .vector-job {
+  color: #A8FFF2;
 }
 @media (max-width: 768px) {
   .vector-desktop {
@@ -1266,7 +1288,7 @@ html {
   text-decoration: none;
 }
 .header-mobile-overlay .link--burger:hover {
-  color: #63a69f;
+  color: #A8FFF2;
 }
 @media (max-width: 1023px) {
   .header-container {
@@ -1380,10 +1402,10 @@ html {
   transition: color 0.2s ease;
 }
 .footer-social-item .link--footer:hover {
-  color: #63a69f;
+  color: #A8FFF2;
 }
 .footer-social-item:hover .footer-social-icon .icon-contact {
-  color: #63a69f;
+  color: #A8FFF2;
 }
 .sr-only {
   position: absolute;
@@ -1488,7 +1510,7 @@ html {
   transition: color 0.2s ease;
 }
 .footer-social-link-mobile:hover .icon-contact {
-  color: #63a69f;
+  color: #A8FFF2;
 }
 .footer-copyright-mobile {
   display: flex;
@@ -1503,7 +1525,7 @@ html {
   text-align: left;
 }
 .footer-contact-link:hover {
-  color: #63a69f;
+  color: #A8FFF2;
 }
 @media (max-width: 768px) {
   .footer-desktop {
@@ -1766,7 +1788,7 @@ html {
   cursor: pointer;
 }
 .approach-text-dark .link--inline:hover, .approach-text-dark-mobile .link--inline:hover {
-  color: #ffffff;
+  color: #A8FFF2;
   text-decoration: underline;
 }
 .section-approach-mobile {
@@ -2060,7 +2082,7 @@ html {
 }
 .legal-list-item::before {
   content: "•";
-  color: #63a69f;
+  color: #A8FFF2;
   position: absolute;
   left: 0;
   font-weight: bold;

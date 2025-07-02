@@ -17,6 +17,7 @@ html {
   --th-blue-dark: #2a4d69;
   --th-blue-light: #d9e8f5;
   --th-green: #63a69f;
+  --th-green-accessible: #A8FFF2;
 
   /* Font families */
   --font-title: 'Space Grotesk', sans-serif;
@@ -302,7 +303,7 @@ html {
 /* Link - Inline variant */
 .link--inline {
   font-size: theme(--text-body);
-  color: theme(--th-green);
+  color: theme(--th-green-accessible);
 }
 .link--inline:hover {
   color: theme(--th-blue-dark);
@@ -310,7 +311,7 @@ html {
 }
 .link--inline:focus {
   outline-color: theme(--th-blue-dark);
-  color: theme(--th-green);
+  color: theme(--th-green-accessible);
 }
 
 /* Link - Header variant */
@@ -319,7 +320,7 @@ html {
   color: theme(--th-white);
 }
 .link--header:hover {
-  color: theme(--th-green);
+  color: theme(--th-green-accessible);
 }
 .link--header.current,
 .link--header[aria-current="page"] {
@@ -337,7 +338,7 @@ html {
   color: theme(--th-white);
 }
 .link--footer:hover {
-  color: theme(--th-green);
+  color: theme(--th-green-accessible);
 }
 .link--footer.current,
 .link--footer[aria-current="page"] {
@@ -351,7 +352,7 @@ html {
   color: theme(--th-white);
 }
 .link--burger:hover {
-  color: theme(--th-green);
+  color: theme(--th-green-accessible);
 }
 .link--burger.current,
 .link--burger[aria-current="page"] {
@@ -438,21 +439,40 @@ html {
   height: 96.75px;
   padding: 1rem;
   background-color: theme(--th-blue-dark);
-  color: theme(--th-white);
 }
 
 .vector-desktop .vector-logo {
   width: 48px;
   height: 48.75px;
-  color: theme(--th-white);
   flex-shrink: 0;
 }
 
+/* Logo bold via CSS SVG */
+.vector-desktop .vector-logo svg {
+  font-weight: bold;
+}
+
+.vector-desktop .vector-logo svg path,
+.vector-desktop .vector-logo svg circle,
+.vector-desktop .vector-logo svg rect {
+  stroke-width: 2;
+  font-weight: bold;
+}
+
 .vector-desktop .vector-text {
-  font-family: theme(--font-text);
+  font-family: theme(--font-title);
   font-size: theme(--text-body);
-  color: theme(--th-white);
   line-height: 1.4;
+  font-weight: bold;
+}
+
+/* Couleurs différentiées pour nom et métier */
+.vector-desktop .vector-name {
+  color: theme(--th-blue-light);
+}
+
+.vector-desktop .vector-job {
+  color: theme(--th-green-accessible);
 }
 
 /* Vector mobile */
@@ -464,22 +484,41 @@ html {
   height: 76px;
   padding: 0.75rem;
   background-color: theme(--th-blue-dark);
-  color: theme(--th-white);
   border-radius: 0.5rem;
 }
 
 .vector-mobile .vector-logo {
   width: 40px;
   height: 40.63px;
-  color: theme(--th-white);
   flex-shrink: 0;
 }
 
+/* Logo bold via CSS SVG - mobile */
+.vector-mobile .vector-logo svg {
+  font-weight: bold;
+}
+
+.vector-mobile .vector-logo svg path,
+.vector-mobile .vector-logo svg circle,
+.vector-mobile .vector-logo svg rect {
+  stroke-width: 2;
+  font-weight: bold;
+}
+
 .vector-mobile .vector-text {
-  font-family: theme(--font-text);
+  font-family: theme(--font-title);
   font-size: theme(--text-body-mobile);
-  color: theme(--th-white);
   line-height: 1.4;
+  font-weight: bold;
+}
+
+/* Couleurs différentiées pour nom et métier - mobile */
+.vector-mobile .vector-name {
+  color: theme(--th-blue-light);
+}
+
+.vector-mobile .vector-job {
+  color: theme(--th-green-accessible);
 }
 
 /* Responsive - Auto switch based on screen size */
@@ -1214,7 +1253,7 @@ html {
 }
 
 .header-mobile-overlay .link--burger:hover {
-  color: theme(--th-green);
+  color: theme(--th-green-accessible);
 }
 
 @media (max-width: 1023px) {
@@ -1370,12 +1409,12 @@ html {
 }
 
 .footer-social-item .link--footer:hover {
-  color: theme(--th-green);
+  color: theme(--th-green-accessible);
 }
 
 /* Change icon color when hovering the link */
 .footer-social-item:hover .footer-social-icon .icon-contact {
-  color: theme(--th-green);
+  color: theme(--th-green-accessible);
 }
 
 /* Screen reader only */
@@ -1506,7 +1545,7 @@ html {
 }
 
 .footer-social-link-mobile:hover .icon-contact {
-  color: theme(--th-green);
+  color: theme(--th-green-accessible);
 }
 
 /* Copyright Mobile */
@@ -1524,7 +1563,7 @@ html {
 }
 
 .footer-contact-link:hover {
-  color: theme(--th-green);
+  color: theme(--th-green-accessible);
 }
 
 /* === RESPONSIVE === */
@@ -1875,7 +1914,7 @@ html {
 
 .approach-text-dark .link--inline:hover,
 .approach-text-dark-mobile .link--inline:hover {
-  color: theme(--th-white);
+  color: theme(--th-green-accessible);
   text-decoration: underline;
 }
 
@@ -2248,7 +2287,7 @@ html {
 
 .legal-list-item::before {
   content: "•";
-  color: theme(--th-green);
+  color: theme(--th-green-accessible);
   position: absolute;
   left: 0;
   font-weight: bold;
