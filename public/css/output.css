@@ -913,6 +913,7 @@ html {
   margin: 0;
 }
 .article-card__content .link--inline {
+  color: #63a69f;
   align-self: flex-start;
   margin-top: auto;
 }
@@ -971,6 +972,7 @@ html {
   line-height: 1;
 }
 .acc-card__content .link--inline {
+  color: #63a69f;
   align-self: flex-start;
   cursor: pointer;
 }
@@ -1168,6 +1170,7 @@ html {
   color: #2a4d69;
 }
 .reco-card__content .link--inline {
+  color: #63a69f;
   align-self: flex-start;
   cursor: pointer;
 }

@@ -757,6 +757,7 @@ html {
 
 /* Ensure link styling in card context */
 .article-card__content .link--inline {
+  color: theme(--th-green);
   align-self: flex-start;
   margin-top: auto; /* Push link to bottom if card has flex-grow */
 }
@@ -834,6 +835,7 @@ html {
 
 /* Ensure link styling in card context */
 .acc-card__content .link--inline {
+  color: theme(--th-green);
   align-self: flex-start;
   cursor: pointer;
 }
@@ -1092,6 +1094,7 @@ html {
 
 /* Ensure link styling in card context */
 .reco-card__content .link--inline {
+  color: theme(--th-green);
   align-self: flex-start;
   cursor: pointer;
 }
