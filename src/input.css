@@ -447,7 +447,7 @@ html {
   flex-shrink: 0;
 }
 
-/* Logo bold via CSS SVG */
+/* Logo */
 .vector-desktop .vector-logo svg {
   font-weight: bold;
 }
