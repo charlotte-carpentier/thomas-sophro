@@ -28,7 +28,7 @@ description: "Mentions légales et informations juridiques du cabinet de sophrol
               
               {# Paragraphe #}
               {% if content.type == "paragraph" %}
-                <p class="text-body legal-paragraph">{{ content.text }}</p>
+                <p class="text-body legal-paragraph">{{ content.text | safe }}</p>
               {% endif %}
               
               {# Liste #}
