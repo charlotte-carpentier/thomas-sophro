@@ -2334,3 +2334,12 @@ html {
     padding-top: 1rem; /* S = 1rem en mobile */
   }
 }
+
+/* === AXEPTIO POSITIONING FIX === */
+@media (max-width: 768px) {
+  #axeptio_overlay {
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+  }
+}
