@@ -11,7 +11,7 @@
       "name": "brand_mobile",
       "logoPath": "/assets/images/logo/logo_thomas.svg", 
       "logoAlt": "Logo Thomas Carpentier, représente une chouette apaisée dans un cercle",
-      "text": "<span class=\"vector-name\">Thomas Carpentier</span> <span class=\"vector-job\">Sophrologue</span>",
+      "text": "<span class=\"vector-name\">Thomas Carpentier</span><br><span class=\"vector-job\">Sophrologue</span>",
       "variant": "mobile"
     }
   ]
